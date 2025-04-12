@@ -2,7 +2,6 @@ import { database } from "~/database/context";
 import * as schema from "~/database/schema";
 
 import type { Route } from "./+types/home";
-import { DateTimePicker24h } from "@/components/DateTimePicker";
 import { Label } from "@/components/ui/label";
 import { en } from "@/locales/en";
 import logoWhite from "viastro_logo_white.png";
