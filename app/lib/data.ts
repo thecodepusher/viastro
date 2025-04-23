@@ -1,0 +1,66 @@
+export const locations = [
+  {
+    id: 1,
+    name: "Belgrade Airport",
+  },
+  { id: 2, name: "Novi Beograd" },
+];
+
+export const aditionalEquipment = [
+  {
+    id: 1,
+    name: "Total insurance",
+    description:
+      "This coverage package completely releases you of any possible financial responsibility in the case of damage to the vehicle, windows, mirrors, lights, and wheels caused by traffic accidents, theft or attempted theft.",
+    price: 68,
+  },
+  {
+    id: 2,
+    name: "Cross border permit",
+    description:
+      "If you are planning to travel outside the borders of our beautiful country, you must select a border crossing charge. Vehicles have territorial validity of insurance in Europe, with the exception of Kosovo.",
+    price: 48,
+  },
+  {
+    id: 3,
+    name: "Green card",
+    description:
+      "Exclusively for crossing the borders of North Macedonia, Albania, Ukraine, Turkey, Russia, Belarus, Moldova, Israel, Iran, Morocco, Tunisia and Azerbaijan a Green card is mandatory. Green card is issued together with the Cross border permit.",
+    price: 36,
+  },
+  {
+    id: 4,
+    name: "Wi-Fi",
+    description:
+      "Excellent connection for all your devices! Connect up to 5 devices at once, surf with the best 4G network and stay connected while on your vacation",
+    price: 30,
+  },
+  {
+    id: 5,
+    name: "Child seat (0-9 kg)",
+    description:
+      "for children from the day of birth up to 13 kg, belongs to the 0+ car seat group. ",
+    price: 49,
+  },
+  {
+    id: 6,
+    name: "Child seat (9-18 kg)",
+    description:
+      "Child seat for children from birth up to 18 kg, belongs to the 0+ and 1 car seat group.",
+    price: 49,
+  },
+  {
+    id: 7,
+    name: "Child seat (18-36 kg)",
+    description:
+      "Booster seat for children from 4 up to 12 years old, belongs to the 2 and 3 car seat group.",
+    price: 49,
+  },
+  {
+    id: 8,
+    name: "Child seat Booster (18-36kg)",
+    description:
+      "Booster seat for children from 4 up to 12 years old, belongs to the 2 and 3 car seat group.",
+    price: 49,
+  },
+];
