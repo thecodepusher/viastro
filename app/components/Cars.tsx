@@ -3,52 +3,9 @@ import { Button } from "./ui/button";
 import { en } from "@/locales/en";
 import type { Route } from "../routes/+types/cars-page";
 import type { BaseLocale } from "@/locales/base-locale";
-
-export enum GasType {
-  diesel,
-  gasoline,
-  electric,
-  hybrid,
-}
-
-export enum TransmissionType {
-  automatic,
-  manual,
-}
-
-export enum CarType {
-  sedan,
-  suv,
-  compactSuv,
-  hatchback,
-}
-
-export const cars = [
-  {
-    id: 1,
-    slug: "peugeot_3008",
-    name: "Peugeot 3008",
-    type: CarType.suv,
-    gas: GasType.diesel,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    price: 40,
-    image: "/3008.png",
-  },
-  {
-    id: 2,
-    slug: "peugeot_2008",
-    name: "Peugeot 2008",
-    type: CarType.compactSuv,
-    gas: GasType.gasoline,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    price: 30,
-    image: "/2008.png",
-  },
-];
+import { Info } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { cars } from "@/lib/data";
 
 export default function Cars(props: {
   lang: BaseLocale;
@@ -68,10 +25,38 @@ export default function Cars(props: {
             </h4>
             <img src={car.image} />
 
-            <p className="mb-8 text-center font-black text-pd text-3xl">
-              <span className="">{car.price}</span>{" "}
-              <span className="">€/dan</span>
-            </p>
+            <div className="mb-8 flex gap-2 items-center justify-center">
+              <p className="text-center font-black text-pd text-3xl">
+                <span className="">od {car.price}</span>{" "}
+                <span className="">€/dan</span>
+              </p>
+              <Popover>
+                <PopoverTrigger>
+                  <Info />
+                </PopoverTrigger>
+                <PopoverContent>
+                  <div>
+                    {car.prices.map((x) => (
+                      <div>
+                        {x.from === x.to && (
+                          <p>
+                            {x.from} dan: {x.price} €/dan
+                          </p>
+                        )}
+                        {x.from !== x.to && (
+                          <p>
+                            {x.from}
+                            {x.to != null ? ` - ${x.to}` : "+"} days: {x.price}{" "}
+                            €/dan
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+
             <div className="grid grid-cols-2">
               <div className="flex p-2 items-center gap-1 border-r border-b">
                 <img width={34} height={34} src="/car.svg" />

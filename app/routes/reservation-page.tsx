@@ -3,7 +3,6 @@ import type { Route } from "./+types/reservation-page";
 import Footer from "@/components/Footer";
 import { prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
-import { cars } from "@/components/Cars";
 import {
   Link,
   Outlet,

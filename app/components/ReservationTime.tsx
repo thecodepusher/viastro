@@ -18,6 +18,7 @@ import { useState } from "react";
 import { Label } from "./ui/label";
 import { CalendarIcon } from "lucide-react";
 import type { BaseLocale } from "@/locales/base-locale";
+import { toast } from "sonner";
 
 export default function ReservationTime(props: {
   locations: {
@@ -230,9 +231,15 @@ export default function ReservationTime(props: {
 
         <Button
           onClick={() => {
-            if (!pickDate || !dropDate) return;
+            if (!pickDate || !dropDate) {
+              toast.error("Odaberite datum preuzimanja i vraćanja vozila!");
+              return;
+            }
 
-            if (!pickUpLocation || !dropOffLocation) return;
+            if (!pickUpLocation || !dropOffLocation) {
+              toast.error("Odaberite mesto preuzimanja i vraćanja vozila!");
+              return;
+            }
 
             onStart({
               pickUpLocation,

@@ -6,6 +6,80 @@ export const locations = [
   { id: 2, name: "Novi Beograd" },
 ];
 
+export enum GasType {
+  diesel,
+  gasoline,
+  electric,
+  hybrid,
+}
+
+export enum TransmissionType {
+  automatic,
+  manual,
+}
+
+export enum CarType {
+  sedan,
+  suv,
+  compactSuv,
+  hatchback,
+}
+
+export const cars = [
+  {
+    id: 1,
+    slug: "peugeot_3008",
+    name: "Peugeot 3008",
+    type: CarType.suv,
+    gas: GasType.diesel,
+    numberOfSeats: 5,
+    transmissionType: TransmissionType.automatic,
+    airConditioning: true,
+    price: 30,
+    deposite: 300,
+    prices: [
+      { from: 1, to: 1, price: 50 },
+      { from: 2, to: 3, price: 40 },
+      { from: 4, to: 7, price: 38 },
+      { from: 8, to: 15, price: 35 },
+      { from: 16, to: 29, price: 32 },
+      { from: 30, to: null, price: 30 },
+    ],
+    image: "/3008.png",
+  },
+  {
+    id: 2,
+    slug: "peugeot_2008",
+    name: "Peugeot 2008",
+    type: CarType.compactSuv,
+    gas: GasType.gasoline,
+    numberOfSeats: 5,
+    transmissionType: TransmissionType.automatic,
+    airConditioning: true,
+    deposite: 300,
+    prices: [
+      { from: 1, to: 1, price: 40 },
+      { from: 2, to: 3, price: 30 },
+      { from: 4, to: 7, price: 28 },
+      { from: 8, to: 15, price: 25 },
+      { from: 16, to: 29, price: 22 },
+      { from: 30, to: null, price: 20 },
+    ],
+    price: 20,
+    image: "/2008.png",
+  },
+];
+
+export const wokringHours = [
+  { from: "09:00", to: "18:00" },
+  { from: "09:00", to: "18:00" },
+  { from: "09:00", to: "18:00" },
+  { from: "09:00", to: "18:00" },
+  { from: "09:00", to: "18:00" },
+  { from: "09:00", to: "18:00" },
+  { from: "09:00", to: "18:00" },
+];
+
 export const aditionalEquipment = [
   {
     id: 1,
