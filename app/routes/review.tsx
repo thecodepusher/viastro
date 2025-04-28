@@ -188,7 +188,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   const info = await transporter.sendMail({
     from: "<office@viastro.rs>", // sender address
-    to: "radojcicmarko1@gmail.com", // list of receivers
+    to: process.env.EMAIL_OFFICE, // list of receivers
     subject: "New reservation", // Subject line
     html: `
     <p>${car!.name}</p>
