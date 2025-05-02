@@ -69,7 +69,8 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   const idExtras = cookie.extras as string;
 
-  let extras: { id: number; name: string; price: number }[] = [];
+  let extras: { id: number; name: string; price: number; perDay: boolean }[] =
+    [];
 
   if (notInWorkingHours) {
     price += 10;
@@ -82,13 +83,18 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
       .forEach((x) => {
         const a = aditionalEquipment.find((a) => a.id == x)!;
 
-        price += a.price;
+        if (a.perDay) {
+          price += days * a.price;
+        } else {
+          price += a.price;
+        }
 
         extras.push(a);
       });
   }
 
   return {
+    days,
     price,
     lang,
     carPrice,
@@ -170,7 +176,11 @@ export async function action({ request }: Route.ActionArgs) {
       .forEach((x) => {
         const a = aditionalEquipment.find((a) => a.id == x)!;
 
-        price += a.price;
+        if (a.perDay) {
+          price += days * a.price;
+        } else {
+          price += a.price;
+        }
 
         extras.push(a);
       });
@@ -278,7 +288,7 @@ export default function Reservation({
                   {extra.name}
                   {" - "}
                   <span className="font-bold text-s text-lg">
-                    {extra.price}€
+                    {extra.price * (extra.perDay ? loaderData.days : 1)}€
                   </span>
                 </div>
               ))}

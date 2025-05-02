@@ -138,7 +138,14 @@ export default function Vehicle({
               </div>
 
               <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
-                <p className="font-bold text-lg">{equipment.price}€</p>
+                {equipment.free && (
+                  <p className="font-bold text-lg">Free of charge</p>
+                )}
+                {!equipment.free && (
+                  <p className="font-bold text-lg">
+                    {equipment.price}€{equipment.perDay ? "/day" : ""}
+                  </p>
+                )}
                 <Button
                   variant="outline"
                   className={`${

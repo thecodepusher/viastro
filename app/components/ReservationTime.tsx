@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { addDays, format } from "date-fns";
+import { addDays, format, subDays } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { Label } from "./ui/label";
@@ -101,7 +101,7 @@ export default function ReservationTime(props: {
   return (
     <div className="mx-auto mt-8">
       <h3 className="px-4 pb-1 font-black text-2xl text-white">
-        Create a reservation
+        {lang.createReservation}
       </h3>
       <div className="bg-white shadow rounded-lg p-4 mb-8 flex flex-col lg:items-end lg:flex-row gap-4">
         <div className="flex flex-col gap-1">
@@ -160,6 +160,7 @@ export default function ReservationTime(props: {
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
+                  toDate={subDays(dropDate ?? addDays(new Date(), 7), 3)}
                   selected={pickDate}
                   fromDate={new Date()}
                   onSelect={setPickDate}
@@ -207,7 +208,7 @@ export default function ReservationTime(props: {
                 <Calendar
                   mode="single"
                   selected={dropDate}
-                  fromDate={new Date()}
+                  fromDate={addDays(pickDate ?? new Date(), 3)}
                   onSelect={setDropDate}
                   initialFocus
                 />
@@ -252,7 +253,7 @@ export default function ReservationTime(props: {
           }}
           className="bg-s"
         >
-          Continue
+          {lang.continue}
         </Button>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { data, redirect, useFetcher, useNavigate } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { formatDate, setHours } from "date-fns";
 import { locations } from "@/lib/data";
+import Cta from "@/components/Cta";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -108,8 +109,8 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
         </div>
       </div>
 
-      <BlogSection />
-      <Logos />
+      <Logos lang={loaderData.lang} />
+
       <Cars
         onSelect={() => {
           navigate("reservation");
@@ -117,12 +118,16 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
         lang={loaderData.lang}
         langCode={loaderData.langCode}
       />
-      <Feature />
+
+      <FandQ />
+
+      <BlogSection />
+
+      <TrustedBy />
 
       <GetInTouch />
 
-      <TrustedBy />
-      <FandQ />
+      <Cta lang={loaderData.lang} />
 
       <Footer />
     </div>

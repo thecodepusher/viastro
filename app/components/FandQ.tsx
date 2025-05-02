@@ -1,8 +1,54 @@
 const faqs = [
   {
-    question: "Can I collect the vehicle at the airport?",
+    question: "Koje uslove moram da ispunim da bih iznajmio vozilo?",
     answer:
-      "The car can be picked up at the airport. Picking up at the airport is free.",
+      "Potrebno je da imate važeću vozačku dozvolu najmanje 2 godine i da ste stariji od 21 godine. Prilikom preuzimanja vozila obavezno je prikazati ličnu kartu i vozačku dozvolu.",
+  },
+  {
+    question: "Da li je kasko osiguranje uključeno u cenu?",
+    answer:
+      "Da, svi naši automobili imaju kasko osiguranje sa učešćem u šteti. Detalji o pokriću i izuzecima se nalaze u Uslovima najma.",
+  },
+
+  {
+    question: "Da li mogu vozilom da putujem u inostranstvo?",
+    answer:
+      "Naravno. Potrebno je unapred najaviti planirano putovanje van Srbije kako bismo obezbedili dodatnu dokumentaciju i osiguranje za inostranstvo.",
+  },
+  {
+    question: "Da li je moguće dostaviti vozilo na adresu?",
+    answer:
+      "Da, nudimo dostavu vozila na željenu adresu, uključujući aerodrom, stan ili hotel. Usluga se dodatno naplaćuje i mora biti zakazana unapred.",
+  },
+  {
+    question: "Šta ako zakasnim sa vraćanjem vozila?",
+    answer:
+      "Ukoliko kasnite više od 1 sata, naplaćuje se dodatni dan. Preporučujemo da nas unapred kontaktirate u slučaju kašnjenja.",
+  },
+  {
+    question: "Da li se vozilo izdaje sa punim rezervoarom?",
+    answer:
+      "Da, svako vozilo se izdaje sa punim rezervoarom i očekujemo da se vrati u istom stanju. U suprotnom se naplaćuje razlika goriva + usluga dopune.",
+  },
+  {
+    question: "Kako mogu da rezervišem vozilo?",
+    answer:
+      "Rezervaciju možete izvršiti putem sajta, pozivom ili licno u nasim prostorijama.",
+  },
+  {
+    question: "Koji su načini plaćanja?",
+    answer:
+      "Prihvatamo gotovinu, platne kartice i uplatu preko firme. Depozit se ostavlja prilikom preuzimanja vozila i vraća se nakon završetka najma.",
+  },
+  {
+    question: "Da li se vozila redovno servisiraju?",
+    answer:
+      "Apsolutno. Naša vozila su nova, tehnički ispravna i redovno održavana u ovlašćenim servisima. Bezbednost i pouzdanost su nam prioritet.",
+  },
+  {
+    question: "Šta ako dođe do štete ili nezgode?",
+    answer:
+      "U slučaju bilo kakvog incidenta, obavezno odmah kontaktirajte nas i policiju. Detaljna procedura se nalazi u Uslovima najma. Kasko pokriva većinu slučajeva, osim ako nije došlo do grube nepažnje.",
   },
 ];
 
@@ -15,13 +61,13 @@ export default function FandQ() {
             <h2 className="text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl">
               Frequently asked questions
             </h2>
-            <p className="mt-4 text-base/7 text-pretty text-gray-600">
+            {/* <p className="mt-4 text-base/7 text-pretty text-gray-600">
               Can’t find the answer you’re looking for? Reach out to our{" "}
               <a href="#" className="font-semibold text-[#FF9B17]">
                 customer support
               </a>{" "}
               team.
-            </p>
+            </p> */}
           </div>
           <div className="mt-10 lg:col-span-7 lg:mt-0">
             <dl className="space-y-10">
