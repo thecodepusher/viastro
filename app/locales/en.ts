@@ -18,4 +18,6 @@ export const en: BaseLocale = {
   manual: "Manual",
   automatic: "Automatic",
   seats: "seats",
+  description:
+    "Rent a car Belgrade – Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
 };

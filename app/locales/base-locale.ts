@@ -16,4 +16,5 @@ export interface BaseLocale {
   manual: string;
   automatic: string;
   seats: string;
+  description: string;
 }

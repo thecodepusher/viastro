@@ -1,11 +1,13 @@
+import Cta from "@/components/Cta";
+import FandQ from "@/components/FandQ";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
-import { CircleCheck } from "lucide-react";
-import { Link, replace } from "react-router";
-import type { Route } from "./+types/success";
 import { en } from "@/locales/en";
+import BlogSection from "@/components/BlogSection";
 import { sr } from "@/locales/sr";
+import type { Route } from "./+types/blog-details";
+import { posts } from "@/lib/data";
+import { redirect, replace } from "react-router";
 import { langCookie } from "@/lib/prefs-cookie";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -41,26 +43,35 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     }
   }
 
+  const post = posts.find((x) => x.slug == params.slug);
+
+  if (!post) {
+    return redirect("/blog");
+  }
+
   return {
+    langCode: params.lang ?? "en",
+    post,
     lang,
-    langCode: params.lang,
+    message: context.VALUE_FROM_EXPRESS,
   };
 }
 
-export default function Reservation() {
+export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <Header />
-      <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
-        <CircleCheck size={60} className="text-p" />
-        <p className="font-medium text-lg text-pd mx-8">
-          Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi
-          rezervacije.
-        </p>
-        <Link to="../">
-          <Button className="bg-s">Vratite se na početnu</Button>
-        </Link>
+
+      <img className="mx-auto" src={loaderData.post.imageUrl} />
+
+      <div className="prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
+        <div
+          dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
+        />
       </div>
+
+      <Cta lang={loaderData.lang} />
+
       <Footer />
     </div>
   );

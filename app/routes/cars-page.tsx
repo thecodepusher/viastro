@@ -2,23 +2,44 @@ import Header from "@/components/Header";
 import type { Route } from "./+types/cars-page";
 import Cars from "@/components/Cars";
 import Footer from "@/components/Footer";
-import { prefs } from "@/lib/prefs-cookie";
+import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
 import Logos from "@/components/Logos";
-import { useNavigate } from "react-router";
+import { replace, useNavigate } from "react-router";
+import { sr } from "@/locales/sr";
 
 export async function loader({ context, params, request }: Route.LoaderArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await prefs.parse(cookieHeader)) || {};
+  if (!params.lang) {
+    const cookieHeader = request.headers.get("Cookie");
+
+    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
+
+    const url = new URL(request.url);
+
+    let returnPath = url.pathname;
+
+    if (lgCookie.lang) {
+      if (returnPath == "/") {
+        return replace(`/${lgCookie.lang}`);
+      }
+      return replace(`/${lgCookie.lang}${url.pathname}`);
+    }
+
+    if (returnPath == "/") {
+      return replace(`/en`);
+    }
+
+    return replace(`/en${url.pathname}`);
+  }
 
   let lang = en;
 
-  // if (params.lang) {
-  //   switch (params.lang) {
-  //     case "sr":
-  //       lang = sr;
-  //   }
-  // }
+  if (params.lang) {
+    switch (params.lang) {
+      case "sr":
+        lang = sr;
+    }
+  }
 
   return {
     langCode: params.lang ?? "en",

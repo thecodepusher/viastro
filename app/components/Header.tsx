@@ -8,9 +8,12 @@ import {
 } from "@/components/ui/sheet";
 
 import { MenuIcon } from "lucide-react";
-import { Link } from "react-router";
+import { Form, Link, useLocation } from "react-router";
+import { Button } from "./ui/button";
 
 export default function Header() {
+  const location = useLocation();
+
   return (
     <header className="fixed z-40 top-0 h-18 w-full bg-[#FF9B17]">
       <div className="max-w-7xl justify-between items-center mx-auto px-2 flex h-18 py-1">
@@ -48,9 +51,18 @@ export default function Header() {
             </div>
             <p className="mt-6 px-6">Select language: </p>
             <div className="px-6 flex items-center gap-2">
-              <img className="w-8 shadow border" src="/gb.svg" />
-              <img className="w-8 shadow border" src="/rs.svg" />
-              <img className="w-8 shadow border" src="/ru.svg" />
+              <Form method="POST" action="/select-lang">
+                <input hidden name="loc" value={location.pathname} />
+                <Button variant="ghost" name="lang" type="submit" value="en">
+                  <img className="w-8 shadow border" src="/gb.svg" />
+                </Button>
+                <Button variant="ghost" name="lang" type="submit" value="sr">
+                  <img className="w-8 shadow border" src="/rs.svg" />
+                </Button>
+                <Button variant="ghost" name="lang" type="submit" value="sr">
+                  <img className="w-8 shadow border" src="/ru.svg" />
+                </Button>
+              </Form>
             </div>
           </SheetContent>
         </Sheet>

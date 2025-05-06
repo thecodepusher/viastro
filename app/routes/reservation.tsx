@@ -1,27 +1,48 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { prefs } from "@/lib/prefs-cookie";
+import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
-import { Outlet, redirect, useFetcher } from "react-router";
+import { Outlet, redirect, replace, useFetcher } from "react-router";
 import { CheckIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Route } from "./+types/reservation";
 import ReservationTime from "@/components/ReservationTime";
 import { locations } from "@/lib/data";
 import { setHours } from "date-fns";
+import { sr } from "@/locales/sr";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await prefs.parse(cookieHeader)) || {};
+  if (!params.lang) {
+    const cookieHeader = request.headers.get("Cookie");
+
+    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
+
+    const url = new URL(request.url);
+
+    let returnPath = url.pathname;
+
+    if (lgCookie.lang) {
+      if (returnPath == "/") {
+        return replace(`/${lgCookie.lang}`);
+      }
+      return replace(`/${lgCookie.lang}${url.pathname}`);
+    }
+
+    if (returnPath == "/") {
+      return replace(`/en`);
+    }
+
+    return replace(`/en${url.pathname}`);
+  }
 
   let lang = en;
 
-  // if (params.lang) {
-  //   switch (params.lang) {
-  //     case "sr":
-  //       lang = sr;
-  //   }
-  // }
+  if (params.lang) {
+    switch (params.lang) {
+      case "sr":
+        lang = sr;
+    }
+  }
 
   // console.log(cookie);
 

@@ -1,8 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { prefs } from "@/lib/prefs-cookie";
+import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
-import { Form, Outlet, redirect } from "react-router";
+import { Form, Outlet, redirect, replace } from "react-router";
 import { CheckIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Route } from "./+types/review";
@@ -14,19 +14,44 @@ import { aditionalEquipment, cars, locations } from "@/lib/data";
 import { differenceInCalendarDays, format } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import nodemailer from "nodemailer";
+import { sr } from "@/locales/sr";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
+
+  if (!params.lang) {
+    const cookieHeader = request.headers.get("Cookie");
+
+    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
+
+    const url = new URL(request.url);
+
+    let returnPath = url.pathname;
+
+    if (lgCookie.lang) {
+      if (returnPath == "/") {
+        return replace(`/${lgCookie.lang}`);
+      }
+      return replace(`/${lgCookie.lang}${url.pathname}`);
+    }
+
+    if (returnPath == "/") {
+      return replace(`/en`);
+    }
+
+    return replace(`/en${url.pathname}`);
+  }
+
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
   let lang = en;
 
-  // if (params.lang) {
-  //   switch (params.lang) {
-  //     case "sr":
-  //       lang = sr;
-  //   }
-  // }
+  if (params.lang) {
+    switch (params.lang) {
+      case "sr":
+        lang = sr;
+    }
+  }
 
   const car = cars.find((x) => x.id === +cookie.carId);
   const pickup = locations.find((x) => x.id === +cookie.pickUpLocation);
@@ -77,19 +102,29 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   }
 
   if (idExtras) {
+    const ae = [...car.aditionalEquipment, ...aditionalEquipment];
+
     idExtras
       .split(",")
       .map((x) => +x)
       .forEach((x) => {
-        const a = aditionalEquipment.find((a) => a.id == x)!;
+        const a = ae.find((a) => a.id == x)!;
+
+        let aPrice = 0;
 
         if (a.perDay) {
-          price += days * a.price;
+          if (a.maxPerDays && a.maxPerDays < days) {
+            aPrice = a.price * a.maxPerDays;
+          } else {
+            aPrice = days * a.price;
+          }
         } else {
-          price += a.price;
+          aPrice = a.price;
         }
 
-        extras.push(a);
+        price += aPrice;
+
+        extras.push({ ...a, price: aPrice });
       });
   }
 
@@ -170,19 +205,29 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   if (idExtras) {
+    const ae = [...car.aditionalEquipment, ...aditionalEquipment];
+
     idExtras
       .split(",")
       .map((x) => +x)
       .forEach((x) => {
-        const a = aditionalEquipment.find((a) => a.id == x)!;
+        const a = ae.find((a) => a.id == x)!;
+
+        let aPrice = 0;
 
         if (a.perDay) {
-          price += days * a.price;
+          if (a.maxPerDays && a.maxPerDays < days) {
+            aPrice = a.price * a.maxPerDays;
+          } else {
+            aPrice = days * a.price;
+          }
         } else {
-          price += a.price;
+          aPrice = a.price;
         }
 
-        extras.push(a);
+        price += aPrice;
+
+        extras.push({ ...a, price: aPrice });
       });
   }
 
@@ -288,7 +333,7 @@ export default function Reservation({
                   {extra.name}
                   {" - "}
                   <span className="font-bold text-s text-lg">
-                    {extra.price * (extra.perDay ? loaderData.days : 1)}€
+                    {extra.price}€
                   </span>
                 </div>
               ))}

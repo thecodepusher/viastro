@@ -23,7 +23,7 @@ export default function GetInTouch() {
                     <dd>Monday - Friday</dd>
                   </div>
                   <div className="mt-1">
-                    <dd>8.00 - 20.00</dd>
+                    <dd>8.00 - 16.00</dd>
                   </div>
                 </dl>
               </div>
@@ -33,12 +33,10 @@ export default function GetInTouch() {
                 </h3>
                 <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
                   <div>
-                    <dd className="font-semibold text-s">
-                      Reservation Support
-                    </dd>
+                    <dd className="font-semibold text-s">Dostupan 24/7</dd>
                   </div>
                   <div className="mt-1">
-                    <dd>+1 (555) 905-3456</dd>
+                    <dd>+38169656555</dd>
                   </div>
                 </dl>
               </div>
@@ -49,11 +47,11 @@ export default function GetInTouch() {
                 <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
                   <div>
                     <dd className="font-semibold text-s">
-                      Reservation Support
+                      reservations@viastro.rs
                     </dd>
                   </div>
                   <div className="mt-1">
-                    <dd>office@viastro.rs</dd>
+                    {/* <dd>reservations@viastro.rs</dd> */}
                   </div>
                 </dl>
               </div>
@@ -64,12 +62,10 @@ export default function GetInTouch() {
                 </h3>
                 <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
                   <div>
-                    <dd className="font-semibold text-s">
-                      Reservation Support
-                    </dd>
+                    <dd className="font-semibold text-s">viastro.rs</dd>
                   </div>
                   <div className="mt-1">
-                    <dd>viastro</dd>
+                    <dd></dd>
                   </div>
                 </dl>
               </div>
@@ -79,7 +75,7 @@ export default function GetInTouch() {
                   Novi Beograd
                 </h3>
                 <address className="mt-3 space-y-1 text-sm/6 text-gray-600 not-italic">
-                  <p>4556 Brendan Ferry</p>
+                  <p>Danila Lekica Spanca 31, 11070</p>
                 </address>
               </div>
 

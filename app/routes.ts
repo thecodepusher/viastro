@@ -1,10 +1,12 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
+  route("select-lang", "routes/select-lang.tsx", []),
   route(":lang?", "routes/home.tsx", []),
   route(":lang?/faq", "routes/faq-page.tsx", []),
   route(":lang?/contact", "routes/contact-page.tsx", []),
   route(":lang?/blog", "routes/blog-page.tsx", []),
+  route(":lang?/blog/:slug", "routes/blog-details.tsx", []),
   route(":lang?/success", "routes/success.tsx", []),
   route(":lang?/cars", "routes/cars-page.tsx", []),
   route(":lang?/rental-conditions", "routes/rental-conditions-page.tsx", []),

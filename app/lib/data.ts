@@ -37,6 +37,18 @@ export const cars = [
     airConditioning: true,
     price: 45,
     deposite: 500,
+    aditionalEquipment: [
+      {
+        id: 1,
+        name: "Full Protection osiguranje",
+        description:
+          "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
+        price: 30,
+        free: false,
+        perDay: true,
+        maxPerDays: null,
+      },
+    ],
     prices: [
       { from: 3, to: 7, price: 75 },
       { from: 8, to: 15, price: 65 },
@@ -55,6 +67,18 @@ export const cars = [
     transmissionType: TransmissionType.automatic,
     airConditioning: true,
     deposite: 500,
+    aditionalEquipment: [
+      {
+        id: 1,
+        name: "Full Protection osiguranje",
+        description:
+          "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
+        price: 40,
+        free: false,
+        perDay: true,
+        maxPerDays: null,
+      },
+    ],
     prices: [
       { from: 3, to: 7, price: 65 },
       { from: 8, to: 15, price: 55 },
@@ -74,6 +98,18 @@ export const cars = [
     transmissionType: TransmissionType.automatic,
     airConditioning: true,
     deposite: 300,
+    aditionalEquipment: [
+      {
+        id: 1,
+        name: "Full Protection osiguranje",
+        description:
+          "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
+        price: 50,
+        free: false,
+        perDay: true,
+        maxPerDays: null,
+      },
+    ],
     prices: [
       { from: 3, to: 7, price: 55 },
       { from: 8, to: 15, price: 50 },
@@ -85,26 +121,127 @@ export const cars = [
   },
 ];
 
+export const posts = [
+  {
+    id: 1,
+    slug: "kopaonik",
+    title: "Vikend na Kopaoniku – Planinska avantura uz Viastro rent a car",
+    href: "/blog/kopaonik",
+    description:
+      "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija – tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa – udobno, sigurno i uz potpunu slobodu kretanja.",
+    content: `
+      <h2>Vikend na Kopaoniku – Planinska avantura uz Viastro rent a car</h2>
+      <p>Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija – bilo da idete na skijanje, planinarenje ili samo uživanje u prirodi i SPA centrima. A da bi put bio podjednako prijatan kao i boravak, pravo rešenje je iznajmljivanje vozila koje odgovara vašim potrebama. Viastro rent a car vam nudi vozila koja su idealna za put do planine – udobna, pouzdana i sa punim kasko osiguranjem.</p>
+
+      <h3>Zašto Kopaonik za vikend?</h3>
+      <ol>
+        <li><strong>Brza dostupnost:</strong><br>
+          Smešten na oko 280 km od Beograda, Kopaonik je idealan za trodnevni odmor. Uz automatski menjač i tempomat, putovanje postaje pravo uživanje.
+        </li>
+        <li><strong>Aktivnosti tokom cele godine:</strong>
+          <ul>
+            <li><strong>Zimi:</strong> više od 55 km ski staza, noćno skijanje, adrenalinski sadržaji</li>
+            <li><strong>Leti:</strong> pešačke ture, bajs po planinskim stazama, zip line, bazeni na otvorenom</li>
+            <li><strong>Tokom cele godine:</strong> luksuzni SPA centri, etno restorani, panoramski pogledi</li>
+          </ul>
+        </li>
+        <li><strong>Širok izbor smeštaja:</strong><br>
+          Od hotela sa 5 zvezdica do pristupačnih apartmana – Kopaonik ima opcije za svaki budžet.
+        </li>
+      </ol>
+
+      <h3>Zašto iznajmiti vozilo kod Viastro?</h3>
+      <ul>
+        <li><strong>Komfor i sigurnost:</strong> Svi naši automobili su redovno servisirani, klimatizovani i potpuno opremljeni za duža putovanja.</li>
+        <li><strong>Fleksibilni paketi:</strong> Najam već od 3 dana sa neograničenim kilometrima – savršeno za vikend planine.</li>
+        <li><strong>Puna pokrivenost:</strong> Full kasko osiguranje, 24h asistencija, i mogućnost dodatne opreme (nosač za ski, lanaca, dečje sedište).</li>
+        <li><strong>Brza i jednostavna rezervacija:</strong> Kontaktirajte nas putem sajta <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili direktno na broj <a href="tel:0696565555">069/6565-555</a>.</li>
+      </ul>
+
+      <h3>Plan puta – predlog:</h3>
+      <ul>
+        <li><strong>Petak (polazak):</strong> Preuzmite vozilo i uputite se ka Kopaoniku. Preporučena ruta: Beograd – Kruševac – Brus – Kopaonik.</li>
+        <li><strong>Subota:</strong> Uživajte u sportskim aktivnostima, prirodi i domaćoj kuhinji.</li>
+        <li><strong>Nedelja:</strong> Opuštanje u SPA centru i povratak uveče.</li>
+      </ul>
+
+      <p><strong>Viastro – Your Journey Starts Here.</strong><br>
+      Za sve vas koji želite slobodu da istražujete Srbiju sopstvenim tempom, Viastro rent a car nudi pouzdana vozila i maksimalnu fleksibilnost.</p>
+    `,
+    imageUrl: "/kop.png",
+    date: "Maj 5, 2025",
+    datetime: "2020-03-16",
+  },
+  {
+    id: 2,
+    title: "Đerdap Nacionalni Park – Gvozdena kapija prirode i istorije",
+    href: "/blog/djerdap",
+    slug: "djerdap",
+    description:
+      "Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.",
+    content: `
+      <h2>Đerdap Nacionalni Park – Gvozdena kapija prirode i istorije</h2>
+      <p>Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.</p>
+
+      <h3>Šta videti i doživeti:</h3>
+      <ul>
+        <li><strong>Golubačka tvrđava:</strong> Impozantna srednjovekovna tvrđava na ulazu u Đerdapsku klisuru.</li>
+        <li><strong>Lepenski Vir:</strong> Arheološko nalazište staro preko 11.000 godina.</li>
+        <li><strong>Vidikovci Veliki i Mali Štrbac:</strong> Pružaju nezaboravne poglede na Dunav.</li>
+        <li><strong>Tabula Traiana:</strong> Rimski natpis uklesan u stenu.</li>
+      </ul>
+
+      <h3>Kako doći:</h3>
+      <p>Iz Beograda, putovanje traje oko 3,5 sata. Preporučuje se ruta preko Požarevca i Velikog Gradišta, sa pauzom kod Golubačke tvrđave.</p>
+
+      <h3>Zašto izabrati Viastro rent a car:</h3>
+      <p>Naši SUV modeli, poput <strong>Peugeot 3008 GT Line</strong>, idealni su za vožnju kroz klisure. Uz <strong>full kasko osiguranje</strong> i <strong>neograničene kilometre</strong>, možete bezbrižno istraživati sve što Đerdap nudi.</p>
+    `,
+    imageUrl: "/sargan.png",
+    date: "3 Maj, 2025",
+    datetime: "2020-03-16",
+  },
+  {
+    id: 3,
+    title: "Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu",
+    href: "/blog/mokra_gora",
+    slug: "mokra_gora",
+    content: `
+      <h2>Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu</h2>
+      <p>Mokra Gora je destinacija koja spaja prirodne lepote, kulturnu baštinu i jedinstvene turističke atrakcije. Vožnja Šarganskom osmicom, uskom prugom koja vijuga kroz planinske predele, pruža nezaboravan doživljaj.</p>
+
+      <h3>Šta ne propustiti:</h3>
+      <ul>
+        <li><strong>Šarganska osmica:</strong> Vožnja istorijskom prugom koja pravi oblik broja osam.</li>
+        <li><strong>Drvengrad:</strong> Etno-selo koje je izgradio Emir Kusturica.</li>
+        <li><strong>Priroda Mokre Gore:</strong> Idealna za planinarenje i uživanje u netaknutoj prirodi.</li>
+      </ul>
+
+      <h3>Kako doći:</h3>
+      <p>Mokra Gora se nalazi oko 200 km jugozapadno od Beograda. Putovanje traje oko 3,5 sata, a preporučena ruta vodi preko Užica.</p>
+
+      <h3>Viastro rent a car – Vaš partner za putovanja:</h3>
+      <p>Naša vozila su savršena za planinske puteve i duže vožnje. Uz <strong>automatski menjač</strong>, <strong>klimatizaciju</strong> i <strong>dodatnu opremu</strong>, vaše putovanje će biti udobno i sigurno.</p>
+    `,
+    description:
+      "Mokra Gora je destinacija koja spaja prirodne lepote, kulturnu baštinu i jedinstvene turističke atrakcije. Vožnja Šarganskom osmicom, uskom prugom koja vijuga kroz planinske predele, pruža nezaboravan doživljaj.",
+    imageUrl: "/djerdap.png",
+    date: "1 Maj, 2025",
+    datetime: "2020-03-16",
+  },
+];
+
 export const wokringHours = [
-  { from: "09:00", to: "18:00" },
-  { from: "09:00", to: "18:00" },
-  { from: "09:00", to: "18:00" },
-  { from: "09:00", to: "18:00" },
-  { from: "09:00", to: "18:00" },
-  { from: "09:00", to: "18:00" },
-  { from: "09:00", to: "18:00" },
+  { from: "08:00", to: "16:00" },
+  { from: "08:00", to: "16:00" },
+  { from: "08:00", to: "16:00" },
+  { from: "08:00", to: "16:00" },
+  { from: "08:00", to: "16:00" },
+  { from: "08:00", to: "16:00" },
+  { from: "08:00", to: "16:00" },
 ];
 
 export const aditionalEquipment = [
-  {
-    id: 1,
-    name: "Total insurance",
-    description:
-      "This coverage package completely releases you of any possible financial responsibility in the case of damage to the vehicle, windows, mirrors, lights, and wheels caused by traffic accidents, theft or attempted theft.",
-    price: 68,
-    free: false,
-    perDay: true,
-  },
   {
     id: 2,
     name: "Dozvola za prelazak granice",
@@ -113,6 +250,7 @@ export const aditionalEquipment = [
     price: 48,
     free: false,
     perDay: false,
+    maxPerDays: null,
   },
   {
     id: 3,
@@ -122,6 +260,7 @@ export const aditionalEquipment = [
     price: 36,
     free: false,
     perDay: false,
+    maxPerDays: null,
   },
   {
     id: 5,
@@ -131,6 +270,7 @@ export const aditionalEquipment = [
     price: 0,
     free: true,
     perDay: false,
+    maxPerDays: null,
   },
   {
     id: 6,
@@ -140,6 +280,7 @@ export const aditionalEquipment = [
     price: 0,
     free: true,
     perDay: false,
+    maxPerDays: null,
   },
   {
     id: 7,
@@ -149,5 +290,16 @@ export const aditionalEquipment = [
     price: 0,
     free: true,
     perDay: false,
+    maxPerDays: null,
+  },
+  {
+    id: 8,
+    name: "WiFi",
+    description:
+      "Ostanite povezani i tokom puta! Nudimo opciju mobilnog WiFi uređaja u vozilu, idealnu za navigaciju, streaming, poslovne pozive ili zabavu tokom putovanja. Rezervacije preko 7 dana cena je fiksna 35e.",
+    price: 5,
+    free: false,
+    perDay: true,
+    maxPerDays: 7,
   },
 ];

@@ -11,16 +11,17 @@ import Cars from "@/components/Cars";
 import Header from "@/components/Header";
 import ReservationTime from "@/components/ReservationTime";
 import Footer from "@/components/Footer";
-import { data, redirect, useFetcher, useNavigate } from "react-router";
-import { prefs } from "@/lib/prefs-cookie";
-import { formatDate, setHours } from "date-fns";
+import { redirect, replace, useFetcher, useNavigate } from "react-router";
+import { langCookie, prefs } from "@/lib/prefs-cookie";
+import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import Cta from "@/components/Cta";
+import { sr } from "@/locales/sr";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ data }: Route.MetaArgs) {
   return [
     { title: "Viastro rent a car | Belgrade" },
-    { name: "description", content: "" },
+    { name: "description", content: data.lang.description },
   ];
 }
 
@@ -52,14 +53,37 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
+  if (!params.lang) {
+    const cookieHeader = request.headers.get("Cookie");
+
+    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
+
+    const url = new URL(request.url);
+
+    let returnPath = url.pathname;
+
+    if (lgCookie.lang) {
+      if (returnPath == "/") {
+        return replace(`/${lgCookie.lang}`);
+      }
+      return replace(`/${lgCookie.lang}${url.pathname}`);
+    }
+
+    if (returnPath == "/") {
+      return replace(`/en`);
+    }
+
+    return replace(`/en${url.pathname}`);
+  }
+
   let lang = en;
 
-  // if (params.lang) {
-  //   switch (params.lang) {
-  //     case "sr":
-  //       lang = sr;
-  //   }
-  // }
+  if (params.lang) {
+    switch (params.lang) {
+      case "sr":
+        lang = sr;
+    }
+  }
 
   return {
     langCode: params.lang ?? "en",
