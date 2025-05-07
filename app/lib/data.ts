@@ -43,7 +43,7 @@ export const cars = [
         name: "Full Protection osiguranje",
         description:
           "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
-        price: 30,
+        price: 12.99,
         free: false,
         perDay: true,
         maxPerDays: null,
@@ -73,7 +73,7 @@ export const cars = [
         name: "Full Protection osiguranje",
         description:
           "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
-        price: 40,
+        price: 11.99,
         free: false,
         perDay: true,
         maxPerDays: null,
@@ -86,7 +86,7 @@ export const cars = [
       { from: 30, to: null, price: 38 },
     ],
     price: 38,
-    image: "/2008.png",
+    image: "/2008.avif",
   },
   {
     id: 3,
@@ -104,7 +104,7 @@ export const cars = [
         name: "Full Protection osiguranje",
         description:
           "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
-        price: 50,
+        price: 9.99,
         free: false,
         perDay: true,
         maxPerDays: null,
@@ -117,7 +117,69 @@ export const cars = [
       { from: 30, to: null, price: 35 },
     ],
     price: 35,
-    image: "/2008.png",
+    image: "/c3-aircross.jpg",
+  },
+  {
+    id: 4,
+    slug: "skoda_oktavia",
+    name: "Škoda Octavia",
+    type: CarType.sedan,
+    gas: GasType.diesel,
+    numberOfSeats: 5,
+    transmissionType: TransmissionType.automatic,
+    airConditioning: true,
+    deposite: 500,
+    aditionalEquipment: [
+      {
+        id: 1,
+        name: "Full Protection osiguranje",
+        description:
+          "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
+        price: 12.99,
+        free: false,
+        perDay: true,
+        maxPerDays: null,
+      },
+    ],
+    prices: [
+      { from: 3, to: 7, price: 75 },
+      { from: 8, to: 15, price: 65 },
+      { from: 16, to: 29, price: 55 },
+      { from: 30, to: null, price: 45 },
+    ],
+    price: 45,
+    image: "/skoda_octavia.png",
+  },
+  {
+    id: 5,
+    slug: "audi_a6",
+    name: "Audi A6",
+    type: CarType.sedan,
+    gas: GasType.diesel,
+    numberOfSeats: 5,
+    transmissionType: TransmissionType.automatic,
+    airConditioning: true,
+    deposite: 500,
+    aditionalEquipment: [
+      {
+        id: 1,
+        name: "Full Protection osiguranje",
+        description:
+          "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
+        price: 14.99,
+        free: false,
+        perDay: true,
+        maxPerDays: null,
+      },
+    ],
+    prices: [
+      { from: 3, to: 7, price: 115 },
+      { from: 8, to: 15, price: 105 },
+      { from: 16, to: 29, price: 95 },
+      { from: 30, to: null, price: 85 },
+    ],
+    price: 85,
+    image: "/audi-a6.webp",
   },
 ];
 

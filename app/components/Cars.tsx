@@ -5,7 +5,7 @@ import type { Route } from "../routes/+types/cars-page";
 import type { BaseLocale } from "@/locales/base-locale";
 import { Info } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { cars, GasType, TransmissionType } from "@/lib/data";
+import { cars, CarType, GasType, TransmissionType } from "@/lib/data";
 
 export default function Cars(props: {
   lang: BaseLocale;
@@ -18,6 +18,22 @@ export default function Cars(props: {
         {cars.map((car) => {
           let gas = "";
           let transmission = "";
+          let carType = "";
+
+          switch (car.type) {
+            case CarType.suv:
+              carType = "SUV";
+              break;
+            case CarType.hatchback:
+              carType = "Hatchback";
+              break;
+            case CarType.sedan:
+              carType = "Sedan";
+              break;
+            case CarType.compactSuv:
+              carType = "Compact SUV";
+              break;
+          }
 
           switch (car.transmissionType) {
             case TransmissionType.manual:
@@ -50,7 +66,7 @@ export default function Cars(props: {
               <h4 className="font-black text-pd text-xl text-center">
                 {car.name}
               </h4>
-              <img src={car.image} />
+              <img className="h-52 object-contain" src={car.image} />
 
               <div className="mb-8 flex gap-2 items-center justify-center">
                 <p className="text-center font-black text-pd text-3xl">
@@ -90,7 +106,7 @@ export default function Cars(props: {
               <div className="grid grid-cols-2">
                 <div className="flex p-2 items-center gap-1 border-r border-b">
                   <img width={34} height={34} src="/car.svg" />
-                  <p className="font-semibold text-sm text-pd">SUV</p>
+                  <p className="font-semibold text-sm text-pd">{carType}</p>
                 </div>
                 <div className="flex p-2 pl-3 items-center gap-1 border-b">
                   <img width={32} height={32} src="/fuel-pump.svg" />

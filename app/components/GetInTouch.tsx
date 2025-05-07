@@ -31,43 +31,47 @@ export default function GetInTouch() {
                 <h3 className="text-base/7 font-semibold text-gray-900">
                   Phone
                 </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dd className="font-semibold text-s">Dostupan 24/7</dd>
-                  </div>
-                  <div className="mt-1">
-                    <dd>+38169656555</dd>
-                  </div>
-                </dl>
+                <a href="tel:+4733378901">
+                  <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
+                    <div>
+                      <dd className="font-semibold text-s">Dostupan 24/7</dd>
+                    </div>
+                    <div className="mt-1">
+                      <dd>+38169656555</dd>
+                    </div>
+                  </dl>
+                </a>
               </div>
               <div className="rounded-2xl bg-gray-50 p-10">
                 <h3 className="text-base/7 font-semibold text-gray-900">
                   Email
                 </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dd className="font-semibold text-s">
-                      reservations@viastro.rs
-                    </dd>
-                  </div>
-                  <div className="mt-1">
-                    {/* <dd>reservations@viastro.rs</dd> */}
-                  </div>
-                </dl>
+                <a href="mailto:reservations@viastro.rs">
+                  <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
+                    <div>
+                      <dd className="font-semibold text-s">
+                        reservations@viastro.rs
+                      </dd>
+                    </div>
+                    <div className="mt-1"></div>
+                  </dl>
+                </a>
               </div>
 
               <div className="rounded-2xl bg-gray-50 p-10">
                 <h3 className="text-base/7 font-semibold text-gray-900">
                   Instagram
                 </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dd className="font-semibold text-s">viastro.rs</dd>
-                  </div>
-                  <div className="mt-1">
-                    <dd></dd>
-                  </div>
-                </dl>
+                <a href="https://www.instagram.com/viastro.rs/">
+                  <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
+                    <div>
+                      <dd className="font-semibold text-s">viastro.rs</dd>
+                    </div>
+                    <div className="mt-1">
+                      <dd></dd>
+                    </div>
+                  </dl>
+                </a>
               </div>
 
               <div className="rounded-2xl bg-gray-50 p-10">
