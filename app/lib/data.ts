@@ -325,6 +325,16 @@ export const aditionalEquipment = [
     maxPerDays: null,
   },
   {
+    id: 8,
+    name: "WiFi",
+    description:
+      "Ostanite povezani i tokom puta! Nudimo opciju mobilnog WiFi uređaja u vozilu, idealnu za navigaciju, streaming, poslovne pozive ili zabavu tokom putovanja. Rezervacije preko 7 dana cena je fiksna 35e.",
+    price: 5,
+    free: false,
+    perDay: true,
+    maxPerDays: 7,
+  },
+  {
     id: 5,
     name: "Auto sedište - „Jaje“ (0–13 kg)",
     description:
@@ -353,15 +363,5 @@ export const aditionalEquipment = [
     free: true,
     perDay: false,
     maxPerDays: null,
-  },
-  {
-    id: 8,
-    name: "WiFi",
-    description:
-      "Ostanite povezani i tokom puta! Nudimo opciju mobilnog WiFi uređaja u vozilu, idealnu za navigaciju, streaming, poslovne pozive ili zabavu tokom putovanja. Rezervacije preko 7 dana cena je fiksna 35e.",
-    price: 5,
-    free: false,
-    perDay: true,
-    maxPerDays: 7,
   },
 ];

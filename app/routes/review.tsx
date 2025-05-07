@@ -310,7 +310,7 @@ export default function Reservation({
             {loaderData.car?.name}
             {" - "}
             <span className="font-bold text-s text-lg">
-              {loaderData.carPrice}€
+              {loaderData.carPrice.toFixed(2)}€
             </span>
           </p>
         </div>
@@ -333,7 +333,7 @@ export default function Reservation({
                   {extra.name}
                   {" - "}
                   <span className="font-bold text-s text-lg">
-                    {extra.price}€
+                    {extra.price.toFixed(2)}€
                   </span>
                 </div>
               ))}
@@ -343,7 +343,9 @@ export default function Reservation({
 
         <div>
           <Label>Total</Label>
-          <p className="font-bold text-s text-lg">{loaderData.price}€</p>
+          <p className="font-bold text-s text-lg">
+            {loaderData.price.toFixed(2)}€
+          </p>
         </div>
 
         <div>
