@@ -17,4 +17,14 @@ export interface BaseLocale {
   automatic: string;
   seats: string;
   description: string;
+  // Added translations for Feature component
+  deployFaster: string;
+  deployDesc: string;
+  featureDesc: string;
+  // Added translations for TrustedBy component
+  whyChoose: string;
+  fullInsurance: string;
+  noHiddenCosts: string;
+  satisfiedUsers: string;
+  yearsOfExperience: string;
 }

@@ -4,7 +4,6 @@ import { en } from "@/locales/en";
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
 import BlogSection from "@/components/BlogSection";
-import Feature from "@/components/Feature";
 import Logos from "@/components/Logos";
 import GetInTouch from "@/components/GetInTouch";
 import Cars from "@/components/Cars";
@@ -147,7 +146,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
       <BlogSection />
 
-      <TrustedBy />
+      <TrustedBy lang={loaderData.lang} />
 
       <GetInTouch />
 

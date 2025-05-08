@@ -44,6 +44,7 @@ export const cars = [
           "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
         price: 9.99,
         free: false,
+        depositeDiscount: 0,
         perDay: true,
         maxPerDays: null,
       },
@@ -74,6 +75,7 @@ export const cars = [
         description:
           "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
         price: 11.99,
+        depositeDiscount: 0,
         free: false,
         perDay: true,
         maxPerDays: null,
@@ -108,6 +110,7 @@ export const cars = [
         free: false,
         perDay: true,
         maxPerDays: null,
+        depositeDiscount: 0,
       },
     ],
     prices: [
@@ -139,6 +142,7 @@ export const cars = [
         price: 12.99,
         free: false,
         perDay: true,
+        depositeDiscount: 0,
         maxPerDays: null,
       },
     ],
@@ -159,7 +163,7 @@ export const cars = [
     numberOfSeats: 5,
     transmissionType: TransmissionType.automatic,
     airConditioning: true,
-    deposite: 500,
+    deposite: 1000,
     aditionalEquipment: [
       {
         id: 1,
@@ -170,6 +174,7 @@ export const cars = [
         free: false,
         perDay: true,
         maxPerDays: null,
+        depositeDiscount: 500,
       },
     ],
     prices: [
@@ -313,6 +318,7 @@ export const aditionalEquipment = [
     free: false,
     perDay: false,
     maxPerDays: null,
+    depositeDiscount: 0,
   },
   {
     id: 3,
@@ -323,6 +329,7 @@ export const aditionalEquipment = [
     free: false,
     perDay: false,
     maxPerDays: null,
+    depositeDiscount: 0,
   },
   {
     id: 8,
@@ -333,6 +340,7 @@ export const aditionalEquipment = [
     free: false,
     perDay: true,
     maxPerDays: 7,
+    depositeDiscount: 0,
   },
   {
     id: 5,
@@ -343,6 +351,7 @@ export const aditionalEquipment = [
     free: true,
     perDay: false,
     maxPerDays: null,
+    depositeDiscount: 0,
   },
   {
     id: 6,
@@ -353,6 +362,7 @@ export const aditionalEquipment = [
     free: true,
     perDay: false,
     maxPerDays: null,
+    depositeDiscount: 0,
   },
   {
     id: 7,
@@ -363,5 +373,6 @@ export const aditionalEquipment = [
     free: true,
     perDay: false,
     maxPerDays: null,
+    depositeDiscount: 0,
   },
 ];

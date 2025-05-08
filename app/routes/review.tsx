@@ -101,6 +101,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     price += 10;
   }
 
+  let depositeDiscount = 0;
   if (idExtras) {
     const ae = [...car.aditionalEquipment, ...aditionalEquipment];
 
@@ -110,6 +111,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
       .forEach((x) => {
         const a = ae.find((a) => a.id == x)!;
 
+        depositeDiscount += a.depositeDiscount;
         let aPrice = 0;
 
         if (a.perDay) {
@@ -129,6 +131,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   }
 
   return {
+    depositeDiscount,
     days,
     price,
     lang,
@@ -177,6 +180,7 @@ export async function action({ request }: Route.ActionArgs) {
   );
 
   let price = 0;
+  let depositeDiscount = 0;
 
   const days = differenceInCalendarDays(dropoffDate, pickupDate);
 
@@ -212,7 +216,7 @@ export async function action({ request }: Route.ActionArgs) {
       .map((x) => +x)
       .forEach((x) => {
         const a = ae.find((a) => a.id == x)!;
-
+        depositeDiscount += a.depositeDiscount;
         let aPrice = 0;
 
         if (a.perDay) {
@@ -264,7 +268,9 @@ export async function action({ request }: Route.ActionArgs) {
     ${extras.map((x) => `<p>${x.name} - ${x.price}€</p>`)}
     <p>Car price: ${carPrice}€</p>
     <p>Total Price: ${price}€</p>
-    <p>Deposite: ${car.deposite}€</p>
+    <p>Deposite for car: ${car.deposite - depositeDiscount}€</p>
+    <p>Deposite discount: ${depositeDiscount}€</p>
+    <p>Deposite: ${car.deposite - depositeDiscount}€</p>
     <br/>
     <p>${firstName} ${lastName}</p>
     <p>${email}</p>
@@ -352,7 +358,20 @@ export default function Reservation({
           <Label>Depozit</Label>
           <p>
             <span className="font-bold text-s text-lg">
-              {loaderData.car.deposite}€
+              {loaderData.depositeDiscount == 0 && (
+                <span>{loaderData.car.deposite}€</span>
+              )}
+
+              {loaderData.depositeDiscount > 0 && (
+                <span>
+                  <span className="line-through text-gray-400">
+                    {loaderData.car.deposite}€
+                  </span>{" "}
+                  <span>
+                    {loaderData.car.deposite - loaderData.depositeDiscount}€
+                  </span>
+                </span>
+              )}
             </span>
           </p>
         </div>

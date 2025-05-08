@@ -173,6 +173,11 @@ export default function Vehicle({
                   {equipment.name}
                 </p>
                 <p>{equipment.description}</p>
+                {equipment.depositeDiscount > 0 && (
+                  <p className=" font-bold mt-2 text-p">
+                    Vehicle deposite discount {equipment.depositeDiscount}€
+                  </p>
+                )}
               </div>
 
               <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
