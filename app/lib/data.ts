@@ -376,3 +376,5 @@ export const aditionalEquipment = [
     depositeDiscount: 0,
   },
 ];
+
+export const PRICE_FOR_PICKUP_OFF_HOURS = 20;

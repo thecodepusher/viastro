@@ -3,14 +3,19 @@ import Footer from "@/components/Footer";
 import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
 import { Form, Outlet, redirect, replace } from "react-router";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Route } from "./+types/review";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { aditionalEquipment, cars, locations } from "@/lib/data";
+import {
+  aditionalEquipment,
+  cars,
+  locations,
+  PRICE_FOR_PICKUP_OFF_HOURS,
+} from "@/lib/data";
 import { differenceInCalendarDays, format } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import nodemailer from "nodemailer";
@@ -98,7 +103,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     [];
 
   if (notInWorkingHours) {
-    price += 10;
+    price += PRICE_FOR_PICKUP_OFF_HOURS;
   }
 
   let depositeDiscount = 0;
@@ -205,7 +210,7 @@ export async function action({ request }: Route.ActionArgs) {
   let extras: { id: number; name: string; price: number }[] = [];
 
   if (notInWorkingHours) {
-    price += 10;
+    price += PRICE_FOR_PICKUP_OFF_HOURS;
   }
 
   if (idExtras) {
@@ -262,7 +267,7 @@ export async function action({ request }: Route.ActionArgs) {
 
     ${
       notInWorkingHours
-        ? `<p>Dodatak za rezervaciju van radnog vremena - 10€</p>`
+        ? `<p>Dodatak za rezervaciju van radnog vremena - ${PRICE_FOR_PICKUP_OFF_HOURS}€</p>`
         : ``
     }
     ${extras.map((x) => `<p>${x.name} - ${x.price}€</p>`)}
@@ -292,7 +297,7 @@ export default function Reservation({
 }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <h3 className="mx-6 my-4 font-bold text-xl">Cost summery</h3>
+      <h3 className="mx-6 my-4 font-bold text-xl">Cost summary</h3>
       <div className="mx-6 p-4 border rounded shadow flex gap-2 flex-col">
         <div>
           <Label>Pickup</Label>
@@ -330,7 +335,9 @@ export default function Reservation({
                 <div>
                   Dodatak za rezervaciju van radnog vremena
                   {" - "}
-                  <span className="font-bold text-s text-lg">10€</span>
+                  <span className="font-bold text-s text-lg">
+                    {PRICE_FOR_PICKUP_OFF_HOURS}€
+                  </span>
                 </div>
               )}
 
@@ -373,6 +380,14 @@ export default function Reservation({
                 </span>
               )}
             </span>
+          </p>
+        </div>
+
+        <div>
+          <p className="text-sm text-muted-foreground">
+            <Info size={20} className="float-left mr-1 text-p" />
+            Plaćanje se vrši u dinarima po srednjem kursu Narodne banke Srbije
+            na dan uplate
           </p>
         </div>
       </div>

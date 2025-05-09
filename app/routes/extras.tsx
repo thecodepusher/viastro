@@ -146,7 +146,7 @@ export default function Vehicle({
             </div>
 
             <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
-              <p className="font-bold text-lg">10€</p>
+              <p className="font-bold text-lg">20€</p>
             </div>
           </div>
         )}
