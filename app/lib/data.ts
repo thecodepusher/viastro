@@ -27,6 +27,38 @@ export enum CarType {
 
 export const cars = [
   {
+    id: 6,
+    slug: "seat_ibiza_fr",
+    name: "Seat Ibiza FR",
+    type: CarType.hatchback,
+    gas: GasType.gasoline,
+    numberOfSeats: 5,
+    transmissionType: TransmissionType.manual,
+    airConditioning: true,
+    deposite: 300,
+    aditionalEquipment: [
+      {
+        id: 1,
+        name: "Full Protection osiguranje",
+        description:
+          "Za potpunu bezbrižnost tokom putovanja, nudimo Full Protection osiguranje – najviši nivo pokrića za Vas, vozilo i sve putnike. Oslobađanje od finansijske odgovornosti za štetu na: gumama, staklima (vetrobransko staklo, prozori, retrovizori), donjem postroju vozila, karoseriji (ogrebotine, manje udarce), umanjenje franšize (učešća u šteti). Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila. Osiguranje putnika u vozilu – pokriće u slučaju telesnih povreda ili nezgoda tokom najma (P.A.I – Personal Accident Insurance). Osiguranje ne važi u slučaju vožnje pod dejstvom alkohola, psihoaktivnih supstanci, grube nepažnje ili vožnje van javnih puteva. Cena Full Protection paketa zavisi od klase vozila i obračunava se po danu. Tačan iznos doplate biće prikazan prilikom rezervacije ili preuzimanja vozila.",
+        price: 9.99,
+        free: false,
+        depositeDiscount: 0,
+        perDay: true,
+        maxPerDays: null,
+      },
+    ],
+    prices: [
+      { from: 3, to: 7, price: 42 },
+      { from: 8, to: 15, price: 38 },
+      { from: 16, to: 29, price: 34 },
+      { from: 30, to: null, price: 30 },
+    ],
+    price: 30,
+    image: "/ibiza.webp",
+  },
+  {
     id: 3,
     slug: "citroen_c3_aircross",
     name: "Citroen C3 Aircross",
