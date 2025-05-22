@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { addDays, format, subDays } from "date-fns";
+import { addDays, format, isAfter, subDays } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { Label } from "./ui/label";
@@ -160,10 +160,18 @@ export default function ReservationTime(props: {
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  toDate={subDays(dropDate ?? addDays(new Date(), 7), 3)}
+                  // toDate={subDays(dropDate ?? addDays(new Date(), 7), 3)}
                   selected={pickDate}
                   fromDate={new Date()}
-                  onSelect={setPickDate}
+                  onSelect={(newDate) => {
+                    setPickDate(newDate);
+
+                    if (!newDate || !dropDate) return;
+
+                    if (isAfter(addDays(newDate, 3), dropDate)) {
+                      setDropDate(undefined);
+                    }
+                  }}
                   initialFocus
                 />
               </PopoverContent>

@@ -386,8 +386,15 @@ export default function Reservation({
         <div>
           <p className="text-sm text-muted-foreground">
             <Info size={20} className="float-left mr-1 text-p" />
-            Plaćanje se vrši u dinarima po srednjem kursu Narodne banke Srbije
-            na dan uplate
+            All payments will be effected in Serbian currency - Dinar (RSD). The
+            amount your credit card account will be charged for is obtained
+            through the conversion of the price in Euro into Serbian dinar
+            according to the current exchange rate of the Serbian National Bank.
+            When charging your credit card, the same amount is converted into
+            your local currency according to the exchange rate of credit card
+            associations. As a result of this conversion there is a possibility
+            of a slight difference from the original price stated in our web
+            site.
           </p>
         </div>
       </div>

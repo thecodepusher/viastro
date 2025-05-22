@@ -100,7 +100,7 @@ export default function Footer() {
       },
       {
         name: "Whatsapp",
-        href: "https://wa.me/+38169656555",
+        href: "https://wa.me/38169656555",
         icon: (props: any) => (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -167,8 +167,56 @@ export default function Footer() {
             </a>
           ))}
         </div>
+
+        <div className="mt-4  px-2 py-4 flex gap-4 items-center justify-center flex-wrap flex-col md:flex-row">
+          <div className="px-2 py-4 flex gap-4 items-center justify-center flex-wrap">
+            <img width="37px" height="23px" src="/mc.svg" alt="master" />
+            <img width="37px" height="23px" src="/ms.svg" alt="maestro" />
+            <img width="40px" height="25px" src="/visa.png" alt="visa" />
+            <img width="40px" height="25px" src="/dina.png" alt="dina" />
+            <img
+              width="37px"
+              height="23px"
+              src="/am.png"
+              alt="american express"
+            />
+          </div>
+
+          <a href="https://www.raiffeisenbank.rs/">
+            <img width="120px" src="/raiffeisen.png" alt="Raiffeisen bank" />
+          </a>
+
+          <a
+            href="https://www.wspay.rs"
+            title="Monri WSpay - Web Secure Payment Gateway"
+            target="_blank"
+          >
+            <img
+              width="60px"
+              alt="Monri WSpay - Web Secure Payment Gateway"
+              src="https://www.wspay.info/payment-info/wsPayWebSecureLogo-118x50-transparent.png"
+            />
+          </a>
+
+          <div className="px-2 flex gap-4 items-center justify-center flex-wrap">
+            <a href="https://rs.visa.com/pay-with-visa/security-and-assistance/protected-everywhere.html">
+              <img width="30px" src="/visa-secure.jpg" alt="Verified by Visa" />
+            </a>
+            <a href="https://www.mastercard.rs/sr-rs/korisnici/pronadite-karticu.html">
+              <img
+                width="120px"
+                src="/mc_idcheck.svg"
+                alt="Mastercard SecureCode"
+              />
+            </a>
+          </div>
+        </div>
+
         <p className="mt-10 text-center text-sm/6 text-gray-400">
-          &copy; 2025 Viastro. All rights reserved.
+          &copy; Viastro doo Beograd
+        </p>
+        <p className="text-center text-sm/6 text-gray-400">
+          PIB: 114961759 MB: 22096737 Delatnost: 7711
         </p>
       </div>
     </footer>

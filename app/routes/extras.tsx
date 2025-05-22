@@ -122,7 +122,7 @@ export default function Vehicle({
               vožnje pod dejstvom alkohola ili psihoaktivnih supstanci, kao ni
               štetu na gumama, staklima i donjem postroju, osim ako nije
               drugačije ugovoreno. Za dodatnu sigurnost, dostupan je i full
-              protect paket osiguranja,
+              protect paket osiguranja.
             </p>
           </div>
 
