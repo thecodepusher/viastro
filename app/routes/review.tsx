@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
-import { Form, Outlet, redirect, replace } from "react-router";
+import { Form, Link, Outlet, redirect, replace } from "react-router";
 import { CheckIcon, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Route } from "./+types/review";
@@ -454,12 +454,15 @@ export default function Reservation({
               >
                 AGREEMENT
               </label>
-              <p className="text-sm text-muted-foreground">
-                We need your agreement so we can contact you regarding your
-                reservation. Find out more about our privacy policy, Conversion
-                Statement, User Privacy Protection, Confidential Transaction
-                Data Protection, and Refunds. here.
-              </p>
+              <Link target="_blank" to="/privacy-policy">
+                <p className="text-sm text-muted-foreground">
+                  We need your agreement so we can contact you regarding your
+                  reservation. Find out more about our privacy policy,
+                  Conversion Statement, User Privacy Protection, Confidential
+                  Transaction Data Protection, and Refunds{" "}
+                  <span className="underline font-bold">here.</span>
+                </p>
+              </Link>
             </div>
           </div>
         </div>

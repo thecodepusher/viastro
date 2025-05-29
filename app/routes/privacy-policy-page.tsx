@@ -7,7 +7,7 @@ import type { Route } from "./+types/rental-conditions-page";
 import { langCookie } from "@/lib/prefs-cookie";
 import { replace } from "react-router";
 import { sr } from "@/locales/sr";
-import { usloviNajma } from "@/lib/data";
+import { privacyPolicy, usloviNajma } from "@/lib/data";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   if (!params.lang) {
@@ -45,7 +45,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   return {
     langCode: params.lang ?? "en",
     lang,
-    usloviNajma: usloviNajma,
+    usloviNajma: privacyPolicy,
     message: context.VALUE_FROM_EXPRESS,
   };
 }

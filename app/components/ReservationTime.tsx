@@ -216,7 +216,7 @@ export default function ReservationTime(props: {
                 <Calendar
                   mode="single"
                   selected={dropDate}
-                  fromDate={addDays(pickDate ?? new Date(), 3)}
+                  fromDate={addDays(pickDate ?? new Date(), 2)}
                   onSelect={setDropDate}
                   initialFocus
                 />

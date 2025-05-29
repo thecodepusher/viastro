@@ -456,3 +456,892 @@ export const aditionalEquipment = [
 ];
 
 export const PRICE_FOR_PICKUP_OFF_HOURS = 20;
+
+export const privacyPolicy = `
+
+  <p class="c1"><span class="c3">VIASTRO DOO</span></p>
+  <p class="c1">
+      <span class="c0">&#128205;</span
+      ><span
+          >&nbsp;Adresa: Danila Leki&#263;a &Scaron;panca 31, Novi
+          Beograd<br /></span
+      ><span class="c0">&#128209;</span
+      ><span
+          >&nbsp;PIB: 114961759 | Mati&#269;ni broj: 22096737<br /></span
+      ><span class="c0">&#128231;</span
+      ><span>&nbsp;Email: office@viastro.rs | </span
+      ><span class="c0">&#128222;</span
+      ><span class="c3">&nbsp;Tel: 069/656-555</span>
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c1">
+      <span class="c3">ZA&Scaron;TITA PRIVATNOSTI KORISNIKA</span>
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >U ime Viastro Doo obavezujemo se da &#263;emo &#269;uvati
+          privatnost svih na&scaron;ih kupaca.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Prikupljamo samo neophodne, osnovne podatke o kupcima/
+          korisnicima i podatke neophodne za poslovanje i informisanje
+          korisnika u skladu sa dobrim poslovnim obi&#269;ajima i u cilju
+          pru&#382;anja kvalitetne usluge.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Dajemo kupcima mogu&#263;nost izbora uklju&#269;uju&#263;i
+          mogu&#263;nost odluke da li &#382;ele ili ne da se
+          izbri&scaron;u sa mailing lista koje se koriste za
+          marketin&scaron;ke kampanje.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Svi podaci o korisnicima/kupcima se strogo &#269;uvaju i
+          dostupni su samo zaposlenima kojima su ti podaci nu&#382;ni za
+          obavljanje posla. Svi zaposleni [ime prodajnog mesta] (i
+          poslovni partneri) odgovorni su za po&scaron;tovanje na&#269;ela
+          za&scaron;tite privatnosti.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c1">
+      <span class="c3"
+          >ZA&Scaron;TITA POVERLJIVIH PODATAKA O TRANSAKCIJI</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Prilikom uno&scaron;enja podataka o platnoj kartici, poverljive
+          informacija se prenose putem javne mre&#382;e u
+          za&scaron;ti&#263;enoj (kriptovanoj) formi upotrebom SSL
+          protokola i PKI sistema, kao trenutno najsavremenije
+          kriptografske tehnologije.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Sigurnost podataka prilikom kupovine, garantuje procesor
+          platnih kartica. Niti jednog trenutka podaci o platnoj kartici
+          nisu dostupni na&scaron;em sistemu.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c1"><span class="c3">POVRA&#262;AJ SREDSTAVA</span></p>
+  <p class="c1">
+      <span class="c3"
+          >U slu&#269;aju vra&#263;anja robe i povra&#263;aja sredstava
+          kupcu koji je prethodno platio nekom od platnih kartica,
+          delimi&#269;no ili u celosti, a bez obzira na razlog
+          vra&#263;anja, Viastro Doo je u obavezi da povra&#263;aj
+          vr&scaron;i isklju&#269;ivo preko VISA, EC/MC i Maestro metoda
+          pla&#263;anja, &scaron;to zna&#269;i da &#263;e banka na zahtev
+          prodavca obaviti povra&#263;aj sredstava na ra&#269;un korisnika
+          kartice.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c1"><span class="c3">IZJAVA O KONVERZIJI</span></p>
+  <p class="c1">
+      <span class="c3"
+          >All payments will be effected in Serbian currency - Dinar
+          (RSD). The amount your credit card account will be charged for
+          is obtained through the conversion of the price in Euro into
+          Serbian dinar according to the current exchange rate of the
+          Serbian National Bank. When charging your credit card, the same
+          amount is converted into your local currency according to the
+          exchange rate of credit card associations. As a result of this
+          conversion there is a possibility of a slight difference from
+          the original price stated in our web site.</span
+      >
+  </p>
+  `;
+
+export const usloviNajma = `
+  <p class="c3">
+      <span
+          >OP&Scaron;TI USLOVI NAJMA VOZILA &ndash; VIASTRO DOO
+          <br />&#128205; Adresa: Danila Leki&#263;a &Scaron;panca 31,
+          Novi Beograd<br />&#128209; PIB: 114961759 | Mati&#269;ni broj:
+          22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Tel: 069/656-555<br /><br /></span
+      ><span class="c8"
+          >1. OP&Scaron;TE ODREDBE I DEFINICIJE POJMOVA</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          ><br />Op&scaron;ti uslovi najma vozila predstavljaju sastavni
+          deo svakog Ugovora o najmu motornog vozila zaklju&#269;enog sa
+          privrednim dru&scaron;tvom VIASTRO DOO BEOGRAD-NOVI
+          BEOGRAD.</span
+      >
+  </p>
+  <p class="c0">
+      <span
+          ><br />Korisniku su prilikom potpisivanja ugovora o najmu
+          motornog vozila predo&#269;ene odredbe Op&scaron;tih uslova.
+          Korisnik se obave&scaron;tava tako&#273;e da se u svakom
+          trenutku u slu&#269;aju dodatne potrebe mo&#382;e ponovo sa
+          sadr&#382;inom istih upoznati putem internet stranice Najmodavca </span
+      ><span class="c17"
+          ><a
+              class="c13"
+              href="https://www.google.com/url?q=https://viastro.rs/en/rental-conditions&amp;sa=D&amp;source=editors&amp;ust=1748527385691949&amp;usg=AOvVaw1rFlFbTivsJVnm749QXOp1"
+              >https://viastro.rs/en/rental-conditions</a
+          ></span
+      ><span class="c1"
+          >; Korisnik potpisivanjem Ugovora o najmu motornog vozila
+          potvr&#273;uje da je upoznat sa svim odredbama Op&scaron;tih
+          uslova najma vozila, da je sadr&#382;inu istih razumeo uslovima
+          i da ih u celosti prihvata imaju&#263;i u vidu da predstavljaju
+          sastavni deo svakog pojedina&#269;nog ugovora o najmu
+          vozila.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Na Ugovor o najmu vozila &#263;e primenjuju pozitivni propisi
+          Republike Srbije i ugovara se njihova supsidijerna primena za
+          sva prava i obaveze koja nisu istim regulisana pod uslovom da su
+          primenjljiva na konkretne slu&#269;ajeve. &nbsp;Na sva sporna
+          pitanja koja mogu proiza&#263;i iz Ugovora i Op&scaron;tih
+          uslova se ugovara nadle&#382;nost mesno i stvarno nadle&#382;nog
+          suda u Beogradu.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Namodavac i Korisnik &#263;e nastojati da sva sporna pitanja
+          prevashodno re&scaron;e mirnim vansudskim putem.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Korisnik potpisivanjem ugovora potvr&#273;uje da je
+          pro&#269;itao odredbe Op&scaron;tih uslova, da je njihovu
+          sadr&#382;inu razumeo i da je saglasan da se isti primenjuju kao
+          sastavni deo Ugovora.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Najmodavac zadr&#382;ava pravo da Op&scaron;te uslove najma
+          vozila izmeni uz obavezu da ih prethodno objavi na internet
+          stranici sa rokom stupanja na snagu od 30 dana od dana objave a
+          radi blagovremenog upoznavanja Korisnika sa sadr&#382;inom
+          izmena.</span
+      >
+  </p>
+  <p class="c0 c7"><span class="c1"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >2. ZNA&#268;ENJE &nbsp;NEKIH OD IZRAZA U OP&Scaron;TIM USLOVIMA
+          POSLOVANJA</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >&rsquo;&rsquo;Najmodavac&rsquo;&rsquo; &ndash; privredno
+          dru&scaron;tvo Viastro doo Beograd, sa sedi&scaron;tem na adresi
+          ul. Danila Leki&#263;a &Scaron;panca br.31, Beograd-Novi
+          Beograd, mati&#269;ni broj: 22096737, PIB: 114961759;</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >&rsquo;&rsquo;Najmoprimac&rsquo;&rsquo; &ndash; svako
+          fizi&#269;ko ili pravno lice koje iznajmljuje vozilo, odnosno u
+          &#269;ije ime se vozilo iznajmljuje;</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >&rsquo;&rsquo;Ugovor&rsquo;&rsquo; &ndash; Ugovor o najmu koji
+          se potpisuje prilikom preuzimanja vozila a kojim se vozilo daje
+          na kori&scaron;&#263;enje, defini&scaron;u se prava i obaveze
+          ugovornih strana u skladu sa ugovornim odredbama i Op&scaron;tim
+          uslovima najma kao &scaron;to su primera radi preuzimanje i
+          vra&#263;anje vozila, pokri&#263;e, paket opreme i usluga
+          uklju&#269;enih u cenu kao i na&#269;in pla&#263;anja. Ugovor
+          pored navedenog sadr&#382;i i podaatke o stanju kilometra&#382;e
+          vozila, o&scaron;te&#263;enjima i eventualnim nedostacima na
+          vozilu i druga prava i obaveze koje obe ugovorne strane svojim
+          potpisom u potpunosti prihvataju. Skica o stanju vozila prilikom
+          izdavanja i ovi Op&scaron;ti uslovi smatraju se sastavnim delom
+          Ugovora o najmu vozila kao njegov prilog;</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >&rsquo;&rsquo;Voza&#269;/Dodatni voza&#269;&rsquo;&rsquo;
+          &ndash; je fizi&#269;ko lice navedeno u Ugovoru kao
+          &lsquo;&rsquo;Korisnik&rsquo;&rsquo; koje potpisuje Ugovor o
+          najmu i preuzima vozilo, a koje je odgovorno za
+          po&scaron;tovanje svih odredbi Ugovora i Op&scaron;tih
+          uslova;</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >&rsquo;&rsquo;Korisnik&rsquo;&rsquo; &ndash; Najmoprimac,
+          Voza&#269; i Dodatni voza&#269; u daljem tekstu Op&scaron;tih
+          uslova najma ozna&#269;avaju se jednom re&#269;ju &ndash;
+          Korisnik</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >&lsquo;&rsquo;Vozilo&rsquo;&rsquo; je predmet najma Ugovora, a
+          &#269;iji podaci su navedeni u Ugovoru.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c8"
+          ><br />3. USLOVI I PRAVILA KORI&Scaron;&#262;ENJA VOZILA</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Najmodavac izdaje Korisniku Vozilo koje je tehni&#269;ki
+          ispravno, oprano i sa punim rezervoarom, sa ugovorenom
+          pripadaju&#263;om opremom i propratnom dokumentacijom &scaron;to
+          Korisnik potpisivanjem Ugovora i potvr&#273;uje. Lice koje u ime
+          Korisnika preuzima vozilo i potpisuje Ugovor, ukoliko za to ima
+          ovla&scaron;&#263;enje, garantuje i odgovoran je Najmodavcu,
+          solidarno sa Korisnikom za po&scaron;tovanje i ispunjenje svih
+          ugovornih obaveza. Potpisivanjem Ugovora Korisnik garantuje
+          Najmodavcu da ispunjava op&scaron;te uslove za upravljanje
+          motornim vozilom i da poseduje sve relevantne isprave u skladu
+          sa va&#382;e&#263;im zakonskim i podzakonskim propisima
+          Republike Srbije. Prilikom potpisivanja ugovora Korisnik je
+          obavezan da Najmodavcu preda na uvid li&#269;ne isprave a
+          &#269;ije kopije &#263;e predstavljati sastavni deo Ugovora kao
+          prilog.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          >Korisnik je obavezan da se stara o redovnoj tehni&#269;koj
+          ispravnosti vozila i da vodi ra&#269;una i redovno proverava
+          parametre kao &scaron;to su stanje te&#269;nosti za
+          hla&#273;enje, ulje, ostale te&#269;nosti, visinu pritiska u
+          gumama i dr. U slu&#269;aju notifikacija sa instrument table ili
+          drugih signalizacija Vozila ili ukoliko Korisnik smatra da
+          postoje drugi razlozi za obavljanje servisa ili redovnih servisa
+          Korisnik je obavezan da se javi Najmodavcu radi obavljanja
+          neophodnih radnji. U slu&#269;aju nastanka &scaron;tete na
+          vozilu zbog nepo&scaron;tovanja ovih odredbi Korisnik &#263;e
+          biti du&#382;an da nadoknadi tako nastalu &scaron;tetu i
+          eventualnu izgubljenu dobit Najmodavca za period
+          nemogu&#263;nosti izdavanja vozila usled kr&scaron;enja ovih
+          odredbi Op&scaron;tih uslova.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Korisniku je izri&#269;ito zabranjeno da koristiti vozilo
+          za slede&#263;e potrebe: trka, off-road vo&#382;nje, vu&#269;u
+          drugih vozila ili prikolica, &scaron;kolu vo&#382;nje, prevoz
+          opasnih materija, profesionalni prevoz putnika, vo&#382;nju pod
+          dejstvom alkohola, narkotika i drugih zakonom zabranjenih
+          psihoaktivnih supstanci i/ili bilo koje druge nezakonite
+          aktivnosti.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Korisnik je obavezan da vodi ra&#269;una o ispravnosti i
+          bezbednosti vozila sa odgovaraju&#263;im stepenom pa&#382;nje
+          (dobrog doma&#263;ina odnosno dobrog privrednika u zavisnosti od
+          toga koji je pravni standard primenjljiv na konkretan
+          slu&#269;aj). Zabranjeno je ostavljanje vozila otklju&#269;anog,
+          sa spu&scaron;tenim prozorima ili na drugi na&#269;in
+          neobezbe&#273;enog ili sa klju&#269;evima u bravi.<br
+      /></span>
+  </p>
+  <p class="c6">
+      <span class="c1"
+          >Korisnik je du&#382;an da prilikom vra&#263;anja vozila
+          izvr&scaron;i povra&#263;aj istog na adresi Najmodavca sa koje
+          je vozilo i preuzeo. Vozilo pre povra&#263;aja mora biti oprano
+          spolja i iznutra a rezervoar mora biti pun. Ukoliko ove obaveze
+          nisu ispo&scaron;tovane od strane Korisnika, Najmodavac ima
+          pravo da naplati usluge pranja i/ili dolivanja goriva prema
+          va&#382;e&#263;em cenovniku.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Korisnik mo&#382;e koristiti vozilo za vo&#382;nju u
+          Republici Srbiji, dok za prelazak granice i vo&#382;nju u
+          slede&#263;im zemljama to mo&#382;e u&#269;initi isklju&#269;ivo
+          uz prethodnu pismenu saglasnost Najmodavca: zemlje Evropske
+          unije, Crna Gora, Bosna i Hercegovina, Severna Makedonija.
+          Prelazak granice i vo&#382;nja u druge zemlje je zabranjena.
+          Pored navedenog Korisnik se tako&#273;e zabranjuje vo&#382;nja i
+          prelazak administrativnih prelaza na teritoriju AP Kosova i
+          Metohije;</span
+      >
+  </p>
+  <p class="c6 c7"><span class="c1"></span></p>
+  <p class="c0">
+      <span class="c1"
+          >Korisnik je du&#382;an da se upozna sa korisni&#269;kim
+          uputstvom za svako vozilo, neposredno po preuzimanju istog.
+          Tako&#273;e, va&#382;no je da se pridr&#382;ava svih preporuka i
+          instrukcija u vezi sa pravilnim kori&scaron;&#263;enjem vozila
+          kako bi se obezbedila njegova optimalna funkcionalnost i izbegle
+          mogu&#263;e &scaron;tete.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >U slu&#269;aju gubitka fabri&#269;ke garancije vozila koje je
+          nastalo kao posledica nepravilnog kori&scaron;&#263;enja vozila
+          od strane Korisnika, odnosno kori&scaron;&#263;enja u
+          suprotnosti sa pravilima i uslovima fabri&#269;ke garancije,
+          Najmodavac ima pravo na naknadu punog iznosa &scaron;tete koju
+          tom prilikom pretrpi a koja je nastala kao posledica gore
+          opisanih radnji Korisnika.
+      </span>
+  </p>
+  <p class="c16">
+      <span
+          >Najmodavac zadr&#382;ava pravo da u bilo kom trenutku, bez
+          prethodne najave, raskine ugovor i zatra&#382;i povra&#263;aj
+          iznajmljenog Vozila. zbog kr&scaron;enja bilo kojih odredbi
+          op&scaron;tih uslova od strane korisnika.<br /></span
+      ><span class="c11"
+          >4.VOZA&#268;KI USLOVI ZA KORISNIKA I OGRANI&#268;ENJA
+          NAJMA</span
+      ><span class="c1"><br /></span>
+  </p>
+  <p class="c6">
+      <span class="c1"
+          >Minimalna godine starosti Korisnika-voza&#269;a za
+          zaklju&#269;enje Ugovora o najmu je21 godina.
+      </span>
+  </p>
+  <p class="c6 c7"><span class="c1"></span></p>
+  <p class="c6">
+      <span class="c1"
+          >Korisnik mora da poseduje voza&#269;ku dozvolu koja mora biti
+          va&#382;e&#263;a u minimalnom trajanju od pune 2 godine na dan
+          zaklju&#269;enja Ugovora o najmu.</span
+      >
+  </p>
+  <p class="c6 c7"><span class="c1"></span></p>
+  <p class="c6">
+      <span class="c1"
+          >U slu&#269;aju ugovaranja prava za Dodatnog voza&#269;a
+          iznajmljenog vozila isti mora biti upisan u ugovor i ispunjavati
+          iste uslove kao i Korisnik.</span
+      >
+  </p>
+  <p class="c6 c7"><span class="c1"></span></p>
+  <p class="c16">
+      <span><br /></span
+      ><span class="c8"
+          >5.KORI&Scaron;&#262;ENJE VOZILA VAN GRANICA REPUBLIKE
+          SRBIJE</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />
+          Vo&#382;nja vozila van teritorije Republike Srbije i prelazak
+          granice dozvoljen je samo uz prethodnu pisanu saglasnost
+          Najmodavca.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Korisnik je obavezan da snosi sve tro&scaron;kove vezane
+          za dodatno osiguranje vozila i me&#273;unarodnu dokumentaciju
+          koja je u tom slu&#269;aju potrebna. Specifikacija navedenih
+          tro&scaron;kova navedena je u odgovaraju&#263;em delu
+          cenovnika.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Kr&scaron;enje ovih odredbi, odnosno postupanje Korisnika
+          mimo pisane saglasnosti Najmodavca, predstavlja grubo
+          kr&scaron;enje odredbi O&scaron;tih uslova i Ugovora zbog kojeg
+          Najmodavac ima pravo na raskid ugovora i naknadu eventualno
+          pretrpljene &scaron;tete.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Ukoliko vozilo bude kori&scaron;&#263;eno van teritorije
+          dozvoljenih zemalja, odnosno bude kori&scaron;&#263;eno za
+          prelazak granice i vo&#382;nju u zemljama bez prethodne pisane
+          saglasnosti Najmodavca, Korisnik snosi punu odgovornost za
+          celokupan iznos &scaron;tete koju kao posledicu takvih
+          postupanja pretrpi Najmodavac. Ukoliko izuzetno &scaron;tetu
+          koja je nastala kao posledica nedozvoljenih postupanja Korisnika
+          nadoknadi Najmodavac, on u tom slu&#269;aju sti&#269;e pravo
+          regresa prema Korisniku koja pored iznosa &scaron;tete
+          podrazumeva i pravo regresa na naknadu svih prate&#263;ih
+          tro&scaron;kova koji u takvom slu&#269;aju nastanu a koji
+          podrazumevaju ali se ne ograni&#269;avaju na eventualne sudske i
+          advokatske tro&scaron;kove, tro&scaron;kove pla&#263;enih taksi
+          i kazni, administrativni tro&scaron;kovi i tome
+          sli&#269;no.</span
+      >
+  </p>
+  <p class="c6 c7">
+      <span class="c1"><br /></span>
+  </p>
+  <p class="c3"><span class="c11">6.DOKUMENTACIJA I ODGOVORNOST</span></p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Korisnik je u obavezi da za sve vreme trajanja Ugovora
+          &#269;uva dobijenu dokumentaciju za vozilo i sve primerke
+          klju&#269;eva od Vozila koje je zaprimio.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />U slu&#269;aju gubitka saobra&#263;ajne dozvole,
+          klju&#269;a, tablica, nalepnica, polisa osiguranja i tome
+          sli&#269;no &ndash; Korisnik je u obavezi da plati iznos za
+          preduzimanje radnji Najmodavca u cilju otklanjanja posledica
+          prema va&#382;e&#263;em cenovniku. Va&#382;e&#263;i cenovnik u
+          ovim slu&#269;ajevima u cenu uklju&#269;uje i manipulativne
+          tro&scaron;kove koji tom prilikom nastaju (stvarni
+          tro&scaron;kovi i tro&scaron;kovi anga&#382;ovanja zaposlenih
+          Najmodavca na otklanjanju posledica gubitka).</span
+      >
+  </p>
+  <p class="c6"><span class="c1">&nbsp;</span></p>
+  <p class="c0">
+      <span
+          >Vozilo se obavezno fotografi&scaron;e od strane zaposlenih
+          Najmodavca prilikom preuzimanja i vra&#263;anja istog od strane
+          Korisnika, a koje fotografije &#263;e predstavljati sastavni deo
+          dokumentacije za predmet i eventualno dokaz u slu&#269;aju
+          re&scaron;avanja spornih pitanja.<br /><br /></span
+      ><span class="c11">7. DEPOZIT I NAPLATA</span>
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Korisnik je u obavezi da polo&#382;i Depozit prilikom
+          preuzimanja vozila.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Najmodavac ima pravo da iznos Depozita koristi za pokri&#263;e
+          slede&#263;ih slu&#269;ajeva: naknade &scaron;tete,
+          tro&scaron;kove dolivanja goriva, tro&scaron;kove pranja,
+          tro&scaron;kove pla&#263;anja kazni, tro&scaron;kove gubitka
+          dokumentacije ili opreme.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Najmodavac zadr&#382;ava pravo da zadr&#382;i deo ili ceo iznos
+          depozita u roku od 30 dana od &nbsp;zavr&scaron;teka najma, u
+          cilju dodatnih provera i pokri&#263;a eventualno nepla&#263;enih
+          kazni Korisnika, radi pla&#263;anja tro&scaron;kova osiguranja
+          i/ili drugih iznosa &scaron;teta koji su nastali usled radnji
+          Korisnika a koje se mogu naknadno pojaviti za isplatu.
+          Najmodavac zadr&#382;ava pravo regresa prema Korisniku i nakon
+          isteka roka od 30dana i povra&#263;aja depozita ukoliko se
+          pojavi potreba pla&#263;anja iznosa za Korisnika koji i
+          ina&#269;e padaju na njegov teret.</span
+      >
+  </p>
+  <p class="c0">
+      <span><br /></span
+      ><span class="c8">8. OSIGURANJE I NAKNADA &Scaron;TETE</span>
+  </p>
+  <p class="c6">
+      <span class="c1"
+          >Sva vozila Najmodavca su osigurana polisom obaveznog osiguranja
+          od autoodgovornosti i kasko osiguranjem sa
+          u&#269;e&scaron;&#263;em u &scaron;teti (fran&scaron;iza).</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />Osnovna polisa kasko osiguranja ne pokriva &scaron;tetu
+          koja nastane na: gumama, felnama, staklu vozila, trapu vozila,
+          podvozju, enterijeru, motoru, kva&#269;ilu i &scaron;tete koje
+          nastanu usled nepa&#382;nje ili neadekvatnog
+          kori&scaron;&#263;enja od strane Korisnika.</span
+      >
+  </p>
+  <p class="c6">
+      <span class="c1"
+          ><br />&Scaron;teta se procenjuje isklju&#269;ivo od strane
+          ovla&scaron;&#263;enog procenitelja.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          ><br />Ukoliko se za nastalu &scaron;tetu ne sa&#269;ini
+          policijski zapisnik i/ili se ne izvr&scaron;i prijava
+          &scaron;tetnog doga&#273;aja iz razloga koji se mogu pripisati u
+          krivicu Korisniku celokupan iznos &scaron;tete zajedno sa
+          prate&#263;im tro&scaron;kovima, usled nemogu&#263;nosti naplate
+          navedenih iznosa od osiguravaju&#263;ih ku&#263;a, padaju
+          isklju&#269;ivo i u celosti na teret Korisnika.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >U slu&#269;aju saobra&#263;ajne nezgode u kojoj je
+          u&#269;estvovao Korisnik koji NIJE kriv za saobra&#263;ajnu
+          nezgodu isti NE&#262;E BITI U OBAVEZI da pla&#263;a iznos
+          u&#269;e&scaron;&#263;a u &scaron;teti ukoliko Najmodavcu
+          blagovremeno dostavi policijski zapisnik, podatke o drugim
+          u&#269;esnicima saobra&#263;ajne nezgode i ukoliko je vozilo
+          koristio u skladu sa Ugovorom i Op&scaron;tim uslovima.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >U slu&#269;aju saobra&#263;ajne nezgode u kojoj Korisnik JESTE
+          kriv za saobra&#263;ajnu nezgodu isti se &nbsp;obavezuje da
+          izvr&scaron;i uplatu nov&#269;anog iznos u&#269;e&scaron;&#263;a
+          u &scaron;teti (fran&scaron;izu) u skladu sa va&#382;e&#263;om
+          polisom kasko osiguranja.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Minimalan iznos u&#269;e&scaron;&#263;a za &scaron;tetni
+          doga&#273;aj iznosi 100 EUR + PDV, a maksimalan se odre&#273;uje
+          prema osiguranoj vrednosti prema osigiranoj vrednosti iz polise
+          osiguranja.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Korisnik je obavezan da nadoknadi PUN iznos &scaron;tete,
+          odnosno Najmodavac sti&#269;e pravo regresa prema Korisniku u
+          slede&#263;im slu&#269;ajevima:</span
+      >
+  </p>
+  <ol class="c10 lst-kix_list_15-0 start" start="1">
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Neprijavljivanje &scaron;tetnog
+              doga&#273;aja/saobra&#263;ajne nezgode policiji i/ili
+              Najmodavcu.</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Nedostavljanje originalnih klju&#269;eva i prate&#263;e
+              dokumentacije vozila u slu&#269;aju kra&#273;e iznajmljenog
+              vozila,</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Vo&#382;nje pod uticajem alkohola, i/ili psihoaktivnih
+              supstanci i/ili bez va&#382;e&#263;e voza&#269;ke
+              dozvole,</span
+          >
+      </li>
+      <li class="c0 c9 c14 li-bullet-0">
+          <span class="c1"
+              >Kori&scaron;&#263;enje vozila u slu&#269;ajevima koji su
+              zabranjeni ovim Op&scaron;tim uslovima (npr. trke, off-road,
+              bez dozvole za izlazak iz zemlje).</span
+          >
+      </li>
+  </ol>
+  <p class="c3">
+      <span><br /></span
+      ><span class="c8"
+          >9. POSTUPANJE U SLU&#268;AJU SAOBRA&#262;AJNE NEZGODE I
+          KRA&#272;E</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >U slu&#269;aju nastanka saobra&#263;ajne nezgode u kojem
+          u&#269;estvuje Korisnik i/ili bilo koje drugo
+          ovla&scaron;&#263;eno ili neovla&scaron;&#263;eno lice &ndash;
+          Korisnik je obavezan da odmah obavesti nadle&#382;nu slu&#382;bu
+          policije i Najmodavca, kao i da dostavi uredno popunjen i overen
+          policijski zapisnik.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >U slu&#269;aju kra&#273;e vozila &ndash; Korisnik je obavezan
+          da odmah obavestiti nadle&#382;nu slu&#382;bu policije i
+          Najmodavca kao i da Najmodavcu preda bez odlaganja originalne
+          klju&#269;eve i prate&#263;u dokumentaciju za
+          vozilo.Kr&scaron;enje ovih odredbi prestavljaju grube povrede
+          Op&scaron;tih uslova zbog kojih Najmodavac ima pravo da od
+          Korisnika potra&#382;uje celokupan iznos tako prouzrokovane
+          &scaron;tete.
+      </span>
+  </p>
+  <p class="c3">
+      <span><br /></span
+      ><span class="c8">10. OPREMA I UNUTRA&Scaron;NJOST</span>
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Sva dodatna oprema za iznajmljeno vozilo (GPS, sedi&scaron;ta,
+          lanci i sl.) mora biti vra&#263;ena po prestanku ugovora
+          neo&scaron;te&#263;ena zajedno sa vozilom.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >U slu&#269;aju gubitka ili o&scaron;te&#263;enja dodatne opreme
+          koji se mogu pripisati u krivicu Korisniku ili su nastali na
+          osnovu okolnosti koje padaju na teret Korisnika, Najmodavac ima
+          pravo da naplati od Korisnika iznose istih prema
+          va&#382;e&#263;em cenovniku.</span
+      >
+  </p>
+  <p class="c0">
+      <span
+          >Zabranjeno je pu&scaron;enje u vozilu i kao i svako
+          pona&scaron;anje prilikom kori&scaron;&#263;enja vozila koja
+          mogu proizrokovati te&scaron;ka o&scaron;te&#263;enja enterijera
+          (fleke, mirisi). U slu&#269;aju kr&scaron;enja ovih odredbi
+          Najmodavac ima pravo da naplati Korisniku usluge dubinskog
+          pranja vozila prema va&#382;e&#263;em cenovniku.<br /><br /></span
+      ><span class="c11">11. KA&Scaron;NJENJE I POVRA&#262;AJ</span>
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Ka&scaron;njenje do 30 minuta: Najmodavac &#263;e tolerisati
+          maksimalno ka&scaron;njenje sa povratom vozila pri prestanku
+          Ugovora do najvi&scaron;e 30 minuta.
+      </span>
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Ka&scaron;njenje preko 30 minuta: U slu&#269;aju
+          ka&scaron;njenja sa povratom vozila po prestanku Ugovora od
+          preko 30 minuta, smatra&#263;e se da je Korisnik produ&#382;io
+          najam Vozila za jo&scaron; jedan dodatni dan najma pod istim
+          uslovima kao &scaron;to je prethodno ugovoreno.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Korisnik je obavezan da izvr&scaron;i povra&#263;aj Vozila na
+          lokaciju sa koje je isto preuzeo ili drugu lokaciju ali samo uz
+          obavezno postojanje prethodnog pisanog dogovora o promeni
+          lokacije. Pisani dogovor u smislu odredbe ovog &#269;lana
+          podrazumeva I razmenu poruka putem elektronskih sredstava
+          komunikacije.</span
+      >
+  </p>
+  <p class="c0 c2">
+      <span class="c8"><br />12. OTKAZIVANJE REZERVACIJE</span>
+  </p>
+  <p class="c0 c2">
+      <span class="c1"
+          >Otkazivanje do 48h pre po&#269;etka najma&ndash; Korisnik
+          mo&#382;e otkazati rezervaciju vozila najkasnije 48 sati pre
+          po&#269;etka najma vozila bez nastanka dodatnih obaveza i/ili
+          tro&scaron;kova.</span
+      >
+  </p>
+  <p class="c0 c2">
+      <span class="c1"
+          >Otkazivanje manje od 48h &ndash; U slu&#269;aju da Korisnik
+          otka&#382;e rezervaciju vozila u roku kra&#263;em od 48
+          &#269;asova pre po&#269;etka najma u obavezi je da isplati
+          Najmodavcu iznos od 30% od ukupnog iznosa najma.</span
+      >
+  </p>
+  <p class="c0 c2">
+      <span class="c1"
+          >Otkazivanje manje od 24h &ndash; U slu&#269;aju da Korisnik
+          otka&#382;e rezervaciju vozila u roku kra&#263;em od 24
+          &#269;asa pre po&#269;etka najma u obavezi je da isplati
+          Najmodavcu iznos od 50% od ukupnog iznosa najma.</span
+      >
+  </p>
+  <p class="c0 c2">
+      <span class="c1"
+          >Nepojavljivanje &ndash; U slu&#269;aju da se Korisnik ne pojavi
+          u dogovorenom terminu primopredaje vozila u obavezi je da
+          isplati Najmodavcu naknadu u iznosu od 100% iznosanajma.</span
+      >
+  </p>
+  <p class="c0">
+      <span><br /><br /></span
+      ><span class="c11"
+          >13. ZA&Scaron;TITA PODATAKA O LI&#268;NOSTI</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Li&#269;ni podaci Korisnika koriste se isklju&#269;ivo za
+          obradu najma u skladu sa Zakonom o za&scaron;titi podataka o
+          li&#269;nosti.</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Korisnik je potpisivanjem ugovora dao saglasnost i upoznao se
+          da Obave&scaron;tenjem o obradi podataka o li&#269;nosti od
+          strane Najmodavca (u svojstvu Rukovaoca) a tako&#273;e je sa
+          istim saglasan. Korisnik je upoznat da Najmodavac obra&#273;uje
+          sve podatke koje je upisao i predao Najmodavcu prilikom
+          zaklju&#269;enja Ugovora, i to: mesto i datum zaklju&#269;enja
+          ugovora, ime i prezime Korisnika, broj li&#269;ne karte, jmbg,
+          broj saobra&#263;ajne i voza&#269;ke dozvole,
+          prebivali&scaron;te, telefon, e-mail. Svrha obrade podataka
+          jeste zaklju&#269;enje i izvr&scaron;enje ugovora o najmu i
+          sprovo&#273;enje marketin&scaron;kih aktivnosti prodavca i
+          &#269;uvaju se u periodu od tri godine od dana pristanka. Pravni
+          osnov obrade jeste:</span
+      >
+  </p>
+  <ul class="c10 lst-kix_list_12-0 start">
+      <li class="c4 li-bullet-0">
+          <span class="c1">Pristanak lica na koje se podaci odnose</span>
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Obrada je neophodna za izvr&scaron;enje ugovora
+              zaklju&#269;enog sa licem na koji se podaci odnose</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Izvr&scaron;avanje zakonom utvr&#273;enih obaveza.</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Lice ima pravo pristupa, pravo na ispravku, dopunu,
+              brisanje, ograni&#269;enje i prenosivost podataka, kao i
+              pravo na prigovor i automatizovano dono&scaron;enje
+              pojedina&#269;nih odluka. Lice ima pravo na opoziv pristanka
+              u bilo koje vreme, pri &#269;emu opoziv pristanka ne
+              uti&#269;e na dopu&scaron;tenost obrade pre opoziva. U
+              slu&#269;aju opoziva pristanka, Rukovalac ne&#263;e
+              obra&#273;ivati podatke Lica na koje se opoziv odnosi, osim
+              ukoliko Rukovalac ima zakonsko ovla&scaron;&#263;enje za
+              obradu. Navedene zahteve Lica dostavljaju e-mailom na e-
+              mail adresu </span
+          ><span class="c15"
+              ><a class="c13" href="mailto:office@viastro.rs"
+                  >office@viastro.rs</a
+              ></span
+          ><span class="c1">; </span>
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Rukovalac &#263;e na svaki zahtev odgovoriti u
+              najkra&#263;em mogu&#263;em roku, a u svakom slu&#269;aju
+              najkasnije u roku od 30 dana od prijema zahteva u skladu sa
+              &#269;lanom 21. Zakona o za&scaron;titi podataka o
+              li&#269;nosti. Lice mo&#382;e podneti pritu&#382;bu u vezi
+              sa obradom svojih podataka o li&#269;nosti pred Poverenikom
+              za informacije od javnog zna&#269;aja i za&scaron;titu
+              podataka o li&#269;nosti.</span
+          >
+      </li>
+  </ul>
+  <p class="c0 c7 c9"><span class="c1"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >14. ZA&Scaron;TITA POTRO&Scaron;A&#268;A I REKLAMACIJE</span
+      >
+  </p>
+  <p class="c0">
+      <span class="c1"
+          >Imaju&#263;i u vidu da Korisnik kao ugovorna mo&#382;e biti i
+          fizi&#269;ko lice odredbe Ugovora o najmu i Op&scaron;tih uslova
+          najma su tako definisane da se Korisnik na jasan i nedvosmislen
+          na&#269;in prilikom zaklju&#269;enja Ugovora obave&scaron;tava
+          o:</span
+      >
+  </p>
+  <ul class="c10 lst-kix_list_14-0 start">
+      <li class="c4 li-bullet-0">
+          <span class="c1">Osnovnim obele&#382;jima usluge</span>
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Poslovnom imenu, mati&#269;nom broju, adresi sedi&scaron;ta
+              i broju telefona</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Prodajnoj ceni usluga ili na&#269;inu na koji &#263;e se
+              prodajna cena usluga obra&#269;unati ukoliko se zbog prirode
+              usluge prodajna cena ne mo&#382;e obra&#269;unati
+              unapred</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Na&#269;inu pla&#263;anja, na&#269;inu i roku isporuke ,
+              na&#269;inu izvr&scaron;enja drugih ugovornih obaveza</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Postojanju zakonske odgovornosti zbog nesaobraznosti usluge
+              ugovoru</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Na&#269;inu izjavljivanja reklamacije trgovcu, a
+              naro&#269;ito o mestu prijema i na&#269;inu postupanja
+              trgovca po njima, kao i uslovima koji se odnose na
+              ostvarivanje prava potro&scaron;a&#269;a po osnovu
+              saobraznosti</span
+          >
+      </li>
+      <li class="c16 c14 c9 li-bullet-0">
+          <span class="c1"
+              >Mogu&#263;nosti vansudskog re&scaron;avanja sporova</span
+          >
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1">Trajanju ugovora</span>
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1">Minimalnom trajanju ugovornih obaveza</span>
+      </li>
+      <li class="c4 li-bullet-0">
+          <span class="c1"
+              >Funkcionalnosti, uklju&#269;uju&#263;i i mere tehni&#269;ke
+              za&scaron;tite digitalnog sadr&#382;aja</span
+          >
+      </li>
+  </ul>
+  <p class="c0 c7 c9"><span class="c1"></span></p>
+  <p class="c0">
+      <span class="c1"
+          >Najmodavac obave&scaron;tava Korisnika da radi ostvarivanja
+          svojih prava mo&#382;e izjaviti reklamaciju radi ostvarivanja
+          svojih prava na e-mail adresu office@viastro.rs ili
+          telefon+38169656555; Korisnik se detaljnije mo&#382;e
+          informisati o proceduri na&#269;inu izjavljivanja reklamacije
+          pristupom na link www.viastro.rs/reklamacije.</span
+      >
+  </p>
+  <p class="c0 c7"><span class="c1"></span></p>
+  <p class="c0 c7 c12">
+      <span class="c1"><br /><br /><br /></span>
+  </p>
+  `;
