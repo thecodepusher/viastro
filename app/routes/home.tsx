@@ -135,6 +135,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
       <Logos lang={loaderData.lang} />
 
       <Cars
+        availableCars={null}
         onSelect={() => {
           navigate("reservation");
         }}

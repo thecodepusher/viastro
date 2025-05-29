@@ -10,6 +10,7 @@ import { cars, CarType, GasType, TransmissionType } from "@/lib/data";
 export default function Cars(props: {
   lang: BaseLocale;
   langCode: string;
+  availableCars: string[] | null;
   onSelect: (arg0: number) => void;
 }) {
   return (
@@ -19,6 +20,12 @@ export default function Cars(props: {
           let gas = "";
           let transmission = "";
           let carType = "";
+
+          let available = true;
+
+          if (props.availableCars) {
+            available = props.availableCars.some((x) => x == car.exnternalId);
+          }
 
           switch (car.type) {
             case CarType.suv:
@@ -127,10 +134,14 @@ export default function Cars(props: {
               </div>
 
               <Button
+                disabled={!available}
                 onClick={() => {
+                  if (!available) return;
                   props.onSelect(car.id);
                 }}
-                className="w-full mt-8 bg-s"
+                className={`w-full mt-8 bg-s ${
+                  available ? "bg-s" : "bg-gray-300"
+                }`}
               >
                 Rezerviši
               </Button>

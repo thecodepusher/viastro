@@ -60,6 +60,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
       <div className="mt-18">
         <Logos lang={loaderData.lang} />
         <Cars
+          availableCars={null}
           onSelect={() => {
             navigate("/reservation");
           }}

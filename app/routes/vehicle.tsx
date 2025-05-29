@@ -8,11 +8,12 @@ import { cn } from "@/lib/utils";
 import type { Route } from "./+types/vehicle";
 import Cars from "@/components/Cars";
 import { sr } from "@/locales/sr";
+import { format } from "date-fns";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
+  const cookieHeader = request.headers.get("Cookie");
 
+  if (!params.lang) {
     const lgCookie = (await langCookie.parse(cookieHeader)) || {};
 
     const url = new URL(request.url);
@@ -42,7 +43,32 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     }
   }
 
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  const pickupDate = new Date(cookie.pickUpDate);
+  const pickupTime = cookie.pickUpTime;
+  const dropoffDate = new Date(cookie.dropOffDate);
+  const dropoffTime = cookie.dropOffTime;
+
+  const cars: string[] = [];
+
+  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "get_available_models",
+      date_from: `${format(pickupDate, "dd/MM/yyyy")} ${pickupTime}`,
+      date_to: `${format(dropoffDate, "dd/MM/yyyy")} ${dropoffTime}`,
+    }),
+    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+  });
+  const availableCars = await res.json();
+
+  for (let a of availableCars.available_models) {
+    cars.push(a.id);
+  }
+
   return {
+    cars,
     lang,
     langCode: params.lang,
   };
@@ -76,6 +102,7 @@ export default function Vehicle({
   return (
     <div className="w-full">
       <Cars
+        availableCars={loaderData.cars}
         onSelect={(carId) => {
           const form = new FormData();
           form.append("carId", `${carId}`);

@@ -28,7 +28,7 @@ export enum CarType {
 export const cars = [
   {
     id: 6,
-    exnternalId: "",
+    exnternalId: "7",
     slug: "seat_ibiza_fr",
     name: "Seat Ibiza FR",
     type: CarType.hatchback,
@@ -59,42 +59,9 @@ export const cars = [
     price: 30,
     image: "/ibiza.webp",
   },
-  // {
-  //   id: 7,
-  //   exnternalId: "",
-  //   slug: "volkswagen_golf_7",
-  //   name: "Volkswagen Golf 7",
-  //   type: CarType.hatchback,
-  //   gas: GasType.diesel,
-  //   numberOfSeats: 5,
-  //   transmissionType: TransmissionType.manual,
-  //   airConditioning: true,
-  //   deposite: 300,
-  //   aditionalEquipment: [
-  //     {
-  //       id: 1,
-  //       name: "Full Protection osiguranje",
-  //       description:
-  //         "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
-  //       price: 9.99,
-  //       free: false,
-  //       depositeDiscount: 150,
-  //       perDay: true,
-  //       maxPerDays: null,
-  //     },
-  //   ],
-  //   prices: [
-  //     { from: 3, to: 7, price: 45 },
-  //     { from: 8, to: 15, price: 41 },
-  //     { from: 16, to: 29, price: 37 },
-  //     { from: 30, to: null, price: 33 },
-  //   ],
-  //   price: 33,
-  //   image: "/golf_7.webp",
-  // },
   {
     id: 3,
-    exnternalId: "",
+    exnternalId: "2",
     slug: "citroen_c3_aircross",
     name: "Citroen C3 Aircross",
     type: CarType.compactSuv,
@@ -127,6 +94,7 @@ export const cars = [
   },
   {
     id: 2,
+    exnternalId: "1",
     slug: "peugeot_2008",
     name: "Peugeot 2008 GT Line",
     type: CarType.compactSuv,
@@ -159,6 +127,7 @@ export const cars = [
   },
   {
     id: 4,
+    exnternalId: "6",
     slug: "skoda_oktavia",
     name: "Škoda Octavia",
     type: CarType.sedan,
@@ -191,6 +160,7 @@ export const cars = [
   },
   {
     id: 1,
+    exnternalId: "3",
     slug: "peugeot_3008",
     name: "Peugeot 3008",
     type: CarType.suv,
@@ -223,6 +193,7 @@ export const cars = [
   },
   {
     id: 5,
+    exnternalId: "4",
     slug: "audi_a6",
     name: "Audi A6",
     type: CarType.sedan,

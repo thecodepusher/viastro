@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "Šta ako zakasnim sa vraćanjem vozila?",
     answer:
-      "Ukoliko kasnite više od 1 sata, naplaćuje se dodatni dan. Preporučujemo da nas unapred kontaktirate u slučaju kašnjenja.",
+      "Ukoliko kasnite više od 30 minuta, naplaćuje se dodatni dan. Preporučujemo da nas unapred kontaktirate u slučaju kašnjenja.",
   },
   {
     question: "Da li se vozilo izdaje sa punim rezervoarom?",
