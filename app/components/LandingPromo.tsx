@@ -18,9 +18,9 @@ export default function LandingPromo(props: { lang: BaseLocale }) {
           nudimo uslugu dostave vozila na aerodrom.
         </p>
 
-        <Button className="w-full mt-8 bg-s">
-          <Link to="/reservation">Rezerviši vozilo</Link>
-        </Button>
+        <Link to="/reservation">
+          <Button className="w-full mt-8 bg-s">Rezerviši vozilo</Button>
+        </Link>
       </div>
     </div>
   );
