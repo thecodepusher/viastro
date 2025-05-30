@@ -53,7 +53,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <Header />
 
-      <FandQ />
+      <FandQ langCode={loaderData.langCode} />
 
       <Cta lang={loaderData.lang} />
 

@@ -52,7 +52,7 @@ export default function Header() {
             <p className="mt-6 px-6">Select language: </p>
             <div className="px-6 flex items-center gap-2">
               <Form method="POST" action="/select-lang">
-                <input hidden name="loc" value={location.pathname} />
+                <input readOnly hidden name="loc" value={location.pathname} />
                 <Button variant="ghost" name="lang" type="submit" value="en">
                   <img className="w-8 shadow border" src="/gb.svg" />
                 </Button>

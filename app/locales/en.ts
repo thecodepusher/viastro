@@ -29,4 +29,22 @@ export const en: BaseLocale = {
   noHiddenCosts: "No hidden costs",
   satisfiedUsers: "99.9%",
   yearsOfExperience: "5+",
+  reserve: "Book now",
+  ctaTitle: "Hit the Road Without Worries!",
+  ctaSubTitle:
+    "Rent a reliable car quickly and easily – book your vehicle today and enjoy a stress-free drive.",
+  gitTitle: "Get in touch",
+  gitSubTitle:
+    "We are here for you. Feel free to call us and get the necessary information.",
+  gitDays: "Monday - Friday",
+  gitAwailable: "Available 24/7",
+  lhTitle: "Take over the vehicle immediately upon landing",
+  lhSubTitle: "RENT A CAR BELGRADE",
+  lhFor: "from",
+  lhPrice: "30€/day",
+  lpTitle: "Do you need a rental car after landing at the airport?",
+  lpSubTitle: "Your car is waiting for you!",
+  lpParagraph:
+    "In addition to our selection of reliable, high-quality cars at great prices, we also offer vehicle delivery to the airport.",
+  lpAction: "RESERVE A VEHICLE",
 };

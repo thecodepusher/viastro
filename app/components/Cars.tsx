@@ -143,7 +143,7 @@ export default function Cars(props: {
                   available ? "bg-s" : "bg-gray-300"
                 }`}
               >
-                Rezerviši
+                {props.lang.reserve}
               </Button>
             </div>
           );

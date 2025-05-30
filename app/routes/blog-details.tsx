@@ -3,12 +3,12 @@ import FandQ from "@/components/FandQ";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { en } from "@/locales/en";
-import BlogSection from "@/components/BlogSection";
 import { sr } from "@/locales/sr";
 import type { Route } from "./+types/blog-details";
-import { posts } from "@/lib/data";
+import { postsEn, postsRu, postsSr } from "@/lib/data";
 import { redirect, replace } from "react-router";
 import { langCookie } from "@/lib/prefs-cookie";
+import { ru } from "@/locales/ru";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   if (!params.lang) {
@@ -34,12 +34,18 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     return replace(`/en${url.pathname}`);
   }
 
+  let posts = postsEn;
+
   let lang = en;
 
   if (params.lang) {
     switch (params.lang) {
       case "sr":
         lang = sr;
+        posts = postsSr;
+      case "ru":
+        lang = ru;
+        posts = postsRu;
     }
   }
 

@@ -141,9 +141,9 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
         langCode={loaderData.langCode}
       />
 
-      <FandQ />
+      <FandQ langCode={loaderData.langCode} />
 
-      <BlogSection />
+      <BlogSection langCode={loaderData.langCode} />
 
       <Cta lang={loaderData.lang} />
 

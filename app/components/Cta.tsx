@@ -7,11 +7,10 @@ export default function Cta(props: { lang: BaseLocale }) {
       <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
-            Hit the Road Without Worries!
+            {props.lang.ctaTitle}
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-pd">
-            Rent a reliable car quickly and easily – book your vehicle today and
-            enjoy a stress-free drive.
+            {props.lang.ctaSubTitle}
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link

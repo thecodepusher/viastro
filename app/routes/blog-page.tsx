@@ -54,7 +54,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <Header />
 
-      <BlogSection />
+      <BlogSection langCode={loaderData.langCode} />
 
       <Cta lang={loaderData.lang} />
 

@@ -54,7 +54,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <Header />
 
-      <GetInTouch />
+      <GetInTouch lang={loaderData.lang} />
 
       <Cta lang={loaderData.lang} />
 

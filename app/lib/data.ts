@@ -226,7 +226,7 @@ export const cars = [
   },
 ];
 
-export const posts = [
+export const postsSr = [
   {
     id: 1,
     slug: "kopaonik",
@@ -336,6 +336,227 @@ export const posts = [
   },
 ];
 
+export const postsEn = [
+  {
+    id: 1,
+    slug: "kopaonik",
+    title: "Weekend on Kopaonik – Mountain Adventure with Viastro Rent a Car",
+    href: "/blog/kopaonik",
+    description:
+      "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination – all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free – comfortably, safely, and with complete freedom of movement.",
+    content: `
+      <h2>Weekend on Kopaonik – Mountain Adventure with Viastro Rent a Car</h2>
+      <p>If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination – whether you're going skiing, hiking, or just enjoying nature and SPA centers. And to make the journey as pleasant as the stay, the right solution is to rent a vehicle that suits your needs. Viastro rent a car offers vehicles ideal for the trip to the mountains – comfortable, reliable, and with full casco insurance.</p>
+
+      <h3>Why Kopaonik for the weekend?</h3>
+      <ol>
+        <li><strong>Quick accessibility:</strong><br>
+          Located about 280 km from Belgrade, Kopaonik is ideal for a three-day getaway. With an automatic transmission and cruise control, the journey becomes a real pleasure.
+        </li>
+        <li><strong>Year-round activities:</strong>
+          <ul>
+            <li><strong>Winter:</strong> more than 55 km of ski slopes, night skiing, adrenaline activities</li>
+            <li><strong>Summer:</strong> hiking tours, mountain biking, zip line, outdoor pools</li>
+            <li><strong>All year round:</strong> luxury SPA centers, ethno restaurants, panoramic views</li>
+          </ul>
+        </li>
+        <li><strong>Wide choice of accommodation:</strong><br>
+          From 5-star hotels to affordable apartments – Kopaonik has options for every budget.
+        </li>
+      </ol>
+
+      <h3>Why rent a vehicle from Viastro?</h3>
+      <ul>
+        <li><strong>Comfort and safety:</strong> All our cars are regularly serviced, air-conditioned, and fully equipped for longer trips.</li>
+        <li><strong>Flexible packages:</strong> Rentals from 3 days with unlimited mileage – perfect for a mountain weekend.</li>
+        <li><strong>Full coverage:</strong> Full casco insurance, 24h assistance, and the option of additional equipment (ski rack, chains, child seat).</li>
+        <li><strong>Quick and easy booking:</strong> Contact us via the website <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or directly at <a href="tel:0696565555">069/6565-555</a>.</li>
+      </ul>
+
+      <h3>Itinerary – suggestion:</h3>
+      <ul>
+        <li><strong>Friday (departure):</strong> Pick up your vehicle and head to Kopaonik. Recommended route: Belgrade – Kruševac – Brus – Kopaonik.</li>
+        <li><strong>Saturday:</strong> Enjoy sports activities, nature, and local cuisine.</li>
+        <li><strong>Sunday:</strong> Relax at a SPA center and return in the evening.</li>
+      </ul>
+
+      <p><strong>Viastro – Your Journey Starts Here.</strong><br>
+      For all of you who want the freedom to explore Serbia at your own pace, Viastro rent a car offers reliable vehicles and maximum flexibility.</p>
+    `,
+    imageUrl: "/kop.png",
+    date: "May 5, 2025",
+    datetime: "2020-03-16",
+  },
+  {
+    id: 2,
+    title: "Đerdap National Park – The Iron Gates of Nature and History",
+    href: "/blog/djerdap",
+    slug: "djerdap",
+    description:
+      "If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.",
+    content: `
+      <h2>Đerdap National Park – The Iron Gates of Nature and History</h2>
+      <p>If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.</p>
+
+      <h3>What to see and experience:</h3>
+      <ul>
+        <li><strong>Golubac Fortress:</strong> An imposing medieval fortress at the entrance to the Đerdap Gorge.</li>
+        <li><strong>Lepenski Vir:</strong> An archaeological site over 11,000 years old.</li>
+        <li><strong>Veliki and Mali Štrbac Viewpoints:</strong> Offer unforgettable views of the Danube.</li>
+        <li><strong>Tabula Traiana:</strong> A Roman inscription carved into the rock.</li>
+      </ul>
+
+      <h3>How to get there:</h3>
+      <p>From Belgrade, the journey takes about 3.5 hours. The recommended route is via Požarevac and Veliko Gradište, with a stop at Golubac Fortress.</p>
+
+      <h3>Why choose Viastro rent a car:</h3>
+      <p>Our SUV models, like the <strong>Peugeot 3008 GT Line</strong>, are ideal for driving through the gorges. With <strong>full casco insurance</strong> and <strong>unlimited kilometers</strong>, you can explore everything Đerdap has to offer carefree.</p>
+    `,
+    imageUrl: "/sargan.png",
+    date: "May 3, 2025",
+    datetime: "2020-03-16",
+  },
+  {
+    id: 3,
+    title: "Mokra Gora and Šargan Eight – A Journey Through Time and Nature",
+    href: "/blog/mokra_gora",
+    slug: "mokra_gora",
+    content: `
+      <h2>Mokra Gora and Šargan Eight – A Journey Through Time and Nature</h2>
+      <p>Mokra Gora is a destination that combines natural beauty, cultural heritage, and unique tourist attractions. The ride on the Šargan Eight, a narrow-gauge railway that winds through mountainous landscapes, offers an unforgettable experience.</p>
+
+      <h3>What not to miss:</h3>
+      <ul>
+        <li><strong>Šargan Eight:</strong> A ride on the historic railway that forms a figure-eight.</li>
+        <li><strong>Drvengrad (Timber Town):</strong> An ethno-village built by Emir Kusturica.</li>
+        <li><strong>Nature of Mokra Gora:</strong> Ideal for hiking and enjoying untouched nature.</li>
+      </ul>
+
+      <h3>How to get there:</h3>
+      <p>Mokra Gora is located about 200 km southwest of Belgrade. The journey takes about 3.5 hours, and the recommended route is via Užice.</p>
+
+      <h3>Viastro rent a car – Your travel partner:</h3>
+      <p>Our vehicles are perfect for mountain roads and longer drives. With an <strong>automatic transmission</strong>, <strong>air conditioning</strong>, and <strong>additional equipment</strong>, your journey will be comfortable and safe.</p>
+    `,
+    description:
+      "Mokra Gora is a destination that combines natural beauty, cultural heritage, and unique tourist attractions. The ride on the Šargan Eight, a narrow-gauge railway that winds through mountainous landscapes, offers an unforgettable experience.",
+    imageUrl: "/djerdap.png",
+    date: "May 1, 2025",
+    datetime: "2020-03-16",
+  },
+];
+
+export const postsRu = [
+  {
+    id: 1,
+    slug: "kopaonik",
+    title: "Выходные на Копаонике – Горное приключение с Viastro rent a car",
+    href: "/blog/kopaonik",
+    description:
+      "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник – идеальное место для выходных – круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса – комфортно, безопасно и с полной свободой передвижения.",
+    content: `
+      <h2>Выходные на Копаонике – Горное приключение с Viastro rent a car</h2>
+      <p>Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник – идеальное место для выходных – собираетесь ли вы кататься на лыжах, ходить в походы или просто наслаждаться природой и СПА-центрами. А чтобы поездка была такой же приятной, как и пребывание, правильное решение – арендовать автомобиль, соответствующий вашим потребностям. Viastro rent a car предлагает автомобили, идеально подходящие для поездки в горы – удобные, надежные и с полной страховкой КАСКО.</p>
+
+      <h3>Почему Копаоник на выходные?</h3>
+      <ol>
+        <li><strong>Быстрая доступность:</strong><br>
+          Расположенный примерно в 280 км от Белграда, Копаоник идеален для трехдневного отдыха. С автоматической коробкой передач и круиз-контролем путешествие становится настоящим удовольствием.
+        </li>
+        <li><strong>Мероприятия круглый год:</strong>
+          <ul>
+            <li><strong>Зимой:</strong> более 55 км лыжных трасс, ночное катание, адреналиновые развлечения</li>
+            <li><strong>Летом:</strong> пешеходные туры, велосипедные прогулки по горным тропам, зиплайн, открытые бассейны</li>
+            <li><strong>Круглый год:</strong> роскошные СПА-центры, этно-рестораны, панорамные виды</li>
+          </ul>
+        </li>
+        <li><strong>Широкий выбор жилья:</strong><br>
+          От 5-звездочных отелей до доступных апартаментов – на Копаонике есть варианты на любой бюджет.
+        </li>
+      </ol>
+
+      <h3>Почему арендовать автомобиль у Viastro?</h3>
+      <ul>
+        <li><strong>Комфорт и безопасность:</strong> Все наши автомобили регулярно обслуживаются, оснащены кондиционерами и полностью оборудованы для длительных поездок.</li>
+        <li><strong>Гибкие пакеты:</strong> Аренда от 3 дней с неограниченным пробегом – идеально для выходных в горах.</li>
+        <li><strong>Полное покрытие:</strong> Полная страховка КАСКО, круглосуточная помощь на дороге и возможность дополнительного оборудования (багажник для лыж, цепи, детское кресло).</li>
+        <li><strong>Быстрое и простое бронирование:</strong> Свяжитесь с нами через сайт <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или напрямую по номеру <a href="tel:0696565555">069/6565-555</a>.</li>
+      </ul>
+
+      <h3>План поездки – предложение:</h3>
+      <ul>
+        <li><strong>Пятница (отправление):</strong> Заберите автомобиль и отправляйтесь на Копаоник. Рекомендуемый маршрут: Белград – Крушевац – Брус – Копаоник.</li>
+        <li><strong>Суббота:</strong> Наслаждайтесь спортивными мероприятиями, природой и местной кухней.</li>
+        <li><strong>Воскресенье:</strong> Отдых в СПА-центре и возвращение вечером.</li>
+      </ul>
+
+      <p><strong>Viastro – Ваше путешествие начинается здесь.</strong><br>
+      Для всех вас, кто хочет свободы исследовать Сербию в собственном темпе, Viastro rent a car предлагает надежные автомобили и максимальную гибкость.</p>
+    `,
+    imageUrl: "/kop.png",
+    date: "5 мая 2025",
+    datetime: "2020-03-16",
+  },
+  {
+    id: 2,
+    title: "Национальный парк Джердап – Железные ворота природы и истории",
+    href: "/blog/djerdap",
+    slug: "djerdap",
+    description:
+      "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап – это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
+    content: `
+      <h2>Национальный парк Джердап – Железные ворота природы и истории</h2>
+      <p>Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап – это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.</p>
+
+      <h3>Что посмотреть и испытать:</h3>
+      <ul>
+        <li><strong>Голубацкая крепость:</strong> Внушительная средневековая крепость у входа в Джердапское ущелье.</li>
+        <li><strong>Лепенски-Вир:</strong> Археологический объект возрастом более 11 000 лет.</li>
+        <li><strong>Смотровые площадки Велики и Мали Штрбац:</strong> Открывают незабываемые виды на Дунай.</li>
+        <li><strong>Табула Траяна:</strong> Римская надпись, высеченная в скале.</li>
+      </ul>
+
+      <h3>Как добраться:</h3>
+      <p>Из Белграда поездка занимает около 3,5 часов. Рекомендуемый маршрут через Пожаревац и Велико-Градиште, с остановкой у Голубацкой крепости.</p>
+
+      <h3>Почему выбрать Viastro rent a car:</h3>
+      <p>Наши модели внедорожников, такие как <strong>Peugeot 3008 GT Line</strong>, идеально подходят для езды по ущельям. С <strong>полной страховкой КАСКО</strong> и <strong>неограниченным пробегом</strong> вы можете беззаботно исследовать все, что предлагает Джердап.</p>
+    `,
+    imageUrl: "/sargan.png",
+    date: "3 мая 2025",
+    datetime: "2020-03-16",
+  },
+  {
+    id: 3,
+    title:
+      "Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу",
+    href: "/blog/mokra_gora",
+    slug: "mokra_gora",
+    content: `
+      <h2>Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу</h2>
+      <p>Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.</p>
+
+      <h3>Что не пропустить:</h3>
+      <ul>
+        <li><strong>Шарганская восьмерка:</strong> Поездка по исторической железной дороге, образующей форму восьмерки.</li>
+        <li><strong>Дрвенград:</strong> Этно-деревня, построенная Эмиром Кустурицей.</li>
+        <li><strong>Природа Мокра Горы:</strong> Идеально подходит для пеших прогулок и наслаждения нетронутой природой.</li>
+      </ul>
+
+      <h3>Как добраться:</h3>
+      <p>Мокра Гора находится примерно в 200 км к юго-западу от Белграда. Поездка занимает около 3,5 часов, рекомендуемый маршрут – через Ужице.</p>
+
+      <h3>Viastro rent a car – Ваш партнер в путешествиях:</h3>
+      <p>Наши автомобили идеально подходят для горных дорог и длительных поездок. С <strong>автоматической коробкой передач</strong>, <strong>кондиционером</strong> и <strong>дополнительным оборудованием</strong> ваше путешествие будет комфортным и безопасным.</p>
+    `,
+    description:
+      "Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.",
+    imageUrl: "/djerdap.png",
+    date: "1 мая 2025",
+    datetime: "2020-03-16",
+  },
+];
+
 export const wokringHours = [
   { from: "08:00", to: "16:00" },
   { from: "08:00", to: "16:00" },
@@ -429,7 +650,6 @@ export const aditionalEquipment = [
 export const PRICE_FOR_PICKUP_OFF_HOURS = 20;
 
 export const privacyPolicy = `
-
   <p class="c1"><span class="c3">VIASTRO DOO</span></p>
   <p class="c1">
       <span class="c0">&#128205;</span

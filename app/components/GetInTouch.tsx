@@ -1,4 +1,6 @@
-export default function GetInTouch() {
+import type { BaseLocale } from "@/locales/base-locale";
+
+export default function GetInTouch(props: { lang: BaseLocale }) {
   return (
     <div className="bg-white py-8 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -6,11 +8,10 @@ export default function GetInTouch() {
           <div className="grid grid-cols-1 gap-10 py-16 lg:grid-cols-3">
             <div>
               <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900">
-                Get in touch
+                {props.lang.gitTitle}
               </h2>
               <p className="mt-4 text-base/7 text-gray-600">
-                Mi smo tu za vas. Budite slobodni da nas pozovete i dobijete
-                neophodne informacije.
+                {props.lang.gitSubTitle}
               </p>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
@@ -25,7 +26,7 @@ export default function GetInTouch() {
                 </a>
                 <dl className="mt-3 space-y-1 text-sm/6 ">
                   <div className="text-s font-bold">
-                    <dd>Monday - Friday</dd>
+                    <dd>{props.lang.gitDays}</dd>
                   </div>
                   <div className="mt-1">
                     <dd>8.00 - 16.00</dd>
@@ -34,7 +35,7 @@ export default function GetInTouch() {
               </div>
               <div className="rounded-2xl bg-gray-50 p-10">
                 <h3 className="text-base/7 font-semibold text-gray-900">
-                  Dostupno 24/7
+                  {props.lang.gitAwailable}
                 </h3>
                 <a href="tel:+38169656555">
                   <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">

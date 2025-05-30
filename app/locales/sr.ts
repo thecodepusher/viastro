@@ -1,8 +1,8 @@
 import type { BaseLocale } from "./base-locale";
 
 export const sr: BaseLocale = {
-  title: "Your Journey Starts Here",
-  subTitle: "Car Rental Belgrade",
+  title: "Vaše putovanje počinje ovde",
+  subTitle: "Car Rental Beograd",
   createReservation: "Kreirajte rezervaciju",
   continue: "Nastavi",
   pickUpLoacation: "Mesto podizanja",
@@ -29,4 +29,22 @@ export const sr: BaseLocale = {
   noHiddenCosts: "Nema skrivenih troškova",
   satisfiedUsers: "99.9%",
   yearsOfExperience: "5+",
+  reserve: "Rezervišite",
+  ctaTitle: "Putujte bezbrižno!",
+  ctaSubTitle:
+    "Iznajmite pouzdan automobil brzo i jednostavno – rezervišite vozilo još danas i uživajte u vožnji bez stresa.",
+  gitTitle: "Kontaktirajte nas",
+  gitSubTitle:
+    "Mi smo tu za vas. Budite slobodni da nas pozovete i dobijete neophodne informacije.",
+  gitDays: "Ponedeljak - Petak",
+  gitAwailable: "Dostupno 24/7",
+  lhTitle: "Preuzmite vozilo odmah pri sletanju",
+  lhSubTitle: "RENT A CAR BEOGRAD",
+  lhFor: "već od",
+  lhPrice: "30€/dan",
+  lpTitle: "Potreban Vam je rent a car nakon sletanja na aerodrom?",
+  lpSubTitle: "Automobil Vas čeka!",
+  lpParagraph:
+    "Pored naše ponude pouzdanih i kvalitetnih automobila po super cenama, nudimo uslugu dostave vozila na aerodrom.",
+  lpAction: "Rezerviši vozilo",
 };

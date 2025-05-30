@@ -143,13 +143,13 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
         langCode={loaderData.langCode}
       />
 
-      <FandQ />
+      <FandQ langCode={loaderData.langCode} />
 
-      <BlogSection />
+      <BlogSection langCode={loaderData.langCode} />
 
       <TrustedBy lang={loaderData.lang} />
 
-      <GetInTouch />
+      <GetInTouch lang={loaderData.lang} />
 
       <Cta lang={loaderData.lang} />
 

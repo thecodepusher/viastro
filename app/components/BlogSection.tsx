@@ -1,12 +1,21 @@
-import { posts } from "@/lib/data";
+import { postsEn, postsRu, postsSr } from "@/lib/data";
 
-export default function BlogSection() {
+export default function BlogSection(props: { langCode: string }) {
+  let posts = postsEn;
+
+  let title = "Where for the weekend?";
+  if (props.langCode == "sr") {
+    posts = postsSr;
+    title = "Gde za vikend?";
+  } else if (props.langCode == "ru") {
+    posts = postsRu;
+    title = "Куда на выходные?";
+  }
+
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h1 className="text-center font-black text-2xl text-pd">
-          Gde za vikend
-        </h1>
+        <h1 className="text-center font-black text-2xl text-pd">{title}</h1>
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {posts.map((post) => (
             <article

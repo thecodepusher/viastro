@@ -10,16 +10,15 @@ export default function LandingPromo(props: { lang: BaseLocale }) {
       </div>
       <div className="flex flex-col gap-3 mt-8 px-2">
         <p className="text-2xl font-bold text-s text-center">
-          Potreban Vam je rent a car nakon sletanja na aerodrom?
+          {props.lang.lpTitle}
         </p>
-        <p className="text-xl font-medium text-center">Automobil Vas čeka!</p>
-        <p className="mt-8 text-center">
-          Pored naše ponude pouzdanih i kvalitetnih automobila po super cenama,
-          nudimo uslugu dostave vozila na aerodrom.
+        <p className="text-xl font-medium text-center">
+          {props.lang.lpSubTitle}
         </p>
+        <p className="mt-8 text-center">{props.lang.lpParagraph}</p>
 
         <Link to="/reservation">
-          <Button className="w-full mt-8 bg-s">Rezerviši vozilo</Button>
+          <Button className="w-full mt-8 bg-s">{props.lang.lpAction}</Button>
         </Link>
       </div>
     </div>
