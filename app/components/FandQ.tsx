@@ -61,13 +61,6 @@ export default function FandQ() {
             <h2 className="text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl">
               Frequently asked questions
             </h2>
-            {/* <p className="mt-4 text-base/7 text-pretty text-gray-600">
-              Can’t find the answer you’re looking for? Reach out to our{" "}
-              <a href="#" className="font-semibold text-[#FF9B17]">
-                customer support
-              </a>{" "}
-              team.
-            </p> */}
           </div>
           <div className="mt-10 lg:col-span-7 lg:mt-0">
             <dl className="space-y-10">

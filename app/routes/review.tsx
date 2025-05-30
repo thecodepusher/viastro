@@ -1,10 +1,7 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
-import { Form, Link, Outlet, redirect, replace } from "react-router";
-import { CheckIcon, Info } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Form, Link, redirect, replace } from "react-router";
+import { Info } from "lucide-react";
 import type { Route } from "./+types/review";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,7 +13,7 @@ import {
   locations,
   PRICE_FOR_PICKUP_OFF_HOURS,
 } from "@/lib/data";
-import { differenceInCalendarDays, format } from "date-fns";
+import { differenceInMinutes, format, set } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import nodemailer from "nodemailer";
 import { sr } from "@/locales/sr";
@@ -79,7 +76,23 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   let price = 0;
 
-  const days = differenceInCalendarDays(dropoffDate, pickupDate);
+  const pickupDateAndTime = set(new Date(pickupDate), {
+    hours: pickupTime.split(":")[0],
+    minutes: pickupTime.split(":")[1],
+    seconds: 0,
+    milliseconds: 0,
+  });
+
+  const dropOffDateAndTime = set(new Date(dropoffDate), {
+    hours: dropoffTime.split(":")[0],
+    minutes: dropoffTime.split(":")[1],
+    seconds: 0,
+    milliseconds: 0,
+  });
+
+  const days = Math.ceil(
+    differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+  );
 
   let carPrice = 0;
 
@@ -187,7 +200,23 @@ export async function action({ request }: Route.ActionArgs) {
   let price = 0;
   let depositeDiscount = 0;
 
-  const days = differenceInCalendarDays(dropoffDate, pickupDate);
+  const pickupDateAndTime = set(new Date(pickupDate), {
+    hours: pickupTime.split(":")[0],
+    minutes: pickupTime.split(":")[1],
+    seconds: 0,
+    milliseconds: 0,
+  });
+
+  const dropOffDateAndTime = set(new Date(dropoffDate), {
+    hours: dropoffTime.split(":")[0],
+    minutes: dropoffTime.split(":")[1],
+    seconds: 0,
+    milliseconds: 0,
+  });
+
+  const days = Math.ceil(
+    differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+  );
 
   let carPrice = 0;
 
