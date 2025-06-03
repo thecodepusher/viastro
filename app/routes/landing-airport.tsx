@@ -132,14 +132,14 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
       <TrustedBy lang={loaderData.lang} />
 
-      <LandingPromo lang={loaderData.lang} />
+      <LandingPromo langCode={loaderData.langCode} lang={loaderData.lang} />
 
       <Logos lang={loaderData.lang} />
 
       <Cars
         availableCars={null}
         onSelect={() => {
-          navigate(`${loaderData.langCode}/reservation`);
+          navigate(`/${loaderData.langCode}/reservation`);
         }}
         lang={loaderData.lang}
         langCode={loaderData.langCode}

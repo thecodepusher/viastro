@@ -2,7 +2,10 @@ import type { BaseLocale } from "@/locales/base-locale";
 import { Button } from "./ui/button";
 import { Link } from "react-router";
 
-export default function LandingPromo(props: { lang: BaseLocale }) {
+export default function LandingPromo(props: {
+  lang: BaseLocale;
+  langCode: string;
+}) {
   return (
     <div className="flex flex-col md:flex-row gap-16 max-w-5xl mx-auto mb-12">
       <div>
@@ -17,7 +20,7 @@ export default function LandingPromo(props: { lang: BaseLocale }) {
         </p>
         <p className="mt-8 text-center">{props.lang.lpParagraph}</p>
 
-        <Link to="/reservation">
+        <Link to={`${props.langCode}/reservation`}>
           <Button className="w-full mt-8 bg-s">{props.lang.lpAction}</Button>
         </Link>
       </div>
