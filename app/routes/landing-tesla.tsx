@@ -26,8 +26,10 @@ export function meta({ data }: Route.MetaArgs) {
   ];
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
+
+  console.log(params.lang);
 
   const pickUpLocation = formData.get("pickUpLocation");
   const dropOffLocation = formData.get("dropOffLocation");
@@ -46,7 +48,7 @@ export async function action({ request }: Route.ActionArgs) {
   cookie.dropOffDate = dropOffDate;
   cookie.dropOffTime = dropOffTime;
 
-  return redirect("reservation/vehicle", {
+  return redirect(`/${params.lang}/reservation/vehicle`, {
     headers: {
       "Set-Cookie": await prefs.serialize(cookie),
     },
