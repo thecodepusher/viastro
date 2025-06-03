@@ -9,7 +9,7 @@ export default function LandingHero(props: { lang: BaseLocale }) {
         <img className="" src="/viastro_logo_white.png" />
       </div>
 
-      <div className="text-white font-medium text-center rounded-full md:p-4 bg-p shadow absolute bottom-4 left-2 md:left-24 w-32">
+      <div className="text-white font-medium text-center rounded-full md:p-4 bg-p shadow absolute bottom-4 left-2 md:left-24 lg:left-36 w-32">
         <p>
           {props.lang.lhFor}
           <br />
