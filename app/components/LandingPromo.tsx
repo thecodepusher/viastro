@@ -20,7 +20,7 @@ export default function LandingPromo(props: {
         </p>
         <p className="mt-8 text-center">{props.lang.lpParagraph}</p>
 
-        <Link to={`${props.langCode}/reservation`}>
+        <Link to={`/${props.langCode}/reservation`}>
           <Button className="w-full mt-8 bg-s">{props.lang.lpAction}</Button>
         </Link>
       </div>
