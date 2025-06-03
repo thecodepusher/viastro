@@ -139,7 +139,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
       <Cars
         availableCars={null}
         onSelect={() => {
-          navigate("reservation");
+          navigate(`${loaderData.langCode}/reservation`);
         }}
         lang={loaderData.lang}
         langCode={loaderData.langCode}
