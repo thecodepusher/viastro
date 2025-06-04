@@ -9,8 +9,8 @@ export default function LandingHero(props: { lang: BaseLocale }) {
         <img className="" src="/viastro_logo_white.png" />
       </div>
 
-      <div className="text-white font-medium text-center rounded-full md:p-4 bg-p shadow absolute bottom-4 left-2 md:left-24 lg:left-36 w-32">
-        <p>
+      <div className="text-white font-medium text-center rounded-full md:p-4 bg-p shadow absolute bottom-6 left-12 md:left-32 lg:left-60 w-32">
+        <p className="font-bold">
           {props.lang.lhFor}
           <br />
           {props.lang.lhPrice}
@@ -21,10 +21,10 @@ export default function LandingHero(props: { lang: BaseLocale }) {
       <img className="mx-auto hidden md:block lg:hidden" src="/hero.png" />
       <img className="mx-auto hidden lg:block" src="/hero_lg.png" />
 
-      <p className="absolute top-1/3 md:top-1/2 md:-translate-y-1/2 left-0 right-0 text-base text-center md:text-3xl text-white">
+      <p className="absolute top-1/3 md:top-1/2 font-black tracking-wider md:-translate-y-1/2 left-0 right-0 text-base sm:text-2xl text-center md:text-4xl text-white">
         {props.lang.lhTitle}
       </p>
-      <h1 className="md:p-4 text-center font-bold absolute mt-4 md:mt-14 top-1/2 left-1/2 -translate-1/2 md:text-3xl text-white">
+      <h1 className="md:p-4 text-center font-bold absolute mt-4 md:mt-14 top-1/2 left-1/2 -translate-1/2 sm:text-2xl md:text-3xl text-white">
         {props.lang.subTitle}
       </h1>
     </div>
