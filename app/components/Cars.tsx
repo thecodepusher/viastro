@@ -77,8 +77,10 @@ export default function Cars(props: {
 
               <div className="mb-8 flex gap-2 items-center justify-center">
                 <p className="text-center font-black text-pd text-3xl">
-                  <span className="">od {car.price}</span>{" "}
-                  <span className="">€/dan</span>
+                  <span className="">
+                    {props.lang.from} {car.price}
+                  </span>{" "}
+                  <span className="">€/{props.lang.day}</span>
                 </p>
                 <Popover>
                   <PopoverTrigger>

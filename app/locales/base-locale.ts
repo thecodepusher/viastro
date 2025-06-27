@@ -1,4 +1,6 @@
 export interface BaseLocale {
+  from: string;
+  day: string;
   title: string;
   subTitle: string;
   createReservation: string;

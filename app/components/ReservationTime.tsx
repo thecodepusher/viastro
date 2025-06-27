@@ -116,7 +116,7 @@ export default function ReservationTime(props: {
         <div className="flex flex-col gap-1">
           <Label>{lang.pickUpLoacation}</Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>
-            <SelectTrigger className="w-[260px] lg:w-[180px]">
+            <SelectTrigger className="w-[300px] lg:w-[180px]">
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
@@ -132,7 +132,7 @@ export default function ReservationTime(props: {
         <div className="flex flex-col gap-1">
           <Label>{lang.dropOffLoacation}</Label>
           <Select value={dropOffLocation} onValueChange={setDropOffLocation}>
-            <SelectTrigger className="w-[260px] lg:w-[180px]">
+            <SelectTrigger className="w-[300px] lg:w-[180px]">
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
@@ -154,7 +154,7 @@ export default function ReservationTime(props: {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[170px] justify-start text-left font-normal",
+                    "w-[210px] justify-start text-left font-normal",
                     !pickDate && "text-muted-foreground"
                   )}
                 >
@@ -243,7 +243,7 @@ export default function ReservationTime(props: {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[170px] justify-start text-left font-normal",
+                    "w-[210px] justify-start text-left font-normal",
                     !dropDate && "text-muted-foreground"
                   )}
                 >

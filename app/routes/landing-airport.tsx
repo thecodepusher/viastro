@@ -18,14 +18,15 @@ import Cta from "@/components/Cta";
 import { sr } from "@/locales/sr";
 import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
+import FloatingButtons from "@/components/ContactFloatingButtons";
 
 export function meta({ data }: Route.MetaArgs) {
   return [
-    { title: "Rent a Car Aerodrom Beograd Nikola Test - Vrhunska Vozila" },
+    { title: "Rent a Car Belgrade Nikola Tesla Airport - Premium Vehicles" },
     {
       name: "description",
       content:
-        "Viastro Rent a car - Aerodrom Nikola Tesla Beograd - Najnovija vozila po vrhunskim cenama, bez skrivenih troskova. RezerviSite vozilo i uzivajte u voznji.",
+        "Viastro Rent a Car - Nikola Tesla Airport Belgrade - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.",
     },
   ];
 }
@@ -104,6 +105,8 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full">
+      <FloatingButtons />
+
       <LandingHero lang={loaderData.lang} />
       <div className="flex flex-col w-full">
         <div className="gap-4 flex flex-col bg-gradient-to-b from-p">

@@ -18,6 +18,7 @@ import Cta from "@/components/Cta";
 import { sr } from "@/locales/sr";
 import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
+import FloatingButtons from "@/components/ContactFloatingButtons";
 
 export function meta({ data }: Route.MetaArgs) {
   return [
@@ -102,6 +103,8 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full">
+      <FloatingButtons />
+
       <LandingHero lang={loaderData.lang} />
       <div className="flex flex-col w-full">
         <div className="gap-4 flex flex-col bg-gradient-to-b from-p">

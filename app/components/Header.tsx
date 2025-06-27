@@ -59,7 +59,7 @@ export default function Header() {
                 <Button variant="ghost" name="lang" type="submit" value="sr">
                   <img className="w-8 shadow border" src="/rs.svg" />
                 </Button>
-                <Button variant="ghost" name="lang" type="submit" value="sr">
+                <Button variant="ghost" name="lang" type="submit" value="ru">
                   <img className="w-8 shadow border" src="/ru.svg" />
                 </Button>
               </Form>

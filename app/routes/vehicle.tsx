@@ -63,6 +63,8 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
   const availableCars = await res.json();
 
+  console.log(availableCars);
+
   for (let a of availableCars.available_models) {
     cars.push(a.id);
   }

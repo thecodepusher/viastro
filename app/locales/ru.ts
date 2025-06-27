@@ -48,4 +48,6 @@ export const ru: BaseLocale = {
   lpSubTitle: "",
   lpParagraph: "",
   lpAction: "",
+  from: "От",
+  day: "День",
 };

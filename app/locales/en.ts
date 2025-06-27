@@ -47,4 +47,6 @@ export const en: BaseLocale = {
   lpParagraph:
     "In addition to our selection of reliable, high-quality cars at great prices, we also offer vehicle delivery to the airport.",
   lpAction: "RESERVE A VEHICLE",
+  from: "from",
+  day: "day",
 };

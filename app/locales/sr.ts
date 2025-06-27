@@ -47,4 +47,6 @@ export const sr: BaseLocale = {
   lpParagraph:
     "Pored naše ponude pouzdanih i kvalitetnih automobila po super cenama, nudimo uslugu dostave vozila na aerodrom.",
   lpAction: "Rezerviši vozilo",
+  from: "od",
+  day: "dan",
 };
