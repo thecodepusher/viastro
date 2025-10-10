@@ -16,6 +16,7 @@ import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import Cta from "@/components/Cta";
 import { sr } from "@/locales/sr";
+import { getLocale } from "@/lib/utils";
 
 export function meta({ data }: Route.MetaArgs) {
   return [
@@ -52,37 +53,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
+  let lang = await getLocale(params.lang, request);
 
   return {
     langCode: params.lang ?? "en",
@@ -98,7 +69,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full">
-      <Header />
+      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
       <div className="flex flex-col w-full mt-18">
         <div className="gap-4 flex flex-col bg-gradient-to-b from-p">
           <div className="mx-4 mt-8">
@@ -153,7 +124,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
       <Cta lang={loaderData.lang} />
 
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

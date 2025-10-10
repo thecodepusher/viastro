@@ -1,46 +1,13 @@
 import Cta from "@/components/Cta";
-import FandQ from "@/components/FandQ";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { en } from "@/locales/en";
 import type { Route } from "./+types/contact-page";
 import GetInTouch from "@/components/GetInTouch";
-import { sr } from "@/locales/sr";
-import { replace } from "react-router";
-import { langCookie } from "@/lib/prefs-cookie";
+
+import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
+  const lang = await getLocale(params.lang, request);
 
   return {
     langCode: params.lang ?? "en",
@@ -52,13 +19,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <Header />
+      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
 
       <GetInTouch lang={loaderData.lang} />
 
       <Cta lang={loaderData.lang} />
 
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

@@ -217,7 +217,6 @@ export default function ReservationTime(props: {
                   }
                 }
 
-                console.log(t);
                 setDropOffTimes(t);
               }}
             >

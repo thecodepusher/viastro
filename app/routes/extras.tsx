@@ -4,9 +4,17 @@ import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
 import { Link, Outlet, redirect, replace, useFetcher } from "react-router";
 import { CheckIcon, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getLocale } from "@/lib/utils";
 import type { Route } from "./+types/extras";
-import { aditionalEquipment, cars, locations, wokringHours } from "@/lib/data";
+import {
+  aditionalEquipment,
+  cars,
+  getAditionalEquipment,
+  getCars,
+  locations,
+  wokringHours,
+  type LocaleTypes,
+} from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { differenceInCalendarDays } from "date-fns";
@@ -14,41 +22,18 @@ import { calculateInWorkingHours } from "@/lib/helpers";
 import { sr } from "@/locales/sr";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  const car = cars.find((x) => x.id === +cookie.carId);
+  const lang = await getLocale(params.lang, request);
+
+  const car = getCars(params.lang as LocaleTypes).find(
+    (x) => x.id === +cookie.carId
+  );
   const pickupDate = cookie.pickUpDate;
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
-
-  if (!car) {
-    return redirect("../vehicle");
-  }
 
   let notInWorkingHours = calculateInWorkingHours(
     dropoffDate,
@@ -56,23 +41,19 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     dropoffTime,
     pickupTime
   );
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
+  if (!car) {
+    return redirect("../vehicle");
   }
 
-  const ad = [...car.aditionalEquipment, ...aditionalEquipment];
+  const ad = [
+    ...car.aditionalEquipment,
+    ...getAditionalEquipment(params.lang as LocaleTypes),
+  ];
 
   return {
     lang,
     notInWorkingHours,
     aditionalEquipment: ad,
-    // car,
     langCode: params.lang,
   };
 }
@@ -104,7 +85,9 @@ export default function Vehicle({
 
   return (
     <div className="w-full">
-      <h3 className="font-bold py-4 px-6 text-lg">Included in reservation</h3>
+      <h3 className="font-bold py-4 px-6 text-lg">
+        {loaderData.lang.includedInReservation}
+      </h3>
 
       <div className="mx-6 mb-6 flex flex-col gap-2">
         <div
@@ -112,18 +95,9 @@ export default function Vehicle({
         >
           <div className="flex flex-col">
             <p className={`text-white font-bold`}>
-              Osnovno kasko osiguranje (uključeno u cenu najma)
+              {loaderData.lang.basicCascoInsurance}
             </p>
-            <p>
-              Sva vozila iz naše flote dolaze sa uključenim osnovnim kasko
-              osiguranjem, koje pruža pokriće u slučaju saobraćajne nezgode,
-              krađe vozila ili štete nastale usled više sile (poplave, požari i
-              slično). Osiguranje ne pokriva štetu nastalu usled grubog nemara,
-              vožnje pod dejstvom alkohola ili psihoaktivnih supstanci, kao ni
-              štetu na gumama, staklima i donjem postroju, osim ako nije
-              drugačije ugovoreno. Za dodatnu sigurnost, dostupan je i full
-              protect paket osiguranja.
-            </p>
+            <p>{loaderData.lang.cascoInsuranceDisclaimer}</p>
           </div>
 
           <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
@@ -137,12 +111,9 @@ export default function Vehicle({
           >
             <div className="flex flex-col">
               <p className={`text-white font-bold`}>
-                Dodatak za rezervaciju van radnog vremena
+                {loaderData.lang.afterHoursReservationFee}
               </p>
-              <p>
-                Za podizanje ili vracanje vozila van radnog vremena naplacuje se
-                dodatno
-              </p>
+              <p>{loaderData.lang.afterHoursFeeDetails}</p>
             </div>
 
             <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
@@ -151,7 +122,9 @@ export default function Vehicle({
           </div>
         )}
       </div>
-      <h3 className="font-bold py-4 px-6 text-lg">Additional Equipment</h3>
+      <h3 className="font-bold py-4 px-6 text-lg">
+        {loaderData.lang.additionalEquipment}
+      </h3>
 
       <div className="mx-6 mb-6 flex flex-col gap-2">
         {loaderData.aditionalEquipment.map((equipment) => {
@@ -175,22 +148,25 @@ export default function Vehicle({
                 <p>{equipment.description}</p>
                 {equipment.depositeDiscount > 0 && (
                   <p className=" font-bold mt-2 text-p">
-                    Vehicle deposite discount {equipment.depositeDiscount}€
+                    {loaderData.lang.vehicleDepositDiscount}{" "}
+                    {equipment.depositeDiscount}€
                   </p>
                 )}
               </div>
 
               <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
                 {equipment.free && (
-                  <p className="font-bold text-lg">Free of charge</p>
+                  <p className="font-bold text-lg">
+                    {loaderData.lang.freeOfCharge}
+                  </p>
                 )}
                 {!equipment.free && (
                   <p className="font-bold text-lg">
                     {equipment.price}€
                     {equipment.perDay
-                      ? `/day ${
+                      ? `/${loaderData.lang.day} ${
                           equipment.maxPerDays
-                            ? `- max price ${
+                            ? `- ${loaderData.lang.maxPrice} ${
                                 equipment.maxPerDays * equipment.price
                               }€`
                             : ""
@@ -211,7 +187,9 @@ export default function Vehicle({
                     }
                   }}
                 >
-                  {isSelected ? "Selected" : "Select"}
+                  {isSelected
+                    ? loaderData.lang.selected
+                    : loaderData.lang.select}
                 </Button>
               </div>
             </div>
@@ -230,7 +208,7 @@ export default function Vehicle({
           className="bg-s hover:bg-p"
           size="lg"
         >
-          Continue
+          {loaderData.lang.continue}
           <ChevronRight />
         </Button>
       </div>

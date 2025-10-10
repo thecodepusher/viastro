@@ -1,12 +1,17 @@
-export default function Footer() {
+import type { BaseLocale } from "@/locales/base-locale";
+
+export default function Footer(props: { lang: BaseLocale; langCode: string }) {
   const navigation = {
     main: [
-      { name: "Home", href: "/" },
-      { name: "Cars", href: "/cars" },
-      { name: "Rental conditions", href: "/rental-conditions" },
-      { name: "FAQ", href: "/faq" },
-      { name: "Blog", href: "/blog" },
-      { name: "Contact", href: "/contact" },
+      { name: "Home", href: `/${props.langCode}/` },
+      { name: "Cars", href: `/${props.langCode}/cars` },
+      {
+        name: "Rental conditions",
+        href: `/${props.langCode}/rental-conditions`,
+      },
+      { name: "FAQ", href: `/${props.langCode}/faq` },
+      { name: "Blog", href: `/${props.langCode}/blog` },
+      { name: "Contact", href: `/${props.langCode}/contact` },
     ],
     social: [
       {

@@ -49,4 +49,36 @@ export const sr: BaseLocale = {
   lpAction: "Rezerviši vozilo",
   from: "od",
   day: "dan",
+  allPricesIncludeVAT: "Sve cene su sa PDV-om",
+  deposit: "Depozit:",
+
+  pricesByDays: "Cene po danima:",
+  includedInReservation: "Uključeno u rezervaciju",
+  additionalEquipment: "Dodatna oprema",
+  vehicleDepositDiscount: "Popust na depozit za vozilo",
+  costSummary: "Pregled troškova",
+  conversionStatement:
+    "Sva plaćanja će biti izvršena u lokalnoj valuti Republike Srbije – dinar (RSD). Iznos za koji će Vaša kreditna kartica biti zadužena dobija se konverzijom cene iz Evra u srpski dinar po važećem kursu Narodne banke Srbije. Prilikom zaduživanja Vaše kreditne kartice, ista suma se konvertuje u Vašu lokalnu valutu prema kursu udruženja kreditnih kartica. Kao rezultat ove konverzije, postoji mogućnost neznatne razlike u odnosu na originalnu cenu navedenu na našem veb sajtu.",
+  yourInformation: "Vaši podaci",
+  email: "Email",
+  firstName: "Ime",
+  lastName: "Prezime",
+  phone: "Telefon",
+  privacyAgreement:
+    "Potreban nam je Vaš pristanak kako bismo Vas mogli kontaktirati u vezi sa Vašom rezervacijom. Više o našoj politici privatnosti, Izjavi o konverziji, Zaštiti privatnosti korisnika, Zaštiti poverljivih podataka o transakcijama i Povraćaju novca možete saznati ovde.",
+  finish: "Završi",
+  reservation: "Rezervacija",
+  vehicles: "Vozila",
+  accessories: "Dodaci",
+  review: "Pregled",
+  freeOfCharge: "Besplatno",
+  maxPrice: "Maksimalna cena",
+  select: "Izaberi",
+  selected: "Izabrano",
+  basicCascoInsurance: "Osnovno kasko osiguranje (uključeno u cenu najma)",
+  cascoInsuranceDisclaimer:
+    "Sva vozila iz naše flote dolaze sa uključenim osnovnim kasko osiguranjem, koje pruža pokriće u slučaju saobraćajne nezgode, krađe vozila ili štete nastale usled više sile (poplave, požari i slično). Osiguranje ne pokriva štetu nastalu usled grubog nemara, vožnje pod dejstvom alkohola ili psihoaktivnih supstanci, kao ni štetu na gumama, staklima i donjem postroju, osim ako nije drugačije ugovoreno. Za dodatnu sigurnost, dostupan je i full protect paket osiguranja.",
+  afterHoursReservationFee: "Dodatak za rezervaciju van radnog vremena",
+  afterHoursFeeDetails:
+    "Za podizanje ili vraćanje vozila van radnog vremena naplaćuje se dodatno",
 };

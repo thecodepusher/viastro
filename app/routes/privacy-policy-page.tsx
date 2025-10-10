@@ -8,39 +8,10 @@ import { langCookie } from "@/lib/prefs-cookie";
 import { replace } from "react-router";
 import { sr } from "@/locales/sr";
 import { privacyPolicy, usloviNajma } from "@/lib/data";
+import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
+  const lang = await getLocale(params.lang, request);
 
   return {
     langCode: params.lang ?? "en",
@@ -53,7 +24,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <Header />
+      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
 
       <div className="mt-16 prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
         <div
@@ -61,7 +32,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
         />
       </div>
 
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

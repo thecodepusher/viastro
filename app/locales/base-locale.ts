@@ -48,4 +48,33 @@ export interface BaseLocale {
   lpSubTitle: string;
   lpParagraph: string;
   lpAction: string;
+
+  allPricesIncludeVAT: string;
+  deposit: string;
+
+  pricesByDays: string;
+  includedInReservation: string;
+  additionalEquipment: string;
+  vehicleDepositDiscount: string;
+  costSummary: string;
+  conversionStatement: string;
+  yourInformation: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  privacyAgreement: string;
+  finish: string;
+  reservation: string;
+  vehicles: string;
+  accessories: string;
+  review: string;
+  freeOfCharge: string;
+  maxPrice: string;
+  select: string;
+  selected: string;
+  basicCascoInsurance: string;
+  cascoInsuranceDisclaimer: string;
+  afterHoursReservationFee: string;
+  afterHoursFeeDetails: string;
 }

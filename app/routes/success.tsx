@@ -7,61 +7,32 @@ import type { Route } from "./+types/success";
 import { en } from "@/locales/en";
 import { sr } from "@/locales/sr";
 import { langCookie } from "@/lib/prefs-cookie";
+import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
+  const lang = await getLocale(params.lang, request);
 
   return {
     lang,
-    langCode: params.lang,
+    langCode: params.lang ?? "en",
   };
 }
 
-export default function Reservation() {
+export default function Reservation({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <Header />
+      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
         <CircleCheck size={60} className="text-p" />
         <p className="font-medium text-lg text-pd mx-8">
           Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi
           rezervacije.
         </p>
-        <Link to="../">
+        <Link to={`/${loaderData.langCode}`}>
           <Button className="bg-s">Vratite se na početnu</Button>
         </Link>
       </div>
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

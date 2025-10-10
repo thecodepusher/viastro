@@ -12,52 +12,15 @@ import {
   useMatch,
   useMatches,
 } from "react-router";
-import { CheckIcon, Locate } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { sr } from "@/locales/sr";
+import { CheckIcon } from "lucide-react";
+import { cn, getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
-
-  // console.log(cookie);
-
-  // const car = cars.find((x) => x.slug === params["car-slug"]);
-
-  // if (!car) return redirect(`/${params.lang ?? "en"}/cars`);
+  const lang = await getLocale(params.lang, request);
 
   return {
     lang,
-    langCode: params.lang,
+    langCode: params.lang ?? "en",
   };
 }
 
@@ -72,28 +35,28 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   const steps = [
     {
       id: "01",
-      name: "Rezervacija",
+      name: loaderData.lang.reservation,
       routeId: "routes/reservation",
       href: "./",
       status: currentRoute.id == "routes/reservation" ? "current" : "",
     },
     {
       id: "02",
-      name: "Vozila",
+      name: loaderData.lang.vehicles,
       routeId: "routes/vehicle",
       href: "./vehicle",
       status: currentRoute.id == "routes/vehicle" ? "current" : "",
     },
     {
       id: "03",
-      name: "Dodaci",
+      name: loaderData.lang.accessories,
       routeId: "routes/extras",
       href: "./extras",
       status: currentRoute.id == "routes/extras" ? "current" : "",
     },
     {
       id: "04",
-      name: "Review",
+      name: loaderData.lang.review,
       routeId: "routes/review",
       href: "./review",
       status: currentRoute.id == "routes/review" ? "current" : "",
@@ -116,7 +79,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full">
-      <Header />
+      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
 
       <div className="py-4 bg-p mt-18 lg:border-t lg:border-b lg:border-gray-200">
         <nav
@@ -247,7 +210,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
       <div className="min-h-[400px]">
         <Outlet />
       </div>
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

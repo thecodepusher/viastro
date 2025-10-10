@@ -25,6 +25,40 @@ export enum CarType {
   hatchback,
 }
 
+const fullProtection = {
+  id: 1,
+  nameMap: {
+    en: "Full Protection Insurance",
+    sr: "Full Protection osiguranje",
+    ru: "Страхование Full Protection",
+  },
+  descriptionMap: {
+    en: "In addition to basic protection, this option includes protection against damage to rear-view mirrors, the windshield and windows, as well as coverage for damage to the undercarriage, wheels, and tires – parts usually not covered by standard insurance. Furthermore, Full Protection includes insurance for all passengers in the vehicle, including the driver, in the event of a traffic accident. With Full Protection insurance, the deposit amount is significantly reduced or completely waived, depending on the vehicle class.",
+    sr: "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+    ru: "Помимо базовой защиты, в эту опцию входит защита от повреждений зеркал заднего вида, лобового и других стекол, а также покрытие ущерба днища, колес и шин – деталей, которые обычно не покрываются стандартной страховкой. Кроме того, Full Protection включает страхование всех пассажиров в транспортном средстве, включая водителя, в случае дорожно-транспортного происшествия. При страховании Full Protection сумма залога значительно снижается или полностью отменяется, в зависимости от класса автомобиля.",
+  },
+  name: "Full Protection osiguranje",
+  description:
+    "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+};
+
+export type LocaleTypes = "en" | "ru" | "sr";
+
+export function getCars(langCode: LocaleTypes) {
+  return cars.map((c) => {
+    return {
+      ...c,
+      aditionalEquipment: c.aditionalEquipment.map((ad) => {
+        return {
+          ...ad,
+          name: ad.nameMap[langCode],
+          description: ad.descriptionMap[langCode],
+        };
+      }),
+    };
+  });
+}
+
 export const cars = [
   {
     id: 6,
@@ -39,10 +73,7 @@ export const cars = [
     deposite: 300,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 9.99,
         free: false,
         depositeDiscount: 150,
@@ -72,10 +103,7 @@ export const cars = [
     deposite: 300,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 9.99,
         free: false,
         depositeDiscount: 150,
@@ -105,10 +133,7 @@ export const cars = [
     deposite: 300,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 9.99,
         free: false,
         depositeDiscount: 150,
@@ -138,10 +163,7 @@ export const cars = [
     deposite: 300,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 9.99,
         free: false,
         depositeDiscount: 150,
@@ -171,10 +193,7 @@ export const cars = [
     deposite: 500,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 11.99,
         depositeDiscount: 250,
         free: false,
@@ -204,10 +223,7 @@ export const cars = [
     deposite: 500,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 12.99,
         free: false,
         perDay: true,
@@ -238,10 +254,7 @@ export const cars = [
     deposite: 500,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 12.99,
         free: false,
         perDay: true,
@@ -270,10 +283,7 @@ export const cars = [
     deposite: 1000,
     aditionalEquipment: [
       {
-        id: 1,
-        name: "Full Protection osiguranje",
-        description:
-          "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+        ...fullProtection,
         price: 14.99,
         free: false,
         perDay: true,
@@ -633,9 +643,29 @@ export const wokringHours = [
   { from: "08:00", to: "16:00" },
 ];
 
+export function getAditionalEquipment(langCode: LocaleTypes) {
+  return aditionalEquipment.map((ad) => {
+    return {
+      ...ad,
+      name: ad.nameMap[langCode],
+      description: ad.descriptionMap[langCode],
+    };
+  });
+}
+
 export const aditionalEquipment = [
   {
     id: 2,
+    nameMap: {
+      en: "Cross Border Permission",
+      sr: "Dozvola za prelazak granice",
+      ru: "Разрешение на пересечение границы",
+    },
+    descriptionMap: {
+      en: "If you plan to travel with the rented vehicle outside the territory of the Republic of Serbia, you must obtain a Cross Border Permission. This permission enables the legal use of the vehicle abroad and is valid for one international destination or multiple countries specified at the time of issuance, with the exception of AP Kosovo and Metohija.",
+      sr: "Ukoliko planirate da putujete sa iznajmljenim vozilom van teritorije Republike Srbije, potrebno je obezbediti dozvolu za prelazak granice. Ova dozvola omogućava legalno korišćenje vozila u inostranstvu i važi za jednu međunarodnu destinaciju ili više zemalja navedenih prilikom izdavanja, sa izuzetkom AP Kosovo i Metohija.",
+      ru: "Если вы планируете поездку на арендованном автомобиле за пределы территории Республики Сербия, необходимо получить **Разрешение на пересечение границы**. Это разрешение дает право легального использования транспортного средства за границей и действительно для одного международного направления или нескольких стран, указанных при выдаче, за исключением АР Косово и Метохия.",
+    },
     name: "Dozvola za prelazak granice",
     description:
       "Ukoliko planirate da putujete sa iznajmljenim vozilom van teritorije Republike Srbije, potrebno je obezbediti dozvolu za prelazak granice. Ova dozvola omogućava legalno korišćenje vozila u inostranstvu i važi za jednu međunarodnu destinaciju ili više zemalja navedenih prilikom izdavanja, sa izuzetkom AP Kosovo i Metohija.",
@@ -647,6 +677,16 @@ export const aditionalEquipment = [
   },
   {
     id: 3,
+    nameMap: {
+      en: "Green Card",
+      sr: "Zeleni karton",
+      ru: "Зеленая карта",
+    },
+    descriptionMap: {
+      en: "The Green Card (International Motor Insurance Card) is mandatory for crossing the borders of the following countries: North Macedonia, Albania, Ukraine, Turkey, Russia, Belarus, Moldova, Israel, Iran, Morocco, Tunisia, and Azerbaijan. The Green Card is issued together with the Cross Border Permission.",
+      sr: "Zeleni karton (Međunarodna karta osiguranja vozila) je obavezan za prelazak granica sledećih zemalja: Severna Makedonija, Albanija, Ukrajina, Turska, Rusija, Belorusija, Moldavija, Izrael, Iran, Maroko, Tunis i Azerbejdžan. Zeleni karton se izdaje zajedno sa dozvolom za prelazak granice",
+      ru: "Зеленая карта (Международная карта страхования транспортного средства) обязательна для пересечения границ следующих стран: Северная Македония, Албания, Украина, Турция, Россия, Беларусь, Молдова, Израиль, Иран, Марокко, Тунис и Азербайджан. Зеленая карта выдается вместе с Разрешением на пересечение границы.",
+    },
     name: "Zeleni karton",
     description:
       "Zeleni karton (Međunarodna karta osiguranja vozila) je obavezan za prelazak granica sledećih zemalja: Severna Makedonija, Albanija, Ukrajina, Turska, Rusija, Belorusija, Moldavija, Izrael, Iran, Maroko, Tunis i Azerbejdžan. Zeleni karton se izdaje zajedno sa dozvolom za prelazak granice",
@@ -658,6 +698,16 @@ export const aditionalEquipment = [
   },
   {
     id: 9,
+    nameMap: {
+      en: "Additional Driver",
+      sr: "Dodatni vozač",
+      ru: "Дополнительный водитель",
+    },
+    descriptionMap: {
+      en: "If you wish for more than one person to operate the vehicle during the rental, it is possible to add an **additional driver**. The additional driver must meet the same requirements as the main driver: they must possess a valid driver’s license and be at least 21 years old (or older, depending on the vehicle class).",
+      sr: "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati **dodatnog vozača**. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač – da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila).",
+      ru: "Если вы хотите, чтобы автомобилем во время аренды управляло более одного человека, можно добавить **дополнительного водителя**. Дополнительный водитель должен соответствовать тем же требованиям, что и основной водитель: иметь действующее водительское удостоверение и быть не моложе 21 года (или старше, в зависимости от класса автомобиля).",
+    },
     name: "Dodatni vozac",
     description:
       "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati dodatnog vozača. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač – da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila). ",
@@ -667,30 +717,18 @@ export const aditionalEquipment = [
     maxPerDays: null,
     depositeDiscount: 0,
   },
-  // {
-  //   id: 8,
-  //   name: "WiFi",
-  //   description:
-  //     "Ostanite povezani i tokom puta! Nudimo opciju mobilnog WiFi uređaja u vozilu, idealnu za navigaciju, streaming, poslovne pozive ili zabavu tokom putovanja. Rezervacije preko 7 dana cena je fiksna 35e.",
-  //   price: 5,
-  //   free: false,
-  //   perDay: true,
-  //   maxPerDays: 7,
-  //   depositeDiscount: 0,
-  // },
-  // {
-  //   id: 5,
-  //   name: "Auto sedište - „Jaje“ (0–13 kg)",
-  //   description:
-  //     "Idealno za novorođenčad i bebe do 13 kilograma. Ovo sedište pruža maksimalnu sigurnost i udobnost za najmlađe putnike. Montira se suprotno od pravca vožnje, u skladu sa najvišim bezbednosnim standardima.",
-  //   price: 0,
-  //   free: true,
-  //   perDay: false,
-  //   maxPerDays: null,
-  //   depositeDiscount: 0,
-  // },
   {
     id: 6,
+    nameMap: {
+      en: "Car Seat (0–36 kg)",
+      sr: "Auto sedište (0–36 kg)",
+      ru: "Автокресло (0–36 кг)",
+    },
+    descriptionMap: {
+      en: "A universal car seat that covers all ages—from newborns up to children around 12 years old. It is adjustable in height and recline, allowing for a safe and comfortable ride throughout all phases of the child’s development. The seat can be installed rear-facing for the smallest babies and forward-facing for older children.",
+      sr: "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja. Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
+      ru: "Универсальное автокресло, подходящее для всех возрастов – от новорожденных до детей примерно 12 лет. Регулируется по высоте и наклону, что обеспечивает безопасную и комфортную поездку на всех этапах развития ребенка. Кресло может устанавливаться против хода движения для самых маленьких детей и по ходу движения для детей постарше.",
+    },
     name: "Auto sedište (0–36 kg)",
     description:
       "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja.Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
@@ -702,6 +740,16 @@ export const aditionalEquipment = [
   },
   {
     id: 7,
+    nameMap: {
+      en: "Booster Seat",
+      sr: "Buster sedište (Booster)",
+      ru: "Бустер (Booster)",
+    },
+    descriptionMap: {
+      en: "Intended for children older than 7 years and weighing over 15 kilograms. The Booster ensures the correct positioning of the seat belt and increases child safety during the ride. Compact and easy to install in any vehicle.",
+      sr: "Namenjeno deci starijoj od 7 godine i težoj od 15 kilograma. Booster omogućava pravilno postavljanje sigurnosnog pojasa i povećava sigurnost deteta tokom vožnje. Kompaktno i lako za postavljanje u bilo koje vozilo.",
+      ru: "Предназначено для детей старше 7 лет и весом более 15 килограммов. Бустер обеспечивает правильное положение ремня безопасности и повышает безопасность ребенка во время поездки. Компактен и легко устанавливается в любой автомобиль.",
+    },
     name: "Buster sedište (Booster)",
     description:
       "Namenjeno deci starijoj od 7 godine i težoj od 15 kilograma. Booster omogućava pravilno postavljanje sigurnosnog pojasa i povećava sigurnost deteta tokom vožnje. Kompaktno i lako za postavljanje u bilo koje vozilo.",

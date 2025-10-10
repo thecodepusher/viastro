@@ -10,52 +10,28 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   aditionalEquipment,
   cars,
+  getAditionalEquipment,
+  getCars,
   locations,
   PRICE_FOR_PICKUP_OFF_HOURS,
+  type LocaleTypes,
 } from "@/lib/data";
 import { differenceInMinutes, format, set } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import nodemailer from "nodemailer";
 import { sr } from "@/locales/sr";
+import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
 
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
+  const lang = await getLocale(params.lang, request);
 
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
-
-  const car = cars.find((x) => x.id === +cookie.carId);
+  const car = getCars(params.lang as LocaleTypes).find(
+    (x) => x.id === +cookie.carId
+  );
   const pickup = locations.find((x) => x.id === +cookie.pickUpLocation);
   const dropOff = locations.find((x) => x.id === +cookie.dropOffLocation);
   const pickupDate = cookie.pickUpDate;
@@ -121,7 +97,10 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   let depositeDiscount = 0;
   if (idExtras) {
-    const ae = [...car.aditionalEquipment, ...aditionalEquipment];
+    const ae = [
+      ...car.aditionalEquipment,
+      ...getAditionalEquipment(params.lang as LocaleTypes),
+    ];
 
     idExtras
       .split(",")
@@ -329,7 +308,7 @@ export default function Reservation({
       <h3 className="mx-6 my-4 font-bold text-xl">Cost summary</h3>
       <div className="mx-6 p-4 border rounded shadow flex gap-2 flex-col">
         <div>
-          <Label>Pickup</Label>
+          <Label>{loaderData.lang.pickUpLoacation}</Label>
           <p>
             {loaderData.pickup?.name}{" "}
             {format(loaderData.pickupDate, "dd/MM/yyyy")} -{" "}
@@ -337,7 +316,7 @@ export default function Reservation({
           </p>
         </div>
         <div>
-          <Label>Dropoff</Label>
+          <Label>{loaderData.lang.dropOffLoacation}</Label>
           <p>
             {loaderData.dropOff?.name}{" "}
             {format(loaderData.dropoffDate, "dd/MM/yyyy")} -{" "}
@@ -345,7 +324,7 @@ export default function Reservation({
           </p>
         </div>
         <div>
-          <Label>Vehicle</Label>
+          <Label>{loaderData.lang.vehicles}</Label>
           <p>
             {loaderData.car?.name}
             {" - "}
@@ -357,12 +336,12 @@ export default function Reservation({
 
         {(loaderData.extras.length > 0 || loaderData.notInWorkingHours) && (
           <div>
-            <Label className="">Extras</Label>
+            <Label className="">{loaderData.lang.accessories}</Label>
 
             <div className="flex flex-col ">
               {loaderData.notInWorkingHours && (
                 <div>
-                  Dodatak za rezervaciju van radnog vremena
+                  {loaderData.lang.afterHoursReservationFee}
                   {" - "}
                   <span className="font-bold text-s text-lg">
                     {PRICE_FOR_PICKUP_OFF_HOURS}€
@@ -391,7 +370,7 @@ export default function Reservation({
         </div>
 
         <div>
-          <Label>Depozit</Label>
+          <Label>{loaderData.lang.deposit}</Label>
           <p>
             <span className="font-bold text-s text-lg">
               {loaderData.depositeDiscount == 0 && (
@@ -415,15 +394,7 @@ export default function Reservation({
         <div>
           <p className="text-sm text-muted-foreground">
             <Info size={20} className="float-left mr-1 text-p" />
-            All payments will be effected in Serbian currency - Dinar (RSD). The
-            amount your credit card account will be charged for is obtained
-            through the conversion of the price in Euro into Serbian dinar
-            according to the current exchange rate of the Serbian National Bank.
-            When charging your credit card, the same amount is converted into
-            your local currency according to the exchange rate of credit card
-            associations. As a result of this conversion there is a possibility
-            of a slight difference from the original price stated in our web
-            site.
+            {loaderData.lang.conversionStatement}
           </p>
         </div>
       </div>
@@ -477,19 +448,9 @@ export default function Reservation({
           <div className="items-top flex space-x-2">
             <Checkbox required id="terms1" />
             <div className="grid gap-1.5 leading-none">
-              <label
-                htmlFor="terms1"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                AGREEMENT
-              </label>
               <Link target="_blank" to="/privacy-policy">
                 <p className="text-sm text-muted-foreground">
-                  We need your agreement so we can contact you regarding your
-                  reservation. Find out more about our privacy policy,
-                  Conversion Statement, User Privacy Protection, Confidential
-                  Transaction Data Protection, and Refunds{" "}
-                  <span className="underline font-bold">here.</span>
+                  {loaderData.lang.privacyAgreement}
                 </p>
               </Link>
             </div>

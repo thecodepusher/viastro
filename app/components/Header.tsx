@@ -10,14 +10,15 @@ import {
 import { MenuIcon } from "lucide-react";
 import { Form, Link, useLocation } from "react-router";
 import { Button } from "./ui/button";
+import type { BaseLocale } from "@/locales/base-locale";
 
-export default function Header() {
+export default function Header(props: { lang: BaseLocale; langCode: string }) {
   const location = useLocation();
 
   return (
     <header className="fixed z-40 top-0 h-18 w-full bg-[#FF9B17]">
       <div className="max-w-7xl justify-between items-center mx-auto px-2 flex h-18 py-1">
-        <Link to="/">
+        <Link to={`/${props.langCode}`}>
           <img className="h-16" src={logoWhite} />
         </Link>
 
@@ -30,22 +31,22 @@ export default function Header() {
               <SheetTitle className="px-2">Menu</SheetTitle>
             </SheetHeader>
             <div className="flex px-6 gap-2 flex-col">
-              <Link to="/">
+              <Link to={`/${props.langCode}`}>
                 <h2 className="border-b">Home</h2>
               </Link>
-              <Link to="/cars">
+              <Link to={`/${props.langCode}/cars`}>
                 <h2 className="border-b">Cars</h2>
               </Link>
-              <Link to="/rental-conditions">
+              <Link to={`/${props.langCode}/rental-conditions`}>
                 <h2 className="border-b">Rental conditions</h2>
               </Link>
-              <Link to="/faq">
+              <Link to={`/${props.langCode}/faq`}>
                 <h2 className="border-b">FAQ</h2>
               </Link>
-              <Link to="/blog">
+              <Link to={`/${props.langCode}/blog`}>
                 <h2 className="border-b">Blog</h2>
               </Link>
-              <Link to="/contact">
+              <Link to={`/${props.langCode}/contact`}>
                 <h2 className="border-b">Contact</h2>
               </Link>
             </div>

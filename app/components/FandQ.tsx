@@ -162,8 +162,6 @@ const faqsRu = [
 export default function FandQ(props: { langCode: string }) {
   let faqs = faqsEn;
 
-  console.log(props.langCode);
-
   let title = "Frequently asked questions";
 
   if (props.langCode == "sr") {

@@ -19,6 +19,7 @@ import { sr } from "@/locales/sr";
 import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
 import FloatingButtons from "@/components/ContactFloatingButtons";
+import { getLocale } from "@/lib/utils";
 
 export function meta({ data }: Route.MetaArgs) {
   return [
@@ -29,8 +30,6 @@ export function meta({ data }: Route.MetaArgs) {
 
 export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
-
-  console.log(params.lang);
 
   const pickUpLocation = formData.get("pickUpLocation");
   const dropOffLocation = formData.get("dropOffLocation");
@@ -57,37 +56,7 @@ export async function action({ request, params }: Route.ActionArgs) {
 }
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
+  const lang = await getLocale(params.lang, request);
 
   return {
     langCode: params.lang ?? "en",
@@ -152,7 +121,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
       <Cta lang={loaderData.lang} />
 
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

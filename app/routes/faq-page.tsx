@@ -7,39 +7,10 @@ import type { Route } from "./+types/faq-page";
 import { sr } from "@/locales/sr";
 import { langCookie } from "@/lib/prefs-cookie";
 import { replace } from "react-router";
+import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  if (!params.lang) {
-    const cookieHeader = request.headers.get("Cookie");
-
-    const lgCookie = (await langCookie.parse(cookieHeader)) || {};
-
-    const url = new URL(request.url);
-
-    let returnPath = url.pathname;
-
-    if (lgCookie.lang) {
-      if (returnPath == "/") {
-        return replace(`/${lgCookie.lang}`);
-      }
-      return replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      return replace(`/en`);
-    }
-
-    return replace(`/en${url.pathname}`);
-  }
-
-  let lang = en;
-
-  if (params.lang) {
-    switch (params.lang) {
-      case "sr":
-        lang = sr;
-    }
-  }
+  const lang = await getLocale(params.lang, request);
 
   return {
     langCode: params.lang ?? "en",
@@ -51,13 +22,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <Header />
+      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
 
       <FandQ langCode={loaderData.langCode} />
 
       <Cta lang={loaderData.lang} />
 
-      <Footer />
+      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }
