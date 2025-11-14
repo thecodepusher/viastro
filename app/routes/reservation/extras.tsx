@@ -5,7 +5,7 @@ import { en } from "@/locales/en";
 import { Link, Outlet, redirect, replace, useFetcher } from "react-router";
 import { CheckIcon, ChevronRight } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
-import type { Route } from "./+types/extras";
+import type { Route } from "../+types/extras";
 import {
   aditionalEquipment,
   cars,
@@ -91,8 +91,7 @@ export default function Vehicle({
 
       <div className="mx-6 mb-6 flex flex-col gap-2">
         <div
-          className={`border rounded shadow gap-4 flex flex-col p-4 bg-s text-white `}
-        >
+          className={`border rounded shadow gap-4 flex flex-col p-4 bg-s text-white `}>
           <div className="flex flex-col">
             <p className={`text-white font-bold`}>
               {loaderData.lang.basicCascoInsurance}
@@ -107,8 +106,7 @@ export default function Vehicle({
 
         {loaderData.notInWorkingHours && (
           <div
-            className={`border rounded shadow gap-4 flex flex-col p-4 bg-s text-white `}
-          >
+            className={`border rounded shadow gap-4 flex flex-col p-4 bg-s text-white `}>
             <div className="flex flex-col">
               <p className={`text-white font-bold`}>
                 {loaderData.lang.afterHoursReservationFee}
@@ -135,14 +133,12 @@ export default function Vehicle({
               className={`border rounded shadow gap-4 flex flex-col p-4 ${
                 isSelected ? "bg-s text-white" : ""
               }`}
-              key={equipment.id}
-            >
+              key={equipment.id}>
               <div className="flex flex-col">
                 <p
                   className={`${
                     isSelected ? "text-white" : "text-s"
-                  }  font-bold`}
-                >
+                  }  font-bold`}>
                   {equipment.name}
                 </p>
                 <p>{equipment.description}</p>
@@ -185,8 +181,7 @@ export default function Vehicle({
                     } else {
                       setSelected([...selected, equipment.id]);
                     }
-                  }}
-                >
+                  }}>
                   {isSelected
                     ? loaderData.lang.selected
                     : loaderData.lang.select}
@@ -206,8 +201,7 @@ export default function Vehicle({
             fetcher.submit(form, { method: "post" });
           }}
           className="bg-s hover:bg-p"
-          size="lg"
-        >
+          size="lg">
           {loaderData.lang.continue}
           <ChevronRight />
         </Button>

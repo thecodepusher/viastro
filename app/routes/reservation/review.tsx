@@ -2,7 +2,7 @@ import { langCookie, prefs } from "@/lib/prefs-cookie";
 import { en } from "@/locales/en";
 import { Form, Link, redirect, replace } from "react-router";
 import { Info } from "lucide-react";
-import type { Route } from "./+types/review";
+import type { Route } from "../+types/review";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";

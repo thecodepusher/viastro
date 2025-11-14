@@ -5,7 +5,7 @@ import { prefs } from "@/lib/prefs-cookie";
 import { Outlet, redirect, replace, useFetcher } from "react-router";
 import { CheckIcon } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
-import type { Route } from "./+types/vehicle";
+import type { Route } from "../+types/vehicle";
 import Cars from "@/components/Cars";
 import { sr } from "@/locales/sr";
 import { format } from "date-fns";
