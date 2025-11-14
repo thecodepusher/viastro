@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="flag-icons-rs" viewBox="0 0 640 480">
   <defs>
     <clipPath id="rs-a">
-      <path fill-rule="evenodd" d="M60 0h1200v900H60z"/>
+      <path fillRule="evenodd" d="M60 0h1200v900H60z"/>
     </clipPath>
   </defs>
   <g clip-path="url(#rs-a)" transform="translate(-32)scale(.53333)">
