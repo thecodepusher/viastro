@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build --ssr false",
+    "build": "react-router build",
     "db:generate": "dotenv -- drizzle-kit generate",
     "db:migrate": "dotenv -- drizzle-kit migrate",
     "dev": "dotenv -- node server.js",
@@ -24,6 +24,7 @@
     "@radix-ui/react-tooltip": "^1.2.0",
     "@react-router/express": "^7.5.0",
     "@react-router/node": "^7.5.0",
+    "@vercel/react-router": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "compression": "^1.7.5",
