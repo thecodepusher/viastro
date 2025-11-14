@@ -1,5 +1,3 @@
-import type { Route } from "./+types/home";
-
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
 import BlogSection from "@/components/BlogSection";
@@ -15,6 +13,7 @@ import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import Cta from "@/components/Cta";
 import { getLocale } from "@/lib/utils";
+import type { Route } from "./+types/home";
 
 export function meta({ data }: Route.MetaArgs) {
   return [

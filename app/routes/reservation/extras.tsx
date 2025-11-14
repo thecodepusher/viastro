@@ -6,9 +6,9 @@ import { getAditionalEquipment, getCars, type LocaleTypes } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { calculateInWorkingHours } from "@/lib/helpers";
-import type { Route } from "./+types";
+import type { Route } from "./+types/extras";
 
-export async function loader({ request, context, params }: Route.LoaderArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 

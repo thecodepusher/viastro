@@ -1,5 +1,3 @@
-import type { Route } from "./+types/home";
-
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
 import BlogSection from "@/components/BlogSection";
@@ -16,6 +14,7 @@ import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
 import FloatingButtons from "@/components/ContactFloatingButtons";
 import { getLocale } from "@/lib/utils";
+import type { Route } from "./+types/landing-airport";
 
 export function meta({ data }: Route.MetaArgs) {
   return [

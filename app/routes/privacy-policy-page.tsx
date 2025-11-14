@@ -1,8 +1,8 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import type { Route } from "./+types/rental-conditions-page";
 import { privacyPolicy } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
+import type { Route } from "./+types/privacy-policy-page";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);

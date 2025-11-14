@@ -4,9 +4,9 @@ import { redirect, useFetcher } from "react-router";
 import { getLocale } from "@/lib/utils";
 import Cars from "@/components/Cars";
 import { format } from "date-fns";
-import type { Route } from "./+types";
+import type { Route } from "./+types/vehicle";
 
-export async function loader({ request, context, params }: Route.LoaderArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
 
   const lang = await getLocale(params.lang, request);

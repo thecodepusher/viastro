@@ -6,7 +6,7 @@ import { locations } from "@/lib/data";
 import { setHours } from "date-fns";
 import type { Route } from "./+types";
 
-export async function loader({ request, context, params }: Route.LoaderArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
 
   return {

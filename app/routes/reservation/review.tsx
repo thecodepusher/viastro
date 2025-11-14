@@ -17,7 +17,7 @@ import {
 import { differenceInMinutes, format, set } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import { getLocale } from "@/lib/utils";
-import type { Route } from "./+types";
+import type { Route } from "./+types/review";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
