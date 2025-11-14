@@ -1,5 +1,4 @@
 import type { Route } from "./+types/home";
-import { en } from "@/locales/en";
 
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
@@ -10,12 +9,11 @@ import Cars from "@/components/Cars";
 import Header from "@/components/Header";
 import ReservationTime from "@/components/ReservationTime";
 import Footer from "@/components/Footer";
-import { redirect, replace, useFetcher, useNavigate } from "react-router";
-import { langCookie, prefs } from "@/lib/prefs-cookie";
+import { redirect, useFetcher, useNavigate } from "react-router";
+import { prefs } from "@/lib/prefs-cookie";
 import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import Cta from "@/components/Cta";
-import { sr } from "@/locales/sr";
 import { getLocale } from "@/lib/utils";
 
 export function meta({ data }: Route.MetaArgs) {
@@ -71,7 +69,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <Header lang={loaderData.lang} langCode={loaderData.langCode} />
       <div className="flex flex-col w-full mt-18">
-        <div className="gap-4 flex flex-col bg-gradient-to-b from-p">
+        <div className="gap-4 flex flex-col bg-linear-to-b from-p">
           <div className="mx-4 mt-8">
             <h1 className="text-center text-white font-black uppercase text-xl">
               {loaderData.lang.title}

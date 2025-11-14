@@ -1,14 +1,10 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { prefs } from "@/lib/prefs-cookie";
 
-import { Outlet, redirect, replace, useFetcher } from "react-router";
-import { CheckIcon } from "lucide-react";
-import { cn, getLocale } from "@/lib/utils";
-import type { Route } from "../+types/vehicle";
+import { redirect, useFetcher } from "react-router";
+import { getLocale } from "@/lib/utils";
 import Cars from "@/components/Cars";
-import { sr } from "@/locales/sr";
 import { format } from "date-fns";
+import type { Route } from "./+types";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -65,10 +61,7 @@ export async function action({ request }: Route.ActionArgs) {
 
 export function meta({}: Route.MetaArgs) {}
 
-export default function Vehicle({
-  actionData,
-  loaderData,
-}: Route.ComponentProps) {
+export default function Vehicle({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
 
   return (

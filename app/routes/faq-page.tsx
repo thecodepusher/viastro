@@ -2,11 +2,7 @@ import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { en } from "@/locales/en";
 import type { Route } from "./+types/faq-page";
-import { sr } from "@/locales/sr";
-import { langCookie } from "@/lib/prefs-cookie";
-import { replace } from "react-router";
 import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -19,7 +15,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   };
 }
 
-export default function Home({ actionData, loaderData }: Route.ComponentProps) {
+export default function FandQPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <Header lang={loaderData.lang} langCode={loaderData.langCode} />

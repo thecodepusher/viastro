@@ -1,25 +1,12 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { langCookie, prefs } from "@/lib/prefs-cookie";
-import { en } from "@/locales/en";
-import { Link, Outlet, redirect, replace, useFetcher } from "react-router";
-import { CheckIcon, ChevronRight } from "lucide-react";
-import { cn, getLocale } from "@/lib/utils";
-import type { Route } from "../+types/extras";
-import {
-  aditionalEquipment,
-  cars,
-  getAditionalEquipment,
-  getCars,
-  locations,
-  wokringHours,
-  type LocaleTypes,
-} from "@/lib/data";
+import { prefs } from "@/lib/prefs-cookie";
+import { redirect, useFetcher } from "react-router";
+import { ChevronRight } from "lucide-react";
+import { getLocale } from "@/lib/utils";
+import { getAditionalEquipment, getCars, type LocaleTypes } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { differenceInCalendarDays } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
-import { sr } from "@/locales/sr";
+import type { Route } from "./+types";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -76,7 +63,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 export function meta({}: Route.MetaArgs) {}
 
-export default function Vehicle({
+export default function Extras({
   actionData,
   loaderData,
 }: Route.ComponentProps) {

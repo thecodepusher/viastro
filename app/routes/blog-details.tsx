@@ -34,7 +34,10 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   };
 }
 
-export default function Home({ actionData, loaderData }: Route.ComponentProps) {
+export default function BlogDetailsPage({
+  actionData,
+  loaderData,
+}: Route.ComponentProps) {
   return (
     <div className="w-full">
       <Header lang={loaderData.lang} langCode={loaderData.langCode} />

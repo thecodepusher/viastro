@@ -1,21 +1,17 @@
 import type { Route } from "./+types/home";
-import { en } from "@/locales/en";
 
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
 import BlogSection from "@/components/BlogSection";
 import Logos from "@/components/Logos";
-import GetInTouch from "@/components/GetInTouch";
 import Cars from "@/components/Cars";
-import Header from "@/components/Header";
 import ReservationTime from "@/components/ReservationTime";
 import Footer from "@/components/Footer";
-import { redirect, replace, useFetcher, useNavigate } from "react-router";
-import { langCookie, prefs } from "@/lib/prefs-cookie";
+import { redirect, useFetcher, useNavigate } from "react-router";
+import { prefs } from "@/lib/prefs-cookie";
 import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import Cta from "@/components/Cta";
-import { sr } from "@/locales/sr";
 import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
 import FloatingButtons from "@/components/ContactFloatingButtons";
@@ -70,7 +66,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   };
 }
 
-export default function Home({ actionData, loaderData }: Route.ComponentProps) {
+export default function LandingAirportPage({
+  loaderData,
+}: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
 
@@ -80,7 +78,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
       <LandingHero lang={loaderData.lang} />
       <div className="flex flex-col w-full">
-        <div className="gap-4 flex flex-col bg-gradient-to-b from-p">
+        <div className="gap-4 flex flex-col bg-linear-to-b from-p">
           <ReservationTime
             onStart={async (data) => {
               const form = new FormData();

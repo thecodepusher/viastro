@@ -1,8 +1,6 @@
-import { langCookie, prefs } from "@/lib/prefs-cookie";
-import { en } from "@/locales/en";
-import { Form, Link, redirect, replace } from "react-router";
+import { prefs } from "@/lib/prefs-cookie";
+import { Form, Link, redirect } from "react-router";
 import { Info } from "lucide-react";
-import type { Route } from "../+types/review";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -18,11 +16,10 @@ import {
 } from "@/lib/data";
 import { differenceInMinutes, format, set } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
-import nodemailer from "nodemailer";
-import { sr } from "@/locales/sr";
 import { getLocale } from "@/lib/utils";
+import type { Route } from "./+types";
 
-export async function loader({ request, context, params }: Route.LoaderArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
 
   const lang = await getLocale(params.lang, request);
@@ -151,19 +148,12 @@ export async function action({ request }: Route.ActionArgs) {
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
   const car = cars.find((x) => x.id === +cookie.carId);
-  const pickup = locations.find((x) => x.id === +cookie.pickUpLocation);
-  const dropOff = locations.find((x) => x.id === +cookie.dropOffLocation);
   const pickupDate = cookie.pickUpDate;
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
 
   const formData = await request.formData();
-
-  const firstName = formData.get("first_name");
-  const lastName = formData.get("last_name");
-  const email = formData.get("email");
-  const phone = formData.get("phone");
 
   if (!car) {
     return redirect("../vehicle");
@@ -248,49 +238,6 @@ export async function action({ request }: Route.ActionArgs) {
       });
   }
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
-    port: 587,
-    secure: false, // true for port 465, false for other ports
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
-
-  const info = await transporter.sendMail({
-    from: "<office@viastro.rs>", // sender address
-    to: process.env.EMAIL_OFFICE, // list of receivers
-    subject: "New reservation", // Subject line
-    html: `
-    <p>${car!.name}</p>
-    <p>Pickup: ${pickup!.name} ${format(
-      pickupDate,
-      "dd/MM/yyyy"
-    )} - ${pickupTime}</p>
-    <p>Dropoff: ${dropOff!.name} ${format(
-      dropoffDate,
-      "dd/MM/yyyy"
-    )} - ${dropoffTime}</p>
-
-    ${
-      notInWorkingHours
-        ? `<p>Dodatak za rezervaciju van radnog vremena - ${PRICE_FOR_PICKUP_OFF_HOURS}€</p>`
-        : ``
-    }
-    ${extras.map((x) => `<p>${x.name} - ${x.price}€</p>`)}
-    <p>Car price: ${carPrice}€</p>
-    <p>Total Price: ${price}€</p>
-    <p>Deposite for car: ${car.deposite - depositeDiscount}€</p>
-    <p>Deposite discount: ${depositeDiscount}€</p>
-    <p>Deposite: ${car.deposite - depositeDiscount}€</p>
-    <br/>
-    <p>${firstName} ${lastName}</p>
-    <p>${email}</p>
-    <p>${phone}</p>
-    `, // html body
-  });
-
   return redirect("../../success", {
     headers: {
       "Set-Cookie": await prefs.serialize({}),
@@ -299,10 +246,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 export function meta({}: Route.MetaArgs) {}
 
-export default function Reservation({
-  actionData,
-  loaderData,
-}: Route.ComponentProps) {
+export default function Review({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <h3 className="mx-6 my-4 font-bold text-xl">Cost summary</h3>

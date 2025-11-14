@@ -1,15 +1,10 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { langCookie, prefs } from "@/lib/prefs-cookie";
-import { en } from "@/locales/en";
-import { Outlet, redirect, replace, useFetcher } from "react-router";
-import { CheckIcon } from "lucide-react";
-import { cn, getLocale } from "@/lib/utils";
-import type { Route } from "../+types/reservation";
+import { prefs } from "@/lib/prefs-cookie";
+import { redirect, useFetcher } from "react-router";
+import { getLocale } from "@/lib/utils";
 import ReservationTime from "@/components/ReservationTime";
 import { locations } from "@/lib/data";
 import { setHours } from "date-fns";
-import { sr } from "@/locales/sr";
+import type { Route } from "./+types";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);

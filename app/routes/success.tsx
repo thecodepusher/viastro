@@ -2,11 +2,8 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
-import { Link, replace } from "react-router";
+import { Link } from "react-router";
 import type { Route } from "./+types/success";
-import { en } from "@/locales/en";
-import { sr } from "@/locales/sr";
-import { langCookie } from "@/lib/prefs-cookie";
 import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -18,7 +15,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   };
 }
 
-export default function Reservation({ loaderData }: Route.ComponentProps) {
+export default function SuccessPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <Header lang={loaderData.lang} langCode={loaderData.langCode} />
