@@ -1,14 +1,3 @@
-// DEBUG: Logovanje fajlova na Vercel-u
-import fs from "fs";
-try {
-  console.log("Routes:", fs.readdirSync(__dirname));
-  console.log(
-    "Reservation routes:",
-    fs.readdirSync(__dirname + "/reservation")
-  );
-} catch (e) {
-  console.error("FS error:", e);
-}
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 const routes = [
@@ -34,12 +23,5 @@ const routes = [
     route("review", "routes/reservation/review.tsx"),
   ]),
 ];
-
-console.log("Routes array:", routes);
-routes.forEach((r, i) => {
-  if (!r) {
-    console.error("Route at index", i, "is undefined or null!");
-  }
-});
 
 export default routes satisfies RouteConfig;

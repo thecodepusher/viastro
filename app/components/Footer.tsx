@@ -126,7 +126,7 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
   };
 
   return (
-    <footer className="bg-[#181320]">
+    <footer className="bg-pd">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
         <nav
           aria-label="Footer"

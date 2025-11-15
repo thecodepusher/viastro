@@ -37,16 +37,6 @@ if (DEVELOPMENT) {
   });
 } else {
   console.log("Starting production server");
-  // DEBUG: Logovanje Vite manifest fajla
-  try {
-    const { readFileSync } = await import("fs");
-    const manifest = JSON.parse(
-      readFileSync(join(__dirname, "build/client/.vite/manifest.json"), "utf-8")
-    );
-    console.log("Vite manifest keys:", Object.keys(manifest));
-  } catch (e) {
-    console.error("Manifest read error:", e);
-  }
   app.use(
     "/assets",
     express.static("build/client/assets", { immutable: true, maxAge: "1y" })

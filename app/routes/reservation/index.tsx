@@ -52,7 +52,7 @@ export default function Reservation({
 
   return (
     <div className="flex flex-col w-full">
-      <div className="gap-4 flex flex-col bg-gradient-to-b from-p">
+      <div className="gap-4 flex flex-col bg-linear-to-b from-p">
         <ReservationTime
           onStart={async (data) => {
             const form = new FormData();
