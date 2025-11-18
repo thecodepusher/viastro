@@ -1,6 +1,7 @@
 import type { Route } from "./+types/rental-conditions-page";
 import { usloviNajma } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
+import Cta from "@/components/Cta";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -23,6 +24,7 @@ export default function RentalConditionsPage({
           dangerouslySetInnerHTML={{ __html: loaderData.usloviNajma ?? "" }}
         />
       </div>
+      <Cta lang={loaderData.lang} />
     </div>
   );
 }

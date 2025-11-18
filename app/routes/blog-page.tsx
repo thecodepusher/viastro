@@ -15,9 +15,8 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export default function BlogPage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="w-full">
+    <div className="w-full pt-16">
       <BlogSection langCode={loaderData.langCode} />
-
       <Cta lang={loaderData.lang} />
     </div>
   );

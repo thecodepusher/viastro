@@ -1,7 +1,15 @@
 import type { BaseLocale } from "./base-locale";
 
 export const ru: BaseLocale = {
+  home: "Главная",
+  cars: "Автомобили",
+  rentalConditions: "Условия аренды",
+  faq: "FAQ",
+  blog: "Блог",
+  contact: "Контакт",
   title: "Ваше путешествие начинается здесь",
+  selectLanguage: "Выберите язык",
+  contactUs: "Свяжитесь с нами",
   subTitle: "Car Rental Belgrade",
   createReservation: "Создать бронирование",
   pickUpLoacation: "Место получения",
@@ -30,11 +38,14 @@ export const ru: BaseLocale = {
   fullInsurance: "Полная страховка включена",
   noHiddenCosts: "Без скрытых платежей",
   satisfiedUsers: "99.9%",
+  satisfiedUsersTitle: "удовлетворенных пользователей",
+  yearsOfExperienceTitle: "лет опыта",
   yearsOfExperience: "5+",
   reserve: "Забронируйте",
   ctaTitle: "Путешествуйте без забот!",
   ctaSubTitle:
     "Арендуйте надежный автомобиль быстро и легко – забронируйте свой автомобиль сегодня и наслаждайтесь поездкой без стресса.",
+  ctaAction: "Создайте бронирование сегодня",
   gitTitle: "Свяжитесь с нами",
   gitSubTitle:
     "Мы здесь для вас. Не стесняйтесь позвонить нам и получить необходимую информацию.",

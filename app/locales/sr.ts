@@ -1,7 +1,15 @@
 import type { BaseLocale } from "./base-locale";
 
 export const sr: BaseLocale = {
+  home: "Početna",
+  cars: "Vozila",
+  rentalConditions: "Opšti uslovi najma",
+  faq: "Često postavljena pitanja",
+  blog: "Blog",
+  contact: "Kontakt",
   title: "Vaše putovanje počinje ovde",
+  selectLanguage: "Izaberite jezik",
+  contactUs: "Kontaktirajte nas",
   subTitle: "Car Rental Beograd",
   createReservation: "Kreirajte rezervaciju",
   continue: "Nastavi",
@@ -27,12 +35,15 @@ export const sr: BaseLocale = {
   whyChoose: "Zašto izabrati Viastro?",
   fullInsurance: "Puno osiguranje uključeno",
   noHiddenCosts: "Nema skrivenih troškova",
+  satisfiedUsersTitle: "zadovoljnih korisnika",
   satisfiedUsers: "99.9%",
+  yearsOfExperienceTitle: "godina iskustva",
   yearsOfExperience: "5+",
   reserve: "Rezervišite",
   ctaTitle: "Putujte bezbrižno!",
   ctaSubTitle:
     "Iznajmite pouzdan automobil brzo i jednostavno – rezervišite vozilo još danas i uživajte u vožnji bez stresa.",
+  ctaAction: "Kreirajte rezervaciju još danas",
   gitTitle: "Kontaktirajte nas",
   gitSubTitle:
     "Mi smo tu za vas. Budite slobodni da nas pozovete i dobijete neophodne informacije.",

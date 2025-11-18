@@ -49,7 +49,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="gap-4 flex flex-col bg-linear-to-b from-p">
+      <div className="flex flex-col items-center justify-center bg-linear-to-b from-p sm:h-[50vh] h-[70vh]">
         <ReservationTime
           onStart={async (data) => {
             const form = new FormData();

@@ -16,7 +16,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export default function ContactPage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="w-full">
+    <div className="w-full pt-16">
       <GetInTouch lang={loaderData.lang} />
 
       <Cta lang={loaderData.lang} />

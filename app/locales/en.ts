@@ -1,7 +1,15 @@
 import type { BaseLocale } from "./base-locale";
 
 export const en: BaseLocale = {
+  home: "Home",
+  cars: "Cars",
+  rentalConditions: "Rental Conditions",
+  faq: "FAQ",
+  blog: "Blog",
+  contact: "Contact",
   title: "Your Journey Starts Here",
+  selectLanguage: "Select language",
+  contactUs: "Contact us",
   subTitle: "Car Rental Belgrade",
   createReservation: "Create a reservation",
   pickUpLoacation: "Pick up location",
@@ -27,12 +35,15 @@ export const en: BaseLocale = {
   whyChoose: "Why choose Viastro?",
   fullInsurance: "Full insurance include",
   noHiddenCosts: "No hidden costs",
+  satisfiedUsersTitle: "satisfied users",
   satisfiedUsers: "99.9%",
+  yearsOfExperienceTitle: "years of experience",
   yearsOfExperience: "5+",
   reserve: "Book now",
   ctaTitle: "Hit the Road Without Worries!",
   ctaSubTitle:
     "Rent a reliable car quickly and easily – book your vehicle today and enjoy a stress-free drive.",
+  ctaAction: "Create a reservation today",
   gitTitle: "Get in touch",
   gitSubTitle:
     "We are here for you. Feel free to call us and get the necessary information.",

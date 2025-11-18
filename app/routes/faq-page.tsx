@@ -15,9 +15,8 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export default function FandQPage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="w-full">
+    <div className="w-full pt-20">
       <FandQ langCode={loaderData.langCode} />
-
       <Cta lang={loaderData.lang} />
     </div>
   );

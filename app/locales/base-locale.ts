@@ -1,4 +1,12 @@
 export interface BaseLocale {
+  home: string;
+  cars: string;
+  rentalConditions: string;
+  faq: string;
+  blog: string;
+  contact: string;
+  selectLanguage: string;
+  contactUs: string;
   from: string;
   day: string;
   title: string;
@@ -27,12 +35,15 @@ export interface BaseLocale {
   whyChoose: string;
   fullInsurance: string;
   noHiddenCosts: string;
+  satisfiedUsersTitle: string;
   satisfiedUsers: string;
+  yearsOfExperienceTitle: string;
   yearsOfExperience: string;
   reserve: string;
   // Cta
   ctaTitle: string;
   ctaSubTitle: string;
+  ctaAction: string;
   // Get In Touch
   gitTitle: string;
   gitSubTitle: string;

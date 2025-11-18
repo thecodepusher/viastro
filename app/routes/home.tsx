@@ -65,12 +65,12 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <div className="flex flex-col w-full mt-18">
-        <div className="gap-4 flex flex-col bg-linear-to-b from-p">
+        <div className="flex flex-col items-center justify-center bg-linear-to-b from-p sm:h-[50vh] h-[70vh]">
           <div className="mx-4 mt-8">
-            <h1 className="text-center text-white font-black uppercase text-xl">
+            <h1 className="text-center text-white font-black uppercase text-2xl">
               {loaderData.lang.title}
             </h1>
-            <h2 className="text-center text-[#614B80] font-black uppercase text-2xl">
+            <h2 className="text-center text-[#614B80] font-black uppercase text-4xl mt-4">
               {loaderData.lang.subTitle}
             </h2>
           </div>
@@ -98,7 +98,6 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
       </div>
 
       <Logos lang={loaderData.lang} />
-
       <Cars
         availableCars={null}
         onSelect={() => {
@@ -107,15 +106,10 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
         lang={loaderData.lang}
         langCode={loaderData.langCode}
       />
-
-      <FandQ langCode={loaderData.langCode} />
-
-      <BlogSection langCode={loaderData.langCode} />
-
       <TrustedBy lang={loaderData.lang} />
-
+      <BlogSection langCode={loaderData.langCode} />
+      <FandQ langCode={loaderData.langCode} />
       <GetInTouch lang={loaderData.lang} />
-
       <Cta lang={loaderData.lang} />
     </div>
   );

@@ -1,11 +1,11 @@
 import Cta from "@/components/Cta";
 import type { Route } from "./+types/blog-details";
 import { postsEn, postsRu, postsSr } from "@/lib/data";
-import { redirect } from "react-router";
+import { redirect, Link } from "react-router";
 import { getLocale } from "@/lib/utils";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  let posts = postsEn;
+  let posts = postsSr;
 
   let lang = await getLocale(params.lang, request);
 
@@ -13,8 +13,16 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     switch (params.lang) {
       case "sr":
         posts = postsSr;
+        break;
       case "ru":
         posts = postsRu;
+        break;
+      case "en":
+        posts = postsEn;
+        break;
+      default:
+        posts = postsSr;
+        break;
     }
   }
 
@@ -32,21 +40,35 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   };
 }
 
-export default function BlogDetailsPage({
-  actionData,
-  loaderData,
-}: Route.ComponentProps) {
+export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="w-full">
-      <img className="mx-auto" src={loaderData.post.imageUrl} />
+    <>
+      <div className="w-full flex flex-col items-center justify-center pt-30">
+        <img className="max-w-[675px]" src={loaderData.post.imageUrl} />
 
-      <div className="prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
-        <div
-          dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
-        />
+        <div className="max-w-4xl mx-auto px-4 w-full">
+          <nav
+            className="flex items-center justify-center gap-2 text-md text-gray-600 py-4 flex-nowrap w-full min-w-0"
+            aria-label="Breadcrumb">
+            <Link
+              to={`/${loaderData.langCode}/blog`}
+              className="hover:text-[#FF9B17] transition-colors shrink-0">
+              Blog
+            </Link>
+            <span className="text-gray-400 shrink-0">{">"}</span>
+            <span className="text-gray-800 font-medium truncate min-w-0">
+              {loaderData.post.title}
+            </span>
+          </nav>
+        </div>
+
+        <div className="prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
+          <div
+            dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
+          />
+        </div>
       </div>
-
       <Cta lang={loaderData.lang} />
-    </div>
+    </>
   );
 }

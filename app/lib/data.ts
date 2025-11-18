@@ -305,9 +305,9 @@ export const cars = [
 export const postsSr = [
   {
     id: 1,
-    slug: "kopaonik",
+    slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Vikend na Kopaoniku – Planinska avantura uz Viastro rent a car",
-    href: "/blog/kopaonik",
+    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija – tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa – udobno, sigurno i uz potpunu slobodu kretanja.",
     content: `
@@ -356,8 +356,8 @@ export const postsSr = [
   {
     id: 2,
     title: "Đerdap Nacionalni Park – Gvozdena kapija prirode i istorije",
-    href: "/blog/djerdap",
-    slug: "djerdap",
+    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.",
     content: `
@@ -385,8 +385,8 @@ export const postsSr = [
   {
     id: 3,
     title: "Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu",
-    href: "/blog/mokra_gora",
-    slug: "mokra_gora",
+    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu</h2>
       <p>Mokra Gora je destinacija koja spaja prirodne lepote, kulturnu baštinu i jedinstvene turističke atrakcije. Vožnja Šarganskom osmicom, uskom prugom koja vijuga kroz planinske predele, pruža nezaboravan doživljaj.</p>
@@ -415,9 +415,9 @@ export const postsSr = [
 export const postsEn = [
   {
     id: 1,
-    slug: "kopaonik",
+    slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Weekend on Kopaonik – Mountain Adventure with Viastro Rent a Car",
-    href: "/blog/kopaonik",
+    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination – all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free – comfortably, safely, and with complete freedom of movement.",
     content: `
@@ -466,8 +466,8 @@ export const postsEn = [
   {
     id: 2,
     title: "Đerdap National Park – The Iron Gates of Nature and History",
-    href: "/blog/djerdap",
-    slug: "djerdap",
+    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.",
     content: `
@@ -495,8 +495,8 @@ export const postsEn = [
   {
     id: 3,
     title: "Mokra Gora and Šargan Eight – A Journey Through Time and Nature",
-    href: "/blog/mokra_gora",
-    slug: "mokra_gora",
+    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora and Šargan Eight – A Journey Through Time and Nature</h2>
       <p>Mokra Gora is a destination that combines natural beauty, cultural heritage, and unique tourist attractions. The ride on the Šargan Eight, a narrow-gauge railway that winds through mountainous landscapes, offers an unforgettable experience.</p>
@@ -525,9 +525,9 @@ export const postsEn = [
 export const postsRu = [
   {
     id: 1,
-    slug: "kopaonik",
+    slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Выходные на Копаонике – Горное приключение с Viastro rent a car",
-    href: "/blog/kopaonik",
+    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник – идеальное место для выходных – круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса – комфортно, безопасно и с полной свободой передвижения.",
     content: `
@@ -576,8 +576,8 @@ export const postsRu = [
   {
     id: 2,
     title: "Национальный парк Джердап – Железные ворота природы и истории",
-    href: "/blog/djerdap",
-    slug: "djerdap",
+    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап – это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
     content: `
@@ -606,8 +606,8 @@ export const postsRu = [
     id: 3,
     title:
       "Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу",
-    href: "/blog/mokra_gora",
-    slug: "mokra_gora",
+    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу</h2>
       <p>Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.</p>
