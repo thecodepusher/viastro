@@ -44,10 +44,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 export function meta({}: Route.MetaArgs) {}
 
-export default function Reservation({
-  actionData,
-  loaderData,
-}: Route.ComponentProps) {
+export default function Reservation({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
 
   return (

@@ -1,7 +1,8 @@
+import { Link, Outlet, useMatches } from "react-router";
 import Header from "@/components/Header";
+import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
 import Footer from "@/components/Footer";
-import { Link, Outlet, useMatches } from "react-router";
 import { CheckIcon } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
 
@@ -14,58 +15,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export async function action({ request }: Route.ActionArgs) {}
+export async function action() {}
 export function meta({}: Route.MetaArgs) {}
 
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();
-
-  const currentRoute = matches[2];
-
-  const steps = [
-    {
-      id: "01",
-      name: loaderData.lang.reservation,
-      routeId: "routes/reservation",
-      href: "./",
-      status: currentRoute.id == "routes/reservation" ? "current" : "",
-    },
-    {
-      id: "02",
-      name: loaderData.lang.vehicles,
-      routeId: "routes/vehicle",
-      href: "./vehicle",
-      status: currentRoute.id == "routes/vehicle" ? "current" : "",
-    },
-    {
-      id: "03",
-      name: loaderData.lang.accessories,
-      routeId: "routes/extras",
-      href: "./extras",
-      status: currentRoute.id == "routes/extras" ? "current" : "",
-    },
-    {
-      id: "04",
-      name: loaderData.lang.review,
-      routeId: "routes/review",
-      href: "./review",
-      status: currentRoute.id == "routes/review" ? "current" : "",
-    },
-  ];
-
-  const currentStep = steps.find((x) => x.routeId == currentRoute.id);
-
-  steps.forEach((step, index) => {
-    const currentStepIndex = steps.indexOf(currentStep!);
-
-    if (index > currentStepIndex) {
-      step.status = "upcoming";
-    } else if (index < steps.indexOf(currentStep!)) {
-      step.status = "complete";
-    } else {
-      step.status = "current";
-    }
-  });
+  const steps = reservationSteps(loaderData, matches[2]);
 
   return (
     <div className="w-full">

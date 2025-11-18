@@ -10,7 +10,8 @@ A modern, production-ready template for building full-stack React applications u
 - 🔄 Data loading and mutations
 - 🔒 TypeScript by default
 - 🎉 TailwindCSS for styling
-- 💾 PostgreSQL + DrizzleORM
+- 🔗 External API integration for car data
+- ✉️ Email-based reservation requests
 - 📖 [React Router docs](https://reactrouter.com/)
 
 ## Getting Started
@@ -25,13 +26,7 @@ npm install
 
 ### Development
 
-Copy `.env.example` to `.env` and provide a `DATABASE_URL` with your connection string.
-
-Run an initial database migration:
-
-```bash
-npm run db:migrate
-```
+Copy `.env.example` to `.env` and provide the API endpoint and email credentials used for reservation notifications.
 
 Start the development server with HMR:
 
@@ -39,7 +34,7 @@ Start the development server with HMR:
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Your application will be available at `http://localhost:3000`.
 
 ## Building for Production
 
@@ -50,29 +45,6 @@ npm run build
 ```
 
 ## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-# For npm
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
 
 If you're familiar with deploying Node applications, the built-in app server is production-ready.
 
