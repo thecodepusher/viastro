@@ -1,6 +1,4 @@
 import Cta from "@/components/Cta";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import type { Route } from "./+types/blog-details";
 import { postsEn, postsRu, postsSr } from "@/lib/data";
 import { redirect } from "react-router";
@@ -27,7 +25,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   }
 
   return {
-    langCode: params.lang ?? "en",
+    langCode: params.lang ?? "sr",
     post,
     lang,
     message: context.VALUE_FROM_EXPRESS,
@@ -40,8 +38,6 @@ export default function BlogDetailsPage({
 }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
-
       <img className="mx-auto" src={loaderData.post.imageUrl} />
 
       <div className="prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
@@ -51,8 +47,6 @@ export default function BlogDetailsPage({
       </div>
 
       <Cta lang={loaderData.lang} />
-
-      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

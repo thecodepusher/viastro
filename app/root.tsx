@@ -5,12 +5,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useMatches,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import { Toaster } from "./components/ui/sonner";
 import CookieConsent from "./components/CookieConsent";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -51,8 +54,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             src="https://www.googletagmanager.com/ns.html?id=GTM-5FXCXRX2"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
+            style={{ display: "none", visibility: "hidden" }}></iframe>
         </noscript>
         {children}
         <CookieConsent />
@@ -65,7 +67,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const matches = useMatches();
+
+  const matchWithData = matches
+    .slice()
+    .reverse()
+    .find((match) => {
+      const data = match.data;
+      return (
+        data && typeof data === "object" && "lang" in data && "langCode" in data
+      );
+    });
+
+  const langData = matchWithData?.data as
+    | { lang: any; langCode: string }
+    | undefined;
+
+  return (
+    <>
+      {langData && <Header lang={langData.lang} langCode={langData.langCode} />}
+      <Outlet />
+      {langData && <Footer lang={langData.lang} langCode={langData.langCode} />}
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

@@ -10,6 +10,15 @@ declare module "react-router" {
 
 export const app = express();
 
+// Handle .well-known paths (used by Chrome DevTools and other tools)
+// Return 404 without triggering React Router
+app.use((req, res, next) => {
+  if (req.path.startsWith("/.well-known/")) {
+    return res.status(404).end();
+  }
+  next();
+});
+
 app.use(
   createRequestHandler({
     build: () => import("virtual:react-router/server-build"),

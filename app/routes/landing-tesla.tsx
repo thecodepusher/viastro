@@ -4,7 +4,6 @@ import BlogSection from "@/components/BlogSection";
 import Logos from "@/components/Logos";
 import Cars from "@/components/Cars";
 import ReservationTime from "@/components/ReservationTime";
-import Footer from "@/components/Footer";
 import { redirect, useFetcher, useNavigate } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { setHours } from "date-fns";
@@ -54,7 +53,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
 
   return {
-    langCode: params.lang ?? "en",
+    langCode: params.lang ?? "sr",
     lang,
     locations,
     message: context.VALUE_FROM_EXPRESS,
@@ -115,8 +114,6 @@ export default function LandingTeslaPage({ loaderData }: Route.ComponentProps) {
       <BlogSection langCode={loaderData.langCode} />
 
       <Cta lang={loaderData.lang} />
-
-      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

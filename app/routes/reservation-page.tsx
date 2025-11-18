@@ -1,8 +1,6 @@
 import { Link, Outlet, useMatches } from "react-router";
-import Header from "@/components/Header";
 import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
-import Footer from "@/components/Footer";
 import { CheckIcon } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
 
@@ -11,7 +9,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   return {
     lang,
-    langCode: params.lang ?? "en",
+    langCode: params.lang ?? "sr",
   };
 }
 
@@ -24,8 +22,6 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full">
-      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
-
       <div className="py-4 bg-p mt-18 lg:border-t lg:border-b lg:border-gray-200">
         <nav
           aria-label="Progress"
@@ -147,7 +143,6 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
       <div className="min-h-[400px]">
         <Outlet />
       </div>
-      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

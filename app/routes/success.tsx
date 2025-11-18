@@ -1,5 +1,3 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
 import { Link } from "react-router";
@@ -11,14 +9,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   return {
     lang,
-    langCode: params.lang ?? "en",
+    langCode: params.lang ?? "sr",
   };
 }
 
 export default function SuccessPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <Header lang={loaderData.lang} langCode={loaderData.langCode} />
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
         <CircleCheck size={60} className="text-p" />
         <p className="font-medium text-lg text-pd mx-8">
@@ -29,7 +26,6 @@ export default function SuccessPage({ loaderData }: Route.ComponentProps) {
           <Button className="bg-s">Vratite se na početnu</Button>
         </Link>
       </div>
-      <Footer lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

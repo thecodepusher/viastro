@@ -38,7 +38,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return {
     cars,
     lang,
-    langCode: params.lang ?? "en",
+    langCode: params.lang ?? "sr",
   };
 }
 
