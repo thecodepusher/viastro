@@ -143,6 +143,16 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
           <p className="mt-1.5 text-xs text-gray-500 sm:mt-2 sm:text-sm lg:text-base">
             PIB: 114961759 MB: 22096737 Delatnost: 7711
           </p>
+          <p className="mt-1.5 text-xs text-gray-500 sm:mt-2 sm:text-sm lg:text-base">
+            Web by{" "}
+            <a
+              href="https://krivokucadragan.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-white">
+              CodePusher
+            </a>
+          </p>
         </div>
       </div>
     </footer>
