@@ -78,6 +78,7 @@ export const en: BaseLocale = {
     "We need your agreement so we can contact you regarding your reservation. Find out more about our privacy policy, Conversion Statement, User Privacy Protection, Confidential Transaction Data Protection, and Refunds here.",
   finish: "Finish",
   reservation: "Reservation",
+  step: "Step",
   vehicles: "Vehicles",
   accessories: "Accessories",
   review: "Review",

@@ -77,6 +77,7 @@ export interface BaseLocale {
   privacyAgreement: string;
   finish: string;
   reservation: string;
+  step: string;
   vehicles: string;
   accessories: string;
   review: string;

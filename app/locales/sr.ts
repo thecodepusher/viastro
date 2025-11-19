@@ -79,6 +79,7 @@ export const sr: BaseLocale = {
     "Potreban nam je Vaš pristanak kako bismo Vas mogli kontaktirati u vezi sa Vašom rezervacijom. Više o našoj politici privatnosti, Izjavi o konverziji, Zaštiti privatnosti korisnika, Zaštiti poverljivih podataka o transakcijama i Povraćaju novca možete saznati ovde.",
   finish: "Završi",
   reservation: "Rezervacija",
+  step: "Korak",
   vehicles: "Vozila",
   accessories: "Dodaci",
   review: "Pregled",
