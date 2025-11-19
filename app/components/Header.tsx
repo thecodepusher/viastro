@@ -5,7 +5,6 @@ import {
   SheetTitle,
   SheetTrigger,
   SheetFooter,
-  SheetClose,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 
@@ -15,6 +14,7 @@ import { Button } from "./ui/button";
 import type { BaseLocale } from "@/locales/base-locale";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
@@ -26,6 +26,11 @@ import logo from "viastro_logo.png";
 export default function Header(props: { lang: BaseLocale; langCode: string }) {
   const location = useLocation();
   const isMobile = useIsMobile();
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  useEffect(() => {
+    setSheetOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { to: `/${props.langCode}`, label: props.lang.home },
@@ -121,7 +126,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
         )}
 
         {isMobile && (
-          <Sheet>
+          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
