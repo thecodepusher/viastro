@@ -41,7 +41,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     lang,
     notInWorkingHours,
     aditionalEquipment: ad,
-    langCode: params.lang,
+    langCode: params.lang ?? "sr",
   };
 }
 

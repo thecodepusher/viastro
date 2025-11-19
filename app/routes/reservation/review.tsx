@@ -139,7 +139,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     pickupTime,
     dropoffDate,
     dropoffTime,
-    langCode: params.lang,
+    langCode: params.lang ?? "sr",
   };
 }
 

@@ -12,7 +12,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return {
     lang,
     locations,
-    langCode: params.lang,
+    langCode: params.lang ?? "sr",
   };
 }
 

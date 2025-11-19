@@ -53,11 +53,11 @@ export default function ReservationTime(props: {
   const [dropDatePopoverOpen, setDropDatePopoverOpen] = useState(false);
 
   return (
-    <div className="mx-auto mt-8">
-      <h3 className="pb-1 font-black text-2xl text-white sm:text-left text-center">
+    <div className="mx-auto">
+      <h3 className="pb-4 font-black text-2xl sm:text-3xl text-white sm:text-left text-center drop-shadow-lg">
         {lang.createReservation}
       </h3>
-      <div className="bg-white shadow rounded-lg p-4 mb-8 flex flex-col lg:items-end lg:flex-row gap-4">
+      <div className="bg-white shadow-xl rounded-lg p-4 sm:p-6 mb-8 flex flex-col lg:items-end lg:flex-row gap-4 border border-white/20">
         <div className="flex flex-col gap-1">
           <Label>{lang.pickUpLoacation}</Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>

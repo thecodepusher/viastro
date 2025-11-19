@@ -82,15 +82,21 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
         )}
 
         {!isMobile && (
-          <div className="hidden md:flex items-center gap-2">
-            <Form method="POST" action="/select-lang">
+          <div className="hidden md:flex">
+            <Form
+              method="POST"
+              action="/select-lang"
+              className="flex flex-row items-center gap-1">
               <input readOnly hidden name="loc" value={location.pathname} />
               <Button
                 variant="ghost"
                 name="lang"
                 type="submit"
                 value="sr"
-                className="h-9 w-9 p-0 hover:bg-white/20 cursor-pointer">
+                className={cn(
+                  "h-10 w-10 p-1 hover:bg-white/20 cursor-pointer",
+                  props.langCode === "sr" && "bg-white/20"
+                )}>
                 <img
                   className="w-7 h-7 rounded shadow-sm border border-white/30"
                   src="/rs.svg"
@@ -102,7 +108,10 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 name="lang"
                 type="submit"
                 value="en"
-                className="h-9 w-9 p-0 hover:bg-white/20 cursor-pointer">
+                className={cn(
+                  "h-10 w-10 p-1 hover:bg-white/20 cursor-pointer",
+                  props.langCode === "en" && "bg-white/20"
+                )}>
                 <img
                   className="w-7 h-7 rounded shadow-sm border border-white/30"
                   src="/gb.svg"
@@ -114,7 +123,10 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 name="lang"
                 type="submit"
                 value="ru"
-                className="h-9 w-9 p-0 hover:bg-white/20 cursor-pointer">
+                className={cn(
+                  "h-10 w-10 p-1 hover:bg-white/20 cursor-pointer",
+                  props.langCode === "ru" && "bg-white/20"
+                )}>
                 <img
                   className="w-7 h-7 rounded shadow-sm border border-white/30"
                   src="/ru.svg"
@@ -189,7 +201,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                         name="lang"
                         type="submit"
                         value="sr"
-                        className="h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all">
+                        className={cn(
+                          "h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all",
+                          props.langCode === "sr" &&
+                            "bg-gray-100 border-[#FF9B17]"
+                        )}>
                         <img
                           className="w-10 h-10 rounded shadow-sm"
                           src="/rs.svg"
@@ -201,7 +217,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                         name="lang"
                         type="submit"
                         value="en"
-                        className="h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all">
+                        className={cn(
+                          "h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all",
+                          props.langCode === "en" &&
+                            "bg-gray-100 border-[#FF9B17]"
+                        )}>
                         <img
                           className="w-10 h-10 rounded shadow-sm"
                           src="/gb.svg"
@@ -213,7 +233,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                         name="lang"
                         type="submit"
                         value="ru"
-                        className="h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all">
+                        className={cn(
+                          "h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all",
+                          props.langCode === "ru" &&
+                            "bg-gray-100 border-[#FF9B17]"
+                        )}>
                         <img
                           className="w-10 h-10 rounded shadow-sm"
                           src="/ru.svg"

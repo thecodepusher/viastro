@@ -1,3 +1,10 @@
+import { redirect, useFetcher, useNavigate } from "react-router";
+import { prefs } from "@/lib/prefs-cookie";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { setHours } from "date-fns";
+import { locations } from "@/lib/data";
+import { getLocale } from "@/lib/utils";
+import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
 import BlogSection from "@/components/BlogSection";
@@ -5,12 +12,6 @@ import Logos from "@/components/Logos";
 import GetInTouch from "@/components/GetInTouch";
 import Cars from "@/components/Cars";
 import ReservationTime from "@/components/ReservationTime";
-import { redirect, useFetcher, useNavigate } from "react-router";
-import { prefs } from "@/lib/prefs-cookie";
-import { setHours } from "date-fns";
-import { locations } from "@/lib/data";
-import Cta from "@/components/Cta";
-import { getLocale } from "@/lib/utils";
 import type { Route } from "./+types/home";
 
 export function meta({ data }: Route.MetaArgs) {
@@ -61,39 +62,62 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const heroVideoUrl = isMobile ? "/hero-video.mp4" : "/hero-video-desktop.mp4";
 
   return (
     <div className="w-full">
       <div className="flex flex-col w-full mt-18">
-        <div className="flex flex-col items-center justify-center bg-linear-to-b from-p sm:h-[50vh] h-[70vh]">
-          <div className="mx-4 mt-8">
-            <h1 className="text-center text-white font-black uppercase text-2xl">
-              {loaderData.lang.title}
-            </h1>
-            <h2 className="text-center text-[#614B80] font-black uppercase text-4xl mt-4">
-              {loaderData.lang.subTitle}
-            </h2>
+        <div className="relative flex flex-col items-center justify-center h-[calc(100vh-8.45rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
+          <video
+            className="absolute inset-0 w-full h-full sm:object-cover object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-label="Hero video background">
+            <source src={heroVideoUrl} type="video/mp4" />
+          </video>
+
+          <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/40 via-black/50 to-black/70" />
+
+          <div className="absolute inset-0 w-full h-full bg-linear-to-b from-[#FF9B17]/20 via-[#FF9B17]/5 to-transparent" />
+
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+            <div className="text-center mb-8 sm:mb-12">
+              <h1 className="text-white font-black uppercase text-3xl sm:text-4xl lg:text-5xl mb-4 drop-shadow-lg">
+                {loaderData.lang.title}
+              </h1>
+              <h2 className="text-white font-black uppercase text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
+                <span className="text-[#FF9B17]">
+                  {loaderData.lang.subTitle}
+                </span>
+              </h2>
+            </div>
+
+            <div className="w-full">
+              <ReservationTime
+                onStart={async (data) => {
+                  const form = new FormData();
+                  form.append("pickUpLocation", data.pickUpLocation);
+                  form.append("dropOffLocation", data.dropOffLocation);
+                  form.append(
+                    "pickUpDate",
+                    setHours(data.pickDate, 12).toISOString()
+                  );
+                  form.append("pickUpTime", data.pickUpTime);
+                  form.append(
+                    "dropOffDate",
+                    setHours(data.dropDate, 12).toISOString()
+                  );
+                  form.append("dropOffTime", data.dropOfTime);
+                  fetcher.submit(form, { method: "post" });
+                }}
+                lang={loaderData.lang}
+                locations={loaderData.locations}
+              />
+            </div>
           </div>
-          <ReservationTime
-            onStart={async (data) => {
-              const form = new FormData();
-              form.append("pickUpLocation", data.pickUpLocation);
-              form.append("dropOffLocation", data.dropOffLocation);
-              form.append(
-                "pickUpDate",
-                setHours(data.pickDate, 12).toISOString()
-              );
-              form.append("pickUpTime", data.pickUpTime);
-              form.append(
-                "dropOffDate",
-                setHours(data.dropDate, 12).toISOString()
-              );
-              form.append("dropOffTime", data.dropOfTime);
-              fetcher.submit(form, { method: "post" });
-            }}
-            lang={loaderData.lang}
-            locations={loaderData.locations}
-          />
         </div>
       </div>
 

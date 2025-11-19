@@ -1,7 +1,4 @@
-import { Link } from "react-router";
 import { Button } from "./ui/button";
-import { en } from "@/locales/en";
-import type { Route } from "../routes/+types/cars-page";
 import type { BaseLocale } from "@/locales/base-locale";
 import { Info } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -68,8 +65,7 @@ export default function Cars(props: {
           return (
             <div
               key={car.id}
-              className="flex flex-col border rounded p-4 shadow hover:shadow-lg"
-            >
+              className="flex flex-col border rounded p-4 shadow hover:shadow-lg">
               <h4 className="font-black text-pd text-xl text-center">
                 {car.name}
               </h4>
@@ -143,8 +139,7 @@ export default function Cars(props: {
                 }}
                 className={`w-full mt-8 bg-s ${
                   available ? "bg-s" : "bg-gray-300"
-                }`}
-              >
+                }`}>
                 {props.lang.reserve}
               </Button>
             </div>

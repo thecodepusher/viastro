@@ -71,7 +71,7 @@ export default function LandingAirportPage({
   const navigate = useNavigate();
 
   return (
-    <div className="w-full">
+    <div className="w-full pt-20">
       <FloatingButtons />
 
       <LandingHero lang={loaderData.lang} />
