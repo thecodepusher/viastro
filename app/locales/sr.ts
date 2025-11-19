@@ -25,7 +25,7 @@ export const sr: BaseLocale = {
   electric: "Električni",
   manual: "Manuelni",
   automatic: "Automatik",
-  seats: "sedista",
+  seats: "sedišta",
   description:
     "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na aerodromu i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
   deployFaster: "Brža isporuka",
@@ -40,6 +40,12 @@ export const sr: BaseLocale = {
   yearsOfExperienceTitle: "godina iskustva",
   yearsOfExperience: "5+",
   reserve: "Rezervišite",
+  available: "Dostupno",
+  reserved: "Rezervisano",
+  seat: "Sedišta",
+  fuel: "Gorivo",
+  type: "Tip",
+  gear: "Menjač",
   ctaTitle: "Putujte bezbrižno!",
   ctaSubTitle:
     "Iznajmite pouzdan automobil brzo i jednostavno – rezervišite vozilo još danas i uživajte u vožnji bez stresa.",

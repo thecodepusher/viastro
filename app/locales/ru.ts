@@ -42,6 +42,12 @@ export const ru: BaseLocale = {
   yearsOfExperienceTitle: "лет опыта",
   yearsOfExperience: "5+",
   reserve: "Забронируйте",
+  available: "Доступно",
+  reserved: "Забронировано",
+  seat: "Сиденье",
+  fuel: "Топливо",
+  type: "Тип",
+  gear: "Коробка передач",
   ctaTitle: "Путешествуйте без забот!",
   ctaSubTitle:
     "Арендуйте надежный автомобиль быстро и легко – забронируйте свой автомобиль сегодня и наслаждайтесь поездкой без стресса.",

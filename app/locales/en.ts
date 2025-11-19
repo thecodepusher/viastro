@@ -40,6 +40,12 @@ export const en: BaseLocale = {
   yearsOfExperienceTitle: "years of experience",
   yearsOfExperience: "5+",
   reserve: "Book now",
+  available: "Available",
+  reserved: "Reserved",
+  seat: "Seat",
+  fuel: "Fuel",
+  type: "Type",
+  gear: "Gear",
   ctaTitle: "Hit the Road Without Worries!",
   ctaSubTitle:
     "Rent a reliable car quickly and easily – book your vehicle today and enjoy a stress-free drive.",

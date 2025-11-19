@@ -27,11 +27,9 @@ export interface BaseLocale {
   automatic: string;
   seats: string;
   description: string;
-  // Added translations for Feature component
   deployFaster: string;
   deployDesc: string;
   featureDesc: string;
-  // Added translations for TrustedBy component
   whyChoose: string;
   fullInsurance: string;
   noHiddenCosts: string;
@@ -40,29 +38,29 @@ export interface BaseLocale {
   yearsOfExperienceTitle: string;
   yearsOfExperience: string;
   reserve: string;
-  // Cta
+  available: string;
+  reserved: string;
+  seat: string;
+  fuel: string;
+  type: string;
+  gear: string;
   ctaTitle: string;
   ctaSubTitle: string;
   ctaAction: string;
-  // Get In Touch
   gitTitle: string;
   gitSubTitle: string;
   gitDays: string;
   gitAwailable: string;
-  // Landing hero
   lhTitle: string;
   lhSubTitle: string;
   lhFor: string;
   lhPrice: string;
-  // Landing promo
   lpTitle: string;
   lpSubTitle: string;
   lpParagraph: string;
   lpAction: string;
-
   allPricesIncludeVAT: string;
   deposit: string;
-
   pricesByDays: string;
   includedInReservation: string;
   additionalEquipment: string;
