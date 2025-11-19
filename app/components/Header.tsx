@@ -126,15 +126,15 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:bg-white/20 h-10 w-10"
+                className="text-white hover:bg-white/20"
                 aria-label="Open menu">
-                <MenuIcon className="h-10 w-10" />
+                <MenuIcon className="size-7" />
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
               className="w-screen sm:w-[400px] flex flex-col">
-              <SheetHeader className="border-b border-gray-200/60 mb-4 h-18 px-3.5 py-1 shadow-sm">
+              <SheetHeader className="border-b border-gray-200/60 mb-2 h-18 px-3 py-1 shadow-sm">
                 <SheetTitle className="text-2xl font-bold text-left">
                   <Link to={`/${props.langCode}`} className="shrink-0">
                     <img className="h-16" src={logo} alt="Viastro Logo" />

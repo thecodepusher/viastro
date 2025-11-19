@@ -54,7 +54,7 @@ export default function ReservationTime(props: {
 
   return (
     <div className="mx-auto mt-8">
-      <h3 className="px-4 pb-1 font-black text-2xl text-white sm:text-left text-center">
+      <h3 className="pb-1 font-black text-2xl text-white sm:text-left text-center">
         {lang.createReservation}
       </h3>
       <div className="bg-white shadow rounded-lg p-4 mb-8 flex flex-col lg:items-end lg:flex-row gap-4">
