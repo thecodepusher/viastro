@@ -1,8 +1,9 @@
 import { Link, Outlet, useMatches } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, ChevronRight } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -19,129 +20,151 @@ export function meta({}: Route.MetaArgs) {}
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const completedSteps = steps.filter((s) => s.status === "complete").length;
+  const currentStepIndex = steps.findIndex((s) => s.status === "current");
+  const progressPercentage =
+    currentStepIndex >= 0
+      ? ((completedSteps + 1) / steps.length) * 100
+      : (completedSteps / steps.length) * 100;
+
+  useEffect(() => {
+    setIsAnimating(true);
+    const timer = setTimeout(() => setIsAnimating(false), 500);
+    return () => clearTimeout(timer);
+  }, [currentStepIndex]);
 
   return (
     <div className="w-full">
-      <div className="py-4 bg-p mt-18 lg:border-t lg:border-b lg:border-gray-200">
-        <nav
-          aria-label="Progress"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ol
-            role="list"
-            className="overflow-hidden rounded-md lg:flex lg:rounded-none lg:border-r lg:border-l lg:border-gray-200">
-            {steps.map((step, stepIdx) => (
-              <li key={step.id} className="relative overflow-hidden lg:flex-1">
-                <div
-                  className={cn(
-                    stepIdx === 0 ? "rounded-t-md border-b-0" : "",
-                    stepIdx === steps.length - 1
-                      ? "rounded-b-md border-t-0"
-                      : "",
-                    "overflow-hidden border border-gray-200 lg:border-0"
-                  )}>
-                  {step.status === "complete" ? (
-                    <Link to={step.href} className="group">
-                      <span
-                        aria-hidden="true"
-                        className="absolute top-0 left-0 h-full w-1 bg-transparent group-hover:bg-gray-200 lg:top-auto lg:bottom-0 lg:h-1 lg:w-full"
-                      />
-                      <span
-                        className={cn(
-                          stepIdx !== 0 ? "lg:pl-9" : "",
-                          "flex items-center px-6 py-5 text-sm font-medium"
-                        )}>
-                        <span className="shrink-0">
-                          <span className="flex size-10 items-center justify-center rounded-full bg-s">
+      <div className="bg-linear-to-r from-p via-p to-p/90 mt-18 shadow-lg">
+        <div className="mx-auto max-w-7xl px-4 py-2">
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-lg font-semibold text-white">
+                {loaderData.lang.reservation || "Rezervacija"}
+              </h2>
+              <span className="text-sm font-medium text-white/90">
+                {completedSteps + (currentStepIndex >= 0 ? 1 : 0)} /{" "}
+                {steps.length}
+              </span>
+            </div>
+            <div className="w-full bg-white/20 rounded-full h-2.5 overflow-hidden">
+              <div
+                className={cn(
+                  "h-full bg-white rounded-full transition-all duration-500 ease-out",
+                  isAnimating && "animate-pulse"
+                )}
+                style={{ width: `${progressPercentage}%` }}
+              />
+            </div>
+          </div>
+
+          <nav aria-label="Progress" className="relative">
+            <ol
+              role="list"
+              className="flex flex-col lg:flex-row gap-2 lg:gap-0">
+              {steps.map((step, stepIdx) => {
+                const isComplete = step.status === "complete";
+                const isCurrent = step.status === "current";
+                const isUpcoming = step.status === "upcoming";
+
+                return (
+                  <li
+                    key={step.id}
+                    className={cn(
+                      "relative flex-1",
+                      stepIdx < steps.length - 1 && "lg:mr-4"
+                    )}>
+                    {isComplete ? (
+                      <Link
+                        to={step.href}
+                        className="group flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/40">
+                        <div className="relative shrink-0">
+                          <div className="flex size-12 items-center justify-center rounded-full bg-s shadow-lg group-hover:scale-110 transition-transform duration-300">
                             <CheckIcon
                               aria-hidden="true"
                               className="size-6 text-white"
                             />
-                          </span>
-                        </span>
-                        <span className="mt-0.5 ml-4 flex min-w-0 flex-col">
-                          <span className="text-sm text-white font-medium">
+                          </div>
+                          {stepIdx < steps.length - 1 && (
+                            <div className="hidden lg:block absolute top-1/2 left-full w-4 h-0.5 bg-white/30 -translate-y-1/2 translate-x-2" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-medium text-white/70 mb-1">
+                            Korak {step.id}
+                          </div>
+                          <div className="text-sm font-semibold text-white">
                             {step.name}
-                          </span>
-                        </span>
-                      </span>
-                    </Link>
-                  ) : step.status === "current" ? (
-                    <Link to={step.href} aria-current="step">
-                      <span
-                        aria-hidden="true"
-                        className="absolute top-0 left-0 h-full w-1 bg-s lg:top-auto lg:bottom-0 lg:h-1 lg:w-full"
-                      />
-                      <span
-                        className={cn(
-                          stepIdx !== 0 ? "lg:pl-9" : "",
-                          "flex items-center px-6 py-5 text-sm font-medium"
-                        )}>
-                        <span className="shrink-0">
-                          <span className="flex size-10 items-center justify-center rounded-full border-2 border-s">
-                            <span className="text-s">{step.id}</span>
-                          </span>
-                        </span>
-                        <span className="mt-0.5 ml-4 flex min-w-0 flex-col">
-                          <span className="text-sm font-medium text-s">
+                          </div>
+                        </div>
+                        <ChevronRight className="size-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 lg:hidden" />
+                      </Link>
+                    ) : isCurrent ? (
+                      <div className="flex items-center gap-3 p-4 rounded-lg bg-white shadow-lg border-2 border-s animate-in fade-in slide-in-from-bottom-2 duration-500">
+                        <div className="relative shrink-0">
+                          <div className="flex size-12 items-center justify-center rounded-full bg-s border-4 border-white shadow-xl ring-4 ring-s/20">
+                            <span className="text-sm font-bold text-white">
+                              {step.id}
+                            </span>
+                          </div>
+                          {stepIdx < steps.length - 1 && (
+                            <div className="hidden lg:block absolute top-1/2 left-full w-4 h-0.5 bg-s/30 -translate-y-1/2 translate-x-2" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-medium text-s/70 mb-1">
+                            Korak {step.id}
+                          </div>
+                          <div className="text-sm font-semibold text-s">
                             {step.name}
-                          </span>
-                        </span>
-                      </span>
-                    </Link>
-                  ) : (
-                    <div className="group">
-                      <span
-                        aria-hidden="true"
-                        className="absolute top-0 left-0 h-full w-1 bg-transparent group-hover:bg-gray-200 lg:top-auto lg:bottom-0 lg:h-1 lg:w-full"
-                      />
-                      <span
-                        className={cn(
-                          stepIdx !== 0 ? "lg:pl-9" : "",
-                          "flex items-center px-6 py-5 text-sm font-medium"
-                        )}>
-                        <span className="shrink-0">
-                          <span className="flex size-10 items-center justify-center rounded-full border-2 border-white/40">
-                            <span className="text-white/70">{step.id}</span>
-                          </span>
-                        </span>
-                        <span className="mt-0.5 ml-4 flex min-w-0 flex-col">
-                          <span className="text-sm font-medium text-white/70">
-                            {step.name}
-                          </span>
-                        </span>
-                      </span>
-                    </div>
-                  )}
-
-                  {stepIdx !== 0 ? (
-                    <>
-                      {/* Separator */}
-                      <div
-                        aria-hidden="true"
-                        className="absolute inset-0 top-0 left-0 hidden w-3 lg:block">
-                        <svg
-                          fill="none"
-                          viewBox="0 0 12 82"
-                          preserveAspectRatio="none"
-                          className="size-full text-gray-300">
-                          <path
-                            d="M0.5 0V31L10.5 41L0.5 51V82"
-                            stroke="currentcolor"
-                            vectorEffect="non-scaling-stroke"
-                          />
-                        </svg>
+                          </div>
+                        </div>
+                        <div className="hidden lg:flex items-center gap-1">
+                          <div className="size-2 rounded-full bg-s animate-pulse" />
+                          <div className="size-2 rounded-full bg-s animate-pulse delay-150" />
+                          <div className="size-2 rounded-full bg-s animate-pulse delay-300" />
+                        </div>
                       </div>
-                    </>
-                  ) : null}
-                </div>
-              </li>
-            ))}
-          </ol>
-        </nav>
+                    ) : (
+                      <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 opacity-60">
+                        <div className="relative shrink-0">
+                          <div className="flex size-12 items-center justify-center rounded-full border-2 border-white/30 bg-white/5">
+                            <span className="text-sm font-medium text-white/50">
+                              {step.id}
+                            </span>
+                          </div>
+                          {stepIdx < steps.length - 1 && (
+                            <div className="hidden lg:block absolute top-1/2 left-full w-4 h-0.5 bg-white/10 -translate-y-1/2 translate-x-2" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-medium text-white/40 mb-1">
+                            Korak {step.id}
+                          </div>
+                          <div className="text-sm font-medium text-white/50">
+                            {step.name}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+        </div>
       </div>
 
-      <div className="min-h-[400px]">
-        <Outlet />
+      <div
+        className={cn(
+          "min-h-[400px] transition-opacity duration-500",
+          isAnimating && "opacity-0"
+        )}>
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
