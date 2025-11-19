@@ -68,7 +68,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <div className="flex flex-col w-full mt-18">
-        <div className="relative flex flex-col items-center justify-center h-[calc(100vh-8.45rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
+        <div className="relative flex flex-col items-center justify-center h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full sm:object-cover object-cover"
             autoPlay
@@ -83,7 +83,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
           <div className="absolute inset-0 w-full h-full bg-linear-to-b from-[#FF9B17]/20 via-[#FF9B17]/5 to-transparent" />
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="absolute sm:relative bottom-0 z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:py-16 lg:py-20">
             <div className="text-center mb-8 sm:mb-12">
               <h1 className="text-white font-black uppercase text-3xl sm:text-4xl lg:text-5xl mb-4 drop-shadow-lg">
                 {loaderData.lang.title}

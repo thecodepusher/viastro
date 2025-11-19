@@ -57,11 +57,11 @@ export default function ReservationTime(props: {
       <h3 className="pb-4 font-black text-2xl sm:text-3xl text-white sm:text-left text-center drop-shadow-lg">
         {lang.createReservation}
       </h3>
-      <div className="bg-white shadow-xl rounded-lg p-4 sm:p-6 mb-8 flex flex-col lg:items-end lg:flex-row gap-4 border border-white/20">
-        <div className="flex flex-col gap-1">
+      <div className="w-full bg-white shadow-xl rounded-lg p-4 sm:p-6 mb-8 flex flex-col items-center sm:items-end lg:flex-row gap-4 border border-white/20">
+        <div className="w-full flex flex-col gap-1">
           <Label>{lang.pickUpLoacation}</Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>
-            <SelectTrigger className="w-[300px] lg:w-[180px]">
+            <SelectTrigger className="w-full">
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
@@ -74,10 +74,10 @@ export default function ReservationTime(props: {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="w-full flex flex-col gap-1">
           <Label>{lang.dropOffLoacation}</Label>
           <Select value={dropOffLocation} onValueChange={setDropOffLocation}>
-            <SelectTrigger className="w-[300px] lg:w-[180px]">
+            <SelectTrigger className="w-full">
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
@@ -91,7 +91,7 @@ export default function ReservationTime(props: {
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="w-full flex flex-col gap-1">
           <Label>{lang.pickUpTime}</Label>
           <div className="flex gap-0.5">
             <Popover
@@ -101,7 +101,7 @@ export default function ReservationTime(props: {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[210px] justify-start text-left font-normal",
+                    "w-[calc(100%-90px)] justify-start text-left font-normal",
                     !pickDate && "text-muted-foreground"
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
@@ -112,7 +112,7 @@ export default function ReservationTime(props: {
                   )}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
+              <PopoverContent className="w-full p-0">
                 <Calendar
                   mode="single"
                   selected={pickDate}
@@ -180,7 +180,7 @@ export default function ReservationTime(props: {
             </Select>
           </div>
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="w-full flex flex-col gap-1">
           <Label>{lang.dropOffTime}</Label>
           <div className="flex gap-0.5">
             <Popover
@@ -190,7 +190,7 @@ export default function ReservationTime(props: {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[210px] justify-start text-left font-normal",
+                    "w-[calc(100%-90px)] justify-start text-left font-normal",
                     !dropDate && "text-muted-foreground"
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
@@ -271,7 +271,7 @@ export default function ReservationTime(props: {
               dropOfTime,
             });
           }}
-          className="bg-s">
+          className="sm:w-34 w-full bg-s">
           {lang.continue}
         </Button>
       </div>
