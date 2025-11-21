@@ -98,4 +98,7 @@ export const en: BaseLocale = {
   afterHoursReservationFee: "After-Hours Reservation Fee",
   afterHoursFeeDetails:
     "An additional charge applies for vehicle pick-up or return outside of regular working hours",
+  successTitle:
+    "Your reservation has been successfully sent. You will be contacted to confirm your reservation.",
+  successAction: "Return to the home page",
 };

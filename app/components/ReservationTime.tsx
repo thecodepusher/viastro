@@ -27,6 +27,14 @@ export default function ReservationTime(props: {
     name: string;
   }[];
   lang: BaseLocale;
+  initialValues?: {
+    pickUpDate?: string;
+    pickUpTime?: string;
+    dropOffDate?: string;
+    dropOffTime?: string;
+    pickUpLocation?: string;
+    dropOffLocation?: string;
+  };
   onStart: (data: {
     pickDate: Date;
     dropDate: Date;
@@ -36,19 +44,77 @@ export default function ReservationTime(props: {
     dropOffLocation: string;
   }) => Promise<void>;
 }) {
-  const [pickDate, setPickDate] = useState<Date | undefined>(new Date());
-  const [dropDate, setDropDate] = useState<Date | undefined>(
-    addDays(new Date(), 7)
-  );
+  const { initialValues } = props;
 
-  const [pickUpTime, setPickUpTime] = useState("15:00");
-  const [dropOfTime, setDropOfTime] = useState<string | null>("15:00");
+  const getInitialPickDate = (): Date | undefined => {
+    if (initialValues?.pickUpDate) {
+      const date = new Date(initialValues.pickUpDate);
+      return isNaN(date.getTime()) ? new Date() : date;
+    }
+    return new Date();
+  };
 
-  const [pickUpLocation, setPickUpLocation] = useState<string | undefined>();
-  const [dropOffLocation, setDropOffLocation] = useState<string | undefined>();
+  const getInitialDropDate = (): Date | undefined => {
+    if (initialValues?.dropOffDate) {
+      const date = new Date(initialValues.dropOffDate);
+      return isNaN(date.getTime()) ? addDays(new Date(), 7) : date;
+    }
+    return addDays(new Date(), 7);
+  };
 
   const { locations, lang, onStart } = props;
-  const [dropOffTimes, setDropOffTimes] = useState<string[]>([...times]);
+
+  const getInitialDropOffTimes = (): {
+    times: string[];
+    validDropOffTime: string | null;
+  } => {
+    const initialPickDate = getInitialPickDate();
+    const initialDropDate = getInitialDropDate();
+    const initialPickUpTime = initialValues?.pickUpTime || "15:00";
+    const initialDropOffTime = initialValues?.dropOffTime || "15:00";
+
+    if (initialPickDate && initialDropDate) {
+      const daysDiff = differenceInDays(initialDropDate, initialPickDate);
+      const t = [...times];
+
+      if (daysDiff == 2) {
+        t.splice(0, times.indexOf(initialPickUpTime) + 1);
+
+        if (t.indexOf(initialDropOffTime) == -1) {
+          return { times: t, validDropOffTime: t.length > 0 ? t[0] : null };
+        }
+      }
+
+      return { times: t, validDropOffTime: initialDropOffTime };
+    }
+    return { times: [...times], validDropOffTime: initialDropOffTime };
+  };
+
+  const initialDropOffData = getInitialDropOffTimes();
+  const [pickDate, setPickDate] = useState<Date | undefined>(
+    getInitialPickDate()
+  );
+  const [dropDate, setDropDate] = useState<Date | undefined>(
+    getInitialDropDate()
+  );
+
+  const [pickUpTime, setPickUpTime] = useState(
+    initialValues?.pickUpTime || "15:00"
+  );
+  const [dropOfTime, setDropOfTime] = useState<string | null>(
+    initialDropOffData.validDropOffTime
+  );
+
+  const [pickUpLocation, setPickUpLocation] = useState<string | undefined>(
+    initialValues?.pickUpLocation
+  );
+  const [dropOffLocation, setDropOffLocation] = useState<string | undefined>(
+    initialValues?.dropOffLocation
+  );
+
+  const [dropOffTimes, setDropOffTimes] = useState<string[]>(
+    initialDropOffData.times
+  );
   const [pickDatePopoverOpen, setPickDatePopoverOpen] = useState(false);
   const [dropDatePopoverOpen, setDropDatePopoverOpen] = useState(false);
 

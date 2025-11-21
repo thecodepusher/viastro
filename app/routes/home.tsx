@@ -51,6 +51,14 @@ export async function action({ request }: Route.ActionArgs) {
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   let lang = await getLocale(params.lang, request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  delete cookie.pickUpDate;
+  delete cookie.pickUpTime;
+  delete cookie.dropOffDate;
+  delete cookie.dropOffTime;
+
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
     body: JSON.stringify({
@@ -61,13 +69,29 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   const apiResponse: ApiAllModelsResponse = await res.json();
 
-  return {
+  const data = {
     langCode: params.lang ?? "sr",
     lang,
     locations,
     message: context.VALUE_FROM_EXPRESS,
     cars: apiResponse,
+    initialValues: {
+      pickUpDate: undefined,
+      pickUpTime: undefined,
+      dropOffDate: undefined,
+      dropOffTime: undefined,
+      pickUpLocation: cookie.pickUpLocation,
+      dropOffLocation: cookie.dropOffLocation,
+    },
   };
+
+  const response = Response.json(data, {
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+
+  return response as unknown as typeof data;
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
@@ -126,6 +150,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                 }}
                 lang={loaderData.lang}
                 locations={loaderData.locations}
+                initialValues={loaderData.initialValues}
               />
             </div>
           </div>

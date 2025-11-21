@@ -55,13 +55,36 @@ export async function action({ request, params }: Route.ActionArgs) {
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  return {
+  delete cookie.pickUpDate;
+  delete cookie.pickUpTime;
+  delete cookie.dropOffDate;
+  delete cookie.dropOffTime;
+
+  const data = {
     langCode: params.lang ?? "sr",
     lang,
     locations,
     message: context.VALUE_FROM_EXPRESS,
+    initialValues: {
+      pickUpDate: undefined,
+      pickUpTime: undefined,
+      dropOffDate: undefined,
+      dropOffTime: undefined,
+      pickUpLocation: cookie.pickUpLocation,
+      dropOffLocation: cookie.dropOffLocation,
+    },
   };
+
+  const response = Response.json(data, {
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+
+  return response as unknown as typeof data;
 }
 
 export default function LandingAirportPage({
@@ -96,6 +119,7 @@ export default function LandingAirportPage({
             }}
             lang={loaderData.lang}
             locations={loaderData.locations}
+            initialValues={loaderData.initialValues}
           />
         </div>
       </div>
@@ -107,7 +131,7 @@ export default function LandingAirportPage({
       <Logos lang={loaderData.lang} />
 
       <Cars
-        availableCars={null}
+        cars={[]}
         onSelect={() => {
           navigate(`/${loaderData.langCode}/reservation`);
         }}

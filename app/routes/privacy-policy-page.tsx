@@ -1,16 +1,32 @@
 import { privacyPolicy } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
 import type { Route } from "./+types/privacy-policy-page";
+import { prefs } from "@/lib/prefs-cookie";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  return {
+  delete cookie.pickUpDate;
+  delete cookie.pickUpTime;
+  delete cookie.dropOffDate;
+  delete cookie.dropOffTime;
+
+  const data = {
     langCode: params.lang ?? "sr",
     lang,
     usloviNajma: privacyPolicy,
     message: context.VALUE_FROM_EXPRESS,
   };
+
+  const response = Response.json(data, {
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+
+  return response as unknown as typeof data;
 }
 
 export default function PrivacyPolicyPage({

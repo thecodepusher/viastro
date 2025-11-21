@@ -3,15 +3,31 @@ import type { Route } from "./+types/contact-page";
 import GetInTouch from "@/components/GetInTouch";
 
 import { getLocale } from "@/lib/utils";
+import { prefs } from "@/lib/prefs-cookie";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  return {
+  delete cookie.pickUpDate;
+  delete cookie.pickUpTime;
+  delete cookie.dropOffDate;
+  delete cookie.dropOffTime;
+
+  const data = {
     langCode: params.lang ?? "sr",
     lang,
     message: context.VALUE_FROM_EXPRESS,
   };
+
+  const response = Response.json(data, {
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+
+  return response as unknown as typeof data;
 }
 
 export default function ContactPage({ loaderData }: Route.ComponentProps) {

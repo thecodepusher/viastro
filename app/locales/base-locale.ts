@@ -87,4 +87,6 @@ export interface BaseLocale {
   cascoInsuranceDisclaimer: string;
   afterHoursReservationFee: string;
   afterHoursFeeDetails: string;
+  successTitle: string;
+  successAction: string;
 }

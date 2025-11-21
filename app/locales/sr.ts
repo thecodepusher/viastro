@@ -68,7 +68,6 @@ export const sr: BaseLocale = {
   day: "dan",
   allPricesIncludeVAT: "Sve cene su sa PDV-om",
   deposit: "Depozit:",
-
   pricesByDays: "Cene po danima:",
   includedInReservation: "Uključeno u rezervaciju",
   additionalEquipment: "Dodatna oprema",
@@ -99,4 +98,7 @@ export const sr: BaseLocale = {
   afterHoursReservationFee: "Dodatak za rezervaciju van radnog vremena",
   afterHoursFeeDetails:
     "Za podizanje ili vraćanje vozila van radnog vremena naplaćuje se dodatno",
+  successTitle:
+    "Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi rezervacije.",
+  successAction: "Vratite se na početnu stranicu",
 };

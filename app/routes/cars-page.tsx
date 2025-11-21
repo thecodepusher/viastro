@@ -4,9 +4,18 @@ import { type ApiAllModelsResponse } from "@/lib/api-cars";
 import type { Route } from "./+types/cars-page";
 import Cars from "@/components/Cars";
 import Logos from "@/components/Logos";
+import { prefs } from "@/lib/prefs-cookie";
 
 export async function loader({ context, params, request }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  delete cookie.pickUpDate;
+  delete cookie.pickUpTime;
+  delete cookie.dropOffDate;
+  delete cookie.dropOffTime;
+
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
     body: JSON.stringify({
@@ -17,12 +26,20 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
 
   const apiResponse: ApiAllModelsResponse = await res.json();
 
-  return {
+  const data = {
     langCode: params.lang ?? "sr",
     lang,
     message: context.VALUE_FROM_EXPRESS,
     cars: apiResponse,
   };
+
+  const response = Response.json(data, {
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+
+  return response as unknown as typeof data;
 }
 
 export async function action() {}

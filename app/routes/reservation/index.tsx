@@ -8,11 +8,21 @@ import type { Route } from "./+types";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
 
   return {
     lang,
     locations,
     langCode: params.lang ?? "sr",
+    initialValues: {
+      pickUpDate: cookie.pickUpDate,
+      pickUpTime: cookie.pickUpTime,
+      dropOffDate: cookie.dropOffDate,
+      dropOffTime: cookie.dropOffTime,
+      pickUpLocation: cookie.pickUpLocation,
+      dropOffLocation: cookie.dropOffLocation,
+    },
   };
 }
 
@@ -50,26 +60,27 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col items-center justify-center bg-linear-to-b from-p sm:h-[60vh] h-[50vh]">
-        <ReservationTime
-          onStart={async (data) => {
-            const form = new FormData();
-            form.append("pickUpLocation", data.pickUpLocation);
-            form.append("dropOffLocation", data.dropOffLocation);
-            form.append(
-              "pickUpDate",
-              setHours(data.pickDate, 12).toISOString()
-            );
-            form.append("pickUpTime", data.pickUpTime);
-            form.append(
-              "dropOffDate",
-              setHours(data.dropDate, 12).toISOString()
-            );
-            form.append("dropOffTime", data.dropOfTime);
-            fetcher.submit(form, { method: "post" });
-          }}
-          lang={loaderData.lang}
-          locations={loaderData.locations}
-        />
+          <ReservationTime
+            onStart={async (data) => {
+              const form = new FormData();
+              form.append("pickUpLocation", data.pickUpLocation);
+              form.append("dropOffLocation", data.dropOffLocation);
+              form.append(
+                "pickUpDate",
+                setHours(data.pickDate, 12).toISOString()
+              );
+              form.append("pickUpTime", data.pickUpTime);
+              form.append(
+                "dropOffDate",
+                setHours(data.dropDate, 12).toISOString()
+              );
+              form.append("dropOffTime", data.dropOfTime);
+              fetcher.submit(form, { method: "post" });
+            }}
+            lang={loaderData.lang}
+            locations={loaderData.locations}
+            initialValues={loaderData.initialValues}
+          />
       </div>
     </div>
   );

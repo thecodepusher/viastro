@@ -3,6 +3,7 @@ import type { Route } from "./+types/blog-details";
 import { postsEn, postsRu, postsSr } from "@/lib/data";
 import { redirect, Link } from "react-router";
 import { getLocale } from "@/lib/utils";
+import { prefs } from "@/lib/prefs-cookie";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   let posts = postsSr;
@@ -32,12 +33,28 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     return redirect("/blog");
   }
 
-  return {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  delete cookie.pickUpDate;
+  delete cookie.pickUpTime;
+  delete cookie.dropOffDate;
+  delete cookie.dropOffTime;
+
+  const data = {
     langCode: params.lang ?? "sr",
     post,
     lang,
     message: context.VALUE_FROM_EXPRESS,
   };
+
+  const response = Response.json(data, {
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+
+  return response as unknown as typeof data;
 }
 
 export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
