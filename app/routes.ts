@@ -1,6 +1,8 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 const routes = [
+  route("sitemap.xml", "routes/sitemap[.]xml.tsx"),
+  route("robots.txt", "routes/robots[.]txt.tsx"),
   route("select-lang", "routes/select-lang.tsx"),
   route(":lang?", "routes/home.tsx"),
   route(":lang?/faq", "routes/faq-page.tsx"),

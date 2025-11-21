@@ -12,17 +12,33 @@ import Cta from "@/components/Cta";
 import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
 import FloatingButtons from "@/components/ContactFloatingButtons";
+import SEO from "@/components/SEO";
 import { getLocale } from "@/lib/utils";
+import {
+  getBaseUrl,
+  generateOrganizationSchema,
+  generateLocalBusinessSchema,
+  generateCarRentalServiceSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/seo";
 import type { Route } from "./+types/landing-airport";
 
 export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+  const canonical = `${baseUrl}/${data.langCode || "sr"}/rent-a-car-belgrade-airport`;
+  const title = "Rent a Car Belgrade Airport - Premium Vehicles | Viastro";
+  const description =
+    "Viastro Rent a Car - Belgrade Airport - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.";
+
   return [
-    { title: "Rent a Car Belgrade Nikola Tesla Airport - Premium Vehicles" },
-    {
-      name: "description",
-      content:
-        "Viastro Rent a Car - Nikola Tesla Airport Belgrade - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.",
-    },
+    { title },
+    { name: "description", content: description },
+    { name: "keywords", content: "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { rel: "canonical", href: canonical },
   ];
 }
 
@@ -64,11 +80,15 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
 
+  const baseUrl = getBaseUrl(request);
+  const langCode = params.lang ?? "sr";
+
   const data = {
-    langCode: params.lang ?? "sr",
+    langCode,
     lang,
     locations,
     message: context.VALUE_FROM_EXPRESS,
+    baseUrl,
     initialValues: {
       pickUpDate: undefined,
       pickUpTime: undefined,
@@ -94,8 +114,24 @@ export default function LandingAirportPage({
   const fetcher = useFetcher();
   const navigate = useNavigate();
 
+  // Generate SEO schemas
+  const schemas = [
+    generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
+    generateLocalBusinessSchema(loaderData.baseUrl, loaderData.langCode),
+    generateCarRentalServiceSchema(loaderData.baseUrl, loaderData.langCode),
+    generateBreadcrumbSchema(
+      loaderData.baseUrl,
+      [
+        { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
+        { name: "Rent a Car Airport", url: `/${loaderData.langCode}/rent-a-car-belgrade-airport` },
+      ],
+      loaderData.langCode
+    ),
+  ];
+
   return (
     <div className="w-full pt-20">
+      <SEO schemas={schemas} />
       <FloatingButtons />
 
       <LandingHero lang={loaderData.lang} />

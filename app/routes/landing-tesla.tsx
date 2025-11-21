@@ -13,12 +13,32 @@ import LandingHero from "@/components/LandingHero";
 import LandingPromo from "@/components/LandingPromo";
 import FloatingButtons from "@/components/ContactFloatingButtons";
 import { getLocale } from "@/lib/utils";
+import SEO from "@/components/SEO";
 import type { Route } from "./+types/landing-tesla";
+import {
+  getBaseUrl,
+  generateOrganizationSchema,
+  generateLocalBusinessSchema,
+  generateCarRentalServiceSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/seo";
 
 export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+  const canonical = `${baseUrl}/${data.langCode || "sr"}/rent-a-car-aerodrom-beograd-nikola-tesla`;
+  const title = "Rent a Car Belgrade Airport Nikola Tesla | Viastro";
+  const description =
+    "Rent a car at Belgrade Airport (Nikola Tesla). Fast pickup service, wide selection of vehicles, and competitive prices. Book online today!";
+
   return [
-    { title: "Viastro rent a car | Belgrade" },
-    { name: "description", content: data.lang.description },
+    { title },
+    { name: "description", content: description },
+    { name: "keywords", content: "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { rel: "canonical", href: canonical },
   ];
 }
 
@@ -60,11 +80,15 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
 
+  const baseUrl = getBaseUrl(request);
+  const langCode = params.lang ?? "sr";
+
   const data = {
-    langCode: params.lang ?? "sr",
+    langCode,
     lang,
     locations,
     message: context.VALUE_FROM_EXPRESS,
+    baseUrl,
     initialValues: {
       pickUpDate: undefined,
       pickUpTime: undefined,
@@ -88,8 +112,24 @@ export default function LandingTeslaPage({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
 
+  // Generate SEO schemas
+  const schemas = [
+    generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
+    generateLocalBusinessSchema(loaderData.baseUrl, loaderData.langCode),
+    generateCarRentalServiceSchema(loaderData.baseUrl, loaderData.langCode),
+    generateBreadcrumbSchema(
+      loaderData.baseUrl,
+      [
+        { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
+        { name: "Rent a Car Airport", url: `/${loaderData.langCode}/rent-a-car-aerodrom-beograd-nikola-tesla` },
+      ],
+      loaderData.langCode
+    ),
+  ];
+
   return (
     <div className="w-full">
+      <SEO schemas={schemas} />
       <FloatingButtons />
 
       <LandingHero lang={loaderData.lang} />

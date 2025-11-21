@@ -13,12 +13,37 @@ import Logos from "@/components/Logos";
 import GetInTouch from "@/components/GetInTouch";
 import Cars from "@/components/Cars";
 import ReservationTime from "@/components/ReservationTime";
+import SEO from "@/components/SEO";
+import {
+  getBaseUrl,
+  generateOrganizationSchema,
+  generateWebSiteSchema,
+  generateLocalBusinessSchema,
+  generateCarRentalServiceSchema,
+} from "@/lib/seo";
 import type { Route } from "./+types/home";
 
 export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+  const canonical = `${baseUrl}/${data.langCode || "sr"}`;
+  const imageUrl = `${baseUrl}/viastro_logo.png`;
+
   return [
     { title: "Viastro rent a car | Belgrade" },
     { name: "description", content: data.lang.description },
+    { name: "keywords", content: "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade" },
+    { property: "og:title", content: "Viastro rent a car | Belgrade" },
+    { property: "og:description", content: data.lang.description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: imageUrl },
+    { property: "og:locale", content: data.langCode === "sr" ? "sr_RS" : data.langCode === "en" ? "en_US" : "ru_RU" },
+    { property: "og:site_name", content: "Viastro Rent a Car" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Viastro rent a car | Belgrade" },
+    { name: "twitter:description", content: data.lang.description },
+    { name: "twitter:image", content: imageUrl },
+    { rel: "canonical", href: canonical },
   ];
 }
 
@@ -85,6 +110,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
 
   const apiResponse: ApiAllModelsResponse = await res.json();
+  const baseUrl = getBaseUrl(request);
 
   const data = {
     langCode: params.lang ?? "sr",
@@ -92,6 +118,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     locations,
     message: context.VALUE_FROM_EXPRESS,
     cars: apiResponse,
+    baseUrl,
     initialValues: {
       pickUpDate: undefined,
       pickUpTime: undefined,
@@ -117,8 +144,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const isMobile = useIsMobile();
   const heroVideoUrl = isMobile ? "/hero-video.mp4" : "/hero-video-desktop.mp4";
 
+  // Generate SEO schemas
+  const schemas = [
+    generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
+    generateWebSiteSchema(loaderData.baseUrl, loaderData.langCode),
+    generateLocalBusinessSchema(loaderData.baseUrl, loaderData.langCode),
+    generateCarRentalServiceSchema(loaderData.baseUrl, loaderData.langCode),
+  ];
+
   return (
     <div className="w-full">
+      <SEO schemas={schemas} />
       <div className="flex flex-col w-full mt-18">
         <div className="relative flex flex-col items-center justify-center h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
           <video

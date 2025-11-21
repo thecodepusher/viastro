@@ -36,6 +36,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#FF9B17" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="language" content="Serbian" />
+        <meta httpEquiv="content-language" content="sr, en, ru" />
+        <link rel="alternate" hrefLang="sr" href="/sr" />
+        <link rel="alternate" hrefLang="en" href="/en" />
+        <link rel="alternate" hrefLang="ru" href="/ru" />
+        <link rel="alternate" hrefLang="x-default" href="/sr" />
         <Meta />
         <Links />
         <script

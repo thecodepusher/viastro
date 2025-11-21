@@ -1,9 +1,16 @@
 import Cta from "@/components/Cta";
+import SEO from "@/components/SEO";
 import type { Route } from "./+types/blog-details";
 import { postsEn, postsRu, postsSr } from "@/lib/data";
 import { redirect, Link } from "react-router";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
+import {
+  getBaseUrl,
+  generateOrganizationSchema,
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   let posts = postsSr;
@@ -42,11 +49,15 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
 
+  const baseUrl = getBaseUrl(request);
+  const langCode = params.lang ?? "sr";
+
   const data = {
-    langCode: params.lang ?? "sr",
+    langCode,
     post,
     lang,
     message: context.VALUE_FROM_EXPRESS,
+    baseUrl,
   };
 
   const response = Response.json(data, {
@@ -58,9 +69,69 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   return response as unknown as typeof data;
 }
 
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+  const canonical = `${baseUrl}/${data.langCode || "sr"}/blog/${data.post.slug}`;
+  const title = `${data.post.title} | Viastro Blog`;
+  const description = data.post.description || data.post.title;
+  const imageUrl = data.post.imageUrl
+    ? `${baseUrl}${data.post.imageUrl}`
+    : `${baseUrl}/hero_mobile.png`;
+
+  return [
+    { title },
+    { name: "description", content: description },
+    { name: "keywords", content: "viastro blog, rent a car Belgrade, car rental tips" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "article" },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: imageUrl },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: imageUrl },
+    { rel: "canonical", href: canonical },
+    { property: "article:published_time", content: data.post.datetime || new Date().toISOString() },
+  ];
+}
+
 export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
+  // Generate SEO schemas
+  const articleUrl = `${loaderData.baseUrl}/${loaderData.langCode}/blog/${loaderData.post.slug}`;
+  const imageUrl = loaderData.post.imageUrl
+    ? `${loaderData.baseUrl}${loaderData.post.imageUrl}`
+    : `${loaderData.baseUrl}/hero_mobile.png`;
+
+  const schemas = [
+    generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
+    generateArticleSchema(
+      loaderData.baseUrl,
+      {
+        title: loaderData.post.title,
+        image: imageUrl,
+        datePublished: loaderData.post.datetime || new Date().toISOString(),
+        dateModified: loaderData.post.datetime || new Date().toISOString(),
+        description: loaderData.post.description,
+        author: "Viastro",
+        url: articleUrl,
+      },
+      loaderData.langCode
+    ),
+    generateBreadcrumbSchema(
+      loaderData.baseUrl,
+      [
+        { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
+        { name: loaderData.lang.blog, url: `/${loaderData.langCode}/blog` },
+        { name: loaderData.post.title, url: `/${loaderData.langCode}/blog/${loaderData.post.slug}` },
+      ],
+      loaderData.langCode
+    ),
+  ];
+
   return (
     <>
+      <SEO schemas={schemas} />
       <div className="w-full flex flex-col items-center justify-center pt-30">
         <img className="max-w-[675px]" src={loaderData.post.imageUrl} />
 
