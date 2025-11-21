@@ -1,9 +1,10 @@
-import { Link, Outlet, useMatches } from "react-router";
+import { Link, Outlet, useMatches, useFetcher } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
 import { CheckIcon, ChevronRight } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { prefs } from "@/lib/prefs-cookie";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -14,13 +15,27 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export async function action() {}
+export async function action({ request }: Route.ActionArgs) {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  delete cookie.selectedCarId;
+
+  return new Response(null, {
+    status: 200,
+    headers: {
+      "Set-Cookie": await prefs.serialize(cookie),
+    },
+  });
+}
+
 export function meta({}: Route.MetaArgs) {}
 
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const fetcher = useFetcher();
 
   const completedSteps = steps.filter((s) => s.status === "complete").length;
   const currentStepIndex = steps.findIndex((s) => s.status === "current");
@@ -29,11 +44,26 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
       ? ((completedSteps + 1) / steps.length) * 100
       : (completedSteps / steps.length) * 100;
 
+  const [prevStepIndex, setPrevStepIndex] = useState<number | null>(null);
+
   useEffect(() => {
     setIsAnimating(true);
     const timer = setTimeout(() => setIsAnimating(false), 500);
     return () => clearTimeout(timer);
   }, [currentStepIndex]);
+
+  useEffect(() => {
+    if (
+      prevStepIndex !== null &&
+      prevStepIndex !== currentStepIndex &&
+      currentStepIndex !== 1
+    ) {
+      const form = new FormData();
+      form.append("action", "deleteSelectedCarId");
+      fetcher.submit(form, { method: "post" });
+    }
+    setPrevStepIndex(currentStepIndex);
+  }, [currentStepIndex, prevStepIndex, fetcher]);
 
   return (
     <div className="w-full">
@@ -84,6 +114,11 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                     {isComplete ? (
                       <Link
                         to={step.href}
+                        onClick={() => {
+                          const form = new FormData();
+                          form.append("action", "deleteSelectedCarId");
+                          fetcher.submit(form, { method: "post" });
+                        }}
                         className="group flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 active:bg-white/30 transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/40 active:scale-[0.98]">
                         <div className="relative shrink-0">
                           <div className="flex size-12 items-center justify-center rounded-full bg-s shadow-lg group-hover:scale-110 group-active:scale-105 transition-transform duration-300 animate-in zoom-in-50">

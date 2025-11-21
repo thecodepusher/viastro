@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useFetcher } from "react-router";
 import { getLocale } from "@/lib/utils";
 import { type ApiAllModelsResponse } from "@/lib/api-cars";
 import type { Route } from "./+types/cars-page";
@@ -15,6 +15,7 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
   delete cookie.pickUpTime;
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
+  delete cookie.selectedCarId;
 
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
@@ -42,18 +43,41 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
   return response as unknown as typeof data;
 }
 
-export async function action() {}
+export async function action({ request }: Route.ActionArgs) {
+  const formData = await request.formData();
+  const selectedCarId = formData.get("selectedCarId");
+
+  if (selectedCarId) {
+    const cookieHeader = request.headers.get("Cookie");
+    const cookie = (await prefs.parse(cookieHeader)) || {};
+    cookie.selectedCarId = selectedCarId;
+
+    return new Response(null, {
+      status: 200,
+      headers: {
+        "Set-Cookie": await prefs.serialize(cookie),
+      },
+    });
+  }
+
+  return new Response(null, { status: 400 });
+}
+
 export function meta({}: Route.MetaArgs) {}
 
 export default function CarsPage({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
+  const fetcher = useFetcher();
 
   return (
     <div className="w-full">
       <div className="mt-18">
         <Logos lang={loaderData.lang} />
         <Cars
-          onSelect={() => {
+          onSelect={(carId) => {
+            const form = new FormData();
+            form.append("selectedCarId", `${carId}`);
+            fetcher.submit(form, { method: "post" });
             navigate(`/${loaderData.langCode}/reservation`);
           }}
           lang={loaderData.lang}

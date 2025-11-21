@@ -31,22 +31,38 @@ export async function action({ request }: Route.ActionArgs) {
   const pickUpTime = formData.get("pickUpTime");
   const dropOffDate = formData.get("dropOffDate");
   const dropOffTime = formData.get("dropOffTime");
+  const selectedCarId = formData.get("selectedCarId");
 
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  cookie.pickUpLocation = pickUpLocation;
-  cookie.dropOffLocation = dropOffLocation;
-  cookie.pickUpDate = pickUpDate;
-  cookie.pickUpTime = pickUpTime;
-  cookie.dropOffDate = dropOffDate;
-  cookie.dropOffTime = dropOffTime;
+  if (pickUpLocation) {
+    cookie.pickUpLocation = pickUpLocation;
+    cookie.dropOffLocation = dropOffLocation;
+    cookie.pickUpDate = pickUpDate;
+    cookie.pickUpTime = pickUpTime;
+    cookie.dropOffDate = dropOffDate;
+    cookie.dropOffTime = dropOffTime;
 
-  return redirect("reservation/vehicle", {
-    headers: {
-      "Set-Cookie": await prefs.serialize(cookie),
-    },
-  });
+    return redirect("reservation/vehicle", {
+      headers: {
+        "Set-Cookie": await prefs.serialize(cookie),
+      },
+    });
+  }
+
+  if (selectedCarId) {
+    cookie.selectedCarId = selectedCarId;
+
+    return new Response(null, {
+      status: 200,
+      headers: {
+        "Set-Cookie": await prefs.serialize(cookie),
+      },
+    });
+  }
+
+  return new Response(null, { status: 400 });
 }
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -58,6 +74,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.pickUpTime;
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
+  delete cookie.selectedCarId;
 
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
@@ -159,7 +176,10 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
       <Logos lang={loaderData.lang} />
       <Cars
-        onSelect={() => {
+        onSelect={(carId) => {
+          const form = new FormData();
+          form.append("selectedCarId", `${carId}`);
+          fetcher.submit(form, { method: "post" });
           navigate("reservation");
         }}
         lang={loaderData.lang}

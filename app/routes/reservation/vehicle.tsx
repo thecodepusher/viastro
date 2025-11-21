@@ -56,8 +56,26 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     availableCarIds
   );
 
+  // Get selected car ID from cookie and sort cars
+  const selectedCarId = cookie.selectedCarId
+    ? parseInt(cookie.selectedCarId as string, 10)
+    : null;
+
+  let sortedCars = [...transformedCars];
+  if (selectedCarId) {
+    const selectedCarIndex = sortedCars.findIndex(
+      (car) => car.id === selectedCarId
+    );
+    if (selectedCarIndex !== -1) {
+      const selectedCar = sortedCars[selectedCarIndex];
+      sortedCars.splice(selectedCarIndex, 1);
+      sortedCars.unshift(selectedCar);
+    }
+  }
+
   return {
-    cars: transformedCars,
+    cars: sortedCars,
+    selectedCarId,
     lang,
     langCode: params.lang ?? "sr",
   };
@@ -86,6 +104,7 @@ export default function Vehicle({ loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <Cars
         cars={loaderData.cars as TransformedCar[]}
+        selectedCarId={loaderData.selectedCarId}
         onSelect={(carId) => {
           const form = new FormData();
           form.append("carId", `${carId}`);

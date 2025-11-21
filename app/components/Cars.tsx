@@ -14,6 +14,7 @@ export default function Cars(props: {
   langCode: string;
   onSelect: (arg0: number) => void;
   cars?: any[];
+  selectedCarId?: number | null;
 }) {
   const isApiFormat =
     props.cars &&
@@ -30,13 +31,23 @@ export default function Cars(props: {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {carsToDisplay.map((car) => {
           const available = car.available !== undefined ? car.available : true;
+          const isSelected = props.selectedCarId === car.id;
+          const borderColor = available ? "#614b80" : "#9ca3af";
 
           return (
             <Card
               key={car.id}
               className={`group relative flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
                 !available ? "opacity-75" : ""
-              }`}>
+              }`}
+              style={
+                isSelected
+                  ? {
+                      borderColor: borderColor,
+                      borderWidth: "3px",
+                    }
+                  : {}
+              }>
               <div className="absolute top-4 right-4 z-10">
                 {available ? (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-400">
