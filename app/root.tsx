@@ -110,7 +110,6 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
   const location = useLocation();
   const matches = useMatches();
 
-  // Try to get language from matches first
   const matchWithData = matches
     .slice()
     .reverse()
@@ -125,13 +124,13 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
     | { lang: any; langCode: string }
     | undefined;
 
-  // If no lang data in matches, extract from URL
   if (!langData) {
     const pathParts = location.pathname.split("/").filter(Boolean);
-    const langCode = pathParts[0] === "sr" || pathParts[0] === "en" || pathParts[0] === "ru" 
-      ? pathParts[0] 
-      : "sr";
-    
+    const langCode =
+      pathParts[0] === "sr" || pathParts[0] === "en" || pathParts[0] === "ru"
+        ? pathParts[0]
+        : "sr";
+
     let lang = sr;
     switch (langCode) {
       case "en":
@@ -143,11 +142,10 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
       default:
         lang = sr;
     }
-    
+
     langData = { lang, langCode };
   }
 
-  // Handle 404 errors
   if (isRouteErrorResponse(error) && error.status === 404) {
     return (
       <>
@@ -158,7 +156,6 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
     );
   }
 
-  // Handle other errors
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
