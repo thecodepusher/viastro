@@ -4,6 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
+import { type ApiAllModelsResponse } from "@/lib/api-cars";
 import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
@@ -50,16 +51,26 @@ export async function action({ request }: Route.ActionArgs) {
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   let lang = await getLocale(params.lang, request);
+  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "get_all_models",
+    }),
+    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+  });
+
+  const apiResponse: ApiAllModelsResponse = await res.json();
 
   return {
     langCode: params.lang ?? "sr",
     lang,
     locations,
     message: context.VALUE_FROM_EXPRESS,
+    cars: apiResponse,
   };
 }
 
-export default function Home({ actionData, loaderData }: Route.ComponentProps) {
+export default function Home({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -123,12 +134,12 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
 
       <Logos lang={loaderData.lang} />
       <Cars
-        availableCars={null}
         onSelect={() => {
           navigate("reservation");
         }}
         lang={loaderData.lang}
         langCode={loaderData.langCode}
+        cars={loaderData.cars}
       />
       <TrustedBy lang={loaderData.lang} />
       <BlogSection langCode={loaderData.langCode} />

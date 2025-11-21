@@ -2,7 +2,8 @@ import { prefs } from "@/lib/prefs-cookie";
 import { redirect, useFetcher } from "react-router";
 import { ChevronRight } from "lucide-react";
 import { getLocale } from "@/lib/utils";
-import { getAditionalEquipment, getCars, type LocaleTypes } from "@/lib/data";
+import { getAditionalEquipment, type LocaleTypes } from "@/lib/data";
+import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { calculateInWorkingHours } from "@/lib/helpers";
@@ -14,9 +15,22 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   const lang = await getLocale(params.lang, request);
 
-  const car = getCars(params.lang as LocaleTypes).find(
-    (x) => x.id === +cookie.carId
-  );
+  // Pozovi API da dobijemo sve modele
+  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "get_all_models",
+    }),
+    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+  });
+  const apiResponse: ApiAllModelsResponse = await res.json();
+  
+  // Transformiši podatke
+  const transformedCars = transformApiCars(apiResponse, lang);
+  
+  // Pronađi automobil po exnternalId (carId iz cookie-ja je exnternalId)
+  const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
+  
   const pickupDate = cookie.pickUpDate;
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;

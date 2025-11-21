@@ -2,66 +2,34 @@ import { Button } from "./ui/button";
 import type { BaseLocale } from "@/locales/base-locale";
 import { Info, CheckCircle2 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { cars, CarType, GasType, TransmissionType } from "@/lib/data";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import {
+  transformApiCars,
+  type ApiCarModel,
+  type TransformedCar,
+} from "@/lib/api-cars";
 
 export default function Cars(props: {
   lang: BaseLocale;
   langCode: string;
-  availableCars: string[] | null;
   onSelect: (arg0: number) => void;
+  cars?: any[];
 }) {
+  const isApiFormat =
+    props.cars &&
+    props.cars.length > 0 &&
+    props.cars[0]?.brand_name &&
+    props.cars[0]?.features;
+
+  const carsToDisplay: TransformedCar[] = isApiFormat
+    ? transformApiCars(props.cars as ApiCarModel[], props.lang)
+    : (props.cars as TransformedCar[]) || [];
+
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {cars.map((car) => {
-          let gas = "";
-          let transmission = "";
-          let carType = "";
-
-          let available = true;
-
-          if (props.availableCars) {
-            available = props.availableCars.some((x) => x == car.exnternalId);
-          }
-
-          switch (car.type) {
-            case CarType.suv:
-              carType = "SUV";
-              break;
-            case CarType.hatchback:
-              carType = "Hatchback";
-              break;
-            case CarType.sedan:
-              carType = "Sedan";
-              break;
-            case CarType.compactSuv:
-              carType = "Compact SUV";
-              break;
-          }
-
-          switch (car.transmissionType) {
-            case TransmissionType.manual:
-              transmission = props.lang.manual;
-              break;
-            case TransmissionType.automatic:
-              transmission = props.lang.automatic;
-              break;
-          }
-
-          switch (car.gas) {
-            case GasType.diesel:
-              gas = props.lang.diesel;
-              break;
-            case GasType.gasoline:
-              gas = props.lang.gasoline;
-              break;
-            case GasType.hybrid:
-              gas = props.lang.hybrid;
-              break;
-            case GasType.electric:
-              gas = props.lang.electric;
-          }
+        {carsToDisplay.map((car) => {
+          const available = car.available !== undefined ? car.available : true;
 
           return (
             <Card
@@ -134,25 +102,34 @@ export default function Cars(props: {
                             {props.lang.pricesByDays}
                           </p>
                           <div className="space-y-1.5">
-                            {car.prices.map((x, idx) => (
-                              <div
-                                key={idx}
-                                className="text-sm text-gray-600 dark:text-gray-400">
-                                {x.from === x.to ? (
-                                  <p>
-                                    {x.from} {props.lang.day}: {x.price} €/
-                                    {props.lang.day}
-                                  </p>
-                                ) : (
-                                  <p>
-                                    {x.from}
-                                    {x.to != null ? ` - ${x.to}` : "+"}{" "}
-                                    {props.lang.day}: {x.price} €/
-                                    {props.lang.day}
-                                  </p>
-                                )}
-                              </div>
-                            ))}
+                            {car.prices.map(
+                              (
+                                x: {
+                                  from: number;
+                                  to: number | null;
+                                  price: number;
+                                },
+                                idx: number
+                              ) => (
+                                <div
+                                  key={idx}
+                                  className="text-sm text-gray-600 dark:text-gray-400">
+                                  {x.from === x.to ? (
+                                    <p>
+                                      {x.from} {props.lang.day}: {x.price} €/
+                                      {props.lang.day}
+                                    </p>
+                                  ) : (
+                                    <p>
+                                      {x.from}
+                                      {x.to != null ? ` - ${x.to}` : "+"}{" "}
+                                      {props.lang.day}: {x.price} €/
+                                      {props.lang.day}
+                                    </p>
+                                  )}
+                                </div>
+                              )
+                            )}
                           </div>
                         </div>
                       </div>
@@ -174,7 +151,7 @@ export default function Cars(props: {
                         {props.lang.type}
                       </p>
                       <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {carType}
+                        {car.carTypeText}
                       </p>
                     </div>
                   </div>
@@ -192,7 +169,7 @@ export default function Cars(props: {
                         {props.lang.fuel}
                       </p>
                       <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {gas}
+                        {car.gasText}
                       </p>
                     </div>
                   </div>
@@ -228,7 +205,7 @@ export default function Cars(props: {
                         {props.lang.gear}
                       </p>
                       <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {transmission}
+                        {car.transmissionText}
                       </p>
                     </div>
                   </div>
