@@ -16,10 +16,7 @@ Disallow: /success
 Disallow: /select-lang
 
 # Sitemap
-Sitemap: ${baseUrl}/sitemap.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1`;
+Sitemap: ${baseUrl}/sitemap.xml`;
 
   return new Response(robots, {
     headers: {
