@@ -6,6 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
   useMatches,
+  useLocation,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -14,6 +15,10 @@ import { Toaster } from "./components/ui/sonner";
 import CookieConsent from "./components/CookieConsent";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
+import { en } from "@/locales/en";
+import { sr } from "@/locales/sr";
+import { ru } from "@/locales/ru";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -101,31 +106,88 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+function ErrorBoundaryContent({ error }: { error: unknown }) {
+  const location = useLocation();
+  const matches = useMatches();
+
+  // Try to get language from matches first
+  const matchWithData = matches
+    .slice()
+    .reverse()
+    .find((match) => {
+      const data = match.data;
+      return (
+        data && typeof data === "object" && "lang" in data && "langCode" in data
+      );
+    });
+
+  let langData = matchWithData?.data as
+    | { lang: any; langCode: string }
+    | undefined;
+
+  // If no lang data in matches, extract from URL
+  if (!langData) {
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    const langCode = pathParts[0] === "sr" || pathParts[0] === "en" || pathParts[0] === "ru" 
+      ? pathParts[0] 
+      : "sr";
+    
+    let lang = sr;
+    switch (langCode) {
+      case "en":
+        lang = en;
+        break;
+      case "ru":
+        lang = ru;
+        break;
+      default:
+        lang = sr;
+    }
+    
+    langData = { lang, langCode };
+  }
+
+  // Handle 404 errors
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return (
+      <>
+        <Header lang={langData.lang} langCode={langData.langCode} />
+        <NotFound />
+        <Footer lang={langData.lang} langCode={langData.langCode} />
+      </>
+    );
+  }
+
+  // Handle other errors
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
+    message = "Error";
+    details = error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <>
+      {langData && <Header lang={langData.lang} langCode={langData.langCode} />}
+      <main className="pt-16 p-4 container mx-auto">
+        <h1>{message}</h1>
+        <p>{details}</p>
+        {stack && (
+          <pre className="w-full p-4 overflow-x-auto">
+            <code>{stack}</code>
+          </pre>
+        )}
+      </main>
+      {langData && <Footer lang={langData.lang} langCode={langData.langCode} />}
+    </>
   );
+}
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  return <ErrorBoundaryContent error={error} />;
 }

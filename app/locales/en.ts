@@ -101,4 +101,7 @@ export const en: BaseLocale = {
   successTitle:
     "Your reservation has been successfully sent. You will be contacted to confirm your reservation.",
   successAction: "Return to the home page",
+  notFoundTitle: "Page Not Found",
+  notFoundMessage: "The page you are looking for does not exist.",
+  notFoundAction: "Return to the home page",
 };

@@ -89,4 +89,7 @@ export interface BaseLocale {
   afterHoursFeeDetails: string;
   successTitle: string;
   successAction: string;
+  notFoundTitle: string;
+  notFoundMessage: string;
+  notFoundAction: string;
 }

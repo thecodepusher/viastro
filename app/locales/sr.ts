@@ -101,4 +101,7 @@ export const sr: BaseLocale = {
   successTitle:
     "Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi rezervacije.",
   successAction: "Vratite se na početnu stranicu",
+  notFoundTitle: "Stranica nije pronađena",
+  notFoundMessage: "Stranica koju tražite ne postoji.",
+  notFoundAction: "Vratite se na početnu stranicu",
 };
