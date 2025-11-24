@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import type { Route } from "./+types/success";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -16,9 +17,12 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
 
+  const baseUrl = getBaseUrl(request);
+
   const data = {
     lang,
     langCode: params.lang ?? "sr",
+    baseUrl,
   };
 
   const response = Response.json(data, {
@@ -28,6 +32,20 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
 
   return response as unknown as typeof data;
+}
+
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Reservation Successful | Viastro Rent a Car",
+    description:
+      "Your car rental reservation has been successfully completed. Thank you for choosing Viastro!",
+    url: `/${data.langCode || "sr"}/success`,
+    baseUrl,
+    keywords: "reservation successful, car rental Belgrade, viastro",
+    imageAlt: "Viastro - Reservation Successful",
+  });
 }
 
 export default function SuccessPage({ loaderData }: Route.ComponentProps) {

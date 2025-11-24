@@ -10,6 +10,7 @@ import {
   getBaseUrl,
   generateOrganizationSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 
 export async function loader({ context, params, request }: Route.LoaderArgs) {
@@ -74,7 +75,6 @@ export async function action({ request }: Route.ActionArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/cars`;
   const title = data.lang.cars
     ? `Viastro ${data.lang.cars} | Belgrade`
     : "Viastro Cars | Belgrade";
@@ -82,20 +82,15 @@ export function meta({ data }: Route.MetaArgs) {
     data.lang.description ||
     "Browse our car rental fleet in Belgrade. Choose from economy, luxury, and SUV vehicles.";
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content:
-        "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title,
+    description,
+    url: `/${data.langCode || "sr"}/cars`,
+    baseUrl,
+    keywords:
+      "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
+    imageAlt: "Viastro Car Fleet - Rent a Car in Belgrade",
+  });
 }
 
 export default function CarsPage({ loaderData }: Route.ComponentProps) {

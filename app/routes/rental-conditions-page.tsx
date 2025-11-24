@@ -3,6 +3,7 @@ import { usloviNajma } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
 import Cta from "@/components/Cta";
 import { prefs } from "@/lib/prefs-cookie";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -15,11 +16,14 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
 
+  const baseUrl = getBaseUrl(request);
+
   const data = {
     langCode: params.lang ?? "sr",
     lang,
     usloviNajma: usloviNajma,
     message: context.VALUE_FROM_EXPRESS,
+    baseUrl,
   };
 
   const response = Response.json(data, {
@@ -29,6 +33,20 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
 
   return response as unknown as typeof data;
+}
+
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Rental Conditions | Viastro Rent a Car",
+    description:
+      "Read Viastro's rental conditions and terms of service for car rental in Belgrade, Serbia.",
+    url: `/${data.langCode || "sr"}/rental-conditions`,
+    baseUrl,
+    keywords: "rental conditions, terms of service, car rental Belgrade",
+    imageAlt: "Viastro Rental Conditions",
+  });
 }
 
 export default function RentalConditionsPage({

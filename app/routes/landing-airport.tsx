@@ -20,30 +20,23 @@ import {
   generateLocalBusinessSchema,
   generateCarRentalServiceSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 import type { Route } from "./+types/landing-airport";
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/rent-a-car-belgrade-airport`;
-  const title = "Rent a Car Belgrade Airport - Premium Vehicles | Viastro";
-  const description =
-    "Viastro Rent a Car - Belgrade Airport - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.";
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content:
-        "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title: "Rent a Car Belgrade Airport - Premium Vehicles | Viastro",
+    description:
+      "Viastro Rent a Car - Belgrade Airport - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.",
+    url: `/${data.langCode || "sr"}/rent-a-car-belgrade-airport`,
+    baseUrl,
+    keywords:
+      "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade",
+    imageAlt: "Viastro Rent a Car - Belgrade Airport",
+  });
 }
 
 export async function action({ request, params }: Route.ActionArgs) {

@@ -377,3 +377,78 @@ export function generateBreadcrumbSchema(
 export function schemaToScriptTag(schema: object): string {
   return `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}</script>`;
 }
+
+export interface OpenGraphMetaOptions {
+  title: string;
+  description: string;
+  url: string;
+  baseUrl?: string;
+  type?: "website" | "article";
+  imageUrl?: string;
+  imageAlt?: string;
+  locale?: string;
+  siteName?: string;
+  keywords?: string;
+  twitterCard?: "summary_large_image" | "summary";
+}
+
+/**
+ * Generates Open Graph and Twitter meta tags for social media sharing
+ * @param options - Configuration options for Open Graph meta tags
+ * @returns Array of meta tag objects compatible with React Router meta function
+ */
+export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
+  const {
+    title,
+    description,
+    url,
+    baseUrl: providedBaseUrl,
+    type = "website",
+    imageUrl,
+    imageAlt,
+    locale,
+    siteName = "Viastro Rent a Car",
+    keywords,
+    twitterCard = "summary_large_image",
+  } = options;
+
+  const baseUrl = providedBaseUrl || getBaseUrl();
+  const ogImage = imageUrl || `${baseUrl}/opengraph-1200x630.jpeg`;
+  const canonical = url.startsWith("http") ? url : `${baseUrl}${url}`;
+
+  const metaTags: Array<{ title?: string; name?: string; property?: string; content?: string; rel?: string; href?: string }> = [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: type },
+    { property: "og:url", content: canonical },
+    { property: "og:image", content: ogImage },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:image:type", content: "image/jpeg" },
+    { name: "twitter:card", content: twitterCard },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: ogImage },
+    { rel: "canonical", href: canonical },
+  ];
+
+  if (keywords) {
+    metaTags.push({ name: "keywords", content: keywords });
+  }
+
+  if (imageAlt) {
+    metaTags.push({ property: "og:image:alt", content: imageAlt });
+  }
+
+  if (locale) {
+    metaTags.push({ property: "og:locale", content: locale });
+  }
+
+  if (siteName) {
+    metaTags.push({ property: "og:site_name", content: siteName });
+  }
+
+  return metaTags;
+}

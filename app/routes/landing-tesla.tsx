@@ -21,29 +21,22 @@ import {
   generateLocalBusinessSchema,
   generateCarRentalServiceSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/rent-a-car-aerodrom-beograd-nikola-tesla`;
-  const title = "Rent a Car Belgrade Airport Nikola Tesla | Viastro";
-  const description =
-    "Rent a car at Belgrade Airport (Nikola Tesla). Fast pickup service, wide selection of vehicles, and competitive prices. Book online today!";
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content:
-        "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title: "Rent a Car Belgrade Airport Nikola Tesla | Viastro",
+    description:
+      "Rent a car at Belgrade Airport (Nikola Tesla). Fast pickup service, wide selection of vehicles, and competitive prices. Book online today!",
+    url: `/${data.langCode || "sr"}/rent-a-car-aerodrom-beograd-nikola-tesla`,
+    baseUrl,
+    keywords:
+      "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
+    imageAlt: "Viastro Rent a Car - Belgrade Airport Nikola Tesla",
+  });
 }
 
 export async function action({ request, params }: Route.ActionArgs) {

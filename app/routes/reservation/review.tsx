@@ -17,6 +17,7 @@ import { differenceInMinutes, format, set } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import { getLocale } from "@/lib/utils";
 import type { Route } from "./+types/review";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -130,6 +131,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       });
   }
 
+  const baseUrl = getBaseUrl(request);
+
   return {
     depositeDiscount,
     days,
@@ -146,6 +149,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     dropoffDate,
     dropoffTime,
     langCode: params.lang ?? "sr",
+    baseUrl,
   };
 }
 
@@ -260,7 +264,19 @@ export async function action({ request, params }: Route.ActionArgs) {
     },
   });
 }
-export function meta({}: Route.MetaArgs) {}
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Reservation - Review & Confirm | Viastro Rent a Car",
+    description:
+      "Review your car rental reservation details and confirm your booking in Belgrade.",
+    url: `/${data.langCode || "sr"}/reservation/review`,
+    baseUrl,
+    keywords: "reservation, review, confirm booking, rent a car Belgrade",
+    imageAlt: "Viastro - Review Reservation",
+  });
+}
 
 export default function Review({ loaderData }: Route.ComponentProps) {
   return (

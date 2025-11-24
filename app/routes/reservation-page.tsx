@@ -5,13 +5,16 @@ import { CheckIcon, ChevronRight } from "lucide-react";
 import { cn, getLocale } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { prefs } from "@/lib/prefs-cookie";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
+  const baseUrl = getBaseUrl(request);
 
   return {
     lang,
     langCode: params.lang ?? "sr",
+    baseUrl,
   };
 }
 
@@ -29,7 +32,19 @@ export async function action({ request }: Route.ActionArgs) {
   });
 }
 
-export function meta({}: Route.MetaArgs) {}
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Reservation | Viastro Rent a Car",
+    description:
+      "Book your car rental in Belgrade. Choose your vehicle, dates, and additional equipment.",
+    url: `/${data.langCode || "sr"}/reservation`,
+    baseUrl,
+    keywords: "reservation, book car, rent a car Belgrade",
+    imageAlt: "Viastro - Car Rental Reservation",
+  });
+}
 
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();

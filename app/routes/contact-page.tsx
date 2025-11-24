@@ -9,6 +9,7 @@ import {
   generateOrganizationSchema,
   generateLocalBusinessSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -43,26 +44,20 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/contact`;
   const title = `Viastro ${data.lang.contact} | Belgrade`;
   const description =
     data.lang.gitSubTitle ||
     "Contact Viastro Rent a Car in Belgrade for car rental services.";
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content:
-        "contact viastro, rent a car Belgrade contact, car rental Belgrade",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title,
+    description,
+    url: `/${data.langCode || "sr"}/contact`,
+    baseUrl,
+    keywords:
+      "contact viastro, rent a car Belgrade contact, car rental Belgrade",
+    imageAlt: "Contact Viastro Rent a Car",
+  });
 }
 
 export default function ContactPage({ loaderData }: Route.ComponentProps) {

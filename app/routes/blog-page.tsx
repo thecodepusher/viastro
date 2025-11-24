@@ -8,6 +8,7 @@ import {
   getBaseUrl,
   generateOrganizationSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -42,24 +43,16 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/blog`;
-  const title = `Viastro ${data.lang.blog} | Belgrade`;
-  const description =
-    "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.";
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content: "viastro blog, rent a car Belgrade, travel guides Serbia",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title: `Viastro ${data.lang.blog} | Belgrade`,
+    description:
+      "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.",
+    url: `/${data.langCode || "sr"}/blog`,
+    baseUrl,
+    keywords: "viastro blog, rent a car Belgrade, travel guides Serbia",
+    imageAlt: "Viastro Blog - Car Rental Tips and Travel Guides",
+  });
 }
 
 export default function BlogPage({ loaderData }: Route.ComponentProps) {

@@ -5,16 +5,19 @@ import ReservationTime from "@/components/ReservationTime";
 import { locations } from "@/lib/data";
 import { setHours } from "date-fns";
 import type { Route } from "./+types";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  const baseUrl = getBaseUrl(request);
 
   return {
     lang,
     locations,
     langCode: params.lang ?? "sr",
+    baseUrl,
     initialValues: {
       pickUpDate: cookie.pickUpDate,
       pickUpTime: cookie.pickUpTime,
@@ -52,7 +55,19 @@ export async function action({ request }: Route.ActionArgs) {
     },
   });
 }
-export function meta({}: Route.MetaArgs) {}
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Reservation - Select Dates | Viastro Rent a Car",
+    description:
+      "Select your pickup and drop-off dates and locations for your car rental in Belgrade.",
+    url: `/${data.langCode || "sr"}/reservation`,
+    baseUrl,
+    keywords: "reservation, book car, select dates, rent a car Belgrade",
+    imageAlt: "Viastro - Select Reservation Dates",
+  });
+}
 
 export default function Reservation({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
