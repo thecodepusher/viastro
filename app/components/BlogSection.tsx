@@ -13,15 +13,16 @@ export default function BlogSection(props: { langCode: string }) {
   }
 
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-white py-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h1 className="text-center font-black text-2xl text-pd">{title}</h1>
+        <h3 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 text-center">
+          {title}
+        </h3>
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {posts.map((post) => (
             <article
               key={`blog-${post.id}`}
-              className="flex flex-col items-start justify-between"
-            >
+              className="flex flex-col items-start justify-between">
               <div className="relative w-full">
                 <img
                   alt=""

@@ -1,4 +1,12 @@
 export interface BaseLocale {
+  home: string;
+  cars: string;
+  rentalConditions: string;
+  faq: string;
+  blog: string;
+  contact: string;
+  selectLanguage: string;
+  contactUs: string;
   from: string;
   day: string;
   title: string;
@@ -19,39 +27,40 @@ export interface BaseLocale {
   automatic: string;
   seats: string;
   description: string;
-  // Added translations for Feature component
   deployFaster: string;
   deployDesc: string;
   featureDesc: string;
-  // Added translations for TrustedBy component
   whyChoose: string;
   fullInsurance: string;
   noHiddenCosts: string;
+  satisfiedUsersTitle: string;
   satisfiedUsers: string;
+  yearsOfExperienceTitle: string;
   yearsOfExperience: string;
   reserve: string;
-  // Cta
+  available: string;
+  reserved: string;
+  seat: string;
+  fuel: string;
+  type: string;
+  gear: string;
   ctaTitle: string;
   ctaSubTitle: string;
-  // Get In Touch
+  ctaAction: string;
   gitTitle: string;
   gitSubTitle: string;
   gitDays: string;
   gitAwailable: string;
-  // Landing hero
   lhTitle: string;
   lhSubTitle: string;
   lhFor: string;
   lhPrice: string;
-  // Landing promo
   lpTitle: string;
   lpSubTitle: string;
   lpParagraph: string;
   lpAction: string;
-
   allPricesIncludeVAT: string;
   deposit: string;
-
   pricesByDays: string;
   includedInReservation: string;
   additionalEquipment: string;
@@ -66,6 +75,7 @@ export interface BaseLocale {
   privacyAgreement: string;
   finish: string;
   reservation: string;
+  step: string;
   vehicles: string;
   accessories: string;
   review: string;
@@ -77,4 +87,12 @@ export interface BaseLocale {
   cascoInsuranceDisclaimer: string;
   afterHoursReservationFee: string;
   afterHoursFeeDetails: string;
+  successTitle: string;
+  successAction: string;
+  notFoundTitle: string;
+  notFoundMessage: string;
+  notFoundAction: string;
+  cookieConsent: string;
+  cookieConsentLink: string;
+  cookieConsentAction: string;
 }

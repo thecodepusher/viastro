@@ -25,289 +25,14 @@ export enum CarType {
   hatchback,
 }
 
-const fullProtection = {
-  id: 1,
-  nameMap: {
-    en: "Full Protection Insurance",
-    sr: "Full Protection osiguranje",
-    ru: "Страхование Full Protection",
-  },
-  descriptionMap: {
-    en: "In addition to basic protection, this option includes protection against damage to rear-view mirrors, the windshield and windows, as well as coverage for damage to the undercarriage, wheels, and tires – parts usually not covered by standard insurance. Furthermore, Full Protection includes insurance for all passengers in the vehicle, including the driver, in the event of a traffic accident. With Full Protection insurance, the deposit amount is significantly reduced or completely waived, depending on the vehicle class.",
-    sr: "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
-    ru: "Помимо базовой защиты, в эту опцию входит защита от повреждений зеркал заднего вида, лобового и других стекол, а также покрытие ущерба днища, колес и шин – деталей, которые обычно не покрываются стандартной страховкой. Кроме того, Full Protection включает страхование всех пассажиров в транспортном средстве, включая водителя, в случае дорожно-транспортного происшествия. При страховании Full Protection сумма залога значительно снижается или полностью отменяется, в зависимости от класса автомобиля.",
-  },
-  name: "Full Protection osiguranje",
-  description:
-    "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
-};
-
 export type LocaleTypes = "en" | "ru" | "sr";
-
-export function getCars(langCode: LocaleTypes) {
-  return cars.map((c) => {
-    return {
-      ...c,
-      aditionalEquipment: c.aditionalEquipment.map((ad) => {
-        return {
-          ...ad,
-          name: ad.nameMap[langCode],
-          description: ad.descriptionMap[langCode],
-        };
-      }),
-    };
-  });
-}
-
-export const cars = [
-  {
-    id: 6,
-    exnternalId: "7",
-    slug: "seat_ibiza_fr",
-    name: "Seat Ibiza FR",
-    type: CarType.hatchback,
-    gas: GasType.gasoline,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.manual,
-    airConditioning: true,
-    deposite: 300,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 9.99,
-        free: false,
-        depositeDiscount: 150,
-        perDay: true,
-        maxPerDays: null,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 42 },
-      { from: 8, to: 15, price: 38 },
-      { from: 16, to: 29, price: 34 },
-      { from: 30, to: null, price: 30 },
-    ],
-    price: 30,
-    image: "/ibiza.webp",
-  },
-  {
-    id: 8,
-    exnternalId: "9",
-    slug: "ford_focus_2020",
-    name: "Ford Focus 2020",
-    type: CarType.hatchback,
-    gas: GasType.gasoline,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.manual,
-    airConditioning: true,
-    deposite: 300,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 9.99,
-        free: false,
-        depositeDiscount: 150,
-        perDay: true,
-        maxPerDays: null,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 42 },
-      { from: 8, to: 15, price: 38 },
-      { from: 16, to: 29, price: 34 },
-      { from: 30, to: null, price: 30 },
-    ],
-    price: 30,
-    image: "/ford-focus.webp",
-  },
-  {
-    id: 7,
-    exnternalId: "8",
-    slug: "clio",
-    name: "Renault Clio 2025",
-    type: CarType.hatchback,
-    gas: GasType.gasoline,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    deposite: 300,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 9.99,
-        free: false,
-        depositeDiscount: 150,
-        perDay: true,
-        maxPerDays: null,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 45 },
-      { from: 8, to: 15, price: 41 },
-      { from: 16, to: 29, price: 37 },
-      { from: 30, to: null, price: 33 },
-    ],
-    price: 33,
-    image: "/clio.png",
-  },
-  {
-    id: 3,
-    exnternalId: "2",
-    slug: "citroen_c3_aircross",
-    name: "Citroen C3 Aircross",
-    type: CarType.compactSuv,
-    gas: GasType.diesel,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    deposite: 300,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 9.99,
-        free: false,
-        depositeDiscount: 150,
-        perDay: true,
-        maxPerDays: null,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 55 },
-      { from: 8, to: 15, price: 50 },
-      { from: 16, to: 29, price: 45 },
-      { from: 30, to: null, price: 35 },
-    ],
-    price: 35,
-    image: "/c3-aircross.jpg",
-  },
-  {
-    id: 2,
-    exnternalId: "1",
-    slug: "peugeot_2008",
-    name: "Peugeot 2008 GT Line",
-    type: CarType.compactSuv,
-    gas: GasType.gasoline,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    deposite: 500,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 11.99,
-        depositeDiscount: 250,
-        free: false,
-        perDay: true,
-        maxPerDays: null,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 65 },
-      { from: 8, to: 15, price: 55 },
-      { from: 16, to: 29, price: 45 },
-      { from: 30, to: null, price: 38 },
-    ],
-    price: 38,
-    image: "/2008.avif",
-  },
-  {
-    id: 4,
-    exnternalId: "6",
-    slug: "skoda_oktavia",
-    name: "Škoda Octavia",
-    type: CarType.sedan,
-    gas: GasType.diesel,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    deposite: 500,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 12.99,
-        free: false,
-        perDay: true,
-        maxPerDays: null,
-        depositeDiscount: 250,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 75 },
-      { from: 8, to: 15, price: 65 },
-      { from: 16, to: 29, price: 55 },
-      { from: 30, to: null, price: 45 },
-    ],
-    price: 45,
-    image: "/skoda_octavia.png",
-  },
-  {
-    id: 1,
-    exnternalId: "3",
-    slug: "peugeot_3008",
-    name: "Peugeot 3008",
-    type: CarType.suv,
-    gas: GasType.diesel,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    price: 45,
-    deposite: 500,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 12.99,
-        free: false,
-        perDay: true,
-        depositeDiscount: 250,
-        maxPerDays: null,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 75 },
-      { from: 8, to: 15, price: 65 },
-      { from: 16, to: 29, price: 55 },
-      { from: 30, to: null, price: 45 },
-    ],
-    image: "/3008.png",
-  },
-  {
-    id: 5,
-    exnternalId: "4",
-    slug: "audi_a6",
-    name: "Audi A6",
-    type: CarType.sedan,
-    gas: GasType.diesel,
-    numberOfSeats: 5,
-    transmissionType: TransmissionType.automatic,
-    airConditioning: true,
-    deposite: 1000,
-    aditionalEquipment: [
-      {
-        ...fullProtection,
-        price: 14.99,
-        free: false,
-        perDay: true,
-        maxPerDays: null,
-        depositeDiscount: 500,
-      },
-    ],
-    prices: [
-      { from: 3, to: 7, price: 115 },
-      { from: 8, to: 15, price: 105 },
-      { from: 16, to: 29, price: 95 },
-      { from: 30, to: null, price: 85 },
-    ],
-    price: 85,
-    image: "/audi-a6.webp",
-  },
-];
 
 export const postsSr = [
   {
     id: 1,
-    slug: "kopaonik",
+    slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Vikend na Kopaoniku – Planinska avantura uz Viastro rent a car",
-    href: "/blog/kopaonik",
+    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija – tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa – udobno, sigurno i uz potpunu slobodu kretanja.",
     content: `
@@ -356,8 +81,8 @@ export const postsSr = [
   {
     id: 2,
     title: "Đerdap Nacionalni Park – Gvozdena kapija prirode i istorije",
-    href: "/blog/djerdap",
-    slug: "djerdap",
+    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.",
     content: `
@@ -385,8 +110,8 @@ export const postsSr = [
   {
     id: 3,
     title: "Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu",
-    href: "/blog/mokra_gora",
-    slug: "mokra_gora",
+    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu</h2>
       <p>Mokra Gora je destinacija koja spaja prirodne lepote, kulturnu baštinu i jedinstvene turističke atrakcije. Vožnja Šarganskom osmicom, uskom prugom koja vijuga kroz planinske predele, pruža nezaboravan doživljaj.</p>
@@ -415,9 +140,9 @@ export const postsSr = [
 export const postsEn = [
   {
     id: 1,
-    slug: "kopaonik",
+    slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Weekend on Kopaonik – Mountain Adventure with Viastro Rent a Car",
-    href: "/blog/kopaonik",
+    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination – all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free – comfortably, safely, and with complete freedom of movement.",
     content: `
@@ -466,8 +191,8 @@ export const postsEn = [
   {
     id: 2,
     title: "Đerdap National Park – The Iron Gates of Nature and History",
-    href: "/blog/djerdap",
-    slug: "djerdap",
+    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.",
     content: `
@@ -495,8 +220,8 @@ export const postsEn = [
   {
     id: 3,
     title: "Mokra Gora and Šargan Eight – A Journey Through Time and Nature",
-    href: "/blog/mokra_gora",
-    slug: "mokra_gora",
+    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora and Šargan Eight – A Journey Through Time and Nature</h2>
       <p>Mokra Gora is a destination that combines natural beauty, cultural heritage, and unique tourist attractions. The ride on the Šargan Eight, a narrow-gauge railway that winds through mountainous landscapes, offers an unforgettable experience.</p>
@@ -525,9 +250,9 @@ export const postsEn = [
 export const postsRu = [
   {
     id: 1,
-    slug: "kopaonik",
+    slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Выходные на Копаонике – Горное приключение с Viastro rent a car",
-    href: "/blog/kopaonik",
+    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник – идеальное место для выходных – круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса – комфортно, безопасно и с полной свободой передвижения.",
     content: `
@@ -576,8 +301,8 @@ export const postsRu = [
   {
     id: 2,
     title: "Национальный парк Джердап – Железные ворота природы и истории",
-    href: "/blog/djerdap",
-    slug: "djerdap",
+    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап – это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
     content: `
@@ -606,8 +331,8 @@ export const postsRu = [
     id: 3,
     title:
       "Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу",
-    href: "/blog/mokra_gora",
-    slug: "mokra_gora",
+    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу</h2>
       <p>Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.</p>

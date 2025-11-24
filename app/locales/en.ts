@@ -1,7 +1,15 @@
 import type { BaseLocale } from "./base-locale";
 
 export const en: BaseLocale = {
+  home: "Home",
+  cars: "Cars",
+  rentalConditions: "Rental Conditions",
+  faq: "FAQ",
+  blog: "Blog",
+  contact: "Contact",
   title: "Your Journey Starts Here",
+  selectLanguage: "Select language",
+  contactUs: "Contact us",
   subTitle: "Car Rental Belgrade",
   createReservation: "Create a reservation",
   pickUpLoacation: "Pick up location",
@@ -27,12 +35,21 @@ export const en: BaseLocale = {
   whyChoose: "Why choose Viastro?",
   fullInsurance: "Full insurance include",
   noHiddenCosts: "No hidden costs",
+  satisfiedUsersTitle: "satisfied users",
   satisfiedUsers: "99.9%",
+  yearsOfExperienceTitle: "years of experience",
   yearsOfExperience: "5+",
   reserve: "Book now",
+  available: "Available",
+  reserved: "Reserved",
+  seat: "Seat",
+  fuel: "Fuel",
+  type: "Type",
+  gear: "Gear",
   ctaTitle: "Hit the Road Without Worries!",
   ctaSubTitle:
     "Rent a reliable car quickly and easily – book your vehicle today and enjoy a stress-free drive.",
+  ctaAction: "Create a reservation today",
   gitTitle: "Get in touch",
   gitSubTitle:
     "We are here for you. Feel free to call us and get the necessary information.",
@@ -67,6 +84,7 @@ export const en: BaseLocale = {
     "We need your agreement so we can contact you regarding your reservation. Find out more about our privacy policy, Conversion Statement, User Privacy Protection, Confidential Transaction Data Protection, and Refunds here.",
   finish: "Finish",
   reservation: "Reservation",
+  step: "Step",
   vehicles: "Vehicles",
   accessories: "Accessories",
   review: "Review",
@@ -80,4 +98,14 @@ export const en: BaseLocale = {
   afterHoursReservationFee: "After-Hours Reservation Fee",
   afterHoursFeeDetails:
     "An additional charge applies for vehicle pick-up or return outside of regular working hours",
+  successTitle:
+    "Your reservation has been successfully sent. You will be contacted to confirm your reservation.",
+  successAction: "Return to the home page",
+  notFoundTitle: "Page Not Found",
+  notFoundMessage: "The page you are looking for does not exist.",
+  notFoundAction: "Return to the home page",
+  cookieConsent:
+    "We use cookies to improve your experience. By using our site, you accept our",
+  cookieConsentLink: "privacy policy",
+  cookieConsentAction: "Accept",
 };

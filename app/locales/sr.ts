@@ -1,7 +1,15 @@
 import type { BaseLocale } from "./base-locale";
 
 export const sr: BaseLocale = {
+  home: "Početna",
+  cars: "Vozila",
+  rentalConditions: "Opšti uslovi najma",
+  faq: "Često postavljena pitanja",
+  blog: "Blog",
+  contact: "Kontakt",
   title: "Vaše putovanje počinje ovde",
+  selectLanguage: "Izaberite jezik",
+  contactUs: "Kontaktirajte nas",
   subTitle: "Car Rental Beograd",
   createReservation: "Kreirajte rezervaciju",
   continue: "Nastavi",
@@ -17,7 +25,7 @@ export const sr: BaseLocale = {
   electric: "Električni",
   manual: "Manuelni",
   automatic: "Automatik",
-  seats: "sedista",
+  seats: "sedišta",
   description:
     "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na aerodromu i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
   deployFaster: "Brža isporuka",
@@ -27,12 +35,21 @@ export const sr: BaseLocale = {
   whyChoose: "Zašto izabrati Viastro?",
   fullInsurance: "Puno osiguranje uključeno",
   noHiddenCosts: "Nema skrivenih troškova",
+  satisfiedUsersTitle: "zadovoljnih korisnika",
   satisfiedUsers: "99.9%",
+  yearsOfExperienceTitle: "godina iskustva",
   yearsOfExperience: "5+",
   reserve: "Rezervišite",
+  available: "Dostupno",
+  reserved: "Rezervisano",
+  seat: "Sedišta",
+  fuel: "Gorivo",
+  type: "Tip",
+  gear: "Menjač",
   ctaTitle: "Putujte bezbrižno!",
   ctaSubTitle:
     "Iznajmite pouzdan automobil brzo i jednostavno – rezervišite vozilo još danas i uživajte u vožnji bez stresa.",
+  ctaAction: "Kreirajte rezervaciju još danas",
   gitTitle: "Kontaktirajte nas",
   gitSubTitle:
     "Mi smo tu za vas. Budite slobodni da nas pozovete i dobijete neophodne informacije.",
@@ -51,7 +68,6 @@ export const sr: BaseLocale = {
   day: "dan",
   allPricesIncludeVAT: "Sve cene su sa PDV-om",
   deposit: "Depozit:",
-
   pricesByDays: "Cene po danima:",
   includedInReservation: "Uključeno u rezervaciju",
   additionalEquipment: "Dodatna oprema",
@@ -68,6 +84,7 @@ export const sr: BaseLocale = {
     "Potreban nam je Vaš pristanak kako bismo Vas mogli kontaktirati u vezi sa Vašom rezervacijom. Više o našoj politici privatnosti, Izjavi o konverziji, Zaštiti privatnosti korisnika, Zaštiti poverljivih podataka o transakcijama i Povraćaju novca možete saznati ovde.",
   finish: "Završi",
   reservation: "Rezervacija",
+  step: "Korak",
   vehicles: "Vozila",
   accessories: "Dodaci",
   review: "Pregled",
@@ -81,4 +98,14 @@ export const sr: BaseLocale = {
   afterHoursReservationFee: "Dodatak za rezervaciju van radnog vremena",
   afterHoursFeeDetails:
     "Za podizanje ili vraćanje vozila van radnog vremena naplaćuje se dodatno",
+  successTitle:
+    "Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi rezervacije.",
+  successAction: "Vratite se na početnu stranicu",
+  notFoundTitle: "Stranica nije pronađena",
+  notFoundMessage: "Stranica koju tražite ne postoji.",
+  notFoundAction: "Vratite se na početnu stranicu",
+  cookieConsent:
+    "Koristimo kolačiće radi poboljšanja korisničkog iskustva. Korišćenjem sajta prihvatate našu",
+  cookieConsentLink: "politiku privatnosti",
+  cookieConsentAction: "Prihvati",
 };
