@@ -198,7 +198,7 @@ export default function Extras({
             form.append("extras", `${selected}`);
             fetcher.submit(form, { method: "post" });
           }}
-          className="bg-s hover:bg-p"
+          className="w-full sm:w-34 bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
           size="lg">
           {loaderData.lang.continue}
           <ChevronRight />

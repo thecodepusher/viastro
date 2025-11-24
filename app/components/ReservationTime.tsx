@@ -346,7 +346,7 @@ export default function ReservationTime(props: {
             });
           }}
           aria-label={lang.continue}
-          className="sm:w-34 w-full bg-s">
+          className="sm:w-34 w-full bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
           {lang.continue}
         </Button>
       </div>
