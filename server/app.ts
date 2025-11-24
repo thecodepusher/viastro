@@ -1,5 +1,5 @@
 import { createRequestHandler } from "@react-router/express";
-import express from "express";
+import { createRequestListener } from "@react-router/node";
 import "react-router";
 
 declare module "react-router" {
@@ -8,24 +8,20 @@ declare module "react-router" {
   }
 }
 
-export const app = express();
+const getLoadContext = () => {
+  return {
+    VALUE_FROM_EXPRESS: "Hello from Express",
+  };
+};
 
-// Handle .well-known paths (used by Chrome DevTools and other tools)
-// Return 404 without triggering React Router
-app.use((req, res, next) => {
-  if (req.path.startsWith("/.well-known/")) {
-    return res.status(404).end();
-  }
-  next();
+// For Vercel - export handler
+export const handler = createRequestListener({
+  build: () => import("virtual:react-router/server-build"),
+  getLoadContext,
 });
 
-app.use(
-  createRequestHandler({
-    build: () => import("virtual:react-router/server-build"),
-    getLoadContext() {
-      return {
-        VALUE_FROM_EXPRESS: "Hello from Express",
-      };
-    },
-  })
-);
+// For local Express development - export app middleware
+export const app = createRequestHandler({
+  build: () => import("virtual:react-router/server-build"),
+  getLoadContext,
+});

@@ -1,6 +1,6 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
-const routes = [
+export default [
   route("sitemap.xml", "routes/sitemap[.]xml.tsx"),
   route("robots.txt", "routes/robots[.]txt.tsx"),
   route("select-lang", "routes/select-lang.tsx"),
@@ -24,6 +24,4 @@ const routes = [
     route("extras", "routes/reservation/extras.tsx"),
     route("review", "routes/reservation/review.tsx"),
   ]),
-];
-
-export default routes satisfies RouteConfig;
+] satisfies RouteConfig;
