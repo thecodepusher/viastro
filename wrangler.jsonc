@@ -1,7 +1,0 @@
-{
-  "name": "viastro",
-  "compatibility_date": "2025-11-24",
-  "assets": {
-    "directory": "./build/client",
-  },
-}
