@@ -4,10 +4,13 @@
  */
 
 export interface OrganizationSchema {
+  "@context": string;
+  "@type": string;
   name: string;
   url: string;
   logo: string;
   contactPoint: {
+    "@type": string;
     telephone: string;
     contactType: string;
     areaServed: string;
@@ -17,30 +20,41 @@ export interface OrganizationSchema {
 }
 
 export interface WebSiteSchema {
+  "@context": string;
+  "@type": string;
   name: string;
   url: string;
   potentialAction: {
-    target: string;
-    queryInput: string;
+    "@type": string;
+    target: {
+      "@type": string;
+      urlTemplate: string;
+    };
+    "query-input": string;
   };
   inLanguage: string[];
 }
 
 export interface LocalBusinessSchema {
+  "@context": string;
+  "@type": string;
   name: string;
   image: string;
   telephone: string;
   priceRange: string;
   address: {
+    "@type": string;
     addressCountry: string;
     addressLocality: string;
     addressRegion: string;
   };
   geo: {
+    "@type": string;
     latitude: string;
     longitude: string;
   };
   openingHoursSpecification: {
+    "@type": string;
     dayOfWeek: string[];
     opens: string;
     closes: string;
@@ -48,11 +62,17 @@ export interface LocalBusinessSchema {
 }
 
 export interface ProductSchema {
+  "@context": string;
+  "@type": string;
   name: string;
   image: string;
   description: string;
-  brand: string;
+  brand: {
+    "@type": string;
+    name: string;
+  };
   offers: {
+    "@type": string;
     price: string;
     priceCurrency: string;
     availability: string;
@@ -61,62 +81,66 @@ export interface ProductSchema {
 }
 
 export interface ArticleSchema {
+  "@context": string;
+  "@type": string;
   headline: string;
   image: string;
   datePublished: string;
   dateModified: string;
   author: {
+    "@type": string;
     name: string;
     url: string;
   };
   publisher: {
+    "@type": string;
     name: string;
     logo: {
+      "@type": string;
       url: string;
     };
+  };
+  description: string;
+  mainEntityOfPage: {
+    "@type": string;
+    "@id": string;
   };
 }
 
 export interface FAQPageSchema {
+  "@context": string;
+  "@type": string;
   mainEntity: {
+    "@type": string;
     name: string;
     acceptedAnswer: {
+      "@type": string;
       text: string;
     };
   }[];
 }
 
-/**
- * Get base URL from request
- */
 export function getBaseUrl(request?: Request): string {
   if (request) {
     try {
       const url = new URL(request.url);
       return `${url.protocol}//${url.host}`;
-    } catch (e) {
-      // Fallback if URL is invalid
-    }
+    } catch (e) {}
   }
-  
-  // Fallback for client-side or when request is not available
+
   if (typeof window !== "undefined") {
     return `${window.location.protocol}//${window.location.host}`;
   }
-  
-  // Default fallback (can be overridden with environment variable)
+
   return process.env.BASE_URL || "https://viastro.rs";
 }
 
-/**
- * Generate Organization Schema (JSON-LD)
- */
 export function generateOrganizationSchema(
   baseUrl: string,
   langCode: string = "sr"
 ): OrganizationSchema {
   const logoUrl = `${baseUrl}/viastro_logo.png`;
-  
+
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -138,9 +162,6 @@ export function generateOrganizationSchema(
   };
 }
 
-/**
- * Generate WebSite Schema (JSON-LD)
- */
 export function generateWebSiteSchema(
   baseUrl: string,
   langCode: string = "sr"
@@ -162,9 +183,6 @@ export function generateWebSiteSchema(
   };
 }
 
-/**
- * Generate LocalBusiness Schema (JSON-LD)
- */
 export function generateLocalBusinessSchema(
   baseUrl: string,
   langCode: string = "sr"
@@ -204,9 +222,6 @@ export function generateLocalBusinessSchema(
   };
 }
 
-/**
- * Generate Service Schema (JSON-LD) for Car Rental
- */
 export function generateCarRentalServiceSchema(
   baseUrl: string,
   langCode: string = "sr"
@@ -251,9 +266,6 @@ export function generateCarRentalServiceSchema(
   };
 }
 
-/**
- * Generate Product Schema for a Car (JSON-LD)
- */
 export function generateCarProductSchema(
   baseUrl: string,
   car: {
@@ -285,9 +297,6 @@ export function generateCarProductSchema(
   };
 }
 
-/**
- * Generate Article Schema for Blog Posts (JSON-LD)
- */
 export function generateArticleSchema(
   baseUrl: string,
   article: {
@@ -329,9 +338,6 @@ export function generateArticleSchema(
   };
 }
 
-/**
- * Generate FAQPage Schema (JSON-LD)
- */
 export function generateFAQPageSchema(
   baseUrl: string,
   faqs: { question: string; answer: string }[],
@@ -351,9 +357,6 @@ export function generateFAQPageSchema(
   };
 }
 
-/**
- * Generate BreadcrumbList Schema (JSON-LD)
- */
 export function generateBreadcrumbSchema(
   baseUrl: string,
   items: { name: string; url: string }[],
@@ -371,10 +374,6 @@ export function generateBreadcrumbSchema(
   };
 }
 
-/**
- * Convert schema object to JSON-LD script tag
- */
 export function schemaToScriptTag(schema: object): string {
   return `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}</script>`;
 }
-

@@ -45,12 +45,18 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
   const canonical = `${baseUrl}/${data.langCode || "sr"}/contact`;
   const title = `Viastro ${data.lang.contact} | Belgrade`;
-  const description = data.lang.gitSubTitle || "Contact Viastro Rent a Car in Belgrade for car rental services.";
+  const description =
+    data.lang.gitSubTitle ||
+    "Contact Viastro Rent a Car in Belgrade for car rental services.";
 
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "contact viastro, rent a car Belgrade contact, car rental Belgrade" },
+    {
+      name: "keywords",
+      content:
+        "contact viastro, rent a car Belgrade contact, car rental Belgrade",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
@@ -60,7 +66,6 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function ContactPage({ loaderData }: Route.ComponentProps) {
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateLocalBusinessSchema(loaderData.baseUrl, loaderData.langCode),
@@ -68,7 +73,10 @@ export default function ContactPage({ loaderData }: Route.ComponentProps) {
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: loaderData.lang.contact, url: `/${loaderData.langCode}/contact` },
+        {
+          name: loaderData.lang.contact,
+          url: `/${loaderData.langCode}/contact`,
+        },
       ],
       loaderData.langCode
     ),

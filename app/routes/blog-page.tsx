@@ -44,12 +44,16 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
   const canonical = `${baseUrl}/${data.langCode || "sr"}/blog`;
   const title = `Viastro ${data.lang.blog} | Belgrade`;
-  const description = "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.";
+  const description =
+    "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.";
 
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "viastro blog, rent a car Belgrade, travel guides Serbia" },
+    {
+      name: "keywords",
+      content: "viastro blog, rent a car Belgrade, travel guides Serbia",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
@@ -59,7 +63,6 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function BlogPage({ loaderData }: Route.ComponentProps) {
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateBreadcrumbSchema(

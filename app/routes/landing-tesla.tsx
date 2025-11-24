@@ -33,7 +33,11 @@ export function meta({ data }: Route.MetaArgs) {
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade" },
+    {
+      name: "keywords",
+      content:
+        "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
@@ -112,7 +116,6 @@ export default function LandingTeslaPage({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
 
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateLocalBusinessSchema(loaderData.baseUrl, loaderData.langCode),
@@ -121,7 +124,10 @@ export default function LandingTeslaPage({ loaderData }: Route.ComponentProps) {
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: "Rent a Car Airport", url: `/${loaderData.langCode}/rent-a-car-aerodrom-beograd-nikola-tesla` },
+        {
+          name: "Rent a Car Airport",
+          url: `/${loaderData.langCode}/rent-a-car-aerodrom-beograd-nikola-tesla`,
+        },
       ],
       loaderData.langCode
     ),

@@ -25,7 +25,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  // Pozovi API da dobijemo sve modele
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
     body: JSON.stringify({
@@ -34,11 +33,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
   });
   const apiResponse: ApiAllModelsResponse = await res.json();
-  
-  // Transformiši podatke
   const transformedCars = transformApiCars(apiResponse, lang);
-  
-  // Pronađi automobil po exnternalId (carId iz cookie-ja je exnternalId)
   const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
   const pickup = locations.find((x) => x.id === +cookie.pickUpLocation);
   const dropOff = locations.find((x) => x.id === +cookie.dropOffLocation);
@@ -158,7 +153,6 @@ export async function action({ request, params }: Route.ActionArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  // Pozovi API da dobijemo sve modele
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
     body: JSON.stringify({
@@ -167,16 +161,11 @@ export async function action({ request, params }: Route.ActionArgs) {
     headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
   });
   const apiResponse: ApiAllModelsResponse = await res.json();
-  
-  // Dobijamo lang za transformaciju
+
   const lang = await getLocale(params.lang, request);
-  
-  // Transformiši podatke
   const transformedCars = transformApiCars(apiResponse, lang);
-  
-  // Pronađi automobil po exnternalId (carId iz cookie-ja je exnternalId)
   const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
-  
+
   const pickupDate = cookie.pickUpDate;
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;

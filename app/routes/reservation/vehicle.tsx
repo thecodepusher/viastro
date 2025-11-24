@@ -56,7 +56,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     availableCarIds
   );
 
-  // Get selected car ID from cookie and sort cars
   const selectedCarId = cookie.selectedCarId
     ? parseInt(cookie.selectedCarId as string, 10)
     : null;

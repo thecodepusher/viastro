@@ -31,13 +31,25 @@ export function meta({ data }: Route.MetaArgs) {
   return [
     { title: "Viastro rent a car | Belgrade" },
     { name: "description", content: data.lang.description },
-    { name: "keywords", content: "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade" },
+    {
+      name: "keywords",
+      content:
+        "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade",
+    },
     { property: "og:title", content: "Viastro rent a car | Belgrade" },
     { property: "og:description", content: data.lang.description },
     { property: "og:type", content: "website" },
     { property: "og:url", content: canonical },
     { property: "og:image", content: imageUrl },
-    { property: "og:locale", content: data.langCode === "sr" ? "sr_RS" : data.langCode === "en" ? "en_US" : "ru_RU" },
+    {
+      property: "og:locale",
+      content:
+        data.langCode === "sr"
+          ? "sr_RS"
+          : data.langCode === "en"
+            ? "en_US"
+            : "ru_RU",
+    },
     { property: "og:site_name", content: "Viastro Rent a Car" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: "Viastro rent a car | Belgrade" },
@@ -144,7 +156,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const isMobile = useIsMobile();
   const heroVideoUrl = isMobile ? "/hero-video.mp4" : "/hero-video-desktop.mp4";
 
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateWebSiteSchema(loaderData.baseUrl, loaderData.langCode),
@@ -163,6 +174,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             loop
             muted
             playsInline
+            {...({ fetchPriority: "high" } as any)}
             aria-label="Hero video background">
             <source src={heroVideoUrl} type="video/mp4" />
           </video>

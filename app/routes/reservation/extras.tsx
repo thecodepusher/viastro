@@ -15,7 +15,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   const lang = await getLocale(params.lang, request);
 
-  // Pozovi API da dobijemo sve modele
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
     body: JSON.stringify({
@@ -24,13 +23,11 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
   });
   const apiResponse: ApiAllModelsResponse = await res.json();
-  
-  // Transformiši podatke
+
   const transformedCars = transformApiCars(apiResponse, lang);
-  
-  // Pronađi automobil po exnternalId (carId iz cookie-ja je exnternalId)
+
   const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
-  
+
   const pickupDate = cookie.pickUpDate;
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;

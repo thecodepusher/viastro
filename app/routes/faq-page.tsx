@@ -25,8 +25,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
-  
-  // Get FAQs based on language
+
   let faqs = faqsSr;
   if (langCode === "en") faqs = faqsEn;
   if (langCode === "ru") faqs = faqsRu;
@@ -52,12 +51,17 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
   const canonical = `${baseUrl}/${data.langCode || "sr"}/faq`;
   const title = `Viastro ${data.lang.faq} | Belgrade`;
-  const description = "Frequently asked questions about car rental services in Belgrade.";
+  const description =
+    "Frequently asked questions about car rental services in Belgrade.";
 
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila" },
+    {
+      name: "keywords",
+      content:
+        "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
@@ -67,7 +71,6 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function FandQPage({ loaderData }: Route.ComponentProps) {
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateFAQPageSchema(

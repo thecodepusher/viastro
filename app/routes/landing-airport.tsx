@@ -33,7 +33,11 @@ export function meta({ data }: Route.MetaArgs) {
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade" },
+    {
+      name: "keywords",
+      content:
+        "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
@@ -114,7 +118,6 @@ export default function LandingAirportPage({
   const fetcher = useFetcher();
   const navigate = useNavigate();
 
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateLocalBusinessSchema(loaderData.baseUrl, loaderData.langCode),
@@ -123,7 +126,10 @@ export default function LandingAirportPage({
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: "Rent a Car Airport", url: `/${loaderData.langCode}/rent-a-car-belgrade-airport` },
+        {
+          name: "Rent a Car Airport",
+          url: `/${loaderData.langCode}/rent-a-car-belgrade-airport`,
+        },
       ],
       loaderData.langCode
     ),

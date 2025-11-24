@@ -85,7 +85,11 @@ export function meta({ data }: Route.MetaArgs) {
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila" },
+    {
+      name: "keywords",
+      content:
+        "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
@@ -98,7 +102,6 @@ export default function CarsPage({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
   const fetcher = useFetcher();
 
-  // Generate SEO schemas
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
     generateBreadcrumbSchema(

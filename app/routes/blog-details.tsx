@@ -81,7 +81,10 @@ export function meta({ data }: Route.MetaArgs) {
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "viastro blog, rent a car Belgrade, car rental tips" },
+    {
+      name: "keywords",
+      content: "viastro blog, rent a car Belgrade, car rental tips",
+    },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "article" },
@@ -92,12 +95,14 @@ export function meta({ data }: Route.MetaArgs) {
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: imageUrl },
     { rel: "canonical", href: canonical },
-    { property: "article:published_time", content: data.post.datetime || new Date().toISOString() },
+    {
+      property: "article:published_time",
+      content: data.post.datetime || new Date().toISOString(),
+    },
   ];
 }
 
 export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
-  // Generate SEO schemas
   const articleUrl = `${loaderData.baseUrl}/${loaderData.langCode}/blog/${loaderData.post.slug}`;
   const imageUrl = loaderData.post.imageUrl
     ? `${loaderData.baseUrl}${loaderData.post.imageUrl}`
@@ -123,7 +128,10 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
         { name: loaderData.lang.blog, url: `/${loaderData.langCode}/blog` },
-        { name: loaderData.post.title, url: `/${loaderData.langCode}/blog/${loaderData.post.slug}` },
+        {
+          name: loaderData.post.title,
+          url: `/${loaderData.langCode}/blog/${loaderData.post.slug}`,
+        },
       ],
       loaderData.langCode
     ),

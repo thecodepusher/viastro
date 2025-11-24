@@ -15,7 +15,7 @@ export const reservationSteps = (
     status: StepStatus;
   }> = [
     {
-      id: "01",
+      id: "1",
       name: loaderData.lang.reservation,
       routeId: "routes/reservation",
       href: "./",
@@ -23,7 +23,7 @@ export const reservationSteps = (
       status: "upcoming",
     },
     {
-      id: "02",
+      id: "2",
       name: loaderData.lang.vehicles,
       routeId: "routes/vehicle",
       href: "./vehicle",
@@ -31,7 +31,7 @@ export const reservationSteps = (
       status: "upcoming",
     },
     {
-      id: "03",
+      id: "3",
       name: loaderData.lang.accessories,
       routeId: "routes/extras",
       href: "./extras",
@@ -39,7 +39,7 @@ export const reservationSteps = (
       status: "upcoming",
     },
     {
-      id: "04",
+      id: "4",
       name: loaderData.lang.review,
       routeId: "routes/review",
       href: "./review",

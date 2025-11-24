@@ -30,58 +30,56 @@ export default function GetInTouch(props: { lang: BaseLocale }) {
                     <p>Danila Lekica Spanca 31, 11070</p>
                   </address>
                 </a>
-                <dl className="mt-3 space-y-1 text-sm/6 ">
-                  <div className="font-bold">
-                    <dd>{props.lang.gitDays}</dd>
-                  </div>
-                  <div className="mt-1">
-                    <dd>8.00 - 16.00</dd>
-                  </div>
-                </dl>
+                <div className="mt-3 space-y-1 text-sm/6 ">
+                  <div className="font-bold">{props.lang.gitDays}</div>
+                  <div className="mt-1">8.00 - 16.00</div>
+                </div>
               </div>
               <div className="rounded-2xl bg-pl/20 border border-pl/30 p-10 transition-colors hover:bg-pl/40">
                 <h3 className="text-base/7 font-semibold text-gray-900">
                   {props.lang.gitAwailable}
                 </h3>
                 <a href="tel:+38169656555">
-                  <dl className="mt-3 space-y-1 text-sm/6">
+                  <div className="mt-3 space-y-1 text-sm/6">
                     <div className="flex items-center gap-2">
                       <FiPhoneCall size={20} />
-                      <dd className="font-semibold">+38169656555</dd>
+                      <span className="font-semibold">+38169656555</span>
                     </div>
-                  </dl>
+                  </div>
                 </a>
                 <a href="https://www.instagram.com/viastro.rs/">
-                  <dl className="mt-3 space-y-1 text-sm/6">
+                  <div className="mt-3 space-y-1 text-sm/6">
                     <div className="flex items-center gap-4">
                       <FaInstagram size={20} />
-                      <dd className="font-semibold">viastro.rs</dd>
+                      <span className="font-semibold">viastro.rs</span>
                     </div>
-                  </dl>
+                  </div>
                 </a>
                 <a href="mailto:reservations@viastro.rs">
-                  <dl className="mt-3 space-y-1 text-sm/6">
+                  <div className="mt-3 space-y-1 text-sm/6">
                     <div className="flex items-center gap-4">
                       <MdOutlineMarkEmailRead size={20} />
-                      <dd className="font-semibold">reservations@viastro.rs</dd>
+                      <span className="font-semibold">
+                        reservations@viastro.rs
+                      </span>
                     </div>
-                  </dl>
+                  </div>
                 </a>
                 <a href="https://wa.me/38169656555">
-                  <dl className="mt-3 space-y-1 text-sm/6">
+                  <div className="mt-3 space-y-1 text-sm/6">
                     <div className="flex items-center gap-4">
                       <FaWhatsapp size={20} />
-                      <dd className="font-semibold">+38169656555</dd>
+                      <span className="font-semibold">+38169656555</span>
                     </div>
-                  </dl>
+                  </div>
                 </a>
                 <a href="viber://chat?number=+38169656555">
-                  <dl className="mt-3 space-y-1 text-sm/6">
+                  <div className="mt-3 space-y-1 text-sm/6">
                     <div className="flex items-center gap-4">
                       <FaViber size={20} />
-                      <dd className="font-semibold">+38169656555</dd>
+                      <span className="font-semibold">+38169656555</span>
                     </div>
-                  </dl>
+                  </div>
                 </a>
               </div>
             </div>

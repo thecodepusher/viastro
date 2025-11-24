@@ -19,6 +19,7 @@ import NotFound from "./components/NotFound";
 import { en } from "@/locales/en";
 import { sr } from "@/locales/sr";
 import { ru } from "@/locales/ru";
+import HreflangLinks from "./components/ui/HreflangLinks";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -46,12 +47,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="googlebot" content="index, follow" />
         <meta name="language" content="Serbian" />
         <meta httpEquiv="content-language" content="sr, en, ru" />
-        <link rel="alternate" hrefLang="sr" href="/sr" />
-        <link rel="alternate" hrefLang="en" href="/en" />
-        <link rel="alternate" hrefLang="ru" href="/ru" />
-        <link rel="alternate" hrefLang="x-default" href="/sr" />
         <Meta />
         <Links />
+        <HreflangLinks />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

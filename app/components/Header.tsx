@@ -70,9 +70,9 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-md hover:bg-white/20 hover:scale-105",
+                    "px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-md hover:bg-white/40 hover:scale-105",
                     "lg:px-5 lg:py-2.5 lg:text-base",
-                    active && "bg-white/25 shadow-sm"
+                    active && "bg-white/45 shadow-sm"
                   )}>
                   {link.label}
                 </Link>
@@ -94,8 +94,8 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 type="submit"
                 value="sr"
                 className={cn(
-                  "h-10 w-10 p-1 hover:bg-white/20 cursor-pointer",
-                  props.langCode === "sr" && "bg-white/20"
+                  "h-10 w-10 p-1 hover:bg-white/40 cursor-pointer",
+                  props.langCode === "sr" && "bg-white/45"
                 )}>
                 <img
                   className="w-7 h-7 rounded shadow-sm border border-white/30"
@@ -109,8 +109,8 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 type="submit"
                 value="en"
                 className={cn(
-                  "h-10 w-10 p-1 hover:bg-white/20 cursor-pointer",
-                  props.langCode === "en" && "bg-white/20"
+                  "h-10 w-10 p-1 hover:bg-white/40 cursor-pointer",
+                  props.langCode === "en" && "bg-white/45"
                 )}>
                 <img
                   className="w-7 h-7 rounded shadow-sm border border-white/30"
@@ -124,8 +124,8 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 type="submit"
                 value="ru"
                 className={cn(
-                  "h-10 w-10 p-1 hover:bg-white/20 cursor-pointer",
-                  props.langCode === "ru" && "bg-white/20"
+                  "h-10 w-10 p-1 hover:bg-white/40 cursor-pointer",
+                  props.langCode === "ru" && "bg-white/45"
                 )}>
                 <img
                   className="w-7 h-7 rounded shadow-sm border border-white/30"
@@ -143,7 +143,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:bg-white/20"
+                className="text-white hover:bg-white/40"
                 aria-label="Open menu">
                 <MenuIcon className="size-7" />
               </Button>
