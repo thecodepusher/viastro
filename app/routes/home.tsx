@@ -14,6 +14,7 @@ import GetInTouch from "@/components/GetInTouch";
 import Cars from "@/components/Cars";
 import ReservationTime from "@/components/ReservationTime";
 import SEO from "@/components/SEO";
+import YouTubeVideo from "@/components/YouTubeVideo";
 import {
   getBaseUrl,
   generateOrganizationSchema,
@@ -154,7 +155,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const heroVideoUrl = isMobile ? "/hero-video.mp4" : "/hero-video-desktop.mp4";
 
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
@@ -168,16 +168,20 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <SEO schemas={schemas} />
       <div className="flex flex-col w-full mt-18">
         <div className="relative flex flex-col items-center justify-center h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
-          <video
-            className="absolute inset-0 w-full h-full sm:object-cover object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            {...({ fetchPriority: "high" } as any)}
-            aria-label="Hero video background">
-            <source src={heroVideoUrl} type="video/mp4" />
-          </video>
+          {isMobile ? (
+            <video
+              className="absolute inset-0 w-full h-full sm:object-cover object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+              {...({ fetchPriority: "high" } as any)}
+              aria-label="Hero video background">
+              <source src="/hero-video.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            <YouTubeVideo videoId="k7mFLoGhh0s" />
+          )}
 
           <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/40 via-black/50 to-black/70" />
 

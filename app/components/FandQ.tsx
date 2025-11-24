@@ -60,13 +60,13 @@ export default function FandQ(props: { langCode: string }) {
                   />
                 </button>
               </dt>
-              <dd
+              <div
                 className={cn(
                   "text-base/7 text-gray-600 px-6 overflow-hidden transition-all duration-300 ease-in-out",
-                  isOpen ? "max-h-96 pb-4" : "max-h-0"
+                  isOpen ? "max-h-96 pb-4 bg-pl/10" : "max-h-0"
                 )}>
                 <div className="pt-2">{faq.answer}</div>
-              </dd>
+              </div>
             </div>
           );
         })}

@@ -153,7 +153,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
               Blog
             </Link>
             <span className="text-gray-400 shrink-0">{">"}</span>
-            <span className="text-gray-800 font-medium truncate min-w-0">
+            <span className="text-gray-400 font-medium truncate min-w-0">
               {loaderData.post.title}
             </span>
           </nav>

@@ -95,4 +95,5 @@ export interface BaseLocale {
   cookieConsent: string;
   cookieConsentLink: string;
   cookieConsentAction: string;
+  reservationReviewAction: string;
 }

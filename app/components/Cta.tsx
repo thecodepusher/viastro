@@ -15,7 +15,7 @@ export default function Cta(props: { lang: BaseLocale }) {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
               to="/reservation"
-              className="rounded-md bg-s px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+              className="rounded-md px-3.5 py-2.5 bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
               {props.lang.ctaAction}
             </Link>
           </div>

@@ -108,4 +108,5 @@ export const sr: BaseLocale = {
     "Koristimo kolačiće radi poboljšanja korisničkog iskustva. Korišćenjem sajta prihvatate našu",
   cookieConsentLink: "politiku privatnosti",
   cookieConsentAction: "Prihvati",
+  reservationReviewAction: "Završi rezervaciju",
 };

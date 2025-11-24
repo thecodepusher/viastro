@@ -9,32 +9,29 @@ export default function SEO({ schemas }: SEOProps) {
     const existingScripts = document.querySelectorAll(
       "script[data-seo-schema]"
     );
-    existingScripts.forEach((script) => script.remove());
+    existingScripts.forEach((script) => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    });
 
-    schemas.forEach((schema, index) => {
+    schemas.forEach((schema) => {
       const script = document.createElement("script");
       script.type = "application/ld+json";
       script.setAttribute("data-seo-schema", "true");
-      script.text = JSON.stringify(schema);
+      script.textContent = JSON.stringify(schema);
       document.head.appendChild(script);
     });
 
     return () => {
       const scripts = document.querySelectorAll("script[data-seo-schema]");
-      scripts.forEach((script) => script.remove());
+      scripts.forEach((script) => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      });
     };
   }, [schemas]);
 
-  return (
-    <>
-      {schemas.map((schema, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          data-seo-schema="true"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
-    </>
-  );
+  return null;
 }

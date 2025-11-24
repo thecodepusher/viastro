@@ -14,7 +14,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import Calendar from "@/components/ui/calendar";
+import CustomCalendar from "@/components/ui/custom-calendar";
 import { Label } from "@/components/ui/label";
 import { CalendarIcon } from "lucide-react";
 import type { BaseLocale } from "@/locales/base-locale";
@@ -182,7 +182,7 @@ export default function ReservationTime(props: {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-full p-0">
-                <Calendar
+                <CustomCalendar
                   mode="single"
                   selected={pickDate}
                   fromDate={new Date()}
@@ -274,7 +274,7 @@ export default function ReservationTime(props: {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar
+                <CustomCalendar
                   mode="single"
                   selected={dropDate}
                   fromDate={addDays(pickDate ?? new Date(), 2)}
@@ -346,7 +346,7 @@ export default function ReservationTime(props: {
             });
           }}
           aria-label={lang.continue}
-          className="sm:w-34 w-full bg-s">
+          className="sm:w-34 w-full bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
           {lang.continue}
         </Button>
       </div>

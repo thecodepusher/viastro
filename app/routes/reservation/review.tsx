@@ -171,8 +171,6 @@ export async function action({ request, params }: Route.ActionArgs) {
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
 
-  const formData = await request.formData();
-
   if (!car) {
     return redirect("../vehicle");
   }
@@ -419,8 +417,10 @@ export default function Review({ loaderData }: Route.ComponentProps) {
           </div>
         </div>
         <div className="flex mx-6 mb-6">
-          <Button type="submit" size="lg" className="w-full bg-s hover:bg-p">
-            Finish
+          <Button
+            type="submit"
+            className="w-full max-w-sm bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
+            {loaderData.lang.reservationReviewAction}
           </Button>
         </div>
       </Form>
