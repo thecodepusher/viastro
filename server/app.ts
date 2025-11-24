@@ -1,6 +1,7 @@
-import { createRequestHandler } from "@react-router/express";
-import { createRequestListener } from "@react-router/node";
-import "react-router";
+import { createRequestHandler } from "react-router";
+import { createRequestHandler as createExpressRequestHandler } from "@react-router/express";
+
+import * as build from "virtual:react-router/server-build";
 
 declare module "react-router" {
   interface AppLoadContext {
@@ -14,14 +15,18 @@ const getLoadContext = () => {
   };
 };
 
-// For Vercel - export handler
-export const handler = createRequestListener({
-  build: () => import("virtual:react-router/server-build"),
-  getLoadContext,
-});
+// For Vercel - export default Web API-compatible function
+const handler = createRequestHandler(build);
+
+export default async function (request: Request): Promise<Response> {
+  return handler(request, {
+    // Add your "load context" here based on the current request
+    ...getLoadContext(),
+  });
+}
 
 // For local Express development - export app middleware
-export const app = createRequestHandler({
-  build: () => import("virtual:react-router/server-build"),
+export const app = createExpressRequestHandler({
+  build: () => Promise.resolve(build),
   getLoadContext,
 });
