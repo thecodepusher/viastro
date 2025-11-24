@@ -92,4 +92,7 @@ export interface BaseLocale {
   notFoundTitle: string;
   notFoundMessage: string;
   notFoundAction: string;
+  cookieConsent: string;
+  cookieConsentLink: string;
+  cookieConsentAction: string;
 }

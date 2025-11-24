@@ -35,29 +35,31 @@ export default function FandQ(props: { langCode: string }) {
         {title}
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+      <dl className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
         {faqs.map((faq, index) => {
           const isOpen = openItems.has(index);
           return (
             <div
               key={faq.question}
               className={cn(
-                "border border-gray-200 rounded-lg overflow-hidden transition-colors self-start",
-                isOpen ? "bg-pl/40" : "bg-pl/20 hover:bg-pl/40"
+                "border border-gray-200 rounded-lg overflow-hidden transition-colors self-start"
               )}>
-              <button
-                onClick={() => toggleItem(index)}
-                className="w-full px-6 py-4 flex items-center justify-between text-left transition-colors cursor-pointer">
-                <dt className="text-base/7 font-semibold text-gray-900 pr-4">
-                  {faq.question}
-                </dt>
-                <ChevronDown
-                  className={cn(
-                    "h-5 w-5 text-gray-500 shrink-0 transition-transform duration-200",
-                    isOpen && "transform rotate-180"
-                  )}
-                />
-              </button>
+              <dt
+                className={cn(isOpen ? "bg-pl/40" : "bg-pl/20 hover:bg-pl/40")}>
+                <button
+                  onClick={() => toggleItem(index)}
+                  className="w-full px-6 py-4 flex items-center justify-between text-left transition-colors cursor-pointer">
+                  <span className="text-base/7 font-semibold text-gray-900 pr-4">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "h-5 w-5 text-gray-500 shrink-0 transition-transform duration-200",
+                      isOpen && "transform rotate-180"
+                    )}
+                  />
+                </button>
+              </dt>
               <dd
                 className={cn(
                   "text-base/7 text-gray-600 px-6 overflow-hidden transition-all duration-300 ease-in-out",
@@ -68,7 +70,7 @@ export default function FandQ(props: { langCode: string }) {
             </div>
           );
         })}
-      </div>
+      </dl>
     </div>
   );
 }

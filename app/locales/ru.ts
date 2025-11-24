@@ -104,4 +104,8 @@ export const ru: BaseLocale = {
   notFoundTitle: "Страница не найдена",
   notFoundMessage: "Страница, которую вы ищете, не существует.",
   notFoundAction: "Вернитесь на главную страницу",
+  cookieConsent:
+    "Мы используем куки для улучшения вашего опыта. Используя сайт, вы принимаете нашу",
+  cookieConsentLink: "политику конфиденциальности",
+  cookieConsentAction: "Принять",
 };

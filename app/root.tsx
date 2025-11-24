@@ -37,6 +37,23 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const matches = useMatches();
+
+  const matchWithData = matches
+    .slice()
+    .reverse()
+    .find((match) => {
+      const data = match.data;
+      return (
+        data && typeof data === "object" && "lang" in data && "langCode" in data
+      );
+    });
+
+  const langData = matchWithData?.data as
+    | { lang: any; langCode: string }
+    | undefined;
+  const langForCookie = langData?.lang ?? sr;
+
   return (
     <html lang="sr">
       <head>
@@ -52,11 +69,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <HreflangLinks />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                    })(window,document,'script','dataLayer','GTM-5FXCXRX2');`,
+            __html: `
+              // Initialize dataLayer and Google Consent Mode v2
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              
+              const cookieConsent = localStorage.getItem('cookie_consent');
+              const consentMode = cookieConsent === 'true' ? 'granted' : 'denied';
+              
+              gtag('consent', 'default', {
+                'analytics_storage': consentMode,
+                'ad_storage': consentMode,
+                'ad_user_data': consentMode,
+                'ad_personalization': consentMode,
+                'functionality_storage': 'granted',
+                'personalization_storage': 'granted',
+                'security_storage': 'granted'
+              });
+              
+              if (cookieConsent === 'true') {
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-5FXCXRX2');
+              }
+            `,
           }}
         />
       </head>
@@ -69,7 +107,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             style={{ display: "none", visibility: "hidden" }}></iframe>
         </noscript>
         {children}
-        <CookieConsent />
+        <CookieConsent lang={langForCookie} />
         <Toaster />
         <ScrollRestoration />
         <Scripts />

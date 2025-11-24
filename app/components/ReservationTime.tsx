@@ -127,7 +127,7 @@ export default function ReservationTime(props: {
         <div className="w-full flex flex-col gap-1">
           <Label>{lang.pickUpLoacation}</Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full" aria-label={lang.pickUpLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
@@ -143,7 +143,9 @@ export default function ReservationTime(props: {
         <div className="w-full flex flex-col gap-1">
           <Label>{lang.dropOffLoacation}</Label>
           <Select value={dropOffLocation} onValueChange={setDropOffLocation}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger
+              className="w-full"
+              aria-label={lang.dropOffLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
@@ -166,6 +168,7 @@ export default function ReservationTime(props: {
               <PopoverTrigger asChild>
                 <Button
                   variant={"outline"}
+                  aria-label={`${lang.pickUpTime} - ${pickDate ? format(pickDate, "PPP") : lang.choose}`}
                   className={cn(
                     "w-[calc(100%-90px)] justify-start text-left font-normal",
                     !pickDate && "text-muted-foreground"
@@ -232,7 +235,9 @@ export default function ReservationTime(props: {
 
                 setDropOffTimes(t);
               }}>
-              <SelectTrigger className="w-[90px]">
+              <SelectTrigger
+                className="w-[90px]"
+                aria-label={`${lang.pickUpTime} - ${pickUpTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
 
@@ -255,6 +260,7 @@ export default function ReservationTime(props: {
               <PopoverTrigger asChild>
                 <Button
                   variant={"outline"}
+                  aria-label={`${lang.dropOffTime} - ${dropDate ? format(dropDate, "PPP") : lang.choose}`}
                   className={cn(
                     "w-[calc(100%-90px)] justify-start text-left font-normal",
                     !dropDate && "text-muted-foreground"
@@ -296,7 +302,9 @@ export default function ReservationTime(props: {
               </PopoverContent>
             </Popover>
             <Select value={dropOfTime ?? ""} onValueChange={setDropOfTime}>
-              <SelectTrigger className="w-[90px]">
+              <SelectTrigger
+                className="w-[90px]"
+                aria-label={`${lang.dropOffTime} - ${dropOfTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
 
@@ -337,6 +345,7 @@ export default function ReservationTime(props: {
               dropOfTime,
             });
           }}
+          aria-label={lang.continue}
           className="sm:w-34 w-full bg-s">
           {lang.continue}
         </Button>

@@ -104,4 +104,8 @@ export const en: BaseLocale = {
   notFoundTitle: "Page Not Found",
   notFoundMessage: "The page you are looking for does not exist.",
   notFoundAction: "Return to the home page",
+  cookieConsent:
+    "We use cookies to improve your experience. By using our site, you accept our",
+  cookieConsentLink: "privacy policy",
+  cookieConsentAction: "Accept",
 };
