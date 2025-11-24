@@ -70,9 +70,9 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-md hover:bg-white/60 hover:scale-105",
+                    "px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-md hover:bg-white/25 hover:scale-105",
                     "lg:px-5 lg:py-2.5 lg:text-base",
-                    active && "bg-white/65 shadow-sm"
+                    active && "bg-white/25 shadow-sm"
                   )}>
                   {link.label}
                 </Link>
