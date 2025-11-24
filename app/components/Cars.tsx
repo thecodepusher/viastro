@@ -95,7 +95,7 @@ export default function Cars(props: {
                   <Popover>
                     <PopoverTrigger asChild>
                       <button
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-colors hover:border-p hover:bg-p hover:text-white dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-p dark:hover:bg-p"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-colors hover:border-p hover:bg-p hover:text-white dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-p dark:hover:bg-p cursor-pointer"
                         aria-label="Price information">
                         <Info className="h-4 w-4" />
                       </button>
