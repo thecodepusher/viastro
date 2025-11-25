@@ -61,7 +61,7 @@ export default function Cars(props: {
                 )}
               </div>
 
-              <div className="relative bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 px-6">
+              <div className="relative bg-white px-6">
                 <div className="relative mx-auto h-48 w-full flex items-center justify-center overflow-hidden">
                   <img
                     className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
