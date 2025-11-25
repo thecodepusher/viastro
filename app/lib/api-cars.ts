@@ -23,7 +23,7 @@ const carImageMap: Record<string, string> = {
   peugeot_2008: "/2008.avif",
   peugeot_3008: "/3008.avif",
   skoda_octavia: "/skoda_octavia.png",
-  skoda_oktavia: "/skoda_octavia.png", // Alternativni naziv
+  skoda_oktavia: "/skoda_octavia.png",
   citroen_c3_aircross: "/c3-aircross.jpg",
   citroen_c3: "/c3-aircross.jpg",
   ford_focus: "/ford-focus.webp",
@@ -39,6 +39,7 @@ const carDataMap: Record<
     fullProtectionPrice: number;
     depositeDiscount: number;
     prices: Array<{ from: number; to: number | null; price: number }>;
+    customName?: string;
   }
 > = {
   // Peugeot 2008 (id: "1")
@@ -46,11 +47,12 @@ const carDataMap: Record<
     deposite: 500,
     fullProtectionPrice: 11.99,
     depositeDiscount: 250,
+    customName: "Peugeot 2008 GT",
     prices: [
-      { from: 3, to: 7, price: 75 },
-      { from: 8, to: 15, price: 65 },
-      { from: 16, to: 29, price: 55 },
-      { from: 30, to: null, price: 45 },
+      { from: 3, to: 7, price: 65 },
+      { from: 8, to: 15, price: 55 },
+      { from: 16, to: 29, price: 45 },
+      { from: 30, to: null, price: 38 },
     ],
   },
   // Citroen C3 Aircross (id: "2")
@@ -58,6 +60,7 @@ const carDataMap: Record<
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
+    customName: "Citroen C3 Aircross",
     prices: [
       { from: 3, to: 7, price: 55 },
       { from: 8, to: 15, price: 50 },
@@ -70,6 +73,7 @@ const carDataMap: Record<
     deposite: 500,
     fullProtectionPrice: 12.99,
     depositeDiscount: 250,
+    customName: "Peugeot 3008",
     prices: [
       { from: 3, to: 7, price: 75 },
       { from: 8, to: 15, price: 65 },
@@ -82,6 +86,7 @@ const carDataMap: Record<
     deposite: 500,
     fullProtectionPrice: 12.99,
     depositeDiscount: 250,
+    customName: "Skoda Octavia",
     prices: [
       { from: 3, to: 7, price: 75 },
       { from: 8, to: 15, price: 65 },
@@ -94,6 +99,7 @@ const carDataMap: Record<
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
+    customName: "Seat Ibiza FR",
     prices: [
       { from: 3, to: 7, price: 42 },
       { from: 8, to: 15, price: 38 },
@@ -106,6 +112,7 @@ const carDataMap: Record<
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
+    customName: "Renault Clio",
     prices: [
       { from: 3, to: 7, price: 45 },
       { from: 8, to: 15, price: 41 },
@@ -145,27 +152,6 @@ function getCarImage(brandName: string, modelName: string): string {
 
 function getCarData(carId: string) {
   return carDataMap[carId] || carDataMap.default;
-}
-
-function calculatePriceByDays(
-  days: number,
-  prices: Array<{ from: number; to: number | null; price: number }>
-): number {
-  for (const priceRange of prices) {
-    if (priceRange.to !== null) {
-      if (days >= priceRange.from && days <= priceRange.to) {
-        return priceRange.price;
-      }
-    }
-  }
-
-  for (const priceRange of prices) {
-    if (priceRange.to === null && days >= priceRange.from) {
-      return priceRange.price;
-    }
-  }
-
-  return prices[prices.length - 1]?.price || 0;
 }
 
 export type ApiCarFeatures = {
@@ -221,6 +207,7 @@ export type TransformedCar = {
   gasText: string;
   transmissionText: string;
   available: boolean;
+  customName?: string;
 };
 
 function getCarTypeFromApi(groupName: string, className: string): CarType {
@@ -322,18 +309,15 @@ export function transformApiCars(
     const gasText = getGasText(gas, lang);
     const transmissionText = getTransmissionText(transmissionType, lang);
     const slug = `${apiCar.brand_name.toLowerCase()}_${apiCar.model_name.toLowerCase().replace(/\s+/g, "_")}`;
-    let calculatedPrice: number;
+    const minPrice =
+      carData.prices.find((p) => p.from === 30)?.price ||
+      carData.prices[carData.prices.length - 1]?.price ||
+      0;
     let available: boolean;
 
     if (apiCar.price !== undefined && apiCar.price !== null) {
-      calculatedPrice = apiCar.price;
       available = apiCar.price > 0;
     } else {
-      if (days !== undefined) {
-        calculatedPrice = calculatePriceByDays(days, carData.prices);
-      } else {
-        calculatedPrice = carData.prices[carData.prices.length - 1]?.price || 0;
-      }
       if (availableCarIds !== undefined) {
         available = availableCarIds.includes(apiCar.id);
       } else {
@@ -354,12 +338,13 @@ export function transformApiCars(
       deposite: carData.deposite,
       aditionalEquipment,
       prices: carData.prices,
-      price: calculatedPrice,
+      price: minPrice,
       image,
       carTypeText,
       gasText,
       transmissionText,
       available,
+      customName: carData.customName,
     };
   });
 }

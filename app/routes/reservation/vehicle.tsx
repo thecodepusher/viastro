@@ -11,6 +11,7 @@ import {
   type TransformedCar,
 } from "@/lib/api-cars";
 import type { Route } from "./+types/vehicle";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -72,11 +73,14 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     }
   }
 
+  const baseUrl = getBaseUrl(request);
+
   return {
     cars: sortedCars,
     selectedCarId,
     lang,
     langCode: params.lang ?? "sr",
+    baseUrl,
   };
 }
 
@@ -94,7 +98,19 @@ export async function action({ request }: Route.ActionArgs) {
   });
 }
 
-export function meta({}: Route.MetaArgs) {}
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Reservation - Select Vehicle | Viastro Rent a Car",
+    description:
+      "Choose from our wide selection of vehicles for your car rental in Belgrade.",
+    url: `/${data.langCode || "sr"}/reservation/vehicle`,
+    baseUrl,
+    keywords: "reservation, select vehicle, choose car, rent a car Belgrade",
+    imageAlt: "Viastro - Select Vehicle",
+  });
+}
 
 export default function Vehicle({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
@@ -112,6 +128,7 @@ export default function Vehicle({ loaderData }: Route.ComponentProps) {
         }}
         lang={loaderData.lang}
         langCode={loaderData.langCode}
+        fromreservationPage
       />
     </div>
   );

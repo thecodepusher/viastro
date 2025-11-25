@@ -6,7 +6,6 @@ import { dirname, join } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// Short-circuit the type-checking of the built output.
 const BUILD_PATH = join(__dirname, "build/server/index.js");
 const DEVELOPMENT = process.env.NODE_ENV === "development";
 const PORT = Number.parseInt(process.env.PORT || "3000");

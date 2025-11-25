@@ -9,6 +9,7 @@ import {
   generateOrganizationSchema,
   generateFAQPageSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 import { faqsSr, faqsEn, faqsRu } from "@/constants/FaQ";
 
@@ -49,25 +50,19 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/faq`;
   const title = `Viastro ${data.lang.faq} | Belgrade`;
   const description =
     "Frequently asked questions about car rental services in Belgrade.";
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content:
-        "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title,
+    description,
+    url: `/${data.langCode || "sr"}/faq`,
+    baseUrl,
+    keywords:
+      "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
+    imageAlt: "Viastro FAQ - Frequently Asked Questions",
+  });
 }
 
 export default function FandQPage({ loaderData }: Route.ComponentProps) {

@@ -15,6 +15,7 @@ export default function Cars(props: {
   onSelect: (arg0: number) => void;
   cars?: any[];
   selectedCarId?: number | null;
+  fromreservationPage?: boolean;
 }) {
   const isApiFormat =
     props.cars &&
@@ -48,20 +49,22 @@ export default function Cars(props: {
                     }
                   : {}
               }>
-              <div className="absolute top-4 right-4 z-10">
-                {available ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                    <CheckCircle2 className="h-3.5 w-3.5" />
-                    {props.lang.available}
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-                    {props.lang.reserved}
-                  </span>
-                )}
-              </div>
+              {props.fromreservationPage && (
+                <div className="absolute top-4 right-4 z-10">
+                  {available ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      {props.lang.available}
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                      {props.lang.reserved}
+                    </span>
+                  )}
+                </div>
+              )}
 
-              <div className="relative bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 px-6">
+              <div className="relative bg-white px-6">
                 <div className="relative mx-auto h-48 w-full flex items-center justify-center overflow-hidden">
                   <img
                     className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
@@ -73,7 +76,7 @@ export default function Cars(props: {
 
               <CardHeader className="-mt-6">
                 <h3 className="text-xl font-bold text-pd dark:text-gray-100 text-center">
-                  {car.name}
+                  {car.customName}
                 </h3>
               </CardHeader>
 
@@ -95,7 +98,7 @@ export default function Cars(props: {
                   <Popover>
                     <PopoverTrigger asChild>
                       <button
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-colors hover:border-p hover:bg-p hover:text-white dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-p dark:hover:bg-p"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-colors hover:border-p hover:bg-p hover:text-white dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-p dark:hover:bg-p cursor-pointer"
                         aria-label="Price information">
                         <Info className="h-4 w-4" />
                       </button>

@@ -109,4 +109,5 @@ export const en: BaseLocale = {
   cookieConsentLink: "privacy policy",
   cookieConsentAction: "Accept",
   reservationReviewAction: "Finish reservation",
+  reviewInformation: "Your information",
 };

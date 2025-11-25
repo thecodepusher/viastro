@@ -2,6 +2,7 @@ import { privacyPolicy } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
 import type { Route } from "./+types/privacy-policy-page";
 import { prefs } from "@/lib/prefs-cookie";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -14,11 +15,14 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
 
+  const baseUrl = getBaseUrl(request);
+
   const data = {
     langCode: params.lang ?? "sr",
     lang,
     usloviNajma: privacyPolicy,
     message: context.VALUE_FROM_EXPRESS,
+    baseUrl,
   };
 
   const response = Response.json(data, {
@@ -28,6 +32,20 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
 
   return response as unknown as typeof data;
+}
+
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Privacy Policy | Viastro Rent a Car",
+    description:
+      "Read Viastro's privacy policy to understand how we collect, use, and protect your personal information.",
+    url: `/${data.langCode || "sr"}/privacy-policy`,
+    baseUrl,
+    keywords: "privacy policy, data protection, viastro rent a car",
+    imageAlt: "Viastro Privacy Policy",
+  });
 }
 
 export default function PrivacyPolicyPage({

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import type { Route } from "./+types/extras";
+import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -48,11 +49,14 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     ...getAditionalEquipment(params.lang as LocaleTypes),
   ];
 
+  const baseUrl = getBaseUrl(request);
+
   return {
     lang,
     notInWorkingHours,
     aditionalEquipment: ad,
     langCode: params.lang ?? "sr",
+    baseUrl,
   };
 }
 
@@ -72,7 +76,19 @@ export async function action({ request }: Route.ActionArgs) {
     },
   });
 }
-export function meta({}: Route.MetaArgs) {}
+export function meta({ data }: Route.MetaArgs) {
+  const baseUrl = data.baseUrl || getBaseUrl();
+
+  return generateOpenGraphMeta({
+    title: "Reservation - Additional Equipment | Viastro Rent a Car",
+    description:
+      "Select additional equipment and extras for your car rental in Belgrade.",
+    url: `/${data.langCode || "sr"}/reservation/extras`,
+    baseUrl,
+    keywords: "reservation, additional equipment, extras, rent a car Belgrade",
+    imageAlt: "Viastro - Additional Equipment",
+  });
+}
 
 export default function Extras({
   actionData,

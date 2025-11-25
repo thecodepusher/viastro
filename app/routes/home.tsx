@@ -21,43 +21,29 @@ import {
   generateWebSiteSchema,
   generateLocalBusinessSchema,
   generateCarRentalServiceSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 import type { Route } from "./+types/home";
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}`;
-  const imageUrl = `${baseUrl}/viastro_logo.png`;
+  const locale =
+    data.langCode === "sr"
+      ? "sr_RS"
+      : data.langCode === "en"
+        ? "en_US"
+        : "ru_RU";
 
-  return [
-    { title: "Viastro rent a car | Belgrade" },
-    { name: "description", content: data.lang.description },
-    {
-      name: "keywords",
-      content:
-        "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade",
-    },
-    { property: "og:title", content: "Viastro rent a car | Belgrade" },
-    { property: "og:description", content: data.lang.description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: canonical },
-    { property: "og:image", content: imageUrl },
-    {
-      property: "og:locale",
-      content:
-        data.langCode === "sr"
-          ? "sr_RS"
-          : data.langCode === "en"
-            ? "en_US"
-            : "ru_RU",
-    },
-    { property: "og:site_name", content: "Viastro Rent a Car" },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: "Viastro rent a car | Belgrade" },
-    { name: "twitter:description", content: data.lang.description },
-    { name: "twitter:image", content: imageUrl },
-    { rel: "canonical", href: canonical },
-  ];
+  return generateOpenGraphMeta({
+    title: "Viastro rent a car | Belgrade",
+    description: data.lang.description,
+    url: `/${data.langCode || "sr"}`,
+    baseUrl,
+    keywords:
+      "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade",
+    imageAlt: "Viastro Rent a Car - Premium Car Rental in Belgrade",
+    locale,
+  });
 }
 
 export async function action({ request }: Route.ActionArgs) {

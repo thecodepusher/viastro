@@ -10,6 +10,7 @@ import {
   generateOrganizationSchema,
   generateArticleSchema,
   generateBreadcrumbSchema,
+  generateOpenGraphMeta,
 } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -71,42 +72,35 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const canonical = `${baseUrl}/${data.langCode || "sr"}/blog/${data.post.slug}`;
   const title = `${data.post.title} | Viastro Blog`;
   const description = data.post.description || data.post.title;
   const imageUrl = data.post.imageUrl
     ? `${baseUrl}${data.post.imageUrl}`
-    : `${baseUrl}/hero_mobile.png`;
+    : undefined;
 
-  return [
-    { title },
-    { name: "description", content: description },
-    {
-      name: "keywords",
-      content: "viastro blog, rent a car Belgrade, car rental tips",
-    },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "article" },
-    { property: "og:url", content: canonical },
-    { property: "og:image", content: imageUrl },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: title },
-    { name: "twitter:description", content: description },
-    { name: "twitter:image", content: imageUrl },
-    { rel: "canonical", href: canonical },
-    {
-      property: "article:published_time",
-      content: data.post.datetime || new Date().toISOString(),
-    },
-  ];
+  const metaTags = generateOpenGraphMeta({
+    title,
+    description,
+    url: `/${data.langCode || "sr"}/blog/${data.post.slug}`,
+    baseUrl,
+    type: "article",
+    imageUrl,
+    keywords: "viastro blog, rent a car Belgrade, car rental tips",
+  });
+
+  metaTags.push({
+    property: "article:published_time",
+    content: data.post.datetime || new Date().toISOString(),
+  });
+
+  return metaTags;
 }
 
 export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
   const articleUrl = `${loaderData.baseUrl}/${loaderData.langCode}/blog/${loaderData.post.slug}`;
   const imageUrl = loaderData.post.imageUrl
     ? `${loaderData.baseUrl}${loaderData.post.imageUrl}`
-    : `${loaderData.baseUrl}/hero_mobile.png`;
+    : `${loaderData.baseUrl}/opengraph-1200x630.jpeg`;
 
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
@@ -140,8 +134,11 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <SEO schemas={schemas} />
-      <div className="w-full flex flex-col items-center justify-center pt-30">
-        <img className="max-w-[675px]" src={loaderData.post.imageUrl} />
+      <div className="w-full flex flex-col items-center justify-center sm:pt-30 pt-18">
+        <img
+          className="sm:max-w-[675px] max-w-screen"
+          src={loaderData.post.imageUrl}
+        />
 
         <div className="max-w-4xl mx-auto px-4 w-full">
           <nav
@@ -159,7 +156,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
           </nav>
         </div>
 
-        <div className="prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
+        <div className="prose prose-md sm:max-w-4xl max-w-screen mx-auto px-4 prose-headings:text-gray-800 prose-p:text-gray-700">
           <div
             dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
           />
