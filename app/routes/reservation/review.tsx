@@ -18,6 +18,7 @@ import { calculateInWorkingHours } from "@/lib/helpers";
 import { getLocale } from "@/lib/utils";
 import type { Route } from "./+types/review";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { sendReservationEmail } from "@/lib/email";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -156,6 +157,24 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 export async function action({ request, params }: Route.ActionArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  const formData = await request.formData();
+
+  const customerEmail = formData.get("email");
+  const firstName = formData.get("first_name");
+  const lastName = formData.get("last_name");
+  const phone = formData.get("phone");
+
+  if (
+    typeof customerEmail !== "string" ||
+    typeof firstName !== "string" ||
+    typeof lastName !== "string" ||
+    typeof phone !== "string"
+  ) {
+    return Response.json(
+      { error: "Missing contact information." },
+      { status: 400 }
+    );
+  }
 
   const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
     method: "POST",
@@ -167,6 +186,8 @@ export async function action({ request, params }: Route.ActionArgs) {
   const apiResponse: ApiAllModelsResponse = await res.json();
 
   const lang = await getLocale(params.lang, request);
+  const langCode = (params.lang as LocaleTypes) || "sr";
+
   const transformedCars = transformApiCars(apiResponse, lang);
   const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
 
@@ -174,9 +195,22 @@ export async function action({ request, params }: Route.ActionArgs) {
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
+  const pickup = locations.find(
+    (location) => location.id === +cookie.pickUpLocation
+  );
+  const dropOff = locations.find(
+    (location) => location.id === +cookie.dropOffLocation
+  );
 
   if (!car) {
     return redirect("../vehicle");
+  }
+
+  if (!pickupDate || !pickupTime || !dropoffDate || !dropoffTime) {
+    return Response.json(
+      { error: "Reservation timing details are missing." },
+      { status: 400 }
+    );
   }
 
   let notInWorkingHours = calculateInWorkingHours(
@@ -232,13 +266,17 @@ export async function action({ request, params }: Route.ActionArgs) {
   }
 
   if (idExtras) {
-    const ae = [...car.aditionalEquipment, ...aditionalEquipment];
+    const ae = [...car.aditionalEquipment, ...getAditionalEquipment(langCode)];
 
     idExtras
       .split(",")
       .map((x) => +x)
       .forEach((x) => {
-        const a = ae.find((a) => a.id == x)!;
+        const a = ae.find((a) => a.id == x);
+        if (!a) {
+          return;
+        }
+
         depositeDiscount += a.depositeDiscount;
         let aPrice = 0;
 
@@ -256,6 +294,56 @@ export async function action({ request, params }: Route.ActionArgs) {
 
         extras.push({ ...a, price: aPrice });
       });
+  }
+
+  const afterHoursFee = notInWorkingHours ? PRICE_FOR_PICKUP_OFF_HOURS : 0;
+
+  const pickupDateFormatted = pickupDate
+    ? format(new Date(pickupDate), "dd/MM/yyyy")
+    : "N/A";
+  const dropOffDateFormatted = dropoffDate
+    ? format(new Date(dropoffDate), "dd/MM/yyyy")
+    : "N/A";
+  const depositAfterDiscount = Math.max(car.deposite - depositeDiscount, 0);
+
+  const extrasDescriptions = extras.map(
+    (extra) => `${extra.name} - ${extra.price.toFixed(2)}€`
+  );
+
+  if (notInWorkingHours) {
+    extrasDescriptions.push(
+      `${lang.afterHoursReservationFee} - ${PRICE_FOR_PICKUP_OFF_HOURS.toFixed(
+        2
+      )}€`
+    );
+  }
+
+  try {
+    await sendReservationEmail({
+      carName: car.name,
+      pickupSummary: `${pickup?.name ?? "N/A"} ${pickupDateFormatted} - ${
+        pickupTime ?? ""
+      }`,
+      dropoffSummary: `${dropOff?.name ?? "N/A"} ${dropOffDateFormatted} - ${
+        dropoffTime ?? ""
+      }`,
+      days,
+      carPrice,
+      totalPrice: price,
+      carDeposit: car.deposite,
+      depositDiscount: depositeDiscount,
+      depositDue: depositAfterDiscount,
+      extrasDescriptions,
+      customerName: `${firstName} ${lastName}`,
+      customerEmail,
+      customerPhone: phone,
+    });
+  } catch (error) {
+    console.error("Brevo email error", error);
+    return Response.json(
+      { error: "Unable to send confirmation email." },
+      { status: 502 }
+    );
   }
 
   return redirect("../../success", {
@@ -281,7 +369,9 @@ export function meta({ data }: Route.MetaArgs) {
 export default function Review({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
-      <h3 className="mx-6 my-4 font-bold text-xl">Cost summary</h3>
+      <h3 className="mx-6 my-4 font-bold text-xl">
+        {loaderData.lang.costSummary}
+      </h3>
       <div className="mx-6 p-4 border rounded shadow flex gap-2 flex-col">
         <div>
           <Label>{loaderData.lang.pickUpLoacation}</Label>
@@ -375,49 +465,51 @@ export default function Review({ loaderData }: Route.ComponentProps) {
         </div>
       </div>
 
-      <h3 className="mx-6 my-4 font-bold text-xl">Your information</h3>
+      <h3 className="mx-6 my-4 font-bold text-xl">
+        {loaderData.lang.reviewInformation}
+      </h3>
 
       <Form method="POST">
         <div className="mx-6 mt-4 p-4 border rounded shadow flex flex-col gap-4 mb-6">
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{loaderData.lang.email}</Label>
             <Input
               required
               type="email"
               id="email"
               name="email"
-              placeholder="Email"
+              placeholder={loaderData.lang.email}
             />
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="first_name">First name</Label>
+            <Label htmlFor="first_name">{loaderData.lang.firstName}</Label>
             <Input
               required
               type="text"
               id="first_name"
               name="first_name"
-              placeholder="First name"
+              placeholder={loaderData.lang.firstName}
             />
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="last_name">Last name</Label>
+            <Label htmlFor="last_name">{loaderData.lang.lastName}</Label>
             <Input
               required
               type="text"
               id="last_name"
               name="last_name"
-              placeholder="Last name"
+              placeholder={loaderData.lang.lastName}
             />
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="phone">Phone</Label>
+            <Label htmlFor="phone">{loaderData.lang.phone}</Label>
             <Input
               required
               type="phone"
               id="phone"
               name="phone"
-              placeholder="Phone"
+              placeholder={loaderData.lang.phone}
             />
           </div>
 

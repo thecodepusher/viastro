@@ -15,6 +15,7 @@ export default function Cars(props: {
   onSelect: (arg0: number) => void;
   cars?: any[];
   selectedCarId?: number | null;
+  fromreservationPage?: boolean;
 }) {
   const isApiFormat =
     props.cars &&
@@ -48,18 +49,20 @@ export default function Cars(props: {
                     }
                   : {}
               }>
-              <div className="absolute top-4 right-4 z-10">
-                {available ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                    <CheckCircle2 className="h-3.5 w-3.5" />
-                    {props.lang.available}
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-                    {props.lang.reserved}
-                  </span>
-                )}
-              </div>
+              {props.fromreservationPage && (
+                <div className="absolute top-4 right-4 z-10">
+                  {available ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      {props.lang.available}
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                      {props.lang.reserved}
+                    </span>
+                  )}
+                </div>
+              )}
 
               <div className="relative bg-white px-6">
                 <div className="relative mx-auto h-48 w-full flex items-center justify-center overflow-hidden">

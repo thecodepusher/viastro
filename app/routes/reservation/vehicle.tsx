@@ -128,6 +128,7 @@ export default function Vehicle({ loaderData }: Route.ComponentProps) {
         }}
         lang={loaderData.lang}
         langCode={loaderData.langCode}
+        fromreservationPage
       />
     </div>
   );

@@ -109,4 +109,5 @@ export const ru: BaseLocale = {
   cookieConsentLink: "политику конфиденциальности",
   cookieConsentAction: "Принять",
   reservationReviewAction: "Завершить бронирование",
+  reviewInformation: "Ваши данные",
 };
