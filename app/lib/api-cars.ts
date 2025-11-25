@@ -39,6 +39,7 @@ const carDataMap: Record<
     fullProtectionPrice: number;
     depositeDiscount: number;
     prices: Array<{ from: number; to: number | null; price: number }>;
+    customName?: string;
   }
 > = {
   // Peugeot 2008 (id: "1")
@@ -46,6 +47,7 @@ const carDataMap: Record<
     deposite: 500,
     fullProtectionPrice: 11.99,
     depositeDiscount: 250,
+    customName: "Peugeot 2008 GT",
     prices: [
       { from: 3, to: 7, price: 65 },
       { from: 8, to: 15, price: 55 },
@@ -58,6 +60,7 @@ const carDataMap: Record<
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
+    customName: "Citroen C3 Aircross",
     prices: [
       { from: 3, to: 7, price: 55 },
       { from: 8, to: 15, price: 50 },
@@ -70,6 +73,7 @@ const carDataMap: Record<
     deposite: 500,
     fullProtectionPrice: 12.99,
     depositeDiscount: 250,
+    customName: "Peugeot 3008",
     prices: [
       { from: 3, to: 7, price: 75 },
       { from: 8, to: 15, price: 65 },
@@ -82,6 +86,7 @@ const carDataMap: Record<
     deposite: 500,
     fullProtectionPrice: 12.99,
     depositeDiscount: 250,
+    customName: "Skoda Octavia",
     prices: [
       { from: 3, to: 7, price: 75 },
       { from: 8, to: 15, price: 65 },
@@ -94,6 +99,7 @@ const carDataMap: Record<
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
+    customName: "Seat Ibiza FR",
     prices: [
       { from: 3, to: 7, price: 42 },
       { from: 8, to: 15, price: 38 },
@@ -106,6 +112,7 @@ const carDataMap: Record<
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
+    customName: "Renault Clio",
     prices: [
       { from: 3, to: 7, price: 45 },
       { from: 8, to: 15, price: 41 },
@@ -200,6 +207,7 @@ export type TransformedCar = {
   gasText: string;
   transmissionText: string;
   available: boolean;
+  customName?: string;
 };
 
 function getCarTypeFromApi(groupName: string, className: string): CarType {
@@ -336,6 +344,7 @@ export function transformApiCars(
       gasText,
       transmissionText,
       available,
+      customName: carData.customName,
     };
   });
 }

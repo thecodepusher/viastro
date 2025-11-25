@@ -76,7 +76,7 @@ export default function Cars(props: {
 
               <CardHeader className="-mt-6">
                 <h3 className="text-xl font-bold text-pd dark:text-gray-100 text-center">
-                  {car.name}
+                  {car.customName}
                 </h3>
               </CardHeader>
 

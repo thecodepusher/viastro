@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  aditionalEquipment,
   getAditionalEquipment,
   locations,
   PRICE_FOR_PICKUP_OFF_HOURS,
@@ -295,8 +294,6 @@ export async function action({ request, params }: Route.ActionArgs) {
         extras.push({ ...a, price: aPrice });
       });
   }
-
-  const afterHoursFee = notInWorkingHours ? PRICE_FOR_PICKUP_OFF_HOURS : 0;
 
   const pickupDateFormatted = pickupDate
     ? format(new Date(pickupDate), "dd/MM/yyyy")
