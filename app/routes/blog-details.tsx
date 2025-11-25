@@ -88,7 +88,6 @@ export function meta({ data }: Route.MetaArgs) {
     keywords: "viastro blog, rent a car Belgrade, car rental tips",
   });
 
-  // Add article-specific meta tags
   metaTags.push({
     property: "article:published_time",
     content: data.post.datetime || new Date().toISOString(),
@@ -135,8 +134,11 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <SEO schemas={schemas} />
-      <div className="w-full flex flex-col items-center justify-center pt-30">
-        <img className="max-w-[675px]" src={loaderData.post.imageUrl} />
+      <div className="w-full flex flex-col items-center justify-center sm:pt-30 pt-18">
+        <img
+          className="sm:max-w-[675px] max-w-screen"
+          src={loaderData.post.imageUrl}
+        />
 
         <div className="max-w-4xl mx-auto px-4 w-full">
           <nav
@@ -154,7 +156,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
           </nav>
         </div>
 
-        <div className="prose prose-lg max-w-4xl mx-auto p-4 prose-headings:text-gray-800 prose-p:text-gray-700">
+        <div className="prose prose-md sm:max-w-4xl max-w-screen mx-auto px-4 prose-headings:text-gray-800 prose-p:text-gray-700">
           <div
             dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
           />
