@@ -57,7 +57,9 @@ export default function SuccessPage({ loaderData }: Route.ComponentProps) {
           {loaderData.lang.successTitle}
         </p>
         <Link to={`/${loaderData.langCode}`}>
-          <Button className="bg-s">{loaderData.lang.successAction}</Button>
+          <Button className="bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
+            {loaderData.lang.successAction}
+          </Button>
         </Link>
       </div>
     </div>

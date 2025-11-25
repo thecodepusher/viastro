@@ -35,7 +35,6 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
     <p><strong>Povraćaj:</strong> ${payload.dropoffSummary}</p>
     <p><strong>Broj dana:</strong> ${payload.days}</p>
     <p><strong>Cena vozila:</strong> ${payload.carPrice.toFixed(2)}€</p>
-    <p><strong>Ukupna cena:</strong> ${payload.totalPrice.toFixed(2)}€</p>
     <p><strong>Depozit za vozilo:</strong> ${payload.carDeposit.toFixed(2)}€</p>
     <p><strong>Popust na depozit:</strong> ${payload.depositDiscount.toFixed(
       2
@@ -43,8 +42,11 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
     <p><strong>Depozit za naplatu:</strong> ${payload.depositDue.toFixed(
       2
     )}€</p>
-    <h3>Dodatna oprema</h3>
+    <p><strong>Dodatna oprema:</strong></p>
     <ul>${extrasHtml}</ul>
+    <h3>Ukupna cena: ${payload.totalPrice.toFixed(2)}€</h3>
+    <br />
+    <br />
     <h3>Podaci klijenta</h3>
     <p><strong>Ime i prezime:</strong> ${payload.customerName}</p>
     <p><strong>Email:</strong> ${payload.customerEmail}</p>
