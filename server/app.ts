@@ -29,11 +29,11 @@ export default async function (request: Request): Promise<Response> {
   headers.set(
     "Content-Security-Policy",
     "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; " +
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com; " +
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
       "img-src 'self' data: https: blob:; " +
-      "connect-src 'self' https://rentacar-manager.com https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com; " +
+      "connect-src 'self' https://rentacar-manager.com https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net; " +
       "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.google.com; " +
       "object-src 'none'; " +
       "base-uri 'self'; " +
