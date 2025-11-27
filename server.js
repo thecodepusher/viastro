@@ -15,6 +15,37 @@ const app = express();
 app.use(compression());
 app.disable("x-powered-by");
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; " +
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; " +
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+      "font-src 'self' https://fonts.gstatic.com data:; " +
+      "img-src 'self' data: https: blob:; " +
+      "connect-src 'self' https://rentacar-manager.com https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com; " +
+      "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.google.com; " +
+      "object-src 'none'; " +
+      "base-uri 'self'; " +
+      "form-action 'self'; " +
+      "frame-ancestors 'self'; " +
+      "upgrade-insecure-requests;"
+  );
+
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+
+  res.setHeader("X-Content-Type-Options", "nosniff");
+
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+
+  res.setHeader(
+    "Permissions-Policy",
+    "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+  );
+
+  next();
+});
+
 if (DEVELOPMENT) {
   console.log("Starting development server");
   const viteDevServer = await import("vite").then((vite) =>
