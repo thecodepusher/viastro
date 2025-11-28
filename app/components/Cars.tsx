@@ -45,7 +45,7 @@ export default function Cars(props: {
                 isSelected
                   ? {
                       borderColor: borderColor,
-                      borderWidth: "3px",
+                      borderWidth: "1px",
                     }
                   : {}
               }>
@@ -151,8 +151,8 @@ export default function Cars(props: {
                   </Popover>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-3 dark:bg-gray-900/50">
+                <div className="grid grid-cols-2 gap-1 sm:gap-3">
+                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
                       <img
                         className="h-6 w-6 object-contain"
