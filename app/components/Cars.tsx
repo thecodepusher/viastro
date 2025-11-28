@@ -153,9 +153,9 @@ export default function Cars(props: {
 
                 <div className="grid grid-cols-2 gap-1 sm:gap-3">
                   <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
+                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
                       <img
-                        className="h-6 w-6 object-contain"
+                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
                         src="/car.svg"
                         alt="Car type"
                       />
@@ -170,10 +170,10 @@ export default function Cars(props: {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-3 dark:bg-gray-900/50">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
+                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
+                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
                       <img
-                        className="h-6 w-6 object-contain"
+                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
                         src="/fuel-pump.svg"
                         alt="Fuel type"
                       />
@@ -188,10 +188,10 @@ export default function Cars(props: {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-3 dark:bg-gray-900/50">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
+                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
+                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
                       <img
-                        className="h-6 w-6 object-contain"
+                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
                         src="/car-seat.svg"
                         alt="Seats"
                       />
@@ -206,10 +206,10 @@ export default function Cars(props: {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-3 dark:bg-gray-900/50">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
+                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
+                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
                       <img
-                        className="h-6 w-6 object-contain"
+                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
                         src="/manual-transmission.svg"
                         alt="Transmission"
                       />
