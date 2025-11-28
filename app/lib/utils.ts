@@ -47,13 +47,13 @@ export async function getLocale(
     }
 
     if (returnPath == "/") {
-      throw replace(`/en`);
+      throw replace(`/sr`);
     }
 
-    throw replace(`/en${url.pathname}`);
+    throw replace(`/sr${url.pathname}`);
   }
 
-  let lang = en;
+  let lang = sr;
 
   if (paramsLang) {
     switch (paramsLang) {
