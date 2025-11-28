@@ -60,6 +60,9 @@ export async function getLocale(
       case "sr":
         lang = sr;
         break;
+      case "en":
+        lang = en;
+        break;
       case "ru":
         lang = ru;
         break;
