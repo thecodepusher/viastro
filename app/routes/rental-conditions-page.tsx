@@ -1,5 +1,5 @@
 import type { Route } from "./+types/rental-conditions-page";
-import { usloviNajma } from "@/lib/data";
+import { usloviNajmaSr, usloviNajmaRs, rentalConditionsEn } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
 import Cta from "@/components/Cta";
 import { prefs } from "@/lib/prefs-cookie";
@@ -17,11 +17,16 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.selectedCarId;
 
   const baseUrl = getBaseUrl(request);
+  const langCode = params.lang ?? "sr";
+
+  let usloviNajma = usloviNajmaSr;
+  if (langCode === "en") usloviNajma = rentalConditionsEn;
+  if (langCode === "ru") usloviNajma = usloviNajmaRs;
 
   const data = {
-    langCode: params.lang ?? "sr",
+    langCode,
     lang,
-    usloviNajma: usloviNajma,
+    usloviNajma,
     message: context.VALUE_FROM_EXPRESS,
     baseUrl,
   };
