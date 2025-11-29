@@ -110,4 +110,7 @@ export const sr: BaseLocale = {
   cookieConsentAction: "Prihvati",
   reservationReviewAction: "Završi rezervaciju",
   reviewInformation: "Vaši podaci",
+  pib: "PIB",
+  mb: "MB",
+  delatnost: "Delatnost",
 };

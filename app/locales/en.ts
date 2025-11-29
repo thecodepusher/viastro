@@ -110,4 +110,7 @@ export const en: BaseLocale = {
   cookieConsentAction: "Accept",
   reservationReviewAction: "Finish reservation",
   reviewInformation: "Your information",
+  pib: "Tax ID",
+  mb: "Registration Number",
+  delatnost: "Activity",
 };

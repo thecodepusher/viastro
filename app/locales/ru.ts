@@ -110,4 +110,7 @@ export const ru: BaseLocale = {
   cookieConsentAction: "Принять",
   reservationReviewAction: "Завершить бронирование",
   reviewInformation: "Ваши данные",
+  pib: "ИНН",
+  mb: "Регистрационный номер",
+  delatnost: "Деятельность",
 };

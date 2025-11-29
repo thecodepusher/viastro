@@ -97,4 +97,7 @@ export interface BaseLocale {
   cookieConsentAction: string;
   reservationReviewAction: string;
   reviewInformation: string;
+  pib: string;
+  mb: string;
+  delatnost: string;
 }

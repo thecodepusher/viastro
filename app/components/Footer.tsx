@@ -141,7 +141,8 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
             &copy; {new Date().getFullYear()} Viastro doo Beograd
           </p>
           <p className="mt-1.5 text-xs text-gray-500 sm:mt-2 sm:text-sm lg:text-base">
-            PIB: 114961759 MB: 22096737 Delatnost: 7711
+            {props.lang.pib}: 114961759 {props.lang.mb}: 22096737{" "}
+            {props.lang.delatnost}: 7711
           </p>
           <p className="mt-1.5 text-xs text-gray-500 sm:mt-2 sm:text-sm lg:text-base">
             Web by{" "}
