@@ -5,6 +5,19 @@
   "env": {
     "NODE_ENV": "production"
   },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.viastro.rs"
+        }
+      ],
+      "destination": "https://viastro.rs/:splat",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
