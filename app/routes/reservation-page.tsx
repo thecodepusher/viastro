@@ -6,15 +6,82 @@ import { cn, getLocale } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
+import { locations } from "@/lib/data";
+import { differenceInDays } from "date-fns";
+import { CarSummary } from "@/components/Reservation/CarSummary";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const baseUrl = getBaseUrl(request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  let carSummary = null;
+
+  // Učitaj podatke o vozilu ako je izabrano (za korake 3 i 4)
+  if (cookie.carId) {
+    try {
+      const res = await fetch(
+        "https://rentacar-manager.com/client/viastro/api/",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            action: "get_all_models",
+          }),
+          headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+        }
+      );
+      const apiResponse: ApiAllModelsResponse = await res.json();
+      const transformedCars = transformApiCars(apiResponse, lang);
+      const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
+
+      if (car && cookie.pickUpDate && cookie.dropOffDate) {
+        const pickupDate = new Date(cookie.pickUpDate);
+        const dropoffDate = new Date(cookie.dropOffDate);
+        const days = differenceInDays(dropoffDate, pickupDate) || 1;
+
+        // Izračunaj cenu na osnovu broja dana
+        let carPrice = 0;
+        for (const price of car.prices) {
+          if ((!price.to || days <= price.to) && days >= price.from) {
+            carPrice = days * price.price;
+            break;
+          }
+        }
+
+        // Ako postoji cena iz review loader-a, koristi je (ona uključuje i dodatke)
+        // Inače koristi osnovnu cenu vozila
+
+        const pickupLocation = locations.find(
+          (x) => x.id === +cookie.pickUpLocation
+        );
+        const dropoffLocation = locations.find(
+          (x) => x.id === +cookie.dropOffLocation
+        );
+
+        carSummary = {
+          car,
+          pickupDate: cookie.pickUpDate,
+          pickupTime: cookie.pickUpTime,
+          dropoffDate: cookie.dropOffDate,
+          dropoffTime: cookie.dropOffTime,
+          pickupLocation: pickupLocation?.name || "",
+          dropoffLocation: dropoffLocation?.name || "",
+          price: carPrice,
+          days,
+        };
+      }
+    } catch (error) {
+      console.error("Error loading car summary:", error);
+    }
+  }
 
   return {
     lang,
     langCode: params.lang ?? "sr",
     baseUrl,
+    carSummary,
   };
 }
 
@@ -49,6 +116,17 @@ export function meta({ data }: Route.MetaArgs) {
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
+
+  // Uzmi carPrice iz review loader-a ako je dostupan
+  const reviewLoaderData = matches.find((m) => m.id === "routes/review")
+    ?.data as { carPrice?: number } | undefined;
+  const carPriceFromReview = reviewLoaderData?.carPrice;
+
+  // Ažuriraj carSummary sa cenom iz review loader-a ako je dostupna (ona uključuje i dodatke)
+  const carSummaryWithPrice =
+    loaderData.carSummary && carPriceFromReview
+      ? { ...loaderData.carSummary, price: carPriceFromReview }
+      : loaderData.carSummary;
   const [isAnimating, setIsAnimating] = useState(false);
   const fetcher = useFetcher();
 
@@ -216,6 +294,27 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
           </nav>
         </div>
       </div>
+
+      {/* Car Summary za korake 3 i 4 - ispod svih koraka */}
+      {(currentStepIndex === 2 || currentStepIndex === 3) &&
+        carSummaryWithPrice && (
+          <div className="sticky top-0 z-40 bg-white border-t border-gray-200 shadow-lg lg:relative lg:z-auto">
+            <div className="w-full lg:mx-auto lg:max-w-7xl lg:px-4 lg:py-4">
+              <CarSummary
+                car={carSummaryWithPrice.car}
+                pickupDate={carSummaryWithPrice.pickupDate}
+                pickupTime={carSummaryWithPrice.pickupTime}
+                dropoffDate={carSummaryWithPrice.dropoffDate}
+                dropoffTime={carSummaryWithPrice.dropoffTime}
+                pickupLocation={carSummaryWithPrice.pickupLocation}
+                dropoffLocation={carSummaryWithPrice.dropoffLocation}
+                price={carSummaryWithPrice.price}
+                days={carSummaryWithPrice.days}
+                lang={loaderData.lang}
+              />
+            </div>
+          </div>
+        )}
 
       <div
         className={cn(

@@ -98,9 +98,7 @@ export function EquipmentItem({
       <div className="flex flex-col md:flex-row items-stretch min-h-[140px]">
         <div className="flex items-center justify-center w-full md:w-32 h-24 md:h-auto bg-gray-50 dark:bg-gray-800/50 shrink-0 md:shrink-0">
           <IconComponent
-            className={`w-16 h-16 md:w-20 md:h-20 ${
-              isSelected ? "text-white" : "text-s"
-            }`}
+            className="w-16 h-16 md:w-20 md:h-20 text-s"
             aria-label={equipment.name}
           />
         </div>
