@@ -392,6 +392,7 @@ export const aditionalEquipment = [
       ru: "Если вы планируете поездку на арендованном автомобиле за пределы территории Республики Сербия, необходимо получить **Разрешение на пересечение границы**. Это разрешение дает право легального использования транспортного средства за границей и действительно для одного международного направления или нескольких стран, указанных при выдаче, за исключением АР Косово и Метохия.",
     },
     name: "Dozvola za prelazak granice",
+    icon: "public/icons/extras/borderpass.svg",
     description:
       "Ukoliko planirate da putujete sa iznajmljenim vozilom van teritorije Republike Srbije, potrebno je obezbediti dozvolu za prelazak granice. Ova dozvola omogućava legalno korišćenje vozila u inostranstvu i važi za jednu međunarodnu destinaciju ili više zemalja navedenih prilikom izdavanja, sa izuzetkom AP Kosovo i Metohija.",
     price: 48,
@@ -413,6 +414,7 @@ export const aditionalEquipment = [
       ru: "Зеленая карта (Международная карта страхования транспортного средства) обязательна для пересечения границ следующих стран: Северная Македония, Албания, Украина, Турция, Россия, Беларусь, Молдова, Израиль, Иран, Марокко, Тунис и Азербайджан. Зеленая карта выдается вместе с Разрешением на пересечение границы.",
     },
     name: "Zeleni karton",
+    icon: "public/icons/extras/borderpass-green.svg",
     description:
       "Zeleni karton (Međunarodna karta osiguranja vozila) je obavezan za prelazak granica sledećih zemalja: Severna Makedonija, Albanija, Ukrajina, Turska, Rusija, Belorusija, Moldavija, Izrael, Iran, Maroko, Tunis i Azerbejdžan. Zeleni karton se izdaje zajedno sa dozvolom za prelazak granice",
     price: 36,
@@ -434,6 +436,7 @@ export const aditionalEquipment = [
       ru: "Если вы хотите, чтобы автомобилем во время аренды управляло более одного человека, можно добавить **дополнительного водителя**. Дополнительный водитель должен соответствовать тем же требованиям, что и основной водитель: иметь действующее водительское удостоверение и быть не моложе 21 года (или старше, в зависимости от класса автомобиля).",
     },
     name: "Dodatni vozac",
+    icon: "public/icons/extras/wificar.svg",
     description:
       "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati dodatnog vozača. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač – da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila). ",
     price: 0,
@@ -455,6 +458,7 @@ export const aditionalEquipment = [
       ru: "Универсальное автокресло, подходящее для всех возрастов – от новорожденных до детей примерно 12 лет. Регулируется по высоте и наклону, что обеспечивает безопасную и комфортную поездку на всех этапах развития ребенка. Кресло может устанавливаться против хода движения для самых маленьких детей и по ходу движения для детей постарше.",
     },
     name: "Auto sedište (0–36 kg)",
+    icon: "public/icons/extras/childseats.svg",
     description:
       "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja.Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
     price: 0,
@@ -476,6 +480,7 @@ export const aditionalEquipment = [
       ru: "Предназначено для детей старше 7 лет и весом более 15 килограммов. Бустер обеспечивает правильное положение ремня безопасности и повышает безопасность ребенка во время поездки. Компактен и легко устанавливается в любой автомобиль.",
     },
     name: "Buster sedište (Booster)",
+    icon: "public/icons/extras/boostseats.svg",
     description:
       "Namenjeno deci starijoj od 7 godine i težoj od 15 kilograma. Booster omogućava pravilno postavljanje sigurnosnog pojasa i povećava sigurnost deteta tokom vožnje. Kompaktno i lako za postavljanje u bilo koje vozilo.",
     price: 0,

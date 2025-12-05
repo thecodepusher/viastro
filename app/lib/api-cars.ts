@@ -16,6 +16,7 @@ export const fullProtection = {
   name: "Full Protection osiguranje",
   description:
     "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+  icon: "public/icons/extras/wificar.svg",
 };
 
 const carImageMap: Record<string, string> = {
