@@ -42,8 +42,8 @@ export function CarSummary({
           />
         </div>
 
-        <div className="flex-1 flex flex-row lg:flex-row p-2 lg:p-4 gap-2 lg:gap-0 min-w-0">
-          <div className="flex-1 flex flex-col justify-between min-w-0">
+        <div className="flex-1 flex flex-row lg:flex-row lg:p-4 gap-0 min-w-0">
+          <div className="flex-1 flex flex-col justify-between min-w-0 p-2 lg:p-0">
             <div className="mb-1 lg:mb-0">
               <div className="flex items-center gap-1.5 lg:gap-3 mb-1 lg:mb-3 flex-wrap">
                 <h3 className="text-xs lg:text-xl font-bold text-gray-900 leading-tight truncate">
@@ -64,7 +64,7 @@ export function CarSummary({
             </div>
 
             <div className="grid grid-cols-2 gap-1 lg:gap-4">
-              <div className="flex items-start gap-1.5 lg:gap-2">
+              <div className="flex items-center gap-1.5 lg:gap-2">
                 <div className="shrink-0">
                   <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
                     <Calendar className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
@@ -88,7 +88,7 @@ export function CarSummary({
                 </div>
               </div>
 
-              <div className="flex items-start gap-1.5 lg:gap-2">
+              <div className="flex items-center gap-1.5 lg:gap-2">
                 <div className="shrink-0">
                   <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
                     <Calendar className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
@@ -112,7 +112,7 @@ export function CarSummary({
                 </div>
               </div>
 
-              <div className="flex items-start gap-1.5 lg:gap-2">
+              <div className="flex items-center gap-1.5 lg:gap-2">
                 <div className="shrink-0">
                   <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
                     <MapPin className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
@@ -128,7 +128,7 @@ export function CarSummary({
                 </div>
               </div>
 
-              <div className="flex items-start gap-1.5 lg:gap-2">
+              <div className="flex items-center gap-1.5 lg:gap-2">
                 <div className="shrink-0">
                   <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
                     <MapPin className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
@@ -146,7 +146,7 @@ export function CarSummary({
             </div>
           </div>
 
-          <div className="w-18 lg:w-56 shrink-0 p-1.5 lg:p-4 bg-gray-50 lg:bg-transparent text-gray-900 lg:rounded-none flex flex-col items-end justify-center gap-0.5 lg:gap-0 lg:border-l lg:border-gray-200 lg:pl-4">
+          <div className="w-18 lg:w-56 shrink-0 lg:p-4 lg:bg-transparent text-gray-900 lg:rounded-none flex flex-col items-end justify-center gap-0.5 lg:gap-0 border-l border-gray-200 lg:pl-4">
             <div className="text-right">
               <p className="text-[9px] lg:text-xs font-medium text-gray-500 mb-0 lg:mb-2 uppercase tracking-wide leading-tight">
                 {days} {lang.day}

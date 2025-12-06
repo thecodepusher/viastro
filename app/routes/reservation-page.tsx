@@ -130,11 +130,17 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
     checkExtrasPrice();
 
-    window.addEventListener("extrasPriceUpdated", handleExtrasPriceUpdate as EventListener);
+    window.addEventListener(
+      "extrasPriceUpdated",
+      handleExtrasPriceUpdate as EventListener
+    );
     const interval = setInterval(checkExtrasPrice, 100);
 
     return () => {
-      window.removeEventListener("extrasPriceUpdated", handleExtrasPriceUpdate as EventListener);
+      window.removeEventListener(
+        "extrasPriceUpdated",
+        handleExtrasPriceUpdate as EventListener
+      );
       clearInterval(interval);
     };
   }, []);
@@ -318,8 +324,8 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
       {(currentStepIndex === 2 || currentStepIndex === 3) &&
         carSummaryWithPrice && (
-          <div className="sticky top-0 z-40 bg-white border-t border-gray-200 shadow-lg lg:relative lg:z-auto">
-            <div className="w-full lg:mx-auto lg:max-w-7xl lg:px-4 lg:py-4">
+          <div className="sticky top-18 z-30 bg-white border-t border-gray-200 shadow-lg">
+            <div className="w-full mx-auto max-w-7xl p-4">
               <CarSummary
                 car={carSummaryWithPrice.car}
                 pickupDate={carSummaryWithPrice.pickupDate}
