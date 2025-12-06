@@ -38,12 +38,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Privacy Policy | Viastro Rent a Car",
-    description:
-      "Read Viastro's privacy policy to understand how we collect, use, and protect your personal information.",
+    title: data.lang.seoPrivacyPolicyTitle,
+    description: data.lang.seoPrivacyPolicyDescription,
     url: `/${data.langCode || "sr"}/privacy-policy`,
     baseUrl,
-    keywords: "privacy policy, data protection, viastro rent a car",
+    keywords: data.lang.seoPrivacyPolicyKeywords,
     imageAlt: "Viastro Privacy Policy",
   });
 }

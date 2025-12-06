@@ -88,7 +88,6 @@ export function EquipmentItem({
   const IconComponent = getEquipmentIcon();
 
   const handleItemClick = (e: React.MouseEvent) => {
-    // Ne pozivaj onToggle ako je klik na button
     const target = e.target as HTMLElement;
     if (target.closest("button") || target.tagName === "BUTTON") {
       return;

@@ -72,7 +72,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = `${data.post.title} | Viastro Blog`;
+  const title = `${data.post.title}${data.lang.seoBlogDetailsTitle}`;
   const description = data.post.description || data.post.title;
   const imageUrl = data.post.imageUrl
     ? `${baseUrl}${data.post.imageUrl}`
@@ -85,7 +85,7 @@ export function meta({ data }: Route.MetaArgs) {
     baseUrl,
     type: "article",
     imageUrl,
-    keywords: "viastro blog, rent a car Belgrade, car rental tips",
+    keywords: data.lang.seoBlogDetailsKeywords,
   });
 
   metaTags.push({

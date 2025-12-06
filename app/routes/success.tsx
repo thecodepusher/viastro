@@ -38,12 +38,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation Successful | Viastro Rent a Car",
-    description:
-      "Your car rental reservation has been successfully completed. Thank you for choosing Viastro!",
+    title: data.lang.seoSuccessTitle,
+    description: data.lang.seoSuccessDescription,
     url: `/${data.langCode || "sr"}/success`,
     baseUrl,
-    keywords: "reservation successful, car rental Belgrade, viastro",
+    keywords: data.lang.seoSuccessKeywords,
     imageAlt: "Viastro - Reservation Successful",
   });
 }

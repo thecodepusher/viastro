@@ -75,20 +75,13 @@ export async function action({ request }: Route.ActionArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = data.lang.cars
-    ? `Viastro ${data.lang.cars} | Belgrade`
-    : "Viastro Cars | Belgrade";
-  const description =
-    data.lang.description ||
-    "Browse our car rental fleet in Belgrade. Choose from economy, luxury, and SUV vehicles.";
 
   return generateOpenGraphMeta({
-    title,
-    description,
+    title: data.lang.seoCarsTitle,
+    description: data.lang.seoCarsDescription,
     url: `/${data.langCode || "sr"}/cars`,
     baseUrl,
-    keywords:
-      "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
+    keywords: data.lang.seoCarsKeywords,
     imageAlt: "Viastro Car Fleet - Rent a Car in Belgrade",
   });
 }

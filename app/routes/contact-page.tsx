@@ -44,18 +44,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = `Viastro ${data.lang.contact} | Belgrade`;
-  const description =
-    data.lang.gitSubTitle ||
-    "Contact Viastro Rent a Car in Belgrade for car rental services.";
 
   return generateOpenGraphMeta({
-    title,
-    description,
+    title: data.lang.seoContactTitle,
+    description: data.lang.seoContactDescription,
     url: `/${data.langCode || "sr"}/contact`,
     baseUrl,
-    keywords:
-      "contact viastro, rent a car Belgrade contact, car rental Belgrade",
+    keywords: data.lang.seoContactKeywords,
     imageAlt: "Contact Viastro Rent a Car",
   });
 }

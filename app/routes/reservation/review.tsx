@@ -353,12 +353,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation - Review & Confirm | Viastro Rent a Car",
-    description:
-      "Review your car rental reservation details and confirm your booking in Belgrade.",
+    title: data.lang.seoReservationReviewTitle,
+    description: data.lang.seoReservationReviewDescription,
     url: `/${data.langCode || "sr"}/reservation/review`,
     baseUrl,
-    keywords: "reservation, review, confirm booking, rent a car Belgrade",
+    keywords: data.lang.seoReservationReviewKeywords,
     imageAlt: "Viastro - Review Reservation",
   });
 }

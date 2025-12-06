@@ -2,11 +2,7 @@ import { useState, useMemo } from "react";
 import { redirect, useFetcher } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { getLocale } from "@/lib/utils";
-import {
-  getAditionalEquipment,
-  PRICE_FOR_PICKUP_OFF_HOURS,
-  type LocaleTypes,
-} from "@/lib/data";
+import { getAditionalEquipment, type LocaleTypes } from "@/lib/data";
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import { differenceInMinutes, set } from "date-fns";
@@ -125,12 +121,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation - Additional Equipment | Viastro Rent a Car",
-    description:
-      "Select additional equipment and extras for your car rental in Belgrade.",
+    title: data.lang.seoReservationExtrasTitle,
+    description: data.lang.seoReservationExtrasDescription,
     url: `/${data.langCode || "sr"}/reservation/extras`,
     baseUrl,
-    keywords: "reservation, additional equipment, extras, rent a car Belgrade",
+    keywords: data.lang.seoReservationExtrasKeywords,
     imageAlt: "Viastro - Additional Equipment",
   });
 }

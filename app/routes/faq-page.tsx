@@ -50,17 +50,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = `Viastro ${data.lang.faq} | Belgrade`;
-  const description =
-    "Frequently asked questions about car rental services in Belgrade.";
 
   return generateOpenGraphMeta({
-    title,
-    description,
+    title: data.lang.seoFaqTitle,
+    description: data.lang.seoFaqDescription,
     url: `/${data.langCode || "sr"}/faq`,
     baseUrl,
-    keywords:
-      "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
+    keywords: data.lang.seoFaqKeywords,
     imageAlt: "Viastro FAQ - Frequently Asked Questions",
   });
 }

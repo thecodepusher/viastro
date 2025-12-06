@@ -113,4 +113,87 @@ export const sr: BaseLocale = {
   pib: "PIB",
   mb: "MB",
   delatnost: "Delatnost",
+  seoHomeTitle: "Viastro rent a car | Beograd",
+  seoHomeDescription:
+    "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na aerodromu i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
+  seoHomeKeywords:
+    "rent a car Beograd, iznajmljivanje automobila Srbija, iznajmljivanje automobila Beograd, rent a car aerodrom Beograd",
+  seoCarsTitle: "Viastro Vozila | Beograd",
+  seoCarsDescription:
+    "Pregledajte našu flotu automobila za iznajmljivanje u Beogradu. Izaberite između ekonomskih, luksuznih i SUV vozila.",
+  seoCarsKeywords:
+    "rent a car Beograd, flota automobila, iznajmljivanje vozila, iznajmljivanje automobila",
+  seoContactTitle: "Viastro Kontakt | Beograd",
+  seoContactDescription:
+    "Kontaktirajte Viastro Rent a Car u Beogradu za usluge iznajmljivanja automobila.",
+  seoContactKeywords:
+    "kontakt viastro, rent a car Beograd kontakt, iznajmljivanje automobila Beograd",
+  seoFaqTitle: "Viastro Često postavljena pitanja | Beograd",
+  seoFaqDescription:
+    "Često postavljena pitanja o uslugama iznajmljivanja automobila u Beogradu.",
+  seoFaqKeywords:
+    "FAQ rent a car Beograd, najčešća pitanja iznajmljivanje automobila, pitanja o iznajmljivanju automobila",
+  seoBlogTitle: "Viastro Blog | Beograd",
+  seoBlogDescription:
+    "Pročitajte naš blog za savete, vodiče za putovanja i informacije o iznajmljivanju automobila u Beogradu i Srbiji.",
+  seoBlogKeywords:
+    "viastro blog, rent a car Beograd, vodiči za putovanja Srbija",
+  seoBlogDetailsTitle: " | Viastro Blog",
+  seoBlogDetailsKeywords:
+    "viastro blog, rent a car Beograd, saveti za iznajmljivanje automobila",
+  seoRentalConditionsTitle: "Opšti uslovi najma | Viastro Rent a Car",
+  seoRentalConditionsDescription:
+    "Pročitajte opšte uslove najma i uslove usluge Viastro za iznajmljivanje automobila u Beogradu, Srbija.",
+  seoRentalConditionsKeywords:
+    "opšti uslovi najma, uslovi usluge, iznajmljivanje automobila Beograd",
+  seoPrivacyPolicyTitle: "Politika privatnosti | Viastro Rent a Car",
+  seoPrivacyPolicyDescription:
+    "Pročitajte politiku privatnosti Viastro da biste razumeli kako prikupljamo, koristimo i štitimo vaše lične podatke.",
+  seoPrivacyPolicyKeywords:
+    "politika privatnosti, zaštita podataka, viastro rent a car",
+  seoSuccessTitle: "Rezervacija uspešna | Viastro Rent a Car",
+  seoSuccessDescription:
+    "Vaša rezervacija za iznajmljivanje automobila je uspešno završena. Hvala što ste izabrali Viastro!",
+  seoSuccessKeywords:
+    "rezervacija uspešna, iznajmljivanje automobila Beograd, viastro",
+  seoReservationTitle: "Rezervacija | Viastro Rent a Car",
+  seoReservationDescription:
+    "Rezervišite iznajmljivanje automobila u Beogradu. Izaberite vozilo, datume i dodatnu opremu.",
+  seoReservationKeywords:
+    "rezervacija, rezerviši automobil, rent a car Beograd",
+  seoReservationSelectDatesTitle:
+    "Rezervacija - Izaberite datume | Viastro Rent a Car",
+  seoReservationSelectDatesDescription:
+    "Izaberite datume i mesta preuzimanja i vraćanja za vaše iznajmljivanje automobila u Beogradu.",
+  seoReservationSelectDatesKeywords:
+    "rezervacija, rezerviši automobil, izaberi datume, rent a car Beograd",
+  seoReservationSelectVehicleTitle:
+    "Rezervacija - Izaberite vozilo | Viastro Rent a Car",
+  seoReservationSelectVehicleDescription:
+    "Izaberite iz naše široke ponude vozila za vaše iznajmljivanje automobila u Beogradu.",
+  seoReservationSelectVehicleKeywords:
+    "rezervacija, izaberi vozilo, izaberi automobil, rent a car Beograd",
+  seoReservationExtrasTitle:
+    "Rezervacija - Dodatna oprema | Viastro Rent a Car",
+  seoReservationExtrasDescription:
+    "Izaberite dodatnu opremu i ekstra opcije za vaše iznajmljivanje automobila u Beogradu.",
+  seoReservationExtrasKeywords:
+    "rezervacija, dodatna oprema, ekstra opcije, rent a car Beograd",
+  seoReservationReviewTitle:
+    "Rezervacija - Pregled i potvrda | Viastro Rent a Car",
+  seoReservationReviewDescription:
+    "Pregledajte detalje vaše rezervacije za iznajmljivanje automobila i potvrdite rezervaciju u Beogradu.",
+  seoReservationReviewKeywords:
+    "rezervacija, pregled, potvrdi rezervaciju, rent a car Beograd",
+  seoLandingAirportTitle:
+    "Rent a Car Beograd Aerodrom - Premium vozila | Viastro",
+  seoLandingAirportDescription:
+    "Viastro Rent a Car - Beograd Aerodrom - Najnovija vozila po najboljim cenama, bez skrivenih troškova. Rezervišite vozilo i uživajte u vožnji.",
+  seoLandingAirportKeywords:
+    "rent a car Beograd aerodrom, Beograd aerodrom iznajmljivanje automobila, preuzimanje na aerodromu Beograd",
+  seoLandingTeslaTitle: "Rent a Car Beograd Aerodrom Nikola Tesla | Viastro",
+  seoLandingTeslaDescription:
+    "Iznajmite automobil na Beogradskom aerodromu (Nikola Tesla). Brza usluga preuzimanja, širok izbor vozila i konkurentne cene. Rezervišite online danas!",
+  seoLandingTeslaKeywords:
+    "rent a car Beograd aerodrom, rent a car Nikola Tesla aerodrom, aerodrom iznajmljivanje automobila Beograd",
 };

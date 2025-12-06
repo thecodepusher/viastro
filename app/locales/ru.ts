@@ -113,4 +113,85 @@ export const ru: BaseLocale = {
   pib: "ИНН",
   mb: "Регистрационный номер",
   delatnost: "Деятельность",
+  seoHomeTitle: "Viastro аренда авто | Белград",
+  seoHomeDescription:
+    "Аренда авто в Белграде – Viastro предлагает недорогую аренду автомобилей в Сербии: новые авто, полная страховка, встреча в аэропорту и возможность выезда за границу. Забронируйте онлайн и исследуйте Белград, Нови Сад или Балканы с комфортом и безопасностью.",
+  seoHomeKeywords:
+    "аренда авто Белград, аренда автомобилей Сербия, аренда автомобилей Белград, аренда авто аэропорт Белград",
+  seoCarsTitle: "Viastro Автомобили | Белград",
+  seoCarsDescription:
+    "Просмотрите наш автопарк для аренды в Белграде. Выберите из эконом, люкс и внедорожников.",
+  seoCarsKeywords:
+    "аренда авто Белград, автопарк, аренда автомобилей, аренда транспортных средств",
+  seoContactTitle: "Viastro Контакт | Белград",
+  seoContactDescription:
+    "Свяжитесь с Viastro Rent a Car в Белграде для услуг аренды автомобилей.",
+  seoContactKeywords:
+    "контакт viastro, аренда авто Белград контакт, аренда автомобилей Белград",
+  seoFaqTitle: "Viastro FAQ | Белград",
+  seoFaqDescription:
+    "Часто задаваемые вопросы об услугах аренды автомобилей в Белграде.",
+  seoFaqKeywords:
+    "FAQ аренда авто Белград, вопросы аренды автомобилей, часто задаваемые вопросы",
+  seoBlogTitle: "Viastro Блог | Белград",
+  seoBlogDescription:
+    "Читайте наш блог для советов, путеводителей и информации об аренде автомобилей в Белграде и Сербии.",
+  seoBlogKeywords: "viastro блог, аренда авто Белград, путеводители Сербия",
+  seoBlogDetailsTitle: " | Viastro Блог",
+  seoBlogDetailsKeywords:
+    "viastro блог, аренда авто Белград, советы по аренде автомобилей",
+  seoRentalConditionsTitle: "Условия аренды | Viastro Rent a Car",
+  seoRentalConditionsDescription:
+    "Прочитайте условия аренды и условия обслуживания Viastro для аренды автомобилей в Белграде, Сербия.",
+  seoRentalConditionsKeywords:
+    "условия аренды, условия обслуживания, аренда автомобилей Белград",
+  seoPrivacyPolicyTitle: "Политика конфиденциальности | Viastro Rent a Car",
+  seoPrivacyPolicyDescription:
+    "Прочитайте политику конфиденциальности Viastro, чтобы понять, как мы собираем, используем и защищаем вашу личную информацию.",
+  seoPrivacyPolicyKeywords:
+    "политика конфиденциальности, защита данных, viastro аренда авто",
+  seoSuccessTitle: "Бронирование успешно | Viastro Rent a Car",
+  seoSuccessDescription:
+    "Ваше бронирование аренды автомобиля успешно завершено. Спасибо, что выбрали Viastro!",
+  seoSuccessKeywords: "бронирование успешно, аренда авто Белград, viastro",
+  seoReservationTitle: "Бронирование | Viastro Rent a Car",
+  seoReservationDescription:
+    "Забронируйте аренду автомобиля в Белграде. Выберите автомобиль, даты и дополнительное оборудование.",
+  seoReservationKeywords:
+    "бронирование, забронировать авто, аренда авто Белград",
+  seoReservationSelectDatesTitle:
+    "Бронирование - Выберите даты | Viastro Rent a Car",
+  seoReservationSelectDatesDescription:
+    "Выберите даты и места получения и возврата для аренды автомобиля в Белграде.",
+  seoReservationSelectDatesKeywords:
+    "бронирование, забронировать авто, выбрать даты, аренда авто Белград",
+  seoReservationSelectVehicleTitle:
+    "Бронирование - Выберите автомобиль | Viastro Rent a Car",
+  seoReservationSelectVehicleDescription:
+    "Выберите из нашего широкого ассортимента автомобилей для аренды в Белграде.",
+  seoReservationSelectVehicleKeywords:
+    "бронирование, выбрать автомобиль, выбрать авто, аренда авто Белград",
+  seoReservationExtrasTitle:
+    "Бронирование - Дополнительное оборудование | Viastro Rent a Car",
+  seoReservationExtrasDescription:
+    "Выберите дополнительное оборудование и опции для аренды автомобиля в Белграде.",
+  seoReservationExtrasKeywords:
+    "бронирование, дополнительное оборудование, дополнительные опции, аренда авто Белград",
+  seoReservationReviewTitle:
+    "Бронирование - Обзор и подтверждение | Viastro Rent a Car",
+  seoReservationReviewDescription:
+    "Просмотрите детали вашего бронирования аренды автомобиля и подтвердите бронирование в Белграде.",
+  seoReservationReviewKeywords:
+    "бронирование, обзор, подтвердить бронирование, аренда авто Белград",
+  seoLandingAirportTitle:
+    "Аренда авто Белград Аэропорт - Премиум автомобили | Viastro",
+  seoLandingAirportDescription:
+    "Viastro Rent a Car - Белград Аэропорт - Новейшие автомобили по лучшим ценам, без скрытых платежей. Забронируйте автомобиль и наслаждайтесь поездкой.",
+  seoLandingAirportKeywords:
+    "аренда авто Белград аэропорт, Белград аэропорт аренда автомобилей, встреча в аэропорту Белград",
+  seoLandingTeslaTitle: "Аренда авто Белград Аэропорт Никола Тесла | Viastro",
+  seoLandingTeslaDescription:
+    "Арендуйте автомобиль в аэропорту Белграда (Никола Тесла). Быстрая услуга получения, широкий выбор автомобилей и конкурентные цены. Забронируйте онлайн сегодня!",
+  seoLandingTeslaKeywords:
+    "аренда авто Белград аэропорт, аренда авто Никола Тесла аэропорт, аэропорт аренда автомобилей Белград",
 };

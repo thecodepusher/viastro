@@ -44,12 +44,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Rental Conditions | Viastro Rent a Car",
-    description:
-      "Read Viastro's rental conditions and terms of service for car rental in Belgrade, Serbia.",
+    title: data.lang.seoRentalConditionsTitle,
+    description: data.lang.seoRentalConditionsDescription,
     url: `/${data.langCode || "sr"}/rental-conditions`,
     baseUrl,
-    keywords: "rental conditions, terms of service, car rental Belgrade",
+    keywords: data.lang.seoRentalConditionsKeywords,
     imageAlt: "Viastro Rental Conditions",
   });
 }

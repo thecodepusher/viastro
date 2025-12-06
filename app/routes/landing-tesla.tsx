@@ -28,13 +28,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Rent a Car Belgrade Airport Nikola Tesla | Viastro",
-    description:
-      "Rent a car at Belgrade Airport (Nikola Tesla). Fast pickup service, wide selection of vehicles, and competitive prices. Book online today!",
+    title: data.lang.seoLandingTeslaTitle,
+    description: data.lang.seoLandingTeslaDescription,
     url: `/${data.langCode || "sr"}/rent-a-car-aerodrom-beograd-nikola-tesla`,
     baseUrl,
-    keywords:
-      "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
+    keywords: data.lang.seoLandingTeslaKeywords,
     imageAlt: "Viastro Rent a Car - Belgrade Airport Nikola Tesla",
   });
 }

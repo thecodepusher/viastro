@@ -35,12 +35,11 @@ export function meta({ data }: Route.MetaArgs) {
         : "ru_RU";
 
   return generateOpenGraphMeta({
-    title: "Viastro rent a car | Belgrade",
-    description: data.lang.description,
+    title: data.lang.seoHomeTitle,
+    description: data.lang.seoHomeDescription,
     url: `/${data.langCode || "sr"}`,
     baseUrl,
-    keywords:
-      "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade",
+    keywords: data.lang.seoHomeKeywords,
     imageAlt: "Viastro Rent a Car - Premium Car Rental in Belgrade",
     locale,
   });

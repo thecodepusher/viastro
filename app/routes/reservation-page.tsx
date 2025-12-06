@@ -98,12 +98,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation | Viastro Rent a Car",
-    description:
-      "Book your car rental in Belgrade. Choose your vehicle, dates, and additional equipment.",
+    title: data.lang.seoReservationTitle,
+    description: data.lang.seoReservationDescription,
     url: `/${data.langCode || "sr"}/reservation`,
     baseUrl,
-    keywords: "reservation, book car, rent a car Belgrade",
+    keywords: data.lang.seoReservationKeywords,
     imageAlt: "Viastro - Car Rental Reservation",
   });
 }

@@ -113,4 +113,83 @@ export const en: BaseLocale = {
   pib: "Tax ID",
   mb: "Registration Number",
   delatnost: "Activity",
+  seoHomeTitle: "Viastro rent a car | Belgrade",
+  seoHomeDescription:
+    "Rent a car Belgrade – Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
+  seoHomeKeywords:
+    "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade",
+  seoCarsTitle: "Viastro Cars | Belgrade",
+  seoCarsDescription:
+    "Browse our car rental fleet in Belgrade. Choose from economy, luxury, and SUV vehicles.",
+  seoCarsKeywords:
+    "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
+  seoContactTitle: "Viastro Contact | Belgrade",
+  seoContactDescription:
+    "Contact Viastro Rent a Car in Belgrade for car rental services.",
+  seoContactKeywords:
+    "contact viastro, rent a car Belgrade contact, car rental Belgrade",
+  seoFaqTitle: "Viastro FAQ | Belgrade",
+  seoFaqDescription:
+    "Frequently asked questions about car rental services in Belgrade.",
+  seoFaqKeywords:
+    "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
+  seoBlogTitle: "Viastro Blog | Belgrade",
+  seoBlogDescription:
+    "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.",
+  seoBlogKeywords: "viastro blog, rent a car Belgrade, travel guides Serbia",
+  seoBlogDetailsTitle: " | Viastro Blog",
+  seoBlogDetailsKeywords: "viastro blog, rent a car Belgrade, car rental tips",
+  seoRentalConditionsTitle: "Rental Conditions | Viastro Rent a Car",
+  seoRentalConditionsDescription:
+    "Read Viastro's rental conditions and terms of service for car rental in Belgrade, Serbia.",
+  seoRentalConditionsKeywords:
+    "rental conditions, terms of service, car rental Belgrade",
+  seoPrivacyPolicyTitle: "Privacy Policy | Viastro Rent a Car",
+  seoPrivacyPolicyDescription:
+    "Read Viastro's privacy policy to understand how we collect, use, and protect your personal information.",
+  seoPrivacyPolicyKeywords:
+    "privacy policy, data protection, viastro rent a car",
+  seoSuccessTitle: "Reservation Successful | Viastro Rent a Car",
+  seoSuccessDescription:
+    "Your car rental reservation has been successfully completed. Thank you for choosing Viastro!",
+  seoSuccessKeywords: "reservation successful, car rental Belgrade, viastro",
+  seoReservationTitle: "Reservation | Viastro Rent a Car",
+  seoReservationDescription:
+    "Book your car rental in Belgrade. Choose your vehicle, dates, and additional equipment.",
+  seoReservationKeywords: "reservation, book car, rent a car Belgrade",
+  seoReservationSelectDatesTitle:
+    "Reservation - Select Dates | Viastro Rent a Car",
+  seoReservationSelectDatesDescription:
+    "Select your pickup and drop-off dates and locations for your car rental in Belgrade.",
+  seoReservationSelectDatesKeywords:
+    "reservation, book car, select dates, rent a car Belgrade",
+  seoReservationSelectVehicleTitle:
+    "Reservation - Select Vehicle | Viastro Rent a Car",
+  seoReservationSelectVehicleDescription:
+    "Choose from our wide selection of vehicles for your car rental in Belgrade.",
+  seoReservationSelectVehicleKeywords:
+    "reservation, select vehicle, choose car, rent a car Belgrade",
+  seoReservationExtrasTitle:
+    "Reservation - Additional Equipment | Viastro Rent a Car",
+  seoReservationExtrasDescription:
+    "Select additional equipment and extras for your car rental in Belgrade.",
+  seoReservationExtrasKeywords:
+    "reservation, additional equipment, extras, rent a car Belgrade",
+  seoReservationReviewTitle:
+    "Reservation - Review & Confirm | Viastro Rent a Car",
+  seoReservationReviewDescription:
+    "Review your car rental reservation details and confirm your booking in Belgrade.",
+  seoReservationReviewKeywords:
+    "reservation, review, confirm booking, rent a car Belgrade",
+  seoLandingAirportTitle:
+    "Rent a Car Belgrade Airport - Premium Vehicles | Viastro",
+  seoLandingAirportDescription:
+    "Viastro Rent a Car - Belgrade Airport - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.",
+  seoLandingAirportKeywords:
+    "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade",
+  seoLandingTeslaTitle: "Rent a Car Belgrade Airport Nikola Tesla | Viastro",
+  seoLandingTeslaDescription:
+    "Rent a car at Belgrade Airport (Nikola Tesla). Fast pickup service, wide selection of vehicles, and competitive prices. Book online today!",
+  seoLandingTeslaKeywords:
+    "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
 };

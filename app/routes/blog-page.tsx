@@ -45,12 +45,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: `Viastro ${data.lang.blog} | Belgrade`,
-    description:
-      "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.",
+    title: data.lang.seoBlogTitle,
+    description: data.lang.seoBlogDescription,
     url: `/${data.langCode || "sr"}/blog`,
     baseUrl,
-    keywords: "viastro blog, rent a car Belgrade, travel guides Serbia",
+    keywords: data.lang.seoBlogKeywords,
     imageAlt: "Viastro Blog - Car Rental Tips and Travel Guides",
   });
 }
