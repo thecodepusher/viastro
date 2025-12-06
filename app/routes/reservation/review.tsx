@@ -365,7 +365,7 @@ export function meta({ data }: Route.MetaArgs) {
 
 export default function Review({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="w-full">
+    <div className="w-full mx-auto max-w-7xl">
       <h3 className="mx-6 my-4 font-bold text-xl">
         {loaderData.lang.costSummary}
       </h3>

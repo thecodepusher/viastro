@@ -1,10 +1,15 @@
-import { prefs } from "@/lib/prefs-cookie";
+import { useState, useMemo } from "react";
 import { redirect, useFetcher } from "react-router";
+import { prefs } from "@/lib/prefs-cookie";
 import { getLocale } from "@/lib/utils";
-import { getAditionalEquipment, type LocaleTypes } from "@/lib/data";
+import {
+  getAditionalEquipment,
+  PRICE_FOR_PICKUP_OFF_HOURS,
+  type LocaleTypes,
+} from "@/lib/data";
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
-import { useState } from "react";
 import { calculateInWorkingHours } from "@/lib/helpers";
+import { differenceInMinutes, set } from "date-fns";
 import type { Route } from "./+types/extras";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { IncludedInReservation } from "@/components/Extras/IncludedInReservation";
@@ -50,6 +55,39 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     ...getAditionalEquipment(params.lang as LocaleTypes),
   ];
 
+  let baseCarPrice = 0;
+  if (pickupDate && dropoffDate && pickupTime && dropoffTime) {
+    const pickupDateAndTime = set(new Date(pickupDate), {
+      hours: pickupTime.split(":")[0],
+      minutes: pickupTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    const dropOffDateAndTime = set(new Date(dropoffDate), {
+      hours: dropoffTime.split(":")[0],
+      minutes: dropoffTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    const days = Math.ceil(
+      differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+    );
+
+    for (let price of car.prices) {
+      if (!price.to) {
+        baseCarPrice = days * price.price;
+        break;
+      }
+
+      if (days >= price.from && days <= price.to) {
+        baseCarPrice = price.price * days;
+        break;
+      }
+    }
+  }
+
   const baseUrl = getBaseUrl(request);
 
   return {
@@ -58,6 +96,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     aditionalEquipment: ad,
     langCode: params.lang ?? "sr",
     baseUrl,
+    car,
+    baseCarPrice,
+    pickupDate,
+    pickupTime,
+    dropoffDate,
+    dropoffTime,
   };
 }
 
@@ -98,12 +142,47 @@ export default function Extras({
   const [selected, setSelected] = useState<number[]>([]);
   const fetcher = useFetcher();
 
+  const days = useMemo(() => {
+    if (
+      !loaderData.pickupDate ||
+      !loaderData.dropoffDate ||
+      !loaderData.pickupTime ||
+      !loaderData.dropoffTime
+    )
+      return 1;
+
+    const pickupDateAndTime = set(new Date(loaderData.pickupDate), {
+      hours: loaderData.pickupTime.split(":")[0],
+      minutes: loaderData.pickupTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    const dropOffDateAndTime = set(new Date(loaderData.dropoffDate), {
+      hours: loaderData.dropoffTime.split(":")[0],
+      minutes: loaderData.dropoffTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    return Math.ceil(
+      differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+    );
+  }, [
+    loaderData.pickupDate,
+    loaderData.dropoffDate,
+    loaderData.pickupTime,
+    loaderData.dropoffTime,
+  ]);
+
   const handleToggleEquipment = (id: number) => {
-    if (selected.some((x) => x === id)) {
-      setSelected(selected.filter((x) => x !== id));
-    } else {
-      setSelected([...selected, id]);
-    }
+    setSelected((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        return prevSelected.filter((x) => x !== id);
+      } else {
+        return [...prevSelected, id];
+      }
+    });
   };
 
   const handleContinue = () => {

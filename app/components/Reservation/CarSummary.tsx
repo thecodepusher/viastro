@@ -63,103 +63,82 @@ export function CarSummary({
               </div>
             </div>
 
-            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-1 lg:gap-4">
-              <div className="flex items-center gap-1.5 lg:items-start lg:gap-2 lg:flex-col">
-                <div className="flex items-center gap-1 flex-1 lg:flex-none lg:w-full">
-                  <div className="shrink-0">
-                    <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
-                      <Calendar className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
-                      {lang.pickUpTime}
-                    </p>
-                    <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight">
-                      <span className="hidden lg:block">
-                        {formattedPickupDate}
-                      </span>
-                      <span className="lg:hidden">
-                        {formattedPickupDate} {pickupTime}
-                      </span>
-                    </p>
-                    <p className="hidden lg:block text-xs font-semibold text-s">
-                      {pickupTime}
-                    </p>
-                  </div>
-                </div>
-                <div className="lg:hidden flex items-center gap-1 flex-1">
-                  <div className="shrink-0">
-                    <div className="w-5 h-5 rounded bg-s/10 flex items-center justify-center">
-                      <Calendar className="w-3 h-3 text-s" />
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[9px] font-bold text-gray-900 leading-tight">
-                      {formattedDropoffDate} {dropoffTime}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hidden lg:flex items-start gap-2">
+            <div className="grid grid-cols-2 gap-1 lg:gap-4">
+              <div className="flex items-start gap-1.5 lg:gap-2">
                 <div className="shrink-0">
-                  <div className="w-10 h-10 rounded bg-s/10 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-s" />
+                  <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
+                    <Calendar className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                    {lang.pickUpTime}
+                  </p>
+                  <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight">
+                    <span className="hidden lg:block">
+                      {formattedPickupDate}
+                    </span>
+                    <span className="lg:hidden">
+                      {formattedPickupDate} {pickupTime}
+                    </span>
+                  </p>
+                  <p className="hidden lg:block text-xs font-semibold text-s">
+                    {pickupTime}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-1.5 lg:gap-2">
+                <div className="shrink-0">
+                  <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
+                    <Calendar className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
                     {lang.dropOffTime}
                   </p>
-                  <p className="text-sm font-bold text-gray-900">
-                    {formattedDropoffDate}
+                  <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight">
+                    <span className="hidden lg:block">
+                      {formattedDropoffDate}
+                    </span>
+                    <span className="lg:hidden">
+                      {formattedDropoffDate} {dropoffTime}
+                    </span>
                   </p>
-                  <p className="text-xs font-semibold text-s">{dropoffTime}</p>
+                  <p className="hidden lg:block text-xs font-semibold text-s">
+                    {dropoffTime}
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 lg:items-start lg:gap-2 lg:flex-col">
-                <div className="flex items-center gap-1 flex-1 lg:flex-none lg:w-full">
-                  <div className="shrink-0">
-                    <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
-                      <MapPin className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
-                      {lang.pickUpLoacation}
-                    </p>
-                    <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight truncate">
-                      {pickupLocation}
-                    </p>
-                  </div>
-                </div>
-                <div className="lg:hidden flex items-center gap-1 flex-1">
-                  <div className="shrink-0">
-                    <div className="w-5 h-5 rounded bg-s/10 flex items-center justify-center">
-                      <MapPin className="w-3 h-3 text-s" />
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[9px] font-bold text-gray-900 leading-tight truncate">
-                      {dropoffLocation}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hidden lg:flex items-start gap-2">
+              <div className="flex items-start gap-1.5 lg:gap-2">
                 <div className="shrink-0">
-                  <div className="w-10 h-10 rounded bg-s/10 flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-s" />
+                  <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
+                    <MapPin className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                    {lang.pickUpLoacation}
+                  </p>
+                  <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight truncate">
+                    {pickupLocation}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-1.5 lg:gap-2">
+                <div className="shrink-0">
+                  <div className="w-5 h-5 lg:w-10 lg:h-10 rounded bg-s/10 flex items-center justify-center">
+                    <MapPin className="w-3 h-3 lg:w-5 lg:h-5 text-s" />
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
                     {lang.dropOffLoacation}
                   </p>
-                  <p className="text-sm font-bold text-gray-900">
+                  <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight truncate">
                     {dropoffLocation}
                   </p>
                 </div>
@@ -175,7 +154,7 @@ export function CarSummary({
               <div className="flex items-baseline justify-end gap-0.5 lg:gap-1 mb-0 lg:mb-2">
                 <Euro className="w-3 h-3 lg:w-5 lg:h-5 text-gray-900" />
                 <span className="text-base lg:text-3xl font-bold text-gray-900 leading-tight">
-                  {price}
+                  {price.toFixed(2)}
                 </span>
               </div>
               <p className="text-[8px] lg:text-xs text-gray-500 leading-tight">

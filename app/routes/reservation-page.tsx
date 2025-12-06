@@ -19,7 +19,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   let carSummary = null;
 
-  // Učitaj podatke o vozilu ako je izabrano (za korake 3 i 4)
   if (cookie.carId) {
     try {
       const res = await fetch(
@@ -41,7 +40,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
         const dropoffDate = new Date(cookie.dropOffDate);
         const days = differenceInDays(dropoffDate, pickupDate) || 1;
 
-        // Izračunaj cenu na osnovu broja dana
         let carPrice = 0;
         for (const price of car.prices) {
           if ((!price.to || days <= price.to) && days >= price.from) {
@@ -49,9 +47,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
             break;
           }
         }
-
-        // Ako postoji cena iz review loader-a, koristi je (ona uključuje i dodatke)
-        // Inače koristi osnovnu cenu vozila
 
         const pickupLocation = locations.find(
           (x) => x.id === +cookie.pickUpLocation
@@ -117,16 +112,35 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
 
-  // Uzmi carPrice iz review loader-a ako je dostupan
   const reviewLoaderData = matches.find((m) => m.id === "routes/review")
     ?.data as { carPrice?: number } | undefined;
   const carPriceFromReview = reviewLoaderData?.carPrice;
 
-  // Ažuriraj carSummary sa cenom iz review loader-a ako je dostupna (ona uključuje i dodatke)
-  const carSummaryWithPrice =
-    loaderData.carSummary && carPriceFromReview
-      ? { ...loaderData.carSummary, price: carPriceFromReview }
-      : loaderData.carSummary;
+  const [extrasPrice, setExtrasPrice] = useState<number | null>(null);
+
+  useEffect(() => {
+    const checkExtrasPrice = () => {
+      if (typeof window !== "undefined" && (window as any).__extrasTotalPrice) {
+        setExtrasPrice((window as any).__extrasTotalPrice);
+      }
+    };
+
+    checkExtrasPrice();
+
+    const interval = setInterval(checkExtrasPrice, 100);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const carSummaryWithPrice = loaderData.carSummary
+    ? {
+        ...loaderData.carSummary,
+        price:
+          extrasPrice !== null
+            ? extrasPrice
+            : carPriceFromReview || loaderData.carSummary.price,
+      }
+    : null;
   const [isAnimating, setIsAnimating] = useState(false);
   const fetcher = useFetcher();
 
@@ -295,7 +309,6 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
         </div>
       </div>
 
-      {/* Car Summary za korake 3 i 4 - ispod svih koraka */}
       {(currentStepIndex === 2 || currentStepIndex === 3) &&
         carSummaryWithPrice && (
           <div className="sticky top-0 z-40 bg-white border-t border-gray-200 shadow-lg lg:relative lg:z-auto">

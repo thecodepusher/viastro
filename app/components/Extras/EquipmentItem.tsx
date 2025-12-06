@@ -87,10 +87,19 @@ export function EquipmentItem({
 
   const IconComponent = getEquipmentIcon();
 
+  const handleItemClick = (e: React.MouseEvent) => {
+    // Ne pozivaj onToggle ako je klik na button
+    const target = e.target as HTMLElement;
+    if (target.closest("button") || target.tagName === "BUTTON") {
+      return;
+    }
+    onToggle(equipment.id);
+  };
+
   return (
     <div
-      onClick={() => onToggle(equipment.id)}
-      className={`group relative border-2 rounded-xl shadow-sm transition-all duration-300 overflow-hidden cursor-pointer ${
+      onClick={handleItemClick}
+      className={`group relative border-2 rounded-xl shadow-sm transition-all duration-300 overflow-hidden cursor-pointer select-none ${
         isSelected
           ? "border-s bg-s text-white shadow-lg scale-[1.02]"
           : "border-gray-200 bg-white hover:border-s hover:shadow-md"
@@ -106,19 +115,19 @@ export function EquipmentItem({
         <div className="flex-1 flex flex-col justify-between p-4 md:p-6">
           <div className="flex-1">
             <h3
-              className={`text-lg md:text-xl font-bold mb-2 ${
+              className={`text-lg md:text-xl font-bold mb-2 select-none ${
                 isSelected ? "text-white" : "text-gray-900"
               }`}>
               {equipment.name}
             </h3>
             <p
-              className={`text-xs md:text-sm leading-relaxed mb-3 ${
+              className={`text-xs md:text-sm leading-relaxed mb-3 select-none ${
                 isSelected ? "text-white/90" : "text-gray-600"
               }`}>
               {equipment.description}
             </p>
             {equipment.depositeDiscount > 0 && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs font-semibold mt-2">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs font-semibold mt-2 select-none">
                 💰 {lang.vehicleDepositDiscount} {equipment.depositeDiscount}€
               </div>
             )}
@@ -138,7 +147,7 @@ export function EquipmentItem({
             {equipment.free ? (
               <div className="w-full">
                 <p
-                  className={`text-xl md:text-2xl font-bold ${
+                  className={`text-xl md:text-2xl font-bold select-none ${
                     isSelected
                       ? "text-white"
                       : "text-green-600 dark:text-green-400"
@@ -150,7 +159,7 @@ export function EquipmentItem({
               <div>
                 <div className="flex items-baseline md:justify-end gap-1 mb-1">
                   <span
-                    className={`text-2xl md:text-3xl font-bold ${
+                    className={`text-2xl md:text-3xl font-bold select-none ${
                       isSelected
                         ? "text-white"
                         : "text-gray-900 dark:text-white"
@@ -159,7 +168,7 @@ export function EquipmentItem({
                   </span>
                   {equipment.perDay && (
                     <span
-                      className={`text-sm ${
+                      className={`text-sm select-none ${
                         isSelected
                           ? "text-white/90"
                           : "text-gray-600 dark:text-gray-400"
@@ -170,7 +179,7 @@ export function EquipmentItem({
                 </div>
                 {equipment.perDay && equipment.maxPerDays && (
                   <p
-                    className={`text-xs mb-1 ${
+                    className={`text-xs mb-1 select-none ${
                       isSelected
                         ? "text-white/90"
                         : "text-gray-600 dark:text-gray-400"
@@ -179,7 +188,7 @@ export function EquipmentItem({
                   </p>
                 )}
                 <p
-                  className={`text-xs ${
+                  className={`text-xs select-none ${
                     isSelected
                       ? "text-white"
                       : "text-gray-500 dark:text-gray-400"
@@ -192,15 +201,17 @@ export function EquipmentItem({
 
           <Button
             variant={isSelected ? "default" : "outline"}
-            className={`md:mt-4 min-w-[80px] md:min-w-[120px] w-1/2 md:w-auto text-sm md:text-base py-2 md:py-0 transition-all relative z-10 ${
+            className={`md:mt-4 min-w-[80px] md:min-w-[120px] w-1/2 md:w-auto text-sm md:text-base py-2 md:py-0 transition-all relative z-10 select-none ${
               isSelected
                 ? "bg-white text-s hover:bg-white/90 border-white"
                 : "border-s text-s hover:bg-s hover:text-white"
             }`}
             onClick={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               onToggle(equipment.id);
-            }}>
+            }}
+            type="button">
             {isSelected ? lang.selected : lang.select}
           </Button>
         </div>
