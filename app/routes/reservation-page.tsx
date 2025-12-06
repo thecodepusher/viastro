@@ -124,11 +124,19 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
       }
     };
 
+    const handleExtrasPriceUpdate = (event: CustomEvent<number>) => {
+      setExtrasPrice(event.detail);
+    };
+
     checkExtrasPrice();
 
+    window.addEventListener("extrasPriceUpdated", handleExtrasPriceUpdate as EventListener);
     const interval = setInterval(checkExtrasPrice, 100);
 
-    return () => clearInterval(interval);
+    return () => {
+      window.removeEventListener("extrasPriceUpdated", handleExtrasPriceUpdate as EventListener);
+      clearInterval(interval);
+    };
   }, []);
 
   const carSummaryWithPrice = loaderData.carSummary

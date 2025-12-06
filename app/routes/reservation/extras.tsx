@@ -2,7 +2,12 @@ import { useState, useMemo } from "react";
 import { redirect, useFetcher } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { getLocale } from "@/lib/utils";
-import { getAditionalEquipment, type LocaleTypes } from "@/lib/data";
+import {
+  getAditionalEquipment,
+  type LocaleTypes,
+  PRICE_FOR_PICKUP_OFF_HOURS,
+  locations,
+} from "@/lib/data";
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import { differenceInMinutes, set } from "date-fns";
@@ -11,6 +16,7 @@ import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { IncludedInReservation } from "@/components/Extras/IncludedInReservation";
 import { EquipmentList } from "@/components/Extras/EquipmentList";
 import { ContinueButton } from "@/components/Extras/ContinueButton";
+import { useEffect } from "react";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -85,6 +91,10 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   }
 
   const baseUrl = getBaseUrl(request);
+  const pickupLocation = locations.find((x) => x.id === +cookie.pickUpLocation);
+  const dropoffLocation = locations.find(
+    (x) => x.id === +cookie.dropOffLocation
+  );
 
   return {
     lang,
@@ -98,6 +108,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     pickupTime,
     dropoffDate,
     dropoffTime,
+    pickupLocation: pickupLocation?.name || "",
+    dropoffLocation: dropoffLocation?.name || "",
   };
 }
 
@@ -130,10 +142,7 @@ export function meta({ data }: Route.MetaArgs) {
   });
 }
 
-export default function Extras({
-  actionData,
-  loaderData,
-}: Route.ComponentProps) {
+export default function Extras({ loaderData }: Route.ComponentProps) {
   const [selected, setSelected] = useState<number[]>([]);
   const fetcher = useFetcher();
 
@@ -179,6 +188,48 @@ export default function Extras({
       }
     });
   };
+
+  const totalPrice = useMemo(() => {
+    let price = loaderData.baseCarPrice;
+
+    if (loaderData.notInWorkingHours) {
+      price += PRICE_FOR_PICKUP_OFF_HOURS;
+    }
+
+    selected.forEach((equipmentId) => {
+      const equipment = loaderData.aditionalEquipment.find(
+        (eq) => eq.id === equipmentId
+      );
+      if (equipment && !equipment.free) {
+        if (equipment.perDay) {
+          if (equipment.maxPerDays && equipment.maxPerDays < days) {
+            price += equipment.price * equipment.maxPerDays;
+          } else {
+            price += equipment.price * days;
+          }
+        } else {
+          price += equipment.price;
+        }
+      }
+    });
+
+    return price;
+  }, [
+    loaderData.baseCarPrice,
+    loaderData.notInWorkingHours,
+    loaderData.aditionalEquipment,
+    selected,
+    days,
+  ]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as any).__extrasTotalPrice = totalPrice;
+      window.dispatchEvent(
+        new CustomEvent("extrasPriceUpdated", { detail: totalPrice })
+      );
+    }
+  }, [totalPrice]);
 
   const handleContinue = () => {
     const form = new FormData();
