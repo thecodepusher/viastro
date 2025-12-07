@@ -161,6 +161,20 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
             dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
           />
         </div>
+
+        {loaderData.post.tags && loaderData.post.tags.length > 0 && (
+          <div className="max-w-4xl mx-auto px-4 mb-8">
+            <div className="flex flex-wrap items-center gap-2">
+              {loaderData.post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-s/10 hover:text-s transition-colors">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <Cta lang={loaderData.lang} />
     </>

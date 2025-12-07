@@ -27,7 +27,7 @@ export default function BlogSection(props: { langCode: string }) {
                 <img
                   alt=""
                   src={post.imageUrl}
-                  className="aspect-video w-full rounded-2xl bg-gray-100 object-cover"
+                  className="w-full rounded-2xl bg-gray-100 object-cover"
                 />
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
               </div>
@@ -36,12 +36,6 @@ export default function BlogSection(props: { langCode: string }) {
                   <time dateTime={post.datetime} className="text-gray-500">
                     {post.date}
                   </time>
-                  {/* <a
-                    href={post.category.href}
-                    className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                  >
-                    {post.category.title}
-                  </a> */}
                 </div>
                 <div className="group relative">
                   <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">

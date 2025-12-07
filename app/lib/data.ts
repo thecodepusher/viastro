@@ -77,6 +77,16 @@ export const postsSr = [
     imageUrl: "/kop.png",
     date: "Maj 5, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Kopaonik",
+      "Rent a car Beograd",
+      "Iznajmljivanje automobila",
+      "Skijanje Srbija",
+      "Planinska turistika",
+      "Vikend izleti",
+      "Car rental Beograd",
+      "Auto najam",
+    ],
   },
   {
     id: 2,
@@ -106,6 +116,16 @@ export const postsSr = [
     imageUrl: "/sargan.png",
     date: "3 Maj, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Đerdap",
+      "Rent a car Beograd",
+      "Nacionalni park Srbija",
+      "Putovanja Srbijom",
+      "Iznajmljivanje automobila",
+      "Turističke destinacije",
+      "Dunav",
+      "Car rental",
+    ],
   },
   {
     id: 3,
@@ -134,6 +154,16 @@ export const postsSr = [
     imageUrl: "/djerdap.png",
     date: "1 Maj, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Mokra Gora",
+      "Rent a car Beograd",
+      "Šarganska osmica",
+      "Zlatibor",
+      "Iznajmljivanje automobila",
+      "Kultura Srbije",
+      "Turizam",
+      "Auto najam",
+    ],
   },
 ];
 
@@ -187,6 +217,16 @@ export const postsEn = [
     imageUrl: "/kop.png",
     date: "May 5, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Kopaonik",
+      "Car rental Belgrade",
+      "Rent a car Serbia",
+      "Skiing Serbia",
+      "Mountain tourism",
+      "Weekend trips",
+      "Belgrade car hire",
+      "Vehicle rental",
+    ],
   },
   {
     id: 2,
@@ -216,6 +256,16 @@ export const postsEn = [
     imageUrl: "/sargan.png",
     date: "May 3, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Đerdap",
+      "Car rental Belgrade",
+      "National Park Serbia",
+      "Serbia travel",
+      "Belgrade car hire",
+      "Tourist destinations",
+      "Danube",
+      "Vehicle rental",
+    ],
   },
   {
     id: 3,
@@ -244,6 +294,16 @@ export const postsEn = [
     imageUrl: "/djerdap.png",
     date: "May 1, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Mokra Gora",
+      "Car rental Belgrade",
+      "Šargan Eight",
+      "Zlatibor",
+      "Belgrade car hire",
+      "Serbia culture",
+      "Tourism",
+      "Vehicle rental",
+    ],
   },
 ];
 
@@ -297,6 +357,16 @@ export const postsRu = [
     imageUrl: "/kop.png",
     date: "5 мая 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Копаоник",
+      "Аренда авто Белград",
+      "Аренда автомобиля",
+      "Лыжи Сербия",
+      "Горный туризм",
+      "Выходные поездки",
+      "Прокат авто Белград",
+      "Автопрокат",
+    ],
   },
   {
     id: 2,
@@ -326,6 +396,16 @@ export const postsRu = [
     imageUrl: "/sargan.png",
     date: "3 мая 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Джердап",
+      "Аренда авто Белград",
+      "Национальный парк Сербия",
+      "Путешествия по Сербии",
+      "Прокат автомобиля",
+      "Туристические направления",
+      "Дунай",
+      "Автопрокат",
+    ],
   },
   {
     id: 3,
@@ -355,6 +435,13 @@ export const postsRu = [
     imageUrl: "/djerdap.png",
     date: "1 мая 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Мокра Гора",
+      "Шарганская восьмерка",
+      "Культура",
+      "Туризм",
+      "Златибор",
+    ],
   },
 ];
 
