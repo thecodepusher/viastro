@@ -41,6 +41,60 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
         </div>
 
         <div className="mb-8 space-y-6 sm:mb-12 sm:space-y-8">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 lg:gap-x-10">
+            <a
+              href="https://www.wspay.rs"
+              title="Monri WSpay - Web Secure Payment Gateway"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80">
+              <img
+                width="80px"
+                alt="Monri WSpay - Web Secure Payment Gateway"
+                src="https://www.wspay.info/payment-info/wsPayWebSecureLogo-118x50-transparent.png"
+                className="h-8 w-auto object-contain sm:h-9 lg:h-12"
+              />
+            </a>
+            <a
+              href="https://www.raiffeisenbank.rs/"
+              className="transition-opacity hover:opacity-80"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                width="140px"
+                src="/raiffeisen.png"
+                alt="Raiffeisen bank"
+                className="h-8 w-auto object-contain sm:h-9 lg:h-12"
+              />
+            </a>
+
+            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
+              <a
+                href="https://rs.visa.com/pay-with-visa/security-and-assistance/protected-everywhere.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-80">
+                <img
+                  width="40px"
+                  src="/visa-secure.jpg"
+                  alt="Verified by Visa"
+                  className="h-6 w-auto object-contain sm:h-7 lg:h-10"
+                />
+              </a>
+              <a
+                href="https://www.mastercard.rs/sr-rs/korisnici/pronadite-karticu.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-80">
+                <img
+                  width="140px"
+                  src="/mc_idcheck.svg"
+                  alt="Mastercard SecureCode"
+                  className="h-8 w-auto object-contain sm:h-9 lg:h-12"
+                />
+              </a>
+            </div>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 lg:gap-x-8">
             <img
               width="50px"
@@ -77,62 +131,6 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
               alt="american express"
               className="h-6 w-auto object-contain sm:h-7 lg:h-10"
             />
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 lg:gap-x-10">
-            <a
-              href="https://www.raiffeisenbank.rs/"
-              className="transition-opacity hover:opacity-80"
-              target="_blank"
-              rel="noopener noreferrer">
-              <img
-                width="140px"
-                src="/raiffeisen.png"
-                alt="Raiffeisen bank"
-                className="h-8 w-auto object-contain sm:h-9 lg:h-12"
-              />
-            </a>
-
-            <a
-              href="https://www.wspay.rs"
-              title="Monri WSpay - Web Secure Payment Gateway"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-80">
-              <img
-                width="80px"
-                alt="Monri WSpay - Web Secure Payment Gateway"
-                src="https://www.wspay.info/payment-info/wsPayWebSecureLogo-118x50-transparent.png"
-                className="h-8 w-auto object-contain sm:h-9 lg:h-12"
-              />
-            </a>
-
-            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-              <a
-                href="https://rs.visa.com/pay-with-visa/security-and-assistance/protected-everywhere.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-80">
-                <img
-                  width="40px"
-                  src="/visa-secure.jpg"
-                  alt="Verified by Visa"
-                  className="h-6 w-auto object-contain sm:h-7 lg:h-10"
-                />
-              </a>
-              <a
-                href="https://www.mastercard.rs/sr-rs/korisnici/pronadite-karticu.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-80">
-                <img
-                  width="140px"
-                  src="/mc_idcheck.svg"
-                  alt="Mastercard SecureCode"
-                  className="h-8 w-auto object-contain sm:h-9 lg:h-12"
-                />
-              </a>
-            </div>
           </div>
         </div>
 

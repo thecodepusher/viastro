@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { redirect, useFetcher } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import {
   getAditionalEquipment,
   type LocaleTypes,
@@ -21,10 +21,13 @@ import { useEffect } from "react";
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  delete cookie.wspayInProgress;
 
   const lang = await getLocale(params.lang, request);
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const databaseUrl = getDatabaseUrl();
+
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",

@@ -3,7 +3,7 @@ import { prefs } from "@/lib/prefs-cookie";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import { type ApiAllModelsResponse } from "@/lib/api-cars";
 import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
@@ -59,6 +59,8 @@ export async function action({ request }: Route.ActionArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
+  delete cookie.wspayInProgress;
+
   if (pickUpLocation) {
     cookie.pickUpLocation = pickUpLocation;
     cookie.dropOffLocation = dropOffLocation;
@@ -98,8 +100,11 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const databaseUrl = getDatabaseUrl();
+
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",

@@ -101,6 +101,12 @@ export const sr: BaseLocale = {
   successTitle:
     "Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi rezervacije.",
   successAction: "Vratite se na početnu stranicu",
+  paymentErrorTitle:
+    "Došlo je do greške pri obradi plaćanja. Vaša rezervacija nije potvrđena. Molimo pokušajte ponovo ili kontaktirajte nas.",
+  paymentErrorAction: "Vratite se na rezervaciju",
+  paymentCancelTitle:
+    "Plaćanje je otkazano. Vaša rezervacija nije potvrđena. Možete pokušati ponovo kada budete spremni.",
+  paymentCancelAction: "Vratite se na rezervaciju",
   notFoundTitle: "Stranica nije pronađena",
   notFoundMessage: "Stranica koju tražite ne postoji.",
   notFoundAction: "Vratite se na početnu stranicu",

@@ -1,10 +1,5 @@
 import { prefs } from "@/lib/prefs-cookie";
-import { Form, Link, redirect } from "react-router";
-import { Info } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { redirect, useNavigation } from "react-router";
 import {
   getAditionalEquipment,
   locations,
@@ -14,19 +9,25 @@ import {
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
 import { differenceInMinutes, format, set } from "date-fns";
 import { calculateInWorkingHours } from "@/lib/helpers";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import type { Route } from "./+types/review";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
-import { sendReservationEmail } from "@/lib/email";
+import {
+  createWSPayFormData,
+  generateShoppingCartId,
+  getWSPayAuthorizationUrl,
+} from "@/lib/wspay";
+import { CostSummary } from "@/components/Reservation/Review/CostSummary";
+import { ReviewForm } from "@/components/Reservation/Review/ReviewForm";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
 
   const lang = await getLocale(params.lang, request);
-
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  const databaseUrl = getDatabaseUrl();
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",
@@ -175,7 +176,9 @@ export async function action({ request, params }: Route.ActionArgs) {
     );
   }
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const databaseUrl = getDatabaseUrl();
+
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",
@@ -306,7 +309,6 @@ export async function action({ request, params }: Route.ActionArgs) {
   const extrasDescriptions = extras.map(
     (extra) => `${extra.name} - ${extra.price.toFixed(2)}€`
   );
-
   if (notInWorkingHours) {
     extrasDescriptions.push(
       `${lang.afterHoursReservationFee} - ${PRICE_FOR_PICKUP_OFF_HOURS.toFixed(
@@ -315,37 +317,101 @@ export async function action({ request, params }: Route.ActionArgs) {
     );
   }
 
-  try {
-    await sendReservationEmail({
-      carName: car.name,
-      pickupSummary: `${pickup?.name ?? "N/A"} ${pickupDateFormatted} - ${
-        pickupTime ?? ""
-      }`,
-      dropoffSummary: `${dropOff?.name ?? "N/A"} ${dropOffDateFormatted} - ${
-        dropoffTime ?? ""
-      }`,
-      days,
-      carPrice,
-      totalPrice: price,
-      carDeposit: car.deposite,
-      depositDiscount: depositeDiscount,
-      depositDue: depositAfterDiscount,
-      extrasDescriptions,
-      customerName: `${firstName} ${lastName}`,
-      customerEmail,
-      customerPhone: phone,
-    });
-  } catch (error) {
-    console.error("Brevo email error", error);
+  const shopId =
+    process.env.WSPAY_SHOP_ID ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_SHOP_ID
+      : undefined);
+  const secretKey =
+    process.env.WSPAY_SECRET_KEY ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_SECRET_KEY
+      : undefined);
+  const testModeEnv =
+    process.env.WSPAY_TEST_MODE ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_TEST_MODE
+      : undefined);
+  const isTestMode = testModeEnv !== "false";
+
+  if (!shopId || !secretKey) {
     return Response.json(
-      { error: "Unable to send confirmation email." },
-      { status: 502 }
+      {
+        error: "Payment gateway configuration error. Please contact support.",
+      },
+      { status: 500 }
     );
   }
 
-  return redirect("../../success", {
+  const shoppingCartId = generateShoppingCartId();
+
+  const baseUrl = getBaseUrl(request);
+
+  const reservationData = {
+    carId: cookie.carId,
+    pickUpLocation: cookie.pickUpLocation,
+    dropOffLocation: cookie.dropOffLocation,
+    pickUpDate: pickupDate,
+    pickUpTime: pickupTime,
+    dropOffDate: dropoffDate,
+    dropOffTime: dropoffTime,
+    extras: idExtras,
+    extrasDescriptions,
+    customerEmail,
+    firstName,
+    lastName,
+    phone,
+    shoppingCartId,
+    totalPrice: price,
+    carPrice,
+    days,
+    depositeDiscount,
+    carName: car.name,
+    pickupName: pickup?.name ?? "N/A",
+    dropOffName: dropOff?.name ?? "N/A",
+    pickupDateFormatted,
+    dropOffDateFormatted,
+    depositAfterDiscount,
+    notInWorkingHours,
+    carDeposit: car.deposite,
+  };
+
+  const returnUrl = `${baseUrl}/${langCode}/wspay/success`;
+  const returnErrorUrl = `${baseUrl}/${langCode}/wspay/error`;
+  const cancelUrl = `${baseUrl}/${langCode}/wspay/cancel`;
+
+  const wspayFormData = createWSPayFormData({
+    shopId,
+    secretKey,
+    shoppingCartId,
+    totalAmount: price,
+    returnUrl,
+    returnErrorUrl,
+    cancelUrl,
+    customerFirstName: firstName,
+    customerLastName: lastName,
+    customerEmail,
+    customerPhone: phone,
+    lang: langCode.toUpperCase(),
+    returnMethod: "GET",
+  });
+
+  const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
+
+  const updatedCookie = {
+    ...cookie,
+    wspayReservation: JSON.stringify(reservationData),
+    wspayInProgress: "true",
+  };
+
+  updatedCookie.wspayFormData = JSON.stringify({
+    url: wspayUrl,
+    formData: wspayFormData,
+  });
+
+  return redirect(`/${langCode}/wspay/redirect`, {
     headers: {
-      "Set-Cookie": await prefs.serialize({}),
+      "Set-Cookie": await prefs.serialize(updatedCookie),
     },
   });
 }
@@ -363,171 +429,28 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function Review({ loaderData }: Route.ComponentProps) {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <div className="w-full mx-auto max-w-7xl">
-      <h3 className="mx-6 my-4 font-bold text-xl">
-        {loaderData.lang.costSummary}
-      </h3>
-      <div className="mx-6 p-4 border rounded shadow flex gap-2 flex-col">
-        <div>
-          <Label>{loaderData.lang.pickUpLoacation}</Label>
-          <p>
-            {loaderData.pickup?.name}{" "}
-            {format(loaderData.pickupDate, "dd/MM/yyyy")} -{" "}
-            {loaderData.pickupTime}
-          </p>
-        </div>
-        <div>
-          <Label>{loaderData.lang.dropOffLoacation}</Label>
-          <p>
-            {loaderData.dropOff?.name}{" "}
-            {format(loaderData.dropoffDate, "dd/MM/yyyy")} -{" "}
-            {loaderData.dropoffTime}
-          </p>
-        </div>
-        <div>
-          <Label>{loaderData.lang.vehicles}</Label>
-          <p>
-            {loaderData.car?.name}
-            {" - "}
-            <span className="font-bold text-s text-lg">
-              {loaderData.carPrice.toFixed(2)}€
-            </span>
-          </p>
-        </div>
+      <CostSummary
+        pickup={loaderData.pickup}
+        dropOff={loaderData.dropOff}
+        pickupDate={loaderData.pickupDate}
+        pickupTime={loaderData.pickupTime}
+        dropoffDate={loaderData.dropoffDate}
+        dropoffTime={loaderData.dropoffTime}
+        car={loaderData.car}
+        carPrice={loaderData.carPrice}
+        price={loaderData.price}
+        depositeDiscount={loaderData.depositeDiscount}
+        extras={loaderData.extras}
+        notInWorkingHours={loaderData.notInWorkingHours}
+        lang={loaderData.lang}
+      />
 
-        {(loaderData.extras.length > 0 || loaderData.notInWorkingHours) && (
-          <div>
-            <Label className="">{loaderData.lang.accessories}</Label>
-
-            <div className="flex flex-col ">
-              {loaderData.notInWorkingHours && (
-                <div>
-                  {loaderData.lang.afterHoursReservationFee}
-                  {" - "}
-                  <span className="font-bold text-s text-lg">
-                    {PRICE_FOR_PICKUP_OFF_HOURS}€
-                  </span>
-                </div>
-              )}
-
-              {loaderData.extras.map((extra) => (
-                <div key={`ext-${extra.id}`}>
-                  {extra.name}
-                  {" - "}
-                  <span className="font-bold text-s text-lg">
-                    {extra.price.toFixed(2)}€
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div>
-          <Label>Total</Label>
-          <p className="font-bold text-s text-lg">
-            {loaderData.price.toFixed(2)}€
-          </p>
-        </div>
-
-        <div>
-          <Label>{loaderData.lang.deposit}</Label>
-          <p>
-            <span className="font-bold text-s text-lg">
-              {loaderData.depositeDiscount == 0 && (
-                <span>{loaderData.car.deposite}€</span>
-              )}
-
-              {loaderData.depositeDiscount > 0 && (
-                <span>
-                  <span className="line-through text-gray-400">
-                    {loaderData.car.deposite}€
-                  </span>{" "}
-                  <span>
-                    {loaderData.car.deposite - loaderData.depositeDiscount}€
-                  </span>
-                </span>
-              )}
-            </span>
-          </p>
-        </div>
-
-        <div>
-          <p className="text-sm text-muted-foreground">
-            <Info size={20} className="float-left mr-1 text-p" />
-            {loaderData.lang.conversionStatement}
-          </p>
-        </div>
-      </div>
-
-      <h3 className="mx-6 my-4 font-bold text-xl">
-        {loaderData.lang.reviewInformation}
-      </h3>
-
-      <Form method="POST">
-        <div className="mx-6 mt-4 p-4 border rounded shadow flex flex-col gap-4 mb-6">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="email">{loaderData.lang.email}</Label>
-            <Input
-              required
-              type="email"
-              id="email"
-              name="email"
-              placeholder={loaderData.lang.email}
-            />
-          </div>
-
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="first_name">{loaderData.lang.firstName}</Label>
-            <Input
-              required
-              type="text"
-              id="first_name"
-              name="first_name"
-              placeholder={loaderData.lang.firstName}
-            />
-          </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="last_name">{loaderData.lang.lastName}</Label>
-            <Input
-              required
-              type="text"
-              id="last_name"
-              name="last_name"
-              placeholder={loaderData.lang.lastName}
-            />
-          </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="phone">{loaderData.lang.phone}</Label>
-            <Input
-              required
-              type="phone"
-              id="phone"
-              name="phone"
-              placeholder={loaderData.lang.phone}
-            />
-          </div>
-
-          <div className="items-top flex space-x-2">
-            <Checkbox required id="terms1" />
-            <div className="grid gap-1.5 leading-none">
-              <Link target="_blank" to="/privacy-policy">
-                <p className="text-sm text-muted-foreground">
-                  {loaderData.lang.privacyAgreement}
-                </p>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="flex mx-6 mb-6">
-          <Button
-            type="submit"
-            className="w-full max-w-sm bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
-            {loaderData.lang.reservationReviewAction}
-          </Button>
-        </div>
-      </Form>
+      <ReviewForm lang={loaderData.lang} isSubmitting={isSubmitting} />
     </div>
   );
 }

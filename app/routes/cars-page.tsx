@@ -1,5 +1,5 @@
 import { useNavigate, useFetcher } from "react-router";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import { type ApiAllModelsResponse } from "@/lib/api-cars";
 import type { Route } from "./+types/cars-page";
 import Cars from "@/components/Cars";
@@ -23,8 +23,11 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const databaseUrl = getDatabaseUrl();
+
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",

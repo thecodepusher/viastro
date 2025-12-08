@@ -1,21 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
-import { Link } from "react-router";
+import { Link, redirect } from "react-router";
 import type { Route } from "./+types/success";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  const lang = await getLocale(params.lang, request);
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  if (!cookie.paymentSuccessful) {
+    return redirect(`/${params.lang ?? "sr"}`);
+  }
+
+  const lang = await getLocale(params.lang, request);
 
   delete cookie.pickUpDate;
   delete cookie.pickUpTime;
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.paymentSuccessful;
+  delete cookie.wspayInProgress;
 
   const baseUrl = getBaseUrl(request);
 
@@ -35,6 +42,10 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 }
 
 export function meta({ data }: Route.MetaArgs) {
+  if (!data) {
+    return [];
+  }
+
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
@@ -48,6 +59,10 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function SuccessPage({ loaderData }: Route.ComponentProps) {
+  if (!loaderData) {
+    return null;
+  }
+
   return (
     <div className="w-full">
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">

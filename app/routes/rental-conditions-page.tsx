@@ -15,6 +15,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
@@ -56,12 +57,10 @@ export function meta({ data }: Route.MetaArgs) {
 export default function RentalConditionsPage({
   loaderData,
 }: Route.ComponentProps) {
-  // Process HTML to wrap only the title (text before first <br>) in a span with class
   const processedHtml =
     loaderData.usloviNajma?.replace(
       /(<p[^>]*class="c3"[^>]*>\s*<span[^>]*>)(.*?)(<br\s*[\/]?>)/s,
       (match, openingTags, titleContent, brTag) => {
-        // Extract only text content before first <br> (handles HTML entities)
         const titleMatch = titleContent.match(/^([^<]+)/);
         if (titleMatch) {
           const titleText = titleMatch[1].trim();

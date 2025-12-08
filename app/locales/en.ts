@@ -101,6 +101,12 @@ export const en: BaseLocale = {
   successTitle:
     "Your reservation has been successfully sent. You will be contacted to confirm your reservation.",
   successAction: "Return to the home page",
+  paymentErrorTitle:
+    "An error occurred while processing your payment. Your reservation was not confirmed. Please try again or contact us.",
+  paymentErrorAction: "Return to reservation",
+  paymentCancelTitle:
+    "Payment was cancelled. Your reservation was not confirmed. You can try again when you're ready.",
+  paymentCancelAction: "Return to reservation",
   notFoundTitle: "Page Not Found",
   notFoundMessage: "The page you are looking for does not exist.",
   notFoundAction: "Return to the home page",

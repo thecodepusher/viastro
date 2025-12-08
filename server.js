@@ -3,12 +3,15 @@ import express from "express";
 import morgan from "morgan";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { config } from "dotenv";
+
+config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const BUILD_PATH = join(__dirname, "build/server/index.js");
 const DEVELOPMENT = process.env.NODE_ENV === "development";
-const PORT = Number.parseInt(process.env.PORT || "3000");
+const PORT = Number.parseInt(process.env.PORT || "9000");
 
 const app = express();
 
@@ -16,6 +19,17 @@ app.use(compression());
 app.disable("x-powered-by");
 
 app.use((req, res, next) => {
+  const databaseUrl =
+    process.env.DATABASE_URL ||
+    "https://rentacar-manager.com/client/viastro/api/";
+  let databaseDomain = "https://rentacar-manager.com";
+  try {
+    const url = new URL(databaseUrl);
+    databaseDomain = `${url.protocol}//${url.hostname}`;
+  } catch (e) {
+    console.error("Error parsing DATABASE_URL:", e);
+  }
+
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
@@ -23,11 +37,12 @@ app.use((req, res, next) => {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
       "img-src 'self' data: https: blob:; " +
-      "connect-src 'self' https://rentacar-manager.com https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net; " +
+      "connect-src 'self' ws://* wss://* ws://localhost:* wss://localhost:* http://localhost:* https://localhost:* " +
+      `${databaseDomain} https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net https://formtest.wspay.biz https://form.wspay.biz; ` +
       "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.google.com; " +
       "object-src 'none'; " +
       "base-uri 'self'; " +
-      "form-action 'self'; " +
+      "form-action 'self' https://formtest.wspay.biz https://form.wspay.biz; " +
       "frame-ancestors 'self'; " +
       "upgrade-insecure-requests;"
   );
@@ -43,6 +58,13 @@ app.use((req, res, next) => {
     "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
   );
 
+  next();
+});
+
+app.use((req, res, next) => {
+  if (req.path.startsWith("/.well-known/")) {
+    return res.status(404).end();
+  }
   next();
 });
 

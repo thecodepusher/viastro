@@ -2,7 +2,7 @@ import { Link, Outlet, useMatches, useFetcher } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
 import { CheckIcon, ChevronRight } from "lucide-react";
-import { cn, getLocale } from "@/lib/utils";
+import { cn, getLocale, getDatabaseUrl } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
@@ -21,16 +21,14 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   if (cookie.carId) {
     try {
-      const res = await fetch(
-        "https://rentacar-manager.com/client/viastro/api/",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            action: "get_all_models",
-          }),
-          headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-        }
-      );
+      const databaseUrl = getDatabaseUrl();
+      const res = await fetch(databaseUrl, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "get_all_models",
+        }),
+        headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+      });
       const apiResponse: ApiAllModelsResponse = await res.json();
       const transformedCars = transformApiCars(apiResponse, lang);
       const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
@@ -85,6 +83,7 @@ export async function action({ request }: Route.ActionArgs) {
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
 
   return new Response(null, {
     status: 200,

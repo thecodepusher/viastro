@@ -89,6 +89,10 @@ export interface BaseLocale {
   afterHoursFeeDetails: string;
   successTitle: string;
   successAction: string;
+  paymentErrorTitle: string;
+  paymentErrorAction: string;
+  paymentCancelTitle: string;
+  paymentCancelAction: string;
   notFoundTitle: string;
   notFoundMessage: string;
   notFoundAction: string;

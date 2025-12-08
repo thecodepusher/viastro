@@ -22,6 +22,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";

@@ -1,7 +1,7 @@
 import { prefs } from "@/lib/prefs-cookie";
 
 import { redirect, useFetcher } from "react-router";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import Cars from "@/components/Cars";
 import { format } from "date-fns";
 import {
@@ -17,35 +17,32 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const lang = await getLocale(params.lang, request);
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  delete cookie.wspayInProgress;
   const pickupDate = new Date(cookie.pickUpDate);
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = new Date(cookie.dropOffDate);
   const dropoffTime = cookie.dropOffTime;
 
-  const allModelsRes = await fetch(
-    "https://rentacar-manager.com/client/viastro/api/",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "get_all_models",
-      }),
-      headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-    }
-  );
+  const databaseUrl = getDatabaseUrl();
+
+  const allModelsRes = await fetch(databaseUrl, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "get_all_models",
+    }),
+    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+  });
   const allModels: ApiAllModelsResponse = await allModelsRes.json();
 
-  const availableRes = await fetch(
-    "https://rentacar-manager.com/client/viastro/api/",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "get_available_models",
-        date_from: `${format(pickupDate, "dd/MM/yyyy")} ${pickupTime}`,
-        date_to: `${format(dropoffDate, "dd/MM/yyyy")} ${dropoffTime}`,
-      }),
-      headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-    }
-  );
+  const availableRes = await fetch(databaseUrl, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "get_available_models",
+      date_from: `${format(pickupDate, "dd/MM/yyyy")} ${pickupTime}`,
+      date_to: `${format(dropoffDate, "dd/MM/yyyy")} ${dropoffTime}`,
+    }),
+    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+  });
   const availableResponse: ApiCarsResponse = await availableRes.json();
   const availableCarIds = availableResponse.available_models.map(
     (car) => car.id

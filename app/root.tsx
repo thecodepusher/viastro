@@ -70,7 +70,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Initialize dataLayer and Google Consent Mode v2
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               
