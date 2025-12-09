@@ -3,6 +3,7 @@ import type { BaseLocale } from "./base-locale";
 export const en: BaseLocale = {
   home: "Home",
   cars: "Cars",
+  longTermRentalNav: "Long-term Rental",
   rentalConditions: "Rental Conditions",
   faq: "FAQ",
   blog: "Blog",
@@ -119,6 +120,103 @@ export const en: BaseLocale = {
   pib: "Tax ID",
   mb: "Registration Number",
   delatnost: "Activity",
+  longTermRental: {
+    heroTitle:
+      "Long-Term Car Rental – Operational Leasing | Viastro Rent a Car",
+    heroSubtitle:
+      "Long-term car rental in Belgrade – zero risk, zero upfront costs",
+    heroDescription:
+      "Looking for a flexible and reliable way to use a vehicle for a month, a year, or longer-without buying, servicing, or extra expenses? Viastro Rent a Car offers modern long-term rental solutions (operational leasing), ideal for companies, entrepreneurs, freelancers, and individuals who want complete freedom without ownership obligations.",
+    heroHighlight: "One monthly payment covers everything:",
+    heroHighlightSupport:
+      "Registration, insurance, regular maintenance, a replacement vehicle, and 24/7 roadside assistance. You just drive - we handle the rest.",
+    benefitsTitle: "Benefits of long-term rental (operational lease)",
+    benefitsIntro:
+      "Compared to purchasing, credit, or leasing, long-term rental brings clear and measurable advantages:",
+    benefitsItems: [
+      "No upfront investments or depreciation",
+      "Fixed monthly price with no hidden fees",
+      "Registration, comprehensive insurance, servicing, and assistance included",
+      "Replacement vehicle in case of breakdown",
+      "Option to change the model during the contract",
+      "Full cost control and maximum flexibility",
+    ],
+    individualsTitle: "Long-term rental for individuals and freelancers",
+    individualsDescription:
+      "If you need a car for daily errands, travel, field work, or freelance gigs-long-term rental is the smartest choice. No hassle with service, registration, or unexpected costs.",
+    individualsBullets: [
+      "No servicing.",
+      "No registration.",
+      "No unexpected expenses.",
+    ],
+    businessTitle: "Long-term rental for companies",
+    businessSubtitle: "Why companies choose Viastro",
+    businessItems: [
+      {
+        title: "No capital lock-in",
+        description:
+          "Forget loans and leasing. Get your fleet with zero upfront cost while keeping capital in the business.",
+      },
+      {
+        title: "Fixed monthly rate with no surprises",
+        description:
+          "Service, tires, registration, insurance, assistance? All included. One invoice - no hidden costs.",
+      },
+      {
+        title: "A fleet that adapts to you",
+        description:
+          "Need more cars? Bigger models? Fewer vehicles? Viastro adapts to your company’s pace.",
+      },
+      {
+        title: "Always new and highly reliable vehicles",
+        description:
+          "Leave breakdowns and downtime behind. Your team drives new, well-maintained vehicles for better safety and efficiency.",
+      },
+      {
+        title: "Replacement vehicle immediately",
+        description:
+          "If a breakdown happens, we deliver a replacement vehicle quickly so your operations stay on track.",
+      },
+      {
+        title: "Professional support 24/7",
+        description:
+          "Our team is with you at any moment-technical help, advice, and roadside support.",
+      },
+    ],
+    idealTitle: "Perfect for:",
+    idealItems: [
+      "Sales reps and field teams",
+      "IT companies and startups",
+      "Construction and logistics companies",
+      "Agencies and service teams",
+      "All businesses that want lower costs and simpler operations",
+    ],
+    reasonsTitle: "Why choose Viastro Rent a Car?",
+    reasonsItems: [
+      "100% transparent costs",
+      "Flexible agreements tailored to your needs",
+      "Fast vehicle delivery",
+      "Professional support",
+      "Experience with small and large fleets",
+    ],
+    ctaTitle: "Contact us and request an offer",
+    ctaSubtitle:
+      "Ready to optimize costs and upgrade your fleet? Send an inquiry and we'll prepare a proposal tailored exactly to your needs.",
+    formTitle: "Send a request",
+    formSubtitle: "Our team replies as soon as possible.",
+    tabBusiness: "Businesses",
+    tabIndividual: "Individuals",
+    companyNameLabel: "Company name",
+    taxIdLabel: "Tax ID",
+    vehicleCountLabel: "Number of vehicles you need a quote for",
+    fullNameLabel: "Full name",
+    phoneLabel: "Phone number",
+    submitLabel: "Send request",
+    contactPhoneLabel: "Phone",
+    contactEmailLabel: "Email",
+    contactPhoneValue: "063 601 237",
+    contactEmailValue: "office@viastro.rs",
+  },
   seoHomeTitle: "Viastro rent a car | Belgrade",
   seoHomeDescription:
     "Rent a car Belgrade – Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
@@ -198,4 +296,10 @@ export const en: BaseLocale = {
     "Rent a car at Belgrade Airport (Nikola Tesla). Fast pickup service, wide selection of vehicles, and competitive prices. Book online today!",
   seoLandingTeslaKeywords:
     "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
+  seoLongTermRentalTitle:
+    "Long-Term Car Rental – Operational Leasing | Viastro Rent a Car",
+  seoLongTermRentalDescription:
+    "Flexible long-term car rental in Belgrade with no upfront investment or hidden fees. Operational leasing for businesses, entrepreneurs, and individuals with registration, insurance, maintenance, and replacement vehicles included.",
+  seoLongTermRentalKeywords:
+    "long-term car rental, operational leasing Belgrade, business car hire, fleet rental",
 };

@@ -22,6 +22,7 @@ export default [
   route(":lang?/cars", "routes/cars-page.tsx"),
   route(":lang?/rental-conditions", "routes/rental-conditions-page.tsx"),
   route(":lang?/privacy-policy", "routes/privacy-policy-page.tsx"),
+  route(":lang?/long-term-rental", "routes/long-term-rental.tsx"),
   route(":lang?/reservation", "routes/reservation-page.tsx", [
     index("routes/reservation/index.tsx"),
     route("vehicle", "routes/reservation/vehicle.tsx"),

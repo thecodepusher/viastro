@@ -219,7 +219,6 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
               {steps.map((step, stepIdx) => {
                 const isComplete = step.status === "complete";
                 const isCurrent = step.status === "current";
-                const isUpcoming = step.status === "upcoming";
 
                 return (
                   <li

@@ -1,6 +1,47 @@
+export interface LongTermRentalLocale {
+  heroTitle: string;
+  heroSubtitle: string;
+  heroDescription: string;
+  heroHighlight: string;
+  heroHighlightSupport: string;
+  benefitsTitle: string;
+  benefitsIntro: string;
+  benefitsItems: string[];
+  individualsTitle: string;
+  individualsDescription: string;
+  individualsBullets: string[];
+  businessTitle: string;
+  businessSubtitle: string;
+  businessItems: Array<{
+    title: string;
+    description: string;
+  }>;
+  idealTitle: string;
+  idealItems: string[];
+  reasonsTitle: string;
+  reasonsItems: string[];
+  ctaTitle: string;
+  ctaSubtitle: string;
+  formTitle: string;
+  formSubtitle: string;
+  tabBusiness: string;
+  tabIndividual: string;
+  companyNameLabel: string;
+  taxIdLabel: string;
+  vehicleCountLabel: string;
+  fullNameLabel: string;
+  phoneLabel: string;
+  submitLabel: string;
+  contactPhoneLabel: string;
+  contactEmailLabel: string;
+  contactPhoneValue: string;
+  contactEmailValue: string;
+}
+
 export interface BaseLocale {
   home: string;
   cars: string;
+  longTermRentalNav: string;
   rentalConditions: string;
   faq: string;
   blog: string;
@@ -104,6 +145,7 @@ export interface BaseLocale {
   pib: string;
   mb: string;
   delatnost: string;
+  longTermRental: LongTermRentalLocale;
   seoHomeTitle: string;
   seoHomeDescription: string;
   seoHomeKeywords: string;
@@ -151,4 +193,7 @@ export interface BaseLocale {
   seoLandingTeslaTitle: string;
   seoLandingTeslaDescription: string;
   seoLandingTeslaKeywords: string;
+  seoLongTermRentalTitle: string;
+  seoLongTermRentalDescription: string;
+  seoLongTermRentalKeywords: string;
 }

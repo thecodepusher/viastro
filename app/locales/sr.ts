@@ -3,6 +3,7 @@ import type { BaseLocale } from "./base-locale";
 export const sr: BaseLocale = {
   home: "Početna",
   cars: "Vozila",
+  longTermRentalNav: "Dugoročni najam",
   rentalConditions: "Opšti uslovi najma",
   faq: "Često postavljena pitanja",
   blog: "Blog",
@@ -119,6 +120,102 @@ export const sr: BaseLocale = {
   pib: "PIB",
   mb: "MB",
   delatnost: "Delatnost",
+  longTermRental: {
+    heroTitle: "Dugoročni najam – Operativni rent | Viastro Rent a Car",
+    heroSubtitle:
+      "Dugoročni najam vozila u Beogradu – rešenje bez rizika i bez ulaganja",
+    heroDescription:
+      "Tražite fleksibilan i pouzdan način da koristite vozilo na mesec, godinu ili duže - bez kupovine, servisa i dodatnih troškova? Viastro Rent a Car nudi savremena rešenja dugoročnog najma (operativnog renta), idealna za firme, preduzetnike, freelancere i fizička lica koja žele potpunu slobodu bez obaveza vlasništva.",
+    heroHighlight: "Jedna mesečna rata pokriva sve:",
+    heroHighlightSupport:
+      "Registraciju, osiguranje, redovno održavanje, zamensko vozilo i pomoć na putu 24/7. Vaše je samo da vozite - sve ostalo je na nama.",
+    benefitsTitle: "Prednosti dugoročnog najma (operativnog renta)",
+    benefitsIntro:
+      "U poređenju sa kupovinom, kreditom ili lizingom, dugoročni najam donosi jasne i merljive pogodnosti:",
+    benefitsItems: [
+      "Bez početnih ulaganja i amortizacije",
+      "Fiksna mesečna cena bez skrivenih troškova",
+      "Registracija, kasko, servisi i asistencija uključeni u cenu",
+      "Zamensko vozilo u slučaju kvara",
+      "Mogućnost zamene modela u toku ugovora",
+      "Potpuna kontrola troškova i maksimalna fleksibilnost",
+    ],
+    individualsTitle: "Dugoročni najam za pojedince i freelancere",
+    individualsDescription:
+      "Ako vam je auto potreban za svakodnevne obaveze, putovanja, teren ili rad kao freelancer - dugoročni najam je najpametniji izbor. Bez obaveza oko servisa, registracije i neplaniranih troškova.",
+    individualsBullets: [
+      "Bez servisa.",
+      "Bez registracije.",
+      "Bez neplaniranih troškova.",
+    ],
+    businessTitle: "Dugoročni najam za firme",
+    businessSubtitle: "Zašto kompanije biraju Viastro",
+    businessItems: [
+      {
+        title: "Nema ulaganja i blokade kapitala",
+        description:
+          "Zaboravite kredite i lizing. Vozni park dobijate bez početnog troška, a kapital ostaje u poslu gde vam je najpotrebniji.",
+      },
+      {
+        title: "Fiksna mesečna rata bez ikakvih iznenađenja",
+        description:
+          "Servisi, gume, registracija, osiguranje, asistencija? Sve je uključeno. Jedan račun - bez skrivenih troškova.",
+      },
+      {
+        title: "Flota koja se prilagođava vama",
+        description:
+          "Treba više vozila? Veći model? Manje vozila? Viastro se prilagođava ritmu vaše firme.",
+      },
+      {
+        title: "Uvek nova i maksimalno pouzdana vozila",
+        description:
+          "Zaboravite kvarove i zastoje. Vaši zaposleni voze nova i uredno održavana vozila, što povećava sigurnost i efikasnost.",
+      },
+      {
+        title: "Zamensko vozilo odmah – bez čekanja",
+        description:
+          "U slučaju kvara isporučujemo zamensko vozilo u najkraćem roku, kako bi poslovanje ostalo neprekinuto.",
+      },
+      {
+        title: "Profesionalna podrška 24/7",
+        description:
+          "Naša ekipa je tu za vas u svakom trenutku - tehnička pomoć, savet, podrška na putu.",
+      },
+    ],
+    idealTitle: "Idealno za:",
+    idealItems: [
+      "Komercijaliste i terenske timove",
+      "IT kompanije i startapove",
+      "Građevinske i logističke firme",
+      "Agencije i servisne timove",
+      "Sve firme koje žele da smanje troškove i pojednostave poslovanje",
+    ],
+    reasonsTitle: "Zašto odabrati baš Viastro Rent a Car?",
+    reasonsItems: [
+      "100% transparentni troškovi",
+      "Fleksibilni ugovori po meri vaših potreba",
+      "Brza isporuka vozila",
+      "Profesionalna podrška",
+      "Iskustvo u radu sa malim i velikim flotama",
+    ],
+    ctaTitle: "Kontaktirajte nas i zatražite ponudu",
+    ctaSubtitle:
+      "Spremni ste da optimizujete troškove i unapredite vozni park? Pošaljite upit i pripremićemo ponudu prilagođenu baš vašim potrebama.",
+    formTitle: "Pošaljite upit",
+    formSubtitle: "Naš tim vam odgovara u najkraćem roku.",
+    tabBusiness: "Pravna lica",
+    tabIndividual: "Fizička lica",
+    companyNameLabel: "Naziv firme",
+    taxIdLabel: "PIB",
+    vehicleCountLabel: "Broj vozila za koje želite ponudu",
+    fullNameLabel: "Ime i prezime",
+    phoneLabel: "Broj telefona",
+    submitLabel: "Pošaljite upit",
+    contactPhoneLabel: "Kontakt telefon",
+    contactEmailLabel: "Email",
+    contactPhoneValue: "063 601 237",
+    contactEmailValue: "office@viastro.rs",
+  },
   seoHomeTitle: "Viastro rent a car | Beograd",
   seoHomeDescription:
     "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na aerodromu i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
@@ -202,4 +299,10 @@ export const sr: BaseLocale = {
     "Iznajmite automobil na Beogradskom aerodromu (Nikola Tesla). Brza usluga preuzimanja, širok izbor vozila i konkurentne cene. Rezervišite online danas!",
   seoLandingTeslaKeywords:
     "rent a car Beograd aerodrom, rent a car Nikola Tesla aerodrom, aerodrom iznajmljivanje automobila Beograd",
+  seoLongTermRentalTitle:
+    "Dugoročni najam – Operativni rent | Viastro Rent a Car",
+  seoLongTermRentalDescription:
+    "Fleksibilan dugoročni najam vozila u Beogradu bez ulaganja i skrivenih troškova. Operativni rent za firme, preduzetnike i pojedince uz registraciju, kasko, održavanje i zamensko vozilo uključene u cenu.",
+  seoLongTermRentalKeywords:
+    "dugoročni najam automobila, operativni rent Beograd, poslovni najam vozila, rent a car dugoročno",
 };

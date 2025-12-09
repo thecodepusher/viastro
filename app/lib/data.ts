@@ -540,7 +540,7 @@ export const aditionalEquipment = [
       ru: "Автокресло (0–36 кг)",
     },
     descriptionMap: {
-      en: "A universal car seat that covers all ages—from newborns up to children around 12 years old. It is adjustable in height and recline, allowing for a safe and comfortable ride throughout all phases of the child’s development. The seat can be installed rear-facing for the smallest babies and forward-facing for older children.",
+      en: "A universal car seat that covers all ages-from newborns up to children around 12 years old. It is adjustable in height and recline, allowing for a safe and comfortable ride throughout all phases of the child’s development. The seat can be installed rear-facing for the smallest babies and forward-facing for older children.",
       sr: "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja. Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
       ru: "Универсальное автокресло, подходящее для всех возрастов – от новорожденных до детей примерно 12 лет. Регулируется по высоте и наклону, что обеспечивает безопасную и комфортную поездку на всех этапах развития ребенка. Кресло может устанавливаться против хода движения для самых маленьких детей и по ходу движения для детей постарше.",
     },

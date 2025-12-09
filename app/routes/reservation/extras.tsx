@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { redirect, useFetcher } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { getLocale, getDatabaseUrl } from "@/lib/utils";
@@ -11,7 +11,6 @@ import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { IncludedInReservation } from "@/components/Extras/IncludedInReservation";
 import { EquipmentList } from "@/components/Extras/EquipmentList";
 import { ContinueButton } from "@/components/Extras/ContinueButton";
-import { useEffect } from "react";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
