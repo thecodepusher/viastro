@@ -121,7 +121,7 @@ export const sr: BaseLocale = {
   mb: "MB",
   delatnost: "Delatnost",
   longTermRental: {
-    heroTitle: "Dugoročni najam – Operativni rent | Viastro Rent a Car",
+    heroTitle: "Dugoročni najam Viastro Rent a Car",
     heroSubtitle:
       "Dugoročni najam vozila u Beogradu – rešenje bez rizika i bez ulaganja",
     heroDescription:

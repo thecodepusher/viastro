@@ -1,4 +1,8 @@
-export const sectionContainer = "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8";
+export const heroContainer =
+  "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-30";
+
+export const sectionContainer =
+  "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-8";
 
 export const gradientCard =
   "group relative overflow-hidden rounded-3xl border border-white/20 bg-white/80 backdrop-blur-xl shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl";

@@ -121,8 +121,7 @@ export const en: BaseLocale = {
   mb: "Registration Number",
   delatnost: "Activity",
   longTermRental: {
-    heroTitle:
-      "Long-Term Car Rental – Operational Leasing | Viastro Rent a Car",
+    heroTitle: "Long-Term Car Rental Viastro Rent a Car",
     heroSubtitle:
       "Long-term car rental in Belgrade – zero risk, zero upfront costs",
     heroDescription:
