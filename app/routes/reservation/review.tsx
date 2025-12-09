@@ -1,6 +1,6 @@
 import { prefs } from "@/lib/prefs-cookie";
 import { redirect, useNavigation } from "react-router";
-import { PRICE_FOR_PICKUP_OFF_HOURS, type LocaleTypes } from "@/lib/data";
+import { type LocaleTypes } from "@/lib/data";
 import { format } from "date-fns";
 import {
   calculateInWorkingHours,
@@ -38,7 +38,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     return redirect("../vehicle");
   }
 
-  const notInWorkingHours = calculateInWorkingHours(
+  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
     reservationData.dropoffDate,
     reservationData.pickupDate,
     reservationData.dropoffTime,
@@ -57,7 +57,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       car,
       days,
       idExtras: reservationData.extras,
-      notInWorkingHours,
+      priceForOffHours,
       langCode: params.lang as LocaleTypes,
     });
 
@@ -73,6 +73,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     car,
     pickup: reservationData.pickup,
     notInWorkingHours,
+    priceForOffHours,
     dropOff: reservationData.dropOff,
     pickupDate: reservationData.pickupDate,
     pickupTime: reservationData.pickupTime,
@@ -131,7 +132,7 @@ export async function action({ request, params }: Route.ActionArgs) {
     );
   }
 
-  const notInWorkingHours = calculateInWorkingHours(
+  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
     reservationData.dropoffDate,
     reservationData.pickupDate,
     reservationData.dropoffTime,
@@ -150,7 +151,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       car,
       days,
       idExtras: reservationData.extras,
-      notInWorkingHours,
+      priceForOffHours,
       langCode,
     });
 
@@ -165,11 +166,9 @@ export async function action({ request, params }: Route.ActionArgs) {
   const extrasDescriptions = extras.map(
     (extra) => `${extra.name} - ${extra.price.toFixed(2)}€`
   );
-  if (notInWorkingHours) {
+  if (notInWorkingHours && priceForOffHours > 0) {
     extrasDescriptions.push(
-      `${lang.afterHoursReservationFee} - ${PRICE_FOR_PICKUP_OFF_HOURS.toFixed(
-        2
-      )}€`
+      `${lang.afterHoursReservationFee} - ${priceForOffHours.toFixed(2)}€`
     );
   }
 
@@ -308,6 +307,7 @@ export default function Review({ loaderData }: Route.ComponentProps) {
         depositeDiscount={loaderData.depositeDiscount}
         extras={loaderData.extras}
         notInWorkingHours={loaderData.notInWorkingHours}
+        priceForOffHours={loaderData.priceForOffHours}
         lang={loaderData.lang}
       />
 

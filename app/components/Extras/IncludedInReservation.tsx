@@ -3,11 +3,13 @@ import type { BaseLocale } from "@/locales/base-locale";
 interface IncludedInReservationProps {
   lang: BaseLocale;
   notInWorkingHours: boolean;
+  priceForOffHours: number;
 }
 
 export function IncludedInReservation({
   lang,
   notInWorkingHours,
+  priceForOffHours,
 }: IncludedInReservationProps) {
   return (
     <>
@@ -43,7 +45,7 @@ export function IncludedInReservation({
           </div>
         </div>
 
-        {notInWorkingHours && (
+        {notInWorkingHours && priceForOffHours > 0 && (
           <div className="group relative border-2 rounded-xl shadow-lg transition-all duration-300 overflow-hidden border-s bg-s text-white">
             <div className="flex flex-col md:flex-row items-stretch min-h-[140px]">
               <div className="flex-1 flex flex-col justify-between p-4 md:p-6">
@@ -63,7 +65,7 @@ export function IncludedInReservation({
                   <div>
                     <div className="flex items-baseline md:justify-end gap-1 mb-1">
                       <span className="text-2xl md:text-3xl font-bold text-white">
-                        20€
+                        {priceForOffHours.toFixed(2)}€
                       </span>
                     </div>
                     <p className="text-xs text-white">

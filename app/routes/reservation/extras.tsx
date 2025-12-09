@@ -2,12 +2,7 @@ import { useState, useMemo } from "react";
 import { redirect, useFetcher } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { getLocale, getDatabaseUrl } from "@/lib/utils";
-import {
-  getAditionalEquipment,
-  type LocaleTypes,
-  PRICE_FOR_PICKUP_OFF_HOURS,
-  locations,
-} from "@/lib/data";
+import { getAditionalEquipment, type LocaleTypes, locations } from "@/lib/data";
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
 import { calculateInWorkingHours } from "@/lib/helpers";
 import { differenceInMinutes, set } from "date-fns";
@@ -47,7 +42,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
 
-  let notInWorkingHours = calculateInWorkingHours(
+  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
     dropoffDate,
     pickupDate,
     dropoffTime,
@@ -104,6 +99,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return {
     lang,
     notInWorkingHours,
+    priceForOffHours,
     aditionalEquipment: ad,
     langCode: params.lang ?? "sr",
     baseUrl,
@@ -197,8 +193,8 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
   const totalPrice = useMemo(() => {
     let price = loaderData.baseCarPrice;
 
-    if (loaderData.notInWorkingHours) {
-      price += PRICE_FOR_PICKUP_OFF_HOURS;
+    if (loaderData.notInWorkingHours && loaderData.priceForOffHours > 0) {
+      price += loaderData.priceForOffHours;
     }
 
     selected.forEach((equipmentId) => {
@@ -247,6 +243,7 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
       <IncludedInReservation
         lang={loaderData.lang}
         notInWorkingHours={loaderData.notInWorkingHours}
+        priceForOffHours={loaderData.priceForOffHours}
       />
 
       <EquipmentList

@@ -16,33 +16,47 @@ export function calculateInWorkingHours(
   p: any,
   dropoffTime: any,
   pickupTime: any
-) {
+): { notInWorkingHours: boolean; priceForOffHours: number } {
   const dropoffDay = new Date(d).getDay();
   const pickupDay = new Date(p).getDay();
 
-  const dropoffWorkingHour = wokringHours[dropoffDay];
-  const pickupWorkingHour = wokringHours[pickupDay];
+  const WORKING_DAYS = [1, 2, 3, 4, 5];
+  const WORKING_HOURS_START = 8 * 60;
+  const WORKING_HOURS_END = 16 * 60;
 
-  let notInWorkingHours = true;
+  const isInWorkingHours = (day: number, time: string): boolean => {
+    if (!WORKING_DAYS.includes(day)) {
+      return false;
+    }
+    const [hours, minutes] = time.split(":").map(Number);
+    const timeInMinutes = hours * 60 + minutes;
 
-  if (
-    +dropoffTime.split(":")[0] * 60 + +dropoffTime.split(":")[1] >
-      +dropoffWorkingHour.from.split(":")[0] * 60 +
-        +dropoffWorkingHour.from.split(":")[1] &&
-    +dropoffTime.split(":")[0] * 60 + +dropoffTime.split(":")[1] <
-      +dropoffWorkingHour.to.split(":")[0] * 60 +
-        +dropoffWorkingHour.to.split(":")[1] &&
-    +pickupTime.split(":")[0] * 60 + +pickupTime.split(":")[1] >
-      +pickupWorkingHour.from.split(":")[0] * 60 +
-        +pickupWorkingHour.from.split(":")[1] &&
-    +pickupTime.split(":")[0] * 60 + +pickupTime.split(":")[1] <
-      +pickupWorkingHour.to.split(":")[0] * 60 +
-        +pickupWorkingHour.to.split(":")[1]
-  ) {
-    notInWorkingHours = false;
+    return (
+      timeInMinutes >= WORKING_HOURS_START && timeInMinutes <= WORKING_HOURS_END
+    );
+  };
+
+  const dropoffInWorkingHours = isInWorkingHours(dropoffDay, dropoffTime);
+  const pickupInWorkingHours = isInWorkingHours(pickupDay, pickupTime);
+
+  if (dropoffInWorkingHours && pickupInWorkingHours) {
+    return {
+      notInWorkingHours: false,
+      priceForOffHours: 0,
+    };
   }
 
-  return notInWorkingHours;
+  if (!dropoffInWorkingHours && !pickupInWorkingHours) {
+    return {
+      notInWorkingHours: true,
+      priceForOffHours: PRICE_FOR_PICKUP_OFF_HOURS * 2,
+    };
+  }
+
+  return {
+    notInWorkingHours: true,
+    priceForOffHours: PRICE_FOR_PICKUP_OFF_HOURS,
+  };
 }
 
 export function calculateRentalDays(
@@ -92,7 +106,7 @@ export function calculateReservationPrice(params: {
   car: TransformedCar;
   days: number;
   idExtras: string | null | undefined;
-  notInWorkingHours: boolean;
+  priceForOffHours: number;
   langCode: LocaleTypes;
 }): {
   price: number;
@@ -100,7 +114,7 @@ export function calculateReservationPrice(params: {
   depositeDiscount: number;
   extras: Array<{ id: number; name: string; price: number; perDay: boolean }>;
 } {
-  const { car, days, idExtras, notInWorkingHours, langCode } = params;
+  const { car, days, idExtras, priceForOffHours, langCode } = params;
 
   let price = 0;
   let depositeDiscount = 0;
@@ -114,8 +128,8 @@ export function calculateReservationPrice(params: {
   const carPrice = calculateCarPrice(car, days);
   price += carPrice;
 
-  if (notInWorkingHours) {
-    price += PRICE_FOR_PICKUP_OFF_HOURS;
+  if (priceForOffHours > 0) {
+    price += priceForOffHours;
   }
 
   if (idExtras) {

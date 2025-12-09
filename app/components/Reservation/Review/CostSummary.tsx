@@ -1,7 +1,6 @@
 import { Info } from "lucide-react";
 import { format } from "date-fns";
 import { Label } from "@/components/ui/label";
-import { PRICE_FOR_PICKUP_OFF_HOURS } from "@/lib/data";
 import type { BaseLocale } from "@/locales/base-locale";
 
 interface CostSummaryProps {
@@ -17,6 +16,7 @@ interface CostSummaryProps {
   depositeDiscount: number;
   extras: Array<{ id: number; name: string; price: number }>;
   notInWorkingHours: boolean;
+  priceForOffHours: number;
   lang: BaseLocale;
 }
 
@@ -33,6 +33,7 @@ export function CostSummary({
   depositeDiscount,
   extras,
   notInWorkingHours,
+  priceForOffHours,
   lang,
 }: CostSummaryProps) {
   return (
@@ -61,15 +62,15 @@ export function CostSummary({
           </p>
         </div>
 
-        {(extras.length > 0 || notInWorkingHours) && (
+        {(extras.length > 0 || (notInWorkingHours && priceForOffHours > 0)) && (
           <div>
             <Label className="">{lang.accessories}</Label>
             <div className="flex flex-col">
-              {notInWorkingHours && (
+              {notInWorkingHours && priceForOffHours > 0 && (
                 <div>
                   {lang.afterHoursReservationFee} -{" "}
                   <span className="font-bold text-s text-lg">
-                    {PRICE_FOR_PICKUP_OFF_HOURS}€
+                    {priceForOffHours.toFixed(2)}€
                   </span>
                 </div>
               )}
