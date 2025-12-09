@@ -84,6 +84,8 @@ export async function action({ request }: Route.ActionArgs) {
 
   delete cookie.selectedCarId;
   delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   return new Response(null, {
     status: 200,

@@ -32,7 +32,17 @@ const carImageMap: Record<string, string> = {
   audi_a6: "/audi-a6.webp",
 };
 
-// Mapa podataka za deposite na osnovu car ID-ja ili grupe
+/**
+ * Mapa podataka o kolima (depositi, cene, nazivi)
+ *
+ * **Ovde se definišu podaci o kolima jer manager nema sve potrebne informacije.**
+ * Ova mapa se koristi da se override-uju ili dopune podaci koji dolaze iz API-ja, uključujući
+ * - deposite (depozite) za svako vozilo
+ * - cene full protection osiguranja
+ * - popuste na depozite
+ * - cene po danima (price tiers)
+ * - custom nazive vozila (ako se razlikuju od onih u manager-u)
+ */
 const carDataMap: Record<
   string,
   {
@@ -270,13 +280,6 @@ function getTransmissionText(
     ? lang.automatic
     : lang.manual;
 }
-
-/**
- * @param apiModels
- * @param lang
- * @param days
- * @param availableCarIds
- */
 
 export function transformApiCars(
   apiModels: ApiCarModel[],

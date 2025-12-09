@@ -3,12 +3,22 @@ import type { Route } from "./+types/wspay-success";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { sendReservationEmail } from "@/lib/email";
+import {
+  verifyWSPayCallbackSignature,
+  type WSPayCallbackParams,
+} from "@/lib/wspay";
+import {
+  getWSPaySession,
+  getSessionIdFromUrl,
+  invalidateWSPaySession,
+} from "@/lib/wspay-session";
 
 export async function action({ request, params }: Route.ActionArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await prefs.parse(cookieHeader)) || {};
+  const url = new URL(request.url);
+  const sessionId = url.searchParams.get("sessionId");
 
-  if (!cookie.wspayInProgress) {
+  const session = getWSPaySession(sessionId);
+  if (!session) {
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
@@ -19,25 +29,59 @@ export async function action({ request, params }: Route.ActionArgs) {
     wspayParams[key] = value as string;
   });
 
-  const reservationDataStr = cookie.wspayReservation;
-  if (!reservationDataStr) {
+  if (wspayParams.ShoppingCartID !== session.shoppingCartId) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}/reservation`);
   }
 
-  let reservationData;
-  try {
-    reservationData = JSON.parse(reservationDataStr);
-  } catch (error) {
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
-  }
-
-  if (wspayParams.ShoppingCartID !== reservationData.shoppingCartId) {
+  const reservationData = session.reservationData;
+  if (!reservationData) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}/reservation`);
   }
 
   const successValue = wspayParams.Success || wspayParams.success;
   if (successValue !== "1" && successValue !== "true") {
     return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+  }
+
+  const shopId =
+    process.env.WSPAY_SHOP_ID ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_SHOP_ID
+      : undefined);
+  const secretKey =
+    process.env.WSPAY_SECRET_KEY ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_SECRET_KEY
+      : undefined);
+
+  if (shopId && secretKey) {
+    const callbackParams: WSPayCallbackParams = {
+      Success: successValue,
+      ApprovalCode: wspayParams.ApprovalCode || wspayParams.Approvalcode,
+      ShoppingCartID: wspayParams.ShoppingCartID || wspayParams.ShoppingCartId,
+      Signature: wspayParams.Signature || wspayParams.signature,
+      Amount: wspayParams.Amount || wspayParams.amount,
+    };
+
+    if (successValue === "1" && !callbackParams.ApprovalCode) {
+      console.error(
+        "WSPay Success: ApprovalCode is missing for successful transaction"
+      );
+      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+    }
+
+    const isValidSignature = verifyWSPayCallbackSignature(
+      callbackParams,
+      shopId,
+      secretKey
+    );
+
+    if (!isValidSignature) {
+      console.error("WSPay Success: Invalid signature verification");
+      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+    }
   }
 
   try {
@@ -64,64 +108,88 @@ export async function action({ request, params }: Route.ActionArgs) {
     console.error(error);
   }
 
-  const cleanCookie: any = { ...cookie };
-  delete cleanCookie.wspayReservation;
-  delete cleanCookie.wspayFormData;
-  delete cleanCookie.pickUpDate;
-  delete cleanCookie.pickUpTime;
-  delete cleanCookie.dropOffDate;
-  delete cleanCookie.dropOffTime;
-  delete cleanCookie.selectedCarId;
-  delete cleanCookie.carId;
-  delete cleanCookie.pickUpLocation;
-  delete cleanCookie.dropOffLocation;
-  delete cleanCookie.extras;
-  cleanCookie.paymentSuccessful = "true";
+  invalidateWSPaySession(sessionId);
+
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+  cookie.paymentSuccessful = "true";
 
   return redirect(`/${params.lang ?? "sr"}/success`, {
     headers: {
-      "Set-Cookie": await prefs.serialize(cleanCookie),
+      "Set-Cookie": await prefs.serialize(cookie),
     },
   });
 }
 
 export async function loader({ request, params }: Route.LoaderArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await prefs.parse(cookieHeader)) || {};
+  const url = new URL(request.url);
+  const sessionId = url.searchParams.get("sessionId");
 
-  if (!cookie.wspayInProgress) {
+  const session = getWSPaySession(sessionId);
+  if (!session) {
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
-  const url = new URL(request.url);
   const wspayParams: Record<string, string> = {};
-
   url.searchParams.forEach((value, key) => {
     wspayParams[key] = value;
   });
 
   if (!wspayParams.ShoppingCartID && !wspayParams.Success) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}/reservation`);
   }
 
-  const reservationDataStr = cookie.wspayReservation;
-  if (!reservationDataStr) {
+  if (wspayParams.ShoppingCartID !== session.shoppingCartId) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}/reservation`);
   }
 
-  let reservationData;
-  try {
-    reservationData = JSON.parse(reservationDataStr);
-  } catch (error) {
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
-  }
-
-  if (wspayParams.ShoppingCartID !== reservationData.shoppingCartId) {
+  const reservationData = session.reservationData;
+  if (!reservationData) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}/reservation`);
   }
 
   const successValue = wspayParams.Success || wspayParams.success;
   const isSuccessful = successValue === "1" || successValue === "true";
+
+  const shopId =
+    process.env.WSPAY_SHOP_ID ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_SHOP_ID
+      : undefined);
+  const secretKey =
+    process.env.WSPAY_SECRET_KEY ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.WSPAY_SECRET_KEY
+      : undefined);
+
+  if (shopId && secretKey && isSuccessful) {
+    const callbackParams: WSPayCallbackParams = {
+      Success: successValue,
+      ApprovalCode: wspayParams.ApprovalCode || wspayParams.Approvalcode,
+      ShoppingCartID: wspayParams.ShoppingCartID || wspayParams.ShoppingCartId,
+      Signature: wspayParams.Signature || wspayParams.signature,
+      Amount: wspayParams.Amount || wspayParams.amount,
+    };
+
+    if (!callbackParams.ApprovalCode) {
+      invalidateWSPaySession(sessionId);
+      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+    }
+
+    const isValidSignature = verifyWSPayCallbackSignature(
+      callbackParams,
+      shopId,
+      secretKey
+    );
+
+    if (!isValidSignature) {
+      invalidateWSPaySession(sessionId);
+      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+    }
+  }
 
   if (isSuccessful) {
     try {
@@ -147,26 +215,19 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       });
     } catch (error) {}
 
-    const cleanCookie: any = { ...cookie };
-    delete cleanCookie.wspayReservation;
-    delete cleanCookie.wspayFormData;
-    delete cleanCookie.pickUpDate;
-    delete cleanCookie.pickUpTime;
-    delete cleanCookie.dropOffDate;
-    delete cleanCookie.dropOffTime;
-    delete cleanCookie.selectedCarId;
-    delete cleanCookie.carId;
-    delete cleanCookie.pickUpLocation;
-    delete cleanCookie.dropOffLocation;
-    delete cleanCookie.extras;
-    cleanCookie.paymentSuccessful = "true";
+    invalidateWSPaySession(sessionId);
+
+    const cookieHeader = request.headers.get("Cookie");
+    const cookie = (await prefs.parse(cookieHeader)) || {};
+    cookie.paymentSuccessful = "true";
 
     return redirect(`/${params.lang ?? "sr"}/success`, {
       headers: {
-        "Set-Cookie": await prefs.serialize(cleanCookie),
+        "Set-Cookie": await prefs.serialize(cookie),
       },
     });
   } else {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}/wspay/error`);
   }
 }

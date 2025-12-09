@@ -2,30 +2,39 @@ import { useEffect, useRef } from "react";
 import { redirect } from "react-router";
 import type { Route } from "./+types/wspay-redirect";
 import { getLocale } from "@/lib/utils";
-import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import {
+  getWSPaySession,
+  getSessionIdFromUrl,
+  invalidateWSPaySession,
+} from "@/lib/wspay-session";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await prefs.parse(cookieHeader)) || {};
+  const url = new URL(request.url);
+  const sessionId = url.searchParams.get("sessionId");
+  const formDataEncoded = url.searchParams.get("formData");
 
-  if (!cookie.wspayInProgress) {
+  const session = getWSPaySession(sessionId);
+  if (!session) {
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
-  const wspayFormDataStr = cookie.wspayFormData;
-  if (!wspayFormDataStr) {
+  if (!formDataEncoded) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
   let wspayData;
   try {
-    wspayData = JSON.parse(wspayFormDataStr);
+    const formDataStr = decodeURIComponent(formDataEncoded);
+    wspayData = JSON.parse(formDataStr);
   } catch (error) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
   if (!wspayData.url || !wspayData.formData) {
+    invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }
 

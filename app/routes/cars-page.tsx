@@ -24,6 +24,8 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
   delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const databaseUrl = getDatabaseUrl();
 

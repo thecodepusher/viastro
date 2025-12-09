@@ -18,6 +18,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const cookie = (await prefs.parse(cookieHeader)) || {};
   delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
   const pickupDate = new Date(cookie.pickUpDate);
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = new Date(cookie.dropOffDate);

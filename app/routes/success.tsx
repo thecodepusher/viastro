@@ -23,6 +23,8 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.selectedCarId;
   delete cookie.paymentSuccessful;
   delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
 

@@ -60,6 +60,8 @@ export async function action({ request }: Route.ActionArgs) {
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
   delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   if (pickUpLocation) {
     cookie.pickUpLocation = pickUpLocation;
@@ -101,6 +103,8 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
   delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const databaseUrl = getDatabaseUrl();
 

@@ -72,14 +72,12 @@ export async function getLocale(
   return lang;
 }
 
-/**
- * Gets the database API URL from environment variables
- * Falls back to default URL if not set
- */
 export function getDatabaseUrl(): string {
   return (
     process.env.DATABASE_URL ||
-    (typeof import.meta !== "undefined" ? import.meta.env?.DATABASE_URL : undefined) ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.DATABASE_URL
+      : undefined) ||
     "https://rentacar-manager.com/client/viastro/api/"
   );
 }
