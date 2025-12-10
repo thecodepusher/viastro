@@ -139,30 +139,35 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const [extrasPrice, setExtrasPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    const checkExtrasPrice = () => {
+    const checkInitialPrice = () => {
       if (typeof window !== "undefined" && (window as any).__extrasTotalPrice) {
-        setExtrasPrice((window as any).__extrasTotalPrice);
+        const initialPrice = (window as any).__extrasTotalPrice;
+        setExtrasPrice(initialPrice);
       }
     };
 
     const handleExtrasPriceUpdate = (event: CustomEvent<number>) => {
-      setExtrasPrice(event.detail);
+      const newPrice = event.detail;
+      setExtrasPrice((prevPrice) => {
+        if (prevPrice !== newPrice) {
+          return newPrice;
+        }
+        return prevPrice;
+      });
     };
 
-    checkExtrasPrice();
+    checkInitialPrice();
 
     window.addEventListener(
       "extrasPriceUpdated",
       handleExtrasPriceUpdate as EventListener
     );
-    const interval = setInterval(checkExtrasPrice, 100);
 
     return () => {
       window.removeEventListener(
         "extrasPriceUpdated",
         handleExtrasPriceUpdate as EventListener
       );
-      clearInterval(interval);
     };
   }, []);
 
