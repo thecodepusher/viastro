@@ -324,17 +324,17 @@ export default function ReservationTime(props: {
         <Button
           onClick={() => {
             if (!pickDate || !dropDate) {
-              toast.error("Odaberite datum preuzimanja i vraćanja vozila!");
+              toast.error(props.lang.toastErrorSelectDates);
               return;
             }
 
             if (!pickUpLocation || !dropOffLocation) {
-              toast.error("Odaberite mesto preuzimanja i vraćanja vozila!");
+              toast.error(props.lang.toastErrorSelectLocations);
               return;
             }
 
             if (!dropOfTime) {
-              toast.error("Odaberite vreme preuzimanja i vraćanja vozila!");
+              toast.error(props.lang.toastErrorSelectTimes);
               return;
             }
 

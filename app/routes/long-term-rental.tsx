@@ -11,6 +11,7 @@ import {
   generateOpenGraphMeta,
   getBaseUrl,
 } from "@/lib/seo";
+import { sendLongTermInquiryEmail } from "@/lib/email";
 import type { Route } from "./+types/long-term-rental";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -44,6 +45,56 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
 
   return response as unknown as typeof data;
+}
+
+export async function action({ request, params }: Route.ActionArgs) {
+  const formData = await request.formData();
+
+  const type = formData.get("type") as "business" | "individual";
+  const companyName = formData.get("companyName") as string | null;
+  const taxId = formData.get("taxId") as string | null;
+  const fullName = formData.get("fullName") as string | null;
+  const phone = formData.get("phone") as string | null;
+  const vehicleCount = formData.get("vehicleCount") as string | null;
+  const email = formData.get("email") as string | null;
+  const langCode = (formData.get("langCode") as string) || params.lang || "sr";
+
+  const lang = await getLocale(langCode, request);
+
+  if (!email || !vehicleCount) {
+    return Response.json(
+      { error: lang.longTermRental.toastErrorEmailRequired },
+      { status: 400 }
+    );
+  }
+
+  const vehicleCountNum = parseInt(vehicleCount, 10);
+  if (isNaN(vehicleCountNum) || vehicleCountNum <= 0) {
+    return Response.json(
+      { error: lang.longTermRental.toastErrorInvalidVehicleCount },
+      { status: 400 }
+    );
+  }
+
+  try {
+    await sendLongTermInquiryEmail({
+      type,
+      companyName: companyName || undefined,
+      taxId: taxId || undefined,
+      fullName: fullName || undefined,
+      phone: phone || undefined,
+      vehicleCount: vehicleCountNum,
+      email,
+    });
+
+    return Response.json({ success: true });
+  } catch (error) {
+    console.error("Error sending long-term inquiry email:", error);
+    return Response.json(
+      { error: lang.longTermRental.toastErrorSending },
+      { status: 500 }
+    );
+  }
 }
 
 export function meta({ data }: Route.MetaArgs) {
@@ -85,7 +136,7 @@ export default function LongTermRentalPage({
       <LongTermBenefits content={content} />
       <LongTermAudiences content={content} />
       <LongTermReasons content={content} />
-      <LongTermContact content={content} />
+      <LongTermContact content={content} langCode={loaderData.langCode} />
     </div>
   );
 }

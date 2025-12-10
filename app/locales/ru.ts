@@ -17,6 +17,12 @@ export const ru: BaseLocale = {
   dropOffLoacation: "Место возврата",
   pickUpTime: "Время получения",
   dropOffTime: "Время возврата",
+  toastErrorSelectDates:
+    "Пожалуйста, выберите даты получения и возврата автомобиля!",
+  toastErrorSelectLocations:
+    "Пожалуйста, выберите места получения и возврата автомобиля!",
+  toastErrorSelectTimes:
+    "Пожалуйста, выберите время получения и возврата автомобиля!",
   choose: "Выбрать",
   continue: "Продолжить",
   vehiclesOffer: "Предложение автомобилей",
@@ -214,6 +220,13 @@ export const ru: BaseLocale = {
     contactEmailLabel: "Email",
     contactPhoneValue: "+38169656555",
     contactEmailValue: "office@viastro.rs",
+    toastSuccessMessage:
+      "Запрос успешно отправлен! Мы свяжемся с вами в ближайшее время.",
+    toastErrorInvalidVehicleCount:
+      "Пожалуйста, введите действительное количество автомобилей",
+    toastErrorEmailRequired: "Пожалуйста, введите адрес электронной почты",
+    toastErrorSending:
+      "Ошибка при отправке запроса. Пожалуйста, попробуйте еще раз.",
   },
   seoHomeTitle: "Viastro аренда авто | Белград",
   seoHomeDescription:

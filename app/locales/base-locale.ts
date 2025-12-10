@@ -36,6 +36,10 @@ export interface LongTermRentalLocale {
   contactEmailLabel: string;
   contactPhoneValue: string;
   contactEmailValue: string;
+  toastSuccessMessage: string;
+  toastErrorInvalidVehicleCount: string;
+  toastErrorEmailRequired: string;
+  toastErrorSending: string;
 }
 
 export interface BaseLocale {
@@ -58,6 +62,9 @@ export interface BaseLocale {
   dropOffLoacation: string;
   pickUpTime: string;
   dropOffTime: string;
+  toastErrorSelectDates: string;
+  toastErrorSelectLocations: string;
+  toastErrorSelectTimes: string;
   choose: string;
   vehiclesOffer: string;
   diesel: string;

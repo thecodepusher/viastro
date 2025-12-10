@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useFetcher } from "react-router";
 import { Input } from "@/components/ui/input";
 import { Building2, Mail, Phone, Send, Zap, UserRound } from "lucide-react";
+import { toast } from "sonner";
 import {
   iconBadge,
   sectionContainer,
@@ -12,12 +14,27 @@ import type { LongTermRentalCopy } from "./types";
 
 type Props = {
   content: LongTermRentalCopy;
+  langCode: string;
 };
 
-export function LongTermContact({ content }: Props) {
+export function LongTermContact({ content, langCode }: Props) {
   const [activeTab, setActiveTab] = useState<"business" | "individual">(
     "business"
   );
+  const fetcher = useFetcher();
+  const [formData, setFormData] = useState<{
+    companyName?: string;
+    taxId?: string;
+    fullName?: string;
+    phone?: string;
+    vehicleCount: string;
+    email: string;
+  }>({
+    vehicleCount: "",
+    email: "",
+  });
+
+  const isSubmitting = fetcher.state === "submitting";
 
   const fields =
     activeTab === "business"
@@ -27,7 +44,7 @@ export function LongTermContact({ content }: Props) {
             label: content.companyNameLabel,
             type: "text",
           },
-          { name: "taxId", label: content.taxIdLabel, type: "text" },
+          { name: "taxId", label: content.taxIdLabel, type: "number" },
           {
             name: "vehicleCount",
             label: content.vehicleCountLabel,
@@ -45,6 +62,66 @@ export function LongTermContact({ content }: Props) {
           },
           { name: "email", label: content.contactEmailLabel, type: "email" },
         ];
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if (fetcher.data && fetcher.state === "idle") {
+      if (fetcher.data.success) {
+        toast.success(content.toastSuccessMessage);
+        setFormData({
+          vehicleCount: "",
+          email: "",
+        });
+      } else if (fetcher.data.error) {
+        toast.error(fetcher.data.error || content.toastErrorSending);
+      }
+    }
+  }, [fetcher.data, fetcher.state, content]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    const vehicleCount = parseInt(formData.vehicleCount, 10);
+
+    if (isNaN(vehicleCount) || vehicleCount <= 0) {
+      toast.error(content.toastErrorInvalidVehicleCount);
+      return;
+    }
+
+    if (!formData.email) {
+      toast.error(content.toastErrorEmailRequired);
+      return;
+    }
+
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append("type", activeTab);
+    if (formData.companyName) {
+      formDataToSubmit.append("companyName", formData.companyName);
+    }
+    if (formData.taxId) {
+      formDataToSubmit.append("taxId", formData.taxId);
+    }
+    if (formData.fullName) {
+      formDataToSubmit.append("fullName", formData.fullName);
+    }
+    if (formData.phone) {
+      formDataToSubmit.append("phone", formData.phone);
+    }
+    formDataToSubmit.append("vehicleCount", vehicleCount.toString());
+    formDataToSubmit.append("email", formData.email);
+    formDataToSubmit.append("langCode", langCode);
+
+    fetcher.submit(formDataToSubmit, { method: "post" });
+  };
 
   return (
     <section className="relative bg-linear-to-b from-slate-50 via-white to-white pb-16 pt-10">
@@ -89,7 +166,7 @@ export function LongTermContact({ content }: Props) {
             </div>
 
             <div className="p-8">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center sm:justify-start justify-center gap-3">
                 <button
                   type="button"
                   onClick={() => setActiveTab("business")}
@@ -114,9 +191,7 @@ export function LongTermContact({ content }: Props) {
                 </button>
               </div>
 
-              <form
-                className="mt-6 space-y-4"
-                onSubmit={(e) => e.preventDefault()}>
+              <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {fields.map((field) => (
                     <label
@@ -131,6 +206,11 @@ export function LongTermContact({ content }: Props) {
                         required
                         name={field.name}
                         type={field.type}
+                        value={
+                          formData[field.name as keyof typeof formData] || ""
+                        }
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                       />
                     </label>
                   ))}
@@ -144,9 +224,10 @@ export function LongTermContact({ content }: Props) {
                   </div>
                   <button
                     type="submit"
-                    className="w-full sm:min-w-40 flex flex-row justify-center items-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-p/30 transition hover:-translate-y-0.5 cursor-pointer">
+                    disabled={isSubmitting}
+                    className="w-full sm:min-w-40 flex flex-row justify-center items-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-p/30 transition hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                     <Send className="size-5 min-w-5 min-h-5" />
-                    {content.submitLabel}
+                    {isSubmitting ? "Šalje se..." : content.submitLabel}
                   </button>
                 </div>
               </form>
