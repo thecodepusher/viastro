@@ -3,7 +3,7 @@ import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
 import { CheckIcon, ChevronRight } from "lucide-react";
 import { cn, getLocale, getDatabaseUrl } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
@@ -171,21 +171,36 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
     };
   }, []);
 
-  const carSummaryWithPrice = loaderData.carSummary
-    ? {
-        ...loaderData.carSummary,
-        price: extrasPrice !== null ? extrasPrice : loaderData.carSummary.price,
-      }
-    : null;
   const [isAnimating, setIsAnimating] = useState(false);
   const fetcher = useFetcher();
 
-  const completedSteps = steps.filter((s) => s.status === "complete").length;
-  const currentStepIndex = steps.findIndex((s) => s.status === "current");
-  const progressPercentage =
-    currentStepIndex >= 0
-      ? ((completedSteps + 1) / steps.length) * 100
-      : (completedSteps / steps.length) * 100;
+  const completedSteps = useMemo(
+    () => steps.filter((s) => s.status === "complete").length,
+    [steps]
+  );
+  const currentStepIndex = useMemo(
+    () => steps.findIndex((s) => s.status === "current"),
+    [steps]
+  );
+  const progressPercentage = useMemo(
+    () =>
+      currentStepIndex >= 0
+        ? ((completedSteps + 1) / steps.length) * 100
+        : (completedSteps / steps.length) * 100,
+    [currentStepIndex, completedSteps, steps.length]
+  );
+
+  const carSummaryWithPrice = useMemo(
+    () =>
+      loaderData.carSummary
+        ? {
+            ...loaderData.carSummary,
+            price:
+              extrasPrice !== null ? extrasPrice : loaderData.carSummary.price,
+          }
+        : null,
+    [loaderData.carSummary, extrasPrice]
+  );
 
   const [prevStepIndex, setPrevStepIndex] = useState<number | null>(null);
 
