@@ -103,7 +103,7 @@ export const en: BaseLocale = {
   afterHoursFeeDetails:
     "An additional charge applies for vehicle pick-up or return outside of regular working hours",
   successTitle:
-    "Your reservation has been successfully sent. You will be contacted to confirm your reservation.",
+    "Your payment has been successfully completed. A payment confirmation will arrive at your email address shortly. You will also be contacted by our team regarding the reservation confirmation.",
   successAction: "Return to the home page",
   paymentErrorTitle:
     "An error occurred while processing your payment. Your reservation was not confirmed. Please try again or contact us.",

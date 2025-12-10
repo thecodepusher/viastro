@@ -103,7 +103,7 @@ export const sr: BaseLocale = {
   afterHoursFeeDetails:
     "Za podizanje ili vraćanje vozila van radnog vremena naplaćuje se dodatno",
   successTitle:
-    "Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi rezervacije.",
+    "Vaša uplata je uspešno izvršena. Potvrda o uplati će vam uskoro stići na e-mail adresu. Takođe ćete biti kontaktirani od strane našeg tima u vezi potvrde rezervacije.",
   successAction: "Vratite se na početnu stranicu",
   paymentErrorTitle:
     "Došlo je do greške pri obradi plaćanja. Vaša rezervacija nije potvrđena. Molimo pokušajte ponovo ili kontaktirajte nas.",

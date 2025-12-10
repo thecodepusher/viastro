@@ -68,10 +68,22 @@ export default function SuccessPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
-        <CircleCheck size={60} className="text-p" />
-        <p className="font-medium text-lg text-pd mx-8">
-          {loaderData.lang.successTitle}
-        </p>
+        <CircleCheck size={60} className="text-green-500" />
+        <div className="font-medium text-lg text-pd mx-8 space-y-2">
+          {loaderData.lang.successTitle
+            .split(". ")
+            .map((sentence, index, array) => {
+              const trimmedSentence = sentence.trim();
+              if (!trimmedSentence) return null;
+              const isLast = index === array.length - 1;
+              return (
+                <p key={index}>
+                  {trimmedSentence}
+                  {isLast ? "" : "."}
+                </p>
+              );
+            })}
+        </div>
         <Link to={`/${loaderData.langCode}`}>
           <Button className="bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
             {loaderData.lang.successAction}
