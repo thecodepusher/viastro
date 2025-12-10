@@ -104,7 +104,7 @@ const CustomCalendar = forwardRef<HTMLDivElement, CustomCalendarProps>(
     return (
       <div
         ref={ref}
-        className={cn("p-3", className)}
+        className={cn("p-3 text-white", className)}
         role="application"
         aria-label="Calendar">
         <div className="flex justify-center pt-1 relative items-center w-full mb-4">
@@ -119,7 +119,7 @@ const CustomCalendar = forwardRef<HTMLDivElement, CustomCalendarProps>(
             <ChevronLeft className="size-4" />
           </button>
 
-          <div className="text-sm font-medium">
+          <div className="text-sm font-semibold text-white">
             {format(currentMonth, "MMMM yyyy")}
           </div>
 
@@ -139,7 +139,7 @@ const CustomCalendar = forwardRef<HTMLDivElement, CustomCalendarProps>(
           {WEEKDAYS.map((day, index) => (
             <div
               key={index}
-              className="text-muted-foreground w-9 font-normal text-[0.8rem] text-center p-0 flex items-center justify-center">
+              className="text-white/70 w-9 font-medium text-[0.8rem] text-center p-0 flex items-center justify-center">
               {day}
             </div>
           ))}
@@ -176,16 +176,15 @@ const CustomCalendar = forwardRef<HTMLDivElement, CustomCalendarProps>(
                           disabled={isDisabled}
                           className={cn(
                             buttonVariants({ variant: "ghost" }),
-                            "h-9 w-9 p-0 font-normal cursor-pointer rounded-md hover:bg-accent transition-colors",
-                            !isCurrentMonth &&
-                              "text-muted-foreground opacity-50",
+                            "h-9 w-9 p-0 font-normal cursor-pointer rounded-md text-white hover:bg-white/10 hover:text-white transition-colors",
+                            !isCurrentMonth && "text-white/40 opacity-70",
                             isDisabled &&
-                              "text-muted-foreground opacity-50 cursor-not-allowed",
+                              "text-white/30 opacity-50 cursor-not-allowed",
                             isTodayDate &&
                               !isSelected &&
-                              "bg-accent text-accent-foreground font-semibold",
+                              "bg-white/10 text-white font-semibold",
                             isSelected &&
-                              "bg-s text-white hover:bg-s/90 hover:text-white focus:bg-s focus:text-white rounded-md cursor-pointer"
+                              "bg-p text-white hover:bg-p/90 hover:text-white focus:bg-p focus:text-white rounded-md cursor-pointer"
                           )}
                           aria-label={format(day, "PPPP")}
                           aria-selected={isSelected}

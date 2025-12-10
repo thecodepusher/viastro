@@ -77,6 +77,13 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
       <CustomHero
         title={loaderData.lang.seoBlogTitle}
         description={loaderData.lang.seoBlogDescription}
+        primaryLabel={loaderData.lang.createReservation}
+        secondaryLabel={loaderData.lang.contactUs}
+        helperText={loaderData.lang.description}
+        primaryHref="/reservation"
+        secondaryHref={`/${loaderData.langCode}/contact`}
+        fastTitle={loaderData.lang.createReservation}
+        fastSubtitle={loaderData.lang.deployFaster}
       />
       <BlogSection langCode={loaderData.langCode} />
       <Cta lang={loaderData.lang} />

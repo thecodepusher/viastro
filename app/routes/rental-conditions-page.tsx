@@ -79,6 +79,13 @@ export default function RentalConditionsPage({
       <CustomHero
         title={loaderData.lang.seoRentalConditionsTitle}
         description={loaderData.lang.seoRentalConditionsDescription}
+        primaryLabel={loaderData.lang.createReservation}
+        secondaryLabel={loaderData.lang.contactUs}
+        helperText={loaderData.lang.description}
+        primaryHref="/reservation"
+        secondaryHref={`/${loaderData.langCode}/contact`}
+        fastTitle={loaderData.lang.createReservation}
+        fastSubtitle={loaderData.lang.deployFaster}
       />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">

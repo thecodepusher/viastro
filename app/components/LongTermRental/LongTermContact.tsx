@@ -1,13 +1,7 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
-import {
-  Building2,
-  Mail,
-  Phone,
-  Send,
-  Zap,
-  UserRound,
-} from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Building2, Mail, Phone, Send, Zap, UserRound } from "lucide-react";
 import {
   iconBadge,
   sectionContainer,
@@ -127,15 +121,16 @@ export function LongTermContact({ content }: Props) {
                   {fields.map((field) => (
                     <label
                       key={field.name}
+                      htmlFor={field.name}
                       className="block space-y-2 rounded-2xl border border-gray-100 bg-slate-50/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40 hover:shadow-md">
                       <span className="text-sm font-semibold text-gray-700">
                         {field.label}
                       </span>
-                      <input
+                      <Input
+                        id={field.name}
                         required
                         name={field.name}
                         type={field.type}
-                        className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-gray-900 shadow-inner focus:border-p focus:outline-none"
                       />
                     </label>
                   ))}

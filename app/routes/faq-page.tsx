@@ -92,6 +92,13 @@ export default function FandQPage({ loaderData }: Route.ComponentProps) {
       <CustomHero
         title={loaderData.lang.seoFaqTitle}
         description={loaderData.lang.seoFaqDescription}
+        primaryLabel={loaderData.lang.createReservation}
+        secondaryLabel={loaderData.lang.contactUs}
+        helperText={loaderData.lang.description}
+        primaryHref="/reservation"
+        secondaryHref={`/${loaderData.langCode}/contact`}
+        fastTitle={loaderData.lang.createReservation}
+        fastSubtitle={loaderData.lang.deployFaster}
       />
       <FandQ langCode={loaderData.langCode} />
       <Cta lang={loaderData.lang} />

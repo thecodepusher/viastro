@@ -43,7 +43,7 @@ export function CarSummary({
         </div>
 
         <div className="flex-1 flex flex-row lg:flex-row lg:p-4 gap-0 min-w-0">
-          <div className="flex-1 flex flex-col justify-between min-w-0 p-2 lg:p-0">
+          <div className="flex-1 flex flex-col justify-between min-w-0 px-2 py-0 lg:p-0">
             <div className="mb-1 lg:mb-0">
               <div className="flex items-center gap-1.5 lg:gap-3 mb-1 lg:mb-3 flex-wrap">
                 <h3 className="text-xs lg:text-xl font-bold text-gray-900 leading-tight truncate">
