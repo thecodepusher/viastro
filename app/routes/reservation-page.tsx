@@ -7,8 +7,13 @@ import { useEffect, useState } from "react";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
-import { locations } from "@/lib/data";
-import { differenceInDays } from "date-fns";
+import { locations, type LocaleTypes } from "@/lib/data";
+import {
+  calculateInWorkingHours,
+  calculateRentalDays,
+  calculateReservationPrice,
+  getReservationDataFromCookies,
+} from "@/lib/helpers";
 import { CarSummary } from "@/components/Reservation/CarSummary";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
@@ -31,37 +36,56 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       });
       const apiResponse: ApiAllModelsResponse = await res.json();
       const transformedCars = transformApiCars(apiResponse, lang);
-      const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
+      const reservationData = getReservationDataFromCookies(cookie);
+      const car = transformedCars.find(
+        (x) => x.exnternalId === reservationData.carId
+      );
 
-      if (car && cookie.pickUpDate && cookie.dropOffDate) {
-        const pickupDate = new Date(cookie.pickUpDate);
-        const dropoffDate = new Date(cookie.dropOffDate);
-        const days = differenceInDays(dropoffDate, pickupDate) || 1;
+      if (
+        car &&
+        reservationData.pickupDate &&
+        reservationData.dropoffDate &&
+        reservationData.pickupTime &&
+        reservationData.dropoffTime
+      ) {
+        const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
+          reservationData.dropoffDate,
+          reservationData.pickupDate,
+          reservationData.dropoffTime,
+          reservationData.pickupTime
+        );
 
-        let carPrice = 0;
-        for (const price of car.prices) {
-          if ((!price.to || days <= price.to) && days >= price.from) {
-            carPrice = days * price.price;
-            break;
-          }
-        }
+        const days = calculateRentalDays(
+          reservationData.pickupDate,
+          reservationData.pickupTime,
+          reservationData.dropoffDate,
+          reservationData.dropoffTime
+        );
+
+        const { price } = calculateReservationPrice({
+          car,
+          days,
+          idExtras: reservationData.extras || null,
+          priceForOffHours,
+          langCode: (params.lang as LocaleTypes) || "sr",
+        });
 
         const pickupLocation = locations.find(
-          (x) => x.id === +cookie.pickUpLocation
+          (x) => x.id === +reservationData.pickUpLocation
         );
         const dropoffLocation = locations.find(
-          (x) => x.id === +cookie.dropOffLocation
+          (x) => x.id === +reservationData.dropOffLocation
         );
 
         carSummary = {
           car,
-          pickupDate: cookie.pickUpDate,
-          pickupTime: cookie.pickUpTime,
-          dropoffDate: cookie.dropOffDate,
-          dropoffTime: cookie.dropOffTime,
+          pickupDate: reservationData.pickupDate,
+          pickupTime: reservationData.pickupTime,
+          dropoffDate: reservationData.dropoffDate,
+          dropoffTime: reservationData.dropoffTime,
           pickupLocation: pickupLocation?.name || "",
           dropoffLocation: dropoffLocation?.name || "",
-          price: carPrice,
+          price,
           days,
         };
       }
@@ -112,10 +136,6 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
 
-  const reviewLoaderData = matches.find((m) => m.id === "routes/review")
-    ?.data as { carPrice?: number } | undefined;
-  const carPriceFromReview = reviewLoaderData?.carPrice;
-
   const [extrasPrice, setExtrasPrice] = useState<number | null>(null);
 
   useEffect(() => {
@@ -149,10 +169,7 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const carSummaryWithPrice = loaderData.carSummary
     ? {
         ...loaderData.carSummary,
-        price:
-          extrasPrice !== null
-            ? extrasPrice
-            : carPriceFromReview || loaderData.carSummary.price,
+        price: extrasPrice !== null ? extrasPrice : loaderData.carSummary.price,
       }
     : null;
   const [isAnimating, setIsAnimating] = useState(false);
