@@ -28,7 +28,7 @@ export interface LongTermRentalLocale {
   tabIndividual: string;
   companyNameLabel: string;
   taxIdLabel: string;
-  vehicleCountLabel: string;
+  carNameLabel: string;
   fullNameLabel: string;
   phoneLabel: string;
   submitLabel: string;
@@ -37,9 +37,10 @@ export interface LongTermRentalLocale {
   contactPhoneValue: string;
   contactEmailValue: string;
   toastSuccessMessage: string;
-  toastErrorInvalidVehicleCount: string;
+  toastErrorInvalidcarName: string;
   toastErrorEmailRequired: string;
   toastErrorSending: string;
+  noSearchResults: string;
 }
 
 export interface BaseLocale {

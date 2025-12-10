@@ -212,7 +212,7 @@ export const ru: BaseLocale = {
     tabIndividual: "Для частных лиц",
     companyNameLabel: "Название компании",
     taxIdLabel: "ИНН",
-    vehicleCountLabel: "Количество авто для расчета предложения",
+    carNameLabel: "Выберите автомобиль",
     fullNameLabel: "Имя и фамилия",
     phoneLabel: "Номер телефона",
     submitLabel: "Отправить запрос",
@@ -222,11 +222,11 @@ export const ru: BaseLocale = {
     contactEmailValue: "office@viastro.rs",
     toastSuccessMessage:
       "Запрос успешно отправлен! Мы свяжемся с вами в ближайшее время.",
-    toastErrorInvalidVehicleCount:
-      "Пожалуйста, введите действительное количество автомобилей",
+    toastErrorInvalidcarName: "Пожалуйста, выберите автомобиль",
     toastErrorEmailRequired: "Пожалуйста, введите адрес электронной почты",
     toastErrorSending:
       "Ошибка при отправке запроса. Пожалуйста, попробуйте еще раз.",
+    noSearchResults: "Результаты не найдены",
   },
   seoHomeTitle: "Viastro аренда авто | Белград",
   seoHomeDescription:

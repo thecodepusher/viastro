@@ -1,5 +1,4 @@
-import type { ReactNode } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useFetcher } from "react-router";
 import { Input } from "@/components/ui/input";
 import { Building2, Mail, Phone, Send, Zap, UserRound } from "lucide-react";
@@ -11,26 +10,31 @@ import {
   sectionTitle,
 } from "./styles";
 import type { LongTermRentalCopy } from "./types";
+import type { TransformedCar } from "@/lib/api-cars";
+import { ContactRow } from "./ContactRow";
+import { CarSelect } from "./CarSelect";
 
 type Props = {
   content: LongTermRentalCopy;
   langCode: string;
+  cars: TransformedCar[];
 };
 
-export function LongTermContact({ content, langCode }: Props) {
+export function LongTermContact({ content, langCode, cars }: Props) {
   const [activeTab, setActiveTab] = useState<"business" | "individual">(
     "business"
   );
   const fetcher = useFetcher();
+  const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState<{
     companyName?: string;
     taxId?: string;
     fullName?: string;
     phone?: string;
-    vehicleCount: string;
+    carName: string;
     email: string;
   }>({
-    vehicleCount: "",
+    carName: "",
     email: "",
   });
 
@@ -46,8 +50,8 @@ export function LongTermContact({ content, langCode }: Props) {
           },
           { name: "taxId", label: content.taxIdLabel, type: "number" },
           {
-            name: "vehicleCount",
-            label: content.vehicleCountLabel,
+            name: "carName",
+            label: content.carNameLabel,
             type: "number",
           },
           { name: "email", label: content.contactEmailLabel, type: "email" },
@@ -56,8 +60,8 @@ export function LongTermContact({ content, langCode }: Props) {
           { name: "fullName", label: content.fullNameLabel, type: "text" },
           { name: "phone", label: content.phoneLabel, type: "tel" },
           {
-            name: "vehicleCount",
-            label: content.vehicleCountLabel,
+            name: "carName",
+            label: content.carNameLabel,
             type: "number",
           },
           { name: "email", label: content.contactEmailLabel, type: "email" },
@@ -76,7 +80,7 @@ export function LongTermContact({ content, langCode }: Props) {
       if (fetcher.data.success) {
         toast.success(content.toastSuccessMessage);
         setFormData({
-          vehicleCount: "",
+          carName: "",
           email: "",
         });
       } else if (fetcher.data.error) {
@@ -85,15 +89,20 @@ export function LongTermContact({ content, langCode }: Props) {
     }
   }, [fetcher.data, fetcher.state, content]);
 
+  const handleCarNameChange = (carName: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      carName,
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isSubmitting) return;
 
-    const vehicleCount = parseInt(formData.vehicleCount, 10);
-
-    if (isNaN(vehicleCount) || vehicleCount <= 0) {
-      toast.error(content.toastErrorInvalidVehicleCount);
+    if (!formData.carName || formData.carName.trim() === "") {
+      toast.error(content.toastErrorInvalidcarName);
       return;
     }
 
@@ -116,7 +125,7 @@ export function LongTermContact({ content, langCode }: Props) {
     if (formData.phone) {
       formDataToSubmit.append("phone", formData.phone);
     }
-    formDataToSubmit.append("vehicleCount", vehicleCount.toString());
+    formDataToSubmit.append("carName", formData.carName);
     formDataToSubmit.append("email", formData.email);
     formDataToSubmit.append("langCode", langCode);
 
@@ -124,7 +133,10 @@ export function LongTermContact({ content, langCode }: Props) {
   };
 
   return (
-    <section className="relative bg-linear-to-b from-slate-50 via-white to-white pb-16 pt-10">
+    <section
+      ref={sectionRef}
+      id="long-term-contact"
+      className="relative bg-linear-to-b from-slate-50 via-white to-white pb-16 pt-10">
       <div className={sectionContainer}>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-p">
@@ -193,27 +205,45 @@ export function LongTermContact({ content, langCode }: Props) {
 
               <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  {fields.map((field) => (
-                    <label
-                      key={field.name}
-                      htmlFor={field.name}
-                      className="block space-y-2 rounded-2xl border border-gray-100 bg-slate-50/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40 hover:shadow-md">
-                      <span className="text-sm font-semibold text-gray-700">
-                        {field.label}
-                      </span>
-                      <Input
-                        id={field.name}
-                        required
-                        name={field.name}
-                        type={field.type}
-                        value={
-                          formData[field.name as keyof typeof formData] || ""
-                        }
-                        onChange={handleInputChange}
-                        disabled={isSubmitting}
-                      />
-                    </label>
-                  ))}
+                  {fields.map((field) => {
+                    if (field.name === "carName") {
+                      return (
+                        <CarSelect
+                          key={field.name}
+                          id={field.name}
+                          name={field.name}
+                          label={field.label}
+                          value={formData.carName}
+                          placeholder={content.carNameLabel}
+                          cars={cars}
+                          noSearchResults={content.noSearchResults}
+                          disabled={isSubmitting}
+                          onChange={handleCarNameChange}
+                        />
+                      );
+                    }
+                    return (
+                      <label
+                        key={field.name}
+                        htmlFor={field.name}
+                        className="block space-y-2 rounded-2xl border border-gray-100 bg-slate-50/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40 hover:shadow-md">
+                        <span className="text-sm font-semibold text-gray-700">
+                          {field.label}
+                        </span>
+                        <Input
+                          id={field.name}
+                          required
+                          name={field.name}
+                          type={field.type}
+                          value={
+                            formData[field.name as keyof typeof formData] || ""
+                          }
+                          onChange={handleInputChange}
+                          disabled={isSubmitting}
+                        />
+                      </label>
+                    );
+                  })}
                 </div>
                 <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -236,27 +266,5 @@ export function LongTermContact({ content, langCode }: Props) {
         </div>
       </div>
     </section>
-  );
-}
-
-function ContactRow({
-  icon,
-  label,
-  value,
-}: {
-  icon: ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 text-white ring-1 ring-white/10">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-white">
-        {icon}
-      </div>
-      <div>
-        <p className="text-xs uppercase tracking-wide text-white/70">{label}</p>
-        <p className="text-base font-semibold text-white">{value}</p>
-      </div>
-    </div>
   );
 }

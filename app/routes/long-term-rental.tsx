@@ -5,13 +5,17 @@ import { LongTermContact } from "@/components/LongTermRental/LongTermContact";
 import { LongTermHero } from "@/components/LongTermRental/LongTermHero";
 import { LongTermReasons } from "@/components/LongTermRental/LongTermReasons";
 import { prefs } from "@/lib/prefs-cookie";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import {
   generateBreadcrumbSchema,
   generateOpenGraphMeta,
   getBaseUrl,
 } from "@/lib/seo";
 import { sendLongTermInquiryEmail } from "@/lib/email";
+import {
+  transformApiCars,
+  type ApiAllModelsResponse,
+} from "@/lib/api-cars";
 import type { Route } from "./+types/long-term-rental";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
@@ -28,6 +32,18 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.wspayFormData;
   delete cookie.wspayReservation;
 
+  // Fetch all cars for the dropdown
+  const databaseUrl = getDatabaseUrl();
+  const allModelsRes = await fetch(databaseUrl, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "get_all_models",
+    }),
+    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+  });
+  const allModels: ApiAllModelsResponse = await allModelsRes.json();
+  const cars = transformApiCars(allModels, lang);
+
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
 
@@ -35,6 +51,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     langCode,
     lang,
     baseUrl,
+    cars,
     message: context.VALUE_FROM_EXPRESS,
   };
 
@@ -55,23 +72,22 @@ export async function action({ request, params }: Route.ActionArgs) {
   const taxId = formData.get("taxId") as string | null;
   const fullName = formData.get("fullName") as string | null;
   const phone = formData.get("phone") as string | null;
-  const vehicleCount = formData.get("vehicleCount") as string | null;
+  const carName = formData.get("carName") as string | null;
   const email = formData.get("email") as string | null;
   const langCode = (formData.get("langCode") as string) || params.lang || "sr";
 
   const lang = await getLocale(langCode, request);
 
-  if (!email || !vehicleCount) {
+  if (!email || !carName) {
     return Response.json(
       { error: lang.longTermRental.toastErrorEmailRequired },
       { status: 400 }
     );
   }
 
-  const vehicleCountNum = parseInt(vehicleCount, 10);
-  if (isNaN(vehicleCountNum) || vehicleCountNum <= 0) {
+  if (!carName || carName.trim() === "") {
     return Response.json(
-      { error: lang.longTermRental.toastErrorInvalidVehicleCount },
+      { error: lang.longTermRental.toastErrorInvalidcarName },
       { status: 400 }
     );
   }
@@ -83,7 +99,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       taxId: taxId || undefined,
       fullName: fullName || undefined,
       phone: phone || undefined,
-      vehicleCount: vehicleCountNum,
+      carName: carName,
       email,
     });
 
@@ -136,7 +152,11 @@ export default function LongTermRentalPage({
       <LongTermBenefits content={content} />
       <LongTermAudiences content={content} />
       <LongTermReasons content={content} />
-      <LongTermContact content={content} langCode={loaderData.langCode} />
+      <LongTermContact 
+        content={content} 
+        langCode={loaderData.langCode}
+        cars={loaderData.cars}
+      />
     </div>
   );
 }
