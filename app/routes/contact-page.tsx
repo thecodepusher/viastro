@@ -1,4 +1,5 @@
 import Cta from "@/components/Cta";
+import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/contact-page";
 import GetInTouch from "@/components/GetInTouch";
 import SEO from "@/components/SEO";
@@ -76,10 +77,13 @@ export default function ContactPage({ loaderData }: Route.ComponentProps) {
   ];
 
   return (
-    <div className="w-full pt-16">
+    <div className="w-full">
       <SEO schemas={schemas} />
+      <CustomHero
+        title={loaderData.lang.seoContactTitle}
+        description={loaderData.lang.seoContactDescription}
+      />
       <GetInTouch lang={loaderData.lang} />
-
       <Cta lang={loaderData.lang} />
     </div>
   );

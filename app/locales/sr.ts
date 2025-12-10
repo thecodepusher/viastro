@@ -213,7 +213,7 @@ export const sr: BaseLocale = {
     submitLabel: "Pošaljite upit",
     contactPhoneLabel: "Kontakt telefon",
     contactEmailLabel: "Email",
-    contactPhoneValue: "063 601 237",
+    contactPhoneValue: "+38169656555",
     contactEmailValue: "office@viastro.rs",
   },
   seoHomeTitle: "Viastro rent a car | Beograd",
@@ -226,17 +226,17 @@ export const sr: BaseLocale = {
     "Pregledajte našu flotu automobila za iznajmljivanje u Beogradu. Izaberite između ekonomskih, luksuznih i SUV vozila.",
   seoCarsKeywords:
     "rent a car Beograd, flota automobila, iznajmljivanje vozila, iznajmljivanje automobila",
-  seoContactTitle: "Viastro Kontakt | Beograd",
+  seoContactTitle: "Kontakt | Viastro Rent a Car",
   seoContactDescription:
     "Kontaktirajte Viastro Rent a Car u Beogradu za usluge iznajmljivanja automobila.",
   seoContactKeywords:
     "kontakt viastro, rent a car Beograd kontakt, iznajmljivanje automobila Beograd",
-  seoFaqTitle: "Viastro Često postavljena pitanja | Beograd",
+  seoFaqTitle: "Često postavljena pitanja | Viastro Rent a Car",
   seoFaqDescription:
     "Često postavljena pitanja o uslugama iznajmljivanja automobila u Beogradu.",
   seoFaqKeywords:
     "FAQ rent a car Beograd, najčešća pitanja iznajmljivanje automobila, pitanja o iznajmljivanju automobila",
-  seoBlogTitle: "Viastro Blog | Beograd",
+  seoBlogTitle: "Blog | Viastro Rent a Car",
   seoBlogDescription:
     "Pročitajte naš blog za savete, vodiče za putovanja i informacije o iznajmljivanju automobila u Beogradu i Srbiji.",
   seoBlogKeywords:

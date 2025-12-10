@@ -2,6 +2,7 @@ import type { Route } from "./+types/rental-conditions-page";
 import { usloviNajmaSr, usloviNajmaRs, rentalConditionsEn } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
 import Cta from "@/components/Cta";
+import { CustomHero } from "@/components/CustomHero";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
@@ -74,7 +75,11 @@ export default function RentalConditionsPage({
     ) || loaderData.usloviNajma;
 
   return (
-    <div className="w-full min-h-screen pt-20">
+    <div className="w-full min-h-screen">
+      <CustomHero
+        title={loaderData.lang.seoRentalConditionsTitle}
+        description={loaderData.lang.seoRentalConditionsDescription}
+      />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="p-6 sm:p-8 lg:p-12">

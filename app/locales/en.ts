@@ -213,7 +213,7 @@ export const en: BaseLocale = {
     submitLabel: "Send request",
     contactPhoneLabel: "Phone",
     contactEmailLabel: "Email",
-    contactPhoneValue: "063 601 237",
+    contactPhoneValue: "+38169656555",
     contactEmailValue: "office@viastro.rs",
   },
   seoHomeTitle: "Viastro rent a car | Belgrade",
@@ -226,17 +226,17 @@ export const en: BaseLocale = {
     "Browse our car rental fleet in Belgrade. Choose from economy, luxury, and SUV vehicles.",
   seoCarsKeywords:
     "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
-  seoContactTitle: "Viastro Contact | Belgrade",
+  seoContactTitle: "Contact | Viastro Rent a Car",
   seoContactDescription:
     "Contact Viastro Rent a Car in Belgrade for car rental services.",
   seoContactKeywords:
     "contact viastro, rent a car Belgrade contact, car rental Belgrade",
-  seoFaqTitle: "Viastro FAQ | Belgrade",
+  seoFaqTitle: "FAQ | Viastro Rent a Car",
   seoFaqDescription:
     "Frequently asked questions about car rental services in Belgrade.",
   seoFaqKeywords:
     "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
-  seoBlogTitle: "Viastro Blog | Belgrade",
+  seoBlogTitle: "Blog | Viastro Rent a Car",
   seoBlogDescription:
     "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.",
   seoBlogKeywords: "viastro blog, rent a car Belgrade, travel guides Serbia",

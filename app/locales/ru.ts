@@ -212,7 +212,7 @@ export const ru: BaseLocale = {
     submitLabel: "Отправить запрос",
     contactPhoneLabel: "Телефон",
     contactEmailLabel: "Email",
-    contactPhoneValue: "063 601 237",
+    contactPhoneValue: "+38169656555",
     contactEmailValue: "office@viastro.rs",
   },
   seoHomeTitle: "Viastro аренда авто | Белград",
@@ -225,17 +225,17 @@ export const ru: BaseLocale = {
     "Просмотрите наш автопарк для аренды в Белграде. Выберите из эконом, люкс и внедорожников.",
   seoCarsKeywords:
     "аренда авто Белград, автопарк, аренда автомобилей, аренда транспортных средств",
-  seoContactTitle: "Viastro Контакт | Белград",
+  seoContactTitle: "Контакт | Viastro Рент а Кар",
   seoContactDescription:
     "Свяжитесь с Viastro Rent a Car в Белграде для услуг аренды автомобилей.",
   seoContactKeywords:
     "контакт viastro, аренда авто Белград контакт, аренда автомобилей Белград",
-  seoFaqTitle: "Viastro FAQ | Белград",
+  seoFaqTitle: "FAQ | Viastro Рент а Кар",
   seoFaqDescription:
     "Часто задаваемые вопросы об услугах аренды автомобилей в Белграде.",
   seoFaqKeywords:
     "FAQ аренда авто Белград, вопросы аренды автомобилей, часто задаваемые вопросы",
-  seoBlogTitle: "Viastro Блог | Белград",
+  seoBlogTitle: "Блог | Viastro Рент а Кар",
   seoBlogDescription:
     "Читайте наш блог для советов, путеводителей и информации об аренде автомобилей в Белграде и Сербии.",
   seoBlogKeywords: "viastro блог, аренда авто Белград, путеводители Сербия",

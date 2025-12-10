@@ -1,6 +1,7 @@
 import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import SEO from "@/components/SEO";
+import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/faq-page";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
@@ -86,8 +87,12 @@ export default function FandQPage({ loaderData }: Route.ComponentProps) {
   ];
 
   return (
-    <div className="w-full pt-20">
+    <div className="w-full">
       <SEO schemas={schemas} />
+      <CustomHero
+        title={loaderData.lang.seoFaqTitle}
+        description={loaderData.lang.seoFaqDescription}
+      />
       <FandQ langCode={loaderData.langCode} />
       <Cta lang={loaderData.lang} />
     </div>

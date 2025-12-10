@@ -1,5 +1,6 @@
 import Cta from "@/components/Cta";
 import SEO from "@/components/SEO";
+import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/blog-page";
 import BlogSection from "@/components/BlogSection";
 import { getLocale } from "@/lib/utils";
@@ -71,8 +72,12 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
   ];
 
   return (
-    <div className="w-full pt-16">
+    <div className="w-full">
       <SEO schemas={schemas} />
+      <CustomHero
+        title={loaderData.lang.seoBlogTitle}
+        description={loaderData.lang.seoBlogDescription}
+      />
       <BlogSection langCode={loaderData.langCode} />
       <Cta lang={loaderData.lang} />
     </div>
