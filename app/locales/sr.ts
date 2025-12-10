@@ -213,6 +213,7 @@ export const sr: BaseLocale = {
     carNameLabel: "Izaberite vozilo",
     fullNameLabel: "Ime i prezime",
     phoneLabel: "Broj telefona",
+    messageLabel: "Opis zahteva",
     submitLabel: "Pošaljite upit",
     contactPhoneLabel: "Kontakt telefon",
     contactEmailLabel: "Email",

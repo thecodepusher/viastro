@@ -31,6 +31,7 @@ export interface LongTermRentalLocale {
   carNameLabel: string;
   fullNameLabel: string;
   phoneLabel: string;
+  messageLabel: string;
   submitLabel: string;
   contactPhoneLabel: string;
   contactEmailLabel: string;

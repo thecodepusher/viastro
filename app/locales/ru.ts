@@ -215,6 +215,7 @@ export const ru: BaseLocale = {
     carNameLabel: "Выберите автомобиль",
     fullNameLabel: "Имя и фамилия",
     phoneLabel: "Номер телефона",
+    messageLabel: "Описание запроса",
     submitLabel: "Отправить запрос",
     contactPhoneLabel: "Телефон",
     contactEmailLabel: "Email",

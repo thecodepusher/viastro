@@ -213,6 +213,7 @@ export const en: BaseLocale = {
     carNameLabel: "Select a vehicle",
     fullNameLabel: "Full name",
     phoneLabel: "Phone number",
+    messageLabel: "Request description",
     submitLabel: "Send request",
     contactPhoneLabel: "Phone",
     contactEmailLabel: "Email",

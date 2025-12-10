@@ -19,7 +19,6 @@ export type LongTermInquiryPayload = {
   companyName?: string;
   taxId?: string;
   fullName?: string;
-  carName: string;
   email: string;
   phone?: string;
   message?: string;
@@ -117,8 +116,8 @@ export async function sendLongTermInquiryEmail(
     ${isBusiness ? `<p><strong>PIB:</strong> ${payload.taxId || "-"}</p>` : ""}
     ${!isBusiness ? `<p><strong>Ime i prezime:</strong> ${payload.fullName || "-"}</p>` : ""}
     ${!isBusiness ? `<p><strong>Telefon:</strong> ${payload.phone || "-"}</p>` : ""}
-    <p><strong>Vozilo:</strong> ${payload.carName}</p>
     <p><strong>Email:</strong> ${payload.email}</p>
+    ${payload.message ? `<p><strong>Opis zahteva:</strong><br/>${payload.message.replace(/\n/g, "<br/>")}</p>` : ""}
   `;
 
   const htmlContent = `

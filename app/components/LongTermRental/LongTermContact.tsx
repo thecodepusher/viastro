@@ -10,17 +10,14 @@ import {
   sectionTitle,
 } from "./styles";
 import type { LongTermRentalCopy } from "./types";
-import type { TransformedCar } from "@/lib/api-cars";
 import { ContactRow } from "./ContactRow";
-import { CarSelect } from "./CarSelect";
 
 type Props = {
   content: LongTermRentalCopy;
   langCode: string;
-  cars: TransformedCar[];
 };
 
-export function LongTermContact({ content, langCode, cars }: Props) {
+export function LongTermContact({ content, langCode }: Props) {
   const [activeTab, setActiveTab] = useState<"business" | "individual">(
     "business"
   );
@@ -31,10 +28,10 @@ export function LongTermContact({ content, langCode, cars }: Props) {
     taxId?: string;
     fullName?: string;
     phone?: string;
-    carName: string;
+    message: string;
     email: string;
   }>({
-    carName: "",
+    message: "",
     email: "",
   });
 
@@ -49,21 +46,11 @@ export function LongTermContact({ content, langCode, cars }: Props) {
             type: "text",
           },
           { name: "taxId", label: content.taxIdLabel, type: "number" },
-          {
-            name: "carName",
-            label: content.carNameLabel,
-            type: "number",
-          },
           { name: "email", label: content.contactEmailLabel, type: "email" },
         ]
       : [
           { name: "fullName", label: content.fullNameLabel, type: "text" },
           { name: "phone", label: content.phoneLabel, type: "tel" },
-          {
-            name: "carName",
-            label: content.carNameLabel,
-            type: "number",
-          },
           { name: "email", label: content.contactEmailLabel, type: "email" },
         ];
 
@@ -80,7 +67,7 @@ export function LongTermContact({ content, langCode, cars }: Props) {
       if (fetcher.data.success) {
         toast.success(content.toastSuccessMessage);
         setFormData({
-          carName: "",
+          message: "",
           email: "",
         });
       } else if (fetcher.data.error) {
@@ -89,22 +76,10 @@ export function LongTermContact({ content, langCode, cars }: Props) {
     }
   }, [fetcher.data, fetcher.state, content]);
 
-  const handleCarNameChange = (carName: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      carName,
-    }));
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isSubmitting) return;
-
-    if (!formData.carName || formData.carName.trim() === "") {
-      toast.error(content.toastErrorInvalidcarName);
-      return;
-    }
 
     if (!formData.email) {
       toast.error(content.toastErrorEmailRequired);
@@ -125,7 +100,9 @@ export function LongTermContact({ content, langCode, cars }: Props) {
     if (formData.phone) {
       formDataToSubmit.append("phone", formData.phone);
     }
-    formDataToSubmit.append("carName", formData.carName);
+    if (formData.message) {
+      formDataToSubmit.append("message", formData.message);
+    }
     formDataToSubmit.append("email", formData.email);
     formDataToSubmit.append("langCode", langCode);
 
@@ -204,24 +181,8 @@ export function LongTermContact({ content, langCode, cars }: Props) {
               </div>
 
               <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {fields.map((field) => {
-                    if (field.name === "carName") {
-                      return (
-                        <CarSelect
-                          key={field.name}
-                          id={field.name}
-                          name={field.name}
-                          label={field.label}
-                          value={formData.carName}
-                          placeholder={content.carNameLabel}
-                          cars={cars}
-                          noSearchResults={content.noSearchResults}
-                          disabled={isSubmitting}
-                          onChange={handleCarNameChange}
-                        />
-                      );
-                    }
                     return (
                       <label
                         key={field.name}
@@ -245,6 +206,27 @@ export function LongTermContact({ content, langCode, cars }: Props) {
                     );
                   })}
                 </div>
+                <label
+                  htmlFor="message"
+                  className="block space-y-2 rounded-2xl border border-gray-100 bg-slate-50/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40 hover:shadow-md">
+                  <span className="text-sm font-semibold text-gray-700">
+                    {content.messageLabel}
+                  </span>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        message: e.target.value,
+                      }))
+                    }
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-gray-900 shadow-inner focus:border-p focus:outline-none resize-none"
+                  />
+                </label>
                 <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <div className={iconBadge}>
