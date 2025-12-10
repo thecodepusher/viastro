@@ -20,15 +20,16 @@ export const fullProtection = {
 };
 
 const carImageMap: Record<string, string> = {
-  renault_clio: "/clio.png",
-  peugeot_2008: "/2008.avif",
-  peugeot_3008: "/3008.avif",
-  skoda_octavia: "/skoda_octavia.png",
-  skoda_oktavia: "/skoda_octavia.png",
-  citroen_c3_aircross: "/c3-aircross.jpg",
-  citroen_c3: "/c3-aircross.jpg",
+  renault_clio: "/clio.webp",
+  peugeot_2008: "/peugeot-2008-gt.webp",
+  peugeot_3008: "/3008.webp",
+  skoda_octavia: "/skoda_octavia.webp",
+  citroen_c3_aircross: "/c3-aircross.webp",
+  citroen_c3: "/c3-aircross.webp",
   ford_focus: "/ford-focus.webp",
-  seat_ibiza: "/ibiza.webp",
+  seat_ibiza: "/seat-ibiza-fr.webp",
+  seat_ibiza_dsg: "/seat-ibiza-dsg.webp",
+  fiat_500: "/fiat-500.webp",
   audi_a6: "/audi-a6.webp",
 };
 
@@ -118,6 +119,19 @@ const carDataMap: Record<
       { from: 30, to: null, price: 30 },
     ],
   },
+  // Seat Ibiza (id: "10")
+  "10": {
+    deposite: 300,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 150,
+    customName: "SEAT Ibiza DSG",
+    prices: [
+      { from: 3, to: 7, price: 42 },
+      { from: 8, to: 15, price: 38 },
+      { from: 16, to: 29, price: 34 },
+      { from: 30, to: null, price: 30 },
+    ],
+  },
   // Renault Clio (id: "8")
   "8": {
     deposite: 300,
@@ -129,6 +143,19 @@ const carDataMap: Record<
       { from: 8, to: 15, price: 41 },
       { from: 16, to: 29, price: 37 },
       { from: 30, to: null, price: 33 },
+    ],
+  },
+  // Fiat 500 (id: "11")
+  "11": {
+    deposite: 300,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 150,
+    customName: "Fiat 500",
+    prices: [
+      { from: 3, to: 7, price: 29 },
+      { from: 8, to: 15, price: 25 },
+      { from: 16, to: 29, price: 21 },
+      { from: 30, to: null, price: 17 },
     ],
   },
   // Default za ostale automobile
