@@ -1,13 +1,14 @@
+import { useEffect, useState, useMemo } from "react";
 import { Link, Outlet, useMatches, useFetcher } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
-import { CheckIcon, ChevronRight } from "lucide-react";
 import { cn, getLocale, getDatabaseUrl } from "@/lib/utils";
-import { useEffect, useState, useMemo } from "react";
 import { prefs } from "@/lib/prefs-cookie";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
 import { locations, type LocaleTypes } from "@/lib/data";
+import { CheckIcon, ChevronRight } from "lucide-react";
 import {
   calculateInWorkingHours,
   calculateRentalDays,
@@ -133,6 +134,8 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
+  const isMobile = useIsMobile();
+
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
 
@@ -226,17 +229,19 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <div className="bg-linear-to-r from-p via-p to-p/90 mt-18 shadow-lg">
-        <div className="mx-auto max-w-7xl px-4 py-2">
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-lg font-semibold text-white">
-                {loaderData.lang.reservation || "Rezervacija"}
-              </h2>
-              <span className="text-sm font-medium text-white/90">
-                {completedSteps + (currentStepIndex >= 0 ? 1 : 0)} /{" "}
-                {steps.length}
-              </span>
-            </div>
+        <div className="mx-auto max-w-7xl px-4 sm:py-2 py-1">
+          <div className="sm:mb-4 mb-1">
+            {!isMobile && (
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-lg font-semibold text-white">
+                  {loaderData.lang.reservation || "Rezervacija"}
+                </h2>
+                <span className="text-sm font-medium text-white/90">
+                  {completedSteps + (currentStepIndex >= 0 ? 1 : 0)} /{" "}
+                  {steps.length}
+                </span>
+              </div>
+            )}
             <div className="w-full bg-white/20 rounded-full h-2.5 overflow-hidden shadow-inner">
               <div
                 className={cn(
