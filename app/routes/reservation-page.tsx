@@ -252,7 +252,7 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
           <nav aria-label="Progress" className="relative">
             <ol
               role="list"
-              className="flex flex-col lg:flex-row gap-2 lg:gap-0">
+              className="flex flex-col lg:flex-row gap-1.5 lg:gap-0">
               {steps.map((step, stepIdx) => {
                 const isComplete = step.status === "complete";
                 const isCurrent = step.status === "current";
@@ -276,12 +276,12 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           form.append("action", "deleteSelectedCarId");
                           fetcher.submit(form, { method: "post" });
                         }}
-                        className="group flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 active:bg-white/30 transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/40 active:scale-[0.98]">
+                        className="group flex items-center gap-2 lg:gap-3 py-2 px-3 lg:p-4 rounded-lg bg-white/10 hover:bg-white/20 active:bg-white/30 transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/40 active:scale-[0.98]">
                         <div className="relative shrink-0">
-                          <div className="flex size-12 items-center justify-center rounded-full bg-s shadow-lg group-hover:scale-110 group-active:scale-105 transition-transform duration-300 animate-in zoom-in-50">
+                          <div className="flex size-8 lg:size-12 items-center justify-center rounded-full bg-s shadow-lg group-hover:scale-110 group-active:scale-105 transition-transform duration-300 animate-in zoom-in-50">
                             <CheckIcon
                               aria-hidden="true"
-                              className="size-6 text-white animate-in zoom-in"
+                              className="size-4 lg:size-6 text-white animate-in zoom-in"
                             />
                           </div>
                           {stepIdx < steps.length - 1 && (
@@ -289,20 +289,20 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-medium text-white/70 mb-1">
+                          <div className="hidden lg:block text-xs font-medium text-white/70 mb-1">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-sm font-semibold text-white">
+                          <div className="text-xs lg:text-sm font-semibold text-white">
                             {step.name}
                           </div>
                         </div>
-                        <ChevronRight className="size-5 text-white/50 group-hover:text-white group-hover:translate-x-1 group-active:translate-x-2 transition-all duration-300 lg:hidden animate-in slide-in-from-right-2" />
+                        <ChevronRight className="size-4 lg:size-5 text-white/50 group-hover:text-white group-hover:translate-x-1 group-active:translate-x-2 transition-all duration-300 lg:hidden animate-in slide-in-from-right-2" />
                       </Link>
                     ) : isCurrent ? (
-                      <div className="flex items-center gap-3 p-4 rounded-lg bg-white shadow-lg border-2 border-s animate-in fade-in slide-in-from-bottom-2 zoom-in-95 duration-500">
+                      <div className="flex items-center gap-2 lg:gap-3 py-2 px-3 lg:p-4 rounded-lg bg-white shadow-lg border-2 border-s animate-in fade-in slide-in-from-bottom-2 zoom-in-95 duration-500">
                         <div className="relative shrink-0 animate-pulse">
-                          <div className="flex size-12 items-center justify-center rounded-full bg-s border-4 border-white shadow-xl ring-4 ring-s/20 animate-in zoom-in-50 duration-500">
-                            <span className="text-sm font-bold text-white animate-in zoom-in duration-500">
+                          <div className="flex size-8 lg:size-12 items-center justify-center rounded-full bg-s border-2 lg:border-4 border-white shadow-xl ring-2 lg:ring-4 ring-s/20 animate-in zoom-in-50 duration-500">
+                            <span className="text-xs lg:text-sm font-bold text-white animate-in zoom-in duration-500">
                               {step.id}
                             </span>
                           </div>
@@ -311,17 +311,17 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-medium text-s/70 mb-1 animate-in fade-in slide-in-from-left-2 duration-500 delay-200">
+                          <div className="hidden lg:block text-xs font-medium text-s/70 mb-1 animate-in fade-in slide-in-from-left-2 duration-500 delay-200">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-sm font-semibold text-s animate-in fade-in slide-in-from-left-2 duration-500 delay-300">
+                          <div className="text-xs lg:text-sm font-semibold text-s animate-in fade-in slide-in-from-left-2 duration-500 delay-300">
                             {step.name}
                           </div>
                         </div>
                         <div className="flex lg:hidden items-center gap-1">
-                          <div className="size-2 rounded-full bg-s animate-pulse" />
-                          <div className="size-2 rounded-full bg-s animate-pulse delay-150" />
-                          <div className="size-2 rounded-full bg-s animate-pulse delay-300" />
+                          <div className="size-1.5 rounded-full bg-s animate-pulse" />
+                          <div className="size-1.5 rounded-full bg-s animate-pulse delay-150" />
+                          <div className="size-1.5 rounded-full bg-s animate-pulse delay-300" />
                         </div>
                         <div className="hidden lg:flex items-center gap-1">
                           <div className="size-2 rounded-full bg-s animate-pulse" />
@@ -330,10 +330,10 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 opacity-60 animate-in fade-in duration-500">
+                      <div className="flex items-center gap-2 lg:gap-3 py-2 px-3 lg:p-4 rounded-lg bg-white/5 border border-white/10 opacity-60 animate-in fade-in duration-500">
                         <div className="relative shrink-0">
-                          <div className="flex size-12 items-center justify-center rounded-full border-2 border-white/30 bg-white/5">
-                            <span className="text-sm font-medium text-white/50">
+                          <div className="flex size-8 lg:size-12 items-center justify-center rounded-full border-2 border-white/30 bg-white/5">
+                            <span className="text-xs lg:text-sm font-medium text-white/50">
                               {step.id}
                             </span>
                           </div>
@@ -342,10 +342,10 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-medium text-white/40 mb-1">
+                          <div className="hidden lg:block text-xs font-medium text-white/40 mb-1">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-sm font-medium text-white/50">
+                          <div className="text-xs lg:text-sm font-medium text-white/50">
                             {step.name}
                           </div>
                         </div>
