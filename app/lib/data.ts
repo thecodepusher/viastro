@@ -580,24 +580,20 @@ export const aditionalEquipment = [
 
 export const PRICE_FOR_PICKUP_OFF_HOURS = 20;
 
-export const privacyPolicy = `
-  <p class="c1"><span class="c3">VIASTRO DOO</span></p>
-  <p class="c1">
-      <span class="c0">&#128205;</span
-      ><span
-          >&nbsp;Adresa: Danila Leki&#263;a &Scaron;panca 31, Novi
-          Beograd<br /></span
-      ><span class="c0">&#128209;</span
-      ><span
-          >&nbsp;PIB: 114961759 | Mati&#269;ni broj: 22096737<br /></span
-      ><span class="c0">&#128231;</span
-      ><span>&nbsp;Email: office@viastro.rs | </span
-      ><span class="c0">&#128222;</span
-      ><span class="c3">&nbsp;Tel: 069/656-555</span>
+export const privacyPolicySr = `
+  <p class="c3">
+      <span
+          >POLITIKA PRIVATNOSTI &ndash; VIASTRO DOO
+          <br />&#128205; Adresa: Danila Leki&#263;a &Scaron;panca 31,
+          Novi Beograd<br />&#128209; PIB: 114961759 | Mati&#269;ni broj:
+          22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Tel: 069/656-555<br /><br /></span>
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1">
-      <span class="c3">ZA&Scaron;TITA PRIVATNOSTI KORISNIKA</span>
+  <p class="c0">
+      <span class="c8"
+          >1. ZAŠTITA PRIVATNOSTI KORISNIKA</span
+      >
   </p>
   <p class="c1">
       <span class="c3"
@@ -631,9 +627,9 @@ export const privacyPolicy = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1">
-      <span class="c3"
-          >ZA&Scaron;TITA POVERLJIVIH PODATAKA O TRANSAKCIJI</span
+  <p class="c0">
+      <span class="c8"
+          >2. ZAŠTITA POVERLJIVIH PODATAKA O TRANSAKCIJI</span
       >
   </p>
   <p class="c1">
@@ -653,7 +649,11 @@ export const privacyPolicy = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1"><span class="c3">POVRA&#262;AJ SREDSTAVA</span></p>
+  <p class="c0">
+      <span class="c8"
+          >3. POVRAĆAJ SREDSTAVA</span
+      >
+  </p>
   <p class="c1">
       <span class="c3"
           >U slu&#269;aju vra&#263;anja robe i povra&#263;aja sredstava
@@ -667,18 +667,162 @@ export const privacyPolicy = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1"><span class="c3">IZJAVA O KONVERZIJI</span></p>
+  <p class="c0">
+      <span class="c8"
+          >4. IZJAVA O KONVERZIJI</span
+      >
+  </p>
   <p class="c1">
       <span class="c3"
-          >All payments will be effected in Serbian currency - Dinar
-          (RSD). The amount your credit card account will be charged for
-          is obtained through the conversion of the price in Euro into
-          Serbian dinar according to the current exchange rate of the
-          Serbian National Bank. When charging your credit card, the same
-          amount is converted into your local currency according to the
-          exchange rate of credit card associations. As a result of this
-          conversion there is a possibility of a slight difference from
-          the original price stated in our web site.</span
+          >Sva pla&#263;anja &#263;e biti izvr&#353;ena u lokalnoj valuti Republike Srbije &ndash; dinar (RSD). Iznos za koji &#263;e Va&#353;a kreditna kartica biti zadu&#382;ena dobija se konverzijom cene iz Evra u srpski dinar po va&#382;e&#263;em kursu Narodne banke Srbije. Prilikom zadu&#382;ivanja Va&#353;e kreditne kartice, ista suma se konvertuje u Va&#353;u lokalnu valutu prema kursu udru&#382;enja kreditnih kartica. Kao rezultat ove konverzije, postoji mogu&#263;nost neznatne razlike u odnosu na originalnu cenu navedenu na na&#353;em veb sajtu.</span
+      >
+  </p>
+  `;
+
+export const privacyPolicyEn = `
+  <p class="c3">
+      <span
+          >PRIVACY POLICY &ndash; VIASTRO DOO
+          <br />&#128205; Address: Danila Leki&#263;a &Scaron;panca 31, Novi
+          Belgrade<br />&#128209; Tax ID: 114961759 | Registration Number: 22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Tel: 069/656-555<br /><br /></span>
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >1. USER PRIVACY PROTECTION</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >On behalf of Viastro Doo, we commit to protecting the privacy of all our customers.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >We collect only necessary, basic customer/user data and data required for business operations and customer information in accordance with good business practices and for the purpose of providing quality service.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >We give customers the option to choose, including the option to decide whether they want to be removed from mailing lists used for marketing campaigns.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >All customer/user data is strictly protected and is available only to employees who need this data to perform their work. All employees (and business partners) are responsible for respecting privacy protection principles.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >2. PROTECTION OF CONFIDENTIAL TRANSACTION DATA</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >When entering payment card data, confidential information is transmitted over the public network in protected (encrypted) form using SSL protocol and PKI system, as the most modern cryptographic technology currently available.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Data security during purchase is guaranteed by the payment card processor. Payment card data is not available in our system at any time.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >3. REFUND</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >In case of return of goods and refund to a customer who has previously paid with one of the payment cards, partially or in full, regardless of the reason for return, Viastro Doo is obliged to make the refund exclusively through VISA, EC/MC and Maestro payment methods, which means that the bank will, upon the seller's request, process the refund to the cardholder's account.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >4. CONVERSION STATEMENT</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >All payments will be effected in Serbian currency - Dinar (RSD). The amount your credit card account will be charged for is obtained through the conversion of the price in Euro into Serbian dinar according to the current exchange rate of the Serbian National Bank. When charging your credit card, the same amount is converted into your local currency according to the exchange rate of credit card associations. As a result of this conversion there is a possibility of a slight difference from the original price stated in our web site.</span
+      >
+  </p>
+  `;
+
+export const privacyPolicyRu = `
+  <p class="c3">
+      <span
+          >ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ &ndash; VIASTRO DOO
+          <br />&#128205; Адрес: ул. Данила Лекича Шпанца 31, Нови
+          Белград<br />&#128209; ИНН: 114961759 | Регистрационный номер: 22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Тел: 069/656-555<br /><br /></span>
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >1. ЗАЩИТА КОНФИДЕНЦИАЛЬНОСТИ ПОЛЬЗОВАТЕЛЕЙ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >От имени Viastro Doo мы обязуемся защищать конфиденциальность всех наших клиентов.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Мы собираем только необходимые, основные данные о клиентах/пользователях и данные, необходимые для ведения бизнеса и информирования клиентов в соответствии с хорошими деловыми практиками и с целью предоставления качественных услуг.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Мы предоставляем клиентам возможность выбора, включая возможность решить, хотят ли они быть удалены из списков рассылки, используемых для маркетинговых кампаний.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Все данные о клиентах/пользователях строго защищены и доступны только сотрудникам, которым эти данные необходимы для выполнения своей работы. Все сотрудники (и деловые партнеры) несут ответственность за соблюдение принципов защиты конфиденциальности.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >2. ЗАЩИТА КОНФИДЕНЦИАЛЬНЫХ ДАННЫХ ТРАНЗАКЦИЙ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >При вводе данных платежной карты конфиденциальная информация передается по публичной сети в защищенной (зашифрованной) форме с использованием протокола SSL и системы PKI, как наиболее современной криптографической технологии, доступной в настоящее время.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Безопасность данных при покупке гарантируется процессором платежных карт. Данные платежной карты недоступны в нашей системе ни в один момент.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >3. ВОЗВРАТ СРЕДСТВ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >В случае возврата товара и возврата средств клиенту, который ранее оплатил одной из платежных карт, частично или полностью, независимо от причины возврата, Viastro Doo обязано производить возврат исключительно через методы оплаты VISA, EC/MC и Maestro, что означает, что банк по запросу продавца обработает возврат средств на счет держателя карты.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >4. ЗАЯВЛЕНИЕ О КОНВЕРСИИ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Все платежи осуществляются в сербской валюте - Динар (RSD). Сумма, которая будет списана с Вашей кредитной карты, получается путем конвертации цены из Евро в сербский динар по текущему обменному курсу Народного банка Сербии. При списании с Вашей кредитной карты та же сумма конвертируется в Вашу местную валюту в соответствии с обменным курсом систем кредитных карт. В результате этой конвертации возможна небольшая разница по сравнению с первоначальной ценой, указанной на нашем сайте.</span
       >
   </p>
   `;
