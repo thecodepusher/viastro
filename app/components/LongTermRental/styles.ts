@@ -1,5 +1,5 @@
 export const heroContainer =
-  "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-30";
+  "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 sm:h-[50vh] h-[60vh] flex flex-col justify-end sm:justify-center";
 
 export const sectionContainer =
   "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-8";

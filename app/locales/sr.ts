@@ -125,10 +125,9 @@ export const sr: BaseLocale = {
   delatnost: "Delatnost",
   longTermRental: {
     heroTitle: "Dugoročni najam Viastro Rent a Car",
-    heroSubtitle:
-      "Dugoročni najam vozila u Beogradu – rešenje bez rizika i bez ulaganja",
+    heroSubtitle: "Dugoročni najam - sve u jednom paketu",
     heroDescription:
-      "Tražite fleksibilan i pouzdan način da koristite vozilo na mesec, godinu ili duže - bez kupovine, servisa i dodatnih troškova? Viastro Rent a Car nudi savremena rešenja dugoročnog najma (operativnog renta), idealna za firme, preduzetnike, freelancere i fizička lica koja žele potpunu slobodu bez obaveza vlasništva.",
+      "Fleksibilan i pouzdan način da koristite vozilo bez kupovine i servisa. Viastro Rent a Car nudi dugoročni najam idealan za firme, preduzetnike i pojedince.",
     heroHighlight: "Jedna mesečna rata pokriva sve:",
     heroHighlightSupport:
       "Registraciju, osiguranje, redovno održavanje, zamensko vozilo i pomoć na putu 24/7. Vaše je samo da vozite - sve ostalo je na nama.",

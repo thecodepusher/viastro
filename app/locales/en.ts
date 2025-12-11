@@ -125,10 +125,9 @@ export const en: BaseLocale = {
   delatnost: "Activity",
   longTermRental: {
     heroTitle: "Long-Term Car Rental Viastro Rent a Car",
-    heroSubtitle:
-      "Long-term car rental in Belgrade – zero risk, zero upfront costs",
+    heroSubtitle: "Long-term rental - all in one package",
     heroDescription:
-      "Looking for a flexible and reliable way to use a vehicle for a month, a year, or longer-without buying, servicing, or extra expenses? Viastro Rent a Car offers modern long-term rental solutions (operational leasing), ideal for companies, entrepreneurs, freelancers, and individuals who want complete freedom without ownership obligations.",
+      "A flexible and reliable way to use a vehicle without buying or servicing. Viastro Rent a Car offers long-term rental ideal for companies, entrepreneurs, and individuals.",
     heroHighlight: "One monthly payment covers everything:",
     heroHighlightSupport:
       "Registration, insurance, regular maintenance, a replacement vehicle, and 24/7 roadside assistance. You just drive - we handle the rest.",
