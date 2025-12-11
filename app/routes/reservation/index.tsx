@@ -91,7 +91,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
         <div className="absolute inset-0 bg-linear-to-b from-p/25 via-p/10 to-transparent" />
 
         <div className="relative z-10 flex h-full items-center">
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div className="w-full max-w-7xl mx-4 sm:mx-6">
             <div className="rounded-3xl bg-white/10 border border-white/15 shadow-[0_25px_80px_rgba(0,0,0,0.45)] ring-1 ring-white/15 backdrop-blur-3xl p-4 sm:p-6">
               <ReservationTime
                 onStart={async (data) => {

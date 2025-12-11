@@ -229,7 +229,7 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <div className="bg-linear-to-r from-p via-p to-p/90 mt-18 shadow-lg">
-        <div className="mx-auto max-w-7xl px-4 sm:py-2 py-1">
+        <div className="mx-auto max-w-7xl px-4 py-2">
           <div className="sm:mb-4 mb-1">
             {!isMobile && (
               <div className="flex items-center justify-between mb-2">
