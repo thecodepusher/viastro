@@ -229,6 +229,8 @@ export async function action({ request, params }: Route.ActionArgs) {
     depositAfterDiscount,
     notInWorkingHours,
     carDeposit: car.deposite,
+    depositAmount: depositAfterDiscount, // Iznos depozita za preautorizaciju
+    needsTotalPayment: true, // Flag da treba i naplata ukupne cene
   };
 
   const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
@@ -248,11 +250,15 @@ export async function action({ request, params }: Route.ActionArgs) {
     isTestMode
   );
 
+  // Preautorizacija za depozit
+  const depositAmount =
+    depositAfterDiscount * Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
+
   const wspayFormDataWithSession = createWSPayFormData({
     shopId,
     secretKey,
     shoppingCartId,
-    totalAmount: price * Number(process.env.WSPAY_EURO_EXCHANGE_RATE),
+    totalAmount: depositAmount,
     returnUrl: returnUrlWithSession,
     returnErrorUrl: returnErrorUrlWithSession,
     cancelUrl: cancelUrlWithSession,
@@ -262,6 +268,7 @@ export async function action({ request, params }: Route.ActionArgs) {
     customerPhone: phone,
     lang: langCode.toUpperCase(),
     returnMethod: "GET",
+    authorizationType: "PreAuth", // Preautorizacija umesto obične naplate
   });
 
   const wspayFormDataEncoded = encodeURIComponent(

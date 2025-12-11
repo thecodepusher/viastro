@@ -15,6 +15,7 @@ export interface WSPayFormData {
   CustomerPhone?: string;
   Lang?: string;
   ReturnMethod?: "GET" | "POST";
+  AuthorizationType?: "PreAuth" | "Sale";
 }
 
 export interface WSPayCallbackParams {
@@ -78,6 +79,7 @@ export function createWSPayFormData(params: {
   customerPhone?: string;
   lang?: string;
   returnMethod?: "GET" | "POST";
+  authorizationType?: "PreAuth" | "Sale";
 }): WSPayFormData {
   const formattedAmount = formatAmountForWSPay(params.totalAmount);
   const signature = generateWSPaySignature(
@@ -116,6 +118,9 @@ export function createWSPayFormData(params: {
   if (params.returnMethod) {
     formData.ReturnMethod = params.returnMethod;
   }
+  if (params.authorizationType) {
+    formData.AuthorizationType = params.authorizationType;
+  }
 
   return formData;
 }
@@ -140,4 +145,156 @@ export function verifyWSPayCallbackSignature(
   const signatureString = `${shopId}${secretKey}${params.ShoppingCartID}${secretKey}${params.Success}${secretKey}${approvalCode}${secretKey}`;
   const hash = createHash("sha512").update(signatureString).digest("hex");
   return hash.toLowerCase() === params.Signature.toLowerCase();
+}
+
+export interface WSPayCaptureReleaseParams {
+  shopId: string;
+  secretKey: string;
+  wsPayOrderId: string;
+  approvalCode: string;
+  amount?: number; // Za capture - opcioni, ako nije naveden koristi se originalni iznos
+}
+
+export interface WSPayCaptureReleaseResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+}
+
+/**
+ * Capture (naplata) preautorizovane transakcije
+ */
+export async function captureWSPayPreAuth(
+  params: WSPayCaptureReleaseParams,
+  isTestMode: boolean = true
+): Promise<WSPayCaptureReleaseResponse> {
+  const apiUrl = isTestMode
+    ? "https://formtest.wspay.biz/api/transaction"
+    : "https://form.wspay.biz/api/transaction";
+
+  const amountForHashing = params.amount
+    ? formatAmountForWSPay(params.amount).replace(/[^0-9]/g, "")
+    : "";
+
+  // Signature za capture: ShopID + SecretKey + WsPayOrderId + SecretKey + ApprovalCode + SecretKey + Amount + SecretKey
+  const signatureString = `${params.shopId}${params.secretKey}${params.wsPayOrderId}${params.secretKey}${params.approvalCode}${params.secretKey}${amountForHashing}${params.secretKey}`;
+  const signature = createHash("sha512").update(signatureString).digest("hex");
+
+  const requestBody: Record<string, string> = {
+    ShopID: params.shopId,
+    WsPayOrderId: params.wsPayOrderId,
+    ApprovalCode: params.approvalCode,
+    Signature: signature,
+    Action: "Capture",
+  };
+
+  if (params.amount) {
+    requestBody.Amount = formatAmountForWSPay(params.amount);
+  }
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(requestBody).toString(),
+    });
+
+    const responseText = await response.text();
+    
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `HTTP ${response.status}: ${responseText}`,
+      };
+    }
+
+    // WSPay obično vraća XML ili form-urlencoded odgovor
+    // Parsiranje odgovora zavisi od WSPay API formata
+    const responseParams = new URLSearchParams(responseText);
+    const success = responseParams.get("Success") === "1" || responseParams.get("success") === "1";
+
+    if (success) {
+      return {
+        success: true,
+        message: "Capture uspešan",
+      };
+    } else {
+      const errorMessage = responseParams.get("ErrorMessage") || responseParams.get("error") || "Nepoznata greška";
+      return {
+        success: false,
+        error: errorMessage,
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Nepoznata greška",
+    };
+  }
+}
+
+/**
+ * Release (otpuštanje) preautorizovane transakcije
+ */
+export async function releaseWSPayPreAuth(
+  params: WSPayCaptureReleaseParams,
+  isTestMode: boolean = true
+): Promise<WSPayCaptureReleaseResponse> {
+  const apiUrl = isTestMode
+    ? "https://formtest.wspay.biz/api/transaction"
+    : "https://form.wspay.biz/api/transaction";
+
+  // Signature za release: ShopID + SecretKey + WsPayOrderId + SecretKey + ApprovalCode + SecretKey
+  const signatureString = `${params.shopId}${params.secretKey}${params.wsPayOrderId}${params.secretKey}${params.approvalCode}${params.secretKey}`;
+  const signature = createHash("sha512").update(signatureString).digest("hex");
+
+  const requestBody: Record<string, string> = {
+    ShopID: params.shopId,
+    WsPayOrderId: params.wsPayOrderId,
+    ApprovalCode: params.approvalCode,
+    Signature: signature,
+    Action: "Void",
+  };
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(requestBody).toString(),
+    });
+
+    const responseText = await response.text();
+    
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `HTTP ${response.status}: ${responseText}`,
+      };
+    }
+
+    const responseParams = new URLSearchParams(responseText);
+    const success = responseParams.get("Success") === "1" || responseParams.get("success") === "1";
+
+    if (success) {
+      return {
+        success: true,
+        message: "Release uspešan",
+      };
+    } else {
+      const errorMessage = responseParams.get("ErrorMessage") || responseParams.get("error") || "Nepoznata greška";
+      return {
+        success: false,
+        error: errorMessage,
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Nepoznata greška",
+    };
+  }
 }
