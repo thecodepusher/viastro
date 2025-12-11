@@ -827,7 +827,7 @@ export const privacyPolicyRu = `
   </p>
   `;
 
-export const usloviNajmaSr = `
+export const rentalConditionsSr = `
   <p class="c3">
       <span
           >OP&Scaron;TI USLOVI NAJMA VOZILA &ndash; VIASTRO DOO
@@ -1612,7 +1612,7 @@ export const usloviNajmaSr = `
   </p>
   `;
 
-export const usloviNajmaRs = `
+export const rentalConditionsRs = `
   <p class="c3">
       <span
           >ОБЩИЕ УСЛОВИЯ АРЕНДЫ ТРАНСПОРТНЫХ СРЕДСТВ – VIASTRO DOO

@@ -1,5 +1,9 @@
 import type { Route } from "./+types/rental-conditions-page";
-import { usloviNajmaSr, usloviNajmaRs, rentalConditionsEn } from "@/lib/data";
+import {
+  rentalConditionsSr,
+  rentalConditionsRs,
+  rentalConditionsEn,
+} from "@/lib/data";
 import { getLocale } from "@/lib/utils";
 import Cta from "@/components/Cta";
 import { CustomHero } from "@/components/CustomHero";
@@ -28,9 +32,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
 
-  let usloviNajma = usloviNajmaSr;
+  let usloviNajma = rentalConditionsSr;
   if (langCode === "en") usloviNajma = rentalConditionsEn;
-  if (langCode === "ru") usloviNajma = usloviNajmaRs;
+  if (langCode === "ru") usloviNajma = rentalConditionsRs;
 
   const data = {
     langCode,
