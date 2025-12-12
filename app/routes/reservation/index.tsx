@@ -79,7 +79,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
 
   return (
     <section className="relative overflow-hidden bg-neutral-950">
-      <div className="relative h-[50vh] sm:h-[70vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
+      <div className="relative h-[70vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url(/long-term-rental-hero-2.jpg)" }}
