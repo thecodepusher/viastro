@@ -1,8 +1,3 @@
-/**
- * SEO Utility Functions
- * Provides structured data (JSON-LD) schema markup for different page types
- */
-
 export interface OrganizationSchema {
   "@context": string;
   "@type": string;
@@ -392,11 +387,6 @@ export interface OpenGraphMetaOptions {
   twitterCard?: "summary_large_image" | "summary";
 }
 
-/**
- * Generates Open Graph and Twitter meta tags for social media sharing
- * @param options - Configuration options for Open Graph meta tags
- * @returns Array of meta tag objects compatible with React Router meta function
- */
 export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
   const {
     title,
@@ -416,7 +406,14 @@ export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
   const ogImage = imageUrl || `${baseUrl}/opengraph-1200x630.jpeg`;
   const canonical = url.startsWith("http") ? url : `${baseUrl}${url}`;
 
-  const metaTags: Array<{ title?: string; name?: string; property?: string; content?: string; rel?: string; href?: string }> = [
+  const metaTags: Array<{
+    title?: string;
+    name?: string;
+    property?: string;
+    content?: string;
+    rel?: string;
+    href?: string;
+  }> = [
     { title },
     { name: "description", content: description },
     { property: "og:title", content: title },

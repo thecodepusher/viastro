@@ -49,6 +49,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
@@ -72,7 +75,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = `${data.post.title} | Viastro Blog`;
+  const title = `${data.post.title}${data.lang.seoBlogDetailsTitle}`;
   const description = data.post.description || data.post.title;
   const imageUrl = data.post.imageUrl
     ? `${baseUrl}${data.post.imageUrl}`
@@ -85,7 +88,7 @@ export function meta({ data }: Route.MetaArgs) {
     baseUrl,
     type: "article",
     imageUrl,
-    keywords: "viastro blog, rent a car Belgrade, car rental tips",
+    keywords: data.lang.seoBlogDetailsKeywords,
   });
 
   metaTags.push({
@@ -161,6 +164,20 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
             dangerouslySetInnerHTML={{ __html: loaderData.post.content ?? "" }}
           />
         </div>
+
+        {loaderData.post.tags && loaderData.post.tags.length > 0 && (
+          <div className="max-w-4xl mx-auto px-4 mb-8">
+            <div className="flex flex-wrap items-center gap-2">
+              {loaderData.post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-s/10 hover:text-s transition-colors">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <Cta lang={loaderData.lang} />
     </>

@@ -1,6 +1,7 @@
 import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import SEO from "@/components/SEO";
+import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/faq-page";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
@@ -23,6 +24,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
@@ -50,17 +54,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = `Viastro ${data.lang.faq} | Belgrade`;
-  const description =
-    "Frequently asked questions about car rental services in Belgrade.";
 
   return generateOpenGraphMeta({
-    title,
-    description,
+    title: data.lang.seoFaqTitle,
+    description: data.lang.seoFaqDescription,
     url: `/${data.langCode || "sr"}/faq`,
     baseUrl,
-    keywords:
-      "FAQ rent a car Belgrade, car rental questions, najčešća pitanja iznajmljivanje automobila",
+    keywords: data.lang.seoFaqKeywords,
     imageAlt: "Viastro FAQ - Frequently Asked Questions",
   });
 }
@@ -87,8 +87,19 @@ export default function FandQPage({ loaderData }: Route.ComponentProps) {
   ];
 
   return (
-    <div className="w-full pt-20">
+    <div className="w-full">
       <SEO schemas={schemas} />
+      <CustomHero
+        title={loaderData.lang.seoFaqTitle}
+        description={loaderData.lang.seoFaqDescription}
+        primaryLabel={loaderData.lang.createReservation}
+        secondaryLabel={loaderData.lang.contactUs}
+        helperText={loaderData.lang.description}
+        primaryHref="/reservation"
+        secondaryHref={`/${loaderData.langCode}/contact`}
+        fastTitle={loaderData.lang.createReservation}
+        fastSubtitle={loaderData.lang.deployFaster}
+      />
       <FandQ langCode={loaderData.langCode} />
       <Cta lang={loaderData.lang} />
     </div>

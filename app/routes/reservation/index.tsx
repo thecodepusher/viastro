@@ -11,6 +11,9 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
   const baseUrl = getBaseUrl(request);
 
   return {
@@ -41,6 +44,9 @@ export async function action({ request }: Route.ActionArgs) {
 
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   cookie.pickUpLocation = pickUpLocation;
   cookie.dropOffLocation = dropOffLocation;
@@ -59,12 +65,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation - Select Dates | Viastro Rent a Car",
-    description:
-      "Select your pickup and drop-off dates and locations for your car rental in Belgrade.",
+    title: data.lang.seoReservationSelectDatesTitle,
+    description: data.lang.seoReservationSelectDatesDescription,
     url: `/${data.langCode || "sr"}/reservation`,
     baseUrl,
-    keywords: "reservation, book car, select dates, rent a car Belgrade",
+    keywords: data.lang.seoReservationSelectDatesKeywords,
     imageAlt: "Viastro - Select Reservation Dates",
   });
 }
@@ -73,8 +78,19 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-col items-center justify-center bg-linear-to-b from-p sm:h-[60vh] h-[50vh]">
+    <section className="relative overflow-hidden bg-neutral-950">
+      <div className="relative h-[70vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/long-term-rental-hero-2.jpg)" }}
+          aria-hidden
+        />
+        <div className="absolute -left-10 -top-10 h-64 w-64 rounded-full bg-p/25 blur-3xl" />
+        <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-s/25 blur-3xl" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/55 to-black/30" />
+        <div className="absolute inset-0 bg-linear-to-b from-p/25 via-p/10 to-transparent" />
+
+        <div className="w-screen h-full flex items-center justify-center">
           <ReservationTime
             onStart={async (data) => {
               const form = new FormData();
@@ -96,7 +112,8 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
             locations={loaderData.locations}
             initialValues={loaderData.initialValues}
           />
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

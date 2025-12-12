@@ -77,6 +77,16 @@ export const postsSr = [
     imageUrl: "/kop.png",
     date: "Maj 5, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Kopaonik",
+      "Rent a car Beograd",
+      "Iznajmljivanje automobila",
+      "Skijanje Srbija",
+      "Planinska turistika",
+      "Vikend izleti",
+      "Car rental Beograd",
+      "Auto najam",
+    ],
   },
   {
     id: 2,
@@ -106,6 +116,16 @@ export const postsSr = [
     imageUrl: "/sargan.png",
     date: "3 Maj, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Đerdap",
+      "Rent a car Beograd",
+      "Nacionalni park Srbija",
+      "Putovanja Srbijom",
+      "Iznajmljivanje automobila",
+      "Turističke destinacije",
+      "Dunav",
+      "Car rental",
+    ],
   },
   {
     id: 3,
@@ -134,6 +154,16 @@ export const postsSr = [
     imageUrl: "/djerdap.png",
     date: "1 Maj, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Mokra Gora",
+      "Rent a car Beograd",
+      "Šarganska osmica",
+      "Zlatibor",
+      "Iznajmljivanje automobila",
+      "Kultura Srbije",
+      "Turizam",
+      "Auto najam",
+    ],
   },
 ];
 
@@ -187,6 +217,16 @@ export const postsEn = [
     imageUrl: "/kop.png",
     date: "May 5, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Kopaonik",
+      "Car rental Belgrade",
+      "Rent a car Serbia",
+      "Skiing Serbia",
+      "Mountain tourism",
+      "Weekend trips",
+      "Belgrade car hire",
+      "Vehicle rental",
+    ],
   },
   {
     id: 2,
@@ -216,6 +256,16 @@ export const postsEn = [
     imageUrl: "/sargan.png",
     date: "May 3, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Đerdap",
+      "Car rental Belgrade",
+      "National Park Serbia",
+      "Serbia travel",
+      "Belgrade car hire",
+      "Tourist destinations",
+      "Danube",
+      "Vehicle rental",
+    ],
   },
   {
     id: 3,
@@ -244,6 +294,16 @@ export const postsEn = [
     imageUrl: "/djerdap.png",
     date: "May 1, 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Mokra Gora",
+      "Car rental Belgrade",
+      "Šargan Eight",
+      "Zlatibor",
+      "Belgrade car hire",
+      "Serbia culture",
+      "Tourism",
+      "Vehicle rental",
+    ],
   },
 ];
 
@@ -297,6 +357,16 @@ export const postsRu = [
     imageUrl: "/kop.png",
     date: "5 мая 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Копаоник",
+      "Аренда авто Белград",
+      "Аренда автомобиля",
+      "Лыжи Сербия",
+      "Горный туризм",
+      "Выходные поездки",
+      "Прокат авто Белград",
+      "Автопрокат",
+    ],
   },
   {
     id: 2,
@@ -326,6 +396,16 @@ export const postsRu = [
     imageUrl: "/sargan.png",
     date: "3 мая 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Джердап",
+      "Аренда авто Белград",
+      "Национальный парк Сербия",
+      "Путешествия по Сербии",
+      "Прокат автомобиля",
+      "Туристические направления",
+      "Дунай",
+      "Автопрокат",
+    ],
   },
   {
     id: 3,
@@ -355,6 +435,13 @@ export const postsRu = [
     imageUrl: "/djerdap.png",
     date: "1 мая 2025",
     datetime: "2020-03-16",
+    tags: [
+      "Мокра Гора",
+      "Шарганская восьмерка",
+      "Культура",
+      "Туризм",
+      "Златибор",
+    ],
   },
 ];
 
@@ -392,6 +479,7 @@ export const aditionalEquipment = [
       ru: "Если вы планируете поездку на арендованном автомобиле за пределы территории Республики Сербия, необходимо получить **Разрешение на пересечение границы**. Это разрешение дает право легального использования транспортного средства за границей и действительно для одного международного направления или нескольких стран, указанных при выдаче, за исключением АР Косово и Метохия.",
     },
     name: "Dozvola za prelazak granice",
+    icon: "public/icons/extras/borderpass.svg",
     description:
       "Ukoliko planirate da putujete sa iznajmljenim vozilom van teritorije Republike Srbije, potrebno je obezbediti dozvolu za prelazak granice. Ova dozvola omogućava legalno korišćenje vozila u inostranstvu i važi za jednu međunarodnu destinaciju ili više zemalja navedenih prilikom izdavanja, sa izuzetkom AP Kosovo i Metohija.",
     price: 48,
@@ -413,6 +501,7 @@ export const aditionalEquipment = [
       ru: "Зеленая карта (Международная карта страхования транспортного средства) обязательна для пересечения границ следующих стран: Северная Македония, Албания, Украина, Турция, Россия, Беларусь, Молдова, Израиль, Иран, Марокко, Тунис и Азербайджан. Зеленая карта выдается вместе с Разрешением на пересечение границы.",
     },
     name: "Zeleni karton",
+    icon: "public/icons/extras/borderpass-green.svg",
     description:
       "Zeleni karton (Međunarodna karta osiguranja vozila) je obavezan za prelazak granica sledećih zemalja: Severna Makedonija, Albanija, Ukrajina, Turska, Rusija, Belorusija, Moldavija, Izrael, Iran, Maroko, Tunis i Azerbejdžan. Zeleni karton se izdaje zajedno sa dozvolom za prelazak granice",
     price: 36,
@@ -434,6 +523,7 @@ export const aditionalEquipment = [
       ru: "Если вы хотите, чтобы автомобилем во время аренды управляло более одного человека, можно добавить **дополнительного водителя**. Дополнительный водитель должен соответствовать тем же требованиям, что и основной водитель: иметь действующее водительское удостоверение и быть не моложе 21 года (или старше, в зависимости от класса автомобиля).",
     },
     name: "Dodatni vozac",
+    icon: "public/icons/extras/wificar.svg",
     description:
       "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati dodatnog vozača. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač – da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila). ",
     price: 0,
@@ -450,11 +540,12 @@ export const aditionalEquipment = [
       ru: "Автокресло (0–36 кг)",
     },
     descriptionMap: {
-      en: "A universal car seat that covers all ages—from newborns up to children around 12 years old. It is adjustable in height and recline, allowing for a safe and comfortable ride throughout all phases of the child’s development. The seat can be installed rear-facing for the smallest babies and forward-facing for older children.",
+      en: "A universal car seat that covers all ages-from newborns up to children around 12 years old. It is adjustable in height and recline, allowing for a safe and comfortable ride throughout all phases of the child’s development. The seat can be installed rear-facing for the smallest babies and forward-facing for older children.",
       sr: "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja. Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
       ru: "Универсальное автокресло, подходящее для всех возрастов – от новорожденных до детей примерно 12 лет. Регулируется по высоте и наклону, что обеспечивает безопасную и комфортную поездку на всех этапах развития ребенка. Кресло может устанавливаться против хода движения для самых маленьких детей и по ходу движения для детей постарше.",
     },
     name: "Auto sedište (0–36 kg)",
+    icon: "public/icons/extras/childseats.svg",
     description:
       "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja.Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
     price: 0,
@@ -476,6 +567,7 @@ export const aditionalEquipment = [
       ru: "Предназначено для детей старше 7 лет и весом более 15 килограммов. Бустер обеспечивает правильное положение ремня безопасности и повышает безопасность ребенка во время поездки. Компактен и легко устанавливается в любой автомобиль.",
     },
     name: "Buster sedište (Booster)",
+    icon: "public/icons/extras/boostseats.svg",
     description:
       "Namenjeno deci starijoj od 7 godine i težoj od 15 kilograma. Booster omogućava pravilno postavljanje sigurnosnog pojasa i povećava sigurnost deteta tokom vožnje. Kompaktno i lako za postavljanje u bilo koje vozilo.",
     price: 0,
@@ -488,24 +580,20 @@ export const aditionalEquipment = [
 
 export const PRICE_FOR_PICKUP_OFF_HOURS = 20;
 
-export const privacyPolicy = `
-  <p class="c1"><span class="c3">VIASTRO DOO</span></p>
-  <p class="c1">
-      <span class="c0">&#128205;</span
-      ><span
-          >&nbsp;Adresa: Danila Leki&#263;a &Scaron;panca 31, Novi
-          Beograd<br /></span
-      ><span class="c0">&#128209;</span
-      ><span
-          >&nbsp;PIB: 114961759 | Mati&#269;ni broj: 22096737<br /></span
-      ><span class="c0">&#128231;</span
-      ><span>&nbsp;Email: office@viastro.rs | </span
-      ><span class="c0">&#128222;</span
-      ><span class="c3">&nbsp;Tel: 069/656-555</span>
+export const privacyPolicySr = `
+  <p class="c3">
+      <span
+          >POLITIKA PRIVATNOSTI &ndash; VIASTRO DOO
+          <br />&#128205; Adresa: Danila Leki&#263;a &Scaron;panca 31,
+          Novi Beograd<br />&#128209; PIB: 114961759 | Mati&#269;ni broj:
+          22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Tel: 069/656-555<br /><br /></span>
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1">
-      <span class="c3">ZA&Scaron;TITA PRIVATNOSTI KORISNIKA</span>
+  <p class="c0">
+      <span class="c8"
+          >1. ZAŠTITA PRIVATNOSTI KORISNIKA</span
+      >
   </p>
   <p class="c1">
       <span class="c3"
@@ -539,9 +627,9 @@ export const privacyPolicy = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1">
-      <span class="c3"
-          >ZA&Scaron;TITA POVERLJIVIH PODATAKA O TRANSAKCIJI</span
+  <p class="c0">
+      <span class="c8"
+          >2. ZAŠTITA POVERLJIVIH PODATAKA O TRANSAKCIJI</span
       >
   </p>
   <p class="c1">
@@ -561,7 +649,11 @@ export const privacyPolicy = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1"><span class="c3">POVRA&#262;AJ SREDSTAVA</span></p>
+  <p class="c0">
+      <span class="c8"
+          >3. POVRAĆAJ SREDSTAVA</span
+      >
+  </p>
   <p class="c1">
       <span class="c3"
           >U slu&#269;aju vra&#263;anja robe i povra&#263;aja sredstava
@@ -575,23 +667,167 @@ export const privacyPolicy = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c1"><span class="c3">IZJAVA O KONVERZIJI</span></p>
+  <p class="c0">
+      <span class="c8"
+          >4. IZJAVA O KONVERZIJI</span
+      >
+  </p>
   <p class="c1">
       <span class="c3"
-          >All payments will be effected in Serbian currency - Dinar
-          (RSD). The amount your credit card account will be charged for
-          is obtained through the conversion of the price in Euro into
-          Serbian dinar according to the current exchange rate of the
-          Serbian National Bank. When charging your credit card, the same
-          amount is converted into your local currency according to the
-          exchange rate of credit card associations. As a result of this
-          conversion there is a possibility of a slight difference from
-          the original price stated in our web site.</span
+          >Sva pla&#263;anja &#263;e biti izvr&#353;ena u lokalnoj valuti Republike Srbije &ndash; dinar (RSD). Iznos za koji &#263;e Va&#353;a kreditna kartica biti zadu&#382;ena dobija se konverzijom cene iz Evra u srpski dinar po va&#382;e&#263;em kursu Narodne banke Srbije. Prilikom zadu&#382;ivanja Va&#353;e kreditne kartice, ista suma se konvertuje u Va&#353;u lokalnu valutu prema kursu udru&#382;enja kreditnih kartica. Kao rezultat ove konverzije, postoji mogu&#263;nost neznatne razlike u odnosu na originalnu cenu navedenu na na&#353;em veb sajtu.</span
       >
   </p>
   `;
 
-export const usloviNajmaSr = `
+export const privacyPolicyEn = `
+  <p class="c3">
+      <span
+          >PRIVACY POLICY &ndash; VIASTRO DOO
+          <br />&#128205; Address: Danila Leki&#263;a &Scaron;panca 31, Novi
+          Belgrade<br />&#128209; Tax ID: 114961759 | Registration Number: 22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Tel: 069/656-555<br /><br /></span>
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >1. USER PRIVACY PROTECTION</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >On behalf of Viastro Doo, we commit to protecting the privacy of all our customers.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >We collect only necessary, basic customer/user data and data required for business operations and customer information in accordance with good business practices and for the purpose of providing quality service.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >We give customers the option to choose, including the option to decide whether they want to be removed from mailing lists used for marketing campaigns.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >All customer/user data is strictly protected and is available only to employees who need this data to perform their work. All employees (and business partners) are responsible for respecting privacy protection principles.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >2. PROTECTION OF CONFIDENTIAL TRANSACTION DATA</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >When entering payment card data, confidential information is transmitted over the public network in protected (encrypted) form using SSL protocol and PKI system, as the most modern cryptographic technology currently available.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Data security during purchase is guaranteed by the payment card processor. Payment card data is not available in our system at any time.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >3. REFUND</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >In case of return of goods and refund to a customer who has previously paid with one of the payment cards, partially or in full, regardless of the reason for return, Viastro Doo is obliged to make the refund exclusively through VISA, EC/MC and Maestro payment methods, which means that the bank will, upon the seller's request, process the refund to the cardholder's account.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >4. CONVERSION STATEMENT</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >All payments will be effected in Serbian currency - Dinar (RSD). The amount your credit card account will be charged for is obtained through the conversion of the price in Euro into Serbian dinar according to the current exchange rate of the Serbian National Bank. When charging your credit card, the same amount is converted into your local currency according to the exchange rate of credit card associations. As a result of this conversion there is a possibility of a slight difference from the original price stated in our web site.</span
+      >
+  </p>
+  `;
+
+export const privacyPolicyRu = `
+  <p class="c3">
+      <span
+          >ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ &ndash; VIASTRO DOO
+          <br />&#128205; Адрес: ул. Данила Лекича Шпанца 31, Нови
+          Белград<br />&#128209; ИНН: 114961759 | Регистрационный номер: 22096737<br />&#128231; Email: office@viastro.rs | &#128222;
+          Тел: 069/656-555<br /><br /></span>
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >1. ЗАЩИТА КОНФИДЕНЦИАЛЬНОСТИ ПОЛЬЗОВАТЕЛЕЙ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >От имени Viastro Doo мы обязуемся защищать конфиденциальность всех наших клиентов.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Мы собираем только необходимые, основные данные о клиентах/пользователях и данные, необходимые для ведения бизнеса и информирования клиентов в соответствии с хорошими деловыми практиками и с целью предоставления качественных услуг.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Мы предоставляем клиентам возможность выбора, включая возможность решить, хотят ли они быть удалены из списков рассылки, используемых для маркетинговых кампаний.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Все данные о клиентах/пользователях строго защищены и доступны только сотрудникам, которым эти данные необходимы для выполнения своей работы. Все сотрудники (и деловые партнеры) несут ответственность за соблюдение принципов защиты конфиденциальности.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >2. ЗАЩИТА КОНФИДЕНЦИАЛЬНЫХ ДАННЫХ ТРАНЗАКЦИЙ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >При вводе данных платежной карты конфиденциальная информация передается по публичной сети в защищенной (зашифрованной) форме с использованием протокола SSL и системы PKI, как наиболее современной криптографической технологии, доступной в настоящее время.</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Безопасность данных при покупке гарантируется процессором платежных карт. Данные платежной карты недоступны в нашей системе ни в один момент.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >3. ВОЗВРАТ СРЕДСТВ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >В случае возврата товара и возврата средств клиенту, который ранее оплатил одной из платежных карт, частично или полностью, независимо от причины возврата, Viastro Doo обязано производить возврат исключительно через методы оплаты VISA, EC/MC и Maestro, что означает, что банк по запросу продавца обработает возврат средств на счет держателя карты.</span
+      >
+  </p>
+  <p class="c1 c2"><span class="c3"></span></p>
+  <p class="c0">
+      <span class="c8"
+          >4. ЗАЯВЛЕНИЕ О КОНВЕРСИИ</span
+      >
+  </p>
+  <p class="c1">
+      <span class="c3"
+          >Все платежи осуществляются в сербской валюте - Динар (RSD). Сумма, которая будет списана с Вашей кредитной карты, получается путем конвертации цены из Евро в сербский динар по текущему обменному курсу Народного банка Сербии. При списании с Вашей кредитной карты та же сумма конвертируется в Вашу местную валюту в соответствии с обменным курсом систем кредитных карт. В результате этой конвертации возможна небольшая разница по сравнению с первоначальной ценой, указанной на нашем сайте.</span
+      >
+  </p>
+  `;
+
+export const rentalConditionsSr = `
   <p class="c3">
       <span
           >OP&Scaron;TI USLOVI NAJMA VOZILA &ndash; VIASTRO DOO
@@ -1376,7 +1612,7 @@ export const usloviNajmaSr = `
   </p>
   `;
 
-export const usloviNajmaRs = `
+export const rentalConditionsRs = `
   <p class="c3">
       <span
           >ОБЩИЕ УСЛОВИЯ АРЕНДЫ ТРАНСПОРТНЫХ СРЕДСТВ – VIASTRO DOO

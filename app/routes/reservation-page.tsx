@@ -1,20 +1,105 @@
+import { useEffect, useState, useMemo } from "react";
 import { Link, Outlet, useMatches, useFetcher } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
 import type { Route } from "./+types/reservation-page";
-import { CheckIcon, ChevronRight } from "lucide-react";
-import { cn, getLocale } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { cn, getLocale, getDatabaseUrl } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
+import { locations, type LocaleTypes } from "@/lib/data";
+import { CheckIcon, ChevronRight } from "lucide-react";
+import {
+  calculateInWorkingHours,
+  calculateRentalDays,
+  calculateReservationPrice,
+  getReservationDataFromCookies,
+} from "@/lib/helpers";
+import { CarSummary } from "@/components/Reservation/CarSummary";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const baseUrl = getBaseUrl(request);
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  let carSummary = null;
+
+  if (cookie.carId) {
+    try {
+      const databaseUrl = getDatabaseUrl();
+      const res = await fetch(databaseUrl, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "get_all_models",
+        }),
+        headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+      });
+      const apiResponse: ApiAllModelsResponse = await res.json();
+      const transformedCars = transformApiCars(apiResponse, lang);
+      const reservationData = getReservationDataFromCookies(cookie);
+      const car = transformedCars.find(
+        (x) => x.exnternalId === reservationData.carId
+      );
+
+      if (
+        car &&
+        reservationData.pickupDate &&
+        reservationData.dropoffDate &&
+        reservationData.pickupTime &&
+        reservationData.dropoffTime
+      ) {
+        const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
+          reservationData.dropoffDate,
+          reservationData.pickupDate,
+          reservationData.dropoffTime,
+          reservationData.pickupTime
+        );
+
+        const days = calculateRentalDays(
+          reservationData.pickupDate,
+          reservationData.pickupTime,
+          reservationData.dropoffDate,
+          reservationData.dropoffTime
+        );
+
+        const { price } = calculateReservationPrice({
+          car,
+          days,
+          idExtras: reservationData.extras || null,
+          priceForOffHours,
+          langCode: (params.lang as LocaleTypes) || "sr",
+        });
+
+        const pickupLocation = locations.find(
+          (x) => x.id === +reservationData.pickUpLocation
+        );
+        const dropoffLocation = locations.find(
+          (x) => x.id === +reservationData.dropOffLocation
+        );
+
+        carSummary = {
+          car,
+          pickupDate: reservationData.pickupDate,
+          pickupTime: reservationData.pickupTime,
+          dropoffDate: reservationData.dropoffDate,
+          dropoffTime: reservationData.dropoffTime,
+          pickupLocation: pickupLocation?.name || "",
+          dropoffLocation: dropoffLocation?.name || "",
+          price,
+          days,
+        };
+      }
+    } catch (error) {
+      console.error("Error loading car summary:", error);
+    }
+  }
 
   return {
     lang,
     langCode: params.lang ?? "sr",
     baseUrl,
+    carSummary,
   };
 }
 
@@ -23,6 +108,9 @@ export async function action({ request }: Route.ActionArgs) {
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   return new Response(null, {
     status: 200,
@@ -36,28 +124,86 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation | Viastro Rent a Car",
-    description:
-      "Book your car rental in Belgrade. Choose your vehicle, dates, and additional equipment.",
+    title: data.lang.seoReservationTitle,
+    description: data.lang.seoReservationDescription,
     url: `/${data.langCode || "sr"}/reservation`,
     baseUrl,
-    keywords: "reservation, book car, rent a car Belgrade",
+    keywords: data.lang.seoReservationKeywords,
     imageAlt: "Viastro - Car Rental Reservation",
   });
 }
 
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
+  const isMobile = useIsMobile();
+
   const matches = useMatches();
   const steps = reservationSteps(loaderData, matches[2]);
+
+  const [extrasPrice, setExtrasPrice] = useState<number | null>(null);
+
+  useEffect(() => {
+    const checkInitialPrice = () => {
+      if (typeof window !== "undefined" && (window as any).__extrasTotalPrice) {
+        const initialPrice = (window as any).__extrasTotalPrice;
+        setExtrasPrice(initialPrice);
+      }
+    };
+
+    const handleExtrasPriceUpdate = (event: CustomEvent<number>) => {
+      const newPrice = event.detail;
+      setExtrasPrice((prevPrice) => {
+        if (prevPrice !== newPrice) {
+          return newPrice;
+        }
+        return prevPrice;
+      });
+    };
+
+    checkInitialPrice();
+
+    window.addEventListener(
+      "extrasPriceUpdated",
+      handleExtrasPriceUpdate as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        "extrasPriceUpdated",
+        handleExtrasPriceUpdate as EventListener
+      );
+    };
+  }, []);
+
   const [isAnimating, setIsAnimating] = useState(false);
   const fetcher = useFetcher();
 
-  const completedSteps = steps.filter((s) => s.status === "complete").length;
-  const currentStepIndex = steps.findIndex((s) => s.status === "current");
-  const progressPercentage =
-    currentStepIndex >= 0
-      ? ((completedSteps + 1) / steps.length) * 100
-      : (completedSteps / steps.length) * 100;
+  const completedSteps = useMemo(
+    () => steps.filter((s) => s.status === "complete").length,
+    [steps]
+  );
+  const currentStepIndex = useMemo(
+    () => steps.findIndex((s) => s.status === "current"),
+    [steps]
+  );
+  const progressPercentage = useMemo(
+    () =>
+      currentStepIndex >= 0
+        ? ((completedSteps + 1) / steps.length) * 100
+        : (completedSteps / steps.length) * 100,
+    [currentStepIndex, completedSteps, steps.length]
+  );
+
+  const carSummaryWithPrice = useMemo(
+    () =>
+      loaderData.carSummary
+        ? {
+            ...loaderData.carSummary,
+            price:
+              extrasPrice !== null ? extrasPrice : loaderData.carSummary.price,
+          }
+        : null,
+    [loaderData.carSummary, extrasPrice]
+  );
 
   const [prevStepIndex, setPrevStepIndex] = useState<number | null>(null);
 
@@ -84,17 +230,19 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <div className="bg-linear-to-r from-p via-p to-p/90 mt-18 shadow-lg">
         <div className="mx-auto max-w-7xl px-4 py-2">
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-lg font-semibold text-white">
-                {loaderData.lang.reservation || "Rezervacija"}
-              </h2>
-              <span className="text-sm font-medium text-white/90">
-                {completedSteps + (currentStepIndex >= 0 ? 1 : 0)} /{" "}
-                {steps.length}
-              </span>
-            </div>
-            <div className="w-full bg-white/20 rounded-full h-2.5 overflow-hidden shadow-inner">
+          <div className="sm:mb-4 mb-1">
+            {!isMobile && (
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-lg font-semibold text-white">
+                  {loaderData.lang.reservation || "Rezervacija"}
+                </h2>
+                <span className="text-sm font-medium text-white/90">
+                  {completedSteps + (currentStepIndex >= 0 ? 1 : 0)} /{" "}
+                  {steps.length}
+                </span>
+              </div>
+            )}
+            <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2.5 overflow-hidden shadow-inner">
               <div
                 className={cn(
                   "h-full bg-white rounded-full transition-all duration-500 ease-out shadow-sm",
@@ -109,11 +257,10 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
           <nav aria-label="Progress" className="relative">
             <ol
               role="list"
-              className="flex flex-col lg:flex-row gap-2 lg:gap-0">
+              className="flex flex-col lg:flex-row gap-1.5 lg:gap-0">
               {steps.map((step, stepIdx) => {
                 const isComplete = step.status === "complete";
                 const isCurrent = step.status === "current";
-                const isUpcoming = step.status === "upcoming";
 
                 return (
                   <li
@@ -134,12 +281,12 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           form.append("action", "deleteSelectedCarId");
                           fetcher.submit(form, { method: "post" });
                         }}
-                        className="group flex items-center gap-3 p-4 rounded-lg bg-white/10 hover:bg-white/20 active:bg-white/30 transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/40 active:scale-[0.98]">
+                        className="group flex items-center gap-2 lg:gap-3 py-2 px-3 lg:p-4 rounded-lg bg-white/10 hover:bg-white/20 active:bg-white/30 transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/40 active:scale-[0.98]">
                         <div className="relative shrink-0">
-                          <div className="flex size-12 items-center justify-center rounded-full bg-s shadow-lg group-hover:scale-110 group-active:scale-105 transition-transform duration-300 animate-in zoom-in-50">
+                          <div className="flex size-8 lg:size-12 items-center justify-center rounded-full bg-s shadow-lg group-hover:scale-110 group-active:scale-105 transition-transform duration-300 animate-in zoom-in-50">
                             <CheckIcon
                               aria-hidden="true"
-                              className="size-6 text-white animate-in zoom-in"
+                              className="size-4 lg:size-6 text-white animate-in zoom-in"
                             />
                           </div>
                           {stepIdx < steps.length - 1 && (
@@ -147,20 +294,20 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-medium text-white/70 mb-1">
+                          <div className="hidden lg:block text-xs font-medium text-white/70 mb-1">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-sm font-semibold text-white">
+                          <div className="text-xs lg:text-sm font-semibold text-white">
                             {step.name}
                           </div>
                         </div>
-                        <ChevronRight className="size-5 text-white/50 group-hover:text-white group-hover:translate-x-1 group-active:translate-x-2 transition-all duration-300 lg:hidden animate-in slide-in-from-right-2" />
+                        <ChevronRight className="size-4 lg:size-5 text-white/50 group-hover:text-white group-hover:translate-x-1 group-active:translate-x-2 transition-all duration-300 lg:hidden animate-in slide-in-from-right-2" />
                       </Link>
                     ) : isCurrent ? (
-                      <div className="flex items-center gap-3 p-4 rounded-lg bg-white shadow-lg border-2 border-s animate-in fade-in slide-in-from-bottom-2 zoom-in-95 duration-500">
+                      <div className="flex items-center gap-2 lg:gap-3 py-2 px-3 lg:p-4 rounded-lg bg-white shadow-lg border-2 border-s animate-in fade-in slide-in-from-bottom-2 zoom-in-95 duration-500">
                         <div className="relative shrink-0 animate-pulse">
-                          <div className="flex size-12 items-center justify-center rounded-full bg-s border-4 border-white shadow-xl ring-4 ring-s/20 animate-in zoom-in-50 duration-500">
-                            <span className="text-sm font-bold text-white animate-in zoom-in duration-500">
+                          <div className="flex size-8 lg:size-12 items-center justify-center rounded-full bg-s border-2 lg:border-4 border-white shadow-xl ring-2 lg:ring-4 ring-s/20 animate-in zoom-in-50 duration-500">
+                            <span className="text-xs lg:text-sm font-bold text-white animate-in zoom-in duration-500">
                               {step.id}
                             </span>
                           </div>
@@ -169,17 +316,17 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-medium text-s/70 mb-1 animate-in fade-in slide-in-from-left-2 duration-500 delay-200">
+                          <div className="hidden lg:block text-xs font-medium text-s/70 mb-1 animate-in fade-in slide-in-from-left-2 duration-500 delay-200">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-sm font-semibold text-s animate-in fade-in slide-in-from-left-2 duration-500 delay-300">
+                          <div className="text-xs lg:text-sm font-semibold text-s animate-in fade-in slide-in-from-left-2 duration-500 delay-300">
                             {step.name}
                           </div>
                         </div>
                         <div className="flex lg:hidden items-center gap-1">
-                          <div className="size-2 rounded-full bg-s animate-pulse" />
-                          <div className="size-2 rounded-full bg-s animate-pulse delay-150" />
-                          <div className="size-2 rounded-full bg-s animate-pulse delay-300" />
+                          <div className="size-1.5 rounded-full bg-s animate-pulse" />
+                          <div className="size-1.5 rounded-full bg-s animate-pulse delay-150" />
+                          <div className="size-1.5 rounded-full bg-s animate-pulse delay-300" />
                         </div>
                         <div className="hidden lg:flex items-center gap-1">
                           <div className="size-2 rounded-full bg-s animate-pulse" />
@@ -188,10 +335,10 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 opacity-60 animate-in fade-in duration-500">
+                      <div className="flex items-center gap-2 lg:gap-3 py-2 px-3 lg:p-4 rounded-lg bg-white/5 border border-white/10 opacity-60 animate-in fade-in duration-500">
                         <div className="relative shrink-0">
-                          <div className="flex size-12 items-center justify-center rounded-full border-2 border-white/30 bg-white/5">
-                            <span className="text-sm font-medium text-white/50">
+                          <div className="flex size-8 lg:size-12 items-center justify-center rounded-full border-2 border-white/30 bg-white/5">
+                            <span className="text-xs lg:text-sm font-medium text-white/50">
                               {step.id}
                             </span>
                           </div>
@@ -200,10 +347,10 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-medium text-white/40 mb-1">
+                          <div className="hidden lg:block text-xs font-medium text-white/40 mb-1">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-sm font-medium text-white/50">
+                          <div className="text-xs lg:text-sm font-medium text-white/50">
                             {step.name}
                           </div>
                         </div>
@@ -216,6 +363,26 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
           </nav>
         </div>
       </div>
+
+      {(currentStepIndex === 2 || currentStepIndex === 3) &&
+        carSummaryWithPrice && (
+          <div className="sticky top-18 z-30 bg-white border-t border-gray-200 shadow-lg">
+            <div className="w-full mx-auto max-w-7xl p-4">
+              <CarSummary
+                car={carSummaryWithPrice.car}
+                pickupDate={carSummaryWithPrice.pickupDate}
+                pickupTime={carSummaryWithPrice.pickupTime}
+                dropoffDate={carSummaryWithPrice.dropoffDate}
+                dropoffTime={carSummaryWithPrice.dropoffTime}
+                pickupLocation={carSummaryWithPrice.pickupLocation}
+                dropoffLocation={carSummaryWithPrice.dropoffLocation}
+                price={carSummaryWithPrice.price}
+                days={carSummaryWithPrice.days}
+                lang={loaderData.lang}
+              />
+            </div>
+          </div>
+        )}
 
       <div
         className={cn(

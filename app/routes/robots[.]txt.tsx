@@ -1,12 +1,9 @@
 import { getBaseUrl } from "@/lib/seo";
 import type { Route } from "./+types/robots[.]txt";
 
-/**
- * Generate robots.txt
- */
 export async function loader({ request }: Route.LoaderArgs) {
   const baseUrl = getBaseUrl(request);
-  
+
   const robots = `User-agent: *
 Allow: /
 
@@ -25,4 +22,3 @@ Sitemap: ${baseUrl}/sitemap.xml`;
     },
   });
 }
-

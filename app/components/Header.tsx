@@ -36,6 +36,10 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
     { to: `/${props.langCode}`, label: props.lang.home },
     { to: `/${props.langCode}/cars`, label: props.lang.cars },
     {
+      to: `/${props.langCode}/long-term-rental`,
+      label: props.lang.longTermRentalNav,
+    },
+    {
       to: `/${props.langCode}/rental-conditions`,
       label: props.lang.rentalConditions,
     },
@@ -56,7 +60,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
 
   return (
     <header className="fixed z-40 top-0 h-18 w-full bg-[#FF9B17] shadow-md">
-      <div className="max-w-7xl justify-between items-center mx-auto px-4 sm:px-6 lg:px-8 flex h-18 py-1">
+      <div className="justify-between items-center mx-auto px-4 sm:px-16 flex h-18 py-1">
         <Link to={`/${props.langCode}`} className="shrink-0">
           <img className="h-16" src={logoWhite} alt="Viastro Logo" />
         </Link>

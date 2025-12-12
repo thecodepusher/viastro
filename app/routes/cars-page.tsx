@@ -1,5 +1,5 @@
 import { useNavigate, useFetcher } from "react-router";
-import { getLocale } from "@/lib/utils";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import { type ApiAllModelsResponse } from "@/lib/api-cars";
 import type { Route } from "./+types/cars-page";
 import Cars from "@/components/Cars";
@@ -23,8 +23,13 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const databaseUrl = getDatabaseUrl();
+
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",
@@ -75,20 +80,13 @@ export async function action({ request }: Route.ActionArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = data.lang.cars
-    ? `Viastro ${data.lang.cars} | Belgrade`
-    : "Viastro Cars | Belgrade";
-  const description =
-    data.lang.description ||
-    "Browse our car rental fleet in Belgrade. Choose from economy, luxury, and SUV vehicles.";
 
   return generateOpenGraphMeta({
-    title,
-    description,
+    title: data.lang.seoCarsTitle,
+    description: data.lang.seoCarsDescription,
     url: `/${data.langCode || "sr"}/cars`,
     baseUrl,
-    keywords:
-      "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
+    keywords: data.lang.seoCarsKeywords,
     imageAlt: "Viastro Car Fleet - Rent a Car in Belgrade",
   });
 }

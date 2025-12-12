@@ -28,13 +28,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Rent a Car Belgrade Airport - Premium Vehicles | Viastro",
-    description:
-      "Viastro Rent a Car - Belgrade Airport - The newest vehicles at the best prices, with no hidden costs. Book your vehicle and enjoy the drive.",
+    title: data.lang.seoLandingAirportTitle,
+    description: data.lang.seoLandingAirportDescription,
     url: `/${data.langCode || "sr"}/rent-a-car-belgrade-airport`,
     baseUrl,
-    keywords:
-      "rent a car Belgrade airport, Belgrade airport car rental, airport pickup Belgrade",
+    keywords: data.lang.seoLandingAirportKeywords,
     imageAlt: "Viastro Rent a Car - Belgrade Airport",
   });
 }
@@ -76,6 +74,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";

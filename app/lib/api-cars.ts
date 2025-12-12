@@ -16,22 +16,34 @@ export const fullProtection = {
   name: "Full Protection osiguranje",
   description:
     "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+  icon: "public/icons/extras/wificar.svg",
 };
 
 const carImageMap: Record<string, string> = {
-  renault_clio: "/clio.png",
-  peugeot_2008: "/2008.avif",
-  peugeot_3008: "/3008.avif",
-  skoda_octavia: "/skoda_octavia.png",
-  skoda_oktavia: "/skoda_octavia.png",
-  citroen_c3_aircross: "/c3-aircross.jpg",
-  citroen_c3: "/c3-aircross.jpg",
+  renault_clio: "/clio.webp",
+  peugeot_2008: "/peugeot-2008-gt.webp",
+  peugeot_3008: "/3008.webp",
+  skoda_octavia: "/skoda_octavia.webp",
+  citroen_c3_aircross: "/c3-aircross.webp",
+  citroen_c3: "/c3-aircross.webp",
   ford_focus: "/ford-focus.webp",
-  seat_ibiza: "/ibiza.webp",
+  seat_ibiza: "/seat-ibiza-fr.webp",
+  seat_ibiza_dsg: "/seat-ibiza-dsg.webp",
+  fiat_500: "/fiat-500.webp",
   audi_a6: "/audi-a6.webp",
 };
 
-// Mapa podataka za deposite na osnovu car ID-ja ili grupe
+/**
+ * Mapa podataka o kolima (depositi, cene, nazivi)
+ *
+ * **Ovde se definišu podaci o kolima jer manager nema sve potrebne informacije.**
+ * Ova mapa se koristi da se override-uju ili dopune podaci koji dolaze iz API-ja, uključujući
+ * - deposite (depozite) za svako vozilo
+ * - cene full protection osiguranja
+ * - popuste na depozite
+ * - cene po danima (price tiers)
+ * - custom nazive vozila (ako se razlikuju od onih u manager-u)
+ */
 const carDataMap: Record<
   string,
   {
@@ -107,6 +119,19 @@ const carDataMap: Record<
       { from: 30, to: null, price: 30 },
     ],
   },
+  // Seat Ibiza (id: "10")
+  "10": {
+    deposite: 300,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 150,
+    customName: "SEAT Ibiza DSG",
+    prices: [
+      { from: 3, to: 7, price: 42 },
+      { from: 8, to: 15, price: 38 },
+      { from: 16, to: 29, price: 34 },
+      { from: 30, to: null, price: 30 },
+    ],
+  },
   // Renault Clio (id: "8")
   "8": {
     deposite: 300,
@@ -118,6 +143,19 @@ const carDataMap: Record<
       { from: 8, to: 15, price: 41 },
       { from: 16, to: 29, price: 37 },
       { from: 30, to: null, price: 33 },
+    ],
+  },
+  // Fiat 500 (id: "11")
+  "11": {
+    deposite: 300,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 150,
+    customName: "Fiat 500",
+    prices: [
+      { from: 3, to: 7, price: 29 },
+      { from: 8, to: 15, price: 25 },
+      { from: 16, to: 29, price: 21 },
+      { from: 30, to: null, price: 17 },
     ],
   },
   // Default za ostale automobile
@@ -269,13 +307,6 @@ function getTransmissionText(
     ? lang.automatic
     : lang.manual;
 }
-
-/**
- * @param apiModels
- * @param lang
- * @param days
- * @param availableCarIds
- */
 
 export function transformApiCars(
   apiModels: ApiCarModel[],

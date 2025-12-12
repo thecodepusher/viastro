@@ -1,4 +1,5 @@
 import Cta from "@/components/Cta";
+import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/contact-page";
 import GetInTouch from "@/components/GetInTouch";
 import SEO from "@/components/SEO";
@@ -22,6 +23,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
@@ -44,18 +48,13 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
-  const title = `Viastro ${data.lang.contact} | Belgrade`;
-  const description =
-    data.lang.gitSubTitle ||
-    "Contact Viastro Rent a Car in Belgrade for car rental services.";
 
   return generateOpenGraphMeta({
-    title,
-    description,
+    title: data.lang.seoContactTitle,
+    description: data.lang.seoContactDescription,
     url: `/${data.langCode || "sr"}/contact`,
     baseUrl,
-    keywords:
-      "contact viastro, rent a car Belgrade contact, car rental Belgrade",
+    keywords: data.lang.seoContactKeywords,
     imageAlt: "Contact Viastro Rent a Car",
   });
 }
@@ -78,10 +77,20 @@ export default function ContactPage({ loaderData }: Route.ComponentProps) {
   ];
 
   return (
-    <div className="w-full pt-16">
+    <div className="w-full">
       <SEO schemas={schemas} />
+      <CustomHero
+        title={loaderData.lang.seoContactTitle}
+        description={loaderData.lang.seoContactDescription}
+        primaryLabel={loaderData.lang.createReservation}
+        secondaryLabel={loaderData.lang.contactUs}
+        helperText={loaderData.lang.description}
+        primaryHref="/reservation"
+        secondaryHref={`/${loaderData.langCode}/contact`}
+        fastTitle={loaderData.lang.createReservation}
+        fastSubtitle={loaderData.lang.deployFaster}
+      />
       <GetInTouch lang={loaderData.lang} />
-
       <Cta lang={loaderData.lang} />
     </div>
   );

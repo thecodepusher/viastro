@@ -1,22 +1,29 @@
-import { prefs } from "@/lib/prefs-cookie";
+import { useState, useMemo, useEffect } from "react";
 import { redirect, useFetcher } from "react-router";
-import { ChevronRight } from "lucide-react";
-import { getLocale } from "@/lib/utils";
-import { getAditionalEquipment, type LocaleTypes } from "@/lib/data";
+import { prefs } from "@/lib/prefs-cookie";
+import { getLocale, getDatabaseUrl } from "@/lib/utils";
+import { getAditionalEquipment, type LocaleTypes, locations } from "@/lib/data";
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { calculateInWorkingHours } from "@/lib/helpers";
+import { differenceInMinutes, set } from "date-fns";
 import type { Route } from "./+types/extras";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { IncludedInReservation } from "@/components/Extras/IncludedInReservation";
+import { EquipmentList } from "@/components/Extras/EquipmentList";
+import { ContinueButton } from "@/components/Extras/ContinueButton";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const lang = await getLocale(params.lang, request);
 
-  const res = await fetch("https://rentacar-manager.com/client/viastro/api/", {
+  const databaseUrl = getDatabaseUrl();
+
+  const res = await fetch(databaseUrl, {
     method: "POST",
     body: JSON.stringify({
       action: "get_all_models",
@@ -34,7 +41,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
 
-  let notInWorkingHours = calculateInWorkingHours(
+  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
     dropoffDate,
     pickupDate,
     dropoffTime,
@@ -49,14 +56,60 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     ...getAditionalEquipment(params.lang as LocaleTypes),
   ];
 
+  let baseCarPrice = 0;
+  if (pickupDate && dropoffDate && pickupTime && dropoffTime) {
+    const pickupDateAndTime = set(new Date(pickupDate), {
+      hours: pickupTime.split(":")[0],
+      minutes: pickupTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    const dropOffDateAndTime = set(new Date(dropoffDate), {
+      hours: dropoffTime.split(":")[0],
+      minutes: dropoffTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    const days = Math.ceil(
+      differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+    );
+
+    for (let price of car.prices) {
+      if (!price.to) {
+        baseCarPrice = days * price.price;
+        break;
+      }
+
+      if (days >= price.from && days <= price.to) {
+        baseCarPrice = price.price * days;
+        break;
+      }
+    }
+  }
+
   const baseUrl = getBaseUrl(request);
+  const pickupLocation = locations.find((x) => x.id === +cookie.pickUpLocation);
+  const dropoffLocation = locations.find(
+    (x) => x.id === +cookie.dropOffLocation
+  );
 
   return {
     lang,
     notInWorkingHours,
+    priceForOffHours,
     aditionalEquipment: ad,
     langCode: params.lang ?? "sr",
     baseUrl,
+    car,
+    baseCarPrice,
+    pickupDate,
+    pickupTime,
+    dropoffDate,
+    dropoffTime,
+    pickupLocation: pickupLocation?.name || "",
+    dropoffLocation: dropoffLocation?.name || "",
   };
 }
 
@@ -80,146 +133,126 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation - Additional Equipment | Viastro Rent a Car",
-    description:
-      "Select additional equipment and extras for your car rental in Belgrade.",
+    title: data.lang.seoReservationExtrasTitle,
+    description: data.lang.seoReservationExtrasDescription,
     url: `/${data.langCode || "sr"}/reservation/extras`,
     baseUrl,
-    keywords: "reservation, additional equipment, extras, rent a car Belgrade",
+    keywords: data.lang.seoReservationExtrasKeywords,
     imageAlt: "Viastro - Additional Equipment",
   });
 }
 
-export default function Extras({
-  actionData,
-  loaderData,
-}: Route.ComponentProps) {
+export default function Extras({ loaderData }: Route.ComponentProps) {
   const [selected, setSelected] = useState<number[]>([]);
   const fetcher = useFetcher();
 
+  const days = useMemo(() => {
+    if (
+      !loaderData.pickupDate ||
+      !loaderData.dropoffDate ||
+      !loaderData.pickupTime ||
+      !loaderData.dropoffTime
+    )
+      return 1;
+
+    const pickupDateAndTime = set(new Date(loaderData.pickupDate), {
+      hours: loaderData.pickupTime.split(":")[0],
+      minutes: loaderData.pickupTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    const dropOffDateAndTime = set(new Date(loaderData.dropoffDate), {
+      hours: loaderData.dropoffTime.split(":")[0],
+      minutes: loaderData.dropoffTime.split(":")[1],
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    return Math.ceil(
+      differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+    );
+  }, [
+    loaderData.pickupDate,
+    loaderData.dropoffDate,
+    loaderData.pickupTime,
+    loaderData.dropoffTime,
+  ]);
+
+  const handleToggleEquipment = (id: number) => {
+    setSelected((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        return prevSelected.filter((x) => x !== id);
+      } else {
+        return [...prevSelected, id];
+      }
+    });
+  };
+
+  const totalPrice = useMemo(() => {
+    let price = loaderData.baseCarPrice;
+
+    if (loaderData.notInWorkingHours && loaderData.priceForOffHours > 0) {
+      price += loaderData.priceForOffHours;
+    }
+
+    selected.forEach((equipmentId) => {
+      const equipment = loaderData.aditionalEquipment.find(
+        (eq) => eq.id === equipmentId
+      );
+      if (equipment && !equipment.free) {
+        if (equipment.perDay) {
+          if (equipment.maxPerDays && equipment.maxPerDays < days) {
+            price += equipment.price * equipment.maxPerDays;
+          } else {
+            price += equipment.price * days;
+          }
+        } else {
+          price += equipment.price;
+        }
+      }
+    });
+
+    return price;
+  }, [
+    loaderData.baseCarPrice,
+    loaderData.notInWorkingHours,
+    loaderData.aditionalEquipment,
+    selected,
+    days,
+  ]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as any).__extrasTotalPrice = totalPrice;
+      window.dispatchEvent(
+        new CustomEvent("extrasPriceUpdated", { detail: totalPrice })
+      );
+    }
+  }, [totalPrice]);
+
+  const handleContinue = () => {
+    const form = new FormData();
+    form.append("extras", `${selected}`);
+    fetcher.submit(form, { method: "post" });
+  };
+
   return (
     <div className="w-full">
-      <h3 className="font-bold py-4 px-6 text-lg">
-        {loaderData.lang.includedInReservation}
-      </h3>
+      <IncludedInReservation
+        lang={loaderData.lang}
+        notInWorkingHours={loaderData.notInWorkingHours}
+        priceForOffHours={loaderData.priceForOffHours}
+      />
 
-      <div className="mx-6 mb-6 flex flex-col gap-2">
-        <div
-          className={`border rounded shadow gap-4 flex flex-col p-4 bg-s text-white `}>
-          <div className="flex flex-col">
-            <p className={`text-white font-bold`}>
-              {loaderData.lang.basicCascoInsurance}
-            </p>
-            <p>{loaderData.lang.cascoInsuranceDisclaimer}</p>
-          </div>
+      <EquipmentList
+        equipment={loaderData.aditionalEquipment}
+        lang={loaderData.lang}
+        selectedIds={selected}
+        onToggle={handleToggleEquipment}
+      />
 
-          <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
-            <p className="font-bold text-lg"></p>
-          </div>
-        </div>
-
-        {loaderData.notInWorkingHours && (
-          <div
-            className={`border rounded shadow gap-4 flex flex-col p-4 bg-s text-white `}>
-            <div className="flex flex-col">
-              <p className={`text-white font-bold`}>
-                {loaderData.lang.afterHoursReservationFee}
-              </p>
-              <p>{loaderData.lang.afterHoursFeeDetails}</p>
-            </div>
-
-            <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
-              <p className="font-bold text-lg">20€</p>
-            </div>
-          </div>
-        )}
-      </div>
-      <h3 className="font-bold py-4 px-6 text-lg">
-        {loaderData.lang.additionalEquipment}
-      </h3>
-
-      <div className="mx-6 mb-6 flex flex-col gap-2">
-        {loaderData.aditionalEquipment.map((equipment) => {
-          const isSelected = selected.some((x) => x == equipment.id);
-
-          return (
-            <div
-              className={`border rounded shadow gap-4 flex flex-col p-4 ${
-                isSelected ? "bg-s text-white" : ""
-              }`}
-              key={equipment.id}>
-              <div className="flex flex-col">
-                <p
-                  className={`${
-                    isSelected ? "text-white" : "text-s"
-                  }  font-bold`}>
-                  {equipment.name}
-                </p>
-                <p>{equipment.description}</p>
-                {equipment.depositeDiscount > 0 && (
-                  <p className=" font-bold mt-2 text-p">
-                    {loaderData.lang.vehicleDepositDiscount}{" "}
-                    {equipment.depositeDiscount}€
-                  </p>
-                )}
-              </div>
-
-              <div className="flex border-t pt-4 justify-end w-full gap-6 items-center">
-                {equipment.free && (
-                  <p className="font-bold text-lg">
-                    {loaderData.lang.freeOfCharge}
-                  </p>
-                )}
-                {!equipment.free && (
-                  <p className="font-bold text-lg">
-                    {equipment.price}€
-                    {equipment.perDay
-                      ? `/${loaderData.lang.day} ${
-                          equipment.maxPerDays
-                            ? `- ${loaderData.lang.maxPrice} ${
-                                equipment.maxPerDays * equipment.price
-                              }€`
-                            : ""
-                        }`
-                      : ""}
-                  </p>
-                )}
-                <Button
-                  variant="outline"
-                  className={`${
-                    isSelected ? "text-s border-white " : "text-s"
-                  } hover:bg-s border-s hover:text-white w-24`}
-                  onClick={() => {
-                    if (isSelected) {
-                      setSelected(selected.filter((x) => x !== equipment.id));
-                    } else {
-                      setSelected([...selected, equipment.id]);
-                    }
-                  }}>
-                  {isSelected
-                    ? loaderData.lang.selected
-                    : loaderData.lang.select}
-                </Button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="flex mb-8 justify-end mx-6">
-        <Button
-          onClick={() => {
-            const form = new FormData();
-
-            form.append("extras", `${selected}`);
-            fetcher.submit(form, { method: "post" });
-          }}
-          className="w-full sm:w-34 bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
-          size="lg">
-          {loaderData.lang.continue}
-          <ChevronRight />
-        </Button>
-      </div>
+      <ContinueButton lang={loaderData.lang} onClick={handleContinue} />
     </div>
   );
 }

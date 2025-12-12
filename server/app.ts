@@ -15,16 +15,25 @@ const getLoadContext = () => {
   };
 };
 
-// For Vercel - export default Web API-compatible function
 const handler = createRequestHandler(build);
 
 export default async function (request: Request): Promise<Response> {
   const response = await handler(request, {
-    // Add your "load context" here based on the current request
     ...getLoadContext(),
   });
 
   const headers = new Headers(response.headers);
+
+  const databaseUrl =
+    process.env.DATABASE_URL ||
+    "https://rentacar-manager.com/client/viastro/api/";
+  let databaseDomain = "https://rentacar-manager.com";
+  try {
+    const url = new URL(databaseUrl);
+    databaseDomain = `${url.protocol}//${url.hostname}`;
+  } catch (e) {
+    console.error("Error parsing DATABASE_URL:", e);
+  }
 
   headers.set(
     "Content-Security-Policy",
@@ -33,11 +42,12 @@ export default async function (request: Request): Promise<Response> {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
       "img-src 'self' data: https: blob:; " +
-      "connect-src 'self' https://rentacar-manager.com https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net; " +
+      "connect-src 'self' ws://* wss://* ws://localhost:* wss://localhost:* http://localhost:* https://localhost:* " +
+      `${databaseDomain} https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net https://formtest.wspay.biz https://form.wspay.biz; ` +
       "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.google.com; " +
       "object-src 'none'; " +
       "base-uri 'self'; " +
-      "form-action 'self'; " +
+      "form-action 'self' https://formtest.wspay.biz https://form.wspay.biz; " +
       "frame-ancestors 'self'; " +
       "upgrade-insecure-requests;"
   );
@@ -60,7 +70,6 @@ export default async function (request: Request): Promise<Response> {
   });
 }
 
-// For local Express development - export app middleware
 export const app = createExpressRequestHandler({
   build: () => Promise.resolve(build),
   getLoadContext,

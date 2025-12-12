@@ -71,3 +71,13 @@ export async function getLocale(
 
   return lang;
 }
+
+export function getDatabaseUrl(): string {
+  return (
+    process.env.DATABASE_URL ||
+    (typeof import.meta !== "undefined"
+      ? import.meta.env?.DATABASE_URL
+      : undefined) ||
+    "https://rentacar-manager.com/client/viastro/api/"
+  );
+}

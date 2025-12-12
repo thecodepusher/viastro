@@ -1,5 +1,6 @@
 import Cta from "@/components/Cta";
 import SEO from "@/components/SEO";
+import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/blog-page";
 import BlogSection from "@/components/BlogSection";
 import { getLocale } from "@/lib/utils";
@@ -21,6 +22,9 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
@@ -45,12 +49,11 @@ export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: `Viastro ${data.lang.blog} | Belgrade`,
-    description:
-      "Read our blog for tips, travel guides, and information about car rental in Belgrade and Serbia.",
+    title: data.lang.seoBlogTitle,
+    description: data.lang.seoBlogDescription,
     url: `/${data.langCode || "sr"}/blog`,
     baseUrl,
-    keywords: "viastro blog, rent a car Belgrade, travel guides Serbia",
+    keywords: data.lang.seoBlogKeywords,
     imageAlt: "Viastro Blog - Car Rental Tips and Travel Guides",
   });
 }
@@ -69,8 +72,19 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
   ];
 
   return (
-    <div className="w-full pt-16">
+    <div className="w-full">
       <SEO schemas={schemas} />
+      <CustomHero
+        title={loaderData.lang.seoBlogTitle}
+        description={loaderData.lang.seoBlogDescription}
+        primaryLabel={loaderData.lang.createReservation}
+        secondaryLabel={loaderData.lang.contactUs}
+        helperText={loaderData.lang.description}
+        primaryHref="/reservation"
+        secondaryHref={`/${loaderData.langCode}/contact`}
+        fastTitle={loaderData.lang.createReservation}
+        fastSubtitle={loaderData.lang.deployFaster}
+      />
       <BlogSection langCode={loaderData.langCode} />
       <Cta lang={loaderData.lang} />
     </div>

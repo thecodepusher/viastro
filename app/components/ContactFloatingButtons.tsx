@@ -4,8 +4,7 @@ const FloatingButtons = () => {
       <a
         href="viber://chat?number=+38169656555"
         className="bg-white text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        aria-label="Dodaj novi termin" // Dodato za pristupačnost
-      >
+        aria-label="Dodaj novi termin">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -31,8 +30,7 @@ const FloatingButtons = () => {
       <a
         href="https://wa.me/38169656555"
         className="bg-white text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        aria-label="Dodaj novi termin" // Dodato za pristupačnost
-      >
+        aria-label="Dodaj novi termin">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -63,8 +61,7 @@ const FloatingButtons = () => {
       <a
         href="tel:+38169656555"
         className="bg-white text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        aria-label="Dodaj novi termin" // Dodato za pristupačnost
-      >
+        aria-label="Dodaj novi termin">
         <svg
           width="24"
           height="24"

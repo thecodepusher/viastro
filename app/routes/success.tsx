@@ -1,21 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
-import { Link } from "react-router";
+import { Link, redirect } from "react-router";
 import type { Route } from "./+types/success";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
-  const lang = await getLocale(params.lang, request);
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
+
+  if (!cookie.paymentSuccessful) {
+    return redirect(`/${params.lang ?? "sr"}`);
+  }
+
+  const lang = await getLocale(params.lang, request);
 
   delete cookie.pickUpDate;
   delete cookie.pickUpTime;
   delete cookie.dropOffDate;
   delete cookie.dropOffTime;
   delete cookie.selectedCarId;
+  delete cookie.paymentSuccessful;
+  delete cookie.wspayInProgress;
+  delete cookie.wspayFormData;
+  delete cookie.wspayReservation;
 
   const baseUrl = getBaseUrl(request);
 
@@ -35,27 +44,46 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 }
 
 export function meta({ data }: Route.MetaArgs) {
+  if (!data) {
+    return [];
+  }
+
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({
-    title: "Reservation Successful | Viastro Rent a Car",
-    description:
-      "Your car rental reservation has been successfully completed. Thank you for choosing Viastro!",
+    title: data.lang.seoSuccessTitle,
+    description: data.lang.seoSuccessDescription,
     url: `/${data.langCode || "sr"}/success`,
     baseUrl,
-    keywords: "reservation successful, car rental Belgrade, viastro",
+    keywords: data.lang.seoSuccessKeywords,
     imageAlt: "Viastro - Reservation Successful",
   });
 }
 
 export default function SuccessPage({ loaderData }: Route.ComponentProps) {
+  if (!loaderData) {
+    return null;
+  }
+
   return (
     <div className="w-full">
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
-        <CircleCheck size={60} className="text-p" />
-        <p className="font-medium text-lg text-pd mx-8">
-          {loaderData.lang.successTitle}
-        </p>
+        <CircleCheck size={60} className="text-green-500" />
+        <div className="font-medium text-lg text-pd mx-8 space-y-2">
+          {loaderData.lang.successTitle
+            .split(". ")
+            .map((sentence, index, array) => {
+              const trimmedSentence = sentence.trim();
+              if (!trimmedSentence) return null;
+              const isLast = index === array.length - 1;
+              return (
+                <p key={index}>
+                  {trimmedSentence}
+                  {isLast ? "" : "."}
+                </p>
+              );
+            })}
+        </div>
         <Link to={`/${loaderData.langCode}`}>
           <Button className="bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
             {loaderData.lang.successAction}

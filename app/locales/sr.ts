@@ -3,6 +3,7 @@ import type { BaseLocale } from "./base-locale";
 export const sr: BaseLocale = {
   home: "Početna",
   cars: "Vozila",
+  longTermRentalNav: "Dugoročni najam",
   rentalConditions: "Opšti uslovi najma",
   faq: "Često postavljena pitanja",
   blog: "Blog",
@@ -17,6 +18,9 @@ export const sr: BaseLocale = {
   dropOffLoacation: "Mesto vraćanja",
   pickUpTime: "Vreme podizanja",
   dropOffTime: "Vreme vraćanja",
+  toastErrorSelectDates: "Odaberite datum preuzimanja i vraćanja vozila!",
+  toastErrorSelectLocations: "Odaberite mesto preuzimanja i vraćanja vozila!",
+  toastErrorSelectTimes: "Odaberite vreme preuzimanja i vraćanja vozila!",
   choose: "Odaberi",
   vehiclesOffer: "Ponuda automobila",
   diesel: "Dizel",
@@ -99,8 +103,14 @@ export const sr: BaseLocale = {
   afterHoursFeeDetails:
     "Za podizanje ili vraćanje vozila van radnog vremena naplaćuje se dodatno",
   successTitle:
-    "Vaša rezervacija je uspešno poslata. Bićete kontaktirani o potvrdi rezervacije.",
+    "Vaša uplata je uspešno izvršena. Potvrda o uplati će vam uskoro stići na e-mail adresu. Takođe ćete biti kontaktirani od strane našeg tima u vezi potvrde rezervacije.",
   successAction: "Vratite se na početnu stranicu",
+  paymentErrorTitle:
+    "Došlo je do greške pri obradi plaćanja. Vaša rezervacija nije potvrđena. Molimo pokušajte ponovo ili kontaktirajte nas.",
+  paymentErrorAction: "Vratite se na rezervaciju",
+  paymentCancelTitle:
+    "Plaćanje je otkazano. Vaša rezervacija nije potvrđena. Možete pokušati ponovo kada budete spremni.",
+  paymentCancelAction: "Vratite se na rezervaciju",
   notFoundTitle: "Stranica nije pronađena",
   notFoundMessage: "Stranica koju tražite ne postoji.",
   notFoundAction: "Vratite se na početnu stranicu",
@@ -113,4 +123,194 @@ export const sr: BaseLocale = {
   pib: "PIB",
   mb: "MB",
   delatnost: "Delatnost",
+  longTermRental: {
+    heroTitle: "Dugoročni najam Viastro Rent a Car",
+    heroSubtitle: "Dugoročni najam - sve u jednom paketu",
+    heroDescription:
+      "Fleksibilan i pouzdan način da koristite vozilo bez kupovine i servisa. Viastro Rent a Car nudi dugoročni najam idealan za firme, preduzetnike i pojedince.",
+    heroHighlight: "Jedna mesečna rata pokriva sve:",
+    heroHighlightSupport:
+      "Registraciju, osiguranje, redovno održavanje, zamensko vozilo i pomoć na putu 24/7. Vaše je samo da vozite - sve ostalo je na nama.",
+    benefitsTitle: "Prednosti dugoročnog najma (operativnog renta)",
+    benefitsIntro:
+      "U poređenju sa kupovinom, kreditom ili lizingom, dugoročni najam donosi jasne i merljive pogodnosti:",
+    benefitsItems: [
+      "Bez početnih ulaganja i amortizacije",
+      "Fiksna mesečna cena bez skrivenih troškova",
+      "Registracija, kasko, servisi i asistencija uključeni u cenu",
+      "Zamensko vozilo u slučaju kvara",
+      "Mogućnost zamene modela u toku ugovora",
+      "Potpuna kontrola troškova i maksimalna fleksibilnost",
+    ],
+    individualsTitle: "Dugoročni najam za pojedince i freelancere",
+    individualsDescription:
+      "Ako vam je auto potreban za svakodnevne obaveze, putovanja, teren ili rad kao freelancer - dugoročni najam je najpametniji izbor. Bez obaveza oko servisa, registracije i neplaniranih troškova.",
+    individualsBullets: [
+      "Bez servisa.",
+      "Bez registracije.",
+      "Bez neplaniranih troškova.",
+    ],
+    businessTitle: "Dugoročni najam za firme",
+    businessSubtitle: "Zašto kompanije biraju Viastro",
+    businessItems: [
+      {
+        title: "Nema ulaganja i blokade kapitala",
+        description:
+          "Zaboravite kredite i lizing. Vozni park dobijate bez početnog troška, a kapital ostaje u poslu gde vam je najpotrebniji.",
+      },
+      {
+        title: "Fiksna mesečna rata bez ikakvih iznenađenja",
+        description:
+          "Servisi, gume, registracija, osiguranje, asistencija? Sve je uključeno. Jedan račun - bez skrivenih troškova.",
+      },
+      {
+        title: "Flota koja se prilagođava vama",
+        description:
+          "Treba više vozila? Veći model? Manje vozila? Viastro se prilagođava ritmu vaše firme.",
+      },
+      {
+        title: "Uvek nova i maksimalno pouzdana vozila",
+        description:
+          "Zaboravite kvarove i zastoje. Vaši zaposleni voze nova i uredno održavana vozila, što povećava sigurnost i efikasnost.",
+      },
+      {
+        title: "Zamensko vozilo odmah – bez čekanja",
+        description:
+          "U slučaju kvara isporučujemo zamensko vozilo u najkraćem roku, kako bi poslovanje ostalo neprekinuto.",
+      },
+      {
+        title: "Profesionalna podrška 24/7",
+        description:
+          "Naša ekipa je tu za vas u svakom trenutku - tehnička pomoć, savet, podrška na putu.",
+      },
+    ],
+    idealTitle: "Idealno za:",
+    idealItems: [
+      "Komercijaliste i terenske timove",
+      "IT kompanije i startapove",
+      "Građevinske i logističke firme",
+      "Agencije i servisne timove",
+      "Sve firme koje žele da smanje troškove i pojednostave poslovanje",
+    ],
+    reasonsTitle: "Zašto odabrati baš Viastro Rent a Car?",
+    reasonsItems: [
+      "100% transparentni troškovi",
+      "Fleksibilni ugovori po meri vaših potreba",
+      "Brza isporuka vozila",
+      "Profesionalna podrška",
+      "Iskustvo u radu sa malim i velikim flotama",
+    ],
+    ctaTitle: "Kontaktirajte nas i zatražite ponudu",
+    ctaSubtitle:
+      "Spremni ste da optimizujete troškove i unapredite vozni park? Pošaljite upit i pripremićemo ponudu prilagođenu baš vašim potrebama.",
+    formTitle: "Pošaljite upit",
+    formSubtitle: "Naš tim vam odgovara u najkraćem roku.",
+    tabBusiness: "Pravna lica",
+    tabIndividual: "Fizička lica",
+    companyNameLabel: "Naziv firme",
+    taxIdLabel: "PIB",
+    carNameLabel: "Izaberite vozilo",
+    fullNameLabel: "Ime i prezime",
+    phoneLabel: "Broj telefona",
+    messageLabel: "Opis zahteva",
+    submitLabel: "Pošaljite upit",
+    contactPhoneLabel: "Kontakt telefon",
+    contactEmailLabel: "Email",
+    contactPhoneValue: "+38169656555",
+    contactEmailValue: "office@viastro.rs",
+    toastSuccessMessage: "Upit je uspešno poslat! Kontaktiraćemo vas uskoro.",
+    toastErrorInvalidcarName: "Molimo izaberite vozilo",
+    toastErrorEmailRequired: "Molimo unesite email adresu",
+    toastErrorSending: "Greška pri slanju upita. Molimo pokušajte ponovo.",
+    noSearchResults: "Nema rezultata",
+  },
+  seoHomeTitle: "Viastro rent a car | Beograd",
+  seoHomeDescription:
+    "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na aerodromu i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
+  seoHomeKeywords:
+    "rent a car Beograd, iznajmljivanje automobila Srbija, iznajmljivanje automobila Beograd, rent a car aerodrom Beograd",
+  seoCarsTitle: "Viastro Vozila | Beograd",
+  seoCarsDescription:
+    "Pregledajte našu flotu automobila za iznajmljivanje u Beogradu. Izaberite između ekonomskih, luksuznih i SUV vozila.",
+  seoCarsKeywords:
+    "rent a car Beograd, flota automobila, iznajmljivanje vozila, iznajmljivanje automobila",
+  seoContactTitle: "Kontakt | Viastro Rent a Car",
+  seoContactDescription:
+    "Kontaktirajte Viastro Rent a Car u Beogradu za usluge iznajmljivanja automobila.",
+  seoContactKeywords:
+    "kontakt viastro, rent a car Beograd kontakt, iznajmljivanje automobila Beograd",
+  seoFaqTitle: "Često postavljena pitanja | Viastro Rent a Car",
+  seoFaqDescription:
+    "Često postavljena pitanja o uslugama iznajmljivanja automobila u Beogradu.",
+  seoFaqKeywords:
+    "FAQ rent a car Beograd, najčešća pitanja iznajmljivanje automobila, pitanja o iznajmljivanju automobila",
+  seoBlogTitle: "Blog | Viastro Rent a Car",
+  seoBlogDescription:
+    "Pročitajte naš blog za savete, vodiče za putovanja i informacije o iznajmljivanju automobila u Beogradu i Srbiji.",
+  seoBlogKeywords:
+    "viastro blog, rent a car Beograd, vodiči za putovanja Srbija",
+  seoBlogDetailsTitle: " | Viastro Blog",
+  seoBlogDetailsKeywords:
+    "viastro blog, rent a car Beograd, saveti za iznajmljivanje automobila",
+  seoRentalConditionsTitle: "Opšti uslovi najma | Viastro Rent a Car",
+  seoRentalConditionsDescription:
+    "Pročitajte opšte uslove najma i uslove usluge Viastro za iznajmljivanje automobila u Beogradu, Srbija.",
+  seoRentalConditionsKeywords:
+    "opšti uslovi najma, uslovi usluge, iznajmljivanje automobila Beograd",
+  seoPrivacyPolicyTitle: "Politika privatnosti | Viastro Rent a Car",
+  seoPrivacyPolicyDescription:
+    "Pročitajte politiku privatnosti Viastro da biste razumeli kako prikupljamo, koristimo i štitimo vaše lične podatke.",
+  seoPrivacyPolicyKeywords:
+    "politika privatnosti, zaštita podataka, viastro rent a car",
+  seoSuccessTitle: "Rezervacija uspešna | Viastro Rent a Car",
+  seoSuccessDescription:
+    "Vaša rezervacija za iznajmljivanje automobila je uspešno završena. Hvala što ste izabrali Viastro!",
+  seoSuccessKeywords:
+    "rezervacija uspešna, iznajmljivanje automobila Beograd, viastro",
+  seoReservationTitle: "Rezervacija | Viastro Rent a Car",
+  seoReservationDescription:
+    "Rezervišite iznajmljivanje automobila u Beogradu. Izaberite vozilo, datume i dodatnu opremu.",
+  seoReservationKeywords:
+    "rezervacija, rezerviši automobil, rent a car Beograd",
+  seoReservationSelectDatesTitle:
+    "Rezervacija - Izaberite datume | Viastro Rent a Car",
+  seoReservationSelectDatesDescription:
+    "Izaberite datume i mesta preuzimanja i vraćanja za vaše iznajmljivanje automobila u Beogradu.",
+  seoReservationSelectDatesKeywords:
+    "rezervacija, rezerviši automobil, izaberi datume, rent a car Beograd",
+  seoReservationSelectVehicleTitle:
+    "Rezervacija - Izaberite vozilo | Viastro Rent a Car",
+  seoReservationSelectVehicleDescription:
+    "Izaberite iz naše široke ponude vozila za vaše iznajmljivanje automobila u Beogradu.",
+  seoReservationSelectVehicleKeywords:
+    "rezervacija, izaberi vozilo, izaberi automobil, rent a car Beograd",
+  seoReservationExtrasTitle:
+    "Rezervacija - Dodatna oprema | Viastro Rent a Car",
+  seoReservationExtrasDescription:
+    "Izaberite dodatnu opremu i ekstra opcije za vaše iznajmljivanje automobila u Beogradu.",
+  seoReservationExtrasKeywords:
+    "rezervacija, dodatna oprema, ekstra opcije, rent a car Beograd",
+  seoReservationReviewTitle:
+    "Rezervacija - Pregled i potvrda | Viastro Rent a Car",
+  seoReservationReviewDescription:
+    "Pregledajte detalje vaše rezervacije za iznajmljivanje automobila i potvrdite rezervaciju u Beogradu.",
+  seoReservationReviewKeywords:
+    "rezervacija, pregled, potvrdi rezervaciju, rent a car Beograd",
+  seoLandingAirportTitle:
+    "Rent a Car Beograd Aerodrom - Premium vozila | Viastro",
+  seoLandingAirportDescription:
+    "Viastro Rent a Car - Beograd Aerodrom - Najnovija vozila po najboljim cenama, bez skrivenih troškova. Rezervišite vozilo i uživajte u vožnji.",
+  seoLandingAirportKeywords:
+    "rent a car Beograd aerodrom, Beograd aerodrom iznajmljivanje automobila, preuzimanje na aerodromu Beograd",
+  seoLandingTeslaTitle: "Rent a Car Beograd Aerodrom Nikola Tesla | Viastro",
+  seoLandingTeslaDescription:
+    "Iznajmite automobil na Beogradskom aerodromu (Nikola Tesla). Brza usluga preuzimanja, širok izbor vozila i konkurentne cene. Rezervišite online danas!",
+  seoLandingTeslaKeywords:
+    "rent a car Beograd aerodrom, rent a car Nikola Tesla aerodrom, aerodrom iznajmljivanje automobila Beograd",
+  seoLongTermRentalTitle:
+    "Dugoročni najam – Operativni rent | Viastro Rent a Car",
+  seoLongTermRentalDescription:
+    "Fleksibilan dugoročni najam vozila u Beogradu bez ulaganja i skrivenih troškova. Operativni rent za firme, preduzetnike i pojedince uz registraciju, kasko, održavanje i zamensko vozilo uključene u cenu.",
+  seoLongTermRentalKeywords:
+    "dugoročni najam automobila, operativni rent Beograd, poslovni najam vozila, rent a car dugoročno",
 };
