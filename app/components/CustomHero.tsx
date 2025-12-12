@@ -30,7 +30,7 @@ export function CustomHero({
   const hideSecondary = location.pathname.includes("/contact");
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[70vh] sm:h-[60vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
+      <div className="relative min-h-[75vh] sm:min-h-[70vh] md:min-h-[65vh] lg:min-h-[60vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url(/long-term-rental-hero-2.jpg)" }}
@@ -43,7 +43,7 @@ export function CustomHero({
         <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/55 to-black/30" />
         <div className="absolute inset-0 bg-linear-to-b from-p/25 via-p/10 to-transparent" />
 
-        <div className="relative z-10 h-full flex flex-col justify-center pt-12 sm:pt-16">
+        <div className="relative z-10 min-h-full flex flex-col justify-center pt-36 sm:pt-24 md:pt-28 lg:pt-50 pb-12 sm:pb-16">
           <div className={heroContainer}>
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
               <div className="max-w-3xl space-y-6 text-white">
