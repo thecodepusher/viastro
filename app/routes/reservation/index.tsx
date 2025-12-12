@@ -79,7 +79,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
 
   return (
     <section className="relative overflow-hidden bg-neutral-950">
-      <div className="relative h-[60vh] sm:h-[65vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
+      <div className="relative h-[50vh] sm:h-[70vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url(/long-term-rental-hero-2.jpg)" }}
@@ -90,32 +90,28 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
         <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/55 to-black/30" />
         <div className="absolute inset-0 bg-linear-to-b from-p/25 via-p/10 to-transparent" />
 
-        <div className="relative z-10 flex h-full items-center">
-          <div className="w-full max-w-7xl mx-4 sm:mx-6">
-            <div className="rounded-3xl bg-white/10 border border-white/15 shadow-[0_25px_80px_rgba(0,0,0,0.45)] ring-1 ring-white/15 backdrop-blur-3xl p-4 sm:p-6">
-              <ReservationTime
-                onStart={async (data) => {
-                  const form = new FormData();
-                  form.append("pickUpLocation", data.pickUpLocation);
-                  form.append("dropOffLocation", data.dropOffLocation);
-                  form.append(
-                    "pickUpDate",
-                    setHours(data.pickDate, 12).toISOString()
-                  );
-                  form.append("pickUpTime", data.pickUpTime);
-                  form.append(
-                    "dropOffDate",
-                    setHours(data.dropDate, 12).toISOString()
-                  );
-                  form.append("dropOffTime", data.dropOfTime);
-                  fetcher.submit(form, { method: "post" });
-                }}
-                lang={loaderData.lang}
-                locations={loaderData.locations}
-                initialValues={loaderData.initialValues}
-              />
-            </div>
-          </div>
+        <div className="w-screen h-full flex items-center justify-center">
+          <ReservationTime
+            onStart={async (data) => {
+              const form = new FormData();
+              form.append("pickUpLocation", data.pickUpLocation);
+              form.append("dropOffLocation", data.dropOffLocation);
+              form.append(
+                "pickUpDate",
+                setHours(data.pickDate, 12).toISOString()
+              );
+              form.append("pickUpTime", data.pickUpTime);
+              form.append(
+                "dropOffDate",
+                setHours(data.dropDate, 12).toISOString()
+              );
+              form.append("dropOffTime", data.dropOfTime);
+              fetcher.submit(form, { method: "post" });
+            }}
+            lang={loaderData.lang}
+            locations={loaderData.locations}
+            initialValues={loaderData.initialValues}
+          />
         </div>
       </div>
     </section>
