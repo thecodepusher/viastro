@@ -1,7 +1,7 @@
 import type { Route } from "./+types/rental-conditions-page";
 import {
   rentalConditionsSr,
-  rentalConditionsRs,
+  rentalConditionsRu,
   rentalConditionsEn,
 } from "@/lib/data";
 import { getLocale } from "@/lib/utils";
@@ -34,7 +34,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
   let usloviNajma = rentalConditionsSr;
   if (langCode === "en") usloviNajma = rentalConditionsEn;
-  if (langCode === "ru") usloviNajma = rentalConditionsRs;
+  if (langCode === "ru") usloviNajma = rentalConditionsRu;
 
   const data = {
     langCode,

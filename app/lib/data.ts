@@ -857,8 +857,8 @@ export const rentalConditionsSr = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://www.google.com/url?q=https://viastro.rs/en/rental-conditions&amp;sa=D&amp;source=editors&amp;ust=1748527385691949&amp;usg=AOvVaw1rFlFbTivsJVnm749QXOp1"
-              >https://viastro.rs/en/rental-conditions</a
+              href="https://viastro.rs/sr/rental-conditions"
+              >https://viastro.rs/sr/rental-conditions</a
           ></span
       ><span class="c1"
           >; Korisnik potpisivanjem Ugovora o najmu motornog vozila
@@ -1612,7 +1612,7 @@ export const rentalConditionsSr = `
   </p>
   `;
 
-export const rentalConditionsRs = `
+export const rentalConditionsRu = `
   <p class="c3">
       <span
           >ОБЩИЕ УСЛОВИЯ АРЕНДЫ ТРАНСПОРТНЫХ СРЕДСТВ – VIASTRO DOO
@@ -1632,8 +1632,8 @@ export const rentalConditionsRs = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://www.google.com/url?q=https://viastro.rs/en/rental-conditions&amp;sa=D&amp;source=editors&amp;ust=1748527385691949&amp;usg=AOvVaw1rFlFbTivsJVnm749QXOp1"
-              >https://viastro.rs/en/rental-conditions</a
+              href="https://viastro.rs/ru/rental-conditions"
+              >https://viastro.rs/ru/rental-conditions</a
           ></span
       ><span class="c1"
           >; Подписывая Договор аренды транспортного средства, Пользователь подтверждает, что он ознакомлен со всеми положениями Общих условий аренды транспортных средств, понял их содержание и полностью их принимает, имея в виду, что они являются неотъемлемой частью каждого отдельного договора аренды транспортного средства.</span
@@ -2101,7 +2101,7 @@ export const rentalConditionsEn = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://www.google.com/url?q=https://viastro.rs/en/rental-conditions&amp;sa=D&amp;source=editors&amp;ust=1748527385691949&amp;usg=AOvVaw1rFlFbTivsJVnm749QXOp1"
+              href="https://viastro.rs/en/rental-conditions"
               >https://viastro.rs/en/rental-conditions</a
           ></span
       ><span class="c1"
