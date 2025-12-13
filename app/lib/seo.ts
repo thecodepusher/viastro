@@ -134,7 +134,7 @@ export function generateOrganizationSchema(
   baseUrl: string,
   langCode: string = "sr"
 ): OrganizationSchema {
-  const logoUrl = `${baseUrl}/viastro_logo.png`;
+  const logoUrl = `${baseUrl}/logo.png`;
 
   return {
     "@context": "https://schema.org",
@@ -186,7 +186,7 @@ export function generateLocalBusinessSchema(
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Viastro Rent a Car",
-    image: `${baseUrl}/viastro_logo.png`,
+    image: `${baseUrl}/logo.png`,
     telephone: "+381-60-123-4567",
     priceRange: "€€",
     address: {
@@ -227,7 +227,7 @@ export function generateCarRentalServiceSchema(
     "@id": `${baseUrl}/#business`,
     name: "Viastro Rent a Car",
     description: "Car rental service in Belgrade, Serbia",
-    image: `${baseUrl}/viastro_logo.png`,
+    image: `${baseUrl}/logo.png`,
     telephone: "+381-60-123-4567",
     address: {
       "@type": "PostalAddress",
@@ -322,7 +322,7 @@ export function generateArticleSchema(
       name: "Viastro",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/viastro_logo.png`,
+        url: `${baseUrl}/logo.png`,
       },
     },
     description: article.description || "",

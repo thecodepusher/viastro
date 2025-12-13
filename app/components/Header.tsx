@@ -20,8 +20,6 @@ import { FaInstagram } from "react-icons/fa";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaViber } from "react-icons/fa";
-import logoWhite from "viastro_logo_white.png";
-import logo from "viastro_logo.png";
 
 export default function Header(props: { lang: BaseLocale; langCode: string }) {
   const location = useLocation();
@@ -62,7 +60,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
     <header className="fixed z-40 top-0 h-20 w-full bg-[#FF9B17] shadow-md">
       <div className="justify-between items-center mx-auto px-4 sm:px-16 flex h-20 py-0 mb-4">
         <Link to={`/${props.langCode}`} className="shrink-0">
-          <img className="h-20" src={logoWhite} alt="Viastro Logo" />
+          <img className="h-20" src="/logo_white.png" alt="Viastro Logo" />
         </Link>
 
         {!isMobile && (
@@ -158,7 +156,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
               <SheetHeader className="border-b border-gray-200/60 h-20 shadow-sm py-0">
                 <SheetTitle className="text-2xl font-bold text-left">
                   <Link to={`/${props.langCode}`} className="shrink-0">
-                    <img className="h-20" src={logo} alt="Viastro Logo" />
+                    <img className="h-20" src="/logo.png" alt="Viastro Logo" />
                   </Link>
                 </SheetTitle>
               </SheetHeader>

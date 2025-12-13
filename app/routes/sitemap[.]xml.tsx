@@ -15,8 +15,6 @@ export async function loader({ request }: Route.LoaderArgs) {
     "rental-conditions",
     "privacy-policy",
     "long-term-rental",
-    "rent-a-car-aerodrom-beograd-nikola-tesla",
-    "rent-a-car-belgrade-airport",
   ];
 
   const allBlogPosts = [...postsSr, ...postsEn, ...postsRu];
