@@ -9,12 +9,12 @@ export async function loader({ request }: Route.LoaderArgs) {
   const staticPages = [
     "",
     "cars",
-    "contact",
+    "long-term-rental",
+    "rental-conditions",
     "faq",
     "blog",
-    "rental-conditions",
+    "contact",
     "privacy-policy",
-    "long-term-rental",
   ];
 
   const allBlogPosts = [...postsSr, ...postsEn, ...postsRu];
