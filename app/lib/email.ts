@@ -28,7 +28,7 @@ export type LongTermInquiryPayload = {
 };
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
-const logoDataUri = "https://viastro.rs/viastro_logo_white.png";
+const logoDataUri = "https://viastro.rs/logo_white.png";
 
 export async function sendReservationEmail(payload: ReservationEmailPayload) {
   const apiKey = process.env.BREVO_API_KEY;

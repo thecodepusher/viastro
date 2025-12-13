@@ -1,0 +1,463 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/sitemap[.]xml": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/robots[.]txt": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/select-lang": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/faq-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/contact-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/blog-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/blog-details": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/success": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/wspay-redirect": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/wspay-success": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/wspay-error": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/wspay-cancel": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/cars-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/rental-conditions-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/privacy-policy-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/long-term-rental": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/reservation/index": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/reservation/vehicle": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/reservation/extras": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/reservation/review": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/sitemap[.]xml": {
+        "id": "routes/sitemap[.]xml",
+        "parentId": "root",
+        "file": "app/routes/sitemap[.]xml.tsx",
+        "path": "sitemap.xml",
+        "config": {}
+      },
+      "routes/robots[.]txt": {
+        "id": "routes/robots[.]txt",
+        "parentId": "root",
+        "file": "app/routes/robots[.]txt.tsx",
+        "path": "robots.txt",
+        "config": {}
+      },
+      "routes/select-lang": {
+        "id": "routes/select-lang",
+        "parentId": "root",
+        "file": "app/routes/select-lang.tsx",
+        "path": "select-lang",
+        "config": {}
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "app/routes/home.tsx",
+        "path": ":lang?",
+        "config": {}
+      },
+      "routes/faq-page": {
+        "id": "routes/faq-page",
+        "parentId": "root",
+        "file": "app/routes/faq-page.tsx",
+        "path": ":lang?/faq",
+        "config": {}
+      },
+      "routes/contact-page": {
+        "id": "routes/contact-page",
+        "parentId": "root",
+        "file": "app/routes/contact-page.tsx",
+        "path": ":lang?/contact",
+        "config": {}
+      },
+      "routes/blog-page": {
+        "id": "routes/blog-page",
+        "parentId": "root",
+        "file": "app/routes/blog-page.tsx",
+        "path": ":lang?/blog",
+        "config": {}
+      },
+      "routes/blog-details": {
+        "id": "routes/blog-details",
+        "parentId": "root",
+        "file": "app/routes/blog-details.tsx",
+        "path": ":lang?/blog/:slug",
+        "config": {}
+      },
+      "routes/success": {
+        "id": "routes/success",
+        "parentId": "root",
+        "file": "app/routes/success.tsx",
+        "path": ":lang?/success",
+        "config": {}
+      },
+      "routes/wspay-redirect": {
+        "id": "routes/wspay-redirect",
+        "parentId": "root",
+        "file": "app/routes/wspay-redirect.tsx",
+        "path": ":lang?/wspay/redirect",
+        "config": {}
+      },
+      "routes/wspay-success": {
+        "id": "routes/wspay-success",
+        "parentId": "root",
+        "file": "app/routes/wspay-success.tsx",
+        "path": ":lang?/wspay/success",
+        "config": {}
+      },
+      "routes/wspay-error": {
+        "id": "routes/wspay-error",
+        "parentId": "root",
+        "file": "app/routes/wspay-error.tsx",
+        "path": ":lang?/wspay/error",
+        "config": {}
+      },
+      "routes/wspay-cancel": {
+        "id": "routes/wspay-cancel",
+        "parentId": "root",
+        "file": "app/routes/wspay-cancel.tsx",
+        "path": ":lang?/wspay/cancel",
+        "config": {}
+      },
+      "routes/cars-page": {
+        "id": "routes/cars-page",
+        "parentId": "root",
+        "file": "app/routes/cars-page.tsx",
+        "path": ":lang?/cars",
+        "config": {}
+      },
+      "routes/rental-conditions-page": {
+        "id": "routes/rental-conditions-page",
+        "parentId": "root",
+        "file": "app/routes/rental-conditions-page.tsx",
+        "path": ":lang?/rental-conditions",
+        "config": {}
+      },
+      "routes/privacy-policy-page": {
+        "id": "routes/privacy-policy-page",
+        "parentId": "root",
+        "file": "app/routes/privacy-policy-page.tsx",
+        "path": ":lang?/privacy-policy",
+        "config": {}
+      },
+      "routes/long-term-rental": {
+        "id": "routes/long-term-rental",
+        "parentId": "root",
+        "file": "app/routes/long-term-rental.tsx",
+        "path": ":lang?/long-term-rental",
+        "config": {}
+      },
+      "routes/reservation-page": {
+        "id": "routes/reservation-page",
+        "parentId": "root",
+        "file": "app/routes/reservation-page.tsx",
+        "path": ":lang?/reservation",
+        "config": {}
+      },
+      "routes/reservation/index": {
+        "id": "routes/reservation/index",
+        "parentId": "routes/reservation-page",
+        "file": "app/routes/reservation/index.tsx",
+        "index": true,
+        "config": {}
+      },
+      "routes/reservation/vehicle": {
+        "id": "routes/reservation/vehicle",
+        "parentId": "routes/reservation-page",
+        "file": "app/routes/reservation/vehicle.tsx",
+        "path": "vehicle",
+        "config": {}
+      },
+      "routes/reservation/extras": {
+        "id": "routes/reservation/extras",
+        "parentId": "routes/reservation-page",
+        "file": "app/routes/reservation/extras.tsx",
+        "path": "extras",
+        "config": {}
+      },
+      "routes/reservation/review": {
+        "id": "routes/reservation/review",
+        "parentId": "routes/reservation-page",
+        "file": "app/routes/reservation/review.tsx",
+        "path": "review",
+        "config": {}
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "/Users/gag/codepusher/viastro/app",
+    "basename": "/",
+    "buildDirectory": "/Users/gag/codepusher/viastro/build",
+    "future": {
+      "v8_middleware": false,
+      "unstable_optimizeDeps": false,
+      "unstable_splitRouteModules": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/sitemap[.]xml": {
+        "id": "routes/sitemap[.]xml",
+        "parentId": "root",
+        "file": "routes/sitemap[.]xml.tsx",
+        "path": "sitemap.xml"
+      },
+      "routes/robots[.]txt": {
+        "id": "routes/robots[.]txt",
+        "parentId": "root",
+        "file": "routes/robots[.]txt.tsx",
+        "path": "robots.txt"
+      },
+      "routes/select-lang": {
+        "id": "routes/select-lang",
+        "parentId": "root",
+        "file": "routes/select-lang.tsx",
+        "path": "select-lang"
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "routes/home.tsx",
+        "path": ":lang?"
+      },
+      "routes/faq-page": {
+        "id": "routes/faq-page",
+        "parentId": "root",
+        "file": "routes/faq-page.tsx",
+        "path": ":lang?/faq"
+      },
+      "routes/contact-page": {
+        "id": "routes/contact-page",
+        "parentId": "root",
+        "file": "routes/contact-page.tsx",
+        "path": ":lang?/contact"
+      },
+      "routes/blog-page": {
+        "id": "routes/blog-page",
+        "parentId": "root",
+        "file": "routes/blog-page.tsx",
+        "path": ":lang?/blog"
+      },
+      "routes/blog-details": {
+        "id": "routes/blog-details",
+        "parentId": "root",
+        "file": "routes/blog-details.tsx",
+        "path": ":lang?/blog/:slug"
+      },
+      "routes/success": {
+        "id": "routes/success",
+        "parentId": "root",
+        "file": "routes/success.tsx",
+        "path": ":lang?/success"
+      },
+      "routes/wspay-redirect": {
+        "id": "routes/wspay-redirect",
+        "parentId": "root",
+        "file": "routes/wspay-redirect.tsx",
+        "path": ":lang?/wspay/redirect"
+      },
+      "routes/wspay-success": {
+        "id": "routes/wspay-success",
+        "parentId": "root",
+        "file": "routes/wspay-success.tsx",
+        "path": ":lang?/wspay/success"
+      },
+      "routes/wspay-error": {
+        "id": "routes/wspay-error",
+        "parentId": "root",
+        "file": "routes/wspay-error.tsx",
+        "path": ":lang?/wspay/error"
+      },
+      "routes/wspay-cancel": {
+        "id": "routes/wspay-cancel",
+        "parentId": "root",
+        "file": "routes/wspay-cancel.tsx",
+        "path": ":lang?/wspay/cancel"
+      },
+      "routes/cars-page": {
+        "id": "routes/cars-page",
+        "parentId": "root",
+        "file": "routes/cars-page.tsx",
+        "path": ":lang?/cars"
+      },
+      "routes/rental-conditions-page": {
+        "id": "routes/rental-conditions-page",
+        "parentId": "root",
+        "file": "routes/rental-conditions-page.tsx",
+        "path": ":lang?/rental-conditions"
+      },
+      "routes/privacy-policy-page": {
+        "id": "routes/privacy-policy-page",
+        "parentId": "root",
+        "file": "routes/privacy-policy-page.tsx",
+        "path": ":lang?/privacy-policy"
+      },
+      "routes/long-term-rental": {
+        "id": "routes/long-term-rental",
+        "parentId": "root",
+        "file": "routes/long-term-rental.tsx",
+        "path": ":lang?/long-term-rental"
+      },
+      "routes/reservation-page": {
+        "id": "routes/reservation-page",
+        "parentId": "root",
+        "file": "routes/reservation-page.tsx",
+        "path": ":lang?/reservation"
+      },
+      "routes/reservation/index": {
+        "id": "routes/reservation/index",
+        "parentId": "routes/reservation-page",
+        "file": "routes/reservation/index.tsx",
+        "index": true
+      },
+      "routes/reservation/vehicle": {
+        "id": "routes/reservation/vehicle",
+        "parentId": "routes/reservation-page",
+        "file": "routes/reservation/vehicle.tsx",
+        "path": "vehicle"
+      },
+      "routes/reservation/extras": {
+        "id": "routes/reservation/extras",
+        "parentId": "routes/reservation-page",
+        "file": "routes/reservation/extras.tsx",
+        "path": "extras"
+      },
+      "routes/reservation/review": {
+        "id": "routes/reservation/review",
+        "parentId": "routes/reservation-page",
+        "file": "routes/reservation/review.tsx",
+        "path": "review"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "routes/sitemap[.]xml.tsx",
+            "path": "sitemap.xml"
+          },
+          {
+            "file": "routes/robots[.]txt.tsx",
+            "path": "robots.txt"
+          },
+          {
+            "file": "routes/select-lang.tsx",
+            "path": "select-lang"
+          },
+          {
+            "file": "routes/home.tsx",
+            "path": ":lang?"
+          },
+          {
+            "file": "routes/faq-page.tsx",
+            "path": ":lang?/faq"
+          },
+          {
+            "file": "routes/contact-page.tsx",
+            "path": ":lang?/contact"
+          },
+          {
+            "file": "routes/blog-page.tsx",
+            "path": ":lang?/blog"
+          },
+          {
+            "file": "routes/blog-details.tsx",
+            "path": ":lang?/blog/:slug"
+          },
+          {
+            "file": "routes/success.tsx",
+            "path": ":lang?/success"
+          },
+          {
+            "file": "routes/wspay-redirect.tsx",
+            "path": ":lang?/wspay/redirect"
+          },
+          {
+            "file": "routes/wspay-success.tsx",
+            "path": ":lang?/wspay/success"
+          },
+          {
+            "file": "routes/wspay-error.tsx",
+            "path": ":lang?/wspay/error"
+          },
+          {
+            "file": "routes/wspay-cancel.tsx",
+            "path": ":lang?/wspay/cancel"
+          },
+          {
+            "file": "routes/cars-page.tsx",
+            "path": ":lang?/cars"
+          },
+          {
+            "file": "routes/rental-conditions-page.tsx",
+            "path": ":lang?/rental-conditions"
+          },
+          {
+            "file": "routes/privacy-policy-page.tsx",
+            "path": ":lang?/privacy-policy"
+          },
+          {
+            "file": "routes/long-term-rental.tsx",
+            "path": ":lang?/long-term-rental"
+          },
+          {
+            "file": "routes/reservation-page.tsx",
+            "children": [
+              {
+                "file": "routes/reservation/index.tsx",
+                "index": true
+              },
+              {
+                "file": "routes/reservation/vehicle.tsx",
+                "path": "vehicle"
+              },
+              {
+                "file": "routes/reservation/extras.tsx",
+                "path": "extras"
+              },
+              {
+                "file": "routes/reservation/review.tsx",
+                "path": "review"
+              }
+            ],
+            "path": ":lang?/reservation"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
