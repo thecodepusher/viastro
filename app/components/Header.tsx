@@ -59,10 +59,10 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
   };
 
   return (
-    <header className="fixed z-40 top-0 h-18 w-full bg-[#FF9B17] shadow-md">
-      <div className="justify-between items-center mx-auto px-4 sm:px-16 flex h-18 py-1">
+    <header className="fixed z-40 top-0 h-20 w-full bg-[#FF9B17] shadow-md">
+      <div className="justify-between items-center mx-auto px-4 sm:px-16 flex h-20 py-0 mb-4">
         <Link to={`/${props.langCode}`} className="shrink-0">
-          <img className="h-16" src={logoWhite} alt="Viastro Logo" />
+          <img className="h-20" src={logoWhite} alt="Viastro Logo" />
         </Link>
 
         {!isMobile && (
@@ -155,10 +155,10 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
             <SheetContent
               side="right"
               className="w-screen sm:w-[400px] flex flex-col">
-              <SheetHeader className="border-b border-gray-200/60 mb-2 h-18 shadow-sm">
+              <SheetHeader className="border-b border-gray-200/60 h-20 shadow-sm py-0">
                 <SheetTitle className="text-2xl font-bold text-left">
                   <Link to={`/${props.langCode}`} className="shrink-0">
-                    <img className="h-16" src={logo} alt="Viastro Logo" />
+                    <img className="h-20" src={logo} alt="Viastro Logo" />
                   </Link>
                 </SheetTitle>
               </SheetHeader>
