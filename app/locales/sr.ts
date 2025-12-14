@@ -8,6 +8,7 @@ export const sr: BaseLocale = {
   faq: "Često postavljena pitanja",
   blog: "Blog",
   contact: "Kontakt",
+  readMore: "Pročitaj više",
   title: "Vaše putovanje počinje ovde",
   selectLanguage: "Izaberite jezik",
   contactUs: "Kontaktirajte nas",

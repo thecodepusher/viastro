@@ -8,6 +8,7 @@ import {
   useMatches,
   useLocation,
 } from "react-router";
+import { useEffect } from "react";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -28,12 +29,10 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
+  { rel: "preconnect", href: "https://www.wspay.info" },
+  { rel: "preconnect", href: "https://i.ytimg.com" },
   { rel: "icon", type: "image/svg", href: "/favicon.svg" },
   { rel: "icon", type: "image/svg", href: "/favicon.svg" },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -54,6 +53,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
     | undefined;
   const langForCookie = langData?.lang ?? sr;
 
+  useEffect(() => {
+    const fontLink = document.querySelector(
+      'link[href*="fonts.googleapis.com/css2"]'
+    ) as HTMLLinkElement;
+    if (fontLink) {
+      fontLink.media = "all";
+    }
+  }, []);
+
   return (
     <html lang="sr">
       <head>
@@ -67,6 +75,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <HreflangLinks />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          media="print"
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          />
+        </noscript>
         <script
           dangerouslySetInnerHTML={{
             __html: `

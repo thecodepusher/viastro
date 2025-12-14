@@ -137,6 +137,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  @font-face {
+    font-family: "Inter";
+    font-display: swap;
+  }
 }
 
 @keyframes fadeInUp {

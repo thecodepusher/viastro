@@ -70,6 +70,18 @@ export default function Cars(props: {
                     className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                     src={car.image}
                     alt={car.name}
+                    loading={
+                      carsToDisplay.indexOf(car) === 0 ? "eager" : "lazy"
+                    }
+                    decoding="async"
+                    width="314"
+                    height="177"
+                    sizes="(max-width: 640px) 314px, (max-width: 1024px) 256px, 314px"
+                    {...(carsToDisplay.indexOf(car) === 0
+                      ? ({
+                          fetchPriority: "high",
+                        } as React.ImgHTMLAttributes<HTMLImageElement>)
+                      : {})}
                   />
                 </div>
               </div>

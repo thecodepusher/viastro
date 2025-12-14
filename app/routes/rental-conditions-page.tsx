@@ -15,6 +15,15 @@ import {
 } from "@/lib/seo";
 import SEO from "@/components/SEO";
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: "preload",
+    href: "/long-term-rental-hero-2.webp",
+    as: "image",
+    fetchPriority: "high",
+  },
+];
+
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const cookieHeader = request.headers.get("Cookie");

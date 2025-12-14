@@ -134,7 +134,7 @@ export function generateOrganizationSchema(
   baseUrl: string,
   langCode: string = "sr"
 ): OrganizationSchema {
-  const logoUrl = `${baseUrl}/logo.png`;
+  const logoUrl = `${baseUrl}/logo.webp`;
 
   return {
     "@context": "https://schema.org",
@@ -186,7 +186,7 @@ export function generateLocalBusinessSchema(
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Viastro Rent a Car",
-    image: `${baseUrl}/logo.png`,
+    image: `${baseUrl}/logo.webp`,
     telephone: "+381-60-123-4567",
     priceRange: "€€",
     address: {
@@ -227,7 +227,7 @@ export function generateCarRentalServiceSchema(
     "@id": `${baseUrl}/#business`,
     name: "Viastro Rent a Car",
     description: "Car rental service in Belgrade, Serbia",
-    image: `${baseUrl}/logo.png`,
+    image: `${baseUrl}/logo.webp`,
     telephone: "+381-60-123-4567",
     address: {
       "@type": "PostalAddress",
@@ -276,7 +276,7 @@ export function generateCarProductSchema(
     "@context": "https://schema.org",
     "@type": "Product",
     name: car.name,
-    image: car.image || `${baseUrl}/car.png`,
+    image: car.image || `${baseUrl}/opengraph-400x400.jpeg`,
     description: car.description || `Rent ${car.name} in Belgrade`,
     brand: {
       "@type": "Brand",
@@ -309,7 +309,7 @@ export function generateArticleSchema(
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
-    image: article.image || `${baseUrl}/hero_mobile.png`,
+    image: article.image || `${baseUrl}/opengraph-400x400.jpeg`,
     datePublished: article.datePublished || new Date().toISOString(),
     dateModified: article.dateModified || new Date().toISOString(),
     author: {
@@ -322,7 +322,7 @@ export function generateArticleSchema(
       name: "Viastro",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     description: article.description || "",
