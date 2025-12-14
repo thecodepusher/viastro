@@ -49,10 +49,13 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
               rel="noopener noreferrer"
               className="transition-opacity hover:opacity-80">
               <img
-                width="80px"
+                width="118"
+                height="50"
                 alt="Monri WSpay - Web Secure Payment Gateway"
                 src="https://www.wspay.info/payment-info/wsPayWebSecureLogo-118x50-transparent.png"
                 className="h-8 w-auto object-contain sm:h-9 lg:h-12"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -61,10 +64,13 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
               target="_blank"
               rel="noopener noreferrer">
               <img
-                width="140px"
+                width="140"
+                height="48"
                 src="/raiffeisen.webp"
                 alt="Raiffeisen bank"
                 className="h-8 w-auto object-contain sm:h-9 lg:h-12"
+                loading="lazy"
+                decoding="async"
               />
             </a>
 
@@ -75,10 +81,13 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
                 rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-80">
                 <img
-                  width="40px"
+                  width="40"
+                  height="40"
                   src="/visa-secure.webp"
                   alt="Verified by Visa"
                   className="h-6 w-auto object-contain sm:h-7 lg:h-10"
+                  loading="lazy"
+                  decoding="async"
                 />
               </a>
               <a
@@ -97,39 +106,49 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 lg:gap-x-8">
             <img
-              width="50px"
-              height="32px"
+              width="50"
+              height="32"
               src="/mc.svg"
               alt="mastercard"
               className="h-6 w-auto object-contain sm:h-7 lg:h-10"
+              loading="lazy"
+              decoding="async"
             />
             <img
-              width="50px"
-              height="32px"
+              width="50"
+              height="32"
               src="/ms.svg"
               alt="maestro"
               className="h-6 w-auto object-contain sm:h-7 lg:h-10"
+              loading="lazy"
+              decoding="async"
             />
             <img
-              width="55px"
-              height="35px"
+              width="55"
+              height="35"
               src="/visa.webp"
               alt="visa"
               className="h-7 w-auto object-contain sm:h-8 lg:h-11"
+              loading="lazy"
+              decoding="async"
             />
             <img
-              width="55px"
-              height="35px"
+              width="55"
+              height="35"
               src="/dina.webp"
               alt="dina"
               className="h-7 w-auto object-contain sm:h-8 lg:h-11"
+              loading="lazy"
+              decoding="async"
             />
             <img
-              width="50px"
-              height="32px"
+              width="50"
+              height="32"
               src="/am.webp"
               alt="american express"
               className="h-6 w-auto object-contain sm:h-7 lg:h-10"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

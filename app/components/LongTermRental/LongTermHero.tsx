@@ -46,13 +46,19 @@ export function LongTermHero({ content }: Props) {
               className={`absolute inset-0 transition-opacity duration-1000 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}>
-              <div
-                className={`absolute inset-0 bg-cover bg-center transition-transform duration-5000 ease-out ${
+              <img
+                src={image}
+                alt=""
+                className={`absolute inset-0 h-full w-full object-cover transition-transform duration-5000 ease-out ${
                   index === currentImageIndex ? "scale-110" : "scale-100"
                 }`}
-                style={{
-                  backgroundImage: `url(${image})`,
-                }}
+                {...(index === 0
+                  ? ({
+                      fetchPriority: "high",
+                      loading: "eager",
+                    } as React.ImgHTMLAttributes<HTMLImageElement>)
+                  : { loading: "lazy" })}
+                aria-hidden="true"
               />
               <div className="absolute inset-0 bg-linear-to-br from-p/20 via-p/10 to-transparent" />
               <div className="absolute inset-0 bg-black/40" />

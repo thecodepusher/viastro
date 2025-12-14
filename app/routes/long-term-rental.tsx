@@ -14,6 +14,20 @@ import {
 import { sendLongTermInquiryEmail } from "@/lib/email";
 import type { Route } from "./+types/long-term-rental";
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: "preload",
+    href: "/long-term-rental-hero-1.webp",
+    as: "image",
+    fetchPriority: "high",
+  },
+  {
+    rel: "preload",
+    href: "/long-term-rental-hero-2.webp",
+    as: "image",
+  },
+];
+
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
   const cookieHeader = request.headers.get("Cookie");

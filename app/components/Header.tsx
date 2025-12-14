@@ -3,6 +3,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetDescription,
   SheetTrigger,
   SheetFooter,
 } from "@/components/ui/sheet";
@@ -60,7 +61,18 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
     <header className="fixed z-40 top-0 h-20 w-full bg-[#FF9B17] shadow-md">
       <div className="justify-between items-center mx-auto px-4 sm:px-16 flex h-20 py-0 mb-4">
         <Link to={`/${props.langCode}`} className="shrink-0">
-          <img className="h-20" src="/logo_white.webp" alt="Viastro Logo" />
+          <img
+            className="h-20 w-auto"
+            src="/logo_white.webp"
+            alt="Viastro Logo"
+            width="80"
+            height="80"
+            loading="eager"
+            {...({
+              fetchPriority: "high",
+            } as React.ImgHTMLAttributes<HTMLImageElement>)}
+            sizes="80px"
+          />
         </Link>
 
         {!isMobile && (
@@ -156,9 +168,20 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
               <SheetHeader className="border-b border-gray-200/60 h-20 shadow-sm py-0">
                 <SheetTitle className="text-2xl font-bold text-left">
                   <Link to={`/${props.langCode}`} className="shrink-0">
-                    <img className="h-20" src="/logo.webp" alt="Viastro Logo" />
+                    <img
+                      className="h-20 w-auto"
+                      src="/logo.webp"
+                      alt="Viastro Logo"
+                      width="80"
+                      height="80"
+                      loading="eager"
+                      sizes="80px"
+                    />
                   </Link>
                 </SheetTitle>
+                <SheetDescription className="sr-only">
+                  Navigation menu for mobile devices
+                </SheetDescription>
               </SheetHeader>
 
               <div className="flex-1 overflow-y-auto">

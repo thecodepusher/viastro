@@ -28,6 +28,10 @@ export default function BlogSection(props: { langCode: string }) {
                   alt=""
                   src={post.imageUrl}
                   className="w-full rounded-2xl bg-gray-100 object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  width="364"
+                  height="243"
                 />
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
               </div>

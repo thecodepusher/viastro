@@ -25,6 +25,15 @@ import {
 } from "@/lib/seo";
 import type { Route } from "./+types/home";
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: "preload",
+    href: "/opengraph-1200x630.jpeg",
+    as: "image",
+    fetchPriority: "high",
+  },
+];
+
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
   const locale =
@@ -169,7 +178,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               loop
               muted
               playsInline
-              {...({ fetchPriority: "high" } as any)}
+              preload="auto"
+              poster="/opengraph-1200x630.jpeg"
+              width="1200"
+              height="630"
+              {...({
+                fetchPriority: "high",
+              } as React.VideoHTMLAttributes<HTMLVideoElement>)}
               aria-label="Hero video background">
               <source src="/hero-video.mp4" type="video/mp4" />
             </video>
