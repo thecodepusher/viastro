@@ -62,7 +62,7 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
               rel="noopener noreferrer">
               <img
                 width="140px"
-                src="/raiffeisen.png"
+                src="/raiffeisen.webp"
                 alt="Raiffeisen bank"
                 className="h-8 w-auto object-contain sm:h-9 lg:h-12"
               />
@@ -76,7 +76,7 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
                 className="transition-opacity hover:opacity-80">
                 <img
                   width="40px"
-                  src="/visa-secure.jpg"
+                  src="/visa-secure.webp"
                   alt="Verified by Visa"
                   className="h-6 w-auto object-contain sm:h-7 lg:h-10"
                 />
@@ -113,21 +113,21 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
             <img
               width="55px"
               height="35px"
-              src="/visa.png"
+              src="/visa.webp"
               alt="visa"
               className="h-7 w-auto object-contain sm:h-8 lg:h-11"
             />
             <img
               width="55px"
               height="35px"
-              src="/dina.png"
+              src="/dina.webp"
               alt="dina"
               className="h-7 w-auto object-contain sm:h-8 lg:h-11"
             />
             <img
               width="50px"
               height="32px"
-              src="/am.png"
+              src="/am.webp"
               alt="american express"
               className="h-6 w-auto object-contain sm:h-7 lg:h-10"
             />

@@ -74,7 +74,7 @@ export const postsSr = [
       <p><strong>Viastro – Your Journey Starts Here.</strong><br>
       Za sve vas koji želite slobodu da istražujete Srbiju sopstvenim tempom, Viastro rent a car nudi pouzdana vozila i maksimalnu fleksibilnost.</p>
     `,
-    imageUrl: "/kop.png",
+    imageUrl: "/kop.webp",
     date: "Maj 5, 2025",
     datetime: "2020-03-16",
     tags: [
@@ -113,7 +113,7 @@ export const postsSr = [
       <h3>Zašto izabrati Viastro rent a car:</h3>
       <p>Naši SUV modeli, poput <strong>Peugeot 3008 GT Line</strong>, idealni su za vožnju kroz klisure. Uz <strong>full kasko osiguranje</strong> i <strong>neograničene kilometre</strong>, možete bezbrižno istraživati sve što Đerdap nudi.</p>
     `,
-    imageUrl: "/sargan.png",
+    imageUrl: "/sargan.webp",
     date: "3 Maj, 2025",
     datetime: "2020-03-16",
     tags: [
@@ -151,7 +151,7 @@ export const postsSr = [
     `,
     description:
       "Mokra Gora je destinacija koja spaja prirodne lepote, kulturnu baštinu i jedinstvene turističke atrakcije. Vožnja Šarganskom osmicom, uskom prugom koja vijuga kroz planinske predele, pruža nezaboravan doživljaj.",
-    imageUrl: "/djerdap.png",
+    imageUrl: "/djerdap.webp",
     date: "1 Maj, 2025",
     datetime: "2020-03-16",
     tags: [
@@ -214,7 +214,7 @@ export const postsEn = [
       <p><strong>Viastro – Your Journey Starts Here.</strong><br>
       For all of you who want the freedom to explore Serbia at your own pace, Viastro rent a car offers reliable vehicles and maximum flexibility.</p>
     `,
-    imageUrl: "/kop.png",
+    imageUrl: "/kop.webp",
     date: "May 5, 2025",
     datetime: "2020-03-16",
     tags: [
@@ -253,7 +253,7 @@ export const postsEn = [
       <h3>Why choose Viastro rent a car:</h3>
       <p>Our SUV models, like the <strong>Peugeot 3008 GT Line</strong>, are ideal for driving through the gorges. With <strong>full casco insurance</strong> and <strong>unlimited kilometers</strong>, you can explore everything Đerdap has to offer carefree.</p>
     `,
-    imageUrl: "/sargan.png",
+    imageUrl: "/sargan.webp",
     date: "May 3, 2025",
     datetime: "2020-03-16",
     tags: [
@@ -291,7 +291,7 @@ export const postsEn = [
     `,
     description:
       "Mokra Gora is a destination that combines natural beauty, cultural heritage, and unique tourist attractions. The ride on the Šargan Eight, a narrow-gauge railway that winds through mountainous landscapes, offers an unforgettable experience.",
-    imageUrl: "/djerdap.png",
+    imageUrl: "/djerdap.webp",
     date: "May 1, 2025",
     datetime: "2020-03-16",
     tags: [
@@ -354,7 +354,7 @@ export const postsRu = [
       <p><strong>Viastro – Ваше путешествие начинается здесь.</strong><br>
       Для всех вас, кто хочет свободы исследовать Сербию в собственном темпе, Viastro rent a car предлагает надежные автомобили и максимальную гибкость.</p>
     `,
-    imageUrl: "/kop.png",
+    imageUrl: "/kop.webp",
     date: "5 мая 2025",
     datetime: "2020-03-16",
     tags: [
@@ -393,7 +393,7 @@ export const postsRu = [
       <h3>Почему выбрать Viastro rent a car:</h3>
       <p>Наши модели внедорожников, такие как <strong>Peugeot 3008 GT Line</strong>, идеально подходят для езды по ущельям. С <strong>полной страховкой КАСКО</strong> и <strong>неограниченным пробегом</strong> вы можете беззаботно исследовать все, что предлагает Джердап.</p>
     `,
-    imageUrl: "/sargan.png",
+    imageUrl: "/sargan.webp",
     date: "3 мая 2025",
     datetime: "2020-03-16",
     tags: [
@@ -432,7 +432,7 @@ export const postsRu = [
     `,
     description:
       "Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.",
-    imageUrl: "/djerdap.png",
+    imageUrl: "/djerdap.webp",
     date: "1 мая 2025",
     datetime: "2020-03-16",
     tags: [

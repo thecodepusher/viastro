@@ -33,7 +33,7 @@ export function CustomHero({
       <div className="relative min-h-[75vh] sm:min-h-[70vh] md:min-h-[65vh] lg:min-h-[60vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/long-term-rental-hero-2.jpg)" }}
+          style={{ backgroundImage: "url(/long-term-rental-hero-2.webp)" }}
           aria-hidden
         />
 

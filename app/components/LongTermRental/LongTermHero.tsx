@@ -15,8 +15,8 @@ type Props = {
 };
 
 const heroImages = [
-  "/long-term-rental-hero-1.jpg",
-  "/long-term-rental-hero-2.jpg",
+  "/long-term-rental-hero-1.webp",
+  "/long-term-rental-hero-2.webp",
 ];
 
 export function LongTermHero({ content }: Props) {

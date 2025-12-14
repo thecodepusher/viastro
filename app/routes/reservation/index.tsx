@@ -82,7 +82,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
       <div className="relative h-[70vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/long-term-rental-hero-2.jpg)" }}
+          style={{ backgroundImage: "url(/long-term-rental-hero-2.webp)" }}
           aria-hidden
         />
         <div className="absolute -left-10 -top-10 h-64 w-64 rounded-full bg-p/25 blur-3xl" />
