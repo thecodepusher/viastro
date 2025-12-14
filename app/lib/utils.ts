@@ -15,31 +15,18 @@ export async function getLocale(
   request: Request
 ) {
   if (!paramsLang) {
-    const acceptLanguage = request.headers
-      .get("Accept-Language")
-      ?.split(";")[0]
-      ?.split(",")[0];
-
     const url = new URL(request.url);
-
     let returnPath = url.pathname;
 
-    if (
-      acceptLanguage == "sr" ||
-      acceptLanguage == "en" ||
-      acceptLanguage == "ru"
-    ) {
-      if (returnPath == "/") {
-        throw replace(`/${acceptLanguage}`);
-      }
-      throw replace(`/${acceptLanguage}${url.pathname}`);
-    }
-
     const cookieHeader = request.headers.get("Cookie");
-
     const lgCookie = (await langCookie.parse(cookieHeader)) || {};
 
-    if (lgCookie.lang) {
+    if (
+      lgCookie.lang &&
+      (lgCookie.lang === "sr" ||
+        lgCookie.lang === "en" ||
+        lgCookie.lang === "ru")
+    ) {
       if (returnPath == "/") {
         throw replace(`/${lgCookie.lang}`);
       }
