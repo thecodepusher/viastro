@@ -25,26 +25,38 @@ export async function loader({ request }: Route.LoaderArgs) {
   const urls: string[] = [];
 
   for (const lang of languages) {
+    const isSerbian = lang === "sr";
+
     for (const page of staticPages) {
       const path = page ? `/${lang}/${page}` : `/${lang}`;
+      const priority = isSerbian
+        ? page === ""
+          ? "1.0"
+          : page === "cars" || page === "blog"
+            ? "0.95"
+            : "0.9"
+        : page === ""
+          ? "0.8"
+          : page === "cars" || page === "blog"
+            ? "0.7"
+            : "0.6";
+
       urls.push(
-        `<url><loc>${baseUrl}${path}</loc><changefreq>weekly</changefreq><priority>${page === "" ? "1.0" : page === "cars" || page === "blog" ? "0.9" : "0.8"}</priority></url>`
+        `<url><loc>${baseUrl}${path}</loc><changefreq>weekly</changefreq><priority>${priority}</priority></url>`
       );
     }
 
     for (const slug of uniqueBlogSlugs) {
+      const priority = isSerbian ? "0.8" : "0.5";
       urls.push(
-        `<url><loc>${baseUrl}/${lang}/blog/${slug}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`
+        `<url><loc>${baseUrl}/${lang}/blog/${slug}</loc><changefreq>monthly</changefreq><priority>${priority}</priority></url>`
       );
     }
   }
 
-  for (const page of staticPages) {
-    const path = page ? `/${page}` : `/`;
-    urls.push(
-      `<url><loc>${baseUrl}${path}</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`
-    );
-  }
+  urls.unshift(
+    `<url><loc>${baseUrl}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>`
+  );
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
