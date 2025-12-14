@@ -52,6 +52,7 @@ export interface BaseLocale {
   faq: string;
   blog: string;
   contact: string;
+  readMore: string;
   selectLanguage: string;
   contactUs: string;
   from: string;

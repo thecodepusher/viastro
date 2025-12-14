@@ -94,7 +94,7 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
         fastTitle={loaderData.lang.createReservation}
         fastSubtitle={loaderData.lang.deployFaster}
       />
-      <BlogSection langCode={loaderData.langCode} />
+      <BlogSection langCode={loaderData.langCode} lang={loaderData.lang} />
       <Cta lang={loaderData.lang} />
     </div>
   );

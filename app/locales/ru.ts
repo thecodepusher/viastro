@@ -8,6 +8,7 @@ export const ru: BaseLocale = {
   faq: "FAQ",
   blog: "Блог",
   contact: "Контакт",
+  readMore: "Читать далее",
   title: "Ваше путешествие начинается здесь",
   selectLanguage: "Выберите язык",
   contactUs: "Свяжитесь с нами",

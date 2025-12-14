@@ -248,7 +248,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         cars={loaderData.cars}
       />
       <TrustedBy lang={loaderData.lang} />
-      <BlogSection langCode={loaderData.langCode} />
+      <BlogSection langCode={loaderData.langCode} lang={loaderData.lang} />
       <FandQ langCode={loaderData.langCode} />
       <GetInTouch lang={loaderData.lang} />
       <Cta lang={loaderData.lang} />

@@ -8,6 +8,7 @@ export const en: BaseLocale = {
   faq: "FAQ",
   blog: "Blog",
   contact: "Contact",
+  readMore: "Read more",
   title: "Your Journey Starts Here",
   selectLanguage: "Select language",
   contactUs: "Contact us",
