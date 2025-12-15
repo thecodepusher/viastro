@@ -65,8 +65,8 @@ export const postsSr = [
       <p><strong>Rezervišite na vreme:</strong> Praznici brzo pune kapacitete, zato obezbedite vozilo ranije. Kontakt: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/mount.webp",
-    date: "Decembar 20, 2025",
-    datetime: "2025-12-20",
+    date: "Decembar 15, 2025",
+    datetime: "2025-12-15",
     tags: [
       "Nova godina planine",
       "Božić putovanje",
@@ -220,6 +220,56 @@ export const postsSr = [
 export const postsEn = [
   {
     id: 1,
+    title:
+      "New Year & Christmas on Serbia’s Mountains - Ski Season with Viastro",
+    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    description:
+      "Planning a cozy mountain holiday for New Year’s or Christmas? Kopaonik, Zlatibor, and Stara Planina are in full ski season. With Viastro rent a car you arrive faster and safer - winter tires, snow chains, full casco, and 24/7 assistance included.",
+    content: `
+      <h2>New Year & Christmas on Serbia’s Mountains</h2>
+      <p>The holidays are perfect for a snowy getaway. Ski resorts are running at full speed, hotels and apartments offer festive packages, and with the right car you arrive stress-free — even after fresh snowfall.</p>
+
+      <h3>Where to go for the holidays?</h3>
+      <ul>
+        <li><strong>Kopaonik:</strong> Most slopes, night skiing, and lively après-ski.</li>
+        <li><strong>Zlatibor:</strong> Family-friendly vibe, the new gondola ride, plenty of walks.</li>
+        <li><strong>Stara Planina:</strong> Wide slopes, fewer crowds, authentic eastern Serbia nature.</li>
+        <li><strong>Tara & Divčibare:</strong> Calmer stay, forest walks, sledding with kids.</li>
+      </ul>
+
+      <h3>What makes the trip smooth?</h3>
+      <ul>
+        <li><strong>Road safety:</strong> Winter tires, chains, and full insurance included.</li>
+        <li><strong>Flexibility:</strong> Pick up in Belgrade or at the airport, return where it suits you.</li>
+        <li><strong>Room for gear:</strong> SUVs and wagons with space for skis and luggage.</li>
+      </ul>
+
+      <h3>Quick holiday plan</h3>
+      <ol>
+        <li><strong>Day 1:</strong> Pick up the car, leave early to avoid traffic on main roads.</li>
+        <li><strong>Day 2-3:</strong> Ski day + wellness/SPA in the evening, local food and festive mood.</li>
+        <li><strong>Day 4:</strong> Short walk or sledding, return in the afternoon.</li>
+      </ol>
+
+      <p><strong>Book early:</strong> Holiday dates fill fast — secure your vehicle now. Contact: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/mount.webp",
+    date: "December 15, 2025",
+    datetime: "2025-12-15",
+    tags: [
+      "New Year travel",
+      "Christmas getaway",
+      "Serbia ski season",
+      "Kopaonik",
+      "Zlatibor",
+      "Stara Planina",
+      "Car rental Belgrade",
+      "Winter tires",
+    ],
+  },
+  {
+    id: 2,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Weekend on Kopaonik - Mountain Adventure with Viastro Rent a Car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
@@ -279,7 +329,7 @@ export const postsEn = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: "Đerdap National Park - The Iron Gates of Nature and History",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
@@ -318,7 +368,7 @@ export const postsEn = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "Mokra Gora and Šargan Eight - A Journey Through Time and Nature",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
@@ -355,61 +405,60 @@ export const postsEn = [
       "Vehicle rental",
     ],
   },
-  {
-    id: 4,
-    title:
-      "New Year & Christmas on Serbia’s Mountains - Ski Season with Viastro",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
-    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
-    description:
-      "Planning a cozy mountain holiday for New Year’s or Christmas? Kopaonik, Zlatibor, and Stara Planina are in full ski season. With Viastro rent a car you arrive faster and safer - winter tires, snow chains, full casco, and 24/7 assistance included.",
-    content: `
-      <h2>New Year & Christmas on Serbia’s Mountains</h2>
-      <p>The holidays are perfect for a snowy getaway. Ski resorts are running at full speed, hotels and apartments offer festive packages, and with the right car you arrive stress-free — even after fresh snowfall.</p>
-
-      <h3>Where to go for the holidays?</h3>
-      <ul>
-        <li><strong>Kopaonik:</strong> Most slopes, night skiing, and lively après-ski.</li>
-        <li><strong>Zlatibor:</strong> Family-friendly vibe, the new gondola ride, plenty of walks.</li>
-        <li><strong>Stara Planina:</strong> Wide slopes, fewer crowds, authentic eastern Serbia nature.</li>
-        <li><strong>Tara & Divčibare:</strong> Calmer stay, forest walks, sledding with kids.</li>
-      </ul>
-
-      <h3>What makes the trip smooth?</h3>
-      <ul>
-        <li><strong>Road safety:</strong> Winter tires, chains, and full insurance included.</li>
-        <li><strong>Flexibility:</strong> Pick up in Belgrade or at the airport, return where it suits you.</li>
-        <li><strong>Room for gear:</strong> SUVs and wagons with space for skis and luggage.</li>
-      </ul>
-
-      <h3>Quick holiday plan</h3>
-      <ol>
-        <li><strong>Day 1:</strong> Pick up the car, leave early to avoid traffic on main roads.</li>
-        <li><strong>Day 2-3:</strong> Ski day + wellness/SPA in the evening, local food and festive mood.</li>
-        <li><strong>Day 4:</strong> Short walk or sledding, return in the afternoon.</li>
-      </ol>
-
-      <p><strong>Book early:</strong> Holiday dates fill fast — secure your vehicle now. Contact: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
-    `,
-    imageUrl: "/mount.webp",
-    date: "December 20, 2025",
-    datetime: "2025-12-20",
-    tags: [
-      "New Year travel",
-      "Christmas getaway",
-      "Serbia ski season",
-      "Kopaonik",
-      "Zlatibor",
-      "Stara Planina",
-      "Car rental Belgrade",
-      "Winter tires",
-    ],
-  },
 ];
 
 export const postsRu = [
   {
     id: 1,
+    title: "Новый год и Рождество в горах Сербии - Лыжный сезон с Viastro",
+    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    description:
+      "Хотите провести новогодние и рождественские праздники в горах? Копаоник, Златибор и Стара-Планина уже в разгаре сезона. С Viastro rent a car вы доберетесь быстрее и безопаснее - зимняя резина, цепи, полное КАСКО и помощь 24/7.",
+    content: `
+      <h2>Новый год и Рождество в горах Сербии</h2>
+      <p>Праздники — идеальное время уехать из города и провести несколько дней на снегу. Курорты работают на полную, отели и апартаменты предлагают праздничные пакеты, а с правильным автомобилем вы доберетесь без стресса — даже после свежего снегопада.</p>
+
+      <h3>Куда поехать на праздники?</h3>
+      <ul>
+        <li><strong>Копаоник:</strong> Больше всего трасс, ночное катание, оживленный apres-ski.</li>
+        <li><strong>Златибор:</strong> Семейная атмосфера, новая гондола, много прогулок.</li>
+        <li><strong>Стара-Планина:</strong> Широкие склоны, меньше людей, аутентичная природа восточной Сербии.</li>
+        <li><strong>Тара и Дивчибаре:</strong> Спокойный отдых, лесные прогулки, санки с детьми.</li>
+      </ul>
+
+      <h3>Что важно в дороге?</h3>
+      <ul>
+        <li><strong>Безопасность:</strong> Зимняя резина, цепи и полное страхование включены.</li>
+        <li><strong>Гибкость:</strong> Выдача в Белграде или в аэропорту, возврат там, где удобно.</li>
+        <li><strong>Место для снаряжения:</strong> SUV и универсалы с багажником для лыж и чемоданов.</li>
+      </ul>
+
+      <h3>Быстрый план на праздники</h3>
+      <ol>
+        <li><strong>День 1:</strong> Заберите авто, выезжайте раньше, чтобы обойти трафик.</li>
+        <li><strong>Дни 2-3:</strong> Катание + вечерний SPA, местная кухня и праздничное настроение.</li>
+        <li><strong>День 4:</strong> Прогулка или санки, выезд домой после обеда.</li>
+      </ol>
+
+      <p><strong>Бронируйте заранее:</strong> Праздничные даты быстро заполняются — закрепите автомобиль сейчас. Контакт: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/mount.webp",
+    date: "15 декабря 2025",
+    datetime: "2025-12-15",
+    tags: [
+      "Новый год Сербия",
+      "Рождество поездка",
+      "Лыжный сезон",
+      "Копаоник",
+      "Златибор",
+      "Стара-Планина",
+      "Аренда авто Белград",
+      "Зимняя резина",
+    ],
+  },
+  {
+    id: 2,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Выходные на Копаонике - Горное приключение с Viastro rent a car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
@@ -469,7 +518,7 @@ export const postsRu = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: "Национальный парк Джердап - Железные ворота природы и истории",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
@@ -508,7 +557,7 @@ export const postsRu = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title:
       "Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
@@ -541,55 +590,6 @@ export const postsRu = [
       "Культура",
       "Туризм",
       "Златибор",
-    ],
-  },
-  {
-    id: 4,
-    title: "Новый год и Рождество в горах Сербии - Лыжный сезон с Viastro",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
-    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
-    description:
-      "Хотите провести новогодние и рождественские праздники в горах? Копаоник, Златибор и Стара-Планина уже в разгаре сезона. С Viastro rent a car вы доберетесь быстрее и безопаснее - зимняя резина, цепи, полное КАСКО и помощь 24/7.",
-    content: `
-      <h2>Новый год и Рождество в горах Сербии</h2>
-      <p>Праздники — идеальное время уехать из города и провести несколько дней на снегу. Курорты работают на полную, отели и апартаменты предлагают праздничные пакеты, а с правильным автомобилем вы доберетесь без стресса — даже после свежего снегопада.</p>
-
-      <h3>Куда поехать на праздники?</h3>
-      <ul>
-        <li><strong>Копаоник:</strong> Больше всего трасс, ночное катание, оживленный apres-ski.</li>
-        <li><strong>Златибор:</strong> Семейная атмосфера, новая гондола, много прогулок.</li>
-        <li><strong>Стара-Планина:</strong> Широкие склоны, меньше людей, аутентичная природа восточной Сербии.</li>
-        <li><strong>Тара и Дивчибаре:</strong> Спокойный отдых, лесные прогулки, санки с детьми.</li>
-      </ul>
-
-      <h3>Что важно в дороге?</h3>
-      <ul>
-        <li><strong>Безопасность:</strong> Зимняя резина, цепи и полное страхование включены.</li>
-        <li><strong>Гибкость:</strong> Выдача в Белграде или в аэропорту, возврат там, где удобно.</li>
-        <li><strong>Место для снаряжения:</strong> SUV и универсалы с багажником для лыж и чемоданов.</li>
-      </ul>
-
-      <h3>Быстрый план на праздники</h3>
-      <ol>
-        <li><strong>День 1:</strong> Заберите авто, выезжайте раньше, чтобы обойти трафик.</li>
-        <li><strong>Дни 2-3:</strong> Катание + вечерний SPA, местная кухня и праздничное настроение.</li>
-        <li><strong>День 4:</strong> Прогулка или санки, выезд домой после обеда.</li>
-      </ol>
-
-      <p><strong>Бронируйте заранее:</strong> Праздничные даты быстро заполняются — закрепите автомобиль сейчас. Контакт: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
-    `,
-    imageUrl: "/mount.webp",
-    date: "20 декабря 2025",
-    datetime: "2025-12-20",
-    tags: [
-      "Новый год Сербия",
-      "Рождество поездка",
-      "Лыжный сезон",
-      "Копаоник",
-      "Златибор",
-      "Стара-Планина",
-      "Аренда авто Белград",
-      "Зимняя резина",
     ],
   },
 ];
