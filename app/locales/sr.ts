@@ -53,7 +53,7 @@ export const sr: BaseLocale = {
   gear: "Menjač",
   ctaTitle: "Putujte bezbrižno!",
   ctaSubTitle:
-    "Iznajmite pouzdan automobil brzo i jednostavno – rezervišite vozilo još danas i uživajte u vožnji bez stresa.",
+    "Iznajmite pouzdan automobil brzo i jednostavno - rezervišite vozilo još danas i uživajte u vožnji bez stresa.",
   ctaAction: "Kreirajte rezervaciju još danas",
   gitTitle: "Kontaktirajte nas",
   gitSubTitle:
@@ -79,7 +79,7 @@ export const sr: BaseLocale = {
   vehicleDepositDiscount: "Popust na depozit za vozilo",
   costSummary: "Pregled troškova",
   conversionStatement:
-    "Sva plaćanja će biti izvršena u lokalnoj valuti Republike Srbije – dinar (RSD). Iznos za koji će Vaša kreditna kartica biti zadužena dobija se konverzijom cene iz Evra u srpski dinar po važećem kursu Narodne banke Srbije. Prilikom zaduživanja Vaše kreditne kartice, ista suma se konvertuje u Vašu lokalnu valutu prema kursu udruženja kreditnih kartica. Kao rezultat ove konverzije, postoji mogućnost neznatne razlike u odnosu na originalnu cenu navedenu na našem veb sajtu.",
+    "Sva plaćanja će biti izvršena u lokalnoj valuti Republike Srbije - dinar (RSD). Iznos za koji će Vaša kreditna kartica biti zadužena dobija se konverzijom cene iz Evra u srpski dinar po važećem kursu Narodne banke Srbije. Prilikom zaduživanja Vaše kreditne kartice, ista suma se konvertuje u Vašu lokalnu valutu prema kursu udruženja kreditnih kartica. Kao rezultat ove konverzije, postoji mogućnost neznatne razlike u odnosu na originalnu cenu navedenu na našem veb sajtu.",
   yourInformation: "Vaši podaci",
   email: "Email",
   firstName: "Ime",
@@ -175,7 +175,7 @@ export const sr: BaseLocale = {
           "Zaboravite kvarove i zastoje. Vaši zaposleni voze nova i uredno održavana vozila, što povećava sigurnost i efikasnost.",
       },
       {
-        title: "Zamensko vozilo odmah – bez čekanja",
+        title: "Zamensko vozilo odmah - bez čekanja",
         description:
           "U slučaju kvara isporučujemo zamensko vozilo u najkraćem roku, kako bi poslovanje ostalo neprekinuto.",
       },
@@ -309,7 +309,7 @@ export const sr: BaseLocale = {
   seoLandingTeslaKeywords:
     "rent a car Beograd aerodrom, rent a car Nikola Tesla aerodrom, aerodrom iznajmljivanje automobila Beograd",
   seoLongTermRentalTitle:
-    "Dugoročni najam – Operativni rent | Viastro Rent a Car",
+    "Dugoročni najam - Operativni rent | Viastro Rent a Car",
   seoLongTermRentalDescription:
     "Fleksibilan dugoročni najam vozila u Beogradu bez ulaganja i skrivenih troškova. Operativni rent za firme, preduzetnike i pojedince uz registraciju, kasko, održavanje i zamensko vozilo uključene u cenu.",
   seoLongTermRentalKeywords:

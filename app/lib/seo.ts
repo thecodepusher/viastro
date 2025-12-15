@@ -276,7 +276,7 @@ export function generateCarProductSchema(
     "@context": "https://schema.org",
     "@type": "Product",
     name: car.name,
-    image: car.image || `${baseUrl}/opengraph-400x400.jpeg`,
+    image: car.image || `${baseUrl}/opengraph-400x400.webp`,
     description: car.description || `Rent ${car.name} in Belgrade`,
     brand: {
       "@type": "Brand",
@@ -309,7 +309,7 @@ export function generateArticleSchema(
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
-    image: article.image || `${baseUrl}/opengraph-400x400.jpeg`,
+    image: article.image || `${baseUrl}/opengraph-400x400.webp`,
     datePublished: article.datePublished || new Date().toISOString(),
     dateModified: article.dateModified || new Date().toISOString(),
     author: {
@@ -403,7 +403,7 @@ export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
   } = options;
 
   const baseUrl = providedBaseUrl || getBaseUrl();
-  const ogImage = imageUrl || `${baseUrl}/opengraph-1200x630.jpeg`;
+  const ogImage = imageUrl || `${baseUrl}/opengraph-1200x630.webp`;
   const canonical = url.startsWith("http") ? url : `${baseUrl}${url}`;
 
   const metaTags: Array<{

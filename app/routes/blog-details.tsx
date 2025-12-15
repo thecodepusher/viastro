@@ -106,7 +106,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
   const articleUrl = `${loaderData.baseUrl}/${loaderData.langCode}/blog/${loaderData.post.slug}`;
   const imageUrl = loaderData.post.imageUrl
     ? `${loaderData.baseUrl}${loaderData.post.imageUrl}`
-    : `${loaderData.baseUrl}/opengraph-1200x630.jpeg`;
+    : `${loaderData.baseUrl}/opengraph-1200x630.webp`;
 
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),

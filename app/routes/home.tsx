@@ -28,7 +28,7 @@ import type { Route } from "./+types/home";
 export const links: Route.LinksFunction = () => [
   {
     rel: "preload",
-    href: "/opengraph-1200x630.jpeg",
+    href: "/opengraph-1200x630.webp",
     as: "image",
     fetchPriority: "high",
   },
@@ -179,7 +179,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               muted
               playsInline
               preload="auto"
-              poster="/opengraph-1200x630.jpeg"
+              poster="/opengraph-1200x630.webp"
               width="1200"
               height="630"
               {...({

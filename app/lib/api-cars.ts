@@ -9,13 +9,13 @@ export const fullProtection = {
     ru: "Страхование Full Protection",
   },
   descriptionMap: {
-    en: "In addition to basic protection, this option includes protection against damage to rear-view mirrors, the windshield and windows, as well as coverage for damage to the undercarriage, wheels, and tires – parts usually not covered by standard insurance. Furthermore, Full Protection includes insurance for all passengers in the vehicle, including the driver, in the event of a traffic accident. With Full Protection insurance, the deposit amount is significantly reduced or completely waived, depending on the vehicle class.",
-    sr: "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
-    ru: "Помимо базовой защиты, в эту опцию входит защита от повреждений зеркал заднего вида, лобового и других стекол, а также покрытие ущерба днища, колес и шин – деталей, которые обычно не покрываются стандартной страховкой. Кроме того, Full Protection включает страхование всех пассажиров в транспортном средстве, включая водителя, в случае дорожно-транспортного происшествия. При страховании Full Protection сумма залога значительно снижается или полностью отменяется, в зависимости от класса автомобиля.",
+    en: "In addition to basic protection, this option includes protection against damage to rear-view mirrors, the windshield and windows, as well as coverage for damage to the undercarriage, wheels, and tires - parts usually not covered by standard insurance. Furthermore, Full Protection includes insurance for all passengers in the vehicle, including the driver, in the event of a traffic accident. With Full Protection insurance, the deposit amount is significantly reduced or completely waived, depending on the vehicle class.",
+    sr: "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama - delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+    ru: "Помимо базовой защиты, в эту опцию входит защита от повреждений зеркал заднего вида, лобового и других стекол, а также покрытие ущерба днища, колес и шин - деталей, которые обычно не покрываются стандартной страховкой. Кроме того, Full Protection включает страхование всех пассажиров в транспортном средстве, включая водителя, в случае дорожно-транспортного происшествия. При страховании Full Protection сумма залога значительно снижается или полностью отменяется, в зависимости от класса автомобиля.",
   },
   name: "Full Protection osiguranje",
   description:
-    "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama – delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
+    "U cenu ove opcije pored osnovne zaštite uključena je zaštita od šteta na retrovizorima, vetrobranskom staklu i prozorima, kao i pokriće za oštećenja na podvozju, točkovima i gumama - delovima koji se u klasičnom osiguranju obično ne priznaju. Pored toga, Full Protection uključuje i osiguranje svih putnika u vozilu, uključujući vozača, u slučaju saobraćajne nezgode. Uz Full Protection osiguranje, iznos depozita se značajno smanjuje ili se potpuno ukida, u zavisnosti od klase vozila.",
   icon: "public/icons/extras/wificar.svg",
 };
 
@@ -185,7 +185,7 @@ function getCarImage(brandName: string, modelName: string): string {
     return carImageMap[partialKey];
   }
 
-  return "/car.png";
+  return "/car.svg";
 }
 
 function getCarData(carId: string) {

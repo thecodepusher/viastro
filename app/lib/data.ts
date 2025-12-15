@@ -30,14 +30,64 @@ export type LocaleTypes = "en" | "ru" | "sr";
 export const postsSr = [
   {
     id: 1,
+    title:
+      "Novogodišnji i božićni odmor na planinama Srbije - Ski sezona sa Viastro rent a car",
+    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    description:
+      "Želite praznični odmor na planini za Novu godinu ili Božić? Kopaonik, Zlatibor i Stara planina su u punoj ski sezoni, a uz Viastro rent a car stižete brže i sigurnije - sa opremom za sneg, punim kasko osiguranjem i 24/7 asistencijom.",
+    content: `
+      <h2>Novogodišnji i božićni odmor na planinama Srbije</h2>
+      <p>Praznici su idealno vreme da se sklonite iz gužve i provedete nekoliko dana na snegu. Ski centri su u punom pogonu, hoteli i apartmani nude praznične pakete, a uz dobar automobil stižete bez stresa - čak i kada padne novi sneg.</p>
+
+      <h3>Gde da idete za praznike?</h3>
+      <ul>
+        <li><strong>Kopaonik:</strong> Najveći broj staza, noćno skijanje i bogat apres-ski program.</li>
+        <li><strong>Zlatibor:</strong> Porodična atmosfera, novo gondola iskustvo i obilje šetnji.</li>
+        <li><strong>Stara planina:</strong> Šire staze, manje gužve i autentična priroda istočne Srbije.</li>
+        <li><strong>Tara i Divčibare:</strong> Za mirniji odmor, šetnje i sanjkanje sa decom.</li>
+      </ul>
+
+      <h3>Šta čini razliku?</h3>
+      <ul>
+        <li><strong>Sigurnost na putu:</strong> Zimske gume, lanci i kasko osiguranje uključeni.</li>
+        <li><strong>Fleksibilnost:</strong> Preuzimanje u Beogradu ili na aerodromu, povratak gde vama odgovara.</li>
+        <li><strong>Prostor za opremu:</strong> SUV i karavani sa dovoljno mesta za ski opremu i kofere.</li>
+      </ul>
+
+      <h3>Brzi plan za praznične dane</h3>
+      <ol>
+        <li><strong>Dan 1:</strong> Preuzmite vozilo, krenite ranije da izbegnete gužve na magistralama.</li>
+        <li><strong>Dan 2-3:</strong> Ski dan + wellness/SPA uveče, lokalna kuhinja i praznična atmosfera.</li>
+        <li><strong>Dan 4:</strong> Kratka šetnja ili sankanje, povratak popodne.</li>
+      </ol>
+
+      <p><strong>Rezervišite na vreme:</strong> Praznici brzo pune kapacitete, zato obezbedite vozilo ranije. Kontakt: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/mount.webp",
+    date: "Decembar 20, 2025",
+    datetime: "2025-12-20",
+    tags: [
+      "Nova godina planine",
+      "Božić putovanje",
+      "Ski sezona Srbija",
+      "Kopaonik",
+      "Zlatibor",
+      "Stara planina",
+      "Rent a car Beograd",
+      "Zimske gume",
+    ],
+  },
+  {
+    id: 2,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
-    title: "Vikend na Kopaoniku – Planinska avantura uz Viastro rent a car",
+    title: "Vikend na Kopaoniku - Planinska avantura uz Viastro rent a car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
-      "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija – tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa – udobno, sigurno i uz potpunu slobodu kretanja.",
+      "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija - tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa - udobno, sigurno i uz potpunu slobodu kretanja.",
     content: `
-      <h2>Vikend na Kopaoniku – Planinska avantura uz Viastro rent a car</h2>
-      <p>Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija – bilo da idete na skijanje, planinarenje ili samo uživanje u prirodi i SPA centrima. A da bi put bio podjednako prijatan kao i boravak, pravo rešenje je iznajmljivanje vozila koje odgovara vašim potrebama. Viastro rent a car vam nudi vozila koja su idealna za put do planine – udobna, pouzdana i sa punim kasko osiguranjem.</p>
+      <h2>Vikend na Kopaoniku - Planinska avantura uz Viastro rent a car</h2>
+      <p>Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija - bilo da idete na skijanje, planinarenje ili samo uživanje u prirodi i SPA centrima. A da bi put bio podjednako prijatan kao i boravak, pravo rešenje je iznajmljivanje vozila koje odgovara vašim potrebama. Viastro rent a car vam nudi vozila koja su idealna za put do planine - udobna, pouzdana i sa punim kasko osiguranjem.</p>
 
       <h3>Zašto Kopaonik za vikend?</h3>
       <ol>
@@ -52,26 +102,26 @@ export const postsSr = [
           </ul>
         </li>
         <li><strong>Širok izbor smeštaja:</strong><br>
-          Od hotela sa 5 zvezdica do pristupačnih apartmana – Kopaonik ima opcije za svaki budžet.
+          Od hotela sa 5 zvezdica do pristupačnih apartmana - Kopaonik ima opcije za svaki budžet.
         </li>
       </ol>
 
       <h3>Zašto iznajmiti vozilo kod Viastro?</h3>
       <ul>
         <li><strong>Komfor i sigurnost:</strong> Svi naši automobili su redovno servisirani, klimatizovani i potpuno opremljeni za duža putovanja.</li>
-        <li><strong>Fleksibilni paketi:</strong> Najam već od 3 dana sa neograničenim kilometrima – savršeno za vikend planine.</li>
+        <li><strong>Fleksibilni paketi:</strong> Najam već od 3 dana sa neograničenim kilometrima - savršeno za vikend planine.</li>
         <li><strong>Puna pokrivenost:</strong> Full kasko osiguranje, 24h asistencija, i mogućnost dodatne opreme (nosač za ski, lanaca, dečje sedište).</li>
         <li><strong>Brza i jednostavna rezervacija:</strong> Kontaktirajte nas putem sajta <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili direktno na broj <a href="tel:0696565555">069/6565-555</a>.</li>
       </ul>
 
-      <h3>Plan puta – predlog:</h3>
+      <h3>Plan puta - predlog:</h3>
       <ul>
-        <li><strong>Petak (polazak):</strong> Preuzmite vozilo i uputite se ka Kopaoniku. Preporučena ruta: Beograd – Kruševac – Brus – Kopaonik.</li>
+        <li><strong>Petak (polazak):</strong> Preuzmite vozilo i uputite se ka Kopaoniku. Preporučena ruta: Beograd - Kruševac - Brus - Kopaonik.</li>
         <li><strong>Subota:</strong> Uživajte u sportskim aktivnostima, prirodi i domaćoj kuhinji.</li>
         <li><strong>Nedelja:</strong> Opuštanje u SPA centru i povratak uveče.</li>
       </ul>
 
-      <p><strong>Viastro – Your Journey Starts Here.</strong><br>
+      <p><strong>Viastro - Your Journey Starts Here.</strong><br>
       Za sve vas koji želite slobodu da istražujete Srbiju sopstvenim tempom, Viastro rent a car nudi pouzdana vozila i maksimalnu fleksibilnost.</p>
     `,
     imageUrl: "/kop.webp",
@@ -89,14 +139,14 @@ export const postsSr = [
     ],
   },
   {
-    id: 2,
-    title: "Đerdap Nacionalni Park – Gvozdena kapija prirode i istorije",
+    id: 3,
+    title: "Đerdap Nacionalni Park - Gvozdena kapija prirode i istorije",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.",
     content: `
-      <h2>Đerdap Nacionalni Park – Gvozdena kapija prirode i istorije</h2>
+      <h2>Đerdap Nacionalni Park - Gvozdena kapija prirode i istorije</h2>
       <p>Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.</p>
 
       <h3>Šta videti i doživeti:</h3>
@@ -128,12 +178,12 @@ export const postsSr = [
     ],
   },
   {
-    id: 3,
-    title: "Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu",
+    id: 4,
+    title: "Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
-      <h2>Mokra Gora i Šarganska osmica – Putovanje kroz vreme i prirodu</h2>
+      <h2>Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu</h2>
       <p>Mokra Gora je destinacija koja spaja prirodne lepote, kulturnu baštinu i jedinstvene turističke atrakcije. Vožnja Šarganskom osmicom, uskom prugom koja vijuga kroz planinske predele, pruža nezaboravan doživljaj.</p>
 
       <h3>Šta ne propustiti:</h3>
@@ -146,7 +196,7 @@ export const postsSr = [
       <h3>Kako doći:</h3>
       <p>Mokra Gora se nalazi oko 200 km jugozapadno od Beograda. Putovanje traje oko 3,5 sata, a preporučena ruta vodi preko Užica.</p>
 
-      <h3>Viastro rent a car – Vaš partner za putovanja:</h3>
+      <h3>Viastro rent a car - Vaš partner za putovanja:</h3>
       <p>Naša vozila su savršena za planinske puteve i duže vožnje. Uz <strong>automatski menjač</strong>, <strong>klimatizaciju</strong> i <strong>dodatnu opremu</strong>, vaše putovanje će biti udobno i sigurno.</p>
     `,
     description:
@@ -171,13 +221,13 @@ export const postsEn = [
   {
     id: 1,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
-    title: "Weekend on Kopaonik – Mountain Adventure with Viastro Rent a Car",
+    title: "Weekend on Kopaonik - Mountain Adventure with Viastro Rent a Car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
-      "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination – all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free – comfortably, safely, and with complete freedom of movement.",
+      "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination - all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free - comfortably, safely, and with complete freedom of movement.",
     content: `
-      <h2>Weekend on Kopaonik – Mountain Adventure with Viastro Rent a Car</h2>
-      <p>If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination – whether you're going skiing, hiking, or just enjoying nature and SPA centers. And to make the journey as pleasant as the stay, the right solution is to rent a vehicle that suits your needs. Viastro rent a car offers vehicles ideal for the trip to the mountains – comfortable, reliable, and with full casco insurance.</p>
+      <h2>Weekend on Kopaonik - Mountain Adventure with Viastro Rent a Car</h2>
+      <p>If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination - whether you're going skiing, hiking, or just enjoying nature and SPA centers. And to make the journey as pleasant as the stay, the right solution is to rent a vehicle that suits your needs. Viastro rent a car offers vehicles ideal for the trip to the mountains - comfortable, reliable, and with full casco insurance.</p>
 
       <h3>Why Kopaonik for the weekend?</h3>
       <ol>
@@ -192,26 +242,26 @@ export const postsEn = [
           </ul>
         </li>
         <li><strong>Wide choice of accommodation:</strong><br>
-          From 5-star hotels to affordable apartments – Kopaonik has options for every budget.
+          From 5-star hotels to affordable apartments - Kopaonik has options for every budget.
         </li>
       </ol>
 
       <h3>Why rent a vehicle from Viastro?</h3>
       <ul>
         <li><strong>Comfort and safety:</strong> All our cars are regularly serviced, air-conditioned, and fully equipped for longer trips.</li>
-        <li><strong>Flexible packages:</strong> Rentals from 3 days with unlimited mileage – perfect for a mountain weekend.</li>
+        <li><strong>Flexible packages:</strong> Rentals from 3 days with unlimited mileage - perfect for a mountain weekend.</li>
         <li><strong>Full coverage:</strong> Full casco insurance, 24h assistance, and the option of additional equipment (ski rack, chains, child seat).</li>
         <li><strong>Quick and easy booking:</strong> Contact us via the website <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or directly at <a href="tel:0696565555">069/6565-555</a>.</li>
       </ul>
 
-      <h3>Itinerary – suggestion:</h3>
+      <h3>Itinerary - suggestion:</h3>
       <ul>
-        <li><strong>Friday (departure):</strong> Pick up your vehicle and head to Kopaonik. Recommended route: Belgrade – Kruševac – Brus – Kopaonik.</li>
+        <li><strong>Friday (departure):</strong> Pick up your vehicle and head to Kopaonik. Recommended route: Belgrade - Kruševac - Brus - Kopaonik.</li>
         <li><strong>Saturday:</strong> Enjoy sports activities, nature, and local cuisine.</li>
         <li><strong>Sunday:</strong> Relax at a SPA center and return in the evening.</li>
       </ul>
 
-      <p><strong>Viastro – Your Journey Starts Here.</strong><br>
+      <p><strong>Viastro - Your Journey Starts Here.</strong><br>
       For all of you who want the freedom to explore Serbia at your own pace, Viastro rent a car offers reliable vehicles and maximum flexibility.</p>
     `,
     imageUrl: "/kop.webp",
@@ -230,13 +280,13 @@ export const postsEn = [
   },
   {
     id: 2,
-    title: "Đerdap National Park – The Iron Gates of Nature and History",
+    title: "Đerdap National Park - The Iron Gates of Nature and History",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.",
     content: `
-      <h2>Đerdap National Park – The Iron Gates of Nature and History</h2>
+      <h2>Đerdap National Park - The Iron Gates of Nature and History</h2>
       <p>If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.</p>
 
       <h3>What to see and experience:</h3>
@@ -269,11 +319,11 @@ export const postsEn = [
   },
   {
     id: 3,
-    title: "Mokra Gora and Šargan Eight – A Journey Through Time and Nature",
+    title: "Mokra Gora and Šargan Eight - A Journey Through Time and Nature",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
-      <h2>Mokra Gora and Šargan Eight – A Journey Through Time and Nature</h2>
+      <h2>Mokra Gora and Šargan Eight - A Journey Through Time and Nature</h2>
       <p>Mokra Gora is a destination that combines natural beauty, cultural heritage, and unique tourist attractions. The ride on the Šargan Eight, a narrow-gauge railway that winds through mountainous landscapes, offers an unforgettable experience.</p>
 
       <h3>What not to miss:</h3>
@@ -286,7 +336,7 @@ export const postsEn = [
       <h3>How to get there:</h3>
       <p>Mokra Gora is located about 200 km southwest of Belgrade. The journey takes about 3.5 hours, and the recommended route is via Užice.</p>
 
-      <h3>Viastro rent a car – Your travel partner:</h3>
+      <h3>Viastro rent a car - Your travel partner:</h3>
       <p>Our vehicles are perfect for mountain roads and longer drives. With an <strong>automatic transmission</strong>, <strong>air conditioning</strong>, and <strong>additional equipment</strong>, your journey will be comfortable and safe.</p>
     `,
     description:
@@ -305,19 +355,69 @@ export const postsEn = [
       "Vehicle rental",
     ],
   },
+  {
+    id: 4,
+    title:
+      "New Year & Christmas on Serbia’s Mountains - Ski Season with Viastro",
+    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    description:
+      "Planning a cozy mountain holiday for New Year’s or Christmas? Kopaonik, Zlatibor, and Stara Planina are in full ski season. With Viastro rent a car you arrive faster and safer - winter tires, snow chains, full casco, and 24/7 assistance included.",
+    content: `
+      <h2>New Year & Christmas on Serbia’s Mountains</h2>
+      <p>The holidays are perfect for a snowy getaway. Ski resorts are running at full speed, hotels and apartments offer festive packages, and with the right car you arrive stress-free — even after fresh snowfall.</p>
+
+      <h3>Where to go for the holidays?</h3>
+      <ul>
+        <li><strong>Kopaonik:</strong> Most slopes, night skiing, and lively après-ski.</li>
+        <li><strong>Zlatibor:</strong> Family-friendly vibe, the new gondola ride, plenty of walks.</li>
+        <li><strong>Stara Planina:</strong> Wide slopes, fewer crowds, authentic eastern Serbia nature.</li>
+        <li><strong>Tara & Divčibare:</strong> Calmer stay, forest walks, sledding with kids.</li>
+      </ul>
+
+      <h3>What makes the trip smooth?</h3>
+      <ul>
+        <li><strong>Road safety:</strong> Winter tires, chains, and full insurance included.</li>
+        <li><strong>Flexibility:</strong> Pick up in Belgrade or at the airport, return where it suits you.</li>
+        <li><strong>Room for gear:</strong> SUVs and wagons with space for skis and luggage.</li>
+      </ul>
+
+      <h3>Quick holiday plan</h3>
+      <ol>
+        <li><strong>Day 1:</strong> Pick up the car, leave early to avoid traffic on main roads.</li>
+        <li><strong>Day 2-3:</strong> Ski day + wellness/SPA in the evening, local food and festive mood.</li>
+        <li><strong>Day 4:</strong> Short walk or sledding, return in the afternoon.</li>
+      </ol>
+
+      <p><strong>Book early:</strong> Holiday dates fill fast — secure your vehicle now. Contact: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/mount.webp",
+    date: "December 20, 2025",
+    datetime: "2025-12-20",
+    tags: [
+      "New Year travel",
+      "Christmas getaway",
+      "Serbia ski season",
+      "Kopaonik",
+      "Zlatibor",
+      "Stara Planina",
+      "Car rental Belgrade",
+      "Winter tires",
+    ],
+  },
 ];
 
 export const postsRu = [
   {
     id: 1,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
-    title: "Выходные на Копаонике – Горное приключение с Viastro rent a car",
+    title: "Выходные на Копаонике - Горное приключение с Viastro rent a car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
-      "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник – идеальное место для выходных – круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса – комфортно, безопасно и с полной свободой передвижения.",
+      "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник - идеальное место для выходных - круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса - комфортно, безопасно и с полной свободой передвижения.",
     content: `
-      <h2>Выходные на Копаонике – Горное приключение с Viastro rent a car</h2>
-      <p>Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник – идеальное место для выходных – собираетесь ли вы кататься на лыжах, ходить в походы или просто наслаждаться природой и СПА-центрами. А чтобы поездка была такой же приятной, как и пребывание, правильное решение – арендовать автомобиль, соответствующий вашим потребностям. Viastro rent a car предлагает автомобили, идеально подходящие для поездки в горы – удобные, надежные и с полной страховкой КАСКО.</p>
+      <h2>Выходные на Копаонике - Горное приключение с Viastro rent a car</h2>
+      <p>Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник - идеальное место для выходных - собираетесь ли вы кататься на лыжах, ходить в походы или просто наслаждаться природой и СПА-центрами. А чтобы поездка была такой же приятной, как и пребывание, правильное решение - арендовать автомобиль, соответствующий вашим потребностям. Viastro rent a car предлагает автомобили, идеально подходящие для поездки в горы - удобные, надежные и с полной страховкой КАСКО.</p>
 
       <h3>Почему Копаоник на выходные?</h3>
       <ol>
@@ -332,26 +432,26 @@ export const postsRu = [
           </ul>
         </li>
         <li><strong>Широкий выбор жилья:</strong><br>
-          От 5-звездочных отелей до доступных апартаментов – на Копаонике есть варианты на любой бюджет.
+          От 5-звездочных отелей до доступных апартаментов - на Копаонике есть варианты на любой бюджет.
         </li>
       </ol>
 
       <h3>Почему арендовать автомобиль у Viastro?</h3>
       <ul>
         <li><strong>Комфорт и безопасность:</strong> Все наши автомобили регулярно обслуживаются, оснащены кондиционерами и полностью оборудованы для длительных поездок.</li>
-        <li><strong>Гибкие пакеты:</strong> Аренда от 3 дней с неограниченным пробегом – идеально для выходных в горах.</li>
+        <li><strong>Гибкие пакеты:</strong> Аренда от 3 дней с неограниченным пробегом - идеально для выходных в горах.</li>
         <li><strong>Полное покрытие:</strong> Полная страховка КАСКО, круглосуточная помощь на дороге и возможность дополнительного оборудования (багажник для лыж, цепи, детское кресло).</li>
         <li><strong>Быстрое и простое бронирование:</strong> Свяжитесь с нами через сайт <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или напрямую по номеру <a href="tel:0696565555">069/6565-555</a>.</li>
       </ul>
 
-      <h3>План поездки – предложение:</h3>
+      <h3>План поездки - предложение:</h3>
       <ul>
-        <li><strong>Пятница (отправление):</strong> Заберите автомобиль и отправляйтесь на Копаоник. Рекомендуемый маршрут: Белград – Крушевац – Брус – Копаоник.</li>
+        <li><strong>Пятница (отправление):</strong> Заберите автомобиль и отправляйтесь на Копаоник. Рекомендуемый маршрут: Белград - Крушевац - Брус - Копаоник.</li>
         <li><strong>Суббота:</strong> Наслаждайтесь спортивными мероприятиями, природой и местной кухней.</li>
         <li><strong>Воскресенье:</strong> Отдых в СПА-центре и возвращение вечером.</li>
       </ul>
 
-      <p><strong>Viastro – Ваше путешествие начинается здесь.</strong><br>
+      <p><strong>Viastro - Ваше путешествие начинается здесь.</strong><br>
       Для всех вас, кто хочет свободы исследовать Сербию в собственном темпе, Viastro rent a car предлагает надежные автомобили и максимальную гибкость.</p>
     `,
     imageUrl: "/kop.webp",
@@ -370,14 +470,14 @@ export const postsRu = [
   },
   {
     id: 2,
-    title: "Национальный парк Джердап – Железные ворота природы и истории",
+    title: "Национальный парк Джердап - Железные ворота природы и истории",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
-      "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап – это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
+      "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап - это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
     content: `
-      <h2>Национальный парк Джердап – Железные ворота природы и истории</h2>
-      <p>Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап – это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.</p>
+      <h2>Национальный парк Джердап - Железные ворота природы и истории</h2>
+      <p>Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап - это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.</p>
 
       <h3>Что посмотреть и испытать:</h3>
       <ul>
@@ -410,12 +510,12 @@ export const postsRu = [
   {
     id: 3,
     title:
-      "Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу",
+      "Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
-      <h2>Мокра Гора и Шарганская восьмерка – Путешествие сквозь время и природу</h2>
-      <p>Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.</p>
+      <h2>Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу</h2>
+      <p>Мокра Гора - это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.</p>
 
       <h3>Что не пропустить:</h3>
       <ul>
@@ -425,13 +525,13 @@ export const postsRu = [
       </ul>
 
       <h3>Как добраться:</h3>
-      <p>Мокра Гора находится примерно в 200 км к юго-западу от Белграда. Поездка занимает около 3,5 часов, рекомендуемый маршрут – через Ужице.</p>
+      <p>Мокра Гора находится примерно в 200 км к юго-западу от Белграда. Поездка занимает около 3,5 часов, рекомендуемый маршрут - через Ужице.</p>
 
-      <h3>Viastro rent a car – Ваш партнер в путешествиях:</h3>
+      <h3>Viastro rent a car - Ваш партнер в путешествиях:</h3>
       <p>Наши автомобили идеально подходят для горных дорог и длительных поездок. С <strong>автоматической коробкой передач</strong>, <strong>кондиционером</strong> и <strong>дополнительным оборудованием</strong> ваше путешествие будет комфортным и безопасным.</p>
     `,
     description:
-      "Мокра Гора – это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.",
+      "Мокра Гора - это место, которое сочетает в себе природные красоты, культурное наследие и уникальные туристические достопримечательности. Поездка по Шарганской восьмерке, узкоколейной железной дороге, извивающейся по горным ландшафтам, дарит незабываемые впечатления.",
     imageUrl: "/djerdap.webp",
     date: "1 мая 2025",
     datetime: "2020-03-16",
@@ -441,6 +541,55 @@ export const postsRu = [
       "Культура",
       "Туризм",
       "Златибор",
+    ],
+  },
+  {
+    id: 4,
+    title: "Новый год и Рождество в горах Сербии - Лыжный сезон с Viastro",
+    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    description:
+      "Хотите провести новогодние и рождественские праздники в горах? Копаоник, Златибор и Стара-Планина уже в разгаре сезона. С Viastro rent a car вы доберетесь быстрее и безопаснее - зимняя резина, цепи, полное КАСКО и помощь 24/7.",
+    content: `
+      <h2>Новый год и Рождество в горах Сербии</h2>
+      <p>Праздники — идеальное время уехать из города и провести несколько дней на снегу. Курорты работают на полную, отели и апартаменты предлагают праздничные пакеты, а с правильным автомобилем вы доберетесь без стресса — даже после свежего снегопада.</p>
+
+      <h3>Куда поехать на праздники?</h3>
+      <ul>
+        <li><strong>Копаоник:</strong> Больше всего трасс, ночное катание, оживленный apres-ski.</li>
+        <li><strong>Златибор:</strong> Семейная атмосфера, новая гондола, много прогулок.</li>
+        <li><strong>Стара-Планина:</strong> Широкие склоны, меньше людей, аутентичная природа восточной Сербии.</li>
+        <li><strong>Тара и Дивчибаре:</strong> Спокойный отдых, лесные прогулки, санки с детьми.</li>
+      </ul>
+
+      <h3>Что важно в дороге?</h3>
+      <ul>
+        <li><strong>Безопасность:</strong> Зимняя резина, цепи и полное страхование включены.</li>
+        <li><strong>Гибкость:</strong> Выдача в Белграде или в аэропорту, возврат там, где удобно.</li>
+        <li><strong>Место для снаряжения:</strong> SUV и универсалы с багажником для лыж и чемоданов.</li>
+      </ul>
+
+      <h3>Быстрый план на праздники</h3>
+      <ol>
+        <li><strong>День 1:</strong> Заберите авто, выезжайте раньше, чтобы обойти трафик.</li>
+        <li><strong>Дни 2-3:</strong> Катание + вечерний SPA, местная кухня и праздничное настроение.</li>
+        <li><strong>День 4:</strong> Прогулка или санки, выезд домой после обеда.</li>
+      </ol>
+
+      <p><strong>Бронируйте заранее:</strong> Праздничные даты быстро заполняются — закрепите автомобиль сейчас. Контакт: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/mount.webp",
+    date: "20 декабря 2025",
+    datetime: "2025-12-20",
+    tags: [
+      "Новый год Сербия",
+      "Рождество поездка",
+      "Лыжный сезон",
+      "Копаоник",
+      "Златибор",
+      "Стара-Планина",
+      "Аренда авто Белград",
+      "Зимняя резина",
     ],
   },
 ];
@@ -519,13 +668,13 @@ export const aditionalEquipment = [
     },
     descriptionMap: {
       en: "If you wish for more than one person to operate the vehicle during the rental, it is possible to add an **additional driver**. The additional driver must meet the same requirements as the main driver: they must possess a valid driver’s license and be at least 21 years old (or older, depending on the vehicle class).",
-      sr: "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati **dodatnog vozača**. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač – da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila).",
+      sr: "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati **dodatnog vozača**. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač - da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila).",
       ru: "Если вы хотите, чтобы автомобилем во время аренды управляло более одного человека, можно добавить **дополнительного водителя**. Дополнительный водитель должен соответствовать тем же требованиям, что и основной водитель: иметь действующее водительское удостоверение и быть не моложе 21 года (или старше, в зависимости от класса автомобиля).",
     },
     name: "Dodatni vozac",
     icon: "public/icons/extras/wificar.svg",
     description:
-      "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati dodatnog vozača. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač – da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila). ",
+      "Ukoliko želite da vozilo koristi više od jedne osobe tokom najma, moguće je dodati dodatnog vozača. Dodatni vozač mora ispunjavati iste uslove kao i glavni vozač - da poseduje važeću vozačku dozvolu, kao i minimalno 21 godinu starosti (ili više, u zavisnosti od klase vozila). ",
     price: 0,
     free: true,
     perDay: false,
@@ -535,19 +684,19 @@ export const aditionalEquipment = [
   {
     id: 6,
     nameMap: {
-      en: "Car Seat (0–36 kg)",
-      sr: "Auto sedište (0–36 kg)",
-      ru: "Автокресло (0–36 кг)",
+      en: "Car Seat (0-36 kg)",
+      sr: "Auto sedište (0-36 kg)",
+      ru: "Автокресло (0-36 кг)",
     },
     descriptionMap: {
       en: "A universal car seat that covers all ages-from newborns up to children around 12 years old. It is adjustable in height and recline, allowing for a safe and comfortable ride throughout all phases of the child’s development. The seat can be installed rear-facing for the smallest babies and forward-facing for older children.",
-      sr: "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja. Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
-      ru: "Универсальное автокресло, подходящее для всех возрастов – от новорожденных до детей примерно 12 лет. Регулируется по высоте и наклону, что обеспечивает безопасную и комфортную поездку на всех этапах развития ребенка. Кресло может устанавливаться против хода движения для самых маленьких детей и по ходу движения для детей постарше.",
+      sr: "Univerzalno auto sedište koje pokriva sve uzraste - od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja. Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
+      ru: "Универсальное автокресло, подходящее для всех возрастов - от новорожденных до детей примерно 12 лет. Регулируется по высоте и наклону, что обеспечивает безопасную и комфортную поездку на всех этапах развития ребенка. Кресло может устанавливаться против хода движения для самых маленьких детей и по ходу движения для детей постарше.",
     },
-    name: "Auto sedište (0–36 kg)",
+    name: "Auto sedište (0-36 kg)",
     icon: "public/icons/extras/childseats.svg",
     description:
-      "Univerzalno auto sedište koje pokriva sve uzraste – od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja.Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
+      "Univerzalno auto sedište koje pokriva sve uzraste - od novorođenčadi do dece od oko 12 godina. Podesivo po visini i nagibu, omogućava bezbednu i udobnu vožnju u svim fazama detetovog razvoja.Sedište se može postavljati u pravcu suprotnom od vožnje za najmanje bebe i u pravcu vožnje za stariju decu.",
     price: 0,
     free: true,
     perDay: false,
@@ -1615,7 +1764,7 @@ export const rentalConditionsSr = `
 export const rentalConditionsRu = `
   <p class="c3">
       <span
-          >ОБЩИЕ УСЛОВИЯ АРЕНДЫ ТРАНСПОРТНЫХ СРЕДСТВ – VIASTRO DOO
+          >ОБЩИЕ УСЛОВИЯ АРЕНДЫ ТРАНСПОРТНЫХ СРЕДСТВ - VIASTRO DOO
           <br />📍 Адрес: ул. Данила Лекича Шпанца 31, Нови Београд<br />📉 ИНН: 114961759 | Регистрационный номер: 22096737<br />📧 Email: office@viastro.rs | 📞 Тел: 069/656-555<br /><br /></span
       ><span class="c8"
           >1. ОБЩИЕ ПОЛОЖЕНИЯ И ОПРЕДЕЛЕНИЯ ПОНЯТИЙ</span
@@ -1667,27 +1816,27 @@ export const rentalConditionsRu = `
   </p>
   <p class="c0">
       <span class="c1"
-          >"Арендодатель" – компания Viastro doo Белград, с местонахождением по адресу ул. Данила Лекича Шпанца, д. 31, Белград-Нови-Београд, регистрационный номер: 22096737, ИНН: 114961759;</span
+          >"Арендодатель" - компания Viastro doo Белград, с местонахождением по адресу ул. Данила Лекича Шпанца, д. 31, Белград-Нови-Београд, регистрационный номер: 22096737, ИНН: 114961759;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >"Арендатор" – любое физическое или юридическое лицо, которое арендует транспортное средство, или от имени которого арендуется транспортное средство;</span
+          >"Арендатор" - любое физическое или юридическое лицо, которое арендует транспортное средство, или от имени которого арендуется транспортное средство;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >"Договор" – Договор аренды, который подписывается при получении транспортного средства и которым транспортное средство передается в пользование, определяются права и обязанности сторон в соответствии с договорными положениями и Общими условиями аренды, такие как, например, получение и возврат транспортного средства, покрытие, пакет оборудования и услуг, включенных в цену, а также способ оплаты. Договор, помимо прочего, содержит данные о пробеге транспортного средства, повреждениях и возможных недостатках транспортного средства и другие права и обязанности, которые обе стороны договора полностью принимают своими подписями. Схема состояния транспортного средства при выдаче и настоящие Общие условия считаются неотъемлемой частью Договора аренды транспортного средства как его приложение;</span
+          >"Договор" - Договор аренды, который подписывается при получении транспортного средства и которым транспортное средство передается в пользование, определяются права и обязанности сторон в соответствии с договорными положениями и Общими условиями аренды, такие как, например, получение и возврат транспортного средства, покрытие, пакет оборудования и услуг, включенных в цену, а также способ оплаты. Договор, помимо прочего, содержит данные о пробеге транспортного средства, повреждениях и возможных недостатках транспортного средства и другие права и обязанности, которые обе стороны договора полностью принимают своими подписями. Схема состояния транспортного средства при выдаче и настоящие Общие условия считаются неотъемлемой частью Договора аренды транспортного средства как его приложение;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >"Водитель/Дополнительный водитель" – это физическое лицо, указанное в Договоре как "Пользователь", которое подписывает Договор аренды и получает транспортное средство и которое ответственно за соблюдение всех положений Договора и Общих условий;</span
+          >"Водитель/Дополнительный водитель" - это физическое лицо, указанное в Договоре как "Пользователь", которое подписывает Договор аренды и получает транспортное средство и которое ответственно за соблюдение всех положений Договора и Общих условий;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >"Пользователь" – Арендатор, Водитель и Дополнительный водитель в дальнейшем тексте Общих условий аренды обозначаются одним словом – Пользователь.</span
+          >"Пользователь" - Арендатор, Водитель и Дополнительный водитель в дальнейшем тексте Общих условий аренды обозначаются одним словом - Пользователь.</span
       >
   </p>
   <p class="c0">
@@ -1804,7 +1953,7 @@ export const rentalConditionsRu = `
   </p>
   <p class="c6">
       <span class="c1"
-          ><br />В случае утери техпаспорта, ключей, номерных знаков, наклеек, страхового полиса и тому подобного – Пользователь обязан оплатить сумму за предпринятые Арендодателем действия по устранению последствий согласно действующему прайс-листу. Действующий прайс-лист в этих случаях включает в цену и операционные расходы, которые при этом возникают (фактические расходы и расходы по задействованию сотрудников Арендодателя на устранение последствий утери).</span
+          ><br />В случае утери техпаспорта, ключей, номерных знаков, наклеек, страхового полиса и тому подобного - Пользователь обязан оплатить сумму за предпринятые Арендодателем действия по устранению последствий согласно действующему прайс-листу. Действующий прайс-лист в этих случаях включает в цену и операционные расходы, которые при этом возникают (фактические расходы и расходы по задействованию сотрудников Арендодателя на устранение последствий утери).</span
       >
   </p>
   <p class="c6"><span class="c1">&nbsp;</span></p>
@@ -1902,12 +2051,12 @@ export const rentalConditionsRu = `
   </p>
   <p class="c0">
       <span class="c1"
-          >В случае возникновения дорожно-транспортного происшествия, в котором участвует Пользователь и/или любое другое уполномоченное или неуполномоченное лицо – Пользователь обязан немедленно уведомить компетентную полицейскую службу и Арендодателя, а также предоставить properly заполненный и заверенный полицейский протокол.</span
+          >В случае возникновения дорожно-транспортного происшествия, в котором участвует Пользователь и/или любое другое уполномоченное или неуполномоченное лицо - Пользователь обязан немедленно уведомить компетентную полицейскую службу и Арендодателя, а также предоставить properly заполненный и заверенный полицейский протокол.</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >В случае кражи транспортного средства – Пользователь обязан немедленно уведомить компетентную полицейскую службу и Арендодателя, а также передать Арендодателю без задержки оригиналы ключей и сопроводительную документацию на транспортное средство. Нарушение этих положений представляет собой грубые нарушения Общих условий, по которым Арендодатель имеет право потребовать от Пользователя всю сумму причиненного таким образом ущерба.
+          >В случае кражи транспортного средства - Пользователь обязан немедленно уведомить компетентную полицейскую службу и Арендодателя, а также передать Арендодателю без задержки оригиналы ключей и сопроводительную документацию на транспортное средство. Нарушение этих положений представляет собой грубые нарушения Общих условий, по которым Арендодатель имеет право потребовать от Пользователя всю сумму причиненного таким образом ущерба.
       </span>
   </p>
   <p class="c3">
@@ -1949,22 +2098,22 @@ export const rentalConditionsRu = `
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Отмена до 48 часов до начала аренды – Пользователь может отменить бронирование транспортного средства не позднее чем за 48 часов до начала аренды транспортного средства без возникновения дополнительных обязательств и/или расходов.</span
+          >Отмена до 48 часов до начала аренды - Пользователь может отменить бронирование транспортного средства не позднее чем за 48 часов до начала аренды транспортного средства без возникновения дополнительных обязательств и/или расходов.</span
       >
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Отмена менее чем за 48 часов – В случае, если Пользователь отменяет бронирование транспортного средства в срок менее 48 часов до начала аренды, он обязан выплатить Арендодателю сумму в размере 30% от общей суммы аренды.</span
+          >Отмена менее чем за 48 часов - В случае, если Пользователь отменяет бронирование транспортного средства в срок менее 48 часов до начала аренды, он обязан выплатить Арендодателю сумму в размере 30% от общей суммы аренды.</span
       >
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Отмена менее чем за 24 часа – В случае, если Пользователь отменяет бронирование транспортного средства в срок менее 24 часов до начала аренды, он обязан выплатить Арендодателю сумму в размере 50% от общей суммы аренды.</span
+          >Отмена менее чем за 24 часа - В случае, если Пользователь отменяет бронирование транспортного средства в срок менее 24 часов до начала аренды, он обязан выплатить Арендодателю сумму в размере 50% от общей суммы аренды.</span
       >
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Неявка – В случае, если Пользователь не явится в согласованный срок передачи транспортного средства, он обязан выплатить Арендодателю компенсацию в размере 100% суммы аренды.</span
+          >Неявка - В случае, если Пользователь не явится в согласованный срок передачи транспортного средства, он обязан выплатить Арендодателю компенсацию в размере 100% суммы аренды.</span
       >
   </p>
   <p class="c0">
@@ -1980,7 +2129,7 @@ export const rentalConditionsRu = `
   </p>
   <p class="c0">
       <span class="c1"
-          >Подписывая договор, Пользователь дал согласие и ознакомился с Уведомлением об обработке персональных данных со стороны Арендодателя (в качестве Контролера) и также согласен с ним. Пользователь уведомлен, что Арендодатель обрабатывает все данные, которые он ввел и предоставил Арендодателю при заключении Договора, а именно: место и дата заключения договора, имя и фамилия Пользователя, номер удостоверения личности, ИНН, номер техпаспорта и водительского удостоверения, место жительства, телефон, e-mail. Цель обработки данных – заключение и исполнение договора аренды и проведение маркетинговых активностей продавца, и они хранятся в течение периода три года с даты согласия. Правовое основание обработки заключается в:</span
+          >Подписывая договор, Пользователь дал согласие и ознакомился с Уведомлением об обработке персональных данных со стороны Арендодателя (в качестве Контролера) и также согласен с ним. Пользователь уведомлен, что Арендодатель обрабатывает все данные, которые он ввел и предоставил Арендодателю при заключении Договора, а именно: место и дата заключения договора, имя и фамилия Пользователя, номер удостоверения личности, ИНН, номер техпаспорта и водительского удостоверения, место жительства, телефон, e-mail. Цель обработки данных - заключение и исполнение договора аренды и проведение маркетинговых активностей продавца, и они хранятся в течение периода три года с даты согласия. Правовое основание обработки заключается в:</span
       >
   </p>
   <ul class="c10 lst-kix_list_12-0 start">
@@ -2084,7 +2233,7 @@ export const rentalConditionsRu = `
 export const rentalConditionsEn = `
   <p class="c3">
       <span
-          >GENERAL VEHICLE RENTAL CONDITIONS – VIASTRO DOO
+          >GENERAL VEHICLE RENTAL CONDITIONS - VIASTRO DOO
           <br />📍 Address: Danila Lekića Španca 31, Novi Beograd<br />📉 Tax ID: 114961759 | Company ID: 22096737<br />📧 Email: office@viastro.rs | 📞 Tel: 069/656-555<br /><br /></span
       ><span class="c8"
           >1. GENERAL PROVISIONS AND DEFINITIONS</span
@@ -2136,27 +2285,27 @@ export const rentalConditionsEn = `
   </p>
   <p class="c0">
       <span class="c1"
-          >''Lessor'' – the company Viastro doo Belgrade, with its registered office at Danila Lekića Španca St. No. 31, Belgrade-Novi Beograd, company ID: 22096737, Tax ID: 114961759;</span
+          >''Lessor'' - the company Viastro doo Belgrade, with its registered office at Danila Lekića Španca St. No. 31, Belgrade-Novi Beograd, company ID: 22096737, Tax ID: 114961759;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >''Lessee'' – any natural or legal person who rents the vehicle, or in whose name the vehicle is rented;</span
+          >''Lessee'' - any natural or legal person who rents the vehicle, or in whose name the vehicle is rented;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >''Agreement'' – the Rental Agreement signed upon vehicle pickup, which grants the use of the vehicle, defining the rights and obligations of the contracting parties in accordance with the contractual provisions and the General Rental Conditions, such as, for example, vehicle pickup and return, coverage, equipment package and services included in the price, and the method of payment. The Agreement also contains, among other things, data on the vehicle's mileage, damages, and any deficiencies in the vehicle, and other rights and obligations that both contracting parties fully accept with their signatures. The vehicle condition sketch at the time of rental and these General Conditions are considered an integral part of the Vehicle Rental Agreement as its annex;</span
+          >''Agreement'' - the Rental Agreement signed upon vehicle pickup, which grants the use of the vehicle, defining the rights and obligations of the contracting parties in accordance with the contractual provisions and the General Rental Conditions, such as, for example, vehicle pickup and return, coverage, equipment package and services included in the price, and the method of payment. The Agreement also contains, among other things, data on the vehicle's mileage, damages, and any deficiencies in the vehicle, and other rights and obligations that both contracting parties fully accept with their signatures. The vehicle condition sketch at the time of rental and these General Conditions are considered an integral part of the Vehicle Rental Agreement as its annex;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >''Driver/Additional Driver'' – is the natural person listed in the Agreement as the ''User'' who signs the Rental Agreement and takes over the vehicle, and who is responsible for complying with all provisions of the Agreement and General Conditions;</span
+          >''Driver/Additional Driver'' - is the natural person listed in the Agreement as the ''User'' who signs the Rental Agreement and takes over the vehicle, and who is responsible for complying with all provisions of the Agreement and General Conditions;</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >''User'' – Lessee, Driver, and Additional Driver in the further text of the General Rental Conditions are referred to by one word – User.</span
+          >''User'' - Lessee, Driver, and Additional Driver in the further text of the General Rental Conditions are referred to by one word - User.</span
       >
   </p>
   <p class="c0">
@@ -2273,7 +2422,7 @@ export const rentalConditionsEn = `
   </p>
   <p class="c6">
       <span class="c1"
-          ><br />In case of loss of the vehicle registration certificate, keys, license plates, stickers, insurance policy, etc. – the User is obliged to pay the amount for the actions undertaken by the Lessor to eliminate the consequences according to the current price list. The current price list in these cases includes in the price the handling costs that arise (actual costs and costs of engaging the Lessor's employees to eliminate the consequences of the loss).</span
+          ><br />In case of loss of the vehicle registration certificate, keys, license plates, stickers, insurance policy, etc. - the User is obliged to pay the amount for the actions undertaken by the Lessor to eliminate the consequences according to the current price list. The current price list in these cases includes in the price the handling costs that arise (actual costs and costs of engaging the Lessor's employees to eliminate the consequences of the loss).</span
       >
   </p>
   <p class="c6"><span class="c1">&nbsp;</span></p>
@@ -2371,12 +2520,12 @@ export const rentalConditionsEn = `
   </p>
   <p class="c0">
       <span class="c1"
-          >In the event of a traffic accident involving the User and/or any other authorized or unauthorized person – the User is obliged to immediately notify the competent police service and the Lessor, and to provide a properly completed and certified police report.</span
+          >In the event of a traffic accident involving the User and/or any other authorized or unauthorized person - the User is obliged to immediately notify the competent police service and the Lessor, and to provide a properly completed and certified police report.</span
       >
   </p>
   <p class="c0">
       <span class="c1"
-          >In case of vehicle theft – the User is obliged to immediately notify the competent police service and the Lessor, and to deliver to the Lessor without delay the original keys and accompanying documentation for the vehicle. Breach of these provisions constitutes gross violations of the General Conditions for which the Lessor has the right to claim the entire amount of damage thus caused from the User.
+          >In case of vehicle theft - the User is obliged to immediately notify the competent police service and the Lessor, and to deliver to the Lessor without delay the original keys and accompanying documentation for the vehicle. Breach of these provisions constitutes gross violations of the General Conditions for which the Lessor has the right to claim the entire amount of damage thus caused from the User.
       </span>
   </p>
   <p class="c3">
@@ -2418,22 +2567,22 @@ export const rentalConditionsEn = `
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Cancellation up to 48h before rental start – The User can cancel the vehicle reservation no later than 48 hours before the start of the vehicle rental without incurring additional obligations and/or costs.</span
+          >Cancellation up to 48h before rental start - The User can cancel the vehicle reservation no later than 48 hours before the start of the vehicle rental without incurring additional obligations and/or costs.</span
       >
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Cancellation less than 48h – If the User cancels the vehicle reservation within a period shorter than 48 hours before the start of the rental, they are obliged to pay the Lessor an amount of 30% of the total rental amount.</span
+          >Cancellation less than 48h - If the User cancels the vehicle reservation within a period shorter than 48 hours before the start of the rental, they are obliged to pay the Lessor an amount of 30% of the total rental amount.</span
       >
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >Cancellation less than 24h – If the User cancels the vehicle reservation within a period shorter than 24 hours before the start of the rental, they are obliged to pay the Lessor an amount of 50% of the total rental amount.</span
+          >Cancellation less than 24h - If the User cancels the vehicle reservation within a period shorter than 24 hours before the start of the rental, they are obliged to pay the Lessor an amount of 50% of the total rental amount.</span
       >
   </p>
   <p class="c0 c2">
       <span class="c1"
-          >No-show – In case the User does not appear at the agreed vehicle handover time, they are obliged to pay the Lessor compensation in the amount of 100% of the rental amount.</span
+          >No-show - In case the User does not appear at the agreed vehicle handover time, they are obliged to pay the Lessor compensation in the amount of 100% of the rental amount.</span
       >
   </p>
   <p class="c0">
