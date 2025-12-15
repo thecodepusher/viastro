@@ -35,7 +35,11 @@ export default function BlogSection(props: {
                   <img
                     alt=""
                     src={post.imageUrl}
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    className={`h-full w-full transition-transform duration-500 ${
+                      post.id === 1
+                        ? "object-cover object-bottom-left group-hover:scale-110"
+                        : "object-contain group-hover:scale-110"
+                    }`}
                     loading="lazy"
                     decoding="async"
                     width="364"

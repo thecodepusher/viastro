@@ -32,7 +32,7 @@ export const en: BaseLocale = {
   automatic: "Automatic",
   seats: "seats",
   description:
-    "Rent a car Belgrade – Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
+    "Rent a car Belgrade - Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
   deployFaster: "Deploy faster",
   deployDesc: "Everything you need to deploy your app",
   featureDesc:
@@ -53,7 +53,7 @@ export const en: BaseLocale = {
   gear: "Gear",
   ctaTitle: "Hit the Road Without Worries!",
   ctaSubTitle:
-    "Rent a reliable car quickly and easily – book your vehicle today and enjoy a stress-free drive.",
+    "Rent a reliable car quickly and easily - book your vehicle today and enjoy a stress-free drive.",
   ctaAction: "Create a reservation today",
   gitTitle: "Get in touch",
   gitSubTitle:
@@ -227,7 +227,7 @@ export const en: BaseLocale = {
   },
   seoHomeTitle: "Viastro rent a car | Belgrade",
   seoHomeDescription:
-    "Rent a car Belgrade – Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
+    "Rent a car Belgrade - Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
   seoHomeKeywords:
     "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade",
   seoCarsTitle: "Viastro Cars | Belgrade",
@@ -305,7 +305,7 @@ export const en: BaseLocale = {
   seoLandingTeslaKeywords:
     "rent a car Belgrade airport, rent a car Nikola Tesla airport, airport car rental Belgrade",
   seoLongTermRentalTitle:
-    "Long-Term Car Rental – Operational Leasing | Viastro Rent a Car",
+    "Long-Term Car Rental - Operational Leasing | Viastro Rent a Car",
   seoLongTermRentalDescription:
     "Flexible long-term car rental in Belgrade with no upfront investment or hidden fees. Operational leasing for businesses, entrepreneurs, and individuals with registration, insurance, maintenance, and replacement vehicles included.",
   seoLongTermRentalKeywords:
