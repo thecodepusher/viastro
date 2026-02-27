@@ -1,6 +1,13 @@
 import type { BaseLocale } from "@/locales/base-locale";
 import { CarType, GasType, TransmissionType } from "./data";
 
+/**
+ * Vehicle IDs that should not be displayed .
+ * Reference: 1=P2008, 2=C3 Aircross, 3=P3008, 6=Octavia, 7=Ibiza FR, 8=Clio,
+ * 10=Ibiza DSG, 11=Fiat 500, 12=C3 Aircross Blue
+ */
+export const EXCLUDED_CAR_IDS: string[] = ["3", "11"];
+
 export const fullProtection = {
   id: 1,
   nameMap: {
@@ -25,6 +32,7 @@ const carImageMap: Record<string, string> = {
   peugeot_3008: "/3008.webp",
   skoda_octavia: "/skoda_octavia.webp",
   citroen_c3_aircross: "/c3-aircross.webp",
+  citroen_c3_aircross_blue: "/c3-aircross-blue.webp",
   citroen_c3: "/c3-aircross.webp",
   ford_focus: "/ford-focus.webp",
   seat_ibiza: "/seat-ibiza-fr.webp",
@@ -156,6 +164,19 @@ const carDataMap: Record<
       { from: 8, to: 15, price: 25 },
       { from: 16, to: 29, price: 21 },
       { from: 30, to: null, price: 17 },
+    ],
+  },
+  // Citroen C3 Aircross Blue (id: "12")
+  "12": {
+    deposite: 300,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 150,
+    customName: "Citroen C3 Aircross Blue",
+    prices: [
+      { from: 3, to: 7, price: 55 },
+      { from: 8, to: 15, price: 50 },
+      { from: 16, to: 29, price: 45 },
+      { from: 30, to: null, price: 35 },
     ],
   },
   // Default za ostale automobile
@@ -301,7 +322,7 @@ function getGasText(gas: GasType, lang: BaseLocale): string {
 
 function getTransmissionText(
   transmissionType: TransmissionType,
-  lang: BaseLocale
+  lang: BaseLocale,
 ): string {
   return transmissionType === TransmissionType.automatic
     ? lang.automatic
@@ -312,13 +333,16 @@ export function transformApiCars(
   apiModels: ApiCarModel[],
   lang: BaseLocale,
   days?: number,
-  availableCarIds?: string[]
+  availableCarIds?: string[],
 ): TransformedCar[] {
-  return apiModels.map((apiCar) => {
+  const visibleModels = apiModels.filter(
+    (car) => !EXCLUDED_CAR_IDS.includes(car.id),
+  );
+  return visibleModels.map((apiCar) => {
     const carType = getCarTypeFromApi(apiCar.group_name, apiCar.class_name);
     const gas = getGasTypeFromApi(apiCar.features.fuel);
     const transmissionType = getTransmissionTypeFromApi(
-      apiCar.features.transmission
+      apiCar.features.transmission,
     );
     const numberOfSeats = parseInt(apiCar.features.passengers) || 5;
     const airConditioning = apiCar.features.aircondition === "1";
