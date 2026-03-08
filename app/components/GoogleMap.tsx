@@ -1,7 +1,7 @@
 export default function GoogleMap() {
-  const address = "Viastro Rent a Car, Danila Lekića Španca 31, Beograd 11070";
+  const address = "Viastro Rent a Car, Nehruova 51a, Beograd 11070";
   const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
-    address
+    address,
   )}&output=embed`;
 
   return (
@@ -15,7 +15,7 @@ export default function GoogleMap() {
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         className="rounded-lg"
-        title="Google Maps - Danila Lekica Spanca 31, Novi Beograd"
+        title="Google Maps - Nehruova 51a, Novi Beograd"
       />
     </div>
   );
