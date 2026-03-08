@@ -27,7 +27,7 @@ export default function GetInTouch(props: { lang: BaseLocale }) {
                 </h3>
                 <a href="https://maps.app.goo.gl/3gyS4z6Wy46Wufg9A">
                   <address className="mt-2 text-sm/6 text-gray-600 not-italic">
-                    <p>Danila Lekica Spanca 31, 11070</p>
+                    <p>Nehruova 51a, 11070</p>
                   </address>
                 </a>
                 <div className="mt-3 space-y-1 text-sm/6 ">
