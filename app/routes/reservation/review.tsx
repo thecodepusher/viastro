@@ -31,7 +31,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const reservationData = getReservationDataFromCookies(cookie);
 
   const car = transformedCars.find(
-    (x) => x.exnternalId === reservationData.carId
+    (x) => x.exnternalId === reservationData.carId,
   );
 
   if (!car) {
@@ -42,14 +42,14 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     reservationData.dropoffDate,
     reservationData.pickupDate,
     reservationData.dropoffTime,
-    reservationData.pickupTime
+    reservationData.pickupTime,
   );
 
   const days = calculateRentalDays(
     reservationData.pickupDate,
     reservationData.pickupTime,
     reservationData.dropoffDate,
-    reservationData.dropoffTime
+    reservationData.dropoffTime,
   );
 
   const { price, carPrice, depositeDiscount, extras } =
@@ -102,7 +102,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   ) {
     return Response.json(
       { error: "Missing contact information." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -113,7 +113,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   const reservationData = getReservationDataFromCookies(cookie);
 
   const car = transformedCars.find(
-    (x) => x.exnternalId === reservationData.carId
+    (x) => x.exnternalId === reservationData.carId,
   );
 
   if (!car) {
@@ -128,7 +128,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   ) {
     return Response.json(
       { error: "Reservation timing details are missing." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -136,14 +136,14 @@ export async function action({ request, params }: Route.ActionArgs) {
     reservationData.dropoffDate,
     reservationData.pickupDate,
     reservationData.dropoffTime,
-    reservationData.pickupTime
+    reservationData.pickupTime,
   );
 
   const days = calculateRentalDays(
     reservationData.pickupDate,
     reservationData.pickupTime,
     reservationData.dropoffDate,
-    reservationData.dropoffTime
+    reservationData.dropoffTime,
   );
 
   const { price, carPrice, depositeDiscount, extras } =
@@ -164,11 +164,11 @@ export async function action({ request, params }: Route.ActionArgs) {
   const depositAfterDiscount = Math.max(car.deposite - depositeDiscount, 0);
 
   const extrasDescriptions = extras.map(
-    (extra) => `${extra.name} - ${extra.price.toFixed(2)}€`
+    (extra) => `${extra.name} - ${extra.price.toFixed(2)}€`,
   );
   if (notInWorkingHours && priceForOffHours > 0) {
     extrasDescriptions.push(
-      `${lang.afterHoursReservationFee} - ${priceForOffHours.toFixed(2)}€`
+      `${lang.afterHoursReservationFee} - ${priceForOffHours.toFixed(2)}€`,
     );
   }
 
@@ -194,7 +194,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       {
         error: "Payment gateway configuration error. Please contact support.",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
@@ -229,8 +229,8 @@ export async function action({ request, params }: Route.ActionArgs) {
     depositAfterDiscount,
     notInWorkingHours,
     carDeposit: car.deposite,
-    depositAmount: depositAfterDiscount, // Iznos depozita za preautorizaciju
-    needsTotalPayment: true, // Flag da treba i naplata ukupne cene
+    depositAmount: depositAfterDiscount,
+    needsTotalPayment: true,
   };
 
   const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
@@ -239,18 +239,17 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   const returnUrlWithSession = ensureHttpsUrl(
     `${baseUrl}/${langCode}/wspay/success?sessionId=${sessionId}`,
-    isTestMode
+    isTestMode,
   );
   const returnErrorUrlWithSession = ensureHttpsUrl(
     `${baseUrl}/${langCode}/wspay/error?sessionId=${sessionId}`,
-    isTestMode
+    isTestMode,
   );
   const cancelUrlWithSession = ensureHttpsUrl(
     `${baseUrl}/${langCode}/wspay/cancel?sessionId=${sessionId}`,
-    isTestMode
+    isTestMode,
   );
 
-  // Preautorizacija za depozit
   const depositAmount =
     depositAfterDiscount * Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
@@ -268,18 +267,18 @@ export async function action({ request, params }: Route.ActionArgs) {
     customerPhone: phone,
     lang: langCode.toUpperCase(),
     returnMethod: "GET",
-    authorizationType: "PreAuth", // Preautorizacija umesto obične naplate
+    authorizationType: "PreAuth",
   });
 
   const wspayFormDataEncoded = encodeURIComponent(
     JSON.stringify({
       url: wspayUrl,
       formData: wspayFormDataWithSession,
-    })
+    }),
   );
 
   return redirect(
-    `/${langCode}/wspay/redirect?sessionId=${sessionId}&formData=${wspayFormDataEncoded}`
+    `/${langCode}/wspay/redirect?sessionId=${sessionId}&formData=${wspayFormDataEncoded}`,
   );
 }
 export function meta({ data }: Route.MetaArgs) {

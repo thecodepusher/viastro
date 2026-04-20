@@ -67,13 +67,16 @@ export async function action({ request, params }: Route.ActionArgs) {
     ShoppingCartID: wspayParams.ShoppingCartID || wspayParams.ShoppingCartId,
     Signature: wspayParams.Signature || wspayParams.signature,
     Amount: wspayParams.Amount || wspayParams.amount,
-    wsPayOrderId: wspayParams.wsPayOrderId || wspayParams.WsPayOrderId || wspayParams.WSPayOrderId,
+    wsPayOrderId:
+      wspayParams.wsPayOrderId ||
+      wspayParams.WsPayOrderId ||
+      wspayParams.WSPayOrderId,
   };
 
   if (shopId && secretKey) {
     if (successValue === "1" && !callbackParams.ApprovalCode) {
       console.error(
-        "WSPay Success: ApprovalCode is missing for successful transaction"
+        "WSPay Success: ApprovalCode is missing for successful transaction",
       );
       return redirect(`/${params.lang ?? "sr"}/wspay/error`);
     }
@@ -81,7 +84,7 @@ export async function action({ request, params }: Route.ActionArgs) {
     const isValidSignature = verifyWSPayCallbackSignature(
       callbackParams,
       shopId,
-      secretKey
+      secretKey,
     );
 
     if (!isValidSignature) {
@@ -91,10 +94,12 @@ export async function action({ request, params }: Route.ActionArgs) {
   }
 
   // Provera da li je ovo preautorizacija depozita i da li treba naplata ukupne cene
-  const isDepositPreAuth = reservationData.needsTotalPayment && 
-                           callbackParams.Amount && 
-                           parseFloat(callbackParams.Amount.replace(",", ".")) === 
-                           (reservationData.depositAmount * Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1));
+  const isDepositPreAuth =
+    reservationData.needsTotalPayment &&
+    callbackParams.Amount &&
+    parseFloat(callbackParams.Amount.replace(",", ".")) ===
+      reservationData.depositAmount *
+        Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
   if (isDepositPreAuth && successValue === "1") {
     // Sačuvaj podatke o preautorizaciji depozita
@@ -120,19 +125,21 @@ export async function action({ request, params }: Route.ActionArgs) {
         : undefined);
     const isTestMode = testModeEnv !== "false";
 
-    const totalAmount = reservationData.totalPrice * Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
+    const totalAmount =
+      reservationData.totalPrice *
+      Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
     const returnUrlTotal = ensureHttpsUrl(
       `${baseUrl}/${langCode}/wspay/success?sessionId=${totalPaymentSessionId}`,
-      isTestMode
+      isTestMode,
     );
     const returnErrorUrlTotal = ensureHttpsUrl(
       `${baseUrl}/${langCode}/wspay/error?sessionId=${totalPaymentSessionId}`,
-      isTestMode
+      isTestMode,
     );
     const cancelUrlTotal = ensureHttpsUrl(
       `${baseUrl}/${langCode}/wspay/cancel?sessionId=${totalPaymentSessionId}`,
-      isTestMode
+      isTestMode,
     );
 
     const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
@@ -157,12 +164,12 @@ export async function action({ request, params }: Route.ActionArgs) {
       JSON.stringify({
         url: wspayUrl,
         formData: totalPaymentFormData,
-      })
+      }),
     );
 
     // Redirectuj na naplatu ukupne cene
     return redirect(
-      `/${langCode}/wspay/redirect?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`
+      `/${langCode}/wspay/redirect?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
     );
   }
 
@@ -266,7 +273,10 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     ShoppingCartID: wspayParams.ShoppingCartID || wspayParams.ShoppingCartId,
     Signature: wspayParams.Signature || wspayParams.signature,
     Amount: wspayParams.Amount || wspayParams.amount,
-    wsPayOrderId: wspayParams.wsPayOrderId || wspayParams.WsPayOrderId || wspayParams.WSPayOrderId,
+    wsPayOrderId:
+      wspayParams.wsPayOrderId ||
+      wspayParams.WsPayOrderId ||
+      wspayParams.WSPayOrderId,
   };
 
   if (shopId && secretKey && isSuccessful) {
@@ -278,7 +288,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     const isValidSignature = verifyWSPayCallbackSignature(
       callbackParams,
       shopId,
-      secretKey
+      secretKey,
     );
 
     if (!isValidSignature) {
@@ -288,10 +298,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   }
 
   // Provera da li je ovo preautorizacija depozita i da li treba naplata ukupne cene
-  const isDepositPreAuth = reservationData.needsTotalPayment && 
-                           callbackParams.Amount && 
-                           parseFloat(callbackParams.Amount.replace(",", ".")) === 
-                           (reservationData.depositAmount * Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1));
+  const isDepositPreAuth =
+    reservationData.needsTotalPayment &&
+    callbackParams.Amount &&
+    parseFloat(callbackParams.Amount.replace(",", ".")) ===
+      reservationData.depositAmount *
+        Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
   if (isDepositPreAuth && isSuccessful) {
     // Sačuvaj podatke o preautorizaciji depozita
@@ -317,19 +329,21 @@ export async function loader({ request, params }: Route.LoaderArgs) {
         : undefined);
     const isTestMode = testModeEnv !== "false";
 
-    const totalAmount = reservationData.totalPrice * Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
+    const totalAmount =
+      reservationData.totalPrice *
+      Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
     const returnUrlTotal = ensureHttpsUrl(
       `${baseUrl}/${langCode}/wspay/success?sessionId=${totalPaymentSessionId}`,
-      isTestMode
+      isTestMode,
     );
     const returnErrorUrlTotal = ensureHttpsUrl(
       `${baseUrl}/${langCode}/wspay/error?sessionId=${totalPaymentSessionId}`,
-      isTestMode
+      isTestMode,
     );
     const cancelUrlTotal = ensureHttpsUrl(
       `${baseUrl}/${langCode}/wspay/cancel?sessionId=${totalPaymentSessionId}`,
-      isTestMode
+      isTestMode,
     );
 
     const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
@@ -354,12 +368,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       JSON.stringify({
         url: wspayUrl,
         formData: totalPaymentFormData,
-      })
+      }),
     );
 
     // Redirectuj na naplatu ukupne cene
     return redirect(
-      `/${langCode}/wspay/redirect?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`
+      `/${langCode}/wspay/redirect?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
     );
   }
 
@@ -369,8 +383,10 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
       // Ako postoji preautorizacija depozita, koristi te podatke za email
       const depositPreAuth = reservationData.depositPreAuth;
-      const depositWsPayOrderId = depositPreAuth?.wsPayOrderId || callbackParams.wsPayOrderId;
-      const depositApprovalCode = depositPreAuth?.approvalCode || callbackParams.ApprovalCode;
+      const depositWsPayOrderId =
+        depositPreAuth?.wsPayOrderId || callbackParams.wsPayOrderId;
+      const depositApprovalCode =
+        depositPreAuth?.approvalCode || callbackParams.ApprovalCode;
 
       const baseUrl = getBaseUrl(request);
 
