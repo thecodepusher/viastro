@@ -132,7 +132,7 @@ export function getBaseUrl(request?: Request): string {
 
 export function generateOrganizationSchema(
   baseUrl: string,
-  langCode: string = "sr"
+  langCode: string = "sr",
 ): OrganizationSchema {
   const logoUrl = `${baseUrl}/logo.webp`;
 
@@ -149,17 +149,13 @@ export function generateOrganizationSchema(
       areaServed: "RS",
       availableLanguage: ["sr", "en", "ru"],
     },
-    sameAs: [
-      // Add social media links when available
-      // "https://www.facebook.com/viastro",
-      // "https://www.instagram.com/viastro",
-    ],
+    sameAs: [],
   };
 }
 
 export function generateWebSiteSchema(
   baseUrl: string,
-  langCode: string = "sr"
+  langCode: string = "sr",
 ): WebSiteSchema {
   return {
     "@context": "https://schema.org",
@@ -180,7 +176,7 @@ export function generateWebSiteSchema(
 
 export function generateLocalBusinessSchema(
   baseUrl: string,
-  langCode: string = "sr"
+  langCode: string = "sr",
 ): LocalBusinessSchema {
   return {
     "@context": "https://schema.org",
@@ -219,7 +215,7 @@ export function generateLocalBusinessSchema(
 
 export function generateCarRentalServiceSchema(
   baseUrl: string,
-  langCode: string = "sr"
+  langCode: string = "sr",
 ) {
   return {
     "@context": "https://schema.org",
@@ -270,7 +266,7 @@ export function generateCarProductSchema(
     price?: string;
     url?: string;
   },
-  langCode: string = "sr"
+  langCode: string = "sr",
 ): ProductSchema {
   return {
     "@context": "https://schema.org",
@@ -303,7 +299,7 @@ export function generateArticleSchema(
     author?: string;
     url: string;
   },
-  langCode: string = "sr"
+  langCode: string = "sr",
 ): ArticleSchema {
   return {
     "@context": "https://schema.org",
@@ -336,7 +332,7 @@ export function generateArticleSchema(
 export function generateFAQPageSchema(
   baseUrl: string,
   faqs: { question: string; answer: string }[],
-  langCode: string = "sr"
+  langCode: string = "sr",
 ): FAQPageSchema {
   return {
     "@context": "https://schema.org",
@@ -355,7 +351,7 @@ export function generateFAQPageSchema(
 export function generateBreadcrumbSchema(
   baseUrl: string,
   items: { name: string; url: string }[],
-  langCode: string = "sr"
+  langCode: string = "sr",
 ) {
   return {
     "@context": "https://schema.org",

@@ -15,6 +15,7 @@ export type ReservationEmailPayload = {
   wsPayOrderId?: string;
   approvalCode?: string;
   baseUrl?: string;
+  emailType?: "completed" | "deposit_pending";
 };
 
 export type LongTermInquiryPayload = {
@@ -29,6 +30,7 @@ export type LongTermInquiryPayload = {
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
 const logoDataUri = "https://viastro.rs/logo_white.webp";
+const OFFICE_EMAIL = "office@viastro.rs";
 
 export async function sendReservationEmail(payload: ReservationEmailPayload) {
   const apiKey = process.env.BREVO_API_KEY;
@@ -46,6 +48,26 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
           )
           .join("")
       : `<tr><td style="padding: 8px 12px; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Nema dodatnih stavki</td></tr>`;
+
+  const isDepositPending = payload.emailType === "deposit_pending";
+  const emailTitle = isDepositPending
+    ? "Depozit preautorizovan"
+    : "Nova rezervacija";
+  const emailSubject = isDepositPending
+    ? `Depozit uplaćen — čeka se uplata najma - ${payload.carName}`
+    : `Nova rezervacija - ${payload.carName}`;
+
+  const pendingNoticeHtml = isDepositPending
+    ? `
+    <div style="margin-bottom: 30px; padding: 20px; background-color: #fef2f2; border-left: 4px solid #ef4444; border-radius: 4px;">
+      <h3 style="margin-top: 0; margin-bottom: 10px; color: #991b1b; font-size: 16px;">⚠️ Nedovršena rezervacija</h3>
+      <p style="margin: 0; color: #991b1b; font-size: 14px; line-height: 1.6;">
+        Korisnik je uspešno preautorizovao depozit, ali <strong>nije završio uplatu najma</strong>.
+        Kontaktirajte klijenta da proverite da li želi da nastavi rezervaciju ili da oslobodite depozit u WSPay admin panelu.
+      </p>
+    </div>
+    `
+    : "";
 
   const paymentInfoHtml =
     payload.wsPayOrderId || payload.approvalCode
@@ -83,9 +105,10 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
                   height="60"
                   style="max-width: 180px; max-height: 60px; width: auto; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;" 
                 />
-                <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">Nova rezervacija</h1>
+                <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">${emailTitle}</h1>
               </div>
               <div style="padding: 40px;">
+              ${pendingNoticeHtml}
           <div style="margin-bottom: 30px;">
             <h2 style="margin: 0 0 20px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #FF9B17; padding-bottom: 10px;">Detalji rezervacije</h2>
             <table style="width: 100%; border-collapse: collapse;">
@@ -197,20 +220,20 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
     },
     body: JSON.stringify({
       sender: {
-        email: "office@viastro.rs",
+        email: OFFICE_EMAIL,
         name: "Viastro Reservations",
       },
       to: [
         {
-          email: "reservations@viastro.rs",
-          name: "Reservations",
+          email: OFFICE_EMAIL,
+          name: "Viastro Office",
         },
       ],
       replyTo: {
         email: payload.customerEmail,
         name: payload.customerName,
       },
-      subject: `Nova rezervacija - ${payload.carName}`,
+      subject: emailSubject,
       htmlContent,
     }),
   });
@@ -336,13 +359,13 @@ export async function sendLongTermInquiryEmail(
     },
     body: JSON.stringify({
       sender: {
-        email: "office@viastro.rs",
+        email: OFFICE_EMAIL,
         name: "Viastro",
       },
       to: [
         {
-          email: "reservations@viastro.rs",
-          name: "Reservations",
+          email: OFFICE_EMAIL,
+          name: "Viastro Office",
         },
       ],
       replyTo: {

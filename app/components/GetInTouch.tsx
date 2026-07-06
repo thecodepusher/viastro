@@ -55,12 +55,12 @@ export default function GetInTouch(props: { lang: BaseLocale }) {
                     </div>
                   </div>
                 </a>
-                <a href="mailto:reservations@viastro.rs">
+                <a href="mailto:office@viastro.rs">
                   <div className="mt-3 space-y-1 text-sm/6">
                     <div className="flex items-center gap-4">
                       <MdOutlineMarkEmailRead size={20} />
                       <span className="font-semibold">
-                        reservations@viastro.rs
+                        office@viastro.rs
                       </span>
                     </div>
                   </div>
