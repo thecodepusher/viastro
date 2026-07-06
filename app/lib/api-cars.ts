@@ -65,9 +65,9 @@ const carDataMap: Record<
 > = {
   // Citroen C3 Aircross (id: "2")
   "2": {
-    deposite: 300,
+    deposite: 200,
     fullProtectionPrice: 9.99,
-    depositeDiscount: 150,
+    depositeDiscount: 100,
     customName: "Citroen C3 Aircross",
     prices: [
       { from: 3, to: 7, price: 50 },
@@ -78,9 +78,9 @@ const carDataMap: Record<
   },
   // Seat Ibiza DSG (id: "10")
   "10": {
-    deposite: 300,
+    deposite: 200,
     fullProtectionPrice: 9.99,
-    depositeDiscount: 150,
+    depositeDiscount: 100,
     customName: "SEAT Ibiza DSG",
     prices: [
       { from: 3, to: 7, price: 40 },
@@ -104,9 +104,9 @@ const carDataMap: Record<
   },
   // Citroen C3 Aircross Blue (id: "12")
   "12": {
-    deposite: 300,
+    deposite: 200,
     fullProtectionPrice: 9.99,
-    depositeDiscount: 150,
+    depositeDiscount: 100,
     customName: "Citroen C3 Aircross Blue",
     prices: [
       { from: 3, to: 7, price: 50 },
@@ -130,9 +130,9 @@ const carDataMap: Record<
   },
   // Skoda Octavia (id: "14", manager: OCTAVIA SIVA)
   "14": {
-    deposite: 500,
+    deposite: 300,
     fullProtectionPrice: 12.99,
-    depositeDiscount: 250,
+    depositeDiscount: 150,
     customName: "Skoda Octavia",
     prices: [
       { from: 3, to: 7, price: 60 },
