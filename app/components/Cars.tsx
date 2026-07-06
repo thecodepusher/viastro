@@ -135,7 +135,7 @@ export default function Cars(props: {
                                   to: number | null;
                                   price: number;
                                 },
-                                idx: number
+                                idx: number,
                               ) => (
                                 <div
                                   key={idx}
@@ -154,7 +154,7 @@ export default function Cars(props: {
                                     </p>
                                   )}
                                 </div>
-                              )
+                              ),
                             )}
                           </div>
                         </div>
