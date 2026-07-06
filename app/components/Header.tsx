@@ -295,7 +295,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                       <FaInstagram size={24} />
                     </a>
                     <a
-                      href="mailto:reservations@viastro.rs"
+                      href="mailto:office@viastro.rs"
                       className="text-gray-600 hover:text-[#FF9B17] transition-colors"
                       aria-label="Email us">
                       <MdOutlineMarkEmailRead size={24} />
