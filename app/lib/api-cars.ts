@@ -2,11 +2,10 @@ import type { BaseLocale } from "@/locales/base-locale";
 import { CarType, GasType, TransmissionType } from "./data";
 
 /**
- * Vehicle IDs that should not be displayed .
- * Reference: 1=P2008, 2=C3 Aircross, 3=P3008, 6=Octavia, 7=Ibiza FR, 8=Clio,
- * 10=Ibiza DSG, 11=Fiat 500, 12=C3 Aircross Blue
+ * Vozila koja se prikazuju na sajtu.
+ * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia
  */
-export const EXCLUDED_CAR_IDS: string[] = ["3", "11"];
+export const ALLOWED_CAR_IDS: string[] = ["10", "8", "2", "12", "13", "14"];
 
 export const fullProtection = {
   id: 1,
@@ -30,7 +29,9 @@ const carImageMap: Record<string, string> = {
   renault_clio: "/clio.webp",
   peugeot_2008: "/peugeot-2008-gt.webp",
   peugeot_3008: "/3008.webp",
-  skoda_octavia: "/skoda_octavia.webp",
+  skoda_octavia: "/skoda-octavia-silver.webp",
+  skoda_octavia_siva: "/skoda-octavia-silver.webp",
+  skoda_kamiq: "/skoda-kamiq.webp",
   citroen_c3_aircross: "/c3-aircross.webp",
   citroen_c3_aircross_blue: "/c3-aircross-blue.webp",
   citroen_c3: "/c3-aircross.webp",
@@ -62,19 +63,6 @@ const carDataMap: Record<
     customName?: string;
   }
 > = {
-  // Peugeot 2008 (id: "1")
-  "1": {
-    deposite: 500,
-    fullProtectionPrice: 11.99,
-    depositeDiscount: 250,
-    customName: "Peugeot 2008 GT",
-    prices: [
-      { from: 3, to: 7, price: 65 },
-      { from: 8, to: 15, price: 55 },
-      { from: 16, to: 29, price: 45 },
-      { from: 30, to: null, price: 38 },
-    ],
-  },
   // Citroen C3 Aircross (id: "2")
   "2": {
     deposite: 300,
@@ -82,62 +70,23 @@ const carDataMap: Record<
     depositeDiscount: 150,
     customName: "Citroen C3 Aircross",
     prices: [
-      { from: 3, to: 7, price: 55 },
-      { from: 8, to: 15, price: 50 },
-      { from: 16, to: 29, price: 45 },
+      { from: 3, to: 7, price: 50 },
+      { from: 8, to: 15, price: 45 },
+      { from: 16, to: 29, price: 40 },
       { from: 30, to: null, price: 35 },
     ],
   },
-  // Peugeot 3008 (id: "3")
-  "3": {
-    deposite: 500,
-    fullProtectionPrice: 12.99,
-    depositeDiscount: 250,
-    customName: "Peugeot 3008",
-    prices: [
-      { from: 3, to: 7, price: 75 },
-      { from: 8, to: 15, price: 65 },
-      { from: 16, to: 29, price: 55 },
-      { from: 30, to: null, price: 45 },
-    ],
-  },
-  // Skoda Octavia (id: "6")
-  "6": {
-    deposite: 500,
-    fullProtectionPrice: 12.99,
-    depositeDiscount: 250,
-    customName: "Skoda Octavia",
-    prices: [
-      { from: 3, to: 7, price: 75 },
-      { from: 8, to: 15, price: 65 },
-      { from: 16, to: 29, price: 55 },
-      { from: 30, to: null, price: 45 },
-    ],
-  },
-  // Seat Ibiza (id: "7")
-  "7": {
-    deposite: 300,
-    fullProtectionPrice: 9.99,
-    depositeDiscount: 150,
-    customName: "Seat Ibiza FR",
-    prices: [
-      { from: 3, to: 7, price: 42 },
-      { from: 8, to: 15, price: 38 },
-      { from: 16, to: 29, price: 34 },
-      { from: 30, to: null, price: 30 },
-    ],
-  },
-  // Seat Ibiza (id: "10")
+  // Seat Ibiza DSG (id: "10")
   "10": {
     deposite: 300,
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
     customName: "SEAT Ibiza DSG",
     prices: [
-      { from: 3, to: 7, price: 42 },
-      { from: 8, to: 15, price: 38 },
-      { from: 16, to: 29, price: 34 },
-      { from: 30, to: null, price: 30 },
+      { from: 3, to: 7, price: 40 },
+      { from: 8, to: 15, price: 35 },
+      { from: 16, to: 29, price: 30 },
+      { from: 30, to: null, price: 25 },
     ],
   },
   // Renault Clio (id: "8")
@@ -147,23 +96,10 @@ const carDataMap: Record<
     depositeDiscount: 150,
     customName: "Renault Clio",
     prices: [
-      { from: 3, to: 7, price: 45 },
-      { from: 8, to: 15, price: 41 },
-      { from: 16, to: 29, price: 37 },
-      { from: 30, to: null, price: 33 },
-    ],
-  },
-  // Fiat 500 (id: "11")
-  "11": {
-    deposite: 300,
-    fullProtectionPrice: 9.99,
-    depositeDiscount: 150,
-    customName: "Fiat 500",
-    prices: [
-      { from: 3, to: 7, price: 29 },
-      { from: 8, to: 15, price: 25 },
-      { from: 16, to: 29, price: 21 },
-      { from: 30, to: null, price: 17 },
+      { from: 3, to: 7, price: 42 },
+      { from: 8, to: 15, price: 38 },
+      { from: 16, to: 29, price: 34 },
+      { from: 30, to: null, price: 30 },
     ],
   },
   // Citroen C3 Aircross Blue (id: "12")
@@ -173,13 +109,38 @@ const carDataMap: Record<
     depositeDiscount: 150,
     customName: "Citroen C3 Aircross Blue",
     prices: [
-      { from: 3, to: 7, price: 55 },
-      { from: 8, to: 15, price: 50 },
-      { from: 16, to: 29, price: 45 },
+      { from: 3, to: 7, price: 50 },
+      { from: 8, to: 15, price: 45 },
+      { from: 16, to: 29, price: 40 },
       { from: 30, to: null, price: 35 },
     ],
   },
-  // Default za ostale automobile
+  // Skoda Kamiq (id: "13")
+  "13": {
+    deposite: 300,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 150,
+    customName: "Skoda Kamiq",
+    prices: [
+      { from: 3, to: 7, price: 55 },
+      { from: 8, to: 15, price: 50 },
+      { from: 16, to: 29, price: 45 },
+      { from: 30, to: null, price: 40 },
+    ],
+  },
+  // Skoda Octavia (id: "14", manager: OCTAVIA SIVA)
+  "14": {
+    deposite: 500,
+    fullProtectionPrice: 12.99,
+    depositeDiscount: 250,
+    customName: "Skoda Octavia",
+    prices: [
+      { from: 3, to: 7, price: 60 },
+      { from: 8, to: 15, price: 55 },
+      { from: 16, to: 29, price: 50 },
+      { from: 30, to: null, price: 45 },
+    ],
+  },
   default: {
     deposite: 300,
     fullProtectionPrice: 9.99,
@@ -335,9 +296,11 @@ export function transformApiCars(
   days?: number,
   availableCarIds?: string[],
 ): TransformedCar[] {
-  const visibleModels = apiModels.filter(
-    (car) => !EXCLUDED_CAR_IDS.includes(car.id),
-  );
+  const visibleModels = apiModels
+    .filter((car) => ALLOWED_CAR_IDS.includes(car.id))
+    .sort(
+      (a, b) => ALLOWED_CAR_IDS.indexOf(a.id) - ALLOWED_CAR_IDS.indexOf(b.id),
+    );
   return visibleModels.map((apiCar) => {
     const carType = getCarTypeFromApi(apiCar.group_name, apiCar.class_name);
     const gas = getGasTypeFromApi(apiCar.features.fuel);
@@ -399,7 +362,8 @@ export function transformApiCars(
       gasText,
       transmissionText,
       available,
-      customName: carData.customName,
+      customName:
+        carData.customName ?? `${apiCar.brand_name} ${apiCar.model_name}`,
     };
   });
 }
