@@ -317,7 +317,15 @@ export default function Review({ loaderData }: Route.ComponentProps) {
         lang={loaderData.lang}
       />
 
-      <ReviewForm lang={loaderData.lang} isSubmitting={isSubmitting} />
+      <ReviewForm
+        lang={loaderData.lang}
+        isSubmitting={isSubmitting}
+        depositAmount={Math.max(
+          loaderData.car.deposite - loaderData.depositeDiscount,
+          0,
+        )}
+        rentalAmount={loaderData.price}
+      />
     </div>
   );
 }

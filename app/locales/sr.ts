@@ -121,6 +121,18 @@ export const sr: BaseLocale = {
   cookieConsentAction: "Prihvati",
   reservationReviewAction: "Završi rezervaciju",
   reviewInformation: "Vaši podaci",
+  paymentStepsTitle: "Proces plaćanja",
+  paymentStepsIntro:
+    "Nakon klika na dugme ispod, pratite dva koraka plaćanja karticom. Oba koraka su obavezna za završetak rezervacije.",
+  paymentStep1Title: "Depozit - rezervacija sredstava",
+  paymentStep1Description:
+    "Prvo unosite podatke kartice za depozit. Iznos depozita se privremeno rezerviše na vašoj kartici, bez stvarne naplate.",
+  paymentStep2Title: "Plaćanje najma",
+  paymentStep2Description:
+    "Zatim nastavljate na plaćanje ukupne cene najma, gde ponovo unosite podatke o plaćanju.",
+  paymentStep2DescriptionBold: "Rezervacija je završena tek nakon oba koraka.",
+  paymentStepsNote:
+    "Depozit se vraća nakon završetka najma, u skladu sa uslovima iznajmljivanja. Sredstva na kartici nisu naplaćena u prvom koraku - samo rezervisana.",
   pib: "PIB",
   mb: "MB",
   delatnost: "Delatnost",
