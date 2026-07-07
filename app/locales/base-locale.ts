@@ -152,6 +152,14 @@ export interface BaseLocale {
   cookieConsentAction: string;
   reservationReviewAction: string;
   reviewInformation: string;
+  paymentStepsTitle: string;
+  paymentStepsIntro: string;
+  paymentStep1Title: string;
+  paymentStep1Description: string;
+  paymentStep2Title: string;
+  paymentStep2Description: string;
+  paymentStep2DescriptionBold: string;
+  paymentStepsNote: string;
   pib: string;
   mb: string;
   delatnost: string;

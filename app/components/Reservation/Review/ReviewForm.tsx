@@ -5,13 +5,21 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { BaseLocale } from "@/locales/base-locale";
+import { PaymentStepsNotice } from "@/components/Reservation/Review/PaymentStepsNotice";
 
 interface ReviewFormProps {
   lang: BaseLocale;
   isSubmitting: boolean;
+  depositAmount: number;
+  rentalAmount: number;
 }
 
-export function ReviewForm({ lang, isSubmitting }: ReviewFormProps) {
+export function ReviewForm({
+  lang,
+  isSubmitting,
+  depositAmount,
+  rentalAmount,
+}: ReviewFormProps) {
   return (
     <Form method="POST">
       <div className="mx-6 mt-4 p-4 sm:p-6 rounded-2xl border border-gray-100 bg-slate-50/80 shadow-sm flex flex-col gap-4 mb-6">
@@ -87,6 +95,13 @@ export function ReviewForm({ lang, isSubmitting }: ReviewFormProps) {
           </div>
         </div>
       </div>
+
+      <PaymentStepsNotice
+        lang={lang}
+        depositAmount={depositAmount}
+        rentalAmount={rentalAmount}
+      />
+
       <div className="flex mx-6 mb-6">
         <Button
           type="submit"

@@ -121,6 +121,19 @@ export const en: BaseLocale = {
   cookieConsentAction: "Accept",
   reservationReviewAction: "Finish reservation",
   reviewInformation: "Your information",
+  paymentStepsTitle: "Payment process",
+  paymentStepsIntro:
+    "After clicking the button below, you will complete two card payment steps. Both steps are required to finish your reservation.",
+  paymentStep1Title: "Deposit - funds reservation",
+  paymentStep1Description:
+    "First, you enter your card details for the deposit. The deposit amount is temporarily reserved on your card without being charged.",
+  paymentStep2Title: "Rental payment",
+  paymentStep2Description:
+    "Next, you proceed to pay the total rental price by entering your payment details again.",
+  paymentStep2DescriptionBold:
+    "Your reservation is complete only after both steps.",
+  paymentStepsNote:
+    "The deposit is returned after the rental ends, in accordance with the rental terms. Funds are not charged in the first step - only reserved.",
   pib: "Tax ID",
   mb: "Registration Number",
   delatnost: "Activity",
