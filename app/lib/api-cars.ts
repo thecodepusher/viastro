@@ -3,9 +3,9 @@ import { CarType, GasType, TransmissionType } from "./data";
 
 /**
  * Vozila koja se prikazuju na sajtu.
- * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia
+ * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia, 15=Polo DSG
  */
-export const ALLOWED_CAR_IDS: string[] = ["10", "8", "2", "12", "13", "14"];
+export const ALLOWED_CAR_IDS: string[] = ["10", "15", "8", "2", "12", "13", "14"];
 
 export const fullProtection = {
   id: 1,
@@ -38,6 +38,8 @@ const carImageMap: Record<string, string> = {
   ford_focus: "/ford-focus.webp",
   seat_ibiza: "/seat-ibiza-fr.webp",
   seat_ibiza_dsg: "/seat-ibiza-dsg.webp",
+  volkswagen_polo: "/volkswagen-polo-red.webp",
+  volkswagen_polo_dsg: "/volkswagen-polo-red.webp",
   fiat_500: "/fiat-500.webp",
   audi_a6: "/audi-a6.webp",
 };
@@ -82,6 +84,19 @@ const carDataMap: Record<
     fullProtectionPrice: 9.99,
     depositeDiscount: 100,
     customName: "SEAT Ibiza DSG",
+    prices: [
+      { from: 3, to: 7, price: 40 },
+      { from: 8, to: 15, price: 35 },
+      { from: 16, to: 29, price: 30 },
+      { from: 30, to: null, price: 25 },
+    ],
+  },
+  // Volkswagen Polo DSG (id: "15")
+  "15": {
+    deposite: 200,
+    fullProtectionPrice: 9.99,
+    depositeDiscount: 100,
+    customName: "Volkswagen Polo DSG",
     prices: [
       { from: 3, to: 7, price: 40 },
       { from: 8, to: 15, price: 35 },
