@@ -36,7 +36,8 @@ export default function BlogSection(props: {
                     alt=""
                     src={post.imageUrl}
                     className={`h-full w-full transition-transform duration-500 ${
-                      post.id === 1
+                      post.imageUrl === "/mount.webp" ||
+                      post.imageUrl === "/sea-summer.webp"
                         ? "object-cover object-bottom-left group-hover:scale-110"
                         : "object-contain group-hover:scale-110"
                     }`}

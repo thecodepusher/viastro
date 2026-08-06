@@ -147,6 +147,9 @@ export interface BaseLocale {
   notFoundTitle: string;
   notFoundMessage: string;
   notFoundAction: string;
+  errorTitle: string;
+  errorMessage: string;
+  errorAction: string;
   cookieConsent: string;
   cookieConsentLink: string;
   cookieConsentAction: string;
