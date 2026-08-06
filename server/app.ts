@@ -43,8 +43,8 @@ export default async function (request: Request): Promise<Response> {
       "font-src 'self' https://fonts.gstatic.com data:; " +
       "img-src 'self' data: https: blob:; " +
       "connect-src 'self' ws://* wss://* ws://localhost:* wss://localhost:* http://localhost:* https://localhost:* " +
-      `${databaseDomain} https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net https://formtest.wspay.biz https://form.wspay.biz; ` +
-      "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.google.com; " +
+      `${databaseDomain} https://api.brevo.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://formtest.wspay.biz https://form.wspay.biz; ` +
+      "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.google.com https://td.doubleclick.net; " +
       "object-src 'none'; " +
       "base-uri 'self'; " +
       "form-action 'self' https://formtest.wspay.biz https://form.wspay.biz; " +

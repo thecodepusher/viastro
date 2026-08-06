@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -9,6 +10,8 @@ import {
   useLocation,
 } from "react-router";
 import { useEffect } from "react";
+import { Home, TriangleAlert } from "lucide-react";
+import { Button } from "./components/ui/button";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -210,31 +213,62 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
     );
   }
 
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
+  let devDetails: string | undefined;
   let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = "Error";
-    details = error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
+  if (import.meta.env.DEV && error instanceof Error) {
+    devDetails = error.message;
     stack = error.stack;
   }
 
   return (
     <>
-      {langData && <Header lang={langData.lang} langCode={langData.langCode} />}
-      <main className="pt-16 p-4 container mx-auto">
-        <h1>{message}</h1>
-        <p>{details}</p>
-        {stack && (
-          <pre className="w-full p-4 overflow-x-auto">
-            <code>{stack}</code>
-          </pre>
-        )}
+      <Header lang={langData.lang} langCode={langData.langCode} />
+      <main className="w-full flex items-center justify-center px-4 py-16 sm:py-24">
+        <div className="max-w-2xl w-full text-center">
+          <div className="mb-8 flex flex-col items-center justify-center">
+            <div className="relative mb-6">
+              <TriangleAlert
+                size={120}
+                className="text-[#FF9B17] opacity-20 absolute inset-0 m-auto"
+              />
+              <h1 className="text-9xl sm:text-[12rem] font-black text-[#FF9B17] relative z-10 drop-shadow-lg">
+                {isRouteErrorResponse(error) ? error.status : "500"}
+              </h1>
+            </div>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            {langData.lang.errorTitle}
+          </h2>
+
+          <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-md mx-auto">
+            {langData.lang.errorMessage}
+          </p>
+
+          <Link to={`/${langData.langCode}`}>
+            <Button
+              size="lg"
+              className="bg-[#FF9B17] hover:bg-[#FF9B17]/90 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
+              <Home className="mr-2 h-5 w-5" />
+              {langData.lang.errorAction}
+            </Button>
+          </Link>
+
+          {devDetails && (
+            <details className="mt-12 text-left rounded-lg border border-gray-200 bg-gray-50 p-4">
+              <summary className="cursor-pointer font-medium text-gray-700">
+                {devDetails}
+              </summary>
+              {stack && (
+                <pre className="mt-4 w-full overflow-x-auto text-xs text-gray-600">
+                  <code>{stack}</code>
+                </pre>
+              )}
+            </details>
+          )}
+        </div>
       </main>
-      {langData && <Footer lang={langData.lang} langCode={langData.langCode} />}
+      <Footer lang={langData.lang} langCode={langData.langCode} />
     </>
   );
 }

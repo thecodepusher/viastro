@@ -115,6 +115,10 @@ export const sr: BaseLocale = {
   notFoundTitle: "Stranica nije pronađena",
   notFoundMessage: "Stranica koju tražite ne postoji.",
   notFoundAction: "Vratite se na početnu stranicu",
+  errorTitle: "Nešto je pošlo naopako",
+  errorMessage:
+    "Došlo je do neočekivane greške. Pokušajte ponovo ili se vratite na početnu stranicu.",
+  errorAction: "Vratite se na početnu stranicu",
   cookieConsent:
     "Koristimo kolačiće radi poboljšanja korisničkog iskustva. Korišćenjem sajta prihvatate našu",
   cookieConsentLink: "politiku privatnosti",

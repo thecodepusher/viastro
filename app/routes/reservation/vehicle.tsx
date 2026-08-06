@@ -25,6 +25,16 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const dropoffDate = new Date(cookie.dropOffDate);
   const dropoffTime = cookie.dropOffTime;
 
+  // Bez izabranih datuma (direktan ulazak na stranicu) vrati korisnika na izbor datuma
+  if (
+    isNaN(pickupDate.getTime()) ||
+    isNaN(dropoffDate.getTime()) ||
+    !pickupTime ||
+    !dropoffTime
+  ) {
+    return redirect("..");
+  }
+
   const databaseUrl = getDatabaseUrl();
 
   const allModelsRes = await fetch(databaseUrl, {

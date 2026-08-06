@@ -31,6 +31,57 @@ export const postsSr = [
   {
     id: 1,
     title:
+      "Letovanje na moru 2026 - Put na Jadran sa Viastro rent a car",
+    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    slug: "letovanje-na-moru-sa-viastro-rent-a-car",
+    description:
+      "Planirate letovanje na moru? Crna Gora, Hrvatska i Grčka su na dohvat ruke automobilom. Uz Viastro rent a car stižete fleksibilno i bezbrižno - klimatizovana vozila, neograničeni kilometri, full kasko i 24/7 asistencija.",
+    content: `
+      <h2>Letovanje na moru sa Viastro rent a car</h2>
+      <p>Leto je vreme za more, sunce i slobodu kretanja. Umesto čekanja autobusa i fiksnih termina, sopstvenim automobilom birate rutu, pauze i destinacije - od Budve i Kotora do Halkidikija i Makarske. Sa Viastro rent a car putovanje počinje u Beogradu ili na aerodromu, a vi uživate od prvog kilometra.</p>
+
+      <h3>Gde na more ovog leta?</h3>
+      <ul>
+        <li><strong>Crna Gora (Budva, Herceg Novi, Kotor):</strong> Najbliže more za vožnju iz Beograda - oko 6-7 sati. Idealno za porodično letovanje i kratke pauze na putu.</li>
+        <li><strong>Hrvatska (Makarska, Split, Dubrovnik):</strong> Jadranska rivijera, kristalno more i bogat gastronomski doživljaj. Automobil vam daje slobodu da menjate plaže svaki dan.</li>
+        <li><strong>Grčka (Halkidiki, Tasos):</strong> Duža vožnja, ali nagrada je duga sezona, lepe plaže i odličan odnos cene i kvaliteta smeštaja.</li>
+        <li><strong>Albanija (Drač, Vlora):</strong> Rastuća destinacija sa pristupačnim cenama i manje gužve van vrhunca sezone.</li>
+      </ul>
+
+      <h3>Zašto rent a car za letovanje?</h3>
+      <ul>
+        <li><strong>Fleksibilnost:</strong> Polazak kada vama odgovara, bez zavisnosti od linija i prenosa.</li>
+        <li><strong>Komfor na putu:</strong> Klima, prostor za kofere i dodatnu opremu, neograničeni kilometri.</li>
+        <li><strong>Sigurnost:</strong> Full kasko osiguranje i 24/7 asistencija tokom celog putovanja.</li>
+        <li><strong>Istraživanje:</strong> Lako stižete do manjih plaža, nacionalnih parkova i noćnih izleta.</li>
+      </ul>
+
+      <h3>Brzi plan za letovanje</h3>
+      <ol>
+        <li><strong>Dan 1:</strong> Preuzmite vozilo u Beogradu ili na aerodromu, krenite ranije i planirajte pauze na putu.</li>
+        <li><strong>Dan 2-6:</strong> Plaže ujutru, lokalna kuhinja i izleti duž obale - Kotor, Sveti Stefan, nacionalni parkovi ili ostrvske ture.</li>
+        <li><strong>Poslednji dan:</strong> Opustite se uz more, krenite popodne i vratite vozilo bez stresa.</li>
+      </ol>
+
+      <p><strong>Rezervišite na vreme:</strong> Letnja sezona brzo popunjava vozni park. Obezbedite automobil ranije. Kontakt: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/sea-summer.webp",
+    date: "Avgust 6, 2026",
+    datetime: "2026-08-06",
+    tags: [
+      "Letovanje na moru",
+      "Putovanje na more",
+      "Crna Gora",
+      "Budva",
+      "Hrvatska",
+      "Grčka",
+      "Rent a car Beograd",
+      "Jadran",
+    ],
+  },
+  {
+    id: 2,
+    title:
       "Novogodišnji i božićni odmor na planinama Srbije - Ski sezona sa Viastro rent a car",
     href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
@@ -79,7 +130,7 @@ export const postsSr = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Vikend na Kopaoniku - Planinska avantura uz Viastro rent a car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
@@ -139,7 +190,7 @@ export const postsSr = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "Đerdap Nacionalni Park - Gvozdena kapija prirode i istorije",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
@@ -178,7 +229,7 @@ export const postsSr = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title: "Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
@@ -220,6 +271,57 @@ export const postsSr = [
 export const postsEn = [
   {
     id: 1,
+    title:
+      "Summer Holiday by the Sea 2026 - Adriatic Road Trip with Viastro",
+    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    slug: "letovanje-na-moru-sa-viastro-rent-a-car",
+    description:
+      "Planning a summer holiday by the sea? Montenegro, Croatia, and Greece are within easy driving distance. With Viastro rent a car you travel freely and stress-free - air-conditioned cars, unlimited mileage, full casco, and 24/7 assistance.",
+    content: `
+      <h2>Summer Holiday by the Sea with Viastro Rent a Car</h2>
+      <p>Summer is for the sea, sun, and freedom to move. Instead of waiting for buses and fixed schedules, your own car lets you choose the route, stops, and destinations - from Budva and Kotor to Halkidiki and Makarska. With Viastro rent a car, the trip starts in Belgrade or at the airport, and you enjoy every kilometer.</p>
+
+      <h3>Where to go this summer?</h3>
+      <ul>
+        <li><strong>Montenegro (Budva, Herceg Novi, Kotor):</strong> The closest sea drive from Belgrade - about 6-7 hours. Ideal for family holidays and short stops along the way.</li>
+        <li><strong>Croatia (Makarska, Split, Dubrovnik):</strong> Adriatic riviera, crystal-clear water, and great food. A car gives you the freedom to change beaches every day.</li>
+        <li><strong>Greece (Halkidiki, Thassos):</strong> A longer drive, but you get a long season, beautiful beaches, and excellent value for accommodation.</li>
+        <li><strong>Albania (Durrës, Vlora):</strong> A growing destination with affordable prices and fewer crowds outside peak weeks.</li>
+      </ul>
+
+      <h3>Why rent a car for your summer trip?</h3>
+      <ul>
+        <li><strong>Flexibility:</strong> Leave when it suits you - no dependence on bus lines or transfers.</li>
+        <li><strong>Comfort on the road:</strong> A/C, space for luggage and extras, unlimited mileage.</li>
+        <li><strong>Safety:</strong> Full casco insurance and 24/7 assistance throughout the trip.</li>
+        <li><strong>Exploration:</strong> Easy access to quieter beaches, national parks, and evening outings.</li>
+      </ul>
+
+      <h3>Quick summer itinerary</h3>
+      <ol>
+        <li><strong>Day 1:</strong> Pick up the car in Belgrade or at the airport, leave early, and plan rest stops.</li>
+        <li><strong>Days 2-6:</strong> Beaches in the morning, local food, and coastal day trips - Kotor, Sveti Stefan, national parks, or island tours.</li>
+        <li><strong>Last day:</strong> Relax by the sea, head back in the afternoon, and return the car without stress.</li>
+      </ol>
+
+      <p><strong>Book early:</strong> Peak summer fills the fleet fast. Secure your car in advance. Contact: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/sea-summer.webp",
+    date: "August 6, 2026",
+    datetime: "2026-08-06",
+    tags: [
+      "Summer holiday",
+      "Sea vacation",
+      "Montenegro",
+      "Budva",
+      "Croatia",
+      "Greece",
+      "Car rental Belgrade",
+      "Adriatic",
+    ],
+  },
+  {
+    id: 2,
     title:
       "New Year & Christmas on Serbia’s Mountains - Ski Season with Viastro",
     href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
@@ -269,7 +371,7 @@ export const postsEn = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Weekend on Kopaonik - Mountain Adventure with Viastro Rent a Car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
@@ -329,7 +431,7 @@ export const postsEn = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "Đerdap National Park - The Iron Gates of Nature and History",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
@@ -368,7 +470,7 @@ export const postsEn = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title: "Mokra Gora and Šargan Eight - A Journey Through Time and Nature",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
@@ -410,6 +512,56 @@ export const postsEn = [
 export const postsRu = [
   {
     id: 1,
+    title: "Летний отдых на море 2026 - Поездка на Адриатику с Viastro",
+    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    slug: "letovanje-na-moru-sa-viastro-rent-a-car",
+    description:
+      "Планируете летний отдых на море? Черногория, Хорватия и Греция доступны на автомобиле. С Viastro rent a car вы едете свободно и без стресса - кондиционер, безлимитный пробег, полное КАСКО и помощь 24/7.",
+    content: `
+      <h2>Летний отдых на море с Viastro rent a car</h2>
+      <p>Лето - время для моря, солнца и свободы передвижения. Вместо ожидания автобусов и фиксированных рейсов вы сами выбираете маршрут, остановки и направления - от Будвы и Котора до Халкидики и Макарски. С Viastro rent a car поездка начинается в Белграде или в аэропорту, а вы наслаждаетесь каждым километром.</p>
+
+      <h3>Куда на море этим летом?</h3>
+      <ul>
+        <li><strong>Черногория (Будва, Херцег-Нови, Котор):</strong> Ближайшее море из Белграда - около 6-7 часов в пути. Идеально для семейного отдыха и коротких остановок по дороге.</li>
+        <li><strong>Хорватия (Макарска, Сплит, Дубровник):</strong> Адриатическая ривьера, кристально чистое море и отличная кухня. Автомобиль дает свободу менять пляжи каждый день.</li>
+        <li><strong>Греция (Халкидики, Тасос):</strong> Более длинная дорога, но в награду - длинный сезон, красивые пляжи и хорошее соотношение цены и качества жилья.</li>
+        <li><strong>Албания (Дуррес, Влёра):</strong> Растущее направление с доступными ценами и меньшим количеством туристов вне пика.</li>
+      </ul>
+
+      <h3>Почему арендовать авто на лето?</h3>
+      <ul>
+        <li><strong>Гибкость:</strong> Выезд когда удобно вам - без зависимости от рейсов и трансферов.</li>
+        <li><strong>Комфорт в дороге:</strong> Кондиционер, место для чемоданов и доп. оборудования, безлимитный пробег.</li>
+        <li><strong>Безопасность:</strong> Полное КАСКО и помощь 24/7 на протяжении всей поездки.</li>
+        <li><strong>Исследования:</strong> Легко добраться до тихих пляжей, нацпарков и вечерних прогулок.</li>
+      </ul>
+
+      <h3>Быстрый план на лето</h3>
+      <ol>
+        <li><strong>День 1:</strong> Заберите авто в Белграде или в аэропорту, выезжайте раньше и планируйте остановки.</li>
+        <li><strong>Дни 2-6:</strong> Пляжи утром, местная кухня и поездки вдоль побережья - Котор, Свети-Стефан, нацпарки или островные туры.</li>
+        <li><strong>Последний день:</strong> Отдохните у моря, выезжайте после обеда и спокойно верните автомобиль.</li>
+      </ol>
+
+      <p><strong>Бронируйте заранее:</strong> В высокий сезон автопарк быстро заполняется. Закрепите машину раньше. Контакт: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
+    `,
+    imageUrl: "/sea-summer.webp",
+    date: "6 августа 2026",
+    datetime: "2026-08-06",
+    tags: [
+      "Летний отдых",
+      "Отдых на море",
+      "Черногория",
+      "Будва",
+      "Хорватия",
+      "Греция",
+      "Аренда авто Белград",
+      "Адриатика",
+    ],
+  },
+  {
+    id: 2,
     title: "Новый год и Рождество в горах Сербии - Лыжный сезон с Viastro",
     href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
@@ -458,7 +610,7 @@ export const postsRu = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Выходные на Копаонике - Горное приключение с Viastro rent a car",
     href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
@@ -518,7 +670,7 @@ export const postsRu = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "Национальный парк Джердап - Железные ворота природы и истории",
     href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
@@ -557,7 +709,7 @@ export const postsRu = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title:
       "Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу",
     href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
