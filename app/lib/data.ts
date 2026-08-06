@@ -885,7 +885,7 @@ export const privacyPolicySr = `
   <p class="c3">
       <span
           >POLITIKA PRIVATNOSTI &ndash; VIASTRO DOO
-          <br />&#128205; Adresa: Danila Leki&#263;a &Scaron;panca 31,
+          <br />&#128205; Adresa: Nehruova 51a,
           Novi Beograd<br />&#128209; PIB: 114961759 | Mati&#269;ni broj:
           22096737<br />&#128231; Email: office@viastro.rs | &#128222;
           Tel: 069/656-555<br /><br /></span>
@@ -984,7 +984,7 @@ export const privacyPolicyEn = `
   <p class="c3">
       <span
           >PRIVACY POLICY &ndash; VIASTRO DOO
-          <br />&#128205; Address: Danila Leki&#263;a &Scaron;panca 31, Novi
+          <br />&#128205; Address: Nehruova 51a, Novi
           Belgrade<br />&#128209; Tax ID: 114961759 | Registration Number: 22096737<br />&#128231; Email: office@viastro.rs | &#128222;
           Tel: 069/656-555<br /><br /></span>
   </p>
@@ -1058,7 +1058,7 @@ export const privacyPolicyRu = `
   <p class="c3">
       <span
           >ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ &ndash; VIASTRO DOO
-          <br />&#128205; Адрес: ул. Данила Лекича Шпанца 31, Нови
+          <br />&#128205; Адрес: ул. Нехруова 51а, Нови
           Белград<br />&#128209; ИНН: 114961759 | Регистрационный номер: 22096737<br />&#128231; Email: office@viastro.rs | &#128222;
           Тел: 069/656-555<br /><br /></span>
   </p>
@@ -1132,7 +1132,7 @@ export const rentalConditionsSr = `
   <p class="c3">
       <span
           >OP&Scaron;TI USLOVI NAJMA VOZILA &ndash; VIASTRO DOO
-          <br />&#128205; Adresa: Danila Leki&#263;a &Scaron;panca 31,
+          <br />&#128205; Adresa: Nehruova 51a,
           Novi Beograd<br />&#128209; PIB: 114961759 | Mati&#269;ni broj:
           22096737<br />&#128231; Email: office@viastro.rs | &#128222;
           Tel: 069/656-555<br /><br /></span
@@ -1215,7 +1215,7 @@ export const rentalConditionsSr = `
       <span class="c1"
           >&rsquo;&rsquo;Najmodavac&rsquo;&rsquo; &ndash; privredno
           dru&scaron;tvo Viastro doo Beograd, sa sedi&scaron;tem na adresi
-          ul. Danila Leki&#263;a &Scaron;panca br.31, Beograd-Novi
+          ul. Nehruova br.51a, Beograd-Novi
           Beograd, mati&#269;ni broj: 22096737, PIB: 114961759;</span
       >
   </p>
@@ -1917,7 +1917,7 @@ export const rentalConditionsRu = `
   <p class="c3">
       <span
           >ОБЩИЕ УСЛОВИЯ АРЕНДЫ ТРАНСПОРТНЫХ СРЕДСТВ - VIASTRO DOO
-          <br />📍 Адрес: ул. Данила Лекича Шпанца 31, Нови Београд<br />📉 ИНН: 114961759 | Регистрационный номер: 22096737<br />📧 Email: office@viastro.rs | 📞 Тел: 069/656-555<br /><br /></span
+          <br />📍 Адрес: ул. Нехруова 51а, Нови Београд<br />📉 ИНН: 114961759 | Регистрационный номер: 22096737<br />📧 Email: office@viastro.rs | 📞 Тел: 069/656-555<br /><br /></span
       ><span class="c8"
           >1. ОБЩИЕ ПОЛОЖЕНИЯ И ОПРЕДЕЛЕНИЯ ПОНЯТИЙ</span
       >
@@ -1968,7 +1968,7 @@ export const rentalConditionsRu = `
   </p>
   <p class="c0">
       <span class="c1"
-          >"Арендодатель" - компания Viastro doo Белград, с местонахождением по адресу ул. Данила Лекича Шпанца, д. 31, Белград-Нови-Београд, регистрационный номер: 22096737, ИНН: 114961759;</span
+          >"Арендодатель" - компания Viastro doo Белград, с местонахождением по адресу ул. Нехруова, д. 51а, Белград-Нови-Београд, регистрационный номер: 22096737, ИНН: 114961759;</span
       >
   </p>
   <p class="c0">
@@ -2386,7 +2386,7 @@ export const rentalConditionsEn = `
   <p class="c3">
       <span
           >GENERAL VEHICLE RENTAL CONDITIONS - VIASTRO DOO
-          <br />📍 Address: Danila Lekića Španca 31, Novi Beograd<br />📉 Tax ID: 114961759 | Company ID: 22096737<br />📧 Email: office@viastro.rs | 📞 Tel: 069/656-555<br /><br /></span
+          <br />📍 Address: Nehruova 51a, Novi Beograd<br />📉 Tax ID: 114961759 | Company ID: 22096737<br />📧 Email: office@viastro.rs | 📞 Tel: 069/656-555<br /><br /></span
       ><span class="c8"
           >1. GENERAL PROVISIONS AND DEFINITIONS</span
       >
@@ -2437,7 +2437,7 @@ export const rentalConditionsEn = `
   </p>
   <p class="c0">
       <span class="c1"
-          >''Lessor'' - the company Viastro doo Belgrade, with its registered office at Danila Lekića Španca St. No. 31, Belgrade-Novi Beograd, company ID: 22096737, Tax ID: 114961759;</span
+          >''Lessor'' - the company Viastro doo Belgrade, with its registered office at Nehruova St. No. 51a, Belgrade-Novi Beograd, company ID: 22096737, Tax ID: 114961759;</span
       >
   </p>
   <p class="c0">
