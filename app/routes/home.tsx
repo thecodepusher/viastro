@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { redirect, useFetcher, useNavigate } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -14,7 +15,6 @@ import GetInTouch from "@/components/GetInTouch";
 import Cars from "@/components/Cars";
 import ReservationTime from "@/components/ReservationTime";
 import SEO from "@/components/SEO";
-import YouTubeVideo from "@/components/YouTubeVideo";
 import {
   getBaseUrl,
   generateOrganizationSchema,
@@ -25,14 +25,7 @@ import {
 } from "@/lib/seo";
 import type { Route } from "./+types/home";
 
-export const links: Route.LinksFunction = () => [
-  {
-    rel: "preload",
-    href: "/opengraph-1200x630.webp",
-    as: "image",
-    fetchPriority: "high",
-  },
-];
+export const links: Route.LinksFunction = () => [];
 
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
@@ -158,6 +151,15 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
+  // video može da krene pre hidratacije (onPlaying se tada ne okine),
+  // pa nakon mount-a / promene izvora proveravamo trenutno stanje
+  useEffect(() => {
+    const video = videoRef.current;
+    setVideoPlaying(!!video && !video.paused && video.readyState >= 3);
+  }, [isMobile]);
 
   const schemas = [
     generateOrganizationSchema(loaderData.baseUrl, loaderData.langCode),
@@ -171,26 +173,37 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <SEO schemas={schemas} />
       <div className="flex flex-col w-full mt-18">
         <div className="relative flex flex-col items-center justify-center h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
-          {isMobile ? (
-            <video
-              className="absolute inset-0 w-full h-full sm:object-cover object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              poster="/opengraph-1200x630.webp"
-              width="1200"
-              height="630"
-              {...({
-                fetchPriority: "high",
-              } as React.VideoHTMLAttributes<HTMLVideoElement>)}
-              aria-label="Hero video background">
-              <source src="/hero-video.mp4" type="video/mp4" />
-            </video>
-          ) : (
-            <YouTubeVideo videoId="k7mFLoGhh0s" />
-          )}
+          <video
+            key={isMobile ? "mobile" : "desktop"}
+            ref={videoRef}
+            className="hero-video absolute inset-0 w-full h-full object-cover pointer-events-none"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            disableRemotePlayback
+            preload="auto"
+            width="1200"
+            height="630"
+            onPlaying={() => setVideoPlaying(true)}
+            {...({
+              fetchPriority: "high",
+            } as React.VideoHTMLAttributes<HTMLVideoElement>)}
+            aria-label="Hero video background">
+            <source
+              src={isMobile ? "/hero-video.mp4" : "/hero-video-desktop.mp4"}
+              type="video/mp4"
+            />
+          </video>
+
+          <div
+            aria-hidden="true"
+            className={`absolute inset-0 w-full h-full bg-pd flex items-center justify-center pointer-events-none transition-opacity duration-700 ${
+              videoPlaying ? "opacity-0" : "opacity-100"
+            }`}>
+            <div className="w-12 h-12 rounded-full border-4 border-white/20 border-t-p animate-spin" />
+          </div>
 
           <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/40 via-black/50 to-black/70" />
 
