@@ -208,7 +208,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           <div className="absolute inset-0 w-full h-full bg-linear-to-b from-pd/35 via-pd/40 to-pd/75" />
           <div className="absolute inset-0 w-full h-full bg-linear-to-tr from-p/10 via-transparent to-transparent" />
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:py-16 lg:py-20">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 sm:py-16 lg:py-20">
             <div className="text-center mb-6 sm:mb-10 animate-fade-in-up">
               <p className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-p">
                 Viastro Rent a Car
