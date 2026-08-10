@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { BaseLocale } from "@/locales/base-locale";
 import { PaymentStepsNotice } from "@/components/Reservation/Review/PaymentStepsNotice";
+import { reviewSectionClass } from "@/components/Reservation/Review/CostSummary";
 
 interface ReviewFormProps {
   lang: BaseLocale;
@@ -22,14 +23,13 @@ export function ReviewForm({
 }: ReviewFormProps) {
   return (
     <Form method="POST">
-      <div className="mx-6 mt-4 p-4 sm:p-6 rounded-2xl border border-gray-100 bg-slate-50/80 shadow-sm flex flex-col gap-4 mb-6">
-        <h3 className="mx-0 mb-1 font-bold text-xl">
+      <div className={`${reviewSectionClass} mb-6 mt-4 gap-4`}>
+        <h3 className="font-display text-xl font-bold text-white">
           {lang.reviewInformation}
         </h3>
+
         <div className="grid w-full max-w-sm items-start gap-1.5">
-          <Label
-            className="text-sm font-semibold text-gray-700"
-            htmlFor="email">
+          <Label className="text-[11px] font-semibold uppercase tracking-wider text-p" htmlFor="email">
             {lang.email}
           </Label>
           <Input
@@ -42,9 +42,7 @@ export function ReviewForm({
         </div>
 
         <div className="grid w-full max-w-sm items-start gap-1.5">
-          <Label
-            className="text-sm font-semibold text-gray-700"
-            htmlFor="first_name">
+          <Label className="text-[11px] font-semibold uppercase tracking-wider text-p" htmlFor="first_name">
             {lang.firstName}
           </Label>
           <Input
@@ -55,10 +53,9 @@ export function ReviewForm({
             placeholder={lang.firstName}
           />
         </div>
+
         <div className="grid w-full max-w-sm items-start gap-1.5">
-          <Label
-            className="text-sm font-semibold text-gray-700"
-            htmlFor="last_name">
+          <Label className="text-[11px] font-semibold uppercase tracking-wider text-p" htmlFor="last_name">
             {lang.lastName}
           </Label>
           <Input
@@ -69,10 +66,9 @@ export function ReviewForm({
             placeholder={lang.lastName}
           />
         </div>
+
         <div className="grid w-full max-w-sm items-start gap-1.5">
-          <Label
-            className="text-sm font-semibold text-gray-700"
-            htmlFor="phone">
+          <Label className="text-[11px] font-semibold uppercase tracking-wider text-p" htmlFor="phone">
             {lang.phone}
           </Label>
           <Input
@@ -84,11 +80,11 @@ export function ReviewForm({
           />
         </div>
 
-          <div className="items-top flex space-x-2">
-            <Checkbox required id="terms1" name="terms1" />
+        <div className="items-top flex space-x-2">
+          <Checkbox required id="terms1" name="terms1" />
           <div className="grid gap-1.5 leading-none">
             <Link target="_blank" to="/privacy-policy">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white/75 transition-colors hover:text-p">
                 {lang.privacyAgreement}
               </p>
             </Link>
@@ -102,11 +98,11 @@ export function ReviewForm({
         rentalAmount={rentalAmount}
       />
 
-      <div className="flex mx-6 mb-6">
+      <div className="mx-auto mb-6 flex max-w-7xl px-4">
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:max-w-sm flex flex-row justify-center items-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-p/30 transition hover:-translate-y-0.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+          className="flex w-full flex-row items-center justify-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-p/30 transition hover:-translate-y-0.5 sm:max-w-sm disabled:cursor-not-allowed disabled:opacity-60">
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

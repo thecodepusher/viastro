@@ -9,6 +9,7 @@ import {
   Car,
   FileCheck,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface EquipmentItem {
   id: number;
@@ -98,100 +99,107 @@ export function EquipmentItem({
   return (
     <div
       onClick={handleItemClick}
-      className={`group relative border-2 rounded-xl shadow-sm transition-all duration-300 overflow-hidden cursor-pointer select-none ${
+      className={cn(
+        "group relative cursor-pointer overflow-hidden rounded-2xl border-2 shadow-lg transition-all duration-300 select-none",
         isSelected
-          ? "border-s bg-s text-white shadow-lg scale-[1.02]"
-          : "border-gray-200 bg-white hover:border-s hover:shadow-md"
-      }`}>
-      <div className="flex flex-col md:flex-row items-stretch min-h-[140px]">
-        <div className="flex items-center justify-center w-full md:w-32 h-24 md:h-auto bg-gray-50 dark:bg-gray-800/50 shrink-0 md:shrink-0">
+          ? "border-p bg-s text-white shadow-p/10 ring-2 ring-p/20 scale-[1.01]"
+          : "border-white/10 bg-linear-to-b from-s/90 to-pd hover:border-p/30 hover:shadow-xl",
+      )}>
+      <div className="flex min-h-[140px] flex-col items-stretch md:flex-row">
+        <div
+          className={cn(
+            "flex h-24 w-full shrink-0 items-center justify-center md:h-auto md:w-32",
+            isSelected ? "bg-white/5" : "bg-pl/30",
+          )}>
           <IconComponent
-            className="w-16 h-16 md:w-20 md:h-20 text-s"
+            className={cn(
+              "h-16 w-16 md:h-20 md:w-20",
+              isSelected ? "text-p" : "text-p",
+            )}
             aria-label={equipment.name}
           />
         </div>
 
-        <div className="flex-1 flex flex-col justify-between p-4 md:p-6">
+        <div className="flex flex-1 flex-col justify-between p-4 md:p-6">
           <div className="flex-1">
             <h3
-              className={`text-lg md:text-xl font-bold mb-2 select-none ${
-                isSelected ? "text-white" : "text-gray-900"
-              }`}>
+              className={cn(
+                "mb-2 text-lg font-bold select-none md:text-xl",
+                isSelected ? "text-white" : "text-foreground",
+              )}>
               {equipment.name}
             </h3>
             <p
-              className={`text-xs md:text-sm leading-relaxed mb-3 select-none ${
-                isSelected ? "text-white/90" : "text-gray-600"
-              }`}>
+              className={cn(
+                "mb-3 text-xs leading-relaxed select-none md:text-sm",
+                isSelected ? "text-white/85" : "text-muted-foreground",
+              )}>
               {equipment.description}
             </p>
             {equipment.depositeDiscount > 0 && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs font-semibold mt-2 select-none">
+              <div
+                className={cn(
+                  "mt-2 inline-flex select-none items-center rounded-full px-3 py-1 text-xs font-semibold",
+                  isSelected
+                    ? "bg-emerald-500/20 text-emerald-300"
+                    : "bg-emerald-500/15 text-emerald-400",
+                )}>
                 💰 {lang.vehicleDepositDiscount} {equipment.depositeDiscount}€
               </div>
             )}
           </div>
         </div>
 
-        <div
-          className={`relative flex flex-row md:flex-col items-center md:items-end justify-between md:justify-between p-4 md:p-6 gap-4 md:gap-0 border-t md:border-t-0 md:min-w-[200px] ${
-            isSelected ? "" : ""
-          }`}>
+        <div className="relative flex flex-row items-center justify-between gap-4 border-t border-white/10 p-4 md:min-w-[200px] md:flex-col md:items-end md:justify-between md:border-t-0 md:p-6">
           <div
-            className={`hidden md:block absolute left-0 top-[15%] bottom-[15%] w-px ${
-              isSelected ? "bg-white/20" : "bg-gray-200 dark:bg-gray-700"
-            }`}
+            className={cn(
+              "absolute left-0 top-[15%] bottom-[15%] hidden w-px md:block",
+              isSelected ? "bg-white/20" : "bg-white/10",
+            )}
           />
-          <div className="text-left md:text-right flex-1 md:flex-none flex items-center md:items-end">
+          <div className="flex flex-1 items-center md:flex-none md:items-end">
             {equipment.free ? (
-              <div className="w-full">
-                <p
-                  className={`text-xl md:text-2xl font-bold select-none ${
-                    isSelected
-                      ? "text-white"
-                      : "text-green-600 dark:text-green-400"
-                  }`}>
-                  {lang.freeOfCharge}
-                </p>
-              </div>
+              <p
+                className={cn(
+                  "text-xl font-bold select-none md:text-2xl",
+                  isSelected ? "text-white" : "text-emerald-400",
+                )}>
+                {lang.freeOfCharge}
+              </p>
             ) : (
               <div>
-                <div className="flex items-baseline md:justify-end gap-1 mb-1">
+                <div className="mb-1 flex items-baseline gap-1 md:justify-end">
                   <span
-                    className={`text-2xl md:text-3xl font-bold select-none ${
-                      isSelected
-                        ? "text-white"
-                        : "text-gray-900 dark:text-white"
-                    }`}>
+                    className={cn(
+                      "text-2xl font-bold select-none md:text-3xl",
+                      isSelected ? "text-white" : "text-foreground",
+                    )}>
                     {equipment.price}€
                   </span>
                   {equipment.perDay && (
                     <span
-                      className={`text-sm select-none ${
-                        isSelected
-                          ? "text-white/90"
-                          : "text-gray-600 dark:text-gray-400"
-                      }`}>
+                      className={cn(
+                        "text-sm select-none",
+                        isSelected ? "text-white/85" : "text-muted-foreground",
+                      )}>
                       /{lang.day}
                     </span>
                   )}
                 </div>
                 {equipment.perDay && equipment.maxPerDays && (
                   <p
-                    className={`text-xs mb-1 select-none ${
-                      isSelected
-                        ? "text-white/90"
-                        : "text-gray-600 dark:text-gray-400"
-                    }`}>
+                    className={cn(
+                      "mb-1 text-xs select-none",
+                      isSelected ? "text-white/85" : "text-muted-foreground",
+                    )}>
                     {lang.maxPrice}: {equipment.maxPerDays * equipment.price}€
                   </p>
                 )}
                 <p
-                  className={`text-xs select-none ${
-                    isSelected
-                      ? "text-white"
-                      : "text-gray-500 dark:text-gray-400"
-                  }`}>
+                  className={cn(
+                    "text-xs select-none",
+                    isSelected ? "text-white/75" : "text-muted-foreground",
+                  )}>
                   {lang.allPricesIncludeVAT}
                 </p>
               </div>
@@ -200,11 +208,12 @@ export function EquipmentItem({
 
           <Button
             variant={isSelected ? "default" : "outline"}
-            className={`md:mt-4 min-w-[80px] md:min-w-[120px] w-1/2 md:w-auto text-sm md:text-base py-2 md:py-0 transition-all relative z-10 select-none ${
+            className={cn(
+              "relative z-10 w-1/2 min-w-[80px] select-none py-2 text-sm transition-all md:mt-4 md:w-auto md:min-w-[120px] md:py-0 md:text-base",
               isSelected
-                ? "bg-white text-s hover:bg-white/90 border-white"
-                : "border-s text-s hover:bg-s hover:text-white"
-            }`}
+                ? "border-white bg-white text-s hover:bg-white/90"
+                : "border-p text-p hover:bg-p hover:text-primary-foreground",
+            )}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -218,9 +227,9 @@ export function EquipmentItem({
 
       {isSelected && (
         <div className="absolute top-2 right-2">
-          <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-p">
             <svg
-              className="w-4 h-4 text-white"
+              className="h-4 w-4 text-primary-foreground"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"

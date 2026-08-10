@@ -299,7 +299,7 @@ export default function Review({ loaderData }: Route.ComponentProps) {
   const isSubmitting = navigation.state === "submitting";
 
   return (
-    <div className="w-full mx-auto max-w-7xl">
+    <div className="w-full bg-surface pb-6">
       <CostSummary
         pickup={loaderData.pickup}
         dropOff={loaderData.dropOff}

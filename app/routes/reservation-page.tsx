@@ -365,8 +365,8 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
       {(currentStepIndex === 2 || currentStepIndex === 3) &&
         carSummaryWithPrice && (
-          <div className="sticky top-18 sm:top-20 z-30 bg-card/95 backdrop-blur-md border-t border-border">
-            <div className="w-full mx-auto max-w-7xl p-3 sm:p-4">
+          <div className="sticky top-18 sm:top-20 z-30 border-b border-white/10 bg-s/95 backdrop-blur-md">
+            <div className="mx-auto w-full max-w-7xl px-0 py-2 sm:px-4 sm:py-3">
               <CarSummary
                 car={carSummaryWithPrice.car}
                 pickupDate={carSummaryWithPrice.pickupDate}
@@ -385,8 +385,8 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
       <div
         className={cn(
-          "min-h-[400px] transition-opacity duration-500",
-          isAnimating && "opacity-0"
+          "min-h-[400px] bg-surface transition-opacity duration-500",
+          isAnimating && "opacity-0",
         )}>
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
           <Outlet />

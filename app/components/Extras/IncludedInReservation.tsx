@@ -13,11 +13,11 @@ export function IncludedInReservation({
 }: IncludedInReservationProps) {
   return (
     <>
-      <h3 className="font-bold mx-auto max-w-7xl px-4 py-2 mt-2 text-lg">
+      <h3 className="mx-auto mt-2 max-w-7xl px-4 py-2 font-display text-lg font-bold text-foreground">
         {lang.includedInReservation}
       </h3>
 
-      <div className="mx-auto max-w-7xl px-4 py-2 flex flex-col gap-4">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-2">
         <div className="group relative border-2 rounded-xl shadow-lg transition-all duration-300 overflow-hidden border-s bg-s text-white">
           <div className="flex flex-col md:flex-row items-stretch min-h-[140px]">
             <div className="flex-1 flex flex-col justify-between p-4 md:p-6">
