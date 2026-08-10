@@ -232,6 +232,7 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
   }, [totalPrice]);
 
   const handleContinue = () => {
+    if (fetcher.state !== "idle") return;
     const form = new FormData();
     form.append("extras", `${selected}`);
     fetcher.submit(form, { method: "post" });
@@ -252,7 +253,11 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
         onToggle={handleToggleEquipment}
       />
 
-      <ContinueButton lang={loaderData.lang} onClick={handleContinue} />
+      <ContinueButton
+        lang={loaderData.lang}
+        onClick={handleContinue}
+        isLoading={fetcher.state !== "idle"}
+      />
     </div>
   );
 }

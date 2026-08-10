@@ -74,7 +74,7 @@ export default function BlogSection(props: {
                 <div className="mt-4">
                   <Link
                     to={post.href}
-                    className="inline-flex items-center text-sm font-semibold text-p transition-colors hover:text-s">
+                    className="inline-flex items-center text-sm font-semibold text-p transition-colors hover:text-white">
                     {props.lang.readMore}
                     <svg
                       className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"

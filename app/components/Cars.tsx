@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Button } from "./ui/button";
 import type { BaseLocale } from "@/locales/base-locale";
-import { Info, CheckCircle2 } from "lucide-react";
+import { Info, CheckCircle2, Loader2 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import {
   transformApiCars,
@@ -16,7 +17,13 @@ export default function Cars(props: {
   cars?: any[];
   selectedCarId?: number | null;
   fromreservationPage?: boolean;
+  isLoading?: boolean;
+  loadingCarId?: number | null;
 }) {
+  const [pendingCarId, setPendingCarId] = useState<number | null>(null);
+  const activeLoadingCarId = props.loadingCarId ?? pendingCarId;
+  const isBusy = props.isLoading || activeLoadingCarId !== null;
+
   const isApiFormat =
     props.cars &&
     props.cars.length > 0 &&
@@ -33,6 +40,7 @@ export default function Cars(props: {
         {carsToDisplay.map((car, index) => {
           const available = car.available !== undefined ? car.available : true;
           const isSelected = props.selectedCarId === car.id;
+          const isCarLoading = activeLoadingCarId === car.id;
 
           return (
             <article
@@ -206,14 +214,30 @@ export default function Cars(props: {
                 </div>
 
                 <Button
-                  disabled={!available}
+                  disabled={!available || isBusy}
+                  aria-busy={isCarLoading}
                   onClick={() => {
-                    if (!available) return;
+                    if (!available || isBusy) return;
+                    setPendingCarId(car.id);
                     props.onSelect(car.id);
                   }}
-                  className="mt-5 w-full bg-p font-semibold text-primary-foreground shadow-md shadow-p/20 hover:bg-p/90 disabled:bg-white/10 disabled:text-white/40 cursor-pointer disabled:cursor-not-allowed"
+                  className={cn(
+                    "mt-5 w-full bg-p font-semibold text-primary-foreground shadow-md shadow-p/20 hover:bg-p/90 cursor-pointer disabled:cursor-not-allowed",
+                    isCarLoading
+                      ? "disabled:bg-p disabled:text-primary-foreground disabled:opacity-80"
+                      : "disabled:bg-white/10 disabled:text-white/40",
+                  )}
                   size="lg">
-                  {available ? props.lang.reserve : props.lang.reserved}
+                  {!available ? (
+                    props.lang.reserved
+                  ) : isCarLoading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      {props.lang.reserve}
+                    </>
+                  ) : (
+                    props.lang.reserve
+                  )}
                 </Button>
               </div>
             </article>

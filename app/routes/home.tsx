@@ -223,6 +223,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
             <div className="w-full animate-fade-in-up-delay">
               <ReservationTime
+                isLoading={fetcher.state !== "idle"}
                 onStart={async (data) => {
                   const form = new FormData();
                   form.append("pickUpLocation", data.pickUpLocation);

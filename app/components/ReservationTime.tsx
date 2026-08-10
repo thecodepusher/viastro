@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import CustomCalendar from "@/components/ui/custom-calendar";
 import { Label } from "@/components/ui/label";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
 import type { BaseLocale } from "@/locales/base-locale";
 import { times } from "@/constants/calendar";
 import { toast } from "sonner";
@@ -27,6 +27,7 @@ export default function ReservationTime(props: {
     name: string;
   }[];
   lang: BaseLocale;
+  isLoading?: boolean;
   initialValues?: {
     pickUpDate?: string;
     pickUpTime?: string;
@@ -62,7 +63,7 @@ export default function ReservationTime(props: {
     return addDays(new Date(), 7);
   };
 
-  const { locations, lang, onStart } = props;
+  const { locations, lang, onStart, isLoading = false } = props;
 
   const getInitialDropOffTimes = (): {
     times: string[];
@@ -130,7 +131,7 @@ export default function ReservationTime(props: {
           </Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>
             <SelectTrigger
-              className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-p/40"
+              className="w-full bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
               aria-label={lang.pickUpLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
@@ -150,7 +151,7 @@ export default function ReservationTime(props: {
           </Label>
           <Select value={dropOffLocation} onValueChange={setDropOffLocation}>
             <SelectTrigger
-              className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-p/40"
+              className="w-full bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
               aria-label={lang.dropOffLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
@@ -179,7 +180,7 @@ export default function ReservationTime(props: {
                   aria-label={`${lang.pickUpTime} - ${pickDate ? format(pickDate, "PPP") : lang.choose}`}
                   className={cn(
                     "w-[calc(100%-88px)] justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40",
-                    !pickDate && "text-muted-foreground",
+                    !pickDate && "text-white/70",
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {pickDate ? (
@@ -244,7 +245,7 @@ export default function ReservationTime(props: {
                 setDropOffTimes(t);
               }}>
               <SelectTrigger
-                className="w-[88px] bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-p/40"
+                className="w-[88px] bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.pickUpTime} - ${pickUpTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
@@ -273,7 +274,7 @@ export default function ReservationTime(props: {
                   aria-label={`${lang.dropOffTime} - ${dropDate ? format(dropDate, "PPP") : lang.choose}`}
                   className={cn(
                     "w-[calc(100%-88px)] justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40",
-                    !dropDate && "text-muted-foreground",
+                    !dropDate && "text-white/70",
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {dropDate ? (
@@ -313,7 +314,7 @@ export default function ReservationTime(props: {
             </Popover>
             <Select value={dropOfTime ?? ""} onValueChange={setDropOfTime}>
               <SelectTrigger
-                className="w-[88px] bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-p/40"
+                className="w-[88px] bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.dropOffTime} - ${dropOfTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
@@ -330,7 +331,10 @@ export default function ReservationTime(props: {
         </div>
 
         <Button
+          disabled={isLoading}
           onClick={() => {
+            if (isLoading) return;
+
             if (!pickDate || !dropDate) {
               toast.error(props.lang.toastErrorSelectDates);
               return;
@@ -356,8 +360,16 @@ export default function ReservationTime(props: {
             });
           }}
           aria-label={lang.continue}
-          className="lg:w-36 w-full h-10 lg:self-end bg-p text-pd font-semibold hover:bg-p/90 cursor-pointer">
-          {lang.continue}
+          aria-busy={isLoading}
+          className="lg:w-36 w-full h-10 lg:self-end bg-p text-pd font-semibold hover:bg-p/90 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
+          {isLoading ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              {lang.continue}
+            </>
+          ) : (
+            lang.continue
+          )}
         </Button>
       </div>
     </div>
