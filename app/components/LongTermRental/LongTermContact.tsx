@@ -113,7 +113,7 @@ export function LongTermContact({ content, langCode }: Props) {
     <section
       ref={sectionRef}
       id="long-term-contact"
-      className="relative bg-linear-to-b from-slate-50 via-white to-white pb-16 pt-10">
+      className="relative bg-surface section-pattern pb-16 pt-10">
       <div className={sectionContainer}>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-p">
@@ -123,7 +123,7 @@ export function LongTermContact({ content, langCode }: Props) {
           <p className={sectionSubtitle}>{content.formSubtitle}</p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-3xl bg-white shadow-2xl shadow-p/10 ring-1 ring-gray-100">
+        <div className="mt-10 overflow-hidden rounded-3xl bg-card shadow-2xl shadow-p/10 ring-1 ring-border/70">
           <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="relative bg-linear-to-br from-p via-p/90 to-p/80 p-8 text-white">
               <div className="absolute inset-0 opacity-20">
@@ -162,7 +162,7 @@ export function LongTermContact({ content, langCode }: Props) {
                   className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all cursor-pointer ${
                     activeTab === "business"
                       ? "bg-p text-white shadow-lg shadow-p/30"
-                      : "bg-slate-100 text-gray-800 hover:bg-slate-200"
+                      : "bg-pl text-muted-foreground hover:bg-pl/80 hover:text-foreground"
                   }`}>
                   <Building2 className="size-5" />
                   {content.tabBusiness}
@@ -173,7 +173,7 @@ export function LongTermContact({ content, langCode }: Props) {
                   className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all cursor-pointer ${
                     activeTab === "individual"
                       ? "bg-p text-white shadow-lg shadow-p/30"
-                      : "bg-slate-100 text-gray-800 hover:bg-slate-200"
+                      : "bg-pl text-muted-foreground hover:bg-pl/80 hover:text-foreground"
                   }`}>
                   <UserRound className="size-5" />
                   {content.tabIndividual}
@@ -187,8 +187,8 @@ export function LongTermContact({ content, langCode }: Props) {
                       <label
                         key={field.name}
                         htmlFor={field.name}
-                        className="block space-y-2 rounded-2xl border border-gray-100 bg-slate-50/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40 hover:shadow-md">
-                        <span className="text-sm font-semibold text-gray-700">
+                        className="block space-y-2 rounded-2xl border border-border/70 bg-pl/30 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40">
+                        <span className="text-sm font-semibold text-foreground">
                           {field.label}
                         </span>
                         <Input
@@ -208,8 +208,8 @@ export function LongTermContact({ content, langCode }: Props) {
                 </div>
                 <label
                   htmlFor="message"
-                  className="block space-y-2 rounded-2xl border border-gray-100 bg-slate-50/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40 hover:shadow-md">
-                  <span className="text-sm font-semibold text-gray-700">
+                  className="block space-y-2 rounded-2xl border border-border/70 bg-pl/30 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-p/40">
+                  <span className="text-sm font-semibold text-foreground">
                     {content.messageLabel}
                   </span>
                   <textarea
@@ -224,11 +224,11 @@ export function LongTermContact({ content, langCode }: Props) {
                       }))
                     }
                     disabled={isSubmitting}
-                    className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-gray-900 shadow-inner focus:border-p focus:outline-none resize-none"
+                    className="w-full rounded-xl border border-border bg-card px-3 py-2 text-foreground shadow-inner focus:border-p focus:outline-none resize-none placeholder:text-muted-foreground"
                   />
                 </label>
                 <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className={iconBadge}>
                       <Send className="size-5 min-w-5 min-h-5" />
                     </div>

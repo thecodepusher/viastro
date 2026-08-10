@@ -97,7 +97,7 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
         <tr>
           <td style="padding: 0;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
-              <div style="background: linear-gradient(135deg, #FF9B17 0%, #ff8c00 100%); padding: 30px 40px; text-align: center;">
+              <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
                   src="${logoDataUri}" 
                   alt="Viastro Logo" 
@@ -174,7 +174,7 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
               ${extrasHtml}
             </table>
           </div>
-          <div style="margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #ff8c00 100%); border-radius: 8px; text-align: center;">
+          <div style="margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); border-radius: 8px; text-align: center;">
             <p style="margin: 0; color: #ffffff; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Ukupna cena</p>
             <p style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700;">${payload.totalPrice.toFixed(2)}€</p>
           </div>
@@ -270,7 +270,7 @@ export async function sendLongTermInquiryEmail(
         <tr>
           <td style="padding: 0;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
-              <div style="background: linear-gradient(135deg, #FF9B17 0%, #ff8c00 100%); padding: 30px 40px; text-align: center;">
+              <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
                   src="${logoDataUri}" 
                   alt="Viastro Logo" 
@@ -335,7 +335,7 @@ export async function sendLongTermInquiryEmail(
           `
               : ""
           }
-          <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #ff8c00 100%); border-radius: 8px; text-align: center;">
+          <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); border-radius: 8px; text-align: center;">
             <p style="margin: 0; color: #ffffff; font-size: 15px; font-weight: 600;">
               Molimo kontaktirajte klijenta i ponudite opcije dugoročnog najma
             </p>

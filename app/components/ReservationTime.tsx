@@ -92,48 +92,50 @@ export default function ReservationTime(props: {
 
   const initialDropOffData = getInitialDropOffTimes();
   const [pickDate, setPickDate] = useState<Date | undefined>(
-    getInitialPickDate()
+    getInitialPickDate(),
   );
   const [dropDate, setDropDate] = useState<Date | undefined>(
-    getInitialDropDate()
+    getInitialDropDate(),
   );
 
   const [pickUpTime, setPickUpTime] = useState(
-    initialValues?.pickUpTime || "15:00"
+    initialValues?.pickUpTime || "15:00",
   );
   const [dropOfTime, setDropOfTime] = useState<string | null>(
-    initialDropOffData.validDropOffTime
+    initialDropOffData.validDropOffTime,
   );
 
   const [pickUpLocation, setPickUpLocation] = useState<string | undefined>(
-    initialValues?.pickUpLocation
+    initialValues?.pickUpLocation,
   );
   const [dropOffLocation, setDropOffLocation] = useState<string | undefined>(
-    initialValues?.dropOffLocation
+    initialValues?.dropOffLocation,
   );
 
   const [dropOffTimes, setDropOffTimes] = useState<string[]>(
-    initialDropOffData.times
+    initialDropOffData.times,
   );
   const [pickDatePopoverOpen, setPickDatePopoverOpen] = useState(false);
   const [dropDatePopoverOpen, setDropDatePopoverOpen] = useState(false);
 
   return (
     <div className="mx-auto">
-      <h3 className="pb-4 font-black text-2xl sm:text-3xl text-white sm:text-left text-center drop-shadow-lg">
+      <h3 className="pb-3 font-display font-semibold text-lg sm:text-2xl text-white/95 sm:text-left text-center">
         {lang.createReservation}
       </h3>
-      <div className="w-full rounded-3xl bg-white/10 border border-white/15 shadow-2xl backdrop-blur-2xl p-4 sm:p-6 mb-8 flex flex-col items-center sm:items-end lg:flex-row gap-4 text-white">
+      <div className="w-full rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xl p-3 sm:p-5 mb-4 sm:mb-6 flex flex-col items-stretch lg:flex-row gap-3 sm:gap-4 text-white">
         <div className="w-full flex flex-col gap-1">
-          <Label className="text-white/90">{lang.pickUpLoacation}</Label>
+          <Label className="text-white/80 text-xs sm:text-sm">
+            {lang.pickUpLoacation}
+          </Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>
             <SelectTrigger
-              className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/30"
+              className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-p/40"
               aria-label={lang.pickUpLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
-            <SelectContent className="bg-black/90 text-white border border-white/15 backdrop-blur-lg **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
+            <SelectContent className="bg-pd text-white border border-white/15 **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
               {locations.map((location) => (
                 <SelectItem key={location.id} value={`${location.id}`}>
                   {location.name}
@@ -143,15 +145,17 @@ export default function ReservationTime(props: {
           </Select>
         </div>
         <div className="w-full flex flex-col gap-1">
-          <Label className="text-white/90">{lang.dropOffLoacation}</Label>
+          <Label className="text-white/80 text-xs sm:text-sm">
+            {lang.dropOffLoacation}
+          </Label>
           <Select value={dropOffLocation} onValueChange={setDropOffLocation}>
             <SelectTrigger
-              className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/30"
+              className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-p/40"
               aria-label={lang.dropOffLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
 
-            <SelectContent className="bg-black/90 text-white border border-white/15 backdrop-blur-lg **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
+            <SelectContent className="bg-pd text-white border border-white/15 **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
               {locations.map((location) => (
                 <SelectItem key={location.id} value={`${location.id}`}>
                   {location.name}
@@ -162,8 +166,10 @@ export default function ReservationTime(props: {
         </div>
 
         <div className="w-full flex flex-col gap-1">
-          <Label className="text-white/90">{lang.pickUpTime}</Label>
-          <div className="flex gap-0.5">
+          <Label className="text-white/80 text-xs sm:text-sm">
+            {lang.pickUpTime}
+          </Label>
+          <div className="flex gap-1">
             <Popover
               open={pickDatePopoverOpen}
               onOpenChange={setPickDatePopoverOpen}>
@@ -172,8 +178,8 @@ export default function ReservationTime(props: {
                   variant={"outline"}
                   aria-label={`${lang.pickUpTime} - ${pickDate ? format(pickDate, "PPP") : lang.choose}`}
                   className={cn(
-                    "w-[calc(100%-90px)] justify-start text-left font-normal bg-white/10 border border-white/25 text-white hover:bg-white/15 hover:border-white/40 focus:ring-2 focus:ring-white/30",
-                    !pickDate && "text-muted-foreground"
+                    "w-[calc(100%-88px)] justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40",
+                    !pickDate && "text-muted-foreground",
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {pickDate ? (
@@ -183,7 +189,7 @@ export default function ReservationTime(props: {
                   )}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-full p-0 bg-black/90 border border-white/15 backdrop-blur-xl">
+              <PopoverContent className="w-full p-0 bg-pd border border-white/15">
                 <CustomCalendar
                   mode="single"
                   selected={pickDate}
@@ -238,12 +244,12 @@ export default function ReservationTime(props: {
                 setDropOffTimes(t);
               }}>
               <SelectTrigger
-                className="w-[90px] bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-white/30"
+                className="w-[88px] bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.pickUpTime} - ${pickUpTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
 
-              <SelectContent className="bg-black/90 text-white border border-white/15 backdrop-blur-lg **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
+              <SelectContent className="bg-pd text-white border border-white/15 **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
                 {times.map((time) => (
                   <SelectItem key={`pickUp${time}`} value={time}>
                     {time}
@@ -254,8 +260,10 @@ export default function ReservationTime(props: {
           </div>
         </div>
         <div className="w-full flex flex-col gap-1">
-          <Label className="text-white/90">{lang.dropOffTime}</Label>
-          <div className="flex gap-0.5">
+          <Label className="text-white/80 text-xs sm:text-sm">
+            {lang.dropOffTime}
+          </Label>
+          <div className="flex gap-1">
             <Popover
               open={dropDatePopoverOpen}
               onOpenChange={setDropDatePopoverOpen}>
@@ -264,8 +272,8 @@ export default function ReservationTime(props: {
                   variant={"outline"}
                   aria-label={`${lang.dropOffTime} - ${dropDate ? format(dropDate, "PPP") : lang.choose}`}
                   className={cn(
-                    "w-[calc(100%-90px)] justify-start text-left font-normal bg-white/10 border border-white/25 text-white hover:bg-white/15 hover:border-white/40 focus:ring-2 focus:ring-white/30",
-                    !dropDate && "text-muted-foreground"
+                    "w-[calc(100%-88px)] justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40",
+                    !dropDate && "text-muted-foreground",
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {dropDate ? (
@@ -275,7 +283,7 @@ export default function ReservationTime(props: {
                   )}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-black/90 border border-white/15 backdrop-blur-xl">
+              <PopoverContent className="w-auto p-0 bg-pd border border-white/15">
                 <CustomCalendar
                   mode="single"
                   selected={dropDate}
@@ -305,12 +313,12 @@ export default function ReservationTime(props: {
             </Popover>
             <Select value={dropOfTime ?? ""} onValueChange={setDropOfTime}>
               <SelectTrigger
-                className="w-[90px] bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-white/30"
+                className="w-[88px] bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.dropOffTime} - ${dropOfTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
 
-              <SelectContent className="bg-black/90 text-white border border-white/15 backdrop-blur-lg **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
+              <SelectContent className="bg-pd text-white border border-white/15 **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
                 {dropOffTimes.map((time) => (
                   <SelectItem key={`dropOff${time}`} value={time}>
                     {time}
@@ -348,7 +356,7 @@ export default function ReservationTime(props: {
             });
           }}
           aria-label={lang.continue}
-          className="sm:w-34 w-full bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
+          className="lg:w-36 w-full h-10 lg:self-end bg-p text-pd font-semibold hover:bg-p/90 cursor-pointer">
           {lang.continue}
         </Button>
       </div>

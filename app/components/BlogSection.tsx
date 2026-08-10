@@ -18,63 +18,55 @@ export default function BlogSection(props: {
   }
 
   return (
-    <div className="bg-white py-12">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h3 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 text-center">
+    <section className="bg-surface section-pattern py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h3 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground text-center">
           {title}
         </h3>
-        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {posts.map((post) => (
             <article
               key={`blog-${post.id}`}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl">
+              className="group flex flex-col overflow-hidden rounded-xl border border-border/70 bg-card transition-colors hover:border-p/40">
               <Link
                 to={post.href}
                 className="relative block w-full overflow-hidden">
-                <div className="relative aspect-3/2 w-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                <div className="relative aspect-3/2 w-full overflow-hidden bg-pl/40 flex items-center justify-center">
                   <img
                     alt=""
                     src={post.imageUrl}
                     className={`h-full w-full transition-transform duration-500 ${
                       post.imageUrl === "/mount.webp" ||
                       post.imageUrl === "/sea-summer.webp"
-                        ? "object-cover object-bottom-left group-hover:scale-110"
-                        : "object-contain group-hover:scale-110"
+                        ? "object-cover object-bottom-left group-hover:scale-105"
+                        : "object-contain group-hover:scale-105"
                     }`}
                     loading="lazy"
                     decoding="async"
                     width="364"
                     height="243"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
                 </div>
               </Link>
 
-              <div className="flex flex-1 flex-col p-6">
-                <div className="mb-3 flex items-center gap-3 text-xs text-gray-500">
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                <div className="mb-3 flex items-center gap-3 text-xs text-muted-foreground">
                   <time dateTime={post.datetime} className="font-medium">
                     {post.date}
                   </time>
                   {post.tags && post.tags.length > 0 && (
                     <>
-                      <span className="text-gray-300">•</span>
-                      <span className="truncate font-medium">
-                        {post.tags[0]}
-                      </span>
+                      <span className="text-border">•</span>
+                      <span className="truncate font-medium">{post.tags[0]}</span>
                     </>
                   )}
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="mb-3 text-xl font-bold leading-tight text-gray-900 transition-colors duration-200 group-hover:text-[#FF9B17]">
-                    <Link
-                      to={post.href}
-                      className="relative inline-block after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-[#FF9B17] after:transition-transform after:duration-300 hover:after:scale-x-100">
-                      {post.title}
-                    </Link>
+                  <h3 className="mb-3 font-display text-lg sm:text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-p">
+                    <Link to={post.href}>{post.title}</Link>
                   </h3>
-                  <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">
+                  <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                     {post.description}
                   </p>
                 </div>
@@ -82,7 +74,7 @@ export default function BlogSection(props: {
                 <div className="mt-4">
                   <Link
                     to={post.href}
-                    className="inline-flex items-center text-sm font-semibold text-[#FF9B17] transition-colors hover:text-s">
+                    className="inline-flex items-center text-sm font-semibold text-p transition-colors hover:text-s">
                     {props.lang.readMore}
                     <svg
                       className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
@@ -103,6 +95,6 @@ export default function BlogSection(props: {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

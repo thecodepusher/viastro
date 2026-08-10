@@ -3,24 +3,28 @@ import { Link } from "react-router";
 
 export default function Cta(props: { lang: BaseLocale }) {
   return (
-    <div className="bg-p">
-      <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
+    <section className="relative overflow-hidden bg-s">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-linear-to-br from-p/20 via-transparent to-transparent"
+      />
+      <div className="relative px-6 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
             {props.lang.ctaTitle}
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-pd/80">
+          <p className="mx-auto mt-5 max-w-xl text-base sm:text-lg text-white/70 text-pretty">
             {props.lang.ctaSubTitle}
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+          <div className="mt-8 flex items-center justify-center">
             <Link
               to="/reservation"
-              className="rounded-md px-3.5 py-2.5 bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
+              className="rounded-lg px-6 py-3 bg-p text-pd font-semibold transition-colors hover:bg-p/90">
               {props.lang.ctaAction}
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

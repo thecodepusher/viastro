@@ -171,8 +171,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div className="w-full">
       <SEO schemas={schemas} />
-      <div className="flex flex-col w-full mt-18">
-        <div className="relative flex flex-col items-center justify-center h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-8.5rem)] overflow-hidden">
+      <div className="flex flex-col w-full mt-18 sm:mt-20">
+        <div className="relative flex flex-col items-center justify-end sm:justify-center min-h-[calc(100svh-4.5rem)] sm:h-[calc(100vh-5rem)] overflow-hidden">
           <video
             key={isMobile ? "mobile" : "desktop"}
             ref={videoRef}
@@ -202,26 +202,26 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             className={`absolute inset-0 w-full h-full bg-pd flex items-center justify-center pointer-events-none transition-opacity duration-700 ${
               videoPlaying ? "opacity-0" : "opacity-100"
             }`}>
-            <div className="w-12 h-12 rounded-full border-4 border-white/20 border-t-p animate-spin" />
+            <div className="w-10 h-10 rounded-full border-2 border-white/20 border-t-p animate-spin" />
           </div>
 
-          <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/40 via-black/50 to-black/70" />
+          <div className="absolute inset-0 w-full h-full bg-linear-to-b from-pd/35 via-pd/40 to-pd/75" />
+          <div className="absolute inset-0 w-full h-full bg-linear-to-tr from-p/10 via-transparent to-transparent" />
 
-          <div className="absolute inset-0 w-full h-full bg-linear-to-b from-[#FF9B17]/20 via-[#FF9B17]/5 to-transparent" />
-
-          <div className="absolute sm:relative bottom-0 z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:py-16 lg:py-20">
-            <div className="text-center mb-8 sm:mb-12">
-              <h1 className="text-white font-black uppercase text-3xl sm:text-4xl lg:text-5xl mb-4 drop-shadow-lg">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:py-16 lg:py-20">
+            <div className="text-center mb-6 sm:mb-10 animate-fade-in-up">
+              <p className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-p">
+                Viastro Rent a Car
+              </p>
+              <h1 className="font-display text-white font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight mb-2">
                 {loaderData.lang.title}
               </h1>
-              <h2 className="text-white font-black uppercase text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
-                <span className="text-[#FF9B17]">
-                  {loaderData.lang.subTitle}
-                </span>
+              <h2 className="font-display text-white/90 font-semibold text-xl sm:text-3xl lg:text-4xl tracking-tight">
+                <span className="text-p">{loaderData.lang.subTitle}</span>
               </h2>
             </div>
 
-            <div className="w-full">
+            <div className="w-full animate-fade-in-up-delay">
               <ReservationTime
                 onStart={async (data) => {
                   const form = new FormData();
@@ -229,12 +229,12 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                   form.append("dropOffLocation", data.dropOffLocation);
                   form.append(
                     "pickUpDate",
-                    setHours(data.pickDate, 12).toISOString()
+                    setHours(data.pickDate, 12).toISOString(),
                   );
                   form.append("pickUpTime", data.pickUpTime);
                   form.append(
                     "dropOffDate",
-                    setHours(data.dropDate, 12).toISOString()
+                    setHours(data.dropDate, 12).toISOString(),
                   );
                   form.append("dropOffTime", data.dropOfTime);
                   fetcher.submit(form, { method: "post" });

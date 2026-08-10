@@ -5,12 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-p: #ff9b17;
-  --color-s: #614b80;
-  --color-pd: #181320;
-  --color-pl: #ffdeb2;
+  --color-p: #e8911a;
+  --color-s: #1e2a3a;
+  --color-pd: #0d1218;
+  --color-pl: #243044;
+  --color-surface: #111820;
   --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Manrope", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display:
+    "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -26,80 +30,77 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+  @apply bg-surface text-foreground antialiased;
+  color-scheme: dark;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --radius: 0.75rem;
+  --background: #111820;
+  --foreground: #eef1f5;
+  --card: #1a2433;
+  --card-foreground: #eef1f5;
+  --popover: #1a2433;
+  --popover-foreground: #eef1f5;
+  --primary: #e8911a;
+  --primary-foreground: #0d1218;
+  --secondary: #1e2a3a;
+  --secondary-foreground: #eef1f5;
+  --muted: #1e2a3a;
+  --muted-foreground: #8b9cb3;
+  --accent: #243044;
+  --accent-foreground: #eef1f5;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #2a3548;
+  --input: #2a3548;
+  --ring: #e8911a;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #1a2433;
+  --sidebar-foreground: #eef1f5;
+  --sidebar-primary: #e8911a;
+  --sidebar-primary-foreground: #0d1218;
+  --sidebar-accent: #243044;
+  --sidebar-accent-foreground: #eef1f5;
+  --sidebar-border: #2a3548;
+  --sidebar-ring: #e8911a;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #111820;
+  --foreground: #eef1f5;
+  --card: #1a2433;
+  --card-foreground: #eef1f5;
+  --popover: #1a2433;
+  --popover-foreground: #eef1f5;
+  --primary: #e8911a;
+  --primary-foreground: #0d1218;
+  --secondary: #1e2a3a;
+  --secondary-foreground: #eef1f5;
+  --muted: #1e2a3a;
+  --muted-foreground: #8b9cb3;
+  --accent: #243044;
+  --accent-foreground: #eef1f5;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: #2a3548;
+  --input: #2a3548;
+  --ring: #e8911a;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: #1a2433;
+  --sidebar-foreground: #eef1f5;
+  --sidebar-primary: #e8911a;
+  --sidebar-primary-foreground: #0d1218;
+  --sidebar-accent: #243044;
+  --sidebar-accent-foreground: #eef1f5;
+  --sidebar-border: #2a3548;
+  --sidebar-ring: #e8911a;
 }
 
 @theme inline {
@@ -145,11 +146,13 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
-  @font-face {
-    font-family: "Inter";
-    font-display: swap;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
   }
 }
 
@@ -164,6 +167,15 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.7s ease-out forwards;
 }
@@ -171,4 +183,34 @@ body {
 .animate-fade-in-up-delay {
   animation: fadeInUp 0.7s ease-out 0.2s forwards;
   opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.section-pattern {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(255 255 255 / 0.04) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+}
+
+@layer components {
+  .content-prose {
+    @apply prose prose-lg max-w-none prose-invert
+      prose-headings:text-foreground prose-headings:font-bold
+      prose-h1:text-3xl prose-h1:mb-6
+      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+      prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
+      prose-strong:text-foreground prose-strong:font-semibold
+      prose-ul:text-muted-foreground prose-ul:my-4 prose-ul:space-y-2
+      prose-li:text-muted-foreground prose-li:my-2 prose-li:leading-relaxed
+      prose-a:text-p prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+      prose-code:text-foreground prose-code:bg-pl prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-blockquote:border-l-4 prose-blockquote:border-p prose-blockquote:pl-4 prose-blockquote:italic;
+  }
 }

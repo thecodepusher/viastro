@@ -154,7 +154,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
               } as React.ImgHTMLAttributes<HTMLImageElement>)}
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/50 to-black/30" />
-            <div className="absolute inset-0 bg-linear-to-b from-[#FF9B17]/10 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-b from-p/10 via-transparent to-transparent" />
           </div>
 
           <div className="absolute inset-0 flex items-center sm:items-end">
@@ -165,7 +165,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
                   aria-label="Breadcrumb">
                   <Link
                     to={`/${loaderData.langCode}/blog`}
-                    className="inline-flex items-center gap-1 sm:gap-1.5 hover:text-[#FF9B17] transition-colors">
+                    className="inline-flex items-center gap-1 sm:gap-1.5 hover:text-p transition-colors">
                     <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
                     {loaderData.lang.blog}
                   </Link>
@@ -181,14 +181,14 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
 
                 <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/90">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-[#FF9B17]" />
+                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-p" />
                     <time dateTime={loaderData.post.datetime}>
                       {loaderData.post.date}
                     </time>
                   </div>
                   {loaderData.post.tags && loaderData.post.tags.length > 0 && (
                     <div className="flex items-center gap-1.5 sm:gap-2">
-                      <Tag className="h-3 w-3 sm:h-4 sm:w-4 text-[#FF9B17]" />
+                      <Tag className="h-3 w-3 sm:h-4 sm:w-4 text-p" />
                       <span className="truncate">
                         {loaderData.post.tags[0]}
                       </span>
@@ -200,17 +200,17 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
           </div>
         </div>
 
-        <div className="w-full bg-white">
+        <div className="w-full bg-surface">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             {loaderData.post.description && (
-              <div className="mb-8 p-6 rounded-2xl bg-linear-to-br from-[#FF9B17]/5 via-[#FF9B17]/10 to-transparent border border-[#FF9B17]/20">
-                <p className="text-lg leading-relaxed text-gray-700 font-medium">
+              <div className="mb-8 p-6 rounded-2xl bg-linear-to-br from-p/10 via-p/5 to-transparent border border-p/20">
+                <p className="text-lg leading-relaxed text-muted-foreground font-medium">
                   {loaderData.post.description}
                 </p>
               </div>
             )}
 
-            <div className="prose prose-lg prose-headings:text-gray-900 prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-[#FF9B17] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-ul:my-6 prose-ol:my-6 prose-li:my-2 prose-li:text-gray-700 max-w-none">
+            <div className="content-prose">
               <div
                 dangerouslySetInnerHTML={{
                   __html: loaderData.post.content ?? "",
@@ -219,10 +219,10 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
             </div>
 
             {loaderData.post.tags && loaderData.post.tags.length > 0 && (
-              <div className="mt-12 pt-8 border-t border-gray-200">
+              <div className="mt-12 pt-8 border-t border-border">
                 <div className="flex flex-wrap items-center gap-3">
-                  <Tag className="h-5 w-5 text-gray-400" />
-                  <span className="text-sm font-semibold text-gray-600">
+                  <Tag className="h-5 w-5 text-muted-foreground" />
+                  <span className="text-sm font-semibold text-muted-foreground">
                     Tags:
                   </span>
                   {loaderData.post.tags.map((tag, index) => (
@@ -231,7 +231,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
                       to={`/${loaderData.langCode}/blog?tag=${encodeURIComponent(
                         tag
                       )}`}
-                      className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-[#FF9B17] hover:text-white transition-all duration-200 hover:scale-105">
+                      className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-pl text-foreground hover:bg-p hover:text-primary-foreground transition-all duration-200 hover:scale-105">
                       #{tag}
                     </Link>
                   ))}
@@ -239,10 +239,10 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
               </div>
             )}
 
-            <div className="mt-12 pt-8 border-t border-gray-200">
+            <div className="mt-12 pt-8 border-t border-border">
               <Link
                 to={`/${loaderData.langCode}/blog`}
-                className="inline-flex items-center gap-2 text-[#FF9B17] font-semibold hover:text-s transition-colors group">
+                className="inline-flex items-center gap-2 text-p font-semibold hover:text-s transition-colors group">
                 <ArrowLeft className="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1" />
                 {loaderData.lang.blog}
               </Link>

@@ -228,26 +228,25 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full">
-      <div className="bg-linear-to-r from-p via-p to-p/90 mt-18 shadow-lg">
-        <div className="mx-auto max-w-7xl px-4 py-2">
-          <div className="sm:mb-4 mb-1">
+      <div className="bg-s mt-18 sm:mt-20 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-3 sm:py-4">
+          <div className="sm:mb-4 mb-2">
             {!isMobile && (
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-lg font-semibold text-white">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="font-display text-lg font-semibold text-white">
                   {loaderData.lang.reservation || "Rezervacija"}
                 </h2>
-                <span className="text-sm font-medium text-white/90">
+                <span className="text-sm font-medium text-white/70">
                   {completedSteps + (currentStepIndex >= 0 ? 1 : 0)} /{" "}
                   {steps.length}
                 </span>
               </div>
             )}
-            <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2.5 overflow-hidden shadow-inner">
+            <div className="w-full bg-white/15 rounded-full h-1.5 sm:h-2 overflow-hidden">
               <div
                 className={cn(
-                  "h-full bg-white rounded-full transition-all duration-500 ease-out shadow-sm",
-                  isAnimating && "animate-pulse",
-                  "animate-in slide-in-from-left duration-700"
+                  "h-full bg-p rounded-full transition-all duration-500 ease-out",
+                  isAnimating && "animate-pulse"
                 )}
                 style={{ width: `${progressPercentage}%` }}
               />
@@ -366,8 +365,8 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
 
       {(currentStepIndex === 2 || currentStepIndex === 3) &&
         carSummaryWithPrice && (
-          <div className="sticky top-18 z-30 bg-white border-t border-gray-200 shadow-lg">
-            <div className="w-full mx-auto max-w-7xl p-4">
+          <div className="sticky top-18 sm:top-20 z-30 bg-card/95 backdrop-blur-md border-t border-border">
+            <div className="w-full mx-auto max-w-7xl p-3 sm:p-4">
               <CarSummary
                 car={carSummaryWithPrice.car}
                 pickupDate={carSummaryWithPrice.pickupDate}

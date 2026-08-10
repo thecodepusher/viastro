@@ -58,7 +58,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const fontLink = document.querySelector(
-      'link[href*="fonts.googleapis.com/css2"]'
+      'link[href*="fonts.googleapis.com/css2"]',
     ) as HTMLLinkElement;
     if (fontLink) {
       fontLink.media = "all";
@@ -70,7 +70,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#FF9B17" />
+        <meta name="theme-color" content="#0D1218" />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta name="language" content="Serbian" />
@@ -80,13 +80,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <HreflangLinks />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
           media="print"
         />
         <noscript>
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
           />
         </noscript>
         <script
@@ -229,26 +229,26 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
             <div className="relative mb-6">
               <TriangleAlert
                 size={120}
-                className="text-[#FF9B17] opacity-20 absolute inset-0 m-auto"
+                className="text-p opacity-20 absolute inset-0 m-auto"
               />
-              <h1 className="text-9xl sm:text-[12rem] font-black text-[#FF9B17] relative z-10 drop-shadow-lg">
+              <h1 className="text-9xl sm:text-[12rem] font-extrabold text-p relative z-10">
                 {isRouteErrorResponse(error) ? error.status : "500"}
               </h1>
             </div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-pd mb-4">
             {langData.lang.errorTitle}
           </h2>
 
-          <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-md mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-md mx-auto">
             {langData.lang.errorMessage}
           </p>
 
           <Link to={`/${langData.langCode}`}>
             <Button
               size="lg"
-              className="bg-[#FF9B17] hover:bg-[#FF9B17]/90 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
+              className="bg-s hover:bg-s/90 text-white px-8 py-6 text-lg font-semibold cursor-pointer">
               <Home className="mr-2 h-5 w-5" />
               {langData.lang.errorAction}
             </Button>

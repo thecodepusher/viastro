@@ -33,8 +33,8 @@ export function CarSummary({
 
   return (
     <div className="w-full h-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-row lg:flex-row items-stretch h-[120px] lg:h-[180px] bg-white lg:rounded-xl lg:shadow-lg lg:border-2 lg:border-s/20 overflow-hidden">
-        <div className="relative w-32 lg:w-56 h-full bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center overflow-hidden shrink-0">
+      <div className="flex flex-row lg:flex-row items-stretch h-[120px] lg:h-[180px] bg-card lg:rounded-xl lg:shadow-lg lg:border-2 lg:border-border overflow-hidden">
+        <div className="relative w-32 lg:w-56 h-full bg-pl/40 flex items-center justify-center overflow-hidden shrink-0">
           <img
             src={car.image}
             alt={car.customName || car.name}
@@ -46,17 +46,17 @@ export function CarSummary({
           <div className="flex-1 flex flex-col justify-between min-w-0 px-2 py-0 lg:p-0">
             <div className="mb-1 lg:mb-0">
               <div className="flex items-center gap-1.5 lg:gap-3 mb-1 lg:mb-3 flex-wrap">
-                <h3 className="text-xs lg:text-xl font-bold text-gray-900 leading-tight truncate">
+                <h3 className="text-xs lg:text-xl font-bold text-foreground leading-tight truncate">
                   {car.customName || car.name}
                 </h3>
                 <div className="flex flex-wrap gap-1 lg:gap-2 items-center">
                   <span className="inline-flex items-center px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded-full text-[9px] lg:text-xs font-semibold bg-s/10 text-s border border-s/20">
                     {car.carTypeText}
                   </span>
-                  <span className="inline-flex items-center px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded-full text-[9px] lg:text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                  <span className="inline-flex items-center px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded-full text-[9px] lg:text-xs font-semibold bg-pl text-muted-foreground border border-border">
                     {car.transmissionText}
                   </span>
-                  <span className="inline-flex items-center px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded-full text-[9px] lg:text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                  <span className="inline-flex items-center px-1.5 lg:px-2.5 py-0.5 lg:py-1 rounded-full text-[9px] lg:text-xs font-semibold bg-pl text-muted-foreground border border-border">
                     {car.gasText}
                   </span>
                 </div>
@@ -71,10 +71,10 @@ export function CarSummary({
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                  <p className="hidden lg:block text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">
                     {lang.pickUpTime}
                   </p>
-                  <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight">
+                  <p className="text-[9px] lg:text-sm font-bold text-foreground leading-tight">
                     <span className="hidden lg:block">
                       {formattedPickupDate}
                     </span>
@@ -95,10 +95,10 @@ export function CarSummary({
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                  <p className="hidden lg:block text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">
                     {lang.dropOffTime}
                   </p>
-                  <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight">
+                  <p className="text-[9px] lg:text-sm font-bold text-foreground leading-tight">
                     <span className="hidden lg:block">
                       {formattedDropoffDate}
                     </span>
@@ -119,7 +119,7 @@ export function CarSummary({
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                  <p className="hidden lg:block text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">
                     {lang.pickUpLoacation}
                   </p>
                   <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight truncate">
@@ -135,7 +135,7 @@ export function CarSummary({
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="hidden lg:block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wide">
+                  <p className="hidden lg:block text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">
                     {lang.dropOffLoacation}
                   </p>
                   <p className="text-[9px] lg:text-sm font-bold text-gray-900 leading-tight truncate">
@@ -146,18 +146,18 @@ export function CarSummary({
             </div>
           </div>
 
-          <div className="w-18 lg:w-56 shrink-0 lg:p-4 lg:bg-transparent text-gray-900 lg:rounded-none flex flex-col items-end justify-center gap-0.5 lg:gap-0 border-l border-gray-200 lg:pl-4">
+          <div className="w-18 lg:w-56 shrink-0 lg:p-4 lg:bg-transparent text-foreground lg:rounded-none flex flex-col items-end justify-center gap-0.5 lg:gap-0 border-l border-border lg:pl-4">
             <div className="text-right">
-              <p className="text-[9px] lg:text-xs font-medium text-gray-500 mb-0 lg:mb-2 uppercase tracking-wide leading-tight">
+              <p className="text-[9px] lg:text-xs font-medium text-muted-foreground mb-0 lg:mb-2 uppercase tracking-wide leading-tight">
                 {days} {lang.day}
               </p>
               <div className="flex items-baseline justify-end gap-0.5 lg:gap-1 mb-0 lg:mb-2">
-                <Euro className="w-3 h-3 lg:w-5 lg:h-5 text-gray-900" />
-                <span className="text-base lg:text-3xl font-bold text-gray-900 leading-tight">
+                <Euro className="w-3 h-3 lg:w-5 lg:h-5 text-foreground" />
+                <span className="text-base lg:text-3xl font-bold text-foreground leading-tight">
                   {price.toFixed(2)}
                 </span>
               </div>
-              <p className="text-[8px] lg:text-xs text-gray-500 leading-tight">
+              <p className="text-[8px] lg:text-xs text-muted-foreground leading-tight">
                 {lang.allPricesIncludeVAT}
               </p>
             </div>

@@ -5,7 +5,15 @@ import { CarType, GasType, TransmissionType } from "./data";
  * Vozila koja se prikazuju na sajtu.
  * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia, 15=Polo DSG
  */
-export const ALLOWED_CAR_IDS: string[] = ["10", "15", "8", "2", "12", "13", "14"];
+export const ALLOWED_CAR_IDS: string[] = [
+  "10",
+  "15",
+  "8",
+  "2",
+  "12",
+  "13",
+  "14",
+];
 
 export const fullProtection = {
   id: 1,
@@ -29,8 +37,8 @@ const carImageMap: Record<string, string> = {
   renault_clio: "/clio.webp",
   peugeot_2008: "/peugeot-2008-gt.webp",
   peugeot_3008: "/3008.webp",
-  skoda_octavia: "/skoda-octavia-silver.webp",
-  skoda_octavia_siva: "/skoda-octavia-silver.webp",
+  skoda_octavia: "/skoda-octavia-grey.webp",
+  skoda_octavia_siva: "/skoda-octavia-grey.webp",
   skoda_kamiq: "/skoda-kamiq.webp",
   citroen_c3_aircross: "/c3-aircross.webp",
   citroen_c3_aircross_blue: "/c3-aircross-blue.webp",
