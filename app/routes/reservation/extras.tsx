@@ -238,7 +238,7 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-surface pb-6">
       <IncludedInReservation
         lang={loaderData.lang}
         notInWorkingHours={loaderData.notInWorkingHours}

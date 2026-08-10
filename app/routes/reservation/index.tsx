@@ -78,19 +78,17 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
 
   return (
-    <section className="relative overflow-hidden bg-neutral-950">
-      <div className="relative h-[70vh] w-full overflow-hidden bg-linear-to-br from-black/60 via-black/50 to-black/30">
+    <section className="relative overflow-hidden bg-pd">
+      <div className="relative min-h-[70vh] w-full overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url(/long-term-rental-hero-2.webp)" }}
           aria-hidden
         />
-        <div className="absolute -left-10 -top-10 h-64 w-64 rounded-full bg-p/25 blur-3xl" />
-        <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-s/25 blur-3xl" />
-        <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/55 to-black/30" />
-        <div className="absolute inset-0 bg-linear-to-b from-p/25 via-p/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-pd/75 via-pd/60 to-pd/40" />
+        <div className="absolute inset-0 bg-linear-to-t from-pd/50 via-transparent to-pd/20" />
 
-        <div className="w-screen h-full flex items-center justify-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full min-h-[70vh] flex items-center justify-center py-10">
           <ReservationTime
             onStart={async (data) => {
               const form = new FormData();
@@ -98,12 +96,12 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
               form.append("dropOffLocation", data.dropOffLocation);
               form.append(
                 "pickUpDate",
-                setHours(data.pickDate, 12).toISOString()
+                setHours(data.pickDate, 12).toISOString(),
               );
               form.append("pickUpTime", data.pickUpTime);
               form.append(
                 "dropOffDate",
-                setHours(data.dropDate, 12).toISOString()
+                setHours(data.dropDate, 12).toISOString(),
               );
               form.append("dropOffTime", data.dropOfTime);
               fetcher.submit(form, { method: "post" });

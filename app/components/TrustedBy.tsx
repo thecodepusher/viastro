@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 import type { BaseLocale } from "@/locales/base-locale";
 import GoogleIcon from "@/components/icons/GoogleIcon";
+
 interface TrustedByProps {
   lang: BaseLocale;
 }
@@ -30,26 +31,34 @@ export default function TrustedBy({ lang }: TrustedByProps) {
   };
 
   return (
-    <div className="bg-pl/20 py-12">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-s py-14 sm:py-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-linear-to-br from-p/20 via-transparent to-transparent"
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
-          <h3 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 text-center">
+          <h3 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white text-center">
             {lang.whyChoose}
           </h3>
-          <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="mt-10 sm:mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.id} className="flex flex-col bg-pl/40 p-8">
-                <dt className="text-sm/6 font-semibold text-pd">{stat.name}</dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">
+              <div
+                key={stat.id}
+                className="flex flex-col rounded-xl border border-white/10 bg-white/5 px-4 py-6 sm:p-8 text-center backdrop-blur-sm transition-colors hover:border-p/30 hover:bg-white/8">
+                <dt className="text-xs sm:text-sm font-medium text-white/60">
+                  {stat.name}
+                </dt>
+                <dd className="order-first font-display text-lg sm:text-2xl font-bold tracking-tight text-white">
                   {stat.value}
                 </dd>
               </div>
             ))}
           </dl>
 
-          <div className="mt-16 flex flex-col items-center justify-center">
+          <div className="mt-12 sm:mt-16 flex flex-col items-center justify-center">
             <div
-              className="flex items-center gap-2 mb-4 cursor-pointer"
+              className="flex items-center gap-2 mb-3 cursor-pointer"
               onClick={() => window.open(googleReviewUrl, "_blank")}
               role="button"
               tabIndex={0}
@@ -59,7 +68,7 @@ export default function TrustedBy({ lang }: TrustedByProps) {
                 }
               }}>
               <GoogleIcon />
-              <span className="text-lg font-semibold text-gray-900">
+              <span className="text-base font-semibold text-white">
                 Google Review
               </span>
             </div>
@@ -68,7 +77,7 @@ export default function TrustedBy({ lang }: TrustedByProps) {
                 <button
                   key={starIndex}
                   type="button"
-                  className="focus:outline-none transition-transform hover:scale-110"
+                  className="focus:outline-none transition-transform hover:scale-105"
                   onMouseEnter={() => setHoveredStar(starIndex)}
                   onMouseLeave={() => setHoveredStar(null)}
                   onClick={() => handleStarClick(starIndex)}
@@ -76,8 +85,8 @@ export default function TrustedBy({ lang }: TrustedByProps) {
                   <Star
                     className={`w-6 h-6 transition-colors cursor-pointer ${
                       getStarFill(starIndex)
-                        ? "fill-yellow-400 text-yellow-400"
-                        : "fill-gray-200 text-gray-200"
+                        ? "fill-p text-p"
+                        : "fill-white/20 text-white/20"
                     }`}
                   />
                 </button>
@@ -86,6 +95,6 @@ export default function TrustedBy({ lang }: TrustedByProps) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -28,11 +28,11 @@ export function EquipmentList({
 }: EquipmentListProps) {
   return (
     <>
-      <h3 className="font-bold mx-auto max-w-7xl px-4 py-2 text-lg">
+      <h3 className="mx-auto max-w-7xl px-4 py-2 font-display text-lg font-bold text-foreground">
         {lang.additionalEquipment}
       </h3>
 
-      <div className="mx-auto max-w-7xl px-4 py-2 flex flex-col gap-4">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-2 pb-4">
         {equipment.map((item) => {
           const isSelected = selectedIds.some((x) => x === item.id);
 

@@ -2,12 +2,12 @@ import { Button } from "./ui/button";
 import type { BaseLocale } from "@/locales/base-locale";
 import { Info, CheckCircle2 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import {
   transformApiCars,
   type ApiCarModel,
   type TransformedCar,
 } from "@/lib/api-cars";
+import { cn } from "@/lib/utils";
 
 export default function Cars(props: {
   lang: BaseLocale;
@@ -28,56 +28,53 @@ export default function Cars(props: {
     : (props.cars as TransformedCar[]) || [];
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {carsToDisplay.map((car) => {
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-14 lg:px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        {carsToDisplay.map((car, index) => {
           const available = car.available !== undefined ? car.available : true;
           const isSelected = props.selectedCarId === car.id;
-          const borderColor = available ? "#614b80" : "#9ca3af";
 
           return (
-            <Card
+            <article
               key={car.id}
-              className={`group relative flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-                !available ? "opacity-75" : ""
-              }`}
-              style={
-                isSelected
-                  ? {
-                      borderColor: borderColor,
-                      borderWidth: "1px",
-                    }
-                  : {}
-              }>
+              className={cn(
+                "group relative flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-linear-to-b from-s/90 to-pd shadow-lg shadow-black/25 transition-all duration-300 hover:-translate-y-1 hover:border-p/35 hover:shadow-xl hover:shadow-p/5",
+                !available && "opacity-70",
+                isSelected && "border-p ring-2 ring-p/25",
+              )}>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-p/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
               {props.fromreservationPage && (
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute top-3 right-3 z-10">
                   {available ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-2.5 py-1 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-500/30">
                       <CheckCircle2 className="h-3.5 w-3.5" />
                       {props.lang.available}
                     </span>
                   ) : (
-                    <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                    <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-1 text-xs font-semibold text-white/60 ring-1 ring-white/10">
                       {props.lang.reserved}
                     </span>
                   )}
                 </div>
               )}
 
-              <div className="relative bg-white px-6">
-                <div className="relative mx-auto h-48 w-full flex items-center justify-center overflow-hidden">
+              <div className="relative px-5 pt-5 pb-1">
+                <div
+                  aria-hidden="true"
+                  className="absolute left-1/2 top-10 h-20 w-3/4 -translate-x-1/2 rounded-full bg-p/15 blur-2xl transition-all group-hover:bg-p/25"
+                />
+                <div className="relative mx-auto flex h-40 sm:h-44 w-full items-center justify-center">
                   <img
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-contain drop-shadow-lg transition-transform duration-500 group-hover:scale-[1.05]"
                     src={car.image}
                     alt={car.name}
-                    loading={
-                      carsToDisplay.indexOf(car) === 0 ? "eager" : "lazy"
-                    }
+                    loading={index === 0 ? "eager" : "lazy"}
                     decoding="async"
                     width="314"
                     height="177"
                     sizes="(max-width: 640px) 314px, (max-width: 1024px) 256px, 314px"
-                    {...(carsToDisplay.indexOf(car) === 0
+                    {...(index === 0
                       ? ({
                           fetchPriority: "high",
                         } as React.ImgHTMLAttributes<HTMLImageElement>)
@@ -86,45 +83,41 @@ export default function Cars(props: {
                 </div>
               </div>
 
-              <CardHeader className="-mt-6">
-                <h3 className="text-xl font-bold text-pd dark:text-gray-100 text-center">
+              <div className="flex flex-1 flex-col px-5 pb-5">
+                <h3 className="font-display text-center text-lg font-bold text-white sm:text-xl">
                   {car.customName}
                 </h3>
-              </CardHeader>
 
-              <CardContent className="flex-1 space-y-6">
-                <div className="flex items-center justify-center gap-3 border-b border-gray-200 dark:border-gray-700 pb-4">
-                  <div className="text-center">
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                        {props.lang.from}
-                      </span>
-                      <span className="text-3xl font-bold text-p dark:text-p">
-                        {car.price}
-                      </span>
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                        €/{props.lang.day}
-                      </span>
-                    </div>
+                <div className="mt-4 flex items-center justify-center gap-2.5">
+                  <div className="inline-flex items-baseline gap-1 rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                    <span className="text-sm font-medium text-white/60">
+                      {props.lang.from}
+                    </span>
+                    <span className="font-display text-3xl font-bold text-p">
+                      {car.price}
+                    </span>
+                    <span className="text-sm font-medium text-white/60">
+                      €/{props.lang.day}
+                    </span>
                   </div>
                   <Popover>
                     <PopoverTrigger asChild>
                       <button
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-colors hover:border-p hover:bg-p hover:text-white dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-p dark:hover:bg-p cursor-pointer"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-p hover:bg-p hover:text-primary-foreground cursor-pointer"
                         aria-label="Price information">
                         <Info className="h-4 w-4" />
                       </button>
                     </PopoverTrigger>
                     <PopoverContent className="w-80">
                       <div className="space-y-3">
-                        <p className="font-semibold text-pd dark:text-gray-100">
+                        <p className="font-semibold text-foreground">
                           {props.lang.allPricesIncludeVAT}
                         </p>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">
+                        <p className="text-sm text-muted-foreground">
                           {props.lang.deposit} {car.deposite}€
                         </p>
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-3">
-                          <p className="mb-2 text-sm font-semibold text-pd dark:text-gray-100">
+                        <div className="border-t border-border pt-3">
+                          <p className="mb-2 text-sm font-semibold text-foreground">
                             {props.lang.pricesByDays}
                           </p>
                           <div className="space-y-1.5">
@@ -139,7 +132,7 @@ export default function Cars(props: {
                               ) => (
                                 <div
                                   key={idx}
-                                  className="text-sm text-gray-600 dark:text-gray-400">
+                                  className="text-sm text-muted-foreground">
                                   {x.from === x.to ? (
                                     <p>
                                       {x.from} {props.lang.day}: {x.price} €/
@@ -163,94 +156,67 @@ export default function Cars(props: {
                   </Popover>
                 </div>
 
-                <div className="grid grid-cols-2 gap-1 sm:gap-3">
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
-                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
-                      <img
-                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
-                        src="/car.svg"
-                        alt="Car type"
-                      />
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  {[
+                    {
+                      src: "/car.svg",
+                      alt: "Car type",
+                      label: props.lang.type,
+                      value: car.carTypeText,
+                    },
+                    {
+                      src: "/fuel-pump.svg",
+                      alt: "Fuel type",
+                      label: props.lang.fuel,
+                      value: car.gasText,
+                    },
+                    {
+                      src: "/car-seat.svg",
+                      alt: "Seats",
+                      label: props.lang.seat,
+                      value: `${car.numberOfSeats} ${props.lang.seats}`,
+                    },
+                    {
+                      src: "/manual-transmission.svg",
+                      alt: "Transmission",
+                      label: props.lang.gear,
+                      value: car.transmissionText,
+                    },
+                  ].map((spec) => (
+                    <div
+                      key={spec.alt}
+                      className="flex items-center gap-2 rounded-xl border border-white/6 bg-white/4 px-2.5 py-2.5 sm:px-3 sm:py-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-p/15">
+                        <img
+                          className="h-4 w-4 object-contain sm:h-[18px] sm:w-[18px]"
+                          src={spec.src}
+                          alt={spec.alt}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[10px] font-medium uppercase tracking-wide text-white/45 sm:text-[11px]">
+                          {spec.label}
+                        </p>
+                        <p className="truncate text-xs font-semibold text-white sm:text-sm">
+                          {spec.value}
+                        </p>
+                      </div>
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                        {props.lang.type}
-                      </p>
-                      <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {car.carTypeText}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
-                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
-                      <img
-                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
-                        src="/fuel-pump.svg"
-                        alt="Fuel type"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                        {props.lang.fuel}
-                      </p>
-                      <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {car.gasText}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
-                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
-                      <img
-                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
-                        src="/car-seat.svg"
-                        alt="Seats"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                        {props.lang.seat}
-                      </p>
-                      <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {car.numberOfSeats} {props.lang.seats}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 rounded-lg bg-gray-50 p-2 sm:p-3 dark:bg-gray-900/50">
-                    <div className="flex sm:h-10 sm:w-10 h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
-                      <img
-                        className="sm:h-6 sm:w-6 h-5 w-5 object-contain"
-                        src="/manual-transmission.svg"
-                        alt="Transmission"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                        {props.lang.gear}
-                      </p>
-                      <p className="truncate text-sm font-semibold text-pd dark:text-gray-100">
-                        {car.transmissionText}
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </CardContent>
 
-              <CardFooter className="pt-0">
                 <Button
                   disabled={!available}
                   onClick={() => {
                     if (!available) return;
                     props.onSelect(car.id);
                   }}
-                  className="w-full bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
+                  className="mt-5 w-full bg-p font-semibold text-primary-foreground shadow-md shadow-p/20 hover:bg-p/90 disabled:bg-white/10 disabled:text-white/40 cursor-pointer disabled:cursor-not-allowed"
                   size="lg">
                   {available ? props.lang.reserve : props.lang.reserved}
                 </Button>
-              </CardFooter>
-            </Card>
+              </div>
+            </article>
           );
         })}
       </div>

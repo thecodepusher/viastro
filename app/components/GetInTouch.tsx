@@ -8,85 +8,73 @@ import GoogleMap from "./GoogleMap";
 
 export default function GetInTouch(props: { lang: BaseLocale }) {
   return (
-    <div className="bg-white py-12">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-center justify-center gap-2">
-        <div className="mx-auto max-w-2xl divide-y divide-gray-100 lg:mx-0 lg:max-w-none">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+    <section className="bg-surface section-pattern py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-8">
+        <div className="w-full mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
             <div className="flex flex-col sm:items-start items-center justify-center">
-              <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900">
+              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground text-center sm:text-left">
                 {props.lang.gitTitle}
               </h2>
-              <p className="mt-4 sm:text-left text-center text-base/7 text-gray-600">
+              <p className="mt-4 sm:text-left text-center text-base text-muted-foreground">
                 {props.lang.gitSubTitle}
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
-              <div className="rounded-2xl bg-pl/20 border border-pl/30 p-10 transition-colors hover:bg-pl/40">
-                <h3 className="text-base/7 font-semibold text-gray-900">
-                  Novi Beograd
-                </h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-2">
+              <div className="rounded-xl border border-border/70 bg-card p-6 sm:p-8 transition-colors hover:border-p/40">
+                <h3 className="text-base font-semibold text-foreground">Novi Beograd</h3>
                 <a href="https://maps.app.goo.gl/3gyS4z6Wy46Wufg9A">
-                  <address className="mt-2 text-sm/6 text-gray-600 not-italic">
+                  <address className="mt-2 text-sm text-muted-foreground not-italic hover:text-p transition-colors">
                     <p>Nehruova 51a, 11070</p>
                   </address>
                 </a>
-                <div className="mt-3 space-y-1 text-sm/6 ">
-                  <div className="font-bold">{props.lang.gitDays}</div>
-                  <div className="mt-1">8.00 - 16.00</div>
+                <div className="mt-4 space-y-1 text-sm">
+                  <div className="font-semibold text-foreground">{props.lang.gitDays}</div>
+                  <div className="text-muted-foreground">8.00 - 16.00</div>
                 </div>
               </div>
-              <div className="rounded-2xl bg-pl/20 border border-pl/30 p-10 transition-colors hover:bg-pl/40">
-                <h3 className="text-base/7 font-semibold text-gray-900">
+              <div className="rounded-xl border border-border/70 bg-card p-6 sm:p-8 transition-colors hover:border-p/40">
+                <h3 className="text-base font-semibold text-foreground">
                   {props.lang.gitAwailable}
                 </h3>
-                <a href="tel:+38169656555">
-                  <div className="mt-3 space-y-1 text-sm/6">
-                    <div className="flex items-center gap-2">
-                      <FiPhoneCall size={20} />
-                      <span className="font-semibold">+38169656555</span>
-                    </div>
-                  </div>
-                </a>
-                <a href="https://www.instagram.com/viastro.rs/">
-                  <div className="mt-3 space-y-1 text-sm/6">
-                    <div className="flex items-center gap-4">
-                      <FaInstagram size={20} />
-                      <span className="font-semibold">viastro.rs</span>
-                    </div>
-                  </div>
-                </a>
-                <a href="mailto:office@viastro.rs">
-                  <div className="mt-3 space-y-1 text-sm/6">
-                    <div className="flex items-center gap-4">
-                      <MdOutlineMarkEmailRead size={20} />
-                      <span className="font-semibold">
-                        office@viastro.rs
-                      </span>
-                    </div>
-                  </div>
-                </a>
-                <a href="https://wa.me/38169656555">
-                  <div className="mt-3 space-y-1 text-sm/6">
-                    <div className="flex items-center gap-4">
-                      <FaWhatsapp size={20} />
-                      <span className="font-semibold">+38169656555</span>
-                    </div>
-                  </div>
-                </a>
-                <a href="viber://chat?number=+38169656555">
-                  <div className="mt-3 space-y-1 text-sm/6">
-                    <div className="flex items-center gap-4">
-                      <FaViber size={20} />
-                      <span className="font-semibold">+38169656555</span>
-                    </div>
-                  </div>
-                </a>
+                <div className="mt-4 space-y-3 text-sm">
+                  <a
+                    href="tel:+38169656555"
+                    className="flex items-center gap-3 text-foreground hover:text-p transition-colors">
+                    <FiPhoneCall size={18} className="text-p shrink-0" />
+                    <span className="font-semibold">+381 69 656 555</span>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/viastro.rs/"
+                    className="flex items-center gap-3 text-foreground hover:text-p transition-colors">
+                    <FaInstagram size={18} className="text-p shrink-0" />
+                    <span className="font-semibold">viastro.rs</span>
+                  </a>
+                  <a
+                    href="mailto:office@viastro.rs"
+                    className="flex items-center gap-3 text-foreground hover:text-p transition-colors">
+                    <MdOutlineMarkEmailRead size={18} className="text-p shrink-0" />
+                    <span className="font-semibold">office@viastro.rs</span>
+                  </a>
+                  <a
+                    href="https://wa.me/38169656555"
+                    className="hidden sm:flex items-center gap-3 text-foreground hover:text-p transition-colors">
+                    <FaWhatsapp size={18} className="text-p shrink-0" />
+                    <span className="font-semibold">WhatsApp</span>
+                  </a>
+                  <a
+                    href="viber://chat?number=+38169656555"
+                    className="hidden sm:flex items-center gap-3 text-foreground hover:text-p transition-colors">
+                    <FaViber size={18} className="text-p shrink-0" />
+                    <span className="font-semibold">Viber</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <GoogleMap />
       </div>
-    </div>
+    </section>
   );
 }

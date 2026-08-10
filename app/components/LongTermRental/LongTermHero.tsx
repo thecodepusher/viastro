@@ -60,8 +60,8 @@ export function LongTermHero({ content }: Props) {
                   : { loading: "lazy" })}
                 aria-hidden="true"
               />
-              <div className="absolute inset-0 bg-linear-to-br from-p/20 via-p/10 to-transparent" />
-              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 bg-linear-to-br from-pd/50 via-pd/35 to-pd/20" />
+              <div className="absolute inset-0 bg-black/30" />
             </div>
           ))}
         </div>
@@ -70,14 +70,14 @@ export function LongTermHero({ content }: Props) {
           <div className={heroContainer}>
             <div className="flex h-full items-end">
               <div className="max-w-2xl space-y-6 text-white">
-                <div className="inline-flex items-center gap-3 rounded-full bg-transparent shadow-p/10 ring-1 ring-white/20 sm:px-2 sm:py-2 px-8 py-2 text-sm font-semibold text-p backdrop-blur-xs">
-                  <Zap className="size-6 min-w-6 min-h-6" />
+                <div className="inline-flex items-center gap-2 rounded-md bg-white/10 ring-1 ring-white/20 px-3 py-1.5 text-sm font-semibold text-p backdrop-blur-sm">
+                  <Zap className="size-4" />
                   {content.heroSubtitle}
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight text-white drop-shadow-lg">
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white">
                   {content.heroTitle}
                 </h1>
-                <p className="text-lg sm:text-xl leading-relaxed text-white/90 drop-shadow-md">
+                <p className="text-base sm:text-lg leading-relaxed text-white/85 max-w-xl">
                   {content.heroDescription}
                 </p>
               </div>
@@ -86,31 +86,32 @@ export function LongTermHero({ content }: Props) {
         </div>
       </div>
 
-      <div className="relative bg-white pb-16">
+      <div className="relative bg-surface pb-16">
         <div className={sectionContainer}>
-          <div className="mb-8 flex flex-wrap gap-3">
-            {featureTags.map((item) => (
-              <span key={item} className={pill}>
-                <ArrowRight className="size-5" />
+          <div className="mb-8 flex flex-wrap gap-2 sm:gap-3">
+            {featureTags.map((item, i) => (
+              <span
+                key={item}
+                className={`${pill} ${i > 1 ? "hidden sm:inline-flex" : ""}`}>
+                <ArrowRight className="size-4" />
                 {item}
               </span>
             ))}
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="space-y-3 rounded-2xl border border-p/10 bg-white p-5 shadow-lg shadow-p/10">
+            <div className="space-y-3 rounded-xl border border-border/70 bg-card p-5">
               <div className="flex items-center gap-2 text-p font-semibold">
                 <ShieldCheck className="size-5" />
                 <span>{content.heroHighlight}</span>
               </div>
-              <p className="text-base text-gray-700">
+              <p className="text-base text-muted-foreground">
                 {content.heroHighlightSupport}
               </p>
             </div>
 
             <div className={gradientCard}>
-              <div className="relative h-full overflow-hidden rounded-3xl bg-linear-to-b from-white via-white to-p/10 p-7">
-                <div className="absolute right-6 top-6 h-24 w-24 rounded-full bg-p/10 blur-3xl" />
+              <div className="relative h-full overflow-hidden rounded-2xl bg-pl/40 p-6">
                 <div className="space-y-5">
                   <div className="flex items-center gap-4">
                     <div className={iconBadge}>
@@ -120,7 +121,7 @@ export function LongTermHero({ content }: Props) {
                       <p className="text-sm font-semibold uppercase tracking-wide text-p">
                         24/7
                       </p>
-                      <p className="text-lg font-bold text-gray-900">
+                      <p className="text-lg font-bold text-foreground">
                         {content.benefitsItems[5]}
                       </p>
                     </div>
@@ -129,7 +130,7 @@ export function LongTermHero({ content }: Props) {
               </div>
             </div>
 
-            <div className="space-y-4 rounded-2xl border border-p/10 bg-white p-5 shadow-lg shadow-p/10 sm:col-span-2 lg:col-span-1">
+            <div className="space-y-4 rounded-xl border border-border/70 bg-card p-5 sm:col-span-2 lg:col-span-1">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 <FeatureTile
                   icon={<ShieldCheck className="size-5" />}
@@ -141,11 +142,13 @@ export function LongTermHero({ content }: Props) {
                   title={content.heroSubtitle}
                 />
               </div>
-              <div className="flex items-center gap-3 rounded-2xl bg-white/80 p-4 ring-1 ring-p/10">
-                <div className="flex h-10 w-10 min-w-10 min-h-10 items-center justify-center rounded-xl bg-p/10 text-p">
+              <div className="flex items-center gap-3 rounded-xl bg-pl/40 p-4">
+                <div className="flex h-10 w-10 min-w-10 min-h-10 items-center justify-center rounded-lg bg-p/15 text-p">
                   <Zap className="size-5" />
                 </div>
-                <p className="text-sm text-gray-700">{content.benefitsIntro}</p>
+                <p className="text-sm text-muted-foreground">
+                  {content.benefitsIntro}
+                </p>
               </div>
             </div>
           </div>

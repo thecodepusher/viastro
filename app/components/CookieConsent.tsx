@@ -69,13 +69,13 @@ export default function CookieConsent({ lang }: { lang: BaseLocale }) {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 flex justify-center">
-      <Card className="w-full max-w-xl shadow-xl border border-gray-200 bg-white">
+      <Card className="w-full max-w-xl shadow-xl border border-border bg-card">
         <CardContent className="w-full flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-muted-foreground">
             {lang.cookieConsent}{" "}
             <Link
               to={privacyPolicyUrl}
-              className="text-[#FF9B17] hover:underline font-semibold">
+              className="text-p hover:underline font-semibold">
               {lang.cookieConsentLink}
             </Link>
             .

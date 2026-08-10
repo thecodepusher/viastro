@@ -26,10 +26,18 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
   const location = useLocation();
   const isMobile = useIsMobile();
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setSheetOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navLinks = [
     { to: `/${props.langCode}`, label: props.lang.home },
@@ -58,11 +66,17 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
   };
 
   return (
-    <header className="fixed z-40 top-0 h-20 w-full bg-[#FF9B17] shadow-md">
-      <div className="justify-between items-center mx-auto px-4 sm:px-16 flex h-20 py-0 mb-4">
+    <header
+      className={cn(
+        "fixed z-40 top-0 w-full transition-[background-color,box-shadow,backdrop-filter] duration-300",
+        scrolled
+          ? "bg-pd/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(255,255,255,0.06)]"
+          : "bg-pd",
+      )}>
+      <div className="justify-between items-center mx-auto px-4 sm:px-8 lg:px-12 flex h-18 sm:h-20">
         <Link to={`/${props.langCode}`} className="shrink-0">
           <img
-            className="h-20 w-auto"
+            className="h-14 sm:h-16 w-auto"
             src="/logo_white.webp"
             alt="Viastro Logo"
             width="80"
@@ -76,7 +90,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
         </Link>
 
         {!isMobile && (
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2 flex-1 justify-center">
+          <nav className="hidden md:flex items-center gap-0.5 lg:gap-1 flex-1 justify-center">
             {navLinks.map((link) => {
               const active = isActive(link.to);
               return (
@@ -84,11 +98,14 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-md hover:bg-white/25 hover:scale-105",
-                    "lg:px-5 lg:py-2.5 lg:text-base",
-                    active && "bg-white/25 shadow-sm"
+                    "relative px-3 py-2 text-sm font-medium text-white/75 transition-colors duration-200 rounded-md hover:text-white",
+                    "lg:px-3.5 lg:text-[0.9375rem]",
+                    active && "text-white",
                   )}>
                   {link.label}
+                  {active && (
+                    <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-p" />
+                  )}
                 </Link>
               );
             })}
@@ -96,7 +113,13 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
         )}
 
         {!isMobile && (
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="tel:+38169656555"
+              className="hidden xl:inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors">
+              <FiPhoneCall className="size-4 text-p" />
+              +381 69 656 555
+            </a>
             <Form
               method="POST"
               action="/select-lang"
@@ -108,11 +131,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 type="submit"
                 value="sr"
                 className={cn(
-                  "h-10 w-10 p-1 hover:bg-white/60 cursor-pointer",
-                  props.langCode === "sr" && "bg-white/65"
+                  "h-9 w-9 p-1 hover:bg-white/10 cursor-pointer",
+                  props.langCode === "sr" && "bg-white/15 ring-1 ring-p/60",
                 )}>
                 <img
-                  className="w-7 h-7 rounded shadow-sm border border-white/30"
+                  className="w-6 h-6 rounded-sm"
                   src="/rs.svg"
                   alt="Serbian"
                 />
@@ -123,11 +146,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 type="submit"
                 value="en"
                 className={cn(
-                  "h-10 w-10 p-1 hover:bg-white/60 cursor-pointer",
-                  props.langCode === "en" && "bg-white/65"
+                  "h-9 w-9 p-1 hover:bg-white/10 cursor-pointer",
+                  props.langCode === "en" && "bg-white/15 ring-1 ring-p/60",
                 )}>
                 <img
-                  className="w-7 h-7 rounded shadow-sm border border-white/30"
+                  className="w-6 h-6 rounded-sm"
                   src="/gb.svg"
                   alt="English"
                 />
@@ -138,11 +161,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 type="submit"
                 value="ru"
                 className={cn(
-                  "h-10 w-10 p-1 hover:bg-white/60 cursor-pointer",
-                  props.langCode === "ru" && "bg-white/65"
+                  "h-9 w-9 p-1 hover:bg-white/10 cursor-pointer",
+                  props.langCode === "ru" && "bg-white/15 ring-1 ring-p/60",
                 )}>
                 <img
-                  className="w-7 h-7 rounded shadow-sm border border-white/30"
+                  className="w-6 h-6 rounded-sm"
                   src="/ru.svg"
                   alt="Russian"
                 />
@@ -157,20 +180,20 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:bg-white/60"
+                className="text-white hover:bg-white/10"
                 aria-label="Open menu">
-                <MenuIcon className="size-7" />
+                <MenuIcon className="size-6" />
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-screen sm:w-[400px] flex flex-col">
-              <SheetHeader className="border-b border-gray-200/60 h-20 shadow-sm py-0">
-                <SheetTitle className="text-2xl font-bold text-left">
+              className="w-screen sm:w-[380px] flex flex-col bg-pd border-l border-white/10 p-0 gap-0 [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:opacity-80 [&>button]:top-6">
+              <SheetHeader className="border-b border-white/10 h-18 px-4 py-0 flex flex-row items-center justify-between pr-14">
+                <SheetTitle className="text-left">
                   <Link to={`/${props.langCode}`} className="shrink-0">
                     <img
-                      className="h-20 w-auto"
-                      src="/logo.webp"
+                      className="h-14 w-auto"
+                      src="/logo_white.webp"
                       alt="Viastro Logo"
                       width="80"
                       height="80"
@@ -184,8 +207,8 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                 </SheetDescription>
               </SheetHeader>
 
-              <div className="flex-1 overflow-y-auto">
-                <nav className="flex flex-col">
+              <div className="flex-1 overflow-y-auto py-4">
+                <nav className="flex flex-col px-3 gap-1">
                   {navLinks.map((link) => {
                     const active = isActive(link.to);
                     return (
@@ -193,126 +216,103 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                         key={link.to}
                         to={link.to}
                         className={cn(
-                          "px-4 py-4 text-base font-semibold transition-all duration-200",
-                          "hover:bg-gray-100 active:bg-gray-200",
+                          "relative px-4 py-3.5 text-base font-medium transition-colors rounded-lg",
                           active
-                            ? "bg-[#FF9B17]/10 text-[#FF9B17]"
-                            : "text-gray-700 hover:text-[#FF9B17]"
+                            ? "bg-white/10 text-white"
+                            : "text-white/70 hover:text-white hover:bg-white/5",
                         )}>
                         {link.label}
+                        {active && (
+                          <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-full bg-p" />
+                        )}
                       </Link>
                     );
                   })}
                 </nav>
 
-                <div className="mt-8">
-                  <Separator className="mb-6 h-px bg-gray-200/60 shadow-sm" />
-                  <p className="text-sm font-medium text-gray-600 mb-4 px-4">
+                <div className="mt-8 px-4">
+                  <Separator className="mb-5 bg-white/10" />
+                  <p className="text-xs font-semibold uppercase tracking-wider text-white/45 mb-3">
                     {props.lang.selectLanguage}
                   </p>
-                  <div className="flex items-center gap-3 px-4">
-                    <Form
-                      method="POST"
-                      action="/select-lang"
-                      className="flex items-center gap-3">
-                      <input
-                        readOnly
-                        hidden
-                        name="loc"
-                        value={location.pathname}
-                      />
+                  <Form
+                    method="POST"
+                    action="/select-lang"
+                    className="flex items-center gap-3">
+                    <input
+                      readOnly
+                      hidden
+                      name="loc"
+                      value={location.pathname}
+                    />
+                    {(
+                      [
+                        ["sr", "/rs.svg", "Serbian"],
+                        ["en", "/gb.svg", "English"],
+                        ["ru", "/ru.svg", "Russian"],
+                      ] as const
+                    ).map(([code, src, alt]) => (
                       <Button
+                        key={code}
                         variant="ghost"
                         name="lang"
                         type="submit"
-                        value="sr"
+                        value={code}
                         className={cn(
-                          "h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all",
-                          props.langCode === "sr" &&
-                            "bg-gray-100 border-[#FF9B17]"
+                          "h-11 w-11 p-0 rounded-lg border border-white/15 bg-white/5 hover:border-p/60 hover:bg-white/10 transition-colors",
+                          props.langCode === code &&
+                            "border-p bg-p/15 ring-1 ring-p/40",
                         )}>
                         <img
-                          className="w-10 h-10 rounded shadow-sm"
-                          src="/rs.svg"
-                          alt="Serbian"
+                          className="w-8 h-8 rounded-sm"
+                          src={src}
+                          alt={alt}
                         />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        name="lang"
-                        type="submit"
-                        value="en"
-                        className={cn(
-                          "h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all",
-                          props.langCode === "en" &&
-                            "bg-gray-100 border-[#FF9B17]"
-                        )}>
-                        <img
-                          className="w-10 h-10 rounded shadow-sm"
-                          src="/gb.svg"
-                          alt="English"
-                        />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        name="lang"
-                        type="submit"
-                        value="ru"
-                        className={cn(
-                          "h-12 w-12 p-0 hover:bg-gray-100 rounded-lg border-2 border-gray-200 hover:border-[#FF9B17] transition-all",
-                          props.langCode === "ru" &&
-                            "bg-gray-100 border-[#FF9B17]"
-                        )}>
-                        <img
-                          className="w-10 h-10 rounded shadow-sm"
-                          src="/ru.svg"
-                          alt="Russian"
-                        />
-                      </Button>
-                    </Form>
-                  </div>
+                    ))}
+                  </Form>
                 </div>
               </div>
 
-              <SheetFooter className="flex-col gap-0 border-t border-gray-200/60 pt-4 mt-4 shadow-[0_-2px_8px_rgba(0,0,0,0.05)]">
+              <SheetFooter className="flex-col gap-0 border-t border-white/10 px-4 py-5 bg-white/[0.03]">
                 <div className="flex flex-row items-center justify-between w-full">
-                  <p className="text-sm font-semibold text-gray-700">
+                  <p className="text-sm font-semibold text-white/90">
                     {props.lang.contactUs}
                   </p>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3.5">
                     <a
                       href="tel:+38169656555"
-                      className="text-gray-600 hover:text-[#FF9B17] transition-colors"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-p hover:text-pd transition-colors"
                       aria-label="Call us">
-                      <FiPhoneCall size={24} />
+                      <FiPhoneCall size={18} />
                     </a>
                     <a
                       href="https://www.instagram.com/viastro.rs/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-[#FF9B17] transition-colors"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-p hover:text-pd transition-colors"
                       aria-label="Instagram">
-                      <FaInstagram size={24} />
+                      <FaInstagram size={18} />
                     </a>
                     <a
                       href="mailto:office@viastro.rs"
-                      className="text-gray-600 hover:text-[#FF9B17] transition-colors"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-p hover:text-pd transition-colors"
                       aria-label="Email us">
-                      <MdOutlineMarkEmailRead size={24} />
+                      <MdOutlineMarkEmailRead size={18} />
                     </a>
                     <a
                       href="https://wa.me/38169656555"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-[#FF9B17] transition-colors"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-p hover:text-pd transition-colors"
                       aria-label="WhatsApp">
-                      <FaWhatsapp size={24} />
+                      <FaWhatsapp size={18} />
                     </a>
                     <a
                       href="viber://chat?number=+38169656555"
-                      className="text-gray-600 hover:text-[#FF9B17] transition-colors"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-p hover:text-pd transition-colors"
                       aria-label="Viber">
-                      <FaViber size={24} />
+                      <FaViber size={18} />
                     </a>
                   </div>
                 </div>
@@ -321,6 +321,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
           </Sheet>
         )}
       </div>
+      <div className="h-px w-full bg-linear-to-r from-transparent via-p/70 to-transparent" />
     </header>
   );
 }

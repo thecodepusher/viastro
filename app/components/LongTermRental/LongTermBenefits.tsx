@@ -14,7 +14,7 @@ type Props = {
 
 export function LongTermBenefits({ content }: Props) {
   return (
-    <section className="bg-white py-12 sm:py-16">
+    <section className="bg-surface section-pattern py-12 sm:py-16">
       <div className={sectionContainer}>
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-p/10 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-p">
@@ -32,7 +32,7 @@ export function LongTermBenefits({ content }: Props) {
                 <div className={iconBadge}>
                   <CheckCircle2 className="size-5" />
                 </div>
-                <p className="text-base font-semibold text-gray-900 leading-relaxed">
+                <p className="text-base font-semibold text-foreground leading-relaxed">
                   {item}
                 </p>
               </div>
