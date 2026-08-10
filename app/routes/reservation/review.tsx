@@ -296,7 +296,7 @@ export function meta({ data }: Route.MetaArgs) {
 
 export default function Review({ loaderData }: Route.ComponentProps) {
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const isSubmitting = navigation.state !== "idle";
 
   return (
     <div className="w-full bg-surface pb-6">

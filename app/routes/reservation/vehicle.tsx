@@ -122,12 +122,17 @@ export function meta({ data }: Route.MetaArgs) {
 
 export default function Vehicle({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
+  const loadingCarId = fetcher.formData?.get("carId")
+    ? Number(fetcher.formData.get("carId"))
+    : null;
 
   return (
     <div className="w-full">
       <Cars
         cars={loaderData.cars as TransformedCar[]}
         selectedCarId={loaderData.selectedCarId}
+        isLoading={fetcher.state !== "idle"}
+        loadingCarId={loadingCarId}
         onSelect={(carId) => {
           const form = new FormData();
           form.append("carId", `${carId}`);

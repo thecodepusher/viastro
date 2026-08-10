@@ -90,6 +90,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full min-h-[70vh] flex items-center justify-center py-10">
           <ReservationTime
+            isLoading={fetcher.state !== "idle"}
             onStart={async (data) => {
               const form = new FormData();
               form.append("pickUpLocation", data.pickUpLocation);
