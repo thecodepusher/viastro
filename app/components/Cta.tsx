@@ -1,7 +1,8 @@
 import type { BaseLocale } from "@/locales/base-locale";
 import { Link } from "react-router";
+import { publicPaths } from "@/lib/paths";
 
-export default function Cta(props: { lang: BaseLocale }) {
+export default function Cta(props: { lang: BaseLocale; langCode?: string }) {
   return (
     <section className="relative overflow-hidden bg-s">
       <div
@@ -18,7 +19,7 @@ export default function Cta(props: { lang: BaseLocale }) {
           </p>
           <div className="mt-8 flex items-center justify-center">
             <Link
-              to="/reservation"
+              to={publicPaths.reservation(props.langCode)}
               className="rounded-lg px-6 py-3 bg-p text-pd font-semibold transition-colors hover:bg-p/90">
               {props.lang.ctaAction}
             </Link>

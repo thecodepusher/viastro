@@ -2,21 +2,22 @@ import type { BaseLocale } from "@/locales/base-locale";
 import InstagramIcon from "@/components/icons/footer/InstagramIcon";
 import ViberIcon from "@/components/icons/footer/ViberIcon";
 import WhatsAppIcon from "@/components/icons/footer/WhatsAppIcon";
+import { publicPaths } from "@/lib/paths";
 
 export const footerNavigation = (
   langCode: string = "sr",
   lang: BaseLocale
 ) => ({
   main: [
-    { name: lang.home, href: `/${langCode}/` },
-    { name: lang.cars, href: `/${langCode}/cars` },
+    { name: lang.home, href: `${publicPaths.home(langCode)}/` },
+    { name: lang.cars, href: publicPaths.cars(langCode) },
     {
       name: lang.rentalConditions,
-      href: `/${langCode}/rental-conditions`,
+      href: publicPaths.rentalConditions(langCode),
     },
-    { name: lang.faq, href: `/${langCode}/faq` },
-    { name: lang.blog, href: `/${langCode}/blog` },
-    { name: lang.contact, href: `/${langCode}/contact` },
+    { name: lang.faq, href: publicPaths.faq(langCode) },
+    { name: lang.blog, href: publicPaths.news(langCode) },
+    { name: lang.contact, href: publicPaths.contact(langCode) },
   ],
   social: [
     {

@@ -5,6 +5,7 @@ import type { Route } from "./+types/success";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -53,7 +54,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoSuccessTitle,
     description: data.lang.seoSuccessDescription,
-    url: `/${data.langCode || "sr"}/success`,
+    url: publicPaths.success(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoSuccessKeywords,
     imageAlt: "Viastro - Reservation Successful",

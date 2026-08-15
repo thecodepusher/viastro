@@ -7,12 +7,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import type { BaseLocale } from "@/locales/base-locale";
 import { PaymentStepsNotice } from "@/components/Reservation/Review/PaymentStepsNotice";
 import { reviewSectionClass } from "@/components/Reservation/Review/CostSummary";
+import { publicPaths } from "@/lib/paths";
 
 interface ReviewFormProps {
   lang: BaseLocale;
   isSubmitting: boolean;
   depositAmount: number;
   rentalAmount: number;
+  langCode: string;
 }
 
 export function ReviewForm({
@@ -20,6 +22,7 @@ export function ReviewForm({
   isSubmitting,
   depositAmount,
   rentalAmount,
+  langCode,
 }: ReviewFormProps) {
   return (
     <Form method="POST">
@@ -83,7 +86,7 @@ export function ReviewForm({
         <div className="items-top flex space-x-2">
           <Checkbox required id="terms1" name="terms1" />
           <div className="grid gap-1.5 leading-none">
-            <Link target="_blank" to="/privacy-policy">
+            <Link target="_blank" to={publicPaths.privacyPolicy(langCode)}>
               <p className="text-sm text-white/75 transition-colors hover:text-p">
                 {lang.privacyAgreement}
               </p>

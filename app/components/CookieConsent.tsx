@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router";
 import { Card, CardContent } from "@/components/ui/card";
 import type { BaseLocale } from "@/locales/base-locale";
 import { Button } from "@/components/ui/button";
+import { publicPaths } from "@/lib/paths";
 
 declare global {
   interface Window {
@@ -20,7 +21,7 @@ export default function CookieConsent({ lang }: { lang: BaseLocale }) {
     pathParts[0] === "sr" || pathParts[0] === "en" || pathParts[0] === "ru"
       ? pathParts[0]
       : "sr";
-  const privacyPolicyUrl = `/${langCode}/privacy-policy`;
+  const privacyPolicyUrl = publicPaths.privacyPolicy(langCode);
 
   useEffect(() => {
     const accepted = localStorage.getItem("cookie_consent");

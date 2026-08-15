@@ -32,7 +32,7 @@ export const postsSr = [
     id: 1,
     title:
       "Letovanje na moru 2026 - Put na Jadran sa Viastro rent a car",
-    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    href: "/vesti/letovanje-na-moru-sa-viastro-rent-a-car",
     slug: "letovanje-na-moru-sa-viastro-rent-a-car",
     description:
       "Planirate letovanje na moru? Crna Gora, Hrvatska i Grčka su na dohvat ruke automobilom. Uz Viastro rent a car stižete fleksibilno i bezbrižno - klimatizovana vozila, neograničeni kilometri, full kasko i 24/7 asistencija.",
@@ -83,7 +83,7 @@ export const postsSr = [
     id: 2,
     title:
       "Novogodišnji i božićni odmor na planinama Srbije - Ski sezona sa Viastro rent a car",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    href: "/vesti/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     description:
       "Želite praznični odmor na planini za Novu godinu ili Božić? Kopaonik, Zlatibor i Stara planina su u punoj ski sezoni, a uz Viastro rent a car stižete brže i sigurnije - sa opremom za sneg, punim kasko osiguranjem i 24/7 asistencijom.",
@@ -133,7 +133,7 @@ export const postsSr = [
     id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Vikend na Kopaoniku - Planinska avantura uz Viastro rent a car",
-    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
+    href: "/vesti/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija - tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa - udobno, sigurno i uz potpunu slobodu kretanja.",
     content: `
@@ -192,7 +192,7 @@ export const postsSr = [
   {
     id: 4,
     title: "Đerdap Nacionalni Park - Gvozdena kapija prirode i istorije",
-    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    href: "/vesti/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.",
@@ -231,7 +231,7 @@ export const postsSr = [
   {
     id: 5,
     title: "Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu",
-    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    href: "/vesti/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu</h2>
@@ -273,7 +273,7 @@ export const postsEn = [
     id: 1,
     title:
       "Summer Holiday by the Sea 2026 - Adriatic Road Trip with Viastro",
-    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    href: "/vesti/letovanje-na-moru-sa-viastro-rent-a-car",
     slug: "letovanje-na-moru-sa-viastro-rent-a-car",
     description:
       "Planning a summer holiday by the sea? Montenegro, Croatia, and Greece are within easy driving distance. With Viastro rent a car you travel freely and stress-free - air-conditioned cars, unlimited mileage, full casco, and 24/7 assistance.",
@@ -324,7 +324,7 @@ export const postsEn = [
     id: 2,
     title:
       "New Year & Christmas on Serbia’s Mountains - Ski Season with Viastro",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    href: "/vesti/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     description:
       "Planning a cozy mountain holiday for New Year’s or Christmas? Kopaonik, Zlatibor, and Stara Planina are in full ski season. With Viastro rent a car you arrive faster and safer - winter tires, snow chains, full casco, and 24/7 assistance included.",
@@ -374,7 +374,7 @@ export const postsEn = [
     id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Weekend on Kopaonik - Mountain Adventure with Viastro Rent a Car",
-    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
+    href: "/vesti/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination - all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free - comfortably, safely, and with complete freedom of movement.",
     content: `
@@ -433,7 +433,7 @@ export const postsEn = [
   {
     id: 4,
     title: "Đerdap National Park - The Iron Gates of Nature and History",
-    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    href: "/vesti/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.",
@@ -472,7 +472,7 @@ export const postsEn = [
   {
     id: 5,
     title: "Mokra Gora and Šargan Eight - A Journey Through Time and Nature",
-    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    href: "/vesti/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora and Šargan Eight - A Journey Through Time and Nature</h2>
@@ -513,7 +513,7 @@ export const postsRu = [
   {
     id: 1,
     title: "Летний отдых на море 2026 - Поездка на Адриатику с Viastro",
-    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    href: "/vesti/letovanje-na-moru-sa-viastro-rent-a-car",
     slug: "letovanje-na-moru-sa-viastro-rent-a-car",
     description:
       "Планируете летний отдых на море? Черногория, Хорватия и Греция доступны на автомобиле. С Viastro rent a car вы едете свободно и без стресса - кондиционер, безлимитный пробег, полное КАСКО и помощь 24/7.",
@@ -563,7 +563,7 @@ export const postsRu = [
   {
     id: 2,
     title: "Новый год и Рождество в горах Сербии - Лыжный сезон с Viastro",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    href: "/vesti/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     description:
       "Хотите провести новогодние и рождественские праздники в горах? Копаоник, Златибор и Стара-Планина уже в разгаре сезона. С Viastro rent a car вы доберетесь быстрее и безопаснее - зимняя резина, цепи, полное КАСКО и помощь 24/7.",
@@ -613,7 +613,7 @@ export const postsRu = [
     id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Выходные на Копаонике - Горное приключение с Viastro rent a car",
-    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
+    href: "/vesti/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник - идеальное место для выходных - круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса - комфортно, безопасно и с полной свободой передвижения.",
     content: `
@@ -672,7 +672,7 @@ export const postsRu = [
   {
     id: 4,
     title: "Национальный парк Джердап - Железные ворота природы и истории",
-    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    href: "/vesti/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап - это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
@@ -712,7 +712,7 @@ export const postsRu = [
     id: 5,
     title:
       "Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу",
-    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    href: "/vesti/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу</h2>
@@ -1158,8 +1158,8 @@ export const rentalConditionsSr = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://viastro.rs/sr/rental-conditions"
-              >https://viastro.rs/sr/rental-conditions</a
+              href="https://viastro.rs/sr/uslovi-iznajmljivanja"
+              >https://viastro.rs/sr/uslovi-iznajmljivanja</a
           ></span
       ><span class="c1"
           >; Korisnik potpisivanjem Ugovora o najmu motornog vozila
@@ -1933,8 +1933,8 @@ export const rentalConditionsRu = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://viastro.rs/ru/rental-conditions"
-              >https://viastro.rs/ru/rental-conditions</a
+              href="https://viastro.rs/ru/uslovi-iznajmljivanja"
+              >https://viastro.rs/ru/uslovi-iznajmljivanja</a
           ></span
       ><span class="c1"
           >; Подписывая Договор аренды транспортного средства, Пользователь подтверждает, что он ознакомлен со всеми положениями Общих условий аренды транспортных средств, понял их содержание и полностью их принимает, имея в виду, что они являются неотъемлемой частью каждого отдельного договора аренды транспортного средства.</span
@@ -2402,8 +2402,8 @@ export const rentalConditionsEn = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://viastro.rs/en/rental-conditions"
-              >https://viastro.rs/en/rental-conditions</a
+              href="https://viastro.rs/en/uslovi-iznajmljivanja"
+              >https://viastro.rs/en/uslovi-iznajmljivanja</a
           ></span
       ><span class="c1"
           >; By signing the Vehicle Rental Agreement, the User confirms that they have read all the provisions of the General Vehicle Rental Conditions, understood their content, and fully accepts them, bearing in mind that they form an integral part of each individual vehicle rental agreement.</span

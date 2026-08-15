@@ -5,6 +5,7 @@ import { postsEn, postsRu, postsSr } from "@/lib/data";
 import { redirect, Link } from "react-router";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
+import { publicPaths } from "@/lib/paths";
 import {
   getBaseUrl,
   generateOrganizationSchema,
@@ -39,7 +40,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   const post = posts.find((x) => x.slug == params.slug);
 
   if (!post) {
-    return redirect("/blog");
+    return redirect(publicPaths.news(params.lang ?? "sr"));
   }
 
   const cookieHeader = request.headers.get("Cookie");
@@ -87,7 +88,7 @@ export function meta({ data }: Route.MetaArgs) {
   const metaTags = generateOpenGraphMeta({
     title,
     description,
-    url: `/${data.langCode || "sr"}/blog/${data.post.slug}`,
+    url: publicPaths.article(data.langCode || "sr", data.post.slug),
     baseUrl,
     type: "article",
     imageUrl,
@@ -103,7 +104,7 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
-  const articleUrl = `${loaderData.baseUrl}/${loaderData.langCode}/blog/${loaderData.post.slug}`;
+  const articleUrl = `${loaderData.baseUrl}${publicPaths.article(loaderData.langCode, loaderData.post.slug)}`;
   const imageUrl = loaderData.post.imageUrl
     ? `${loaderData.baseUrl}${loaderData.post.imageUrl}`
     : `${loaderData.baseUrl}/opengraph-1200x630.webp`;
@@ -127,10 +128,10 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: loaderData.lang.blog, url: `/${loaderData.langCode}/blog` },
+        { name: loaderData.lang.blog, url: publicPaths.news(loaderData.langCode) },
         {
           name: loaderData.post.title,
-          url: `/${loaderData.langCode}/blog/${loaderData.post.slug}`,
+          url: publicPaths.article(loaderData.langCode, loaderData.post.slug),
         },
       ],
       loaderData.langCode
@@ -164,7 +165,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
                   className="mb-3 sm:mb-6 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/80"
                   aria-label="Breadcrumb">
                   <Link
-                    to={`/${loaderData.langCode}/blog`}
+                    to={publicPaths.news(loaderData.langCode)}
                     className="inline-flex items-center gap-1 sm:gap-1.5 hover:text-p transition-colors">
                     <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
                     {loaderData.lang.blog}
@@ -228,9 +229,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
                   {loaderData.post.tags.map((tag, index) => (
                     <Link
                       key={index}
-                      to={`/${loaderData.langCode}/blog?tag=${encodeURIComponent(
-                        tag
-                      )}`}
+                      to={`${publicPaths.news(loaderData.langCode)}?tag=${encodeURIComponent(tag)}`}
                       className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-pl text-foreground hover:bg-p hover:text-primary-foreground transition-all duration-200 hover:scale-105">
                       #{tag}
                     </Link>
@@ -241,7 +240,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
 
             <div className="mt-12 pt-8 border-t border-border">
               <Link
-                to={`/${loaderData.langCode}/blog`}
+                to={publicPaths.news(loaderData.langCode)}
                 className="inline-flex items-center gap-2 text-p font-semibold hover:text-s transition-colors group">
                 <ArrowLeft className="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1" />
                 {loaderData.lang.blog}
@@ -250,7 +249,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
           </div>
         </div>
       </article>
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </>
   );
 }

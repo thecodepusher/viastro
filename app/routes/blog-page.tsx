@@ -5,6 +5,7 @@ import type { Route } from "./+types/blog-page";
 import BlogSection from "@/components/BlogSection";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
+import { publicPaths } from "@/lib/paths";
 import {
   getBaseUrl,
   generateOrganizationSchema,
@@ -60,7 +61,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoBlogTitle,
     description: data.lang.seoBlogDescription,
-    url: `/${data.langCode || "sr"}/blog`,
+    url: publicPaths.news(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoBlogKeywords,
     imageAlt: "Viastro Blog - Car Rental Tips and Travel Guides",
@@ -74,7 +75,7 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: loaderData.lang.blog, url: `/${loaderData.langCode}/blog` },
+        { name: loaderData.lang.blog, url: publicPaths.news(loaderData.langCode) },
       ],
       loaderData.langCode
     ),
@@ -89,13 +90,13 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
         primaryLabel={loaderData.lang.createReservation}
         secondaryLabel={loaderData.lang.contactUs}
         helperText={loaderData.lang.description}
-        primaryHref="/reservation"
-        secondaryHref={`/${loaderData.langCode}/contact`}
+        primaryHref={publicPaths.reservation(loaderData.langCode)}
+        secondaryHref={publicPaths.contact(loaderData.langCode)}
         fastTitle={loaderData.lang.createReservation}
         fastSubtitle={loaderData.lang.deployFaster}
       />
       <BlogSection langCode={loaderData.langCode} lang={loaderData.lang} />
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

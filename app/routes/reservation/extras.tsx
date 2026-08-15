@@ -8,6 +8,7 @@ import { calculateInWorkingHours } from "@/lib/helpers";
 import { differenceInMinutes, set } from "date-fns";
 import type { Route } from "./+types/extras";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 import { IncludedInReservation } from "@/components/Extras/IncludedInReservation";
 import { EquipmentList } from "@/components/Extras/EquipmentList";
 import { ContinueButton } from "@/components/Extras/ContinueButton";
@@ -48,7 +49,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     pickupTime
   );
   if (!car) {
-    return redirect("../vehicle");
+    return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"));
   }
 
   const ad = [
@@ -113,7 +114,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
 
   const extras = formData.get("extras");
@@ -123,7 +124,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   cookie.extras = extras;
 
-  return redirect("../review", {
+  return redirect(publicPaths.reservationReview(params.lang ?? "sr"), {
     headers: {
       "Set-Cookie": await prefs.serialize(cookie),
     },
@@ -135,7 +136,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoReservationExtrasTitle,
     description: data.lang.seoReservationExtrasDescription,
-    url: `/${data.langCode || "sr"}/reservation/extras`,
+    url: publicPaths.reservationExtras(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoReservationExtrasKeywords,
     imageAlt: "Viastro - Additional Equipment",

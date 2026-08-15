@@ -3,6 +3,7 @@ import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/contact-page";
 import GetInTouch from "@/components/GetInTouch";
 import SEO from "@/components/SEO";
+import { publicPaths } from "@/lib/paths";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import {
@@ -61,7 +62,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoContactTitle,
     description: data.lang.seoContactDescription,
-    url: `/${data.langCode || "sr"}/contact`,
+    url: publicPaths.contact(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoContactKeywords,
     imageAlt: "Contact Viastro Rent a Car",
@@ -78,7 +79,7 @@ export default function ContactPage({ loaderData }: Route.ComponentProps) {
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
         {
           name: loaderData.lang.contact,
-          url: `/${loaderData.langCode}/contact`,
+          url: publicPaths.contact(loaderData.langCode),
         },
       ],
       loaderData.langCode
@@ -94,13 +95,13 @@ export default function ContactPage({ loaderData }: Route.ComponentProps) {
         primaryLabel={loaderData.lang.createReservation}
         secondaryLabel={loaderData.lang.contactUs}
         helperText={loaderData.lang.description}
-        primaryHref="/reservation"
-        secondaryHref={`/${loaderData.langCode}/contact`}
+        primaryHref={publicPaths.reservation(loaderData.langCode)}
+        secondaryHref={publicPaths.contact(loaderData.langCode)}
         fastTitle={loaderData.lang.createReservation}
         fastSubtitle={loaderData.lang.deployFaster}
       />
       <GetInTouch lang={loaderData.lang} />
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

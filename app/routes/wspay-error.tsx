@@ -10,6 +10,7 @@ import {
   type WSPayCallbackParams,
 } from "@/lib/wspay";
 import { getWSPaySession, invalidateWSPaySession } from "@/lib/wspay-session";
+import { publicPaths } from "@/lib/paths";
 
 export async function action({ request, params }: Route.ActionArgs) {
   const url = new URL(request.url);
@@ -64,7 +65,9 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   invalidateWSPaySession(sessionId);
 
-  return redirect(`/${params.lang ?? "sr"}/reservation?error=payment_failed`);
+  return redirect(
+    `${publicPaths.reservation(params.lang ?? "sr")}?error=payment_failed`,
+  );
 }
 
 export async function loader({ request, params }: Route.LoaderArgs) {
@@ -136,7 +139,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: "Payment Error",
     description: "Payment processing error",
-    url: `/${langCode}/wspay/error`,
+    url: publicPaths.wspay.error(langCode),
     baseUrl,
   });
 }
@@ -153,7 +156,7 @@ export default function WSPayError({ loaderData }: Route.ComponentProps) {
         <p className="font-medium text-lg text-pd mx-8">
           {loaderData.lang.paymentErrorTitle}
         </p>
-        <Link to={`/${loaderData.langCode}/reservation`}>
+        <Link to={publicPaths.reservation(loaderData.langCode)}>
           <Button className="bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
             {loaderData.lang.paymentErrorAction}
           </Button>

@@ -23,6 +23,7 @@ import {
   generateCarRentalServiceSchema,
   generateOpenGraphMeta,
 } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 import type { Route } from "./+types/home";
 
 export const links: Route.LinksFunction = () => [];
@@ -47,7 +48,7 @@ export function meta({ data }: Route.MetaArgs) {
   });
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
 
   const pickUpLocation = formData.get("pickUpLocation");
@@ -73,7 +74,7 @@ export async function action({ request }: Route.ActionArgs) {
     cookie.dropOffDate = dropOffDate;
     cookie.dropOffTime = dropOffTime;
 
-    return redirect("reservation/vehicle", {
+    return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"), {
       headers: {
         "Set-Cookie": await prefs.serialize(cookie),
       },
@@ -265,7 +266,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <BlogSection langCode={loaderData.langCode} lang={loaderData.lang} />
       <FandQ langCode={loaderData.langCode} />
       <GetInTouch lang={loaderData.lang} />
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

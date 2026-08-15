@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link, Outlet, useMatches, useFetcher } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
+import { publicPaths } from "@/lib/paths";
 import type { Route } from "./+types/reservation-page";
 import { cn, getLocale, getDatabaseUrl } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
@@ -126,7 +127,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoReservationTitle,
     description: data.lang.seoReservationDescription,
-    url: `/${data.langCode || "sr"}/reservation`,
+    url: publicPaths.reservation(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoReservationKeywords,
     imageAlt: "Viastro - Car Rental Reservation",

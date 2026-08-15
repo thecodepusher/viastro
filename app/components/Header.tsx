@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import type { BaseLocale } from "@/locales/base-locale";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { publicPaths } from "@/lib/paths";
 import { useState, useEffect } from "react";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
@@ -40,26 +41,26 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
   }, []);
 
   const navLinks = [
-    { to: `/${props.langCode}`, label: props.lang.home },
-    { to: `/${props.langCode}/cars`, label: props.lang.cars },
+    { to: publicPaths.home(props.langCode), label: props.lang.home },
+    { to: publicPaths.cars(props.langCode), label: props.lang.cars },
     {
-      to: `/${props.langCode}/long-term-rental`,
+      to: publicPaths.longTermRental(props.langCode),
       label: props.lang.longTermRentalNav,
     },
     {
-      to: `/${props.langCode}/rental-conditions`,
+      to: publicPaths.rentalConditions(props.langCode),
       label: props.lang.rentalConditions,
     },
-    { to: `/${props.langCode}/faq`, label: props.lang.faq },
-    { to: `/${props.langCode}/blog`, label: props.lang.blog },
-    { to: `/${props.langCode}/contact`, label: props.lang.contact },
+    { to: publicPaths.faq(props.langCode), label: props.lang.faq },
+    { to: publicPaths.news(props.langCode), label: props.lang.blog },
+    { to: publicPaths.contact(props.langCode), label: props.lang.contact },
   ];
 
   const isActive = (path: string) => {
-    if (path === `/${props.langCode}`) {
+    if (path === publicPaths.home(props.langCode)) {
       return (
         location.pathname === path ||
-        location.pathname === `/${props.langCode}/`
+        location.pathname === `${publicPaths.home(props.langCode)}/`
       );
     }
     return location.pathname.startsWith(path);
@@ -122,7 +123,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
             </a>
             <Form
               method="POST"
-              action="/select-lang"
+              action={publicPaths.languageSelection}
               className="flex flex-row items-center gap-1">
               <input readOnly hidden name="loc" value={location.pathname} />
               <Button
@@ -216,14 +217,14 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                         key={link.to}
                         to={link.to}
                         className={cn(
-                          "relative px-4 py-3.5 text-base font-medium transition-colors rounded-lg",
+                          "relative overflow-hidden px-4 py-3.5 text-base font-medium transition-colors rounded-lg",
                           active
                             ? "bg-white/10 text-white"
                             : "text-white/70 hover:text-white hover:bg-white/5",
                         )}>
                         {link.label}
                         {active && (
-                          <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-full bg-p" />
+                          <span className="absolute inset-y-0 left-0 w-1 rounded-l-lg bg-p" />
                         )}
                       </Link>
                     );
@@ -237,7 +238,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                   </p>
                   <Form
                     method="POST"
-                    action="/select-lang"
+                    action={publicPaths.languageSelection}
                     className="flex items-center gap-3">
                     <input
                       readOnly

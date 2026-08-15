@@ -12,6 +12,7 @@ import {
 } from "@/lib/api-cars";
 import type { Route } from "./+types/vehicle";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -32,7 +33,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     !pickupTime ||
     !dropoffTime
   ) {
-    return redirect("..");
+    return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
   const databaseUrl = getDatabaseUrl();
@@ -93,14 +94,14 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
   const carId = formData.get("carId");
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
   cookie.carId = carId;
 
-  return redirect("../extras", {
+  return redirect(publicPaths.reservationExtras(params.lang ?? "sr"), {
     headers: {
       "Set-Cookie": await prefs.serialize(cookie),
     },
@@ -113,7 +114,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoReservationSelectVehicleTitle,
     description: data.lang.seoReservationSelectVehicleDescription,
-    url: `/${data.langCode || "sr"}/reservation/vehicle`,
+    url: publicPaths.reservationVehicle(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoReservationSelectVehicleKeywords,
     imageAlt: "Viastro - Select Vehicle",
