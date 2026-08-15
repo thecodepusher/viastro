@@ -60,11 +60,14 @@ export async function getLocale(
 }
 
 export function getDatabaseUrl(): string {
-  return (
+  const url =
     process.env.DATABASE_URL ||
     (typeof import.meta !== "undefined"
       ? import.meta.env?.DATABASE_URL
       : undefined) ||
-    "https://rentacar-manager.com/client/viastro/api/"
-  );
+    "https://rentacar-manager.com/client/viastro/api/";
+
+  // Trailing slash is required: without it the API 301-redirects and drops API_KEY,
+  // then returns HTML ("API KEY not provided") which breaks res.json().
+  return url.endsWith("/") ? url : `${url}/`;
 }
