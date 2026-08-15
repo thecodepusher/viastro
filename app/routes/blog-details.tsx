@@ -92,7 +92,9 @@ export function meta({ data }: Route.MetaArgs) {
     baseUrl,
     type: "article",
     imageUrl,
-    keywords: data.lang.seoBlogDetailsKeywords,
+    keywords:
+      ("keywords" in data.post && data.post.keywords) ||
+      data.lang.seoBlogDetailsKeywords,
   });
 
   metaTags.push({

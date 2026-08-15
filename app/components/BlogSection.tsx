@@ -9,13 +9,11 @@ export default function BlogSection(props: {
 }) {
   let posts = postsEn;
 
-  let title = "Where for the weekend?";
+  let title = props.lang.blog;
   if (props.langCode == "sr") {
     posts = postsSr;
-    title = "Gde za vikend?";
   } else if (props.langCode == "ru") {
     posts = postsRu;
-    title = "Куда на выходные?";
   }
 
   return (

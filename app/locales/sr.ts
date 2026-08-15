@@ -329,5 +329,5 @@ export const sr: BaseLocale = {
   seoLongTermRentalDescription:
     "Fleksibilan dugoročni najam vozila u Beogradu bez ulaganja i skrivenih troškova. Operativni rent za firme, preduzetnike i pojedince uz registraciju, kasko, održavanje i zamensko vozilo uključene u cenu.",
   seoLongTermRentalKeywords:
-    "dugoročni najam automobila, operativni rent Beograd, poslovni najam vozila, rent a car dugoročno",
+    "dugoročni najam vozila, dugoročni najam automobila, dugoročni najam za firme, renta vozila za firme, renta vozila za pravna lica, najam vozila za pravna lica, poslovni najam vozila, operativni rent Beograd, operativni lizing vozila, dugoročni rent a car Beograd, vozni park za firme, iznajmljivanje automobila na duži period",
 };
