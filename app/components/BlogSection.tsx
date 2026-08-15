@@ -39,7 +39,8 @@ export default function BlogSection(props: {
                     src={post.imageUrl}
                     className={`h-full w-full transition-transform duration-500 ${
                       post.imageUrl === "/mount.webp" ||
-                      post.imageUrl === "/sea-summer.webp"
+                      post.imageUrl === "/sea-summer.webp" ||
+                      post.imageUrl === "/dugorocni-najam-viastro.webp"
                         ? "object-cover object-bottom-left group-hover:scale-105"
                         : "object-contain group-hover:scale-105"
                     }`}

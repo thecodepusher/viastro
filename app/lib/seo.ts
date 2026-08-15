@@ -379,6 +379,9 @@ export interface OpenGraphMetaOptions {
   type?: "website" | "article";
   imageUrl?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageType?: string;
   locale?: string;
   siteName?: string;
   keywords?: string;
@@ -394,6 +397,9 @@ export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
     type = "website",
     imageUrl,
     imageAlt,
+    imageWidth = 1200,
+    imageHeight = 630,
+    imageType = "image/webp",
     locale,
     siteName = "Viastro Rent a Car",
     keywords,
@@ -425,9 +431,10 @@ export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
     { property: "og:type", content: type },
     { property: "og:url", content: canonical },
     { property: "og:image", content: ogImage },
-    { property: "og:image:width", content: "1200" },
-    { property: "og:image:height", content: "630" },
-    { property: "og:image:type", content: "image/webp" },
+    { property: "og:image:secure_url", content: ogImage },
+    { property: "og:image:width", content: String(imageWidth) },
+    { property: "og:image:height", content: String(imageHeight) },
+    { property: "og:image:type", content: imageType },
     { name: "twitter:card", content: twitterCard },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },

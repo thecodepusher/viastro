@@ -77,12 +77,23 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
 
 export const links: Route.LinksFunction = () => [];
 
+const articleOgImageSizes: Record<string, { width: number; height: number }> = {
+  "/dugorocni-najam-viastro.webp": { width: 1200, height: 630 },
+  "/sea-summer.webp": { width: 1200, height: 800 },
+  "/mount.webp": { width: 1920, height: 1080 },
+  "/kop.webp": { width: 900, height: 600 },
+  "/sargan.webp": { width: 675, height: 450 },
+  "/djerdap.webp": { width: 675, height: 450 },
+};
+
 export function meta({ data }: Route.MetaArgs) {
   const baseUrl = data.baseUrl || getBaseUrl();
   const title = `${data.post.title}${data.lang.seoBlogDetailsTitle}`;
   const description = data.post.description || data.post.title;
-  const imageUrl = data.post.imageUrl
-    ? `${baseUrl}${data.post.imageUrl}`
+  const postImagePath = data.post.imageUrl;
+  const imageUrl = postImagePath ? `${baseUrl}${postImagePath}` : undefined;
+  const imageSize = postImagePath
+    ? articleOgImageSizes[postImagePath]
     : undefined;
 
   const metaTags = generateOpenGraphMeta({
@@ -92,6 +103,9 @@ export function meta({ data }: Route.MetaArgs) {
     baseUrl,
     type: "article",
     imageUrl,
+    imageAlt: data.post.title,
+    imageWidth: imageSize?.width ?? 1200,
+    imageHeight: imageSize?.height ?? 630,
     keywords:
       ("keywords" in data.post && data.post.keywords) ||
       data.lang.seoBlogDetailsKeywords,
