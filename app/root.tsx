@@ -244,11 +244,11 @@ function ErrorBoundaryContent({ error }: { error: unknown }) {
             </div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-pd mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             {langData.lang.errorTitle}
           </h2>
 
-          <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-md mx-auto">
+          <p className="text-lg sm:text-xl text-white/70 mb-10 max-w-md mx-auto">
             {langData.lang.errorMessage}
           </p>
 
