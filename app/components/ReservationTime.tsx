@@ -120,18 +120,18 @@ export default function ReservationTime(props: {
   const [dropDatePopoverOpen, setDropDatePopoverOpen] = useState(false);
 
   return (
-    <div className="mx-auto">
+    <div className="w-full mx-auto">
       <h3 className="pb-3 font-display font-semibold text-lg sm:text-2xl text-white/95 sm:text-left text-center">
         {lang.createReservation}
       </h3>
-      <div className="w-full rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xl p-3 sm:p-5 mb-4 sm:mb-6 flex flex-col items-stretch lg:flex-row gap-3 sm:gap-4 text-white">
-        <div className="w-full flex flex-col gap-1">
+      <div className="w-full max-w-full rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xl p-3 sm:p-5 mb-4 sm:mb-6 flex flex-col items-stretch xl:flex-row gap-3 sm:gap-4 text-white">
+        <div className="w-full min-w-0 xl:w-40 xl:grow-0 xl:shrink-0 flex flex-col gap-1">
           <Label className="text-white/80 text-xs sm:text-sm">
             {lang.pickUpLoacation}
           </Label>
           <Select value={pickUpLocation} onValueChange={setPickUpLocation}>
             <SelectTrigger
-              className="w-full bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
+              className="w-full min-w-0 overflow-hidden bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate"
               aria-label={lang.pickUpLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
@@ -145,13 +145,13 @@ export default function ReservationTime(props: {
             </SelectContent>
           </Select>
         </div>
-        <div className="w-full flex flex-col gap-1">
+        <div className="w-full min-w-0 xl:w-40 xl:grow-0 xl:shrink-0 flex flex-col gap-1">
           <Label className="text-white/80 text-xs sm:text-sm">
             {lang.dropOffLoacation}
           </Label>
           <Select value={dropOffLocation} onValueChange={setDropOffLocation}>
             <SelectTrigger
-              className="w-full bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
+              className="w-full min-w-0 overflow-hidden bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate"
               aria-label={lang.dropOffLoacation}>
               <SelectValue placeholder={lang.choose} />
             </SelectTrigger>
@@ -166,11 +166,11 @@ export default function ReservationTime(props: {
           </Select>
         </div>
 
-        <div className="w-full flex flex-col gap-1">
+        <div className="w-full min-w-0 xl:flex-1 flex flex-col gap-1">
           <Label className="text-white/80 text-xs sm:text-sm">
             {lang.pickUpTime}
           </Label>
-          <div className="flex gap-1">
+          <div className="flex min-w-0 gap-1">
             <Popover
               open={pickDatePopoverOpen}
               onOpenChange={setPickDatePopoverOpen}>
@@ -179,15 +179,13 @@ export default function ReservationTime(props: {
                   variant={"outline"}
                   aria-label={`${lang.pickUpTime} - ${pickDate ? format(pickDate, "PPP") : lang.choose}`}
                   className={cn(
-                    "w-[calc(100%-88px)] justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40",
+                    "min-w-0 flex-1 justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40 overflow-hidden",
                     !pickDate && "text-white/70",
                   )}>
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {pickDate ? (
-                    format(pickDate, "PPP")
-                  ) : (
-                    <span>{lang.choose}</span>
-                  )}
+                  <CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
+                  <span className="truncate">
+                    {pickDate ? format(pickDate, "PPP") : lang.choose}
+                  </span>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-full p-0 bg-pd border border-white/15">
@@ -245,7 +243,7 @@ export default function ReservationTime(props: {
                 setDropOffTimes(t);
               }}>
               <SelectTrigger
-                className="w-[88px] bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
+                className="w-20 shrink-0 px-2 gap-1 bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.pickUpTime} - ${pickUpTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
@@ -260,11 +258,11 @@ export default function ReservationTime(props: {
             </Select>
           </div>
         </div>
-        <div className="w-full flex flex-col gap-1">
+        <div className="w-full min-w-0 xl:flex-1 flex flex-col gap-1">
           <Label className="text-white/80 text-xs sm:text-sm">
             {lang.dropOffTime}
           </Label>
-          <div className="flex gap-1">
+          <div className="flex min-w-0 gap-1">
             <Popover
               open={dropDatePopoverOpen}
               onOpenChange={setDropDatePopoverOpen}>
@@ -273,15 +271,13 @@ export default function ReservationTime(props: {
                   variant={"outline"}
                   aria-label={`${lang.dropOffTime} - ${dropDate ? format(dropDate, "PPP") : lang.choose}`}
                   className={cn(
-                    "w-[calc(100%-88px)] justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40",
+                    "min-w-0 flex-1 justify-start text-left font-normal bg-white/10 border border-white/20 text-white hover:bg-white/15 hover:border-white/35 focus:ring-2 focus:ring-p/40 overflow-hidden",
                     !dropDate && "text-white/70",
                   )}>
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {dropDate ? (
-                    format(dropDate, "PPP")
-                  ) : (
-                    <span>{lang.choose}</span>
-                  )}
+                  <CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
+                  <span className="truncate">
+                    {dropDate ? format(dropDate, "PPP") : lang.choose}
+                  </span>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0 bg-pd border border-white/15">
@@ -314,7 +310,7 @@ export default function ReservationTime(props: {
             </Popover>
             <Select value={dropOfTime ?? ""} onValueChange={setDropOfTime}>
               <SelectTrigger
-                className="w-[88px] bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
+                className="w-20 shrink-0 px-2 gap-1 bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.dropOffTime} - ${dropOfTime || lang.choose}`}>
                 <SelectValue placeholder={lang.choose} />
               </SelectTrigger>
@@ -361,7 +357,7 @@ export default function ReservationTime(props: {
           }}
           aria-label={lang.continue}
           aria-busy={isLoading}
-          className="lg:w-36 w-full h-10 lg:self-end bg-p text-pd font-semibold hover:bg-p/90 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
+          className="xl:w-36 xl:shrink-0 w-full h-10 xl:self-end bg-p text-pd font-semibold hover:bg-p/90 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
           {isLoading ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />

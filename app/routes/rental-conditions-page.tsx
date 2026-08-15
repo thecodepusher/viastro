@@ -14,6 +14,7 @@ import {
   generateBreadcrumbSchema,
 } from "@/lib/seo";
 import SEO from "@/components/SEO";
+import { publicPaths } from "@/lib/paths";
 
 export const links: Route.LinksFunction = () => [
   {
@@ -68,7 +69,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoRentalConditionsTitle,
     description: data.lang.seoRentalConditionsDescription,
-    url: `/${data.langCode || "sr"}/rental-conditions`,
+    url: publicPaths.rentalConditions(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoRentalConditionsKeywords,
     imageAlt: "Viastro Rental Conditions",
@@ -85,7 +86,7 @@ export default function RentalConditionsPage({
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
         {
           name: loaderData.lang.seoRentalConditionsTitle,
-          url: `/${loaderData.langCode}/rental-conditions`,
+          url: publicPaths.rentalConditions(loaderData.langCode),
         },
       ],
       loaderData.langCode
@@ -115,8 +116,8 @@ export default function RentalConditionsPage({
         primaryLabel={loaderData.lang.createReservation}
         secondaryLabel={loaderData.lang.contactUs}
         helperText={loaderData.lang.description}
-        primaryHref="/reservation"
-        secondaryHref={`/${loaderData.langCode}/contact`}
+        primaryHref={publicPaths.reservation(loaderData.langCode)}
+        secondaryHref={publicPaths.contact(loaderData.langCode)}
         fastTitle={loaderData.lang.createReservation}
         fastSubtitle={loaderData.lang.deployFaster}
       />
@@ -200,7 +201,7 @@ export default function RentalConditionsPage({
         </div>
       </div>
 
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

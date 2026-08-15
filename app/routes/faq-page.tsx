@@ -1,6 +1,7 @@
 import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import SEO from "@/components/SEO";
+import { publicPaths } from "@/lib/paths";
 import { CustomHero } from "@/components/CustomHero";
 import type { Route } from "./+types/faq-page";
 import { getLocale } from "@/lib/utils";
@@ -67,7 +68,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoFaqTitle,
     description: data.lang.seoFaqDescription,
-    url: `/${data.langCode || "sr"}/faq`,
+    url: publicPaths.faq(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoFaqKeywords,
     imageAlt: "Viastro FAQ - Frequently Asked Questions",
@@ -89,7 +90,7 @@ export default function FandQPage({ loaderData }: Route.ComponentProps) {
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: loaderData.lang.faq, url: `/${loaderData.langCode}/faq` },
+        { name: loaderData.lang.faq, url: publicPaths.faq(loaderData.langCode) },
       ],
       loaderData.langCode
     ),
@@ -104,13 +105,13 @@ export default function FandQPage({ loaderData }: Route.ComponentProps) {
         primaryLabel={loaderData.lang.createReservation}
         secondaryLabel={loaderData.lang.contactUs}
         helperText={loaderData.lang.description}
-        primaryHref="/reservation"
-        secondaryHref={`/${loaderData.langCode}/contact`}
+        primaryHref={publicPaths.reservation(loaderData.langCode)}
+        secondaryHref={publicPaths.contact(loaderData.langCode)}
         fastTitle={loaderData.lang.createReservation}
         fastSubtitle={loaderData.lang.deployFaster}
       />
       <FandQ langCode={loaderData.langCode} />
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

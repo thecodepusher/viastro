@@ -3,6 +3,7 @@ import { redirect } from "react-router";
 import type { Route } from "./+types/wspay-redirect";
 import { getLocale } from "@/lib/utils";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 import {
   getWSPaySession,
   getSessionIdFromUrl,
@@ -57,7 +58,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: "Redirecting to payment...",
     description: "Redirecting to payment gateway",
-    url: `/${langCode}/wspay/redirect`,
+    url: publicPaths.wspay.redirect(langCode),
     baseUrl,
   });
 }

@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { publicPaths } from "@/lib/paths";
 import { LongTermAudiences } from "@/components/LongTermRental/LongTermAudiences";
 import { LongTermBenefits } from "@/components/LongTermRental/LongTermBenefits";
 import { LongTermContact } from "@/components/LongTermRental/LongTermContact";
@@ -109,7 +110,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoLongTermRentalTitle,
     description: data.lang.seoLongTermRentalDescription,
-    url: `/${data.langCode || "sr"}/long-term-rental`,
+    url: publicPaths.longTermRental(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoLongTermRentalKeywords,
     imageAlt: "Viastro - Long term rental",
@@ -128,7 +129,7 @@ export default function LongTermRentalPage({
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
         {
           name: content.heroTitle,
-          url: `/${loaderData.langCode}/long-term-rental`,
+          url: publicPaths.longTermRental(loaderData.langCode),
         },
       ],
       loaderData.langCode

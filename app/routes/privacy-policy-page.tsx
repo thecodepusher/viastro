@@ -10,6 +10,7 @@ import {
   generateBreadcrumbSchema,
 } from "@/lib/seo";
 import SEO from "@/components/SEO";
+import { publicPaths } from "@/lib/paths";
 
 export const links: Route.LinksFunction = () => [
   {
@@ -64,7 +65,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoPrivacyPolicyTitle,
     description: data.lang.seoPrivacyPolicyDescription,
-    url: `/${data.langCode || "sr"}/privacy-policy`,
+    url: publicPaths.privacyPolicy(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoPrivacyPolicyKeywords,
     imageAlt: "Viastro Privacy Policy",
@@ -81,7 +82,7 @@ export default function PrivacyPolicyPage({
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
         {
           name: loaderData.lang.seoPrivacyPolicyTitle,
-          url: `/${loaderData.langCode}/privacy-policy`,
+          url: publicPaths.privacyPolicy(loaderData.langCode),
         },
       ],
       loaderData.langCode
@@ -111,8 +112,8 @@ export default function PrivacyPolicyPage({
         primaryLabel={loaderData.lang.createReservation}
         secondaryLabel={loaderData.lang.contactUs}
         helperText={loaderData.lang.description}
-        primaryHref="/reservation"
-        secondaryHref={`/${loaderData.langCode}/contact`}
+        primaryHref={publicPaths.reservation(loaderData.langCode)}
+        secondaryHref={publicPaths.contact(loaderData.langCode)}
         fastTitle={loaderData.lang.createReservation}
         fastSubtitle={loaderData.lang.deployFaster}
       />
@@ -195,7 +196,7 @@ export default function PrivacyPolicyPage({
         </div>
       </div>
 
-      <Cta lang={loaderData.lang} />
+      <Cta lang={loaderData.lang} langCode={loaderData.langCode} />
     </div>
   );
 }

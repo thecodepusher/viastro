@@ -1,5 +1,6 @@
 import { Zap } from "lucide-react";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
+import { publicPaths } from "@/lib/paths";
 
 type Props = {
   title: string;
@@ -21,13 +22,16 @@ export function CustomHero({
   primaryLabel = "Nova rezervacija",
   secondaryLabel = "Kontaktiraj nas",
   helperText = "Rezervacija je jednostavna — možete je započeti odmah i dovršiti kasnije.",
-  primaryHref = "/reservation",
-  secondaryHref = "/contact",
+  primaryHref,
+  secondaryHref,
   fastTitle = "Brza rezervacija",
   fastSubtitle = "Start za 60s",
 }: Props) {
   const location = useLocation();
-  const hideSecondary = location.pathname.includes("/contact");
+  const { lang = "sr" } = useParams();
+  const resolvedPrimaryHref = primaryHref ?? publicPaths.reservation(lang);
+  const resolvedSecondaryHref = secondaryHref ?? publicPaths.contact(lang);
+  const hideSecondary = location.pathname.includes("/kontakt");
   return (
     <section className="relative overflow-hidden">
       <div className="relative min-h-[70vh] sm:min-h-[60vh] w-full overflow-hidden">
@@ -76,13 +80,13 @@ export function CustomHero({
                 </div>
                 <div className="flex flex-col gap-2.5 sm:grid sm:grid-cols-2">
                   <a
-                    href={primaryHref}
+                    href={resolvedPrimaryHref}
                     className="w-full rounded-lg bg-p text-pd font-semibold py-3 px-4 text-center transition-colors hover:bg-p/90 focus:outline-none focus:ring-2 focus:ring-p/60">
                     {primaryLabel}
                   </a>
                   {!hideSecondary && (
                     <a
-                      href={secondaryHref}
+                      href={resolvedSecondaryHref}
                       className="rounded-lg bg-transparent text-white font-semibold py-3 px-4 text-center ring-1 ring-white/25 hover:bg-white/10 transition">
                       {secondaryLabel}
                     </a>

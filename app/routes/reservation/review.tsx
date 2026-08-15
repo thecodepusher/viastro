@@ -21,6 +21,7 @@ import {
 import { createWSPaySession } from "@/lib/wspay-session";
 import { CostSummary } from "@/components/Reservation/Review/CostSummary";
 import { ReviewForm } from "@/components/Reservation/Review/ReviewForm";
+import { publicPaths } from "@/lib/paths";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -35,7 +36,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   );
 
   if (!car) {
-    return redirect("../vehicle");
+    return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"));
   }
 
   const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
@@ -117,7 +118,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   );
 
   if (!car) {
-    return redirect("../vehicle");
+    return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"));
   }
 
   if (
@@ -238,15 +239,15 @@ export async function action({ request, params }: Route.ActionArgs) {
   const sessionId = createWSPaySession(shoppingCartId, reservationDataObj);
 
   const returnUrlWithSession = ensureHttpsUrl(
-    `${baseUrl}/${langCode}/wspay/success?sessionId=${sessionId}`,
+    `${baseUrl}${publicPaths.wspay.success(langCode)}?sessionId=${sessionId}`,
     isTestMode,
   );
   const returnErrorUrlWithSession = ensureHttpsUrl(
-    `${baseUrl}/${langCode}/wspay/error?sessionId=${sessionId}`,
+    `${baseUrl}${publicPaths.wspay.error(langCode)}?sessionId=${sessionId}`,
     isTestMode,
   );
   const cancelUrlWithSession = ensureHttpsUrl(
-    `${baseUrl}/${langCode}/wspay/cancel?sessionId=${sessionId}`,
+    `${baseUrl}${publicPaths.wspay.cancel(langCode)}?sessionId=${sessionId}`,
     isTestMode,
   );
 
@@ -278,7 +279,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   );
 
   return redirect(
-    `/${langCode}/wspay/redirect?sessionId=${sessionId}&formData=${wspayFormDataEncoded}`,
+    `${publicPaths.wspay.redirect(langCode)}?sessionId=${sessionId}&formData=${wspayFormDataEncoded}`,
   );
 }
 export function meta({ data }: Route.MetaArgs) {
@@ -287,7 +288,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoReservationReviewTitle,
     description: data.lang.seoReservationReviewDescription,
-    url: `/${data.langCode || "sr"}/reservation/review`,
+    url: publicPaths.reservationReview(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoReservationReviewKeywords,
     imageAlt: "Viastro - Review Reservation",
@@ -319,6 +320,7 @@ export default function Review({ loaderData }: Route.ComponentProps) {
 
       <ReviewForm
         lang={loaderData.lang}
+        langCode={loaderData.langCode}
         isSubmitting={isSubmitting}
         depositAmount={Math.max(
           loaderData.car.deposite - loaderData.depositeDiscount,

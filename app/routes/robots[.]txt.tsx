@@ -1,4 +1,5 @@
 import { getBaseUrl } from "@/lib/seo";
+import { pathSegments } from "@/lib/paths";
 import type { Route } from "./+types/robots[.]txt";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -8,9 +9,15 @@ export async function loader({ request }: Route.LoaderArgs) {
 Allow: /
 
 # Disallow admin and private routes
-Disallow: /reservation/
-Disallow: /success
-Disallow: /select-lang
+Disallow: /${pathSegments.reservation}
+Disallow: /${pathSegments.reservation}/
+Disallow: /*/${pathSegments.reservation}
+Disallow: /*/${pathSegments.reservation}/
+Disallow: /${pathSegments.success}
+Disallow: /*/${pathSegments.success}
+Disallow: /wspay/
+Disallow: /*/wspay/
+Disallow: /${pathSegments.languageSelection}
 
 # Sitemap
 Sitemap: ${baseUrl}/sitemap.xml`;

@@ -1,6 +1,7 @@
 import { redirect } from "react-router";
 import type { Route } from "./+types/wspay-success";
 import { prefs } from "@/lib/prefs-cookie";
+import { publicPaths } from "@/lib/paths";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { sendReservationEmail, type ReservationEmailPayload } from "@/lib/email";
 import {
@@ -72,18 +73,18 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   if (wspayParams.ShoppingCartID !== session.shoppingCartId) {
     invalidateWSPaySession(sessionId);
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
+    return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
   const reservationData = session.reservationData;
   if (!reservationData) {
     invalidateWSPaySession(sessionId);
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
+    return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
   const successValue = wspayParams.Success || wspayParams.success;
   if (successValue !== "1" && successValue !== "true") {
-    return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+    return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
   }
 
   const shopId =
@@ -114,7 +115,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       console.error(
         "WSPay Success: ApprovalCode is missing for successful transaction",
       );
-      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+      return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
     }
 
     const isValidSignature = verifyWSPayCallbackSignature(
@@ -125,7 +126,7 @@ export async function action({ request, params }: Route.ActionArgs) {
 
     if (!isValidSignature) {
       console.error("WSPay Success: Invalid signature verification");
-      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+      return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
     }
   }
 
@@ -179,15 +180,15 @@ export async function action({ request, params }: Route.ActionArgs) {
       Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
     const returnUrlTotal = ensureHttpsUrl(
-      `${baseUrl}/${langCode}/wspay/success?sessionId=${totalPaymentSessionId}`,
+      `${baseUrl}${publicPaths.wspay.success(langCode)}?sessionId=${totalPaymentSessionId}`,
       isTestMode,
     );
     const returnErrorUrlTotal = ensureHttpsUrl(
-      `${baseUrl}/${langCode}/wspay/error?sessionId=${totalPaymentSessionId}`,
+      `${baseUrl}${publicPaths.wspay.error(langCode)}?sessionId=${totalPaymentSessionId}`,
       isTestMode,
     );
     const cancelUrlTotal = ensureHttpsUrl(
-      `${baseUrl}/${langCode}/wspay/cancel?sessionId=${totalPaymentSessionId}`,
+      `${baseUrl}${publicPaths.wspay.cancel(langCode)}?sessionId=${totalPaymentSessionId}`,
       isTestMode,
     );
 
@@ -218,7 +219,7 @@ export async function action({ request, params }: Route.ActionArgs) {
 
     // Redirectuj na naplatu ukupne cene
     return redirect(
-      `/${langCode}/wspay/redirect?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
+      `${publicPaths.wspay.redirect(langCode)}?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
     );
   }
 
@@ -252,7 +253,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   const cookie = (await prefs.parse(cookieHeader)) || {};
   cookie.paymentSuccessful = "true";
 
-  return redirect(`/${params.lang ?? "sr"}/success`, {
+  return redirect(publicPaths.success(params.lang ?? "sr"), {
     headers: {
       "Set-Cookie": await prefs.serialize(cookie),
     },
@@ -275,18 +276,18 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   if (!wspayParams.ShoppingCartID && !wspayParams.Success) {
     invalidateWSPaySession(sessionId);
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
+    return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
   if (wspayParams.ShoppingCartID !== session.shoppingCartId) {
     invalidateWSPaySession(sessionId);
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
+    return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
   const reservationData = session.reservationData;
   if (!reservationData) {
     invalidateWSPaySession(sessionId);
-    return redirect(`/${params.lang ?? "sr"}/reservation`);
+    return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
   const successValue = wspayParams.Success || wspayParams.success;
@@ -318,7 +319,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   if (shopId && secretKey && isSuccessful) {
     if (!callbackParams.ApprovalCode) {
       invalidateWSPaySession(sessionId);
-      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+      return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
     }
 
     const isValidSignature = verifyWSPayCallbackSignature(
@@ -329,7 +330,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
     if (!isValidSignature) {
       invalidateWSPaySession(sessionId);
-      return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+      return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
     }
   }
 
@@ -383,15 +384,15 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
 
     const returnUrlTotal = ensureHttpsUrl(
-      `${baseUrl}/${langCode}/wspay/success?sessionId=${totalPaymentSessionId}`,
+      `${baseUrl}${publicPaths.wspay.success(langCode)}?sessionId=${totalPaymentSessionId}`,
       isTestMode,
     );
     const returnErrorUrlTotal = ensureHttpsUrl(
-      `${baseUrl}/${langCode}/wspay/error?sessionId=${totalPaymentSessionId}`,
+      `${baseUrl}${publicPaths.wspay.error(langCode)}?sessionId=${totalPaymentSessionId}`,
       isTestMode,
     );
     const cancelUrlTotal = ensureHttpsUrl(
-      `${baseUrl}/${langCode}/wspay/cancel?sessionId=${totalPaymentSessionId}`,
+      `${baseUrl}${publicPaths.wspay.cancel(langCode)}?sessionId=${totalPaymentSessionId}`,
       isTestMode,
     );
 
@@ -422,7 +423,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
     // Redirectuj na naplatu ukupne cene
     return redirect(
-      `/${langCode}/wspay/redirect?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
+      `${publicPaths.wspay.redirect(langCode)}?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
     );
   }
 
@@ -452,14 +453,14 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     const cookie = (await prefs.parse(cookieHeader)) || {};
     cookie.paymentSuccessful = "true";
 
-    return redirect(`/${params.lang ?? "sr"}/success`, {
+    return redirect(publicPaths.success(params.lang ?? "sr"), {
       headers: {
         "Set-Cookie": await prefs.serialize(cookie),
       },
     });
   } else {
     invalidateWSPaySession(sessionId);
-    return redirect(`/${params.lang ?? "sr"}/wspay/error`);
+    return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
   }
 }
 
@@ -470,7 +471,7 @@ export function meta({ params }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: "Payment Processing",
     description: "Processing your payment",
-    url: `/${langCode}/wspay/success`,
+    url: publicPaths.wspay.success(langCode),
     baseUrl,
   });
 }

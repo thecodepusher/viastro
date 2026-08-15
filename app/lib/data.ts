@@ -29,10 +29,68 @@ export type LocaleTypes = "en" | "ru" | "sr";
 
 export const postsSr = [
   {
+    id: 0,
+    title:
+      "Dugoročni najam vozila za firme - kako da vozni park radi za vaš biznis",
+    href: "/vesti/dugorocni-najam-vozila-za-firme",
+    slug: "dugorocni-najam-vozila-za-firme",
+    description:
+      "Dugoročni najam vozila za firme i pravna lica: saznajte kako jedna mesečna rata može da obuhvati registraciju, osiguranje, redovno održavanje, asistenciju i zamensko vozilo - bez kupovine automobila i neplaniranih troškova.",
+    keywords:
+      "dugoročni najam vozila, dugoročni najam automobila, dugoročni najam za firme, renta vozila za firme, renta vozila za pravna lica, najam vozila za pravna lica, poslovni najam vozila, operativni rent, operativni lizing vozila, dugoročni rent a car Beograd, vozni park za firme, iznajmljivanje automobila na duži period",
+    content: `
+      <h2>Dugoročni najam vozila za firme: manje administracije, više vremena za posao</h2>
+      <p>Automobil u firmi retko je samo automobil. Za komercijalistu je kancelarija na točkovima, za servisni tim je dolazak kod klijenta, a za preduzetnika sigurnost da plan ne staje kada vozilo ode na servis. Ipak, kupovina vozila često otvara niz novih obaveza: početno ulaganje, registracija, osiguranje, redovno održavanje, gume, nepredviđeni kvarovi i pad vrednosti automobila. Dugoročni najam vozila pretvara taj niz obaveza u jednostavniji, pregledniji dogovor.</p>
+      <p>Uz Viastro dugoročni najam za firme, preduzetnike i fizička lica, koristite vozilo koje odgovara vašem poslu, dok o registraciji, osiguranju, redovnom održavanju, asistenciji na putu i zamenskom vozilu brine naš tim. Vaša firma dobija mobilnost, a vi jasniju sliku mesečnih troškova.</p>
+
+      <h3>Šta je dugoročni najam automobila?</h3>
+      <p>Dugoročni najam automobila, poznat i kao operativni rent, namenjen je svima kojima je vozilo potrebno kontinuirano, a ne žele da ga kupuju i samostalno upravljaju svakim troškom. Umesto većeg početnog ulaganja, dogovarate mesečnu ratu i paket prema realnim potrebama vašeg posla. Tako vozni park postaje usluga koja podržava poslovanje, a ne dodatni projekat kojim morate da se bavite.</p>
+
+      <h3>Zašto firme i pravna lica biraju rentu vozila na duži period?</h3>
+      <ul>
+        <li><strong>Kapital ostaje u poslu:</strong> bez kupovine vozila i vezivanja sredstava u imovinu, budžet može da ostane usmeren na rast, zaposlene i projekte.</li>
+        <li><strong>Jedna mesečna cena:</strong> registracija, kasko osiguranje, redovni servisi, održavanje i pomoć na putu 24/7 deo su paketa, pa je planiranje troškova jednostavnije.</li>
+        <li><strong>Manje zastoja:</strong> kada je vozilo van upotrebe zbog kvara, obezbeđujemo zamensko vozilo u najkraćem roku kako bi tim ostao pokretan.</li>
+        <li><strong>Flota po meri:</strong> broj i tip vozila mogu da prate promene u vašem poslovanju - bilo da širite tim, uvodite novu terensku ekipu ili vam je potreban drugačiji model.</li>
+        <li><strong>Pouzdan utisak:</strong> nova i uredno održavana vozila zaposlenima daju sigurnost, a vašim klijentima profesionalan prvi utisak.</li>
+      </ul>
+
+      <h3>Ko najviše koristi dugoročni najam za firme?</h3>
+      <p>Renta vozila za pravna lica posebno ima smisla za komercijaliste i terenske timove, IT kompanije i startapove, građevinske i logističke firme, agencije i servisne timove. Zajedničko im je da automobil mora da bude spreman onda kada je potreban. Dugoročni najam je jednako praktičan i za preduzetnike, freelancere i pojedince koji žele pouzdano vozilo bez brige o registraciji i servisima.</p>
+
+      <h3>Kako odabrati vozilo za dugoročni najam?</h3>
+      <p>Najbolji izbor ne mora da bude najveći automobil - već onaj koji prati vaš svakodnevni ritam. Za gradsku vožnju i česte sastanke praktičan je kompaktan model. Za više kilometara, putovanja i reprezentativne posete klijentima, limuzina ili veći SUV mogu pružiti dodatni komfor i prostor. Ako prevozite opremu ili često idete na teren, važni su kapacitet prtljažnika, preglednost i sigurnost u vožnji.</p>
+      <p>Pogledajte <a href="/sr/vozila">naša vozila za najam</a>, uporedite modele koji su dostupni u Viastro ponudi i pošaljite nam šta vam je potrebno. Na osnovu broja vozila, načina korišćenja i trajanja najma pripremamo ponudu prilagođenu vašoj firmi.</p>
+
+      <h3>Tri pitanja pre nego što zatražite ponudu</h3>
+      <ol>
+        <li><strong>Koliko vozila i za kakve relacije vam treba?</strong> Navedite da li su u pitanju gradske vožnje, međugradski sastanci, teren ili kombinacija.</li>
+        <li><strong>Ko će koristiti vozila?</strong> Potrebe jednog direktora, prodajnog tima i servisne ekipe nisu iste - zato je važno da se model prilagodi vozaču i poslu.</li>
+        <li><strong>Šta želite da prepustite partneru?</strong> Kod Viastro dugoročnog najma, briga o registraciji, osiguranju, servisima i asistenciji ostaje na nama, dok vi zadržavate fokus na poslovanju.</li>
+      </ol>
+
+      <h3>Vaš vozni park bez nepotrebnog opterećenja</h3>
+      <p>Dugoročni najam nije samo način da dođete do automobila. To je način da poslovna mobilnost bude predvidiva, pouzdana i jednostavnija za upravljanje. Ako razmišljate o dugoročnom najmu vozila u Beogradu ili širom Srbije, Viastro je tu da pripremi fleksibilnu ponudu prema potrebama vašeg tima.</p>
+      <p><strong>Spremni za sledeći korak?</strong> Pogledajte <a href="/sr/vozila">izbor Viastro vozila</a> ili <a href="/sr/dugorocni-najam">pošaljite upit za dugoročni najam</a>. Vi vozite, mi brinemo o svemu ostalom.</p>
+    `,
+    imageUrl: "/dugorocni-najam-viastro.webp",
+    date: "15. avgust 2026.",
+    datetime: "2026-08-15",
+    tags: [
+      "Dugoročni najam vozila",
+      "Dugoročni najam za firme",
+      "Renta vozila za pravna lica",
+      "Operativni rent",
+      "Poslovni najam vozila",
+      "Vozni park za firme",
+      "Rent a car Beograd",
+    ],
+  },
+  {
     id: 1,
     title:
       "Letovanje na moru 2026 - Put na Jadran sa Viastro rent a car",
-    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    href: "/vesti/letovanje-na-moru-sa-viastro-rent-a-car",
     slug: "letovanje-na-moru-sa-viastro-rent-a-car",
     description:
       "Planirate letovanje na moru? Crna Gora, Hrvatska i Grčka su na dohvat ruke automobilom. Uz Viastro rent a car stižete fleksibilno i bezbrižno - klimatizovana vozila, neograničeni kilometri, full kasko i 24/7 asistencija.",
@@ -83,7 +141,7 @@ export const postsSr = [
     id: 2,
     title:
       "Novogodišnji i božićni odmor na planinama Srbije - Ski sezona sa Viastro rent a car",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    href: "/vesti/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     description:
       "Želite praznični odmor na planini za Novu godinu ili Božić? Kopaonik, Zlatibor i Stara planina su u punoj ski sezoni, a uz Viastro rent a car stižete brže i sigurnije - sa opremom za sneg, punim kasko osiguranjem i 24/7 asistencijom.",
@@ -133,7 +191,7 @@ export const postsSr = [
     id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Vikend na Kopaoniku - Planinska avantura uz Viastro rent a car",
-    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
+    href: "/vesti/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Otkrijte čari najpoznatijeg srpskog planinskog centra. Ako tražite beg od gradske gužve i svakodnevnog tempa, Kopaonik je savršena vikend destinacija - tokom cele godine. Od zimskih sportova do letnjih šetnji kroz borove šume, ovaj planinski biser nudi iskustva koja oduševljavaju i domaće i strane goste. A uz Viastro rent a car, vaše putovanje počinje bez stresa - udobno, sigurno i uz potpunu slobodu kretanja.",
     content: `
@@ -192,7 +250,7 @@ export const postsSr = [
   {
     id: 4,
     title: "Đerdap Nacionalni Park - Gvozdena kapija prirode i istorije",
-    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    href: "/vesti/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Ako tražite vikend avanturu koja spaja prirodne lepote, arheološka čuda i panoramske vožnje, Đerdap Nacionalni Park je pravi izbor. Smešten duž desne obale Dunava, od Golubačke tvrđave do Donjeg Milanovca, ovaj park nudi spektakularne pejzaže, uključujući najdublji deo reke (82 m) i najuzaniji prolaz (150 m) u Evropi.",
@@ -231,7 +289,7 @@ export const postsSr = [
   {
     id: 5,
     title: "Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu",
-    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    href: "/vesti/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora i Šarganska osmica - Putovanje kroz vreme i prirodu</h2>
@@ -270,10 +328,53 @@ export const postsSr = [
 
 export const postsEn = [
   {
+    id: 0,
+    title:
+      "Long-Term Car Rental for Businesses - Make Your Fleet Work for You",
+    href: "/vesti/dugorocni-najam-vozila-za-firme",
+    slug: "dugorocni-najam-vozila-za-firme",
+    description:
+      "Learn how long-term vehicle rental gives businesses a predictable monthly cost that can include registration, insurance, routine maintenance, roadside assistance, and a replacement vehicle.",
+    keywords:
+      "long term car rental Serbia, business car rental Belgrade, company vehicle rental, corporate fleet rental, operational car rental, long term rent a car Belgrade",
+    content: `
+      <h2>Long-Term Car Rental for Businesses: less administration, more time for work</h2>
+      <p>A business vehicle is rarely just a vehicle. For a sales representative it is an office on wheels, for a service team it is how they reach clients, and for an entrepreneur it is the confidence that work will not stop when a car needs attention. Buying a vehicle, however, creates a chain of obligations: upfront investment, registration, insurance, routine maintenance, tyres, unexpected repairs, and depreciation. Long-term car rental turns that chain into a clearer, simpler arrangement.</p>
+      <p>With Viastro long-term rental for companies, entrepreneurs, and individuals, you use a vehicle suited to your needs while our team takes care of registration, insurance, routine maintenance, roadside assistance, and a replacement vehicle. Your business stays mobile and your monthly costs are easier to plan.</p>
+
+      <h3>What is long-term car rental?</h3>
+      <p>Long-term car rental, also known as operational rental, is for anyone who needs a vehicle continuously but does not want to buy one and manage every related cost. Rather than a large upfront investment, you arrange a monthly fee and package around real business needs. Your fleet becomes a service that supports the business instead of another project to manage.</p>
+
+      <h3>Why do companies choose long-term vehicle rental?</h3>
+      <ul>
+        <li><strong>Capital stays in the business:</strong> without buying vehicles and tying up funds in assets, the budget can remain focused on growth, people, and projects.</li>
+        <li><strong>One predictable monthly cost:</strong> registration, comprehensive insurance, regular servicing, maintenance, and 24/7 roadside assistance are included in the package.</li>
+        <li><strong>Less downtime:</strong> if a vehicle is unavailable due to a breakdown, we provide a replacement vehicle as quickly as possible.</li>
+        <li><strong>A fleet tailored to you:</strong> the number and type of vehicles can follow changes in your business.</li>
+      </ul>
+
+      <h3>Choose a vehicle that matches your workday</h3>
+      <p>The best choice is not necessarily the largest car, but the one that suits your daily routine. A compact model is practical for city driving and frequent meetings. For longer trips and client visits, a sedan or SUV can offer extra comfort and space. Browse <a href="/en/vozila">our available vehicles</a> and tell us how your team uses them so we can prepare a tailored proposal.</p>
+
+      <h3>A fleet without unnecessary burden</h3>
+      <p>Long-term rental is more than a way to get a car. It is a way to keep business mobility predictable, reliable, and easier to manage. Explore <a href="/en/vozila">Viastro vehicles</a> or <a href="/en/dugorocni-najam">send a long-term rental inquiry</a> and let us create a flexible offer for your team.</p>
+    `,
+    imageUrl: "/dugorocni-najam-viastro.webp",
+    date: "August 15, 2026",
+    datetime: "2026-08-15",
+    tags: [
+      "Long-term car rental",
+      "Business car rental",
+      "Corporate fleet rental",
+      "Operational rental",
+      "Rent a car Belgrade",
+    ],
+  },
+  {
     id: 1,
     title:
       "Summer Holiday by the Sea 2026 - Adriatic Road Trip with Viastro",
-    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    href: "/vesti/letovanje-na-moru-sa-viastro-rent-a-car",
     slug: "letovanje-na-moru-sa-viastro-rent-a-car",
     description:
       "Planning a summer holiday by the sea? Montenegro, Croatia, and Greece are within easy driving distance. With Viastro rent a car you travel freely and stress-free - air-conditioned cars, unlimited mileage, full casco, and 24/7 assistance.",
@@ -324,7 +425,7 @@ export const postsEn = [
     id: 2,
     title:
       "New Year & Christmas on Serbia’s Mountains - Ski Season with Viastro",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    href: "/vesti/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     description:
       "Planning a cozy mountain holiday for New Year’s or Christmas? Kopaonik, Zlatibor, and Stara Planina are in full ski season. With Viastro rent a car you arrive faster and safer - winter tires, snow chains, full casco, and 24/7 assistance included.",
@@ -374,7 +475,7 @@ export const postsEn = [
     id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Weekend on Kopaonik - Mountain Adventure with Viastro Rent a Car",
-    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
+    href: "/vesti/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Discover the charms of Serbia's most famous mountain center. If you're looking for an escape from the city crowds and daily pace, Kopaonik is the perfect weekend destination - all year round. From winter sports to summer walks through pine forests, this mountain gem offers experiences that delight both local and foreign guests. And with Viastro rent a car, your journey starts stress-free - comfortably, safely, and with complete freedom of movement.",
     content: `
@@ -433,7 +534,7 @@ export const postsEn = [
   {
     id: 4,
     title: "Đerdap National Park - The Iron Gates of Nature and History",
-    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    href: "/vesti/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "If you're looking for a weekend adventure that combines natural beauty, archaeological wonders, and scenic drives, Đerdap National Park is the right choice. Located along the right bank of the Danube, from Golubac Fortress to Donji Milanovac, this park offers spectacular landscapes, including the deepest part of the river (82 m) and the narrowest passage (150 m) in Europe.",
@@ -472,7 +573,7 @@ export const postsEn = [
   {
     id: 5,
     title: "Mokra Gora and Šargan Eight - A Journey Through Time and Nature",
-    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    href: "/vesti/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Mokra Gora and Šargan Eight - A Journey Through Time and Nature</h2>
@@ -511,9 +612,51 @@ export const postsEn = [
 
 export const postsRu = [
   {
+    id: 0,
+    title:
+      "Долгосрочная аренда автомобилей для бизнеса - автопарк, который работает на вас",
+    href: "/vesti/dugorocni-najam-vozila-za-firme",
+    slug: "dugorocni-najam-vozila-za-firme",
+    description:
+      "Узнайте, как долгосрочная аренда автомобилей помогает компаниям планировать расходы: регистрация, страховка, регулярное обслуживание, помощь в пути и подменный автомобиль могут быть включены в ежемесячную плату.",
+    keywords:
+      "долгосрочная аренда автомобилей Сербия, аренда автомобилей для компаний Белград, корпоративный автопарк, rent a car Belgrade",
+    content: `
+      <h2>Долгосрочная аренда автомобилей для бизнеса: меньше административных задач, больше времени для работы</h2>
+      <p>Автомобиль в компании редко бывает просто автомобилем. Для менеджера по продажам это офис на колесах, для сервисной команды - способ добраться до клиента, а для предпринимателя - уверенность, что работа не остановится, когда машине требуется обслуживание. Покупка автомобиля, однако, создает целый ряд задач: первоначальные вложения, регистрация, страховка, сервис, шины, непредвиденные ремонты и амортизация. Долгосрочная аренда превращает этот ряд задач в более понятную договоренность.</p>
+      <p>С долгосрочной арендой Viastro для компаний, предпринимателей и частных лиц вы пользуетесь автомобилем, подходящим для ваших задач, а наша команда берет на себя регистрацию, страховку, регулярное обслуживание, помощь в пути и подменный автомобиль.</p>
+
+      <h3>Что такое долгосрочная аренда автомобиля?</h3>
+      <p>Долгосрочная аренда, или операционный рент, подходит тем, кому автомобиль нужен постоянно, но кто не хочет покупать его и самостоятельно управлять каждым связанным расходом. Вместо крупных первоначальных вложений вы согласовываете ежемесячную плату и пакет в соответствии с реальными потребностями бизнеса.</p>
+
+      <h3>Почему компании выбирают долгосрочную аренду?</h3>
+      <ul>
+        <li><strong>Капитал остается в бизнесе:</strong> бюджет можно направить на рост, сотрудников и проекты.</li>
+        <li><strong>Предсказуемая ежемесячная стоимость:</strong> регистрация, полное страхование, сервис, обслуживание и помощь в пути 24/7 включены в пакет.</li>
+        <li><strong>Меньше простоев:</strong> при неисправности мы предоставляем подменный автомобиль в кратчайшие сроки.</li>
+        <li><strong>Автопарк по вашим задачам:</strong> количество и тип автомобилей могут меняться вместе с бизнесом.</li>
+      </ul>
+
+      <h3>Выберите автомобиль для вашего рабочего дня</h3>
+      <p>Лучший вариант - не обязательно самый большой автомобиль, а тот, который соответствует вашему ежедневному ритму. Компактная модель удобна для города и частых встреч, а седан или SUV добавят комфорта в длительных поездках. Посмотрите <a href="/ru/vozila">доступные автомобили</a> и расскажите, как ими будет пользоваться ваша команда.</p>
+
+      <h3>Автопарк без лишней нагрузки</h3>
+      <p>Долгосрочная аренда - это не только способ получить автомобиль. Это способ сделать мобильность бизнеса предсказуемой и простой в управлении. Изучите <a href="/ru/vozila">автомобили Viastro</a> или <a href="/ru/dugorocni-najam">отправьте запрос на долгосрочную аренду</a>, и мы подготовим гибкое предложение для вашей команды.</p>
+    `,
+    imageUrl: "/dugorocni-najam-viastro.webp",
+    date: "15 августа 2026",
+    datetime: "2026-08-15",
+    tags: [
+      "Долгосрочная аренда",
+      "Аренда для компаний",
+      "Корпоративный автопарк",
+      "Rent a car Белград",
+    ],
+  },
+  {
     id: 1,
     title: "Летний отдых на море 2026 - Поездка на Адриатику с Viastro",
-    href: "/blog/letovanje-na-moru-sa-viastro-rent-a-car",
+    href: "/vesti/letovanje-na-moru-sa-viastro-rent-a-car",
     slug: "letovanje-na-moru-sa-viastro-rent-a-car",
     description:
       "Планируете летний отдых на море? Черногория, Хорватия и Греция доступны на автомобиле. С Viastro rent a car вы едете свободно и без стресса - кондиционер, безлимитный пробег, полное КАСКО и помощь 24/7.",
@@ -563,7 +706,7 @@ export const postsRu = [
   {
     id: 2,
     title: "Новый год и Рождество в горах Сербии - Лыжный сезон с Viastro",
-    href: "/blog/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
+    href: "/vesti/novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     slug: "novogodisnji-i-bozicni-odmor-na-planinama-srbije",
     description:
       "Хотите провести новогодние и рождественские праздники в горах? Копаоник, Златибор и Стара-Планина уже в разгаре сезона. С Viastro rent a car вы доберетесь быстрее и безопаснее - зимняя резина, цепи, полное КАСКО и помощь 24/7.",
@@ -613,7 +756,7 @@ export const postsRu = [
     id: 3,
     slug: "vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     title: "Выходные на Копаонике - Горное приключение с Viastro rent a car",
-    href: "/blog/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
+    href: "/vesti/vikend-na-kopaoniku-planinska-avantura-uz-viastro-rent-a-car",
     description:
       "Откройте для себя очарование самого известного горного центра Сербии. Если вы ищете способ убежать от городской суеты и повседневного темпа, Копаоник - идеальное место для выходных - круглый год. От зимних видов спорта до летних прогулок по сосновым лесам, эта горная жемчужина предлагает впечатления, которые восхищают как местных, так и иностранных гостей. А с Viastro rent a car ваше путешествие начнется без стресса - комфортно, безопасно и с полной свободой передвижения.",
     content: `
@@ -672,7 +815,7 @@ export const postsRu = [
   {
     id: 4,
     title: "Национальный парк Джердап - Железные ворота природы и истории",
-    href: "/blog/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
+    href: "/vesti/djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     slug: "djerdap-nacionalni-park-gvozdena-kapija-prirode-i-istorije",
     description:
       "Если вы ищете приключение на выходные, сочетающее природные красоты, археологические чудеса и панорамные поездки, Национальный парк Джердап - это правильный выбор. Расположенный вдоль правого берега Дуная, от Голубацкой крепости до Дони-Милановца, этот парк предлагает захватывающие пейзажи, включая самую глубокую часть реки (82 м) и самый узкий проход (150 м) в Европе.",
@@ -712,7 +855,7 @@ export const postsRu = [
     id: 5,
     title:
       "Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу",
-    href: "/blog/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
+    href: "/vesti/mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     slug: "mokra-gora-i-sarganska-osmica-putovanje-kroz-vreme-i-prirodu",
     content: `
       <h2>Мокра Гора и Шарганская восьмерка - Путешествие сквозь время и природу</h2>
@@ -1158,8 +1301,8 @@ export const rentalConditionsSr = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://viastro.rs/sr/rental-conditions"
-              >https://viastro.rs/sr/rental-conditions</a
+              href="https://viastro.rs/sr/uslovi-iznajmljivanja"
+              >https://viastro.rs/sr/uslovi-iznajmljivanja</a
           ></span
       ><span class="c1"
           >; Korisnik potpisivanjem Ugovora o najmu motornog vozila
@@ -1933,8 +2076,8 @@ export const rentalConditionsRu = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://viastro.rs/ru/rental-conditions"
-              >https://viastro.rs/ru/rental-conditions</a
+              href="https://viastro.rs/ru/uslovi-iznajmljivanja"
+              >https://viastro.rs/ru/uslovi-iznajmljivanja</a
           ></span
       ><span class="c1"
           >; Подписывая Договор аренды транспортного средства, Пользователь подтверждает, что он ознакомлен со всеми положениями Общих условий аренды транспортных средств, понял их содержание и полностью их принимает, имея в виду, что они являются неотъемлемой частью каждого отдельного договора аренды транспортного средства.</span
@@ -2402,8 +2545,8 @@ export const rentalConditionsEn = `
       ><span class="c17"
           ><a
               class="c13"
-              href="https://viastro.rs/en/rental-conditions"
-              >https://viastro.rs/en/rental-conditions</a
+              href="https://viastro.rs/en/uslovi-iznajmljivanja"
+              >https://viastro.rs/en/uslovi-iznajmljivanja</a
           ></span
       ><span class="c1"
           >; By signing the Vehicle Rental Agreement, the User confirms that they have read all the provisions of the General Vehicle Rental Conditions, understood their content, and fully accepts them, bearing in mind that they form an integral part of each individual vehicle rental agreement.</span

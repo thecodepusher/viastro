@@ -1,11 +1,14 @@
 import type { BaseLocale } from "@/locales/base-locale";
+import { publicPaths } from "@/lib/paths";
 
 type StepStatus = "complete" | "current" | "upcoming";
 
 export const reservationSteps = (
-  loaderData: { lang: BaseLocale },
+  loaderData: { lang: BaseLocale; langCode: string },
   currentRoute: { id: string; pathname: string }
 ) => {
+  const langCode = loaderData.langCode || "sr";
+
   const steps: Array<{
     id: string;
     name: string;
@@ -18,39 +21,39 @@ export const reservationSteps = (
       id: "1",
       name: loaderData.lang.reservation,
       routeId: "routes/reservation",
-      href: "./",
-      pathname: "/reservation/",
+      href: publicPaths.reservation(langCode),
+      pathname: publicPaths.reservation(),
       status: "upcoming",
     },
     {
       id: "2",
       name: loaderData.lang.vehicles,
       routeId: "routes/vehicle",
-      href: "./vehicle",
-      pathname: "/reservation/vehicle",
+      href: publicPaths.reservationVehicle(langCode),
+      pathname: publicPaths.reservationVehicle(),
       status: "upcoming",
     },
     {
       id: "3",
       name: loaderData.lang.accessories,
       routeId: "routes/extras",
-      href: "./extras",
-      pathname: "/reservation/extras",
+      href: publicPaths.reservationExtras(langCode),
+      pathname: publicPaths.reservationExtras(),
       status: "upcoming",
     },
     {
       id: "4",
       name: loaderData.lang.review,
       routeId: "routes/review",
-      href: "./review",
-      pathname: "/reservation/review",
+      href: publicPaths.reservationReview(langCode),
+      pathname: publicPaths.reservationReview(),
       status: "upcoming",
     },
   ];
 
   const normalizePathname = (pathname: string): string => {
     let normalized = pathname.replace(/^\/(sr|en|ru)/, "");
-    normalized = normalized.replace(/\/$/, "") || "/reservation";
+    normalized = normalized.replace(/\/$/, "") || publicPaths.reservation();
     if (!normalized.startsWith("/")) {
       normalized = "/" + normalized;
     }

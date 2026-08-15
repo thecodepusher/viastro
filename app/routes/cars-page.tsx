@@ -12,6 +12,7 @@ import {
   generateBreadcrumbSchema,
   generateOpenGraphMeta,
 } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 
 export async function loader({ context, params, request }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -84,7 +85,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoCarsTitle,
     description: data.lang.seoCarsDescription,
-    url: `/${data.langCode || "sr"}/cars`,
+    url: publicPaths.cars(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoCarsKeywords,
     imageAlt: "Viastro Car Fleet - Rent a Car in Belgrade",
@@ -101,7 +102,7 @@ export default function CarsPage({ loaderData }: Route.ComponentProps) {
       loaderData.baseUrl,
       [
         { name: loaderData.lang.home, url: `/${loaderData.langCode}` },
-        { name: loaderData.lang.cars, url: `/${loaderData.langCode}/cars` },
+        { name: loaderData.lang.cars, url: publicPaths.cars(loaderData.langCode) },
       ],
       loaderData.langCode
     ),
@@ -117,7 +118,7 @@ export default function CarsPage({ loaderData }: Route.ComponentProps) {
             const form = new FormData();
             form.append("selectedCarId", `${carId}`);
             fetcher.submit(form, { method: "post" });
-            navigate(`/${loaderData.langCode}/reservation`);
+            navigate(publicPaths.reservation(loaderData.langCode));
           }}
           lang={loaderData.lang}
           langCode={loaderData.langCode}

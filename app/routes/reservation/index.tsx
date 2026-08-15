@@ -6,6 +6,7 @@ import { locations } from "@/lib/data";
 import { setHours } from "date-fns";
 import type { Route } from "./+types";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { publicPaths } from "@/lib/paths";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -32,7 +33,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
 
   const pickUpLocation = formData.get("pickUpLocation");
@@ -55,7 +56,7 @@ export async function action({ request }: Route.ActionArgs) {
   cookie.dropOffDate = dropOffDate;
   cookie.dropOffTime = dropOffTime;
 
-  return redirect("vehicle", {
+  return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"), {
     headers: {
       "Set-Cookie": await prefs.serialize(cookie),
     },
@@ -67,7 +68,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: data.lang.seoReservationSelectDatesTitle,
     description: data.lang.seoReservationSelectDatesDescription,
-    url: `/${data.langCode || "sr"}/reservation`,
+    url: publicPaths.reservation(data.langCode || "sr"),
     baseUrl,
     keywords: data.lang.seoReservationSelectDatesKeywords,
     imageAlt: "Viastro - Select Reservation Dates",

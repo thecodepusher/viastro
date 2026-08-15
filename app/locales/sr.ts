@@ -6,7 +6,7 @@ export const sr: BaseLocale = {
   longTermRentalNav: "Dugoročni najam",
   rentalConditions: "Opšti uslovi najma",
   faq: "Često postavljena pitanja",
-  blog: "Blog",
+  blog: "Vesti",
   contact: "Kontakt",
   readMore: "Pročitaj više",
   title: "Vaše putovanje počinje ovde",
@@ -261,14 +261,14 @@ export const sr: BaseLocale = {
     "Često postavljena pitanja o uslugama iznajmljivanja automobila u Beogradu.",
   seoFaqKeywords:
     "FAQ rent a car Beograd, najčešća pitanja iznajmljivanje automobila, pitanja o iznajmljivanju automobila",
-  seoBlogTitle: "Blog | Viastro Rent a Car",
+  seoBlogTitle: "Vesti | Viastro Rent a Car",
   seoBlogDescription:
-    "Pročitajte naš blog za savete, vodiče za putovanja i informacije o iznajmljivanju automobila u Beogradu i Srbiji.",
+    "Pročitajte naše vesti za savete, vodiče za putovanja i informacije o iznajmljivanju automobila u Beogradu i Srbiji.",
   seoBlogKeywords:
-    "viastro blog, rent a car Beograd, vodiči za putovanja Srbija",
-  seoBlogDetailsTitle: " | Viastro Blog",
+    "viastro vesti, rent a car Beograd, vodiči za putovanja Srbija",
+  seoBlogDetailsTitle: " | Viastro Vesti",
   seoBlogDetailsKeywords:
-    "viastro blog, rent a car Beograd, saveti za iznajmljivanje automobila",
+    "viastro vesti, rent a car Beograd, saveti za iznajmljivanje automobila",
   seoRentalConditionsTitle: "Opšti uslovi najma | Viastro Rent a Car",
   seoRentalConditionsDescription:
     "Pročitajte opšte uslove najma i uslove usluge Viastro za iznajmljivanje automobila u Beogradu, Srbija.",
@@ -329,5 +329,5 @@ export const sr: BaseLocale = {
   seoLongTermRentalDescription:
     "Fleksibilan dugoročni najam vozila u Beogradu bez ulaganja i skrivenih troškova. Operativni rent za firme, preduzetnike i pojedince uz registraciju, kasko, održavanje i zamensko vozilo uključene u cenu.",
   seoLongTermRentalKeywords:
-    "dugoročni najam automobila, operativni rent Beograd, poslovni najam vozila, rent a car dugoročno",
+    "dugoročni najam vozila, dugoročni najam automobila, dugoročni najam za firme, renta vozila za firme, renta vozila za pravna lica, najam vozila za pravna lica, poslovni najam vozila, operativni rent Beograd, operativni lizing vozila, dugoročni rent a car Beograd, vozni park za firme, iznajmljivanje automobila na duži period",
 };

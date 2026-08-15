@@ -14,6 +14,7 @@ import {
   getSessionIdFromUrl,
   invalidateWSPaySession,
 } from "@/lib/wspay-session";
+import { publicPaths } from "@/lib/paths";
 
 export async function action({ request, params }: Route.ActionArgs) {
   const url = new URL(request.url);
@@ -68,7 +69,9 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   invalidateWSPaySession(sessionId);
 
-  return redirect(`/${params.lang ?? "sr"}/reservation?canceled=true`);
+  return redirect(
+    `${publicPaths.reservation(params.lang ?? "sr")}?canceled=true`,
+  );
 }
 
 export async function loader({ request, params }: Route.LoaderArgs) {
@@ -140,7 +143,7 @@ export function meta({ data }: Route.MetaArgs) {
   return generateOpenGraphMeta({
     title: "Payment Cancelled",
     description: "Payment was cancelled",
-    url: `/${langCode}/wspay/cancel`,
+    url: publicPaths.wspay.cancel(langCode),
     baseUrl,
   });
 }
@@ -157,7 +160,7 @@ export default function WSPayCancel({ loaderData }: Route.ComponentProps) {
         <p className="font-medium text-lg text-pd mx-8">
           {loaderData.lang.paymentCancelTitle}
         </p>
-        <Link to={`/${loaderData.langCode}/reservation`}>
+        <Link to={publicPaths.reservation(loaderData.langCode)}>
           <Button className="bg-s text-white shadow-md transition-all hover:bg-s/90 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed">
             {loaderData.lang.paymentCancelAction}
           </Button>

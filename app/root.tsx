@@ -40,6 +40,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const matches = useMatches();
+  const location = useLocation();
 
   const matchWithData = matches
     .slice()
@@ -55,6 +56,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
     | { lang: any; langCode: string }
     | undefined;
   const langForCookie = langData?.lang ?? sr;
+  const langCode = ["sr", "en", "ru"].includes(langData?.langCode ?? "")
+    ? langData!.langCode
+    : "sr";
+  const isPrivateRoute =
+    /\/(rezervacija|uspesno|wspay)(?:\/|$)/.test(location.pathname) ||
+    location.pathname === "/izbor-jezika";
+  const robots = isPrivateRoute ? "noindex, nofollow" : "index, follow";
 
   useEffect(() => {
     const fontLink = document.querySelector(
@@ -66,15 +74,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <html lang="sr">
+    <html lang={langCode}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0D1218" />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="language" content="Serbian" />
-        <meta httpEquiv="content-language" content="sr, en, ru" />
+        <meta name="robots" content={robots} />
+        <meta name="googlebot" content={robots} />
+        <meta httpEquiv="content-language" content={langCode} />
         <Meta />
         <Links />
         <HreflangLinks />

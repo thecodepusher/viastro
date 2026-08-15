@@ -3,6 +3,13 @@ import { useLocation } from "react-router";
 const HreflangLinks = () => {
   const location = useLocation();
   const pathname = location.pathname;
+  const isNonIndexableRoute =
+    /\/(rezervacija|uspesno|wspay)(?:\/|$)/.test(pathname) ||
+    pathname === "/izbor-jezika";
+
+  if (isNonIndexableRoute) {
+    return null;
+  }
 
   let pathWithoutLang = pathname.replace(/^\/(sr|en|ru)(\/|$)/, "/") || "/";
   if (pathWithoutLang !== "/" && !pathWithoutLang.startsWith("/")) {

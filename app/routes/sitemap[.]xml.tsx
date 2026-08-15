@@ -1,5 +1,6 @@
 import { getBaseUrl } from "@/lib/seo";
 import { postsSr, postsEn, postsRu } from "@/lib/data";
+import { pathSegments, publicPaths } from "@/lib/paths";
 import type { Route } from "./+types/sitemap[.]xml";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -25,13 +26,13 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const staticPages = [
     "",
-    "cars",
-    "long-term-rental",
-    "rental-conditions",
-    "faq",
-    "blog",
-    "contact",
-    "privacy-policy",
+    pathSegments.cars,
+    pathSegments.longTermRental,
+    pathSegments.rentalConditions,
+    pathSegments.faq,
+    pathSegments.news,
+    pathSegments.contact,
+    pathSegments.privacyPolicy,
   ];
 
   const allBlogPosts = [...postsSr, ...postsEn, ...postsRu];
@@ -47,19 +48,19 @@ export async function loader({ request }: Route.LoaderArgs) {
     switch (page) {
       case "":
         return (1.0 * baseMultiplier).toFixed(2);
-      case "cars":
+      case pathSegments.cars:
         return (0.95 * baseMultiplier).toFixed(2);
-      case "long-term-rental":
+      case pathSegments.longTermRental:
         return (0.9 * baseMultiplier).toFixed(2);
-      case "blog":
+      case pathSegments.news:
         return (0.9 * baseMultiplier).toFixed(2);
-      case "contact":
+      case pathSegments.contact:
         return (0.8 * baseMultiplier).toFixed(2);
-      case "faq":
+      case pathSegments.faq:
         return (0.7 * baseMultiplier).toFixed(2);
-      case "rental-conditions":
+      case pathSegments.rentalConditions:
         return (0.5 * baseMultiplier).toFixed(2);
-      case "privacy-policy":
+      case pathSegments.privacyPolicy:
         return (0.3 * baseMultiplier).toFixed(2);
       default:
         return (0.5 * baseMultiplier).toFixed(2);
@@ -82,7 +83,7 @@ export async function loader({ request }: Route.LoaderArgs) {
       const priority = isSerbian ? "0.75" : "0.53";
       const lastmod = getBlogPostDate(slug, lang);
       urls.push(
-        `<url><loc>${baseUrl}/${lang}/blog/${slug}</loc><lastmod>${lastmod}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority></url>`
+        `<url><loc>${baseUrl}${publicPaths.article(lang, slug)}</loc><lastmod>${lastmod}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority></url>`
       );
     }
   }
