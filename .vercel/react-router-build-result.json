@@ -13,8 +13,22 @@
       "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/sitemap[.]xml": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/robots[.]txt": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-select-lang": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/select-lang": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-faq": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-contact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-blog": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-blog-details": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-success": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-cars": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-rental-conditions": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-privacy-policy": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-long-term-rental": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-reservation": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-reservation-vehicle": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-reservation-extras": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/legacy-reservation-review": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/faq-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/contact-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/blog-page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
@@ -56,11 +70,18 @@
         "path": "robots.txt",
         "config": {}
       },
+      "routes/legacy-select-lang": {
+        "id": "routes/legacy-select-lang",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": "select-lang",
+        "config": {}
+      },
       "routes/select-lang": {
         "id": "routes/select-lang",
         "parentId": "root",
         "file": "app/routes/select-lang.tsx",
-        "path": "select-lang",
+        "path": "izbor-jezika",
         "config": {}
       },
       "routes/home": {
@@ -70,39 +91,130 @@
         "path": ":lang?",
         "config": {}
       },
+      "routes/legacy-faq": {
+        "id": "routes/legacy-faq",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/faq",
+        "config": {}
+      },
+      "routes/legacy-contact": {
+        "id": "routes/legacy-contact",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/contact",
+        "config": {}
+      },
+      "routes/legacy-blog": {
+        "id": "routes/legacy-blog",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/blog",
+        "config": {}
+      },
+      "routes/legacy-blog-details": {
+        "id": "routes/legacy-blog-details",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/blog/:slug",
+        "config": {}
+      },
+      "routes/legacy-success": {
+        "id": "routes/legacy-success",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/success",
+        "config": {}
+      },
+      "routes/legacy-cars": {
+        "id": "routes/legacy-cars",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/cars",
+        "config": {}
+      },
+      "routes/legacy-rental-conditions": {
+        "id": "routes/legacy-rental-conditions",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/rental-conditions",
+        "config": {}
+      },
+      "routes/legacy-privacy-policy": {
+        "id": "routes/legacy-privacy-policy",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/privacy-policy",
+        "config": {}
+      },
+      "routes/legacy-long-term-rental": {
+        "id": "routes/legacy-long-term-rental",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/long-term-rental",
+        "config": {}
+      },
+      "routes/legacy-reservation": {
+        "id": "routes/legacy-reservation",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation",
+        "config": {}
+      },
+      "routes/legacy-reservation-vehicle": {
+        "id": "routes/legacy-reservation-vehicle",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation/vehicle",
+        "config": {}
+      },
+      "routes/legacy-reservation-extras": {
+        "id": "routes/legacy-reservation-extras",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation/extras",
+        "config": {}
+      },
+      "routes/legacy-reservation-review": {
+        "id": "routes/legacy-reservation-review",
+        "parentId": "root",
+        "file": "app/routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation/review",
+        "config": {}
+      },
       "routes/faq-page": {
         "id": "routes/faq-page",
         "parentId": "root",
         "file": "app/routes/faq-page.tsx",
-        "path": ":lang?/faq",
+        "path": ":lang?/cesta-pitanja",
         "config": {}
       },
       "routes/contact-page": {
         "id": "routes/contact-page",
         "parentId": "root",
         "file": "app/routes/contact-page.tsx",
-        "path": ":lang?/contact",
+        "path": ":lang?/kontakt",
         "config": {}
       },
       "routes/blog-page": {
         "id": "routes/blog-page",
         "parentId": "root",
         "file": "app/routes/blog-page.tsx",
-        "path": ":lang?/blog",
+        "path": ":lang?/vesti",
         "config": {}
       },
       "routes/blog-details": {
         "id": "routes/blog-details",
         "parentId": "root",
         "file": "app/routes/blog-details.tsx",
-        "path": ":lang?/blog/:slug",
+        "path": ":lang?/vesti/:slug",
         "config": {}
       },
       "routes/success": {
         "id": "routes/success",
         "parentId": "root",
         "file": "app/routes/success.tsx",
-        "path": ":lang?/success",
+        "path": ":lang?/uspesno",
         "config": {}
       },
       "routes/wspay-redirect": {
@@ -137,35 +249,35 @@
         "id": "routes/cars-page",
         "parentId": "root",
         "file": "app/routes/cars-page.tsx",
-        "path": ":lang?/cars",
+        "path": ":lang?/vozila",
         "config": {}
       },
       "routes/rental-conditions-page": {
         "id": "routes/rental-conditions-page",
         "parentId": "root",
         "file": "app/routes/rental-conditions-page.tsx",
-        "path": ":lang?/rental-conditions",
+        "path": ":lang?/uslovi-iznajmljivanja",
         "config": {}
       },
       "routes/privacy-policy-page": {
         "id": "routes/privacy-policy-page",
         "parentId": "root",
         "file": "app/routes/privacy-policy-page.tsx",
-        "path": ":lang?/privacy-policy",
+        "path": ":lang?/politika-privatnosti",
         "config": {}
       },
       "routes/long-term-rental": {
         "id": "routes/long-term-rental",
         "parentId": "root",
         "file": "app/routes/long-term-rental.tsx",
-        "path": ":lang?/long-term-rental",
+        "path": ":lang?/dugorocni-najam",
         "config": {}
       },
       "routes/reservation-page": {
         "id": "routes/reservation-page",
         "parentId": "root",
         "file": "app/routes/reservation-page.tsx",
-        "path": ":lang?/reservation",
+        "path": ":lang?/rezervacija",
         "config": {}
       },
       "routes/reservation/index": {
@@ -179,21 +291,21 @@
         "id": "routes/reservation/vehicle",
         "parentId": "routes/reservation-page",
         "file": "app/routes/reservation/vehicle.tsx",
-        "path": "vehicle",
+        "path": "vozilo",
         "config": {}
       },
       "routes/reservation/extras": {
         "id": "routes/reservation/extras",
         "parentId": "routes/reservation-page",
         "file": "app/routes/reservation/extras.tsx",
-        "path": "extras",
+        "path": "dodaci",
         "config": {}
       },
       "routes/reservation/review": {
         "id": "routes/reservation/review",
         "parentId": "routes/reservation-page",
         "file": "app/routes/reservation/review.tsx",
-        "path": "review",
+        "path": "pregled",
         "config": {}
       }
     }
@@ -227,11 +339,17 @@
         "file": "routes/robots[.]txt.tsx",
         "path": "robots.txt"
       },
+      "routes/legacy-select-lang": {
+        "id": "routes/legacy-select-lang",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": "select-lang"
+      },
       "routes/select-lang": {
         "id": "routes/select-lang",
         "parentId": "root",
         "file": "routes/select-lang.tsx",
-        "path": "select-lang"
+        "path": "izbor-jezika"
       },
       "routes/home": {
         "id": "routes/home",
@@ -239,35 +357,113 @@
         "file": "routes/home.tsx",
         "path": ":lang?"
       },
+      "routes/legacy-faq": {
+        "id": "routes/legacy-faq",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/faq"
+      },
+      "routes/legacy-contact": {
+        "id": "routes/legacy-contact",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/contact"
+      },
+      "routes/legacy-blog": {
+        "id": "routes/legacy-blog",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/blog"
+      },
+      "routes/legacy-blog-details": {
+        "id": "routes/legacy-blog-details",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/blog/:slug"
+      },
+      "routes/legacy-success": {
+        "id": "routes/legacy-success",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/success"
+      },
+      "routes/legacy-cars": {
+        "id": "routes/legacy-cars",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/cars"
+      },
+      "routes/legacy-rental-conditions": {
+        "id": "routes/legacy-rental-conditions",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/rental-conditions"
+      },
+      "routes/legacy-privacy-policy": {
+        "id": "routes/legacy-privacy-policy",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/privacy-policy"
+      },
+      "routes/legacy-long-term-rental": {
+        "id": "routes/legacy-long-term-rental",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/long-term-rental"
+      },
+      "routes/legacy-reservation": {
+        "id": "routes/legacy-reservation",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation"
+      },
+      "routes/legacy-reservation-vehicle": {
+        "id": "routes/legacy-reservation-vehicle",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation/vehicle"
+      },
+      "routes/legacy-reservation-extras": {
+        "id": "routes/legacy-reservation-extras",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation/extras"
+      },
+      "routes/legacy-reservation-review": {
+        "id": "routes/legacy-reservation-review",
+        "parentId": "root",
+        "file": "routes/legacy-path-redirect.tsx",
+        "path": ":lang?/reservation/review"
+      },
       "routes/faq-page": {
         "id": "routes/faq-page",
         "parentId": "root",
         "file": "routes/faq-page.tsx",
-        "path": ":lang?/faq"
+        "path": ":lang?/cesta-pitanja"
       },
       "routes/contact-page": {
         "id": "routes/contact-page",
         "parentId": "root",
         "file": "routes/contact-page.tsx",
-        "path": ":lang?/contact"
+        "path": ":lang?/kontakt"
       },
       "routes/blog-page": {
         "id": "routes/blog-page",
         "parentId": "root",
         "file": "routes/blog-page.tsx",
-        "path": ":lang?/blog"
+        "path": ":lang?/vesti"
       },
       "routes/blog-details": {
         "id": "routes/blog-details",
         "parentId": "root",
         "file": "routes/blog-details.tsx",
-        "path": ":lang?/blog/:slug"
+        "path": ":lang?/vesti/:slug"
       },
       "routes/success": {
         "id": "routes/success",
         "parentId": "root",
         "file": "routes/success.tsx",
-        "path": ":lang?/success"
+        "path": ":lang?/uspesno"
       },
       "routes/wspay-redirect": {
         "id": "routes/wspay-redirect",
@@ -297,31 +493,31 @@
         "id": "routes/cars-page",
         "parentId": "root",
         "file": "routes/cars-page.tsx",
-        "path": ":lang?/cars"
+        "path": ":lang?/vozila"
       },
       "routes/rental-conditions-page": {
         "id": "routes/rental-conditions-page",
         "parentId": "root",
         "file": "routes/rental-conditions-page.tsx",
-        "path": ":lang?/rental-conditions"
+        "path": ":lang?/uslovi-iznajmljivanja"
       },
       "routes/privacy-policy-page": {
         "id": "routes/privacy-policy-page",
         "parentId": "root",
         "file": "routes/privacy-policy-page.tsx",
-        "path": ":lang?/privacy-policy"
+        "path": ":lang?/politika-privatnosti"
       },
       "routes/long-term-rental": {
         "id": "routes/long-term-rental",
         "parentId": "root",
         "file": "routes/long-term-rental.tsx",
-        "path": ":lang?/long-term-rental"
+        "path": ":lang?/dugorocni-najam"
       },
       "routes/reservation-page": {
         "id": "routes/reservation-page",
         "parentId": "root",
         "file": "routes/reservation-page.tsx",
-        "path": ":lang?/reservation"
+        "path": ":lang?/rezervacija"
       },
       "routes/reservation/index": {
         "id": "routes/reservation/index",
@@ -333,19 +529,19 @@
         "id": "routes/reservation/vehicle",
         "parentId": "routes/reservation-page",
         "file": "routes/reservation/vehicle.tsx",
-        "path": "vehicle"
+        "path": "vozilo"
       },
       "routes/reservation/extras": {
         "id": "routes/reservation/extras",
         "parentId": "routes/reservation-page",
         "file": "routes/reservation/extras.tsx",
-        "path": "extras"
+        "path": "dodaci"
       },
       "routes/reservation/review": {
         "id": "routes/reservation/review",
         "parentId": "routes/reservation-page",
         "file": "routes/reservation/review.tsx",
-        "path": "review"
+        "path": "pregled"
       }
     },
     "routeDiscovery": {
@@ -370,32 +566,102 @@
             "path": "robots.txt"
           },
           {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": "select-lang",
+            "id": "routes/legacy-select-lang"
+          },
+          {
             "file": "routes/select-lang.tsx",
-            "path": "select-lang"
+            "path": "izbor-jezika"
           },
           {
             "file": "routes/home.tsx",
             "path": ":lang?"
           },
           {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/faq",
+            "id": "routes/legacy-faq"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/contact",
+            "id": "routes/legacy-contact"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/blog",
+            "id": "routes/legacy-blog"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/blog/:slug",
+            "id": "routes/legacy-blog-details"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/success",
+            "id": "routes/legacy-success"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/cars",
+            "id": "routes/legacy-cars"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/rental-conditions",
+            "id": "routes/legacy-rental-conditions"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/privacy-policy",
+            "id": "routes/legacy-privacy-policy"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/long-term-rental",
+            "id": "routes/legacy-long-term-rental"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/reservation",
+            "id": "routes/legacy-reservation"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/reservation/vehicle",
+            "id": "routes/legacy-reservation-vehicle"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/reservation/extras",
+            "id": "routes/legacy-reservation-extras"
+          },
+          {
+            "file": "routes/legacy-path-redirect.tsx",
+            "path": ":lang?/reservation/review",
+            "id": "routes/legacy-reservation-review"
+          },
+          {
             "file": "routes/faq-page.tsx",
-            "path": ":lang?/faq"
+            "path": ":lang?/cesta-pitanja"
           },
           {
             "file": "routes/contact-page.tsx",
-            "path": ":lang?/contact"
+            "path": ":lang?/kontakt"
           },
           {
             "file": "routes/blog-page.tsx",
-            "path": ":lang?/blog"
+            "path": ":lang?/vesti"
           },
           {
             "file": "routes/blog-details.tsx",
-            "path": ":lang?/blog/:slug"
+            "path": ":lang?/vesti/:slug"
           },
           {
             "file": "routes/success.tsx",
-            "path": ":lang?/success"
+            "path": ":lang?/uspesno"
           },
           {
             "file": "routes/wspay-redirect.tsx",
@@ -415,19 +681,19 @@
           },
           {
             "file": "routes/cars-page.tsx",
-            "path": ":lang?/cars"
+            "path": ":lang?/vozila"
           },
           {
             "file": "routes/rental-conditions-page.tsx",
-            "path": ":lang?/rental-conditions"
+            "path": ":lang?/uslovi-iznajmljivanja"
           },
           {
             "file": "routes/privacy-policy-page.tsx",
-            "path": ":lang?/privacy-policy"
+            "path": ":lang?/politika-privatnosti"
           },
           {
             "file": "routes/long-term-rental.tsx",
-            "path": ":lang?/long-term-rental"
+            "path": ":lang?/dugorocni-najam"
           },
           {
             "file": "routes/reservation-page.tsx",
@@ -438,18 +704,18 @@
               },
               {
                 "file": "routes/reservation/vehicle.tsx",
-                "path": "vehicle"
+                "path": "vozilo"
               },
               {
                 "file": "routes/reservation/extras.tsx",
-                "path": "extras"
+                "path": "dodaci"
               },
               {
                 "file": "routes/reservation/review.tsx",
-                "path": "review"
+                "path": "pregled"
               }
             ],
-            "path": ":lang?/reservation"
+            "path": ":lang?/rezervacija"
           }
         ]
       }
