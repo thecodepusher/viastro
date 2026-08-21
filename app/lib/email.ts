@@ -1,3 +1,5 @@
+import type { BaseLocale } from "@/locales/base-locale";
+
 export type ReservationEmailPayload = {
   carName: string;
   pickupSummary: string;
@@ -5,6 +7,10 @@ export type ReservationEmailPayload = {
   days: number;
   carPrice: number;
   totalPrice: number;
+  originalTotalPrice?: number;
+  promoCode?: string;
+  promoDiscountPercent?: number;
+  promoDiscountAmount?: number;
   carDeposit: number;
   depositDiscount: number;
   depositDue: number;
@@ -29,8 +35,13 @@ export type LongTermInquiryPayload = {
 };
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
-const logoDataUri = "https://viastro.rs/logo_white.webp";
+const DEFAULT_PUBLIC_ORIGIN = "https://viastro.rs";
 const OFFICE_EMAIL = "office@viastro.rs";
+
+function emailLogoUrl(baseUrl?: string): string {
+  const origin = (baseUrl || DEFAULT_PUBLIC_ORIGIN).replace(/\/$/, "");
+  return `${origin}/logo_white.png`;
+}
 
 export async function sendReservationEmail(payload: ReservationEmailPayload) {
   const apiKey = process.env.BREVO_API_KEY;
@@ -50,12 +61,19 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
       : `<tr><td style="padding: 8px 12px; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Nema dodatnih stavki</td></tr>`;
 
   const isDepositPending = payload.emailType === "deposit_pending";
+  const hasPromo =
+    Boolean(payload.promoCode) && (payload.promoDiscountPercent ?? 0) > 0;
+  const promoCodeLabel = payload.promoCode
+    ? payload.promoCode.toUpperCase()
+    : "";
   const emailTitle = isDepositPending
     ? "Depozit preautorizovan"
     : "Nova rezervacija";
   const emailSubject = isDepositPending
     ? `Depozit uplaćen — čeka se uplata najma - ${payload.carName}`
-    : `Nova rezervacija - ${payload.carName}`;
+    : hasPromo
+      ? `Nova rezervacija - promo code ${promoCodeLabel} - ${payload.carName}`
+      : `Nova rezervacija - ${payload.carName}`;
 
   const pendingNoticeHtml = isDepositPending
     ? `
@@ -86,11 +104,43 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
     `
       : "";
 
+  const originalRentalTotal =
+    payload.originalTotalPrice ?? payload.totalPrice;
+  const promoBlockHtml = hasPromo
+    ? `
+          <div style="margin-bottom: 20px; padding: 16px; background-color: #ecfdf5; border-left: 4px solid #059669; border-radius: 8px;">
+            <p style="margin: 0 0 12px 0; color: #047857; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">Promo code</p>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-size: 14px;">Kod:</td>
+                <td style="padding: 6px 0; text-align: right; color: #064e3b; font-weight: 700; font-size: 15px; font-family: monospace;">${promoCodeLabel}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-size: 14px;">Popust:</td>
+                <td style="padding: 6px 0; text-align: right; color: #059669; font-weight: 700; font-size: 15px;">-${payload.promoDiscountPercent}%</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-size: 14px;">Originalna cena najma:</td>
+                <td style="padding: 6px 0; text-align: right; color: #6b7280; font-size: 14px; text-decoration: line-through;">${originalRentalTotal.toFixed(2)}€</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-weight: 600; font-size: 14px;">Cena sa popustom:</td>
+                <td style="padding: 6px 0; text-align: right; color: #064e3b; font-weight: 700; font-size: 16px;">${payload.totalPrice.toFixed(2)}€</td>
+              </tr>
+            </table>
+          </div>
+    `
+      : "";
+
+  const logoUrl = emailLogoUrl(payload.baseUrl);
+
   const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
@@ -99,11 +149,11 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
               <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
-                  src="${logoDataUri}" 
+                  src="${logoUrl}" 
                   alt="Viastro Logo" 
-                  width="180" 
-                  height="60"
-                  style="max-width: 180px; max-height: 60px; width: auto; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;" 
+                  width="160" 
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;" 
                 />
                 <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">${emailTitle}</h1>
               </div>
@@ -174,9 +224,12 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
               ${extrasHtml}
             </table>
           </div>
-          <div style="margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); border-radius: 8px; text-align: center;">
+          <div style="margin-bottom: 30px;">
+            ${promoBlockHtml}
+            <div style="margin-bottom: 0; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); border-radius: 8px; text-align: center;">
             <p style="margin: 0; color: #ffffff; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Ukupna cena</p>
             <p style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700;">${payload.totalPrice.toFixed(2)}€</p>
+          </div>
           </div>
           <div style="margin-bottom: 30px; padding-top: 30px; border-top: 2px solid #e5e7eb;">
             <h3 style="margin: 0 0 20px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #FF9B17; padding-bottom: 10px;">👤 Podaci klijenta</h3>
@@ -244,6 +297,224 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
   }
 }
 
+export async function sendCustomerReservationEmail(
+  payload: ReservationEmailPayload,
+  lang: BaseLocale,
+) {
+  const apiKey = process.env.BREVO_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("BREVO_API_KEY is not configured.");
+  }
+
+  if (!payload.customerEmail) {
+    throw new Error("Customer email is missing.");
+  }
+
+  const copy = lang.customerReservationEmail;
+  const dayWord =
+    payload.days === 1 ? copy.daySingular : copy.dayPlural;
+  const hasPromo =
+    Boolean(payload.promoCode) && (payload.promoDiscountPercent ?? 0) > 0;
+  const promoCodeLabel = payload.promoCode
+    ? payload.promoCode.toUpperCase()
+    : "";
+  const originalRentalTotal =
+    payload.originalTotalPrice ?? payload.totalPrice;
+
+  const extrasHtml =
+    payload.extrasDescriptions.length > 0
+      ? payload.extrasDescriptions
+          .map(
+            (extra) =>
+              `<tr><td style="padding: 8px 12px; border-bottom: 1px solid #e5e7eb;">${extra}</td></tr>`,
+          )
+          .join("")
+      : `<tr><td style="padding: 8px 12px; border-bottom: 1px solid #e5e7eb; color: #6b7280;">${copy.noExtras}</td></tr>`;
+
+  const promoBlockHtml = hasPromo
+    ? `
+          <div style="margin-bottom: 20px; padding: 16px; background-color: #ecfdf5; border-left: 4px solid #059669; border-radius: 8px;">
+            <p style="margin: 0 0 12px 0; color: #047857; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">${copy.promoTitle}</p>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-size: 14px;">${copy.promoCodeLabel}:</td>
+                <td style="padding: 6px 0; text-align: right; color: #064e3b; font-weight: 700; font-size: 15px; font-family: monospace;">${promoCodeLabel}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-size: 14px;">${copy.promoDiscountLabel}:</td>
+                <td style="padding: 6px 0; text-align: right; color: #059669; font-weight: 700; font-size: 15px;">-${payload.promoDiscountPercent}%</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-size: 14px;">${copy.originalRentalLabel}:</td>
+                <td style="padding: 6px 0; text-align: right; color: #6b7280; font-size: 14px; text-decoration: line-through;">${originalRentalTotal.toFixed(2)}€</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #065f46; font-weight: 600; font-size: 14px;">${copy.discountedRentalLabel}:</td>
+                <td style="padding: 6px 0; text-align: right; color: #064e3b; font-weight: 700; font-size: 16px;">${payload.totalPrice.toFixed(2)}€</td>
+              </tr>
+            </table>
+          </div>
+    `
+    : "";
+
+  const subject = copy.subject.replace("{carName}", payload.carName);
+  const greeting = copy.greeting.replace("{name}", payload.customerName);
+  const carPriceHint = copy.carPriceHint
+    .replace("{days}", String(payload.days))
+    .replace("{dayWord}", dayWord);
+
+  const logoUrl = emailLogoUrl(payload.baseUrl);
+
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
+        <tr>
+          <td style="padding: 0;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
+              <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
+                <img 
+                  src="${logoUrl}" 
+                  alt="Viastro Logo" 
+                  width="160" 
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;" 
+                />
+                <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">${copy.title}</h1>
+              </div>
+              <div style="padding: 40px;">
+          <div style="margin-bottom: 30px;">
+            <p style="margin: 0 0 12px 0; color: #111827; font-size: 16px; font-weight: 600;">${greeting}</p>
+            <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">${copy.intro}</p>
+          </div>
+          <div style="margin-bottom: 30px;">
+            <h2 style="margin: 0 0 20px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #FF9B17; padding-bottom: 10px;">${copy.detailsTitle}</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 10px 0; font-weight: 600; color: #374151; width: 180px;">${copy.vehicleLabel}:</td>
+                <td style="padding: 10px 0; color: #1f2937; font-size: 15px;">${payload.carName}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: 600; color: #374151;">${copy.pickupLabel}:</td>
+                <td style="padding: 10px 0; color: #1f2937;">${payload.pickupSummary}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: 600; color: #374151;">${copy.dropoffLabel}:</td>
+                <td style="padding: 10px 0; color: #1f2937;">${payload.dropoffSummary}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: 600; color: #374151;">${copy.daysLabel}:</td>
+                <td style="padding: 10px 0; color: #1f2937;">${payload.days} ${dayWord}</td>
+              </tr>
+            </table>
+          </div>
+          <div style="margin-bottom: 30px;">
+            <h3 style="margin: 0 0 20px 0; color: #111827; font-size: 16px; font-weight: 600;">${copy.financialTitle}</h3>
+            <div style="margin-bottom: 16px; background-color: #f9fafb; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb;">
+              <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${copy.carPriceLabel}</p>
+              <p style="margin: 0; color: #1f2937; font-size: 20px; font-weight: 700;">${payload.carPrice.toFixed(2)}€</p>
+              <p style="margin: 8px 0 0 0; color: #6b7280; font-size: 12px;">${carPriceHint}</p>
+            </div>
+
+            <div style="background-color: #f9fafb; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb;">
+              <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${copy.depositLabel}</p>
+              <table style="width: 100%; border-collapse: collapse;">
+                ${
+                  payload.depositDiscount > 0
+                    ? `
+                <tr>
+                  <td style="padding: 6px 0; color: #6b7280; font-size: 14px;">${copy.originalDepositLabel}:</td>
+                  <td style="padding: 6px 0; text-align: right; color: #6b7280; font-size: 14px; text-decoration: line-through;">${payload.carDeposit.toFixed(2)}€</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; color: #6b7280; font-size: 14px;">${copy.depositDiscountLabel}:</td>
+                  <td style="padding: 6px 0; text-align: right; color: #059669; font-weight: 600; font-size: 14px;">-${payload.depositDiscount.toFixed(2)}€</td>
+                </tr>
+                <tr style="border-top: 2px solid #e5e7eb; margin-top: 8px;">
+                  <td style="padding: 10px 0 0 0; color: #1f2937; font-weight: 600; font-size: 15px;">${copy.depositDueLabel}:</td>
+                  <td style="padding: 10px 0 0 0; text-align: right; font-weight: 700; color: #1f2937; font-size: 18px;">${payload.depositDue.toFixed(2)}€</td>
+                </tr>
+                `
+                    : `
+                <tr>
+                  <td style="padding: 6px 0; color: #1f2937; font-weight: 600; font-size: 15px;">${copy.depositDueLabel}:</td>
+                  <td style="padding: 6px 0; text-align: right; font-weight: 700; color: #1f2937; font-size: 18px;">${payload.carDeposit.toFixed(2)}€</td>
+                </tr>
+                `
+                }
+              </table>
+              <p style="margin: 12px 0 0 0; color: #6b7280; font-size: 12px; font-style: italic;">${copy.depositNote}</p>
+            </div>
+          </div>
+          <div style="margin-bottom: 30px;">
+            <h3 style="margin: 0 0 15px 0; color: #111827; font-size: 16px; font-weight: 600;">${copy.extrasTitle}</h3>
+            <table style="width: 100%; border-collapse: collapse; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; overflow: hidden;">
+              ${extrasHtml}
+            </table>
+          </div>
+          <div style="margin-bottom: 30px;">
+            ${promoBlockHtml}
+            <div style="margin-bottom: 0; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); border-radius: 8px; text-align: center;">
+            <p style="margin: 0; color: #ffffff; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">${copy.totalPriceLabel}</p>
+            <p style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700;">${payload.totalPrice.toFixed(2)}€</p>
+          </div>
+          </div>
+          <div style="margin-bottom: 0; padding: 20px; background-color: #fff7ed; border-radius: 8px; border: 1px solid #fed7aa;">
+            <h3 style="margin: 0 0 10px 0; color: #9a3412; font-size: 16px; font-weight: 600;">${copy.nextStepsTitle}</h3>
+            <p style="margin: 0 0 10px 0; color: #7c2d12; font-size: 14px; line-height: 1.6;">${copy.nextSteps}</p>
+            <p style="margin: 0; color: #7c2d12; font-size: 14px; line-height: 1.6;">${copy.contactLine}</p>
+          </div>
+            </div>
+            <div style="background-color: #f9fafb; padding: 20px 40px; text-align: center; border-top: 1px solid #e5e7eb;">
+              <p style="margin: 0; color: #6b7280; font-size: 12px;">${copy.footer}</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    </body>
+    </html>
+  `;
+
+  const response = await fetch(BREVO_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "api-key": apiKey,
+    },
+    body: JSON.stringify({
+      sender: {
+        email: OFFICE_EMAIL,
+        name: "Viastro",
+      },
+      to: [
+        {
+          email: payload.customerEmail,
+          name: payload.customerName,
+        },
+      ],
+      replyTo: {
+        email: OFFICE_EMAIL,
+        name: "Viastro",
+      },
+      subject,
+      htmlContent,
+    }),
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || "Brevo API responded with an error.");
+  }
+}
+
 export async function sendLongTermInquiryEmail(
   payload: LongTermInquiryPayload
 ) {
@@ -258,12 +529,15 @@ export async function sendLongTermInquiryEmail(
     ? payload.companyName || "Firma"
     : payload.fullName || "Klijent";
   const subject = `Upit za dugoročni najam - ${subjectName}`;
+  const logoUrl = emailLogoUrl();
 
   const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
@@ -272,11 +546,11 @@ export async function sendLongTermInquiryEmail(
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
               <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
-                  src="${logoDataUri}" 
+                  src="${logoUrl}" 
                   alt="Viastro Logo" 
-                  width="180" 
-                  height="60"
-                  style="max-width: 180px; max-height: 60px; width: auto; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;" 
+                  width="160" 
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;" 
                 />
                 <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">Upit za dugoročni najam</h1>
               </div>

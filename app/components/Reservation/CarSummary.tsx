@@ -13,6 +13,8 @@ interface CarSummaryProps {
   pickupLocation: string;
   dropoffLocation: string;
   price: number;
+  originalPrice?: number;
+  discountPercent?: number;
   days: number;
   lang: BaseLocale;
 }
@@ -69,11 +71,18 @@ export function CarSummary({
   pickupLocation,
   dropoffLocation,
   price,
+  originalPrice,
+  discountPercent,
   days,
   lang,
 }: CarSummaryProps) {
   const formattedPickupDate = format(new Date(pickupDate), "dd.MM.yyyy");
   const formattedDropoffDate = format(new Date(dropoffDate), "dd.MM.yyyy");
+  const showPromoDiscount =
+    discountPercent != null &&
+    discountPercent > 0 &&
+    originalPrice != null &&
+    originalPrice !== price;
 
   return (
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -127,11 +136,21 @@ export function CarSummary({
             <p className="text-[9px] font-semibold uppercase leading-tight text-white/60 lg:text-xs">
               {days} {lang.day}
             </p>
+            {showPromoDiscount && originalPrice != null && (
+              <p className="whitespace-nowrap text-[9px] font-semibold line-through text-white/40 lg:text-xs">
+                {originalPrice.toFixed(2)}€
+              </p>
+            )}
             <p className="whitespace-nowrap text-xs font-bold tabular-nums leading-none text-p lg:text-2xl">
               <span className="hidden lg:inline">€</span>
               {price.toFixed(2)}
               <span className="lg:hidden">€</span>
             </p>
+            {showPromoDiscount && discountPercent != null && (
+              <p className="text-[9px] font-bold text-emerald-400 lg:text-xs">
+                -{discountPercent}%
+              </p>
+            )}
             <p className="hidden w-full text-[8px] leading-tight text-white/55 sm:block lg:text-xs">
               {lang.allPricesIncludeVAT}
             </p>

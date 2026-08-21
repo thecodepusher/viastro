@@ -13,6 +13,9 @@ interface CostSummaryProps {
   car: { name: string; deposite: number };
   carPrice: number;
   price: number;
+  discountedPrice?: number;
+  promoApplied?: boolean;
+  promoDiscountPercent?: number;
   depositeDiscount: number;
   extras: Array<{ id: number; name: string; price: number }>;
   notInWorkingHours: boolean;
@@ -44,12 +47,17 @@ export function CostSummary({
   car,
   carPrice,
   price,
+  discountedPrice,
+  promoApplied = false,
+  promoDiscountPercent = 0,
   depositeDiscount,
   extras,
   notInWorkingHours,
   priceForOffHours,
   lang,
 }: CostSummaryProps) {
+  const displayPrice = promoApplied && discountedPrice != null ? discountedPrice : price;
+
   return (
     <div className={`${reviewSectionClass} mb-6 mt-4 gap-3 sm:gap-4`}>
       <h3 className="font-display text-xl font-bold text-white">
@@ -102,7 +110,23 @@ export function CostSummary({
           <span className="text-[11px] font-semibold uppercase tracking-wider text-p">
             Total
           </span>
-          <p className="mt-1.5 text-2xl font-bold text-p">{price.toFixed(2)}€</p>
+          <p className="mt-1.5 text-2xl font-bold text-p">
+            {promoApplied ? (
+              <span>
+                <span className="mr-2 text-base font-semibold line-through text-white/40">
+                  {price.toFixed(2)}€
+                </span>
+                {displayPrice.toFixed(2)}€
+              </span>
+            ) : (
+              <span>{price.toFixed(2)}€</span>
+            )}
+          </p>
+          {promoApplied && promoDiscountPercent > 0 && (
+            <p className="mt-1 text-sm font-bold text-emerald-400">
+              -{promoDiscountPercent}% · {lang.promoCodeApplied}
+            </p>
+          )}
         </div>
         <div className="rounded-xl border border-p/30 bg-p/10 px-4 py-3.5">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-p">

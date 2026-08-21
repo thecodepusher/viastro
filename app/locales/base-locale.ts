@@ -1,3 +1,37 @@
+export interface CustomerReservationEmailLocale {
+  subject: string;
+  title: string;
+  greeting: string;
+  intro: string;
+  detailsTitle: string;
+  vehicleLabel: string;
+  pickupLabel: string;
+  dropoffLabel: string;
+  daysLabel: string;
+  daySingular: string;
+  dayPlural: string;
+  financialTitle: string;
+  carPriceLabel: string;
+  carPriceHint: string;
+  depositLabel: string;
+  originalDepositLabel: string;
+  depositDiscountLabel: string;
+  depositDueLabel: string;
+  depositNote: string;
+  extrasTitle: string;
+  noExtras: string;
+  promoTitle: string;
+  promoCodeLabel: string;
+  promoDiscountLabel: string;
+  originalRentalLabel: string;
+  discountedRentalLabel: string;
+  totalPriceLabel: string;
+  nextStepsTitle: string;
+  nextSteps: string;
+  contactLine: string;
+  footer: string;
+}
+
 export interface LongTermRentalLocale {
   heroTitle: string;
   heroSubtitle: string;
@@ -162,6 +196,10 @@ export interface BaseLocale {
   cookieConsentAction: string;
   reservationReviewAction: string;
   reviewInformation: string;
+  promoCodeLabel: string;
+  promoCodeHint: string;
+  promoCodeApplied: string;
+  promoCodeInvalid: string;
   paymentStepsTitle: string;
   paymentStepsIntro: string;
   paymentStep1Title: string;
@@ -175,6 +213,7 @@ export interface BaseLocale {
   pib: string;
   mb: string;
   delatnost: string;
+  customerReservationEmail: CustomerReservationEmailLocale;
   longTermRental: LongTermRentalLocale;
   seoHomeTitle: string;
   seoHomeDescription: string;

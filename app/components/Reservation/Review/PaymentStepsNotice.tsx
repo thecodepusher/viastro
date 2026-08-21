@@ -9,6 +9,9 @@ interface PaymentStepsNoticeProps {
   langCode: string;
   depositAmount: number;
   rentalAmount: number;
+  originalRentalAmount?: number;
+  promoApplied?: boolean;
+  promoDiscountPercent?: number;
 }
 
 export function PaymentStepsNotice({
@@ -16,7 +19,15 @@ export function PaymentStepsNotice({
   langCode,
   depositAmount,
   rentalAmount,
+  originalRentalAmount,
+  promoApplied = false,
+  promoDiscountPercent = 0,
 }: PaymentStepsNoticeProps) {
+  const showRentalDiscount =
+    promoApplied &&
+    originalRentalAmount != null &&
+    originalRentalAmount !== rentalAmount;
+
   return (
     <div
       className={`${reviewSectionClass} mb-0 gap-4 border-p/20 bg-linear-to-br from-pl/50 via-card to-pd sm:p-5`}>
@@ -65,9 +76,25 @@ export function PaymentStepsNotice({
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <p className="font-semibold text-white">{lang.paymentStep2Title}</p>
-              <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-bold text-white">
-                {rentalAmount.toFixed(2)}€
-              </span>
+              {showRentalDiscount && originalRentalAmount != null ? (
+                <>
+                  <span className="text-xs font-semibold line-through text-white/40">
+                    {originalRentalAmount.toFixed(2)}€
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-bold text-white">
+                    {rentalAmount.toFixed(2)}€
+                  </span>
+                  {promoDiscountPercent > 0 && (
+                    <span className="text-xs font-bold text-emerald-400">
+                      -{promoDiscountPercent}%
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-bold text-white">
+                  {rentalAmount.toFixed(2)}€
+                </span>
+              )}
             </div>
             <p className="mt-1 text-sm leading-relaxed text-white/70">
               {lang.paymentStep2Description}{" "}

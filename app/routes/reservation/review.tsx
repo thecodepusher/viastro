@@ -1,5 +1,6 @@
 import { prefs } from "@/lib/prefs-cookie";
 import { redirect, useNavigation } from "react-router";
+import { useEffect, useState } from "react";
 import { type LocaleTypes } from "@/lib/data";
 import { format } from "date-fns";
 import {
@@ -22,6 +23,7 @@ import { createWSPaySession } from "@/lib/wspay-session";
 import { CostSummary } from "@/components/Reservation/Review/CostSummary";
 import { ReviewForm } from "@/components/Reservation/Review/ReviewForm";
 import { publicPaths } from "@/lib/paths";
+import { resolvePromoCode } from "@/constants/promo-codes";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -179,6 +181,13 @@ export async function action({ request, params }: Route.ActionArgs) {
     );
   }
 
+  const promoCodeRaw = formData.get("promo_code");
+  const promo = resolvePromoCode(
+    typeof promoCodeRaw === "string" ? promoCodeRaw : "",
+    price,
+  );
+  const rentalTotal = promo.discountedPrice;
+
   const shopId =
     process.env.WSPAY_SHOP_ID ||
     (typeof import.meta !== "undefined"
@@ -224,7 +233,11 @@ export async function action({ request, params }: Route.ActionArgs) {
     lastName,
     phone,
     shoppingCartId,
-    totalPrice: price,
+    totalPrice: rentalTotal,
+    originalTotalPrice: price,
+    promoCode: promo.valid ? promo.code : undefined,
+    promoDiscountPercent: promo.valid ? promo.percent : undefined,
+    promoDiscountAmount: promo.valid ? promo.discountAmount : undefined,
     carPrice,
     days,
     depositeDiscount,
@@ -304,6 +317,40 @@ export function meta({ data }: Route.MetaArgs) {
 export default function Review({ loaderData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== "idle";
+  const [promoCode, setPromoCode] = useState("");
+  const promo = resolvePromoCode(promoCode, loaderData.price);
+  const rentalAmount = promo.discountedPrice;
+  const originalPrice = loaderData.price;
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const detail = promo.valid
+      ? {
+          price: promo.discountedPrice,
+          originalPrice,
+          discountPercent: promo.percent,
+        }
+      : { price: originalPrice };
+
+    (window as any).__extrasTotalPrice = detail.price;
+    window.dispatchEvent(new CustomEvent("extrasPriceUpdated", { detail }));
+  }, [promo.valid, promo.discountedPrice, promo.percent, originalPrice]);
+
+  useEffect(() => {
+    return () => {
+      if (typeof window === "undefined") {
+        return;
+      }
+
+      (window as any).__extrasTotalPrice = originalPrice;
+      window.dispatchEvent(
+        new CustomEvent("extrasPriceUpdated", { detail: originalPrice }),
+      );
+    };
+  }, [originalPrice]);
 
   return (
     <div className="w-full bg-surface">
@@ -318,6 +365,9 @@ export default function Review({ loaderData }: Route.ComponentProps) {
           car={loaderData.car}
           carPrice={loaderData.carPrice}
           price={loaderData.price}
+          discountedPrice={promo.discountedPrice}
+          promoApplied={promo.valid}
+          promoDiscountPercent={promo.percent}
           depositeDiscount={loaderData.depositeDiscount}
           extras={loaderData.extras}
           notInWorkingHours={loaderData.notInWorkingHours}
@@ -333,7 +383,12 @@ export default function Review({ loaderData }: Route.ComponentProps) {
             loaderData.car.deposite - loaderData.depositeDiscount,
             0,
           )}
-          rentalAmount={loaderData.price}
+          rentalAmount={rentalAmount}
+          originalRentalAmount={originalPrice}
+          promoCode={promoCode}
+          onPromoCodeChange={setPromoCode}
+          promoApplied={promo.valid}
+          promoDiscountPercent={promo.percent}
         />
       </div>
     </div>
