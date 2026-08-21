@@ -26,15 +26,6 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  delete cookie.pickUpDate;
-  delete cookie.pickUpTime;
-  delete cookie.dropOffDate;
-  delete cookie.dropOffTime;
-  delete cookie.selectedCarId;
-  delete cookie.wspayInProgress;
-  delete cookie.wspayFormData;
-  delete cookie.wspayReservation;
-
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
 
@@ -157,6 +148,9 @@ export default function PrivacyPolicyPage({
                 display: block;
                 margin-top: 1.5rem;
                 margin-bottom: 0.75rem;
+              }
+              .content-wrapper p.c0[id] {
+                scroll-margin-top: 6rem;
               }
               .content-wrapper p.c0,
               .content-wrapper p.c1,

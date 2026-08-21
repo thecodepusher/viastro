@@ -1,12 +1,15 @@
 import { Form, Link } from "react-router";
-import { Loader2 } from "lucide-react";
+import { Info, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import type { BaseLocale } from "@/locales/base-locale";
 import { PaymentStepsNotice } from "@/components/Reservation/Review/PaymentStepsNotice";
 import { reviewSectionClass } from "@/components/Reservation/Review/CostSummary";
+import {
+  ReservationActionBar,
+  reservationActionButtonClass,
+} from "@/components/Reservation/ReservationActionBar";
 import { publicPaths } from "@/lib/paths";
 
 interface ReviewFormProps {
@@ -17,6 +20,27 @@ interface ReviewFormProps {
   langCode: string;
 }
 
+function getPolicyLinks(lang: BaseLocale, langCode: string) {
+  const policyPath = publicPaths.privacyPolicy(langCode);
+
+  return [
+    { href: policyPath, label: lang.privacyPolicyLabel },
+    {
+      href: `${policyPath}#konverzija`,
+      label: lang.conversionStatementLabel,
+    },
+    {
+      href: `${policyPath}#privatnost-korisnika`,
+      label: lang.userPrivacyProtectionLabel,
+    },
+    {
+      href: `${policyPath}#podaci-transakcije`,
+      label: lang.transactionDataProtectionLabel,
+    },
+    { href: `${policyPath}#povracaj`, label: lang.refundsLabel },
+  ];
+}
+
 export function ReviewForm({
   lang,
   isSubmitting,
@@ -24,6 +48,8 @@ export function ReviewForm({
   rentalAmount,
   langCode,
 }: ReviewFormProps) {
+  const policyLinks = getPolicyLinks(lang, langCode);
+
   return (
     <Form method="POST">
       <div className={`${reviewSectionClass} mb-6 mt-4 gap-4`}>
@@ -83,29 +109,42 @@ export function ReviewForm({
           />
         </div>
 
-        <div className="items-top flex space-x-2">
-          <Checkbox required id="terms1" name="terms1" />
-          <div className="grid gap-1.5 leading-none">
-            <Link target="_blank" to={publicPaths.privacyPolicy(langCode)}>
-              <p className="text-sm text-white/75 transition-colors hover:text-p">
-                {lang.privacyAgreement}
-              </p>
-            </Link>
-          </div>
+        <div className="rounded-xl border border-white/10 bg-pl/40 px-4 py-3.5">
+          <p className="text-sm leading-relaxed text-white/75">
+            <Info size={18} className="float-left mr-2 mt-0.5 text-p" />
+            {lang.privacyAgreement} {lang.privacyAgreementMore}{" "}
+            {policyLinks.map((item, index) => (
+              <span key={item.href}>
+                {index > 0 &&
+                  (index === policyLinks.length - 1
+                    ? ` ${lang.privacyAgreementAnd} `
+                    : ", ")}
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  to={item.href}
+                  className="font-medium text-p underline-offset-2 hover:underline">
+                  {item.label}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
         </div>
       </div>
 
       <PaymentStepsNotice
         lang={lang}
+        langCode={langCode}
         depositAmount={depositAmount}
         rentalAmount={rentalAmount}
       />
 
-      <div className="mx-auto mb-6 flex max-w-7xl px-4">
+      <ReservationActionBar>
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="flex w-full flex-row items-center justify-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-p/30 transition hover:-translate-y-0.5 sm:max-w-sm disabled:cursor-not-allowed disabled:opacity-60">
+          className={reservationActionButtonClass}>
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -115,7 +154,7 @@ export function ReviewForm({
             lang.reservationReviewAction
           )}
         </Button>
-      </div>
+      </ReservationActionBar>
     </Form>
   );
 }

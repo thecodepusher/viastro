@@ -35,7 +35,13 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     (x) => x.exnternalId === reservationData.carId,
   );
 
-  if (!car) {
+  if (
+    !car ||
+    !reservationData.pickupDate ||
+    !reservationData.pickupTime ||
+    !reservationData.dropoffDate ||
+    !reservationData.dropoffTime
+  ) {
     return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"));
   }
 
@@ -300,34 +306,36 @@ export default function Review({ loaderData }: Route.ComponentProps) {
   const isSubmitting = navigation.state !== "idle";
 
   return (
-    <div className="w-full bg-surface pb-6">
-      <CostSummary
-        pickup={loaderData.pickup}
-        dropOff={loaderData.dropOff}
-        pickupDate={loaderData.pickupDate}
-        pickupTime={loaderData.pickupTime}
-        dropoffDate={loaderData.dropoffDate}
-        dropoffTime={loaderData.dropoffTime}
-        car={loaderData.car}
-        carPrice={loaderData.carPrice}
-        price={loaderData.price}
-        depositeDiscount={loaderData.depositeDiscount}
-        extras={loaderData.extras}
-        notInWorkingHours={loaderData.notInWorkingHours}
-        priceForOffHours={loaderData.priceForOffHours}
-        lang={loaderData.lang}
-      />
+    <div className="w-full bg-surface">
+      <div className="mx-auto w-full max-w-7xl px-0 sm:px-4">
+        <CostSummary
+          pickup={loaderData.pickup}
+          dropOff={loaderData.dropOff}
+          pickupDate={loaderData.pickupDate}
+          pickupTime={loaderData.pickupTime}
+          dropoffDate={loaderData.dropoffDate}
+          dropoffTime={loaderData.dropoffTime}
+          car={loaderData.car}
+          carPrice={loaderData.carPrice}
+          price={loaderData.price}
+          depositeDiscount={loaderData.depositeDiscount}
+          extras={loaderData.extras}
+          notInWorkingHours={loaderData.notInWorkingHours}
+          priceForOffHours={loaderData.priceForOffHours}
+          lang={loaderData.lang}
+        />
 
-      <ReviewForm
-        lang={loaderData.lang}
-        langCode={loaderData.langCode}
-        isSubmitting={isSubmitting}
-        depositAmount={Math.max(
-          loaderData.car.deposite - loaderData.depositeDiscount,
-          0,
-        )}
-        rentalAmount={loaderData.price}
-      />
+        <ReviewForm
+          lang={loaderData.lang}
+          langCode={loaderData.langCode}
+          isSubmitting={isSubmitting}
+          depositAmount={Math.max(
+            loaderData.car.deposite - loaderData.depositeDiscount,
+            0,
+          )}
+          rentalAmount={loaderData.price}
+        />
+      </div>
     </div>
   );
 }

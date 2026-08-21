@@ -1,21 +1,25 @@
-import { ArrowRight, CreditCard, ShieldCheck } from "lucide-react";
+import { ArrowRight, CreditCard, Info, ShieldCheck } from "lucide-react";
+import { Link } from "react-router";
 import type { BaseLocale } from "@/locales/base-locale";
 import { reviewSectionClass } from "@/components/Reservation/Review/CostSummary";
+import { publicPaths } from "@/lib/paths";
 
 interface PaymentStepsNoticeProps {
   lang: BaseLocale;
+  langCode: string;
   depositAmount: number;
   rentalAmount: number;
 }
 
 export function PaymentStepsNotice({
   lang,
+  langCode,
   depositAmount,
   rentalAmount,
 }: PaymentStepsNoticeProps) {
   return (
     <div
-      className={`${reviewSectionClass} mb-4 gap-4 border-p/20 bg-linear-to-br from-pl/50 via-card to-pd sm:p-5`}>
+      className={`${reviewSectionClass} mb-0 gap-4 border-p/20 bg-linear-to-br from-pl/50 via-card to-pd sm:p-5`}>
       <div className="flex items-start gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-p/15 text-p">
           <CreditCard className="h-5 w-5" aria-hidden />
@@ -79,9 +83,20 @@ export function PaymentStepsNotice({
         </div>
       </div>
 
-      <p className="rounded-xl border border-white/10 bg-pl/40 px-3 py-2.5 text-xs leading-relaxed text-white/70 sm:text-sm">
-        {lang.paymentStepsNote}
-      </p>
+      <div className="rounded-xl border border-white/10 bg-pl/40 px-4 py-3.5">
+        <p className="text-sm leading-relaxed text-white/75">
+          <Info size={18} className="float-left mr-2 mt-0.5 text-p" />
+          {lang.paymentStepsNotePrefix}
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            to={publicPaths.rentalConditions(langCode)}
+            className="font-medium text-p underline-offset-2 hover:underline">
+            {lang.paymentStepsNoteLink}
+          </Link>
+          {lang.paymentStepsNoteSuffix}
+        </p>
+      </div>
     </div>
   );
 }

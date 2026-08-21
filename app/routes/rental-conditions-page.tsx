@@ -30,15 +30,6 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
-  delete cookie.pickUpDate;
-  delete cookie.pickUpTime;
-  delete cookie.dropOffDate;
-  delete cookie.dropOffTime;
-  delete cookie.selectedCarId;
-  delete cookie.wspayInProgress;
-  delete cookie.wspayFormData;
-  delete cookie.wspayReservation;
-
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
 

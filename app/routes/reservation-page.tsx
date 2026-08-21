@@ -289,15 +289,16 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                               className="size-4 lg:size-6 text-white animate-in zoom-in"
                             />
                           </div>
-                          {stepIdx < steps.length - 1 && (
-                            <div className="hidden lg:block absolute top-1/2 left-full w-4 h-0.5 bg-white/30 -translate-y-1/2 translate-x-2" />
-                          )}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="hidden lg:block text-xs font-medium text-white/70 mb-1">
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-1 hidden text-xs font-medium text-white/70 lg:block">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-xs lg:text-sm font-semibold text-white">
+                          <div
+                            aria-hidden
+                            className="mb-1 hidden h-px w-4 bg-white/30 lg:block"
+                          />
+                          <div className="text-xs font-semibold text-white lg:text-sm">
                             {step.name}
                           </div>
                         </div>
@@ -311,15 +312,16 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                               {step.id}
                             </span>
                           </div>
-                          {stepIdx < steps.length - 1 && (
-                            <div className="hidden lg:block absolute top-1/2 left-full w-4 h-0.5 bg-s/30 -translate-y-1/2 translate-x-2" />
-                          )}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="hidden lg:block text-xs font-medium text-s/70 mb-1 animate-in fade-in slide-in-from-left-2 duration-500 delay-200">
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-1 hidden text-xs font-medium text-s/70 animate-in fade-in slide-in-from-left-2 duration-500 delay-200 lg:block">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-xs lg:text-sm font-semibold text-s animate-in fade-in slide-in-from-left-2 duration-500 delay-300">
+                          <div
+                            aria-hidden
+                            className="mb-1 hidden h-px w-4 bg-s/30 lg:block"
+                          />
+                          <div className="text-xs font-semibold text-s animate-in fade-in slide-in-from-left-2 duration-500 delay-300 lg:text-sm">
                             {step.name}
                           </div>
                         </div>
@@ -342,15 +344,16 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                               {step.id}
                             </span>
                           </div>
-                          {stepIdx < steps.length - 1 && (
-                            <div className="hidden lg:block absolute top-1/2 left-full w-4 h-0.5 bg-white/10 -translate-y-1/2 translate-x-2" />
-                          )}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="hidden lg:block text-xs font-medium text-white/40 mb-1">
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-1 hidden text-xs font-medium text-white/40 lg:block">
                             {loaderData.lang.step || "Korak"} {step.id}
                           </div>
-                          <div className="text-xs lg:text-sm font-medium text-white/50">
+                          <div
+                            aria-hidden
+                            className="mb-1 hidden h-px w-4 bg-white/20 lg:block"
+                          />
+                          <div className="text-xs font-medium text-white/50 lg:text-sm">
                             {step.name}
                           </div>
                         </div>

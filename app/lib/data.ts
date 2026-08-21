@@ -1034,7 +1034,7 @@ export const privacyPolicySr = `
           Tel: 069/656-555<br /><br /></span>
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="privatnost-korisnika">
       <span class="c8"
           >1. ZAŠTITA PRIVATNOSTI KORISNIKA</span
       >
@@ -1071,7 +1071,7 @@ export const privacyPolicySr = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="podaci-transakcije">
       <span class="c8"
           >2. ZAŠTITA POVERLJIVIH PODATAKA O TRANSAKCIJI</span
       >
@@ -1093,7 +1093,7 @@ export const privacyPolicySr = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="povracaj">
       <span class="c8"
           >3. POVRAĆAJ SREDSTAVA</span
       >
@@ -1111,7 +1111,7 @@ export const privacyPolicySr = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="konverzija">
       <span class="c8"
           >4. IZJAVA O KONVERZIJI</span
       >
@@ -1132,7 +1132,7 @@ export const privacyPolicyEn = `
           Tel: 069/656-555<br /><br /></span>
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="privatnost-korisnika">
       <span class="c8"
           >1. USER PRIVACY PROTECTION</span
       >
@@ -1158,7 +1158,7 @@ export const privacyPolicyEn = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="podaci-transakcije">
       <span class="c8"
           >2. PROTECTION OF CONFIDENTIAL TRANSACTION DATA</span
       >
@@ -1174,7 +1174,7 @@ export const privacyPolicyEn = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="povracaj">
       <span class="c8"
           >3. REFUND</span
       >
@@ -1185,7 +1185,7 @@ export const privacyPolicyEn = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="konverzija">
       <span class="c8"
           >4. CONVERSION STATEMENT</span
       >
@@ -1206,7 +1206,7 @@ export const privacyPolicyRu = `
           Тел: 069/656-555<br /><br /></span>
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="privatnost-korisnika">
       <span class="c8"
           >1. ЗАЩИТА КОНФИДЕНЦИАЛЬНОСТИ ПОЛЬЗОВАТЕЛЕЙ</span
       >
@@ -1232,7 +1232,7 @@ export const privacyPolicyRu = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="podaci-transakcije">
       <span class="c8"
           >2. ЗАЩИТА КОНФИДЕНЦИАЛЬНЫХ ДАННЫХ ТРАНЗАКЦИЙ</span
       >
@@ -1248,7 +1248,7 @@ export const privacyPolicyRu = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="povracaj">
       <span class="c8"
           >3. ВОЗВРАТ СРЕДСТВ</span
       >
@@ -1259,7 +1259,7 @@ export const privacyPolicyRu = `
       >
   </p>
   <p class="c1 c2"><span class="c3"></span></p>
-  <p class="c0">
+  <p class="c0" id="konverzija">
       <span class="c8"
           >4. ЗАЯВЛЕНИЕ О КОНВЕРСИИ</span
       >

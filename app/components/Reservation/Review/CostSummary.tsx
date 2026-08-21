@@ -21,7 +21,7 @@ interface CostSummaryProps {
 }
 
 const reviewSectionClass =
-  "mx-auto flex w-full max-w-7xl flex-col rounded-none border-y border-border/70 bg-card px-4 py-4 sm:rounded-2xl sm:border sm:p-6";
+  "flex w-full flex-col rounded-none border-y border-border/70 bg-card px-4 py-4 sm:rounded-2xl sm:border sm:p-6";
 
 function SummaryRow({ label, children }: { label: string; children: ReactNode }) {
   return (

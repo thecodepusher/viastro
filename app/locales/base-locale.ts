@@ -124,6 +124,13 @@ export interface BaseLocale {
   lastName: string;
   phone: string;
   privacyAgreement: string;
+  privacyAgreementMore: string;
+  privacyPolicyLabel: string;
+  conversionStatementLabel: string;
+  userPrivacyProtectionLabel: string;
+  transactionDataProtectionLabel: string;
+  refundsLabel: string;
+  privacyAgreementAnd: string;
   finish: string;
   reservation: string;
   step: string;
@@ -162,7 +169,9 @@ export interface BaseLocale {
   paymentStep2Title: string;
   paymentStep2Description: string;
   paymentStep2DescriptionBold: string;
-  paymentStepsNote: string;
+  paymentStepsNotePrefix: string;
+  paymentStepsNoteLink: string;
+  paymentStepsNoteSuffix: string;
   pib: string;
   mb: string;
   delatnost: string;

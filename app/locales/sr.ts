@@ -86,7 +86,14 @@ export const sr: BaseLocale = {
   lastName: "Prezime",
   phone: "Telefon",
   privacyAgreement:
-    "Potreban nam je Vaš pristanak kako bismo Vas mogli kontaktirati u vezi sa Vašom rezervacijom. Više o našoj politici privatnosti, Izjavi o konverziji, Zaštiti privatnosti korisnika, Zaštiti poverljivih podataka o transakcijama i Povraćaju novca možete saznati ovde.",
+    "Vaše podatke koristimo isključivo da Vas kontaktiramo u vezi sa ovom rezervacijom.",
+  privacyAgreementMore: "Više o našoj",
+  privacyPolicyLabel: "politici privatnosti",
+  conversionStatementLabel: "Izjavi o konverziji",
+  userPrivacyProtectionLabel: "Zaštiti privatnosti korisnika",
+  transactionDataProtectionLabel: "Zaštiti poverljivih podataka o transakcijama",
+  refundsLabel: "Povraćaju novca",
+  privacyAgreementAnd: "i",
   finish: "Završi",
   reservation: "Rezervacija",
   step: "Korak",
@@ -135,8 +142,11 @@ export const sr: BaseLocale = {
   paymentStep2Description:
     "Zatim nastavljate na plaćanje ukupne cene najma, gde ponovo unosite podatke o plaćanju.",
   paymentStep2DescriptionBold: "Rezervacija je završena tek nakon oba koraka.",
-  paymentStepsNote:
-    "Depozit se vraća nakon završetka najma, u skladu sa uslovima iznajmljivanja. Sredstva na kartici nisu naplaćena u prvom koraku - samo rezervisana.",
+  paymentStepsNotePrefix:
+    "Depozit se vraća nakon završetka najma, ",
+  paymentStepsNoteLink: "u skladu sa uslovima najma",
+  paymentStepsNoteSuffix:
+    ". Sredstva na kartici nisu naplaćena u prvom koraku - samo rezervisana.",
   pib: "PIB",
   mb: "MB",
   delatnost: "Delatnost",

@@ -32,7 +32,7 @@ export function EquipmentList({
         {lang.additionalEquipment}
       </h3>
 
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-2 pb-4">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 pt-2">
         {equipment.map((item) => {
           const isSelected = selectedIds.some((x) => x === item.id);
 

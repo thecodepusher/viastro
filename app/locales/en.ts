@@ -86,7 +86,14 @@ export const en: BaseLocale = {
   lastName: "Last name",
   phone: "Phone",
   privacyAgreement:
-    "We need your agreement so we can contact you regarding your reservation. Find out more about our privacy policy, Conversion Statement, User Privacy Protection, Confidential Transaction Data Protection, and Refunds here.",
+    "We use your details only to contact you about this reservation.",
+  privacyAgreementMore: "Find out more about our",
+  privacyPolicyLabel: "privacy policy",
+  conversionStatementLabel: "Conversion Statement",
+  userPrivacyProtectionLabel: "User Privacy Protection",
+  transactionDataProtectionLabel: "Confidential Transaction Data Protection",
+  refundsLabel: "Refunds",
+  privacyAgreementAnd: "and",
   finish: "Finish",
   reservation: "Reservation",
   step: "Step",
@@ -136,8 +143,11 @@ export const en: BaseLocale = {
     "Next, you proceed to pay the total rental price by entering your payment details again.",
   paymentStep2DescriptionBold:
     "Your reservation is complete only after both steps.",
-  paymentStepsNote:
-    "The deposit is returned after the rental ends, in accordance with the rental terms. Funds are not charged in the first step - only reserved.",
+  paymentStepsNotePrefix:
+    "The deposit is returned after the rental ends, ",
+  paymentStepsNoteLink: "in accordance with the rental terms",
+  paymentStepsNoteSuffix:
+    ". Funds are not charged in the first step - only reserved.",
   pib: "Tax ID",
   mb: "Registration Number",
   delatnost: "Activity",
