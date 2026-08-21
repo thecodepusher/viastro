@@ -1638,7 +1638,7 @@ export const rentalConditionsSr = `
           Korisnika, a koje fotografije &#263;e predstavljati sastavni deo
           dokumentacije za predmet i eventualno dokaz u slu&#269;aju
           re&scaron;avanja spornih pitanja.<br /><br /></span
-      ><span class="c11">7. DEPOZIT I NAPLATA</span>
+      ><span class="c11" id="depozit-i-naplata">7. DEPOZIT I NAPLATA</span>
   </p>
   <p class="c0">
       <span class="c1"
@@ -2255,7 +2255,7 @@ export const rentalConditionsRu = `
   <p class="c0">
       <span
           >Транспортное средство обязательно фотографируется сотрудниками Арендодателя при получении и возврате его Пользователем, и эти фотографии будут составлять неотъемлемую часть документации по предмету и возможное доказательство в случае разрешения спорных вопросов.<br /><br /></span
-      ><span class="c11">7. ДЕПОЗИТ И ОПЛАТА</span>
+      ><span class="c11" id="depozit-i-naplata">7. ДЕПОЗИТ И ОПЛАТА</span>
   </p>
   <p class="c0">
       <span class="c1"
@@ -2724,7 +2724,7 @@ export const rentalConditionsEn = `
   <p class="c0">
       <span
           >The Vehicle is mandatory photographed by the Lessor's employees upon pickup and return by the User, and these photographs will form an integral part of the documentation for the case and potential evidence in case of dispute resolution.<br /><br /></span
-      ><span class="c11">7. DEPOSIT AND PAYMENT</span>
+      ><span class="c11" id="depozit-i-naplata">7. DEPOSIT AND PAYMENT</span>
   </p>
   <p class="c0">
       <span class="c1"

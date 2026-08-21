@@ -90,7 +90,7 @@ export function PaymentStepsNotice({
           <Link
             target="_blank"
             rel="noreferrer"
-            to={publicPaths.rentalConditions(langCode)}
+            to={`${publicPaths.rentalConditions(langCode)}#depozit-i-naplata`}
             className="font-medium text-p underline-offset-2 hover:underline">
             {lang.paymentStepsNoteLink}
           </Link>

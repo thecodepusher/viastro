@@ -153,6 +153,9 @@ export default function RentalConditionsPage({
                 margin-top: 1.5rem;
                 margin-bottom: 0.75rem;
               }
+              .content-wrapper [id] {
+                scroll-margin-top: 6rem;
+              }
               .content-wrapper p.c0,
               .content-wrapper p.c1,
               .content-wrapper p.c3,
