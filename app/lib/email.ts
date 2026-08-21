@@ -35,8 +35,13 @@ export type LongTermInquiryPayload = {
 };
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
-const logoDataUri = "https://viastro.rs/logo_white.webp";
+const DEFAULT_PUBLIC_ORIGIN = "https://viastro.rs";
 const OFFICE_EMAIL = "office@viastro.rs";
+
+function emailLogoUrl(baseUrl?: string): string {
+  const origin = (baseUrl || DEFAULT_PUBLIC_ORIGIN).replace(/\/$/, "");
+  return `${origin}/logo_white.png`;
+}
 
 export async function sendReservationEmail(payload: ReservationEmailPayload) {
   const apiKey = process.env.BREVO_API_KEY;
@@ -125,13 +130,17 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
             </table>
           </div>
     `
-    : "";
+      : "";
+
+  const logoUrl = emailLogoUrl(payload.baseUrl);
 
   const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
@@ -140,11 +149,11 @@ export async function sendReservationEmail(payload: ReservationEmailPayload) {
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
               <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
-                  src="${logoDataUri}" 
+                  src="${logoUrl}" 
                   alt="Viastro Logo" 
-                  width="180" 
-                  height="60"
-                  style="max-width: 180px; max-height: 60px; width: auto; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;" 
+                  width="160" 
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;" 
                 />
                 <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">${emailTitle}</h1>
               </div>
@@ -355,11 +364,15 @@ export async function sendCustomerReservationEmail(
     .replace("{days}", String(payload.days))
     .replace("{dayWord}", dayWord);
 
+  const logoUrl = emailLogoUrl(payload.baseUrl);
+
   const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
@@ -368,11 +381,11 @@ export async function sendCustomerReservationEmail(
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
               <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
-                  src="${logoDataUri}" 
+                  src="${logoUrl}" 
                   alt="Viastro Logo" 
-                  width="180" 
-                  height="60"
-                  style="max-width: 180px; max-height: 60px; width: auto; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;" 
+                  width="160" 
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;" 
                 />
                 <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">${copy.title}</h1>
               </div>
@@ -516,12 +529,15 @@ export async function sendLongTermInquiryEmail(
     ? payload.companyName || "Firma"
     : payload.fullName || "Klijent";
   const subject = `Upit za dugoročni najam - ${subjectName}`;
+  const logoUrl = emailLogoUrl();
 
   const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
@@ -530,11 +546,11 @@ export async function sendLongTermInquiryEmail(
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
               <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
                 <img 
-                  src="${logoDataUri}" 
+                  src="${logoUrl}" 
                   alt="Viastro Logo" 
-                  width="180" 
-                  height="60"
-                  style="max-width: 180px; max-height: 60px; width: auto; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;" 
+                  width="160" 
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;" 
                 />
                 <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">Upit za dugoročni najam</h1>
               </div>

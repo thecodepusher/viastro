@@ -68,7 +68,7 @@ export default function SuccessPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="w-full bg-surface">
-      <div className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-4 py-16 text-center sm:py-24">
+      <div className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-4 py-16 pt-28 text-center sm:py-24">
         <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 ring-2 ring-emerald-500/30">
           <CircleCheck size={44} className="text-emerald-400" strokeWidth={2.5} />
         </div>
