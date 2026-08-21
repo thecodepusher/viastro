@@ -141,37 +141,59 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const steps = reservationSteps(loaderData, matches[2]);
 
   const [extrasPrice, setExtrasPrice] = useState<number | null>(null);
+  const [promoPriceMeta, setPromoPriceMeta] = useState<{
+    originalPrice?: number;
+    discountPercent?: number;
+  } | null>(null);
 
   useEffect(() => {
-    const checkInitialPrice = () => {
-      if (typeof window !== "undefined" && (window as any).__extrasTotalPrice) {
-        const initialPrice = (window as any).__extrasTotalPrice;
-        setExtrasPrice(initialPrice);
+    const applyPriceDetail = (detail: unknown) => {
+      if (typeof detail === "number" && Number.isFinite(detail)) {
+        setExtrasPrice(detail);
+        setPromoPriceMeta(null);
+        return;
+      }
+
+      if (
+        detail &&
+        typeof detail === "object" &&
+        "price" in detail &&
+        typeof (detail as { price: unknown }).price === "number" &&
+        Number.isFinite((detail as { price: number }).price)
+      ) {
+        const next = detail as {
+          price: number;
+          originalPrice?: number;
+          discountPercent?: number;
+        };
+        setExtrasPrice(next.price);
+        setPromoPriceMeta(
+          next.originalPrice != null && next.discountPercent
+            ? {
+                originalPrice: next.originalPrice,
+                discountPercent: next.discountPercent,
+              }
+            : null,
+        );
       }
     };
 
-    const handleExtrasPriceUpdate = (event: CustomEvent<number>) => {
-      const newPrice = event.detail;
-      setExtrasPrice((prevPrice) => {
-        if (prevPrice !== newPrice) {
-          return newPrice;
-        }
-        return prevPrice;
-      });
+    const checkInitialPrice = () => {
+      if (typeof window !== "undefined" && (window as any).__extrasTotalPrice) {
+        applyPriceDetail((window as any).__extrasTotalPrice);
+      }
+    };
+
+    const handleExtrasPriceUpdate = (event: Event) => {
+      applyPriceDetail((event as CustomEvent<unknown>).detail);
     };
 
     checkInitialPrice();
 
-    window.addEventListener(
-      "extrasPriceUpdated",
-      handleExtrasPriceUpdate as EventListener
-    );
+    window.addEventListener("extrasPriceUpdated", handleExtrasPriceUpdate);
 
     return () => {
-      window.removeEventListener(
-        "extrasPriceUpdated",
-        handleExtrasPriceUpdate as EventListener
-      );
+      window.removeEventListener("extrasPriceUpdated", handleExtrasPriceUpdate);
     };
   }, []);
 
@@ -201,9 +223,11 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
             ...loaderData.carSummary,
             price:
               extrasPrice !== null ? extrasPrice : loaderData.carSummary.price,
+            originalPrice: promoPriceMeta?.originalPrice,
+            discountPercent: promoPriceMeta?.discountPercent,
           }
         : null,
-    [loaderData.carSummary, extrasPrice]
+    [loaderData.carSummary, extrasPrice, promoPriceMeta],
   );
 
   const [prevStepIndex, setPrevStepIndex] = useState<number | null>(null);
@@ -380,6 +404,8 @@ export default function ReservationPage({ loaderData }: Route.ComponentProps) {
                 pickupLocation={carSummaryWithPrice.pickupLocation}
                 dropoffLocation={carSummaryWithPrice.dropoffLocation}
                 price={carSummaryWithPrice.price}
+                originalPrice={carSummaryWithPrice.originalPrice}
+                discountPercent={carSummaryWithPrice.discountPercent}
                 days={carSummaryWithPrice.days}
                 lang={loaderData.lang}
               />

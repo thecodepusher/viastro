@@ -3,7 +3,8 @@ import type { Route } from "./+types/wspay-success";
 import { prefs } from "@/lib/prefs-cookie";
 import { publicPaths } from "@/lib/paths";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
-import { sendReservationEmail, type ReservationEmailPayload } from "@/lib/email";
+import { getLocale } from "@/lib/utils";
+import { sendReservationEmail, sendCustomerReservationEmail, type ReservationEmailPayload } from "@/lib/email";
 import {
   verifyWSPayCallbackSignature,
   type WSPayCallbackParams,
@@ -39,6 +40,10 @@ function buildReservationEmailPayload(
     days: reservationData.days,
     carPrice: reservationData.carPrice,
     totalPrice: reservationData.totalPrice,
+    originalTotalPrice: reservationData.originalTotalPrice,
+    promoCode: reservationData.promoCode,
+    promoDiscountPercent: reservationData.promoDiscountPercent,
+    promoDiscountAmount: reservationData.promoDiscountAmount,
     carDeposit:
       reservationData.carDeposit ||
       reservationData.depositAfterDiscount + reservationData.depositeDiscount,
@@ -53,6 +58,38 @@ function buildReservationEmailPayload(
     baseUrl: options.baseUrl,
     emailType: options.emailType,
   };
+}
+
+async function sendCompletedReservationEmails(
+  reservationData: NonNullable<
+    ReturnType<typeof getWSPaySession>
+  >["reservationData"],
+  options: {
+    request: Request;
+    langParam: string | undefined;
+    wsPayOrderId?: string;
+    approvalCode?: string;
+  },
+) {
+  const payload = buildReservationEmailPayload(reservationData, {
+    wsPayOrderId: options.wsPayOrderId,
+    approvalCode: options.approvalCode,
+    emailType: "completed",
+    baseUrl: getBaseUrl(options.request),
+  });
+
+  try {
+    await sendReservationEmail(payload);
+  } catch (error) {
+    console.error("Failed to send office reservation email:", error);
+  }
+
+  try {
+    const lang = await getLocale(options.langParam || "sr", options.request);
+    await sendCustomerReservationEmail(payload, lang);
+  } catch (error) {
+    console.error("Failed to send customer reservation email:", error);
+  }
 }
 
 export async function action({ request, params }: Route.ActionArgs) {
@@ -233,16 +270,12 @@ export async function action({ request, params }: Route.ActionArgs) {
     const depositWsPayOrderId = depositPreAuth?.wsPayOrderId || wsPayOrderId;
     const depositApprovalCode = depositPreAuth?.approvalCode || approvalCode;
 
-    const baseUrl = getBaseUrl(request);
-
-    await sendReservationEmail(
-      buildReservationEmailPayload(reservationData, {
-        wsPayOrderId: depositWsPayOrderId,
-        approvalCode: depositApprovalCode,
-        emailType: "completed",
-        baseUrl,
-      }),
-    );
+    await sendCompletedReservationEmails(reservationData, {
+      request,
+      langParam: params.lang,
+      wsPayOrderId: depositWsPayOrderId,
+      approvalCode: depositApprovalCode,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -435,16 +468,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       const depositApprovalCode =
         depositPreAuth?.approvalCode || callbackParams.ApprovalCode;
 
-      const baseUrl = getBaseUrl(request);
-
-      await sendReservationEmail(
-        buildReservationEmailPayload(reservationData, {
-          wsPayOrderId: depositWsPayOrderId,
-          approvalCode: depositApprovalCode,
-          emailType: "completed",
-          baseUrl,
-        }),
-      );
+      await sendCompletedReservationEmails(reservationData, {
+        request,
+        langParam: params.lang,
+        wsPayOrderId: depositWsPayOrderId,
+        approvalCode: depositApprovalCode,
+      });
     } catch (error) {}
 
     invalidateWSPaySession(sessionId);
