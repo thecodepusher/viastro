@@ -3,6 +3,7 @@ import { locations } from "@/lib/data";
 
 export const GA_MEASUREMENT_ID = "G-SP7K7D7BRS";
 
+const PRODUCTION_ANALYTICS_HOSTS = new Set(["viastro.rs", "www.viastro.rs"]);
 const PENDING_PURCHASE_KEY = "ga_pending_purchase";
 
 export type AnalyticsEventName =
@@ -42,6 +43,14 @@ declare global {
   }
 }
 
+export function isProductionAnalyticsHost() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return PRODUCTION_ANALYTICS_HOSTS.has(window.location.hostname);
+}
+
 export function hasAnalyticsConsent() {
   return (
     typeof window !== "undefined" &&
@@ -49,8 +58,12 @@ export function hasAnalyticsConsent() {
   );
 }
 
+export function canTrackAnalytics() {
+  return hasAnalyticsConsent() && isProductionAnalyticsHost();
+}
+
 export function loadGoogleAnalytics() {
-  if (typeof window === "undefined" || !hasAnalyticsConsent()) {
+  if (typeof window === "undefined" || !canTrackAnalytics()) {
     return;
   }
 
@@ -98,7 +111,7 @@ export function trackEvent(
   name: AnalyticsEventName,
   params?: AnalyticsEventParams,
 ) {
-  if (typeof window === "undefined" || !window.gtag || !hasAnalyticsConsent()) {
+  if (typeof window === "undefined" || !window.gtag || !canTrackAnalytics()) {
     return;
   }
 
@@ -110,7 +123,7 @@ export function trackEventOnce(
   name: AnalyticsEventName,
   params?: AnalyticsEventParams,
 ) {
-  if (typeof window === "undefined") {
+  if (typeof window === "undefined" || !canTrackAnalytics()) {
     return;
   }
 
@@ -128,7 +141,7 @@ export function trackEventOnce(
 }
 
 export function trackPageView(path: string, search = "") {
-  if (typeof window === "undefined" || !window.gtag || !hasAnalyticsConsent()) {
+  if (typeof window === "undefined" || !window.gtag || !canTrackAnalytics()) {
     return;
   }
 

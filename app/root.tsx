@@ -26,7 +26,7 @@ import { ru } from "@/locales/ru";
 import HreflangLinks from "./components/ui/HreflangLinks";
 import {
   GA_MEASUREMENT_ID,
-  hasAnalyticsConsent,
+  canTrackAnalytics,
   trackPageView,
 } from "@/lib/analytics";
 
@@ -79,7 +79,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!hasAnalyticsConsent()) {
+    if (!canTrackAnalytics()) {
       return;
     }
 
@@ -128,7 +128,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 'security_storage': 'granted'
               });
               
-              if (cookieConsent === 'true') {
+              var isProductionHost = location.hostname === 'viastro.rs' || location.hostname === 'www.viastro.rs';
+              if (cookieConsent === 'true' && isProductionHost) {
                 var gaScript = document.createElement('script');
                 gaScript.async = true;
                 gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}';
