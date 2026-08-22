@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useFetcher } from "react-router";
 import { Input } from "@/components/ui/input";
-import { Building2, Mail, Phone, Send, Zap, UserRound } from "lucide-react";
+import { Building2, Mail, MessageSquare, Phone, Send, UserRound } from "lucide-react";
 import { toast } from "sonner";
 import {
   iconBadge,
@@ -113,7 +113,7 @@ export function LongTermContact({ content, langCode }: Props) {
     <section
       ref={sectionRef}
       id="long-term-contact"
-      className="relative bg-surface section-pattern pb-16 pt-10">
+      className="relative bg-surface section-pattern pb-8 pt-6 sm:pb-16 sm:pt-10">
       <div className={sectionContainer}>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-p">
@@ -123,16 +123,16 @@ export function LongTermContact({ content, langCode }: Props) {
           <p className={sectionSubtitle}>{content.formSubtitle}</p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-3xl bg-card shadow-2xl shadow-p/10 ring-1 ring-border/70">
+        <div className="mt-5 sm:mt-10 overflow-hidden rounded-3xl bg-card shadow-2xl shadow-p/10 ring-1 ring-border/70">
           <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative bg-linear-to-br from-p via-p/90 to-p/80 p-8 text-white">
+            <div className="relative bg-linear-to-br from-p via-p/90 to-p/80 p-4 sm:p-8 text-white">
               <div className="absolute inset-0 opacity-20">
                 <div className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-white blur-3xl" />
                 <div className="absolute bottom-0 right-0 h-48 w-48 rounded-full bg-white/40 blur-3xl" />
               </div>
-              <div className="relative space-y-6">
+              <div className="relative space-y-4 sm:space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm font-semibold text-white">
-                  <Zap className="size-5" />
+                  <MessageSquare className="size-5" />
                   {content.formTitle}
                 </div>
                 <h3 className="text-2xl font-bold leading-tight">
@@ -154,7 +154,7 @@ export function LongTermContact({ content, langCode }: Props) {
               </div>
             </div>
 
-            <div className="p-8">
+            <div className="p-4 sm:p-8">
               <div className="flex items-center sm:justify-start justify-center gap-3">
                 <button
                   type="button"
@@ -237,7 +237,7 @@ export function LongTermContact({ content, langCode }: Props) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:min-w-40 flex flex-row justify-center items-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-p/30 transition hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                    className="w-full sm:min-w-40 flex flex-row justify-center items-center gap-2 rounded-full bg-linear-to-r from-p via-p to-p/90 px-6 py-2.5 sm:py-3 text-sm font-semibold text-white shadow-lg shadow-p/30 transition hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                     <Send className="size-5 min-w-5 min-h-5" />
                     {isSubmitting ? "Šalje se..." : content.submitLabel}
                   </button>

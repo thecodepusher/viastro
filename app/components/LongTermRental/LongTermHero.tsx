@@ -1,4 +1,4 @@
-import { ArrowRight, CarFront, Clock3, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, CarFront, Clock3, Package, ShieldCheck, Wallet } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   iconBadge,
@@ -71,7 +71,7 @@ export function LongTermHero({ content }: Props) {
             <div className="flex h-full items-end">
               <div className="max-w-2xl space-y-6 text-white">
                 <div className="inline-flex items-center gap-2 rounded-md bg-white/10 ring-1 ring-white/20 px-3 py-1.5 text-sm font-semibold text-p backdrop-blur-sm">
-                  <Zap className="size-4" />
+                  <Package className="size-4" />
                   {content.heroSubtitle}
                 </div>
                 <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white">
@@ -86,9 +86,9 @@ export function LongTermHero({ content }: Props) {
         </div>
       </div>
 
-      <div className="relative bg-surface pb-16">
+      <div className="relative bg-surface pb-8 sm:pb-16">
         <div className={sectionContainer}>
-          <div className="mb-8 flex flex-wrap gap-2 sm:gap-3">
+          <div className="mb-4 sm:mb-8 flex flex-wrap gap-2 sm:gap-3">
             {featureTags.map((item, i) => (
               <span
                 key={item}
@@ -144,7 +144,7 @@ export function LongTermHero({ content }: Props) {
               </div>
               <div className="flex items-center gap-3 rounded-xl bg-pl/40 p-4">
                 <div className="flex h-10 w-10 min-w-10 min-h-10 items-center justify-center rounded-lg bg-p/15 text-p">
-                  <Zap className="size-5" />
+                  <Wallet className="size-5" />
                 </div>
                 <p className="text-sm text-muted-foreground">
                   {content.benefitsIntro}

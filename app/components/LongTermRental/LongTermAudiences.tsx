@@ -1,4 +1,4 @@
-import { Building2, ListChecks, Zap, UserRound } from "lucide-react";
+import { BadgeCheck, Building2, CheckCircle2, ListChecks, UserRound } from "lucide-react";
 import {
   gradientCard,
   iconBadge,
@@ -15,13 +15,14 @@ type Props = {
 
 export function LongTermAudiences({ content }: Props) {
   return (
-    <section className="bg-surface section-pattern py-14">
+    <section className="bg-surface section-pattern py-6 sm:py-14">
       <div className={sectionContainer}>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-3 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-p">
+            <div className="inline-flex items-center gap-2 rounded-full bg-p/10 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-p">
+              <BadgeCheck className="size-7 shrink-0 sm:size-5" />
               {content.individualsTitle}
-            </p>
+            </div>
             <h2 className={`${sectionTitle} mt-2`}>{content.businessTitle}</h2>
             <p className={sectionSubtitle}>{content.businessSubtitle}</p>
           </div>
@@ -31,9 +32,9 @@ export function LongTermAudiences({ content }: Props) {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
+        <div className="mt-5 sm:mt-8 grid gap-4 sm:gap-6 lg:grid-cols-3">
           <div className={`${gradientCard} lg:col-span-1`}>
-            <div className="h-full space-y-4 bg-pl/30 p-6 backdrop-blur">
+            <div className="h-full space-y-4 bg-pl/30 p-4 sm:p-6 backdrop-blur">
               <div className="flex items-start gap-3">
                 <div className={iconBadge}>
                   <UserRound className="size-5" />
@@ -55,8 +56,8 @@ export function LongTermAudiences({ content }: Props) {
                   <li
                     key={item}
                     className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                    <Zap className="size-5 text-p" />
-                    {item}
+                    <CheckCircle2 className="size-5 shrink-0 text-p" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -65,7 +66,7 @@ export function LongTermAudiences({ content }: Props) {
 
           <div className="lg:col-span-2 space-y-4">
             <div className={`${softCard} border border-p/15`}>
-              <div className="flex items-center gap-3 px-5 pt-5">
+              <div className="flex items-center gap-3 px-3 pt-3 sm:px-5 sm:pt-5">
                 <div className={iconBadge}>
                   <Building2 className="size-5" />
                 </div>
@@ -78,7 +79,7 @@ export function LongTermAudiences({ content }: Props) {
                   </p>
                 </div>
               </div>
-              <div className="grid gap-3 p-5 sm:grid-cols-2">
+              <div className="grid gap-3 p-3 sm:p-5 sm:grid-cols-2">
                 {content.businessItems.map((item, index) => (
                   <div
                     key={item.title}
@@ -102,7 +103,7 @@ export function LongTermAudiences({ content }: Props) {
             </div>
 
             <div className={softCard}>
-              <div className="flex flex-wrap items-center gap-3 p-5">
+              <div className="flex flex-wrap items-center gap-3 p-3 sm:p-5">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-p/10 text-p">
                   <ListChecks className="size-5" />
                 </div>
@@ -110,13 +111,13 @@ export function LongTermAudiences({ content }: Props) {
                   {content.idealTitle}
                 </p>
               </div>
-              <div className="grid gap-3 border-t border-border/70 p-5 sm:grid-cols-2">
+              <div className="grid gap-3 border-t border-border/70 p-3 sm:p-5 sm:grid-cols-2">
                 {content.idealItems.map((item) => (
                   <div
                     key={item}
                     className="flex items-center gap-3 rounded-xl bg-pl/40 px-4 py-3 text-sm font-semibold text-foreground ring-1 ring-border/70">
-                    <Zap className="size-5 text-p" />
-                    {item}
+                    <CheckCircle2 className="size-5 shrink-0 text-p" />
+                    <span>{item}</span>
                   </div>
                 ))}
               </div>
