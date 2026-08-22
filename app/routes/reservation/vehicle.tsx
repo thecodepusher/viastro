@@ -1,5 +1,6 @@
 import { prefs } from "@/lib/prefs-cookie";
 
+import { useEffect } from "react";
 import { redirect, useFetcher } from "react-router";
 import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import Cars from "@/components/Cars";
@@ -13,6 +14,7 @@ import {
 import type { Route } from "./+types/vehicle";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
+import { trackEvent } from "@/lib/analytics";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -127,6 +129,15 @@ export default function Vehicle({ loaderData }: Route.ComponentProps) {
     ? Number(fetcher.formData.get("carId"))
     : null;
 
+  useEffect(() => {
+    const cars = loaderData.cars as TransformedCar[];
+    trackEvent("view_item_list", {
+      step: "vehicle",
+      item_count: cars.length,
+      available_count: cars.filter((car) => car.available).length,
+    });
+  }, [loaderData.cars]);
+
   return (
     <div className="w-full">
       <Cars
@@ -135,6 +146,15 @@ export default function Vehicle({ loaderData }: Route.ComponentProps) {
         isLoading={fetcher.state !== "idle"}
         loadingCarId={loadingCarId}
         onSelect={(carId) => {
+          const cars = loaderData.cars as TransformedCar[];
+          const car = cars.find((item) => item.id === carId);
+          trackEvent("select_car", {
+            step: "vehicle",
+            car_id: car?.exnternalId ?? String(carId),
+            car_name: car?.customName || car?.name,
+            value: car?.price,
+            currency: "EUR",
+          });
           const form = new FormData();
           form.append("carId", `${carId}`);
 

@@ -1,6 +1,6 @@
 import { prefs } from "@/lib/prefs-cookie";
 import { redirect, useNavigation } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { type LocaleTypes } from "@/lib/data";
 import { format } from "date-fns";
 import {
@@ -23,7 +23,15 @@ import { createWSPaySession } from "@/lib/wspay-session";
 import { CostSummary } from "@/components/Reservation/Review/CostSummary";
 import { ReviewForm } from "@/components/Reservation/Review/ReviewForm";
 import { publicPaths } from "@/lib/paths";
-import { resolvePromoCode } from "@/constants/promo-codes";
+import {
+  ALLOWED_PROMO_CODES,
+  normalizePromoCode,
+  resolvePromoCode,
+} from "@/constants/promo-codes";
+import {
+  savePendingPurchase,
+  trackEvent,
+} from "@/lib/analytics";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -321,6 +329,102 @@ export default function Review({ loaderData }: Route.ComponentProps) {
   const promo = resolvePromoCode(promoCode, loaderData.price);
   const rentalAmount = promo.discountedPrice;
   const originalPrice = loaderData.price;
+  const lastPromoEvent = useRef("");
+  const paymentInfoSent = useRef(false);
+
+  useEffect(() => {
+    trackEvent("begin_checkout", {
+      step: "review",
+      value: originalPrice,
+      currency: "EUR",
+      car_id: loaderData.car.exnternalId,
+      car_name: loaderData.car.customName || loaderData.car.name,
+      days: loaderData.days,
+      extras_count: loaderData.extras.length,
+    });
+  }, [
+    loaderData.car.customName,
+    loaderData.car.exnternalId,
+    loaderData.car.name,
+    loaderData.days,
+    loaderData.extras.length,
+    originalPrice,
+  ]);
+
+  useEffect(() => {
+    const normalized = normalizePromoCode(promoCode);
+    if (!normalized) {
+      lastPromoEvent.current = "";
+      return;
+    }
+
+    if (promo.valid) {
+      const appliedKey = `applied:${promo.code}`;
+      if (lastPromoEvent.current === appliedKey) {
+        return;
+      }
+
+      lastPromoEvent.current = appliedKey;
+      trackEvent("promo_applied", {
+        step: "review",
+        promo_code: promo.code,
+        discount_percent: promo.percent,
+        value: promo.discountedPrice,
+        currency: "EUR",
+      });
+      return;
+    }
+
+    const isTypingPrefix = ALLOWED_PROMO_CODES.some((code) =>
+      normalizePromoCode(code).startsWith(normalized),
+    );
+    if (isTypingPrefix || lastPromoEvent.current === "invalid") {
+      return;
+    }
+
+    lastPromoEvent.current = "invalid";
+    trackEvent("promo_invalid", { step: "review" });
+  }, [
+    promo.code,
+    promo.discountedPrice,
+    promo.percent,
+    promo.valid,
+    promoCode,
+  ]);
+
+  useEffect(() => {
+    if (navigation.state === "idle") {
+      paymentInfoSent.current = false;
+      return;
+    }
+
+    if (navigation.state !== "submitting" || paymentInfoSent.current) {
+      return;
+    }
+
+    paymentInfoSent.current = true;
+    const payload = {
+      transaction_id: `va_${Date.now()}`,
+      value: rentalAmount,
+      currency: "EUR" as const,
+      car_id: loaderData.car.exnternalId,
+      car_name: loaderData.car.customName || loaderData.car.name,
+      days: loaderData.days,
+      extras_count: loaderData.extras.length,
+      promo_applied: promo.valid,
+    };
+    savePendingPurchase(payload);
+    trackEvent("add_payment_info", payload);
+  }, [
+    loaderData.car.customName,
+    loaderData.car.exnternalId,
+    loaderData.car.name,
+    loaderData.days,
+    loaderData.extras.length,
+    navigation.state,
+    promo.valid,
+    rentalAmount,
+  ]);
 
   useEffect(() => {
     if (typeof window === "undefined") {

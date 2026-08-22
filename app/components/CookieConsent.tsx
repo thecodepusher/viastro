@@ -4,13 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import type { BaseLocale } from "@/locales/base-locale";
 import { Button } from "@/components/ui/button";
 import { publicPaths } from "@/lib/paths";
-
-declare global {
-  interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
-  }
-}
+import { loadGoogleAnalytics, trackPageView } from "@/lib/analytics";
 
 export default function CookieConsent({ lang }: { lang: BaseLocale }) {
   const [showBanner, setShowBanner] = useState(false);
@@ -52,17 +46,8 @@ export default function CookieConsent({ lang }: { lang: BaseLocale }) {
         });
       }
 
-      if (
-        !document.querySelector('script[src*="googletagmanager.com/gtm.js"]')
-      ) {
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-5FXCXRX2";
-        const firstScript = document.getElementsByTagName("script")[0];
-        if (firstScript && firstScript.parentNode) {
-          firstScript.parentNode.insertBefore(script, firstScript);
-        }
-      }
+      loadGoogleAnalytics();
+      trackPageView(location.pathname, location.search);
     }
   };
 

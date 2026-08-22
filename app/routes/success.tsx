@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
+import { useEffect } from "react";
 import { Link, redirect } from "react-router";
 import type { Route } from "./+types/success";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
+import { consumePendingPurchase, trackEvent } from "@/lib/analytics";
 
 export async function loader({ request, context, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -62,6 +64,17 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function SuccessPage({ loaderData }: Route.ComponentProps) {
+  useEffect(() => {
+    if (!loaderData) {
+      return;
+    }
+
+    const pending = consumePendingPurchase();
+    if (pending) {
+      trackEvent("purchase", pending);
+    }
+  }, [loaderData]);
+
   if (!loaderData) {
     return null;
   }

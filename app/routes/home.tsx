@@ -24,6 +24,10 @@ import {
   generateOpenGraphMeta,
 } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
+import {
+  trackEventOnce,
+  trackReservationDatesSelected,
+} from "@/lib/analytics";
 import type { Route } from "./+types/home";
 
 export const links: Route.LinksFunction = () => [];
@@ -226,6 +230,10 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               <ReservationTime
                 isLoading={fetcher.state !== "idle"}
                 onStart={async (data) => {
+                  trackEventOnce("reservation_start", "reservation_start", {
+                    step: "dates",
+                  });
+                  trackReservationDatesSelected(data);
                   const form = new FormData();
                   form.append("pickUpLocation", data.pickUpLocation);
                   form.append("dropOffLocation", data.dropOffLocation);

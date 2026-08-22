@@ -1,5 +1,6 @@
 import { prefs } from "@/lib/prefs-cookie";
 import { redirect, useFetcher } from "react-router";
+import { useEffect } from "react";
 import { getLocale } from "@/lib/utils";
 import ReservationTime from "@/components/ReservationTime";
 import { locations } from "@/lib/data";
@@ -7,6 +8,10 @@ import { setHours } from "date-fns";
 import type { Route } from "./+types";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
+import {
+  trackEventOnce,
+  trackReservationDatesSelected,
+} from "@/lib/analytics";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -78,6 +83,10 @@ export function meta({ data }: Route.MetaArgs) {
 export default function Reservation({ loaderData }: Route.ComponentProps) {
   const fetcher = useFetcher();
 
+  useEffect(() => {
+    trackEventOnce("reservation_start", "reservation_start", { step: "dates" });
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-pd">
       <div className="relative min-h-[70vh] w-full overflow-hidden">
@@ -93,6 +102,7 @@ export default function Reservation({ loaderData }: Route.ComponentProps) {
           <ReservationTime
             isLoading={fetcher.state !== "idle"}
             onStart={async (data) => {
+              trackReservationDatesSelected(data);
               const form = new FormData();
               form.append("pickUpLocation", data.pickUpLocation);
               form.append("dropOffLocation", data.dropOffLocation);

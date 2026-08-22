@@ -12,6 +12,7 @@ import { publicPaths } from "@/lib/paths";
 import { IncludedInReservation } from "@/components/Extras/IncludedInReservation";
 import { EquipmentList } from "@/components/Extras/EquipmentList";
 import { ContinueButton } from "@/components/Extras/ContinueButton";
+import { trackEvent } from "@/lib/analytics";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -181,6 +182,16 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
   ]);
 
   const handleToggleEquipment = (id: number) => {
+    const equipment = loaderData.aditionalEquipment.find((item) => item.id === id);
+    const wasSelected = selected.includes(id);
+
+    trackEvent("add_extras", {
+      step: "extras",
+      extra_id: id,
+      extra_name: equipment?.name,
+      selected: !wasSelected,
+    });
+
     setSelected((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((x) => x !== id);
