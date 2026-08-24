@@ -1,3 +1,23 @@
+export const supportedLocales = ["sr", "en", "ru"] as const;
+export type SupportedLocale = (typeof supportedLocales)[number];
+
+export function isSupportedLocale(
+  value: string | undefined,
+): value is SupportedLocale {
+  return value === "sr" || value === "en" || value === "ru";
+}
+
+export function isNoindexPath(pathname: string): boolean {
+  const path = pathname.replace(/\/+$/, "") || "/";
+
+  return (
+    /\/rezervacija\/(vozilo|dodaci|pregled)$/.test(path) ||
+    /\/(uspesno|wspay)(?:\/|$)/.test(path) ||
+    path === "/izbor-jezika" ||
+    path === "/select-lang"
+  );
+}
+
 export const pathSegments = {
   faq: "cesta-pitanja",
   contact: "kontakt",
@@ -57,16 +77,21 @@ const legacySegments: Record<string, string> = {
   extras: pathSegments.extras,
   review: pathSegments.review,
   "select-lang": pathSegments.languageSelection,
+  reklamacije: pathSegments.contact,
 };
 
 export function getLegacyRedirectPath(pathname: string): string | null {
-  const segments = pathname.split("/").filter(Boolean);
-  const hasLocale = ["sr", "en", "ru"].includes(segments[0]);
+  const segments = pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+  const hasLocale = isSupportedLocale(segments[0]);
   const startIndex = hasLocale ? 1 : 0;
   const legacySegment = segments[startIndex];
 
   if (!legacySegment || !legacySegments[legacySegment]) {
     return null;
+  }
+
+  if (legacySegment === "select-lang") {
+    return `/${pathSegments.languageSelection}`;
   }
 
   const nextSegments = [...segments];
@@ -79,5 +104,10 @@ export function getLegacyRedirectPath(pathname: string): string | null {
     nextSegments[startIndex + 1] =
       legacySegments[nextSegments[startIndex + 1]];
   }
+
+  if (!hasLocale) {
+    nextSegments.unshift("sr");
+  }
+
   return `/${nextSegments.join("/")}`;
 }

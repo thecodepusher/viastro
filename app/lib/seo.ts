@@ -1,4 +1,10 @@
-import { publicPaths } from "@/lib/paths";
+import { publicPaths, supportedLocales } from "@/lib/paths";
+
+export const PRODUCTION_ORIGIN = "https://viastro.rs";
+
+function isLocalHost(hostname: string): boolean {
+  return hostname === "localhost" || hostname === "127.0.0.1";
+}
 
 export interface OrganizationSchema {
   "@context": string;
@@ -38,6 +44,7 @@ export interface LocalBusinessSchema {
   name: string;
   image: string;
   telephone: string;
+  url: string;
   priceRange: string;
   address: {
     "@type": string;
@@ -121,15 +128,41 @@ export function getBaseUrl(request?: Request): string {
   if (request) {
     try {
       const url = new URL(request.url);
-      return `${url.protocol}//${url.host}`;
+      if (isLocalHost(url.hostname)) {
+        return `${url.protocol}//${url.host}`;
+      }
     } catch (e) {}
   }
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && isLocalHost(window.location.hostname)) {
     return `${window.location.protocol}//${window.location.host}`;
   }
 
-  return process.env.BASE_URL || "https://viastro.rs";
+  return process.env.BASE_URL || PRODUCTION_ORIGIN;
+}
+
+export function getLocaleFromPath(url: string): "sr_RS" | "en_US" | "ru_RU" {
+  try {
+    const path = url.startsWith("http")
+      ? new URL(url).pathname
+      : url.split("?")[0];
+    if (path === "/en" || path.startsWith("/en/")) return "en_US";
+    if (path === "/ru" || path.startsWith("/ru/")) return "ru_RU";
+  } catch (e) {}
+
+  return "sr_RS";
+}
+
+export function getHreflangAlternates(pathWithoutLang: string, baseUrl: string) {
+  const suffix = pathWithoutLang.replace(/\/+$/, "");
+
+  return [
+    ...supportedLocales.map((lang) => ({
+      lang,
+      href: `${baseUrl}/${lang}${suffix}`,
+    })),
+    { lang: "x-default", href: `${baseUrl}/sr${suffix}` },
+  ];
 }
 
 export function generateOrganizationSchema(
@@ -151,7 +184,7 @@ export function generateOrganizationSchema(
       areaServed: "RS",
       availableLanguage: ["sr", "en", "ru"],
     },
-    sameAs: [],
+    sameAs: ["https://www.instagram.com/viastro.rs/"],
   };
 }
 
@@ -186,6 +219,7 @@ export function generateLocalBusinessSchema(
     name: "Viastro Rent a Car",
     image: `${baseUrl}/logo.webp`,
     telephone: "+381-69-656-555",
+    url: `${baseUrl}${publicPaths.home(langCode)}`,
     priceRange: "€€",
     address: {
       "@type": "PostalAddress",
@@ -408,12 +442,14 @@ export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
 
   const baseUrl = providedBaseUrl || getBaseUrl();
   const ogImage = imageUrl || `${baseUrl}/opengraph-1200x630.webp`;
-  const canonical = url.startsWith("http") ? url : `${baseUrl}${url}`;
-  const localeFromUrl = canonical.includes("/en/")
-    ? "en_US"
-    : canonical.includes("/ru/")
-      ? "ru_RU"
-      : "sr_RS";
+  const canonical = (url.startsWith("http") ? url : `${baseUrl}${url}`).replace(
+    /\/$/,
+    "",
+  );
+  const localeFromUrl = getLocaleFromPath(canonical);
+  const localeAlternates = ["sr_RS", "en_US", "ru_RU"].filter(
+    (item) => item !== (locale ?? localeFromUrl),
+  );
 
   const metaTags: Array<{
     tagName?: "link";
@@ -451,6 +487,9 @@ export function generateOpenGraphMeta(options: OpenGraphMetaOptions) {
   }
 
   metaTags.push({ property: "og:locale", content: locale ?? localeFromUrl });
+  for (const alternate of localeAlternates) {
+    metaTags.push({ property: "og:locale:alternate", content: alternate });
+  }
 
   if (siteName) {
     metaTags.push({ property: "og:site_name", content: siteName });

@@ -1,13 +1,12 @@
 import { useLocation } from "react-router";
+import { getBaseUrl, getHreflangAlternates } from "@/lib/seo";
+import { isNoindexPath } from "@/lib/paths";
 
 const HreflangLinks = () => {
   const location = useLocation();
-  const pathname = location.pathname;
-  const isNonIndexableRoute =
-    /\/(rezervacija|uspesno|wspay)(?:\/|$)/.test(pathname) ||
-    pathname === "/izbor-jezika";
+  const pathname = location.pathname.replace(/\/+$/, "") || "/";
 
-  if (isNonIndexableRoute) {
+  if (isNoindexPath(pathname)) {
     return null;
   }
 
@@ -15,38 +14,17 @@ const HreflangLinks = () => {
   if (pathWithoutLang !== "/" && !pathWithoutLang.startsWith("/")) {
     pathWithoutLang = "/" + pathWithoutLang;
   }
-
   if (pathWithoutLang === "/") {
     pathWithoutLang = "";
   }
 
-  const baseUrl =
-    typeof window !== "undefined"
-      ? `${window.location.protocol}//${window.location.host}`
-      : "https://viastro.rs";
+  const alternates = getHreflangAlternates(pathWithoutLang, getBaseUrl());
 
   return (
     <>
-      <link
-        rel="alternate"
-        hrefLang="sr"
-        href={`${baseUrl}/sr${pathWithoutLang}`}
-      />
-      <link
-        rel="alternate"
-        hrefLang="en"
-        href={`${baseUrl}/en${pathWithoutLang}`}
-      />
-      <link
-        rel="alternate"
-        hrefLang="ru"
-        href={`${baseUrl}/ru${pathWithoutLang}`}
-      />
-      <link
-        rel="alternate"
-        hrefLang="x-default"
-        href={`${baseUrl}/sr${pathWithoutLang}`}
-      />
+      {alternates.map(({ lang, href }) => (
+        <link key={lang} rel="alternate" hrefLang={lang} href={href} />
+      ))}
     </>
   );
 };

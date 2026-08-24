@@ -8,11 +8,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const robots = `User-agent: *
 Allow: /
 
-# Disallow admin and private routes
-Disallow: /${pathSegments.reservation}
-Disallow: /${pathSegments.reservation}/
-Disallow: /*/${pathSegments.reservation}
-Disallow: /*/${pathSegments.reservation}/
+# Private checkout and utility pages. Reservation landing is public.
 Disallow: /${pathSegments.success}
 Disallow: /*/${pathSegments.success}
 Disallow: /wspay/

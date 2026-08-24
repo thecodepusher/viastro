@@ -29,6 +29,7 @@ import {
   canTrackAnalytics,
   trackPageView,
 } from "@/lib/analytics";
+import { isNoindexPath } from "@/lib/paths";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -64,10 +65,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const langCode = ["sr", "en", "ru"].includes(langData?.langCode ?? "")
     ? langData!.langCode
     : "sr";
-  const isPrivateRoute =
-    /\/(rezervacija|uspesno|wspay)(?:\/|$)/.test(location.pathname) ||
-    location.pathname === "/izbor-jezika";
-  const robots = isPrivateRoute ? "noindex, nofollow" : "index, follow";
+  const robots = isNoindexPath(location.pathname)
+    ? "noindex, nofollow"
+    : "index, follow";
 
   useEffect(() => {
     const fontLink = document.querySelector(

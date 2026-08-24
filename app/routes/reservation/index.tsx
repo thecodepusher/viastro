@@ -68,6 +68,10 @@ export async function action({ request, params }: Route.ActionArgs) {
   });
 }
 export function meta({ data }: Route.MetaArgs) {
+  if (!data) {
+    return [];
+  }
+
   const baseUrl = data.baseUrl || getBaseUrl();
 
   return generateOpenGraphMeta({

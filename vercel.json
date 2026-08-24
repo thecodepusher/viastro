@@ -2,6 +2,20 @@
   "buildCommand": "NODE_ENV=production npm run build",
   "outputDirectory": "build/client",
   "installCommand": "npm install",
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.viastro.rs"
+        }
+      ],
+      "destination": "https://viastro.rs/:path*",
+      "permanent": true
+    }
+  ],
   "env": {
     "NODE_ENV": "production"
   },

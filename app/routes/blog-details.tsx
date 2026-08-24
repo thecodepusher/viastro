@@ -2,7 +2,7 @@ import Cta from "@/components/Cta";
 import SEO from "@/components/SEO";
 import type { Route } from "./+types/blog-details";
 import { postsEn, postsRu, postsSr } from "@/lib/data";
-import { redirect, Link } from "react-router";
+import { Link } from "react-router";
 import { getLocale } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import { publicPaths } from "@/lib/paths";
@@ -40,7 +40,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   const post = posts.find((x) => x.slug == params.slug);
 
   if (!post) {
-    return redirect(publicPaths.news(params.lang ?? "sr"));
+    throw new Response("Not Found", { status: 404 });
   }
 
   const cookieHeader = request.headers.get("Cookie");
@@ -87,6 +87,10 @@ const articleOgImageSizes: Record<string, { width: number; height: number }> = {
 };
 
 export function meta({ data }: Route.MetaArgs) {
+  if (!data?.post) {
+    return [{ name: "robots", content: "noindex, follow" }];
+  }
+
   const baseUrl = data.baseUrl || getBaseUrl();
   const title = `${data.post.title}${data.lang.seoBlogDetailsTitle}`;
   const description = data.post.description || data.post.title;

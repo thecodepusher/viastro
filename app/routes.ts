@@ -7,6 +7,12 @@ export default [
     id: "routes/legacy-select-lang",
   }),
   route("izbor-jezika", "routes/select-lang.tsx"),
+  route("reklamacije", "routes/legacy-path-redirect.tsx", {
+    id: "routes/legacy-reklamacije",
+  }),
+  route(":lang?/reklamacije", "routes/legacy-path-redirect.tsx", {
+    id: "routes/legacy-lang-reklamacije",
+  }),
   route(":lang?", "routes/home.tsx"),
   route(":lang?/faq", "routes/legacy-path-redirect.tsx", { id: "routes/legacy-faq" }),
   route(":lang?/contact", "routes/legacy-path-redirect.tsx", { id: "routes/legacy-contact" }),

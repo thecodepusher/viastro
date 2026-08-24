@@ -9,7 +9,7 @@ export const footerNavigation = (
   lang: BaseLocale
 ) => ({
   main: [
-    { name: lang.home, href: `${publicPaths.home(langCode)}/` },
+    { name: lang.home, href: publicPaths.home(langCode) },
     { name: lang.cars, href: publicPaths.cars(langCode) },
     {
       name: lang.rentalConditions,

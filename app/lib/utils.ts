@@ -1,10 +1,11 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { langCookie } from "./prefs-cookie";
-import { replace } from "react-router";
+import { redirect } from "react-router";
 import { en } from "@/locales/en";
 import { sr } from "@/locales/sr";
 import { ru } from "@/locales/ru";
+import { isSupportedLocale } from "@/lib/paths";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,51 +13,38 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function getLocale(
   paramsLang: string | undefined,
-  request: Request
+  request: Request,
 ) {
-  if (!paramsLang) {
-    const url = new URL(request.url);
-    let returnPath = url.pathname;
+  const url = new URL(request.url);
 
+  if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
+    throw redirect(`${url.pathname.replace(/\/+$/, "")}${url.search}`, 301);
+  }
+
+  if (!paramsLang) {
     const cookieHeader = request.headers.get("Cookie");
     const lgCookie = (await langCookie.parse(cookieHeader)) || {};
+    const cookieLang = isSupportedLocale(lgCookie.lang) ? lgCookie.lang : null;
+    const prefixedPath =
+      url.pathname === "/"
+        ? `/${cookieLang ?? "sr"}`
+        : `/${cookieLang ?? "sr"}${url.pathname}`;
 
-    if (
-      lgCookie.lang &&
-      (lgCookie.lang === "sr" ||
-        lgCookie.lang === "en" ||
-        lgCookie.lang === "ru")
-    ) {
-      if (returnPath == "/") {
-        throw replace(`/${lgCookie.lang}`);
-      }
-      throw replace(`/${lgCookie.lang}${url.pathname}`);
-    }
-
-    if (returnPath == "/") {
-      throw replace(`/sr`);
-    }
-
-    throw replace(`/sr${url.pathname}`);
+    throw redirect(`${prefixedPath}${url.search}`, cookieLang ? 302 : 301);
   }
 
-  let lang = sr;
-
-  if (paramsLang) {
-    switch (paramsLang) {
-      case "sr":
-        lang = sr;
-        break;
-      case "en":
-        lang = en;
-        break;
-      case "ru":
-        lang = ru;
-        break;
-    }
+  if (!isSupportedLocale(paramsLang)) {
+    throw new Response("Not Found", { status: 404 });
   }
 
-  return lang;
+  switch (paramsLang) {
+    case "en":
+      return en;
+    case "ru":
+      return ru;
+    default:
+      return sr;
+  }
 }
 
 export function getDatabaseUrl(): string {

@@ -1,12 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link, Outlet, useMatches, useFetcher } from "react-router";
 import { reservationSteps } from "@/lib/reservation";
-import { publicPaths } from "@/lib/paths";
 import type { Route } from "./+types/reservation-page";
 import { cn, getLocale, getDatabaseUrl } from "@/lib/utils";
 import { prefs } from "@/lib/prefs-cookie";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
+import { getBaseUrl } from "@/lib/seo";
 import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
 import { locations, type LocaleTypes } from "@/lib/data";
 import { CheckIcon, ChevronRight } from "lucide-react";
@@ -121,18 +120,6 @@ export async function action({ request }: Route.ActionArgs) {
   });
 }
 
-export function meta({ data }: Route.MetaArgs) {
-  const baseUrl = data.baseUrl || getBaseUrl();
-
-  return generateOpenGraphMeta({
-    title: data.lang.seoReservationTitle,
-    description: data.lang.seoReservationDescription,
-    url: publicPaths.reservation(data.langCode || "sr"),
-    baseUrl,
-    keywords: data.lang.seoReservationKeywords,
-    imageAlt: "Viastro - Car Rental Reservation",
-  });
-}
 
 export default function ReservationPage({ loaderData }: Route.ComponentProps) {
   const isMobile = useIsMobile();

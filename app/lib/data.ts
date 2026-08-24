@@ -121,7 +121,7 @@ export const postsSr = [
         <li><strong>Poslednji dan:</strong> Opustite se uz more, krenite popodne i vratite vozilo bez stresa.</li>
       </ol>
 
-      <p><strong>Rezervišite na vreme:</strong> Letnja sezona brzo popunjava vozni park. Obezbedite automobil ranije. Kontakt: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
+      <p><strong>Rezervišite na vreme:</strong> Letnja sezona brzo popunjava vozni park. Obezbedite automobil ranije. Kontakt: <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/sea-summer.webp",
     date: "Avgust 6, 2026",
@@ -171,7 +171,7 @@ export const postsSr = [
         <li><strong>Dan 4:</strong> Kratka šetnja ili sankanje, povratak popodne.</li>
       </ol>
 
-      <p><strong>Rezervišite na vreme:</strong> Praznici brzo pune kapacitete, zato obezbedite vozilo ranije. Kontakt: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
+      <p><strong>Rezervišite na vreme:</strong> Praznici brzo pune kapacitete, zato obezbedite vozilo ranije. Kontakt: <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> ili <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/mount.webp",
     date: "Decembar 15, 2025",
@@ -220,7 +220,7 @@ export const postsSr = [
         <li><strong>Komfor i sigurnost:</strong> Svi naši automobili su redovno servisirani, klimatizovani i potpuno opremljeni za duža putovanja.</li>
         <li><strong>Fleksibilni paketi:</strong> Najam već od 3 dana sa neograničenim kilometrima - savršeno za vikend planine.</li>
         <li><strong>Puna pokrivenost:</strong> Full kasko osiguranje, 24h asistencija, i mogućnost dodatne opreme (nosač za ski, lanaca, dečje sedište).</li>
-        <li><strong>Brza i jednostavna rezervacija:</strong> Kontaktirajte nas putem sajta <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> ili direktno na broj <a href="tel:0696565555">069/6565-555</a>.</li>
+        <li><strong>Brza i jednostavna rezervacija:</strong> Kontaktirajte nas putem sajta <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> ili direktno na broj <a href="tel:0696565555">069/6565-555</a>.</li>
       </ul>
 
       <h3>Plan puta - predlog:</h3>
@@ -405,7 +405,7 @@ export const postsEn = [
         <li><strong>Last day:</strong> Relax by the sea, head back in the afternoon, and return the car without stress.</li>
       </ol>
 
-      <p><strong>Book early:</strong> Peak summer fills the fleet fast. Secure your car in advance. Contact: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
+      <p><strong>Book early:</strong> Peak summer fills the fleet fast. Secure your car in advance. Contact: <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/sea-summer.webp",
     date: "August 6, 2026",
@@ -455,7 +455,7 @@ export const postsEn = [
         <li><strong>Day 4:</strong> Short walk or sledding, return in the afternoon.</li>
       </ol>
 
-      <p><strong>Book early:</strong> Holiday dates fill fast — secure your vehicle now. Contact: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
+      <p><strong>Book early:</strong> Holiday dates fill fast — secure your vehicle now. Contact: <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> or <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/mount.webp",
     date: "December 15, 2025",
@@ -504,7 +504,7 @@ export const postsEn = [
         <li><strong>Comfort and safety:</strong> All our cars are regularly serviced, air-conditioned, and fully equipped for longer trips.</li>
         <li><strong>Flexible packages:</strong> Rentals from 3 days with unlimited mileage - perfect for a mountain weekend.</li>
         <li><strong>Full coverage:</strong> Full casco insurance, 24h assistance, and the option of additional equipment (ski rack, chains, child seat).</li>
-        <li><strong>Quick and easy booking:</strong> Contact us via the website <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> or directly at <a href="tel:0696565555">069/6565-555</a>.</li>
+        <li><strong>Quick and easy booking:</strong> Contact us via the website <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> or directly at <a href="tel:0696565555">069/6565-555</a>.</li>
       </ul>
 
       <h3>Itinerary - suggestion:</h3>
@@ -687,7 +687,7 @@ export const postsRu = [
         <li><strong>Последний день:</strong> Отдохните у моря, выезжайте после обеда и спокойно верните автомобиль.</li>
       </ol>
 
-      <p><strong>Бронируйте заранее:</strong> В высокий сезон автопарк быстро заполняется. Закрепите машину раньше. Контакт: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
+      <p><strong>Бронируйте заранее:</strong> В высокий сезон автопарк быстро заполняется. Закрепите машину раньше. Контакт: <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/sea-summer.webp",
     date: "6 августа 2026",
@@ -736,7 +736,7 @@ export const postsRu = [
         <li><strong>День 4:</strong> Прогулка или санки, выезд домой после обеда.</li>
       </ol>
 
-      <p><strong>Бронируйте заранее:</strong> Праздничные даты быстро заполняются — закрепите автомобиль сейчас. Контакт: <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
+      <p><strong>Бронируйте заранее:</strong> Праздничные даты быстро заполняются — закрепите автомобиль сейчас. Контакт: <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> или <a href="tel:0696565555">069/6565-555</a>.</p>
     `,
     imageUrl: "/mount.webp",
     date: "15 декабря 2025",
@@ -785,7 +785,7 @@ export const postsRu = [
         <li><strong>Комфорт и безопасность:</strong> Все наши автомобили регулярно обслуживаются, оснащены кондиционерами и полностью оборудованы для длительных поездок.</li>
         <li><strong>Гибкие пакеты:</strong> Аренда от 3 дней с неограниченным пробегом - идеально для выходных в горах.</li>
         <li><strong>Полное покрытие:</strong> Полная страховка КАСКО, круглосуточная помощь на дороге и возможность дополнительного оборудования (багажник для лыж, цепи, детское кресло).</li>
-        <li><strong>Быстрое и простое бронирование:</strong> Свяжитесь с нами через сайт <a href="https://www.viastro.rs" target="_blank">www.viastro.rs</a> или напрямую по номеру <a href="tel:0696565555">069/6565-555</a>.</li>
+        <li><strong>Быстрое и простое бронирование:</strong> Свяжитесь с нами через сайт <a href="https://viastro.rs" target="_blank">www.viastro.rs</a> или напрямую по номеру <a href="tel:0696565555">069/6565-555</a>.</li>
       </ul>
 
       <h3>План поездки - предложение:</h3>

@@ -1,11 +1,10 @@
-import { getBaseUrl } from "@/lib/seo";
+import { getBaseUrl, getHreflangAlternates } from "@/lib/seo";
 import { postsSr, postsEn, postsRu } from "@/lib/data";
-import { pathSegments, publicPaths } from "@/lib/paths";
+import { pathSegments, publicPaths, supportedLocales } from "@/lib/paths";
 import type { Route } from "./+types/sitemap[.]xml";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const baseUrl = getBaseUrl(request);
-  const languages = ["sr", "en", "ru"];
 
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -28,6 +27,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     "",
     pathSegments.cars,
     pathSegments.longTermRental,
+    pathSegments.reservation,
     pathSegments.rentalConditions,
     pathSegments.faq,
     pathSegments.news,
@@ -37,7 +37,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const allBlogPosts = [...postsSr, ...postsEn, ...postsRu];
   const uniqueBlogSlugs = Array.from(
-    new Set(allBlogPosts.map((post) => post.slug))
+    new Set(allBlogPosts.map((post) => post.slug)),
   );
 
   const urls: string[] = [];
@@ -56,6 +56,8 @@ export async function loader({ request }: Route.LoaderArgs) {
         return (0.9 * baseMultiplier).toFixed(2);
       case pathSegments.contact:
         return (0.8 * baseMultiplier).toFixed(2);
+      case pathSegments.reservation:
+        return (0.75 * baseMultiplier).toFixed(2);
       case pathSegments.faq:
         return (0.7 * baseMultiplier).toFixed(2);
       case pathSegments.rentalConditions:
@@ -67,33 +69,39 @@ export async function loader({ request }: Route.LoaderArgs) {
     }
   };
 
-  for (const lang of languages) {
+  const xhtmlLinks = (pathWithoutLang: string) =>
+    getHreflangAlternates(pathWithoutLang, baseUrl)
+      .map(
+        ({ lang, href }) =>
+          `<xhtml:link rel="alternate" hreflang="${lang}" href="${href}"/>`,
+      )
+      .join("");
+
+  for (const lang of supportedLocales) {
     const isSerbian = lang === "sr";
 
     for (const page of staticPages) {
-      const path = page ? `/${lang}/${page}` : `/${lang}`;
+      const pathWithoutLang = page ? `/${page}` : "";
+      const path = `/${lang}${pathWithoutLang}`;
       const priority = getPagePriority(page, isSerbian);
 
       urls.push(
-        `<url><loc>${baseUrl}${path}</loc><lastmod>${currentDate}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority></url>`
+        `<url><loc>${baseUrl}${path}</loc><lastmod>${currentDate}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority>${xhtmlLinks(pathWithoutLang)}</url>`,
       );
     }
 
     for (const slug of uniqueBlogSlugs) {
       const priority = isSerbian ? "0.75" : "0.53";
       const lastmod = getBlogPostDate(slug, lang);
+      const pathWithoutLang = `/${pathSegments.news}/${slug}`;
       urls.push(
-        `<url><loc>${baseUrl}${publicPaths.article(lang, slug)}</loc><lastmod>${lastmod}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority></url>`
+        `<url><loc>${baseUrl}${publicPaths.article(lang, slug)}</loc><lastmod>${lastmod}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority>${xhtmlLinks(pathWithoutLang)}</url>`,
       );
     }
   }
 
-  urls.unshift(
-    `<url><loc>${baseUrl}/</loc><lastmod>${currentDate}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`
-  );
-
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.join("\n")}
 </urlset>`;
 

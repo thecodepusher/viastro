@@ -264,7 +264,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           const form = new FormData();
           form.append("selectedCarId", `${carId}`);
           fetcher.submit(form, { method: "post" });
-          navigate("reservation");
+          navigate(publicPaths.reservation(loaderData.langCode));
         }}
         lang={loaderData.lang}
         langCode={loaderData.langCode}
