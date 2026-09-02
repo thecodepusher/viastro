@@ -27,6 +27,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     "",
     pathSegments.cars,
     pathSegments.longTermRental,
+    pathSegments.expo,
     pathSegments.reservation,
     pathSegments.rentalConditions,
     pathSegments.faq,
@@ -52,6 +53,8 @@ export async function loader({ request }: Route.LoaderArgs) {
         return (0.95 * baseMultiplier).toFixed(2);
       case pathSegments.longTermRental:
         return (0.9 * baseMultiplier).toFixed(2);
+      case pathSegments.expo:
+        return (1.0 * baseMultiplier).toFixed(2);
       case pathSegments.news:
         return (0.9 * baseMultiplier).toFixed(2);
       case pathSegments.contact:

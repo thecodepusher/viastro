@@ -28,21 +28,22 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
 
           <nav
             aria-label="Footer"
-            className="w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:max-w-2xl lg:max-w-3xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            className="w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:max-w-2xl lg:max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-nowrap lg:items-stretch lg:divide-x lg:divide-white/8">
               {navigation.main.map((item, index) => (
                 <a
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "flex min-h-[3.25rem] items-center justify-center px-5 py-3.5 text-center text-[15px] font-medium leading-snug text-white/70 transition-colors hover:bg-white/5 hover:text-p md:text-sm",
+                    "flex min-h-[3.25rem] items-center justify-center px-5 py-3.5 text-center text-[15px] font-medium leading-snug transition-colors hover:bg-white/5 md:text-sm lg:min-h-12 lg:flex-1 lg:border-0 lg:px-3 lg:py-3 lg:text-[13px]",
+                    item.accent
+                      ? "text-p hover:text-p/80 font-semibold"
+                      : "text-white/70 hover:text-p",
                     index < navigation.main.length - 1 &&
                       "border-b border-white/8 md:border-b-0",
-                    index < 4 && "md:border-b md:border-white/8 lg:border-b-0",
-                    index < 3 && "lg:border-b lg:border-white/8",
-                    index % 2 === 0 &&
-                      "md:border-r md:border-white/8 lg:border-r-0",
-                    index % 3 !== 2 && "lg:border-r lg:border-white/8",
+                    index < navigation.main.length - 2 &&
+                      "md:border-b md:border-white/8",
+                    index % 2 === 0 && "md:border-r md:border-white/8",
                   )}>
                   {item.name}
                 </a>

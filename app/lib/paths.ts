@@ -27,6 +27,7 @@ export const pathSegments = {
   rentalConditions: "uslovi-iznajmljivanja",
   privacyPolicy: "politika-privatnosti",
   longTermRental: "dugorocni-najam",
+  expo: "expo-2027-beograd-rent-a-car",
   reservation: "rezervacija",
   vehicle: "vozilo",
   extras: "dodaci",
@@ -47,6 +48,7 @@ export const publicPaths = {
     `/${lang}/${pathSegments.rentalConditions}`,
   privacyPolicy: (lang = "sr") => `/${lang}/${pathSegments.privacyPolicy}`,
   longTermRental: (lang = "sr") => `/${lang}/${pathSegments.longTermRental}`,
+  expo: (lang = "sr") => `/${lang}/${pathSegments.expo}`,
   reservation: (lang = "sr") => `/${lang}/${pathSegments.reservation}`,
   reservationVehicle: (lang = "sr") =>
     `/${lang}/${pathSegments.reservation}/${pathSegments.vehicle}`,
@@ -78,6 +80,7 @@ const legacySegments: Record<string, string> = {
   review: pathSegments.review,
   "select-lang": pathSegments.languageSelection,
   reklamacije: pathSegments.contact,
+  expo: pathSegments.expo,
 };
 
 export function getLegacyRedirectPath(pathname: string): string | null {

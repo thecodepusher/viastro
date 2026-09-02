@@ -384,6 +384,160 @@ export function generateFAQPageSchema(
   };
 }
 
+export function generateExpoServiceSchema(
+  baseUrl: string,
+  langCode: string,
+  options: {
+    name: string;
+    description: string;
+    imageUrl?: string;
+  },
+) {
+  const pageUrl = `${baseUrl}${publicPaths.expo(langCode)}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: options.name,
+    alternateName: [
+      "Expo rent a car",
+      "Expo renta car",
+      "Rent a car EXPO 2027 Belgrade",
+    ],
+    description: options.description,
+    image: options.imageUrl || `${baseUrl}/expo-2027-og-1200x630.jpg`,
+    provider: {
+      "@type": "AutomotiveBusiness",
+      name: "Viastro Rent a Car",
+      telephone: "+381-69-656-555",
+      url: baseUrl,
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "RS",
+        addressLocality: "Belgrade",
+      },
+    },
+    brand: {
+      "@type": "Brand",
+      name: "Viastro",
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Belgrade",
+      },
+      {
+        "@type": "Place",
+        name: "EXPO 2027 Belgrade, Surcin",
+      },
+      {
+        "@type": "Airport",
+        name: "Belgrade Nikola Tesla Airport",
+        iataCode: "BEG",
+      },
+    ],
+    serviceType: "Car Rental",
+    category: "Expo rent a car",
+    url: pageUrl,
+    availableLanguage: ["sr", "en", "ru"],
+    offers: {
+      "@type": "Offer",
+      url: `${baseUrl}${publicPaths.reservation(langCode)}`,
+      availability: "https://schema.org/InStock",
+      priceCurrency: "EUR",
+    },
+  };
+}
+
+export function generateExpoWebPageSchema(options: {
+  baseUrl: string;
+  langCode: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+}) {
+  const pageUrl = `${options.baseUrl}${publicPaths.expo(options.langCode)}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": pageUrl,
+    url: pageUrl,
+    name: options.name,
+    description: options.description,
+    inLanguage: options.langCode,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Viastro Rent a Car",
+      url: options.baseUrl,
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: options.imageUrl,
+      width: 1200,
+      height: 630,
+    },
+    about: {
+      "@type": "Event",
+      name: "EXPO 2027 Belgrade",
+      startDate: "2027-05-15",
+      endDate: "2027-08-15",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "EXPO 2027 Belgrade",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Surcin",
+          addressRegion: "Belgrade",
+          addressCountry: "RS",
+        },
+      },
+    },
+  };
+}
+
+export function generateExpoEventSchema(options: {
+  name: string;
+  description: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: "EXPO 2027 Belgrade",
+    description: options.description,
+    startDate: "2027-05-15",
+    endDate: "2027-08-15",
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: "EXPO 2027 Belgrade",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Surcin",
+        addressRegion: "Belgrade",
+        addressCountry: "RS",
+      },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: "EXPO 2027 Belgrade",
+    },
+    offers: {
+      "@type": "Offer",
+      name: options.name,
+      url: options.url,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Viastro Rent a Car",
+      },
+    },
+  };
+}
+
 export function generateBreadcrumbSchema(
   baseUrl: string,
   items: { name: string; url: string }[],

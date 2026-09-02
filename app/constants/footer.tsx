@@ -18,6 +18,7 @@ export const footerNavigation = (
     { name: lang.faq, href: publicPaths.faq(langCode) },
     { name: lang.blog, href: publicPaths.news(langCode) },
     { name: lang.contact, href: publicPaths.contact(langCode) },
+    { name: lang.expoNav, href: publicPaths.expo(langCode), accent: true },
   ],
   social: [
     {

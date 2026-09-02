@@ -1,5 +1,5 @@
 import { ArrowRight, CarFront, Clock3, Package, ShieldCheck, Wallet } from "lucide-react";
-import { useEffect, useState } from "react";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import {
   iconBadge,
   gradientCard,
@@ -14,57 +14,17 @@ type Props = {
   content: LongTermRentalCopy;
 };
 
-const heroImages = [
-  "/long-term-rental-hero-1.webp",
-  "/long-term-rental-hero-2.webp",
-];
-
 export function LongTermHero({ content }: Props) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
   const featureTags = [
     content.benefitsItems[0],
     content.benefitsItems[1],
     content.benefitsItems[3],
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="relative overflow-hidden">
       <div className="relative h-[66vh] w-full overflow-hidden">
-        <div className="absolute inset-0">
-          {heroImages.map((image, index) => (
-            <div
-              key={image}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentImageIndex ? "opacity-100" : "opacity-0"
-              }`}>
-              <img
-                src={image}
-                alt=""
-                className={`absolute inset-0 h-full w-full object-cover transition-transform duration-5000 ease-out ${
-                  index === currentImageIndex ? "scale-110" : "scale-100"
-                }`}
-                {...(index === 0
-                  ? ({
-                      fetchPriority: "high",
-                      loading: "eager",
-                    } as React.ImgHTMLAttributes<HTMLImageElement>)
-                  : { loading: "lazy" })}
-                aria-hidden="true"
-              />
-              <div className="absolute inset-0 bg-linear-to-br from-pd/50 via-pd/35 to-pd/20" />
-              <div className="absolute inset-0 bg-black/30" />
-            </div>
-          ))}
-        </div>
+        <HeroCarousel />
 
         <div className="relative z-10 h-auto">
           <div className={heroContainer}>

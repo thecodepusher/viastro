@@ -78,9 +78,55 @@ export interface LongTermRentalLocale {
   noSearchResults: string;
 }
 
+export interface ExpoLocale {
+  nav: string;
+  breadcrumb: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroImageAlt: string;
+  heroDescription: string;
+  highlights: string[];
+  datesLabel: string;
+  datesValue: string;
+  locationLabel: string;
+  locationValue: string;
+  expectedLabel: string;
+  expectedValue: string;
+  whyTitle: string;
+  whyParagraphs: string[];
+  servicesTitle: string;
+  servicesIntro: string;
+  services: Array<{ title: string; description: string }>;
+  airportTitle: string;
+  airportParagraphs: string[];
+  exhibitorsTitle: string;
+  exhibitorsIntro: string;
+  exhibitors: Array<{ title: string; description: string }>;
+  stepsTitle: string;
+  stepsIntro: string;
+  steps: Array<{ title: string; description: string }>;
+  audiencesTitle: string;
+  audiences: Array<{ title: string; description: string }>;
+  availabilityTitle: string;
+  availabilityText: string;
+  faqTitle: string;
+  faqs: Array<{ question: string; answer: string }>;
+  partnerTitle: string;
+  partnerParagraphs: string[];
+  ctaTitle: string;
+  ctaText: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  relatedTitle: string;
+  relatedCars: string;
+  relatedLongTerm: string;
+  relatedReservation: string;
+}
+
 export interface BaseLocale {
   home: string;
   cars: string;
+  expoNav: string;
   longTermRentalNav: string;
   rentalConditions: string;
   faq: string;
@@ -215,6 +261,7 @@ export interface BaseLocale {
   delatnost: string;
   customerReservationEmail: CustomerReservationEmailLocale;
   longTermRental: LongTermRentalLocale;
+  expo: ExpoLocale;
   seoHomeTitle: string;
   seoHomeDescription: string;
   seoHomeKeywords: string;
@@ -265,4 +312,7 @@ export interface BaseLocale {
   seoLongTermRentalTitle: string;
   seoLongTermRentalDescription: string;
   seoLongTermRentalKeywords: string;
+  seoExpoTitle: string;
+  seoExpoDescription: string;
+  seoExpoKeywords: string;
 }

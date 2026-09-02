@@ -40,7 +40,7 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks: Array<{ to: string; label: string; accent?: boolean }> = [
     { to: publicPaths.home(props.langCode), label: props.lang.home },
     { to: publicPaths.cars(props.langCode), label: props.lang.cars },
     {
@@ -54,6 +54,11 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
     { to: publicPaths.faq(props.langCode), label: props.lang.faq },
     { to: publicPaths.news(props.langCode), label: props.lang.blog },
     { to: publicPaths.contact(props.langCode), label: props.lang.contact },
+    {
+      to: publicPaths.expo(props.langCode),
+      label: props.lang.expoNav,
+      accent: true,
+    },
   ];
 
   const isActive = (path: string) => {
@@ -99,9 +104,12 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "relative px-3 py-2 text-sm font-medium text-white/75 transition-colors duration-200 rounded-md hover:text-white",
+                    "relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md",
                     "lg:px-3.5 lg:text-[0.9375rem]",
-                    active && "text-white",
+                    link.accent
+                      ? "text-p hover:text-p/80 font-semibold"
+                      : "text-white/75 hover:text-white",
+                    active && !link.accent && "text-white",
                   )}>
                   {link.label}
                   {active && (
@@ -218,9 +226,13 @@ export default function Header(props: { lang: BaseLocale; langCode: string }) {
                         to={link.to}
                         className={cn(
                           "relative overflow-hidden px-4 py-3.5 text-base font-medium transition-colors rounded-lg",
-                          active
-                            ? "bg-white/10 text-white"
-                            : "text-white/70 hover:text-white hover:bg-white/5",
+                          link.accent
+                            ? active
+                              ? "bg-p/15 text-p font-semibold"
+                              : "text-p font-semibold hover:bg-p/10"
+                            : active
+                              ? "bg-white/10 text-white"
+                              : "text-white/70 hover:text-white hover:bg-white/5",
                         )}>
                         {link.label}
                         {active && (

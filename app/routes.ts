@@ -40,6 +40,10 @@ export default [
   route(":lang?/uslovi-iznajmljivanja", "routes/rental-conditions-page.tsx"),
   route(":lang?/politika-privatnosti", "routes/privacy-policy-page.tsx"),
   route(":lang?/dugorocni-najam", "routes/long-term-rental.tsx"),
+  route(":lang?/expo", "routes/legacy-path-redirect.tsx", {
+    id: "routes/legacy-expo",
+  }),
+  route(":lang?/expo-2027-beograd-rent-a-car", "routes/expo-page.tsx"),
   route(":lang?/rezervacija", "routes/reservation-page.tsx", [
     index("routes/reservation/index.tsx"),
     route("vozilo", "routes/reservation/vehicle.tsx"),
