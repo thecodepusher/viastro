@@ -63,7 +63,7 @@ export function ExpoLanding({ content, langCode }: Props) {
                   <p className="text-base sm:text-lg leading-relaxed text-white/85 max-w-2xl">
                     {content.heroDescription}
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="hidden lg:flex flex-wrap gap-2">
                     {content.highlights.map((item) => (
                       <span key={item} className={`${pill} bg-white/10 text-p ring-1 ring-white/15`}>
                         <CheckCircle2 className="size-4" />

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, redirect, useFetcher, useNavigate } from "react-router";
+import { redirect, useFetcher, useNavigate } from "react-router";
 import { prefs } from "@/lib/prefs-cookie";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { setHours } from "date-fns";
@@ -259,18 +259,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </div>
 
       <Logos lang={loaderData.lang} />
-      <section className="bg-surface px-4 sm:px-6 lg:px-8">
-        <Link
-          to={publicPaths.expo(loaderData.langCode)}
-          className="mx-auto flex max-w-7xl flex-col gap-2 rounded-xl border border-p/30 bg-p/10 px-5 py-4 transition-colors hover:border-p/50 hover:bg-p/15 sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-sm font-semibold uppercase tracking-wide text-p">
-            {loaderData.lang.expo.heroEyebrow}
-          </span>
-          <span className="text-base font-semibold text-foreground">
-            {loaderData.lang.expo.ctaPrimary}
-          </span>
-        </Link>
-      </section>
       <Cars
         onSelect={(carId) => {
           const form = new FormData();
