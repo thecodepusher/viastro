@@ -436,7 +436,7 @@ export function generateExpoServiceSchema(
         iataCode: "BEG",
       },
     ],
-    serviceType: "Car Rental",
+    serviceType: ["Car Rental", "Chauffeur Service"],
     category: "Expo rent a car",
     url: pageUrl,
     availableLanguage: ["sr", "en", "ru"],

@@ -308,6 +308,7 @@ export const sr: BaseLocale = {
       "Preuzimanje na aerodromu Nikola Tesla (BEG)",
       "Dostava vozila u Beogradu i Surčinu",
       "Dugoročni najam za izlagače",
+      "Vožnja sa vozačem",
       "Podrška na srpskom, engleskom i ruskom",
       "Fakturisanje za firme",
     ],
@@ -336,6 +337,11 @@ export const sr: BaseLocale = {
         title: "Dostava vozila u Beogradu i Surčinu",
         description:
           "Boravite u hotelu u Beogradu ili apartmanu blizu sajma? Dostavljamo vozilo na vašu adresu u Beogradu ili Surčinu, tako da najam počne bez izmene vaših planova.",
+      },
+      {
+        title: "Vožnja sa vozačem",
+        description:
+          "Ne želite da vozite? Viastro nudi uslugu sa profesionalnim vozačem - transfer sa aerodroma, vožnje do sajma, hotela i sastanaka, kao i prevoz delegacija tokom EXPO 2027. Dogovara se unapred, uz jasnu ponudu.",
       },
       {
         title: "Dugoročni najam za izlagače",
@@ -429,7 +435,7 @@ export const sr: BaseLocale = {
       {
         title: "Poslovne delegacije",
         description:
-          "Udobna vozila, podrška na tri jezika i fakturisanje firmama čine Viastro praktičnim izborom za zvanične delegacije i korporativne goste EXPO 2027.",
+          "Udobna vozila, vožnja sa vozačem, podrška na tri jezika i fakturisanje firmama čine Viastro praktičnim izborom za zvanične delegacije i korporativne goste EXPO 2027.",
       },
       {
         title: "Međunarodni gosti",
@@ -450,7 +456,12 @@ export const sr: BaseLocale = {
       {
         question: "Gde da nađem expo rent a car u Beogradu?",
         answer:
-          "Viastro nudi expo rent a car u Beogradu za EXPO 2027: preuzimanje na aerodromu Nikola Tesla, dostava vozila u Surčinu i Beogradu, kao i kratkoročni i dugoročni najam za posetioce i izlagače. Rezervaciju možete započeti online ili nas pozvati.",
+          "Viastro nudi expo rent a car u Beogradu za EXPO 2027: preuzimanje na aerodromu Nikola Tesla, dostava vozila u Surčinu i Beogradu, vožnja sa vozačem, kao i kratkoročni i dugoročni najam za posetioce i izlagače. Rezervaciju možete započeti online ili nas pozvati.",
+      },
+      {
+        question: "Nudite li vožnju sa vozačem?",
+        answer:
+          "Da. Pored klasičnog najma, Viastro nudi vožnju sa vozačem za goste EXPO 2027 - transfere sa aerodroma, vožnje do sajma i hotela i prevoz delegacija. Navedite u rezervaciji da vam treba vozač i pripremićemo ponudu.",
       },
       {
         question: "Mogu li da preuzmem vozilo na aerodromu za EXPO 2027?",
@@ -506,7 +517,7 @@ export const sr: BaseLocale = {
     ],
     ctaTitle: "Trebate vozilo za EXPO 2027?",
     ctaText:
-      "Pošaljite neobavezujuću rezervaciju sa datumima i željenim vozilom. Brzo odgovaramo jasnom ponudom - preuzimanje na aerodromu, dostava u Beogradu i Surčinu, kratkoročni i dugoročni najam.",
+      "Pošaljite neobavezujuću rezervaciju sa datumima i željenim vozilom. Brzo odgovaramo jasnom ponudom - preuzimanje na aerodromu, dostava u Beogradu i Surčinu, vožnja sa vozačem, kratkoročni i dugoročni najam.",
     ctaPrimary: "Rezervišite vozilo",
     ctaSecondary: "Kontaktirajte nas",
     relatedTitle: "Povezane usluge rent a car za EXPO 2027",
@@ -605,7 +616,7 @@ export const sr: BaseLocale = {
     "dugoročni najam vozila, dugoročni najam automobila, dugoročni najam za firme, renta vozila za firme, renta vozila za pravna lica, najam vozila za pravna lica, poslovni najam vozila, operativni rent Beograd, operativni lizing vozila, dugoročni rent a car Beograd, vozni park za firme, iznajmljivanje automobila na duži period",
   seoExpoTitle: "Expo Rent a Car Beograd 2027 | Viastro",
   seoExpoDescription:
-    "Expo rent a car Beograd 2027 - iznajmite automobil za EXPO. Renta car sa aerodroma Nikola Tesla, dostava u Surčinu, dugoročni najam za izlagače. Rezervišite na vreme.",
+    "Expo rent a car Beograd 2027 - iznajmite automobil za EXPO. Renta car sa aerodroma Nikola Tesla, dostava u Surčinu, vožnja sa vozačem i dugoročni najam za izlagače. Rezervišite na vreme.",
   seoExpoKeywords:
-    "expo renta car, expo rent a car, expo rent a car beograd, expo 2027 rent a car, renta car expo, expo 2027 beograd rent a car, iznajmljivanje automobila expo beograd, rent a car expo 2027, expo 2027 surčin, rent a car aerodrom expo, rent a car nikola tesla expo, viastro expo",
+    "expo renta car, expo rent a car, expo rent a car beograd, expo 2027 rent a car, renta car expo, expo 2027 beograd rent a car, iznajmljivanje automobila expo beograd, rent a car expo 2027, expo 2027 surčin, rent a car aerodrom expo, rent a car nikola tesla expo, vožnja sa vozačem beograd, viastro expo",
 };

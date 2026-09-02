@@ -15,6 +15,7 @@ import {
   Receipt,
   ShieldCheck,
   Truck,
+  UserCheck,
   Users,
 } from "lucide-react";
 import type { ExpoLocale } from "@/locales/base-locale";
@@ -37,7 +38,15 @@ type Props = {
   langCode: string;
 };
 
-const serviceIcons = [Plane, Truck, CalendarDays, Languages, Receipt, ShieldCheck];
+const serviceIcons = [
+  Plane,
+  Truck,
+  UserCheck,
+  CalendarDays,
+  Languages,
+  Receipt,
+  ShieldCheck,
+];
 const exhibitorIcons = [CalendarDays, CarFront, Users];
 const audienceIcons = [Globe2, Building2, Users, Languages, MapPin];
 

@@ -308,6 +308,7 @@ export const en: BaseLocale = {
       "Pick-up at Belgrade Airport (BEG)",
       "Vehicle delivery in Belgrade and Surcin",
       "Long-term rental for exhibitors",
+      "Chauffeur service",
       "Support in Serbian, English and Russian",
       "Invoicing for companies",
     ],
@@ -336,6 +337,11 @@ export const en: BaseLocale = {
         title: "Vehicle delivery in Belgrade and Surcin",
         description:
           "Staying at a hotel in Belgrade or an apartment near the EXPO site? We can deliver the vehicle to your address in Belgrade or Surcin, so the rental starts without changing your plans.",
+      },
+      {
+        title: "Chauffeur service",
+        description:
+          "Prefer not to drive? Viastro offers a professional chauffeur - airport transfers, rides to the fair, hotels and meetings, and transport for delegations during EXPO 2027. Arranged in advance, with a clear offer.",
       },
       {
         title: "Long-term rental for exhibitors",
@@ -429,7 +435,7 @@ export const en: BaseLocale = {
       {
         title: "Business delegations",
         description:
-          "Comfortable vehicles, support in three languages and company invoicing make Viastro a practical choice for official delegations and corporate guests at EXPO 2027.",
+          "Comfortable vehicles, chauffeur service, support in three languages and company invoicing make Viastro a practical choice for official delegations and corporate guests at EXPO 2027.",
       },
       {
         title: "International guests",
@@ -450,7 +456,12 @@ export const en: BaseLocale = {
       {
         question: "Where can I find expo rent a car in Belgrade?",
         answer:
-          "Viastro offers expo rent a car in Belgrade for EXPO 2027: pick-up at Nikola Tesla Airport, vehicle delivery in Surcin and Belgrade, plus short-term and long-term rental for visitors and exhibitors. You can start a booking online or call us.",
+          "Viastro offers expo rent a car in Belgrade for EXPO 2027: pick-up at Nikola Tesla Airport, vehicle delivery in Surcin and Belgrade, chauffeur service, plus short-term and long-term rental for visitors and exhibitors. You can start a booking online or call us.",
+      },
+      {
+        question: "Do you offer a chauffeur service?",
+        answer:
+          "Yes. In addition to self-drive rental, Viastro offers a chauffeur service for EXPO 2027 guests - airport transfers, rides to the fair and hotels, and transport for delegations. Mention in your booking that you need a driver and we will prepare an offer.",
       },
       {
         question: "Can I pick up a vehicle at the airport for EXPO 2027?",
@@ -506,7 +517,7 @@ export const en: BaseLocale = {
     ],
     ctaTitle: "Need a vehicle for EXPO 2027?",
     ctaText:
-      "Send a non-binding booking with your dates and preferred vehicle. We respond quickly with a clear offer - airport pick-up, delivery in Belgrade and Surcin, short-term and long-term rentals.",
+      "Send a non-binding booking with your dates and preferred vehicle. We respond quickly with a clear offer - airport pick-up, delivery in Belgrade and Surcin, chauffeur service, short-term and long-term rentals.",
     ctaPrimary: "Book a vehicle",
     ctaSecondary: "Contact us",
     relatedTitle: "Related rent a car services for EXPO 2027",
@@ -601,7 +612,7 @@ export const en: BaseLocale = {
     "long-term car rental, operational leasing Belgrade, business car hire, fleet rental",
   seoExpoTitle: "Expo Rent a Car Belgrade 2027 | Viastro",
   seoExpoDescription:
-    "Expo rent a car Belgrade 2027 - hire a car for EXPO. Airport pick-up at Nikola Tesla, delivery in Surcin, long-term rental for exhibitors. Book early.",
+    "Expo rent a car Belgrade 2027 - hire a car for EXPO. Airport pick-up at Nikola Tesla, delivery in Surcin, chauffeur service and long-term rental for exhibitors. Book early.",
   seoExpoKeywords:
-    "expo rent a car, expo rent a car belgrade, expo 2027 rent a car, rent a car expo, expo 2027 belgrade rent a car, expo belgrade car rental, belgrade airport expo car rental, expo 2027 surcin, viastro expo",
+    "expo rent a car, expo rent a car belgrade, expo 2027 rent a car, rent a car expo, expo 2027 belgrade rent a car, expo belgrade car rental, belgrade airport expo car rental, expo 2027 surcin, chauffeur service belgrade, viastro expo",
 };
