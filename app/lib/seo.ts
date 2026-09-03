@@ -1,3 +1,8 @@
+import {
+  BUSINESS,
+  geoCoordinatesSchema,
+  postalAddressSchema,
+} from "@/lib/business";
 import { publicPaths, supportedLocales } from "@/lib/paths";
 
 export const PRODUCTION_ORIGIN = "https://viastro.rs";
@@ -20,6 +25,14 @@ export interface OrganizationSchema {
     availableLanguage: string[];
   };
   sameAs: string[];
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressCountry: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+  };
 }
 
 export interface WebSiteSchema {
@@ -41,21 +54,28 @@ export interface WebSiteSchema {
 export interface LocalBusinessSchema {
   "@context": string;
   "@type": string;
+  "@id": string;
   name: string;
+  description: string;
   image: string;
   telephone: string;
+  email: string;
   url: string;
   priceRange: string;
+  hasMap: string;
+  sameAs: string[];
   address: {
     "@type": string;
+    streetAddress: string;
     addressCountry: string;
     addressLocality: string;
     addressRegion: string;
+    postalCode: string;
   };
   geo: {
     "@type": string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
   };
   openingHoursSpecification: {
     "@type": string;
@@ -174,17 +194,18 @@ export function generateOrganizationSchema(
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Viastro doo Beograd",
+    name: BUSINESS.legalName,
     url: baseUrl,
     logo: logoUrl,
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+381-69-656-555",
+      telephone: BUSINESS.telephone,
       contactType: "Customer Service",
       areaServed: "RS",
       availableLanguage: ["sr", "en", "ru"],
     },
-    sameAs: ["https://www.instagram.com/viastro.rs/"],
+    sameAs: [BUSINESS.instagramUrl, BUSINESS.mapsUrl],
+    address: postalAddressSchema(),
   };
 }
 
@@ -209,41 +230,41 @@ export function generateWebSiteSchema(
   };
 }
 
+function businessDescription(langCode: string): string {
+  if (langCode === "sr") {
+    return "Rent a car Novi Beograd. Iznajmljivanje automobila na adresi Nehruova 51a, 11070 Novi Beograd.";
+  }
+  if (langCode === "ru") {
+    return "Прокат автомобилей в Нови-Београде. Выдача по адресу Nehruova 51a, 11070 Novi Beograd.";
+  }
+  return "Car rental in New Belgrade. Vehicle pick-up at Nehruova 51a, 11070 Novi Beograd.";
+}
+
 export function generateLocalBusinessSchema(
   baseUrl: string,
   langCode: string = "sr",
 ): LocalBusinessSchema {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Viastro Rent a Car",
+    "@type": "AutoRental",
+    "@id": `${baseUrl}/#business`,
+    name: BUSINESS.name,
+    description: businessDescription(langCode),
     image: `${baseUrl}/logo.webp`,
-    telephone: "+381-69-656-555",
+    telephone: BUSINESS.telephone,
+    email: BUSINESS.email,
     url: `${baseUrl}${publicPaths.home(langCode)}`,
-    priceRange: "€€",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "RS",
-      addressLocality: "Belgrade",
-      addressRegion: "Belgrade",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "44.7866",
-      longitude: "20.4489",
-    },
+    priceRange: BUSINESS.priceRange,
+    hasMap: BUSINESS.mapsUrl,
+    sameAs: [BUSINESS.instagramUrl, BUSINESS.mapsUrl],
+    address: postalAddressSchema(),
+    geo: geoCoordinatesSchema(),
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "20:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Saturday", "Sunday"],
-        opens: "09:00",
-        closes: "18:00",
+        opens: BUSINESS.weekdayOpens,
+        closes: BUSINESS.weekdayCloses,
       },
     ],
   };
@@ -255,23 +276,32 @@ export function generateCarRentalServiceSchema(
 ) {
   return {
     "@context": "https://schema.org",
-    "@type": "AutomotiveBusiness",
+    "@type": "AutoRental",
     "@id": `${baseUrl}/#business`,
-    name: "Viastro Rent a Car",
-    description: "Car rental service in Belgrade, Serbia",
+    name: BUSINESS.name,
+    description: businessDescription(langCode),
     image: `${baseUrl}/logo.webp`,
-    telephone: "+381-69-656-555",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "RS",
-      addressLocality: "Belgrade",
-    },
-    priceRange: "€€",
+    telephone: BUSINESS.telephone,
+    email: BUSINESS.email,
+    address: postalAddressSchema(),
+    geo: geoCoordinatesSchema(),
+    hasMap: BUSINESS.mapsUrl,
+    priceRange: BUSINESS.priceRange,
     url: baseUrl,
-    areaServed: {
-      "@type": "Country",
-      name: "Serbia",
-    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Novi Beograd",
+      },
+      {
+        "@type": "City",
+        name: "Beograd",
+      },
+      {
+        "@type": "Country",
+        name: "Serbia",
+      },
+    ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Car Rental Services",
@@ -407,15 +437,12 @@ export function generateExpoServiceSchema(
     description: options.description,
     image: options.imageUrl || `${baseUrl}/expo-2027-og-1200x630.jpg`,
     provider: {
-      "@type": "AutomotiveBusiness",
-      name: "Viastro Rent a Car",
-      telephone: "+381-69-656-555",
+      "@type": "AutoRental",
+      "@id": `${baseUrl}/#business`,
+      name: BUSINESS.name,
+      telephone: BUSINESS.telephone,
       url: baseUrl,
-      address: {
-        "@type": "PostalAddress",
-        addressCountry: "RS",
-        addressLocality: "Belgrade",
-      },
+      address: postalAddressSchema(),
     },
     brand: {
       "@type": "Brand",
@@ -449,6 +476,66 @@ export function generateExpoServiceSchema(
   };
 }
 
+const EXPO_2027_OFFICIAL_URL = "https://expobelgrade2027.org/";
+const EXPO_2027_START = "2027-05-15";
+const EXPO_2027_END = "2027-08-15";
+const EXPO_TICKET_PREORDER_FROM = "2026-01-01T00:00:00+01:00";
+
+function expoEventLocation() {
+  return {
+    "@type": "Place" as const,
+    name: "EXPO 2027 Belgrade",
+    address: {
+      "@type": "PostalAddress" as const,
+      addressLocality: "Surcin",
+      addressRegion: "Beograd",
+      addressCountry: "RS",
+    },
+  };
+}
+
+function expoEventOrganizer() {
+  return {
+    "@type": "Organization" as const,
+    name: "EXPO 2027 Belgrade",
+    url: EXPO_2027_OFFICIAL_URL,
+  };
+}
+
+export function generateExpoEventSchema(options: {
+  name: string;
+  description: string;
+  url: string;
+  imageUrl: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "@id": `${options.url}#event`,
+    name: "EXPO 2027 Belgrade",
+    description: options.description,
+    image: [options.imageUrl],
+    url: options.url,
+    startDate: EXPO_2027_START,
+    endDate: EXPO_2027_END,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: expoEventLocation(),
+    organizer: expoEventOrganizer(),
+    performer: expoEventOrganizer(),
+    offers: {
+      "@type": "Offer",
+      name: "EXPO 2027 Belgrade tickets",
+      url: EXPO_2027_OFFICIAL_URL,
+      price: "0",
+      priceCurrency: "EUR",
+      availability: "https://schema.org/PreOrder",
+      validFrom: EXPO_TICKET_PREORDER_FROM,
+      seller: expoEventOrganizer(),
+    },
+  };
+}
+
 export function generateExpoWebPageSchema(options: {
   baseUrl: string;
   langCode: string;
@@ -478,62 +565,7 @@ export function generateExpoWebPageSchema(options: {
       height: 630,
     },
     about: {
-      "@type": "Event",
-      name: "EXPO 2027 Belgrade",
-      startDate: "2027-05-15",
-      endDate: "2027-08-15",
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      location: {
-        "@type": "Place",
-        name: "EXPO 2027 Belgrade",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Surcin",
-          addressRegion: "Belgrade",
-          addressCountry: "RS",
-        },
-      },
-    },
-  };
-}
-
-export function generateExpoEventSchema(options: {
-  name: string;
-  description: string;
-  url: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: "EXPO 2027 Belgrade",
-    description: options.description,
-    startDate: "2027-05-15",
-    endDate: "2027-08-15",
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
-      "@type": "Place",
-      name: "EXPO 2027 Belgrade",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Surcin",
-        addressRegion: "Belgrade",
-        addressCountry: "RS",
-      },
-    },
-    organizer: {
-      "@type": "Organization",
-      name: "EXPO 2027 Belgrade",
-    },
-    offers: {
-      "@type": "Offer",
-      name: options.name,
-      url: options.url,
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: "Viastro Rent a Car",
-      },
+      "@id": `${pageUrl}#event`,
     },
   };
 }

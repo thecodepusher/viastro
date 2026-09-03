@@ -1,7 +1,8 @@
+import { mapsQuery } from "@/lib/business";
+
 export default function GoogleMap() {
-  const address = "Viastro Rent a Car, Nehruova 51a, Beograd 11070";
   const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
-    address,
+    mapsQuery(),
   )}&output=embed`;
 
   return (

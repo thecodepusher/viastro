@@ -1,5 +1,6 @@
 import type { BaseLocale } from "@/locales/base-locale";
 import { footerNavigation } from "@/constants/footer";
+import { BUSINESS, formattedAddress } from "@/lib/business";
 import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 
@@ -180,8 +181,9 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
 
         <div className="border-t border-white/10 pt-8 text-center">
           <p className="text-sm text-white/50">
-            &copy; {new Date().getFullYear()} Viastro doo Beograd
+            &copy; {new Date().getFullYear()} {BUSINESS.legalName}
           </p>
+          <p className="mt-2 text-xs text-white/35">{formattedAddress()}</p>
           <p className="mt-2 text-xs text-white/35">
             {props.lang.pib}: 114961759 {props.lang.mb}: 22096737{" "}
             {props.lang.delatnost}: 7711

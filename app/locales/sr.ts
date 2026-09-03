@@ -525,11 +525,11 @@ export const sr: BaseLocale = {
     relatedLongTerm: "Dugoročni najam za izlagače na EXPO 2027",
     relatedReservation: "Rezervišite Expo rent a car online",
   },
-  seoHomeTitle: "Viastro rent a car | Beograd",
+  seoHomeTitle: "Viastro rent a car | Novi Beograd",
   seoHomeDescription:
-    "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na aerodromu i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
+    "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na adresi Nehruova 51a, Novi Beograd, dostava na aerodrom i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
   seoHomeKeywords:
-    "rent a car Beograd, iznajmljivanje automobila Srbija, iznajmljivanje automobila Beograd, rent a car aerodrom Beograd, expo rent a car, expo 2027 beograd rent a car",
+    "rent a car Novi Beograd, rent a car Beograd, iznajmljivanje automobila Novi Beograd, iznajmljivanje automobila Beograd, Nehruova 51a, rent a car aerodrom Beograd, expo rent a car, expo 2027 beograd rent a car",
   seoCarsTitle: "Viastro Vozila | Beograd",
   seoCarsDescription:
     "Pregledajte našu flotu automobila za iznajmljivanje u Beogradu. Izaberite između ekonomskih, luksuznih i SUV vozila.",
@@ -537,9 +537,9 @@ export const sr: BaseLocale = {
     "rent a car Beograd, flota automobila, iznajmljivanje vozila, iznajmljivanje automobila",
   seoContactTitle: "Kontakt | Viastro Rent a Car",
   seoContactDescription:
-    "Kontaktirajte Viastro Rent a Car u Beogradu za usluge iznajmljivanja automobila.",
+    "Kontaktirajte Viastro Rent a Car, Nehruova 51a, 11070 Novi Beograd. Telefon +381 69 656 555.",
   seoContactKeywords:
-    "kontakt viastro, rent a car Beograd kontakt, iznajmljivanje automobila Beograd",
+    "kontakt viastro, rent a car Novi Beograd, rent a car Beograd kontakt, Nehruova 51a, iznajmljivanje automobila Novi Beograd",
   seoFaqTitle: "Često postavljena pitanja | Viastro Rent a Car",
   seoFaqDescription:
     "Često postavljena pitanja o uslugama iznajmljivanja automobila u Beogradu.",

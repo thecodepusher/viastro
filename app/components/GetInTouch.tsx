@@ -1,4 +1,5 @@
 import type { BaseLocale } from "@/locales/base-locale";
+import { BUSINESS, formattedAddress } from "@/lib/business";
 import { FaInstagram } from "react-icons/fa";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
@@ -22,10 +23,12 @@ export default function GetInTouch(props: { lang: BaseLocale }) {
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-2">
               <div className="rounded-xl border border-border/70 bg-card p-6 sm:p-8 transition-colors hover:border-p/40">
-                <h3 className="text-base font-semibold text-foreground">Novi Beograd</h3>
-                <a href="https://maps.app.goo.gl/3gyS4z6Wy46Wufg9A">
+                <h3 className="text-base font-semibold text-foreground">
+                  {BUSINESS.addressLocality}
+                </h3>
+                <a href={BUSINESS.mapsUrl}>
                   <address className="mt-2 text-sm text-muted-foreground not-italic hover:text-p transition-colors">
-                    <p>Nehruova 51a, 11070</p>
+                    <p>{formattedAddress()}</p>
                   </address>
                 </a>
                 <div className="mt-4 space-y-1 text-sm">

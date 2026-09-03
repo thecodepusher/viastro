@@ -104,6 +104,7 @@ export default function ExpoPage({ loaderData }: Route.ComponentProps) {
       name: loaderData.lang.seoExpoTitle,
       description: loaderData.lang.seoExpoDescription,
       url: pageUrl,
+      imageUrl: ogImage,
     }),
     generateFAQPageSchema(
       loaderData.baseUrl,

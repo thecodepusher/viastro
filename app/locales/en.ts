@@ -525,11 +525,11 @@ export const en: BaseLocale = {
     relatedLongTerm: "Long-term rental for EXPO 2027 exhibitors",
     relatedReservation: "Book Expo rent a car online",
   },
-  seoHomeTitle: "Viastro rent a car | Belgrade",
+  seoHomeTitle: "Viastro rent a car | New Belgrade",
   seoHomeDescription:
-    "Rent a car Belgrade - Viastro offers cheap car hire in Serbia with new vehicles, full insurance, airport pickup, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
+    "Rent a car New Belgrade - Viastro offers cheap car hire in Serbia with new vehicles, full insurance, pick-up at Nehruova 51a in Novi Beograd, airport delivery, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
   seoHomeKeywords:
-    "rent a car Belgrade, car rental Serbia, iznajmljivanje automobila Beograd, rent a car airport Belgrade, expo rent a car, expo 2027 belgrade rent a car",
+    "rent a car Novi Beograd, rent a car New Belgrade, rent a car Belgrade, car rental Serbia, Nehruova 51a, iznajmljivanje automobila Beograd, rent a car airport Belgrade, expo rent a car, expo 2027 belgrade rent a car",
   seoCarsTitle: "Viastro Cars | Belgrade",
   seoCarsDescription:
     "Browse our car rental fleet in Belgrade. Choose from economy, luxury, and SUV vehicles.",
@@ -537,9 +537,9 @@ export const en: BaseLocale = {
     "rent a car Belgrade, car fleet, vehicle rental, iznajmljivanje automobila",
   seoContactTitle: "Contact | Viastro Rent a Car",
   seoContactDescription:
-    "Contact Viastro Rent a Car in Belgrade for car rental services.",
+    "Contact Viastro Rent a Car at Nehruova 51a, 11070 Novi Beograd. Phone +381 69 656 555.",
   seoContactKeywords:
-    "contact viastro, rent a car Belgrade contact, car rental Belgrade",
+    "contact viastro, rent a car Novi Beograd, rent a car New Belgrade, Nehruova 51a, car rental Belgrade",
   seoFaqTitle: "FAQ | Viastro Rent a Car",
   seoFaqDescription:
     "Frequently asked questions about car rental services in Belgrade.",
