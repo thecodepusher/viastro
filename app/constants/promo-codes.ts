@@ -1,6 +1,6 @@
 export const PROMO_CODE_DISCOUNT_PERCENT = 10;
 
-export const ALLOWED_PROMO_CODES = ["barber10"];
+export const ALLOWED_PROMO_CODES = ["barber10", "011info"];
 
 export type ResolvedPromoCode = {
   valid: boolean;
