@@ -62,6 +62,50 @@ function CarChip({
   return <span className={`${base} ${styles}`}>{children}</span>;
 }
 
+function SummaryPriceLines({
+  days,
+  dayLabel,
+  price,
+  originalPrice,
+  discountPercent,
+  vatLabel,
+  showPromoDiscount,
+}: {
+  days: number;
+  dayLabel: string;
+  price: number;
+  originalPrice: number;
+  discountPercent: number;
+  vatLabel: string;
+  showPromoDiscount: boolean;
+}) {
+  return (
+    <>
+      <p className="text-[9px] font-semibold uppercase leading-tight text-white/60 lg:text-xs">
+        {days} {dayLabel}
+      </p>
+      {showPromoDiscount ? (
+        <p className="whitespace-nowrap text-[9px] font-semibold line-through text-white/40 lg:text-xs">
+          {originalPrice.toFixed(2)}€
+        </p>
+      ) : null}
+      <p className="whitespace-nowrap text-xs font-bold tabular-nums leading-none text-p lg:text-2xl">
+        <span className="hidden lg:inline">€</span>
+        {price.toFixed(2)}
+        <span className="lg:hidden">€</span>
+      </p>
+      {showPromoDiscount ? (
+        <p className="text-[9px] font-bold text-emerald-400 lg:text-xs">
+          -{discountPercent}%
+        </p>
+      ) : null}
+      <p className="hidden w-full text-[8px] leading-tight text-white/55 sm:block lg:text-xs">
+        {vatLabel}
+      </p>
+    </>
+  );
+}
+
 export function CarSummary({
   car,
   pickupDate,
@@ -87,7 +131,7 @@ export function CarSummary({
   return (
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-row items-stretch overflow-hidden rounded-none border border-white/10 bg-linear-to-r from-s/95 to-card lg:rounded-xl lg:shadow-lg">
-        <div className="relative flex h-[92px] w-18 shrink-0 items-center justify-center bg-pl/40 lg:h-[128px] lg:w-48">
+        <div className="relative flex min-h-[92px] w-18 shrink-0 items-center justify-center self-stretch bg-pl/40 lg:min-h-[128px] lg:w-48">
           <img
             src={car.image}
             alt={car.customName || car.name}
@@ -132,28 +176,33 @@ export function CarSummary({
             </div>
           </div>
 
-          <div className="flex w-19 shrink-0 flex-col items-end justify-center gap-0.5 border-l border-white/10 px-1.5 py-1.5 text-right lg:w-44 lg:gap-1 lg:px-3 lg:py-2.5">
-            <p className="text-[9px] font-semibold uppercase leading-tight text-white/60 lg:text-xs">
-              {days} {lang.day}
-            </p>
-            {showPromoDiscount && originalPrice != null && (
-              <p className="whitespace-nowrap text-[9px] font-semibold line-through text-white/40 lg:text-xs">
-                {originalPrice.toFixed(2)}€
-              </p>
-            )}
-            <p className="whitespace-nowrap text-xs font-bold tabular-nums leading-none text-p lg:text-2xl">
-              <span className="hidden lg:inline">€</span>
-              {price.toFixed(2)}
-              <span className="lg:hidden">€</span>
-            </p>
-            {showPromoDiscount && discountPercent != null && (
-              <p className="text-[9px] font-bold text-emerald-400 lg:text-xs">
-                -{discountPercent}%
-              </p>
-            )}
-            <p className="hidden w-full text-[8px] leading-tight text-white/55 sm:block lg:text-xs">
-              {lang.allPricesIncludeVAT}
-            </p>
+          <div className="flex w-19 shrink-0 flex-col items-end justify-center border-l border-white/10 px-1.5 py-1.5 text-right lg:w-44 lg:px-3 lg:py-2.5">
+            <div className="relative w-full">
+              <div
+                className="invisible flex flex-col items-end gap-0.5 lg:gap-1"
+                aria-hidden>
+                <SummaryPriceLines
+                  days={days}
+                  dayLabel={lang.day}
+                  price={price}
+                  originalPrice={originalPrice ?? price}
+                  discountPercent={discountPercent ?? 10}
+                  vatLabel={lang.allPricesIncludeVAT}
+                  showPromoDiscount
+                />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-end justify-center gap-0.5 lg:gap-1">
+                <SummaryPriceLines
+                  days={days}
+                  dayLabel={lang.day}
+                  price={price}
+                  originalPrice={originalPrice ?? price}
+                  discountPercent={discountPercent ?? 0}
+                  vatLabel={lang.allPricesIncludeVAT}
+                  showPromoDiscount={showPromoDiscount}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

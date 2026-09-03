@@ -207,16 +207,21 @@ export function ReviewForm({
                 onChange={(event) => onPromoCodeChange(event.target.value)}
                 placeholder={lang.promoCodeLabel}
               />
-              {promoApplied && (
-                <p className="text-sm font-bold text-emerald-400">
-                  {lang.promoCodeApplied}
-                </p>
-              )}
-              {showInvalidPromo && (
-                <p className="text-sm font-medium text-white/50">
-                  {lang.promoCodeInvalid}
-                </p>
-              )}
+              <p
+                className={`min-h-5 text-sm ${
+                  promoApplied
+                    ? "font-bold text-emerald-400"
+                    : showInvalidPromo
+                      ? "font-medium text-white/50"
+                      : "invisible"
+                }`}
+                aria-live="polite">
+                {promoApplied
+                  ? lang.promoCodeApplied
+                  : showInvalidPromo
+                    ? lang.promoCodeInvalid
+                    : "\u00a0"}
+              </p>
             </div>
           </div>
         </div>

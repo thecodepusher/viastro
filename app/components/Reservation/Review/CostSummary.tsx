@@ -122,11 +122,15 @@ export function CostSummary({
               <span>{price.toFixed(2)}€</span>
             )}
           </p>
-          {promoApplied && promoDiscountPercent > 0 && (
-            <p className="mt-1 text-sm font-bold text-emerald-400">
-              -{promoDiscountPercent}% · {lang.promoCodeApplied}
-            </p>
-          )}
+          <p
+            className={`mt-1 min-h-5 text-sm font-bold ${
+              promoApplied && promoDiscountPercent > 0
+                ? "text-emerald-400"
+                : "invisible"
+            }`}
+            aria-hidden={!(promoApplied && promoDiscountPercent > 0)}>
+            -{promoDiscountPercent || 10}% · {lang.promoCodeApplied}
+          </p>
         </div>
         <div className="rounded-xl border border-p/30 bg-p/10 px-4 py-3.5">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-p">
