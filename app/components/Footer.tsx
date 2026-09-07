@@ -37,9 +37,7 @@ export default function Footer(props: { lang: BaseLocale; langCode: string }) {
                   href={item.href}
                   className={cn(
                     "flex min-h-[3.25rem] items-center justify-center px-5 py-3.5 text-center text-[15px] font-medium leading-snug transition-colors hover:bg-white/5 md:text-sm lg:min-h-12 lg:flex-1 lg:border-0 lg:px-3 lg:py-3 lg:text-[13px]",
-                    item.accent
-                      ? "text-p hover:text-p/80 font-semibold"
-                      : "text-white/70 hover:text-p",
+                    "text-white/70 hover:text-p",
                     index < navigation.main.length - 1 &&
                       "border-b border-white/8 md:border-b-0",
                     index < navigation.main.length - 2 &&
