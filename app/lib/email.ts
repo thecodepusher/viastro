@@ -1,4 +1,5 @@
 import type { BaseLocale } from "@/locales/base-locale";
+import { RENTAL_RESUME_DAYS } from "@/lib/wspay-resume";
 
 export type ReservationEmailPayload = {
   carName: string;
@@ -479,6 +480,151 @@ export async function sendCustomerReservationEmail(
         </td>
       </tr>
     </table>
+    </body>
+    </html>
+  `;
+
+  const response = await fetch(BREVO_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "api-key": apiKey,
+    },
+    body: JSON.stringify({
+      sender: {
+        email: OFFICE_EMAIL,
+        name: "Viastro",
+      },
+      to: [
+        {
+          email: payload.customerEmail,
+          name: payload.customerName,
+        },
+      ],
+      replyTo: {
+        email: OFFICE_EMAIL,
+        name: "Viastro",
+      },
+      subject,
+      htmlContent,
+    }),
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || "Brevo API responded with an error.");
+  }
+}
+
+export async function sendCustomerRentalDueEmail(
+  payload: ReservationEmailPayload,
+  lang: BaseLocale,
+  payUrl: string,
+) {
+  const apiKey = process.env.BREVO_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("BREVO_API_KEY is not configured.");
+  }
+
+  if (!payload.customerEmail) {
+    throw new Error("Customer email is missing.");
+  }
+
+  const copy = lang.customerRentalDueEmail;
+  const details = lang.customerReservationEmail;
+  const dayWord = payload.days === 1 ? details.daySingular : details.dayPlural;
+  const subject = copy.subject.replace("{carName}", payload.carName);
+  const greeting = details.greeting.replace("{name}", payload.customerName);
+  const intro = copy.intro
+    .replace("{carName}", payload.carName)
+    .replace("{pickup}", payload.pickupSummary)
+    .replace("{dropoff}", payload.dropoffSummary);
+  const expiryNote = copy.expiryNote.replace(
+    "{days}",
+    String(RENTAL_RESUME_DAYS),
+  );
+  const logoUrl = emailLogoUrl(payload.baseUrl);
+  const depositAmount =
+    payload.depositDue > 0 ? payload.depositDue : payload.carDeposit;
+
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6;">
+        <tr>
+          <td style="padding: 0;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
+              <div style="background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); padding: 30px 40px; text-align: center;">
+                <img
+                  src="${logoUrl}"
+                  alt="Viastro Logo"
+                  width="160"
+                  height="160"
+                  style="max-width: 160px; width: 160px; height: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none; background-color: #FF9B17;"
+                />
+                <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 600;">${copy.title}</h1>
+              </div>
+              <div style="padding: 40px;">
+                <div style="margin-bottom: 30px;">
+                  <p style="margin: 0 0 12px 0; color: #111827; font-size: 16px; font-weight: 600;">${greeting}</p>
+                  <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">${intro}</p>
+                </div>
+                <div style="margin-bottom: 30px;">
+                  <h2 style="margin: 0 0 20px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #FF9B17; padding-bottom: 10px;">${details.detailsTitle}</h2>
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                      <td style="padding: 10px 0; font-weight: 600; color: #374151; width: 180px;">${details.vehicleLabel}:</td>
+                      <td style="padding: 10px 0; color: #1f2937; font-size: 15px;">${payload.carName}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 10px 0; font-weight: 600; color: #374151;">${details.pickupLabel}:</td>
+                      <td style="padding: 10px 0; color: #1f2937;">${payload.pickupSummary}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 10px 0; font-weight: 600; color: #374151;">${details.dropoffLabel}:</td>
+                      <td style="padding: 10px 0; color: #1f2937;">${payload.dropoffSummary}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 10px 0; font-weight: 600; color: #374151;">${details.daysLabel}:</td>
+                      <td style="padding: 10px 0; color: #1f2937;">${payload.days} ${dayWord}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div style="margin-bottom: 16px; background-color: #f9fafb; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb;">
+                  <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${details.depositDueLabel}</p>
+                  <p style="margin: 0; color: #1f2937; font-size: 20px; font-weight: 700;">${depositAmount.toFixed(2)}€</p>
+                  <p style="margin: 8px 0 0 0; color: #6b7280; font-size: 12px; font-style: italic;">${details.depositNote}</p>
+                </div>
+                <div style="margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #FF9B17 0%, #E88A00 100%); border-radius: 8px; text-align: center;">
+                  <p style="margin: 0; color: #ffffff; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">${copy.amountLabel}</p>
+                  <p style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700;">${payload.totalPrice.toFixed(2)}€</p>
+                </div>
+                <div style="margin-bottom: 24px; text-align: center;">
+                  <a href="${payUrl}" style="display: inline-block; padding: 14px 28px; background-color: #111827; color: #ffffff; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 8px;">${copy.payButton}</a>
+                </div>
+                <p style="margin: 0 0 16px 0; color: #6b7280; font-size: 13px; line-height: 1.6; word-break: break-all;">
+                  <a href="${payUrl}" style="color: #FF9B17; text-decoration: underline;">${payUrl}</a>
+                </p>
+                <div style="margin-bottom: 0; padding: 20px; background-color: #fff7ed; border-radius: 8px; border: 1px solid #fed7aa;">
+                  <p style="margin: 0 0 10px 0; color: #7c2d12; font-size: 14px; line-height: 1.6;">${copy.linkNote}</p>
+                  <p style="margin: 0 0 10px 0; color: #7c2d12; font-size: 14px; line-height: 1.6;">${expiryNote}</p>
+                  <p style="margin: 0; color: #7c2d12; font-size: 14px; line-height: 1.6;">${details.contactLine}</p>
+                </div>
+              </div>
+              <div style="background-color: #f9fafb; padding: 20px 40px; text-align: center; border-top: 1px solid #e5e7eb;">
+                <p style="margin: 0; color: #6b7280; font-size: 12px;">${details.footer}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
     </body>
     </html>
   `;

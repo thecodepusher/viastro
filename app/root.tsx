@@ -1,4 +1,5 @@
 import {
+  data,
   isRouteErrorResponse,
   Link,
   Links,
@@ -9,6 +10,7 @@ import {
   useMatches,
   useLocation,
 } from "react-router";
+import { maybeRemindRentalPayment } from "@/lib/wspay-rental-reminder";
 import { useEffect } from "react";
 import { Home, TriangleAlert } from "lucide-react";
 import { Button } from "./components/ui/button";
@@ -30,6 +32,14 @@ import {
   trackPageView,
 } from "@/lib/analytics";
 import { isNoindexPath } from "@/lib/paths";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const setCookie = await maybeRemindRentalPayment(request);
+  if (!setCookie) return null;
+  return data(null, {
+    headers: { "Set-Cookie": setCookie },
+  });
+}
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

@@ -1,3 +1,13 @@
+export interface CustomerRentalDueEmailLocale {
+  subject: string;
+  title: string;
+  intro: string;
+  payButton: string;
+  amountLabel: string;
+  linkNote: string;
+  expiryNote: string;
+}
+
 export interface CustomerReservationEmailLocale {
   subject: string;
   title: string;
@@ -185,6 +195,9 @@ export interface BaseLocale {
   paymentErrorAction: string;
   paymentCancelTitle: string;
   paymentCancelAction: string;
+  paymentResumeInvalidTitle: string;
+  paymentResumeInvalidBody: string;
+  paymentResumeInvalidAction: string;
   notFoundTitle: string;
   notFoundMessage: string;
   notFoundAction: string;
@@ -214,6 +227,7 @@ export interface BaseLocale {
   mb: string;
   delatnost: string;
   customerReservationEmail: CustomerReservationEmailLocale;
+  customerRentalDueEmail: CustomerRentalDueEmailLocale;
   longTermRental: LongTermRentalLocale;
   seoHomeTitle: string;
   seoHomeDescription: string;

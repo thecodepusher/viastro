@@ -36,6 +36,7 @@ export default [
   route(":lang?/wspay/success", "routes/wspay-success.tsx"),
   route(":lang?/wspay/error", "routes/wspay-error.tsx"),
   route(":lang?/wspay/cancel", "routes/wspay-cancel.tsx"),
+  route(":lang?/wspay/nastavi", "routes/wspay-resume.tsx"),
   route(":lang?/vozila", "routes/cars-page.tsx"),
   route(":lang?/uslovi-iznajmljivanja", "routes/rental-conditions-page.tsx"),
   route(":lang?/politika-privatnosti", "routes/privacy-policy-page.tsx"),

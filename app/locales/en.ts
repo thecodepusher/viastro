@@ -119,6 +119,10 @@ export const en: BaseLocale = {
   paymentCancelTitle:
     "Payment was cancelled. Your reservation was not confirmed. You can try again when you're ready.",
   paymentCancelAction: "Return to reservation",
+  paymentResumeInvalidTitle: "This rental payment link is no longer valid",
+  paymentResumeInvalidBody:
+    "The deposit is still reserved on your card. Email office@viastro.rs or call 069/656-555 and we will help you finish the rental payment.",
+  paymentResumeInvalidAction: "Contact us",
   notFoundTitle: "Page Not Found",
   notFoundMessage: "The page you are looking for does not exist.",
   notFoundAction: "Return to the home page",
@@ -191,6 +195,17 @@ export const en: BaseLocale = {
     contactLine:
       "Questions? Email us at office@viastro.rs or call 069/656-555.",
     footer: "Viastro Rent a Car",
+  },
+  customerRentalDueEmail: {
+    subject: "Deposit reserved - pay the rental - {carName}",
+    title: "Your deposit is reserved",
+    intro:
+      "The deposit is paid, but the reservation of {carName} from {pickup} to {dropoff} is not finished. You still need to pay the rental using the link below. The link opens the WSPay rental payment.",
+    payButton: "Pay the rental",
+    amountLabel: "Rental amount to pay",
+    linkNote:
+      "If you already received the reservation confirmation email, you do not need this link.",
+    expiryNote: "The link is valid for {days} days.",
   },
   longTermRental: {
     heroTitle: "Long-Term Car Rental Viastro Rent a Car",

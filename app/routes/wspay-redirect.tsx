@@ -6,9 +6,9 @@ import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
 import {
   getWSPaySession,
-  getSessionIdFromUrl,
   invalidateWSPaySession,
 } from "@/lib/wspay-session";
+import { verifyRentalResumeToken, readResumeTokenFromRequest } from "@/lib/wspay-resume";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
@@ -16,12 +16,9 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const formDataEncoded = url.searchParams.get("formData");
 
   const session = getWSPaySession(sessionId);
-  if (!session) {
-    return redirect(`/${params.lang ?? "sr"}`);
-  }
 
   if (!formDataEncoded) {
-    invalidateWSPaySession(sessionId);
+    if (session) invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
@@ -30,12 +27,17 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     const formDataStr = decodeURIComponent(formDataEncoded);
     wspayData = JSON.parse(formDataStr);
   } catch (error) {
-    invalidateWSPaySession(sessionId);
+    if (session) invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }
 
-  if (!wspayData.url || !wspayData.formData) {
-    invalidateWSPaySession(sessionId);
+  const cartId = wspayData?.formData?.ShoppingCartID;
+  const resume = verifyRentalResumeToken(readResumeTokenFromRequest(request));
+  const sessionMatches = Boolean(session && cartId && session.shoppingCartId === cartId);
+  const resumeMatches = Boolean(resume && cartId && resume.cartId === cartId);
+
+  if (!wspayData.url || !wspayData.formData || (!sessionMatches && !resumeMatches)) {
+    if (session) invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }
 

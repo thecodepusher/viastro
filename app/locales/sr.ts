@@ -119,6 +119,10 @@ export const sr: BaseLocale = {
   paymentCancelTitle:
     "Plaćanje je otkazano. Vaša rezervacija nije potvrđena. Možete pokušati ponovo kada budete spremni.",
   paymentCancelAction: "Vratite se na rezervaciju",
+  paymentResumeInvalidTitle: "Link za uplatu najma više ne važi",
+  paymentResumeInvalidBody:
+    "Depozit je i dalje rezervisan na kartici. Pišite nam na office@viastro.rs ili pozovite 069/656-555 da završimo uplatu najma.",
+  paymentResumeInvalidAction: "Kontaktirajte nas",
   notFoundTitle: "Stranica nije pronađena",
   notFoundMessage: "Stranica koju tražite ne postoji.",
   notFoundAction: "Vratite se na početnu stranicu",
@@ -191,6 +195,17 @@ export const sr: BaseLocale = {
     contactLine:
       "Pitanja? Pišite nam na office@viastro.rs ili pozovite 069/656-555.",
     footer: "Viastro Rent a Car",
+  },
+  customerRentalDueEmail: {
+    subject: "Depozit je rezervisan - uplatite najam - {carName}",
+    title: "Depozit je rezervisan",
+    intro:
+      "Depozit je uplaćen, ali rezervacija vozila {carName} za {pickup} do {dropoff} još nije završena. Najam morate platiti na linku ispod. Link otvara WSPay uplatnicu za najam.",
+    payButton: "Uplatite najam",
+    amountLabel: "Iznos najma za uplatu",
+    linkNote:
+      "Ako ste već dobili mejl „Potvrda rezervacije”, ovaj link vam nije potreban.",
+    expiryNote: "Link važi {days} dana.",
   },
   longTermRental: {
     heroTitle: "Dugoročni najam Viastro Rent a Car",

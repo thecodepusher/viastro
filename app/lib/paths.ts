@@ -60,6 +60,7 @@ export const publicPaths = {
     success: (lang = "sr") => `/${lang}/wspay/success`,
     error: (lang = "sr") => `/${lang}/wspay/error`,
     cancel: (lang = "sr") => `/${lang}/wspay/cancel`,
+    resume: (lang = "sr") => `/${lang}/wspay/nastavi`,
   },
 } as const;
 

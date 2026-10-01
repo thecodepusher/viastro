@@ -157,7 +157,7 @@ export default function WSPayCancel({ loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
         <CircleAlert size={60} className="text-yellow-500" />
-        <p className="font-medium text-lg text-pd mx-8">
+        <p className="mx-8 max-w-xl font-medium text-lg text-white">
           {loaderData.lang.paymentCancelTitle}
         </p>
         <Link to={publicPaths.reservation(loaderData.langCode)}>

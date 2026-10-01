@@ -153,7 +153,7 @@ export default function WSPayError({ loaderData }: Route.ComponentProps) {
     <div className="w-full">
       <div className="my-32 gap-8 flex flex-col items-center justify-center text-center">
         <CircleX size={60} className="text-red-500" />
-        <p className="font-medium text-lg text-pd mx-8">
+        <p className="mx-8 max-w-xl font-medium text-lg text-white">
           {loaderData.lang.paymentErrorTitle}
         </p>
         <Link to={publicPaths.reservation(loaderData.langCode)}>

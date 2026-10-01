@@ -122,6 +122,10 @@ export const ru: BaseLocale = {
   paymentCancelTitle:
     "Платеж был отменен. Ваше бронирование не подтверждено. Вы можете попробовать снова, когда будете готовы.",
   paymentCancelAction: "Вернитесь к бронированию",
+  paymentResumeInvalidTitle: "Ссылка на оплату аренды больше не действует",
+  paymentResumeInvalidBody:
+    "Залог по-прежнему зарезервирован на карте. Напишите на office@viastro.rs или позвоните 069/656-555, и мы поможем завершить оплату аренды.",
+  paymentResumeInvalidAction: "Свяжитесь с нами",
   notFoundTitle: "Страница не найдена",
   notFoundMessage: "Страница, которую вы ищете, не существует.",
   notFoundAction: "Вернитесь на главную страницу",
@@ -195,6 +199,17 @@ export const ru: BaseLocale = {
     contactLine:
       "Вопросы? Напишите нам на office@viastro.rs или позвоните 069/656-555.",
     footer: "Viastro Rent a Car",
+  },
+  customerRentalDueEmail: {
+    subject: "Залог зарезервирован - оплатите аренду - {carName}",
+    title: "Залог зарезервирован",
+    intro:
+      "Залог оплачен, но бронирование автомобиля {carName} с {pickup} до {dropoff} еще не завершено. Аренду нужно оплатить по ссылке ниже. Ссылка открывает оплату аренды в WSPay.",
+    payButton: "Оплатить аренду",
+    amountLabel: "Сумма аренды к оплате",
+    linkNote:
+      "Если вы уже получили письмо «Подтверждение бронирования», эта ссылка вам не нужна.",
+    expiryNote: "Ссылка действует {days} дн.",
   },
   longTermRental: {
     heroTitle: "Долгосрочная аренда Viastro Rent a Car",

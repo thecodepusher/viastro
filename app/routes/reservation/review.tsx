@@ -259,6 +259,7 @@ export async function action({ request, params }: Route.ActionArgs) {
     carDeposit: car.deposite,
     depositAmount: depositAfterDiscount,
     needsTotalPayment: true,
+    lang: langCode,
   };
 
   const wspayUrl = getWSPayAuthorizationUrl(isTestMode);

@@ -8,17 +8,28 @@ import { sendReservationEmail, sendCustomerReservationEmail, type ReservationEma
 import {
   verifyWSPayCallbackSignature,
   type WSPayCallbackParams,
-  createWSPayFormData,
   generateShoppingCartId,
-  getWSPayAuthorizationUrl,
-  ensureHttpsUrl,
 } from "@/lib/wspay";
 import {
   getWSPaySession,
-  getSessionIdFromUrl,
   invalidateWSPaySession,
   createWSPaySession,
 } from "@/lib/wspay-session";
+import {
+  buildRentalSaleForm,
+  claimRentalCart,
+  clearResumeCookieHeader,
+  createRentalResumeToken,
+  matchResumeReservation,
+  rentalResumeExpiry,
+  resumeCookieHeader,
+  snapshotReservation,
+} from "@/lib/wspay-resume";
+import {
+  cancelRentalReminder,
+  pickLang,
+  scheduleRentalReminder,
+} from "@/lib/wspay-rental-reminder";
 
 function buildReservationEmailPayload(
   reservationData: NonNullable<
@@ -60,6 +71,146 @@ function buildReservationEmailPayload(
   };
 }
 
+function isDepositPreAuthCallback(reservationData: {
+  needsTotalPayment?: boolean;
+  isTotalPayment?: boolean;
+}): boolean {
+  // Korak je na sesiji. Iznos se ne gleda: depozit i najam mogu biti isti
+  // (oba 200€ = 24.000 RSD), a WSPay iznos zna da vrati u više formata.
+  return Boolean(
+    reservationData.needsTotalPayment && !reservationData.isTotalPayment,
+  );
+}
+
+function callbackCartId(params: Record<string, string>): string | undefined {
+  return params.ShoppingCartID || params.ShoppingCartId || undefined;
+}
+
+function resolveReservation(
+  request: Request,
+  sessionId: string | null,
+  cartId: string | undefined,
+) {
+  const session = getWSPaySession(sessionId);
+  if (
+    session?.reservationData &&
+    cartId &&
+    cartId === session.shoppingCartId
+  ) {
+    return { reservationData: session.reservationData, session };
+  }
+
+  const fromResume = cartId ? matchResumeReservation(request, cartId) : null;
+  if (fromResume) {
+    return { reservationData: fromResume, session };
+  }
+
+  return { reservationData: null, session };
+}
+
+async function successPageRedirect(request: Request, langCode: string) {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await prefs.parse(cookieHeader)) || {};
+  cookie.paymentSuccessful = "true";
+  const headers = new Headers();
+  headers.append("Set-Cookie", await prefs.serialize(cookie));
+  headers.append("Set-Cookie", clearResumeCookieHeader());
+  return redirect(publicPaths.success(langCode), { headers });
+}
+
+async function startRentalCheckout(options: {
+  request: Request;
+  langCode: string;
+  reservationData: {
+    totalPrice: number;
+    firstName: string;
+    lastName: string;
+    customerEmail: string;
+    phone: string;
+    carName: string;
+    pickupName: string;
+    dropOffName: string;
+    pickupDateFormatted: string;
+    dropOffDateFormatted: string;
+    pickUpTime: string;
+    dropOffTime: string;
+    days: number;
+    carPrice: number;
+    originalTotalPrice?: number;
+    promoCode?: string;
+    promoDiscountPercent?: number;
+    promoDiscountAmount?: number;
+    depositeDiscount?: number;
+    depositAfterDiscount: number;
+    carDeposit?: number;
+    extrasDescriptions?: string[];
+    lang?: string;
+  };
+  depositOrderId?: string;
+  depositApproval?: string;
+  shopId: string;
+  secretKey: string;
+}) {
+  const cartId = generateShoppingCartId();
+  const pathLang = new URL(options.request.url).pathname.split("/").filter(Boolean)[0];
+  const langCode = pickLang(
+    options.reservationData.lang,
+    pathLang,
+    options.langCode,
+  );
+  const token = createRentalResumeToken({
+    exp: rentalResumeExpiry(),
+    cartId,
+    lang: langCode,
+    depositOrderId: options.depositOrderId,
+    depositApproval: options.depositApproval,
+    reservation: snapshotReservation(options.reservationData),
+  });
+  const sessionId = createWSPaySession(cartId, {
+    ...options.reservationData,
+    depositPreAuth: {
+      wsPayOrderId: options.depositOrderId,
+      approvalCode: options.depositApproval,
+    },
+    isTotalPayment: true,
+    lang: langCode,
+  });
+  const baseUrl = getBaseUrl(options.request);
+
+  if (token) {
+    scheduleRentalReminder({
+      cartId,
+      token,
+      langCode,
+      baseUrl,
+      reservation: snapshotReservation(options.reservationData),
+    });
+  }
+
+  const payment = buildRentalSaleForm({
+    shopId: options.shopId,
+    secretKey: options.secretKey,
+    cartId,
+    totalPriceEur: options.reservationData.totalPrice,
+    langCode,
+    baseUrl,
+    sessionId,
+    firstName: options.reservationData.firstName,
+    lastName: options.reservationData.lastName,
+    email: options.reservationData.customerEmail,
+    phone: options.reservationData.phone,
+  });
+  const headers = new Headers();
+  if (token) {
+    headers.set("Set-Cookie", resumeCookieHeader(token));
+  }
+
+  return redirect(
+    `${publicPaths.wspay.redirect(langCode)}?sessionId=${sessionId}&formData=${encodeURIComponent(JSON.stringify(payment))}`,
+    { headers },
+  );
+}
+
 async function sendCompletedReservationEmails(
   reservationData: NonNullable<
     ReturnType<typeof getWSPaySession>
@@ -85,7 +236,13 @@ async function sendCompletedReservationEmails(
   }
 
   try {
-    const lang = await getLocale(options.langParam || "sr", options.request);
+    const pathLang = new URL(options.request.url).pathname
+      .split("/")
+      .filter(Boolean)[0];
+    const lang = await getLocale(
+      pickLang(reservationData.lang, options.langParam, pathLang),
+      options.request,
+    );
     await sendCustomerReservationEmail(payload, lang);
   } catch (error) {
     console.error("Failed to send customer reservation email:", error);
@@ -95,12 +252,6 @@ async function sendCompletedReservationEmails(
 export async function action({ request, params }: Route.ActionArgs) {
   const url = new URL(request.url);
   const sessionId = url.searchParams.get("sessionId");
-
-  const session = getWSPaySession(sessionId);
-  if (!session) {
-    return redirect(`/${params.lang ?? "sr"}`);
-  }
-
   const formData = await request.formData();
 
   const wspayParams: Record<string, string> = {};
@@ -108,15 +259,16 @@ export async function action({ request, params }: Route.ActionArgs) {
     wspayParams[key] = value as string;
   });
 
-  if (wspayParams.ShoppingCartID !== session.shoppingCartId) {
-    invalidateWSPaySession(sessionId);
-    return redirect(publicPaths.reservation(params.lang ?? "sr"));
-  }
-
-  const reservationData = session.reservationData;
+  const cartId = callbackCartId(wspayParams);
+  const resolved = resolveReservation(request, sessionId, cartId);
+  const reservationData = resolved.reservationData;
   if (!reservationData) {
-    invalidateWSPaySession(sessionId);
-    return redirect(publicPaths.reservation(params.lang ?? "sr"));
+    if (resolved.session) invalidateWSPaySession(sessionId);
+    return redirect(
+      resolved.session
+        ? publicPaths.reservation(params.lang ?? "sr")
+        : `/${params.lang ?? "sr"}`,
+    );
   }
 
   const successValue = wspayParams.Success || wspayParams.success;
@@ -167,15 +319,13 @@ export async function action({ request, params }: Route.ActionArgs) {
     }
   }
 
-  // Provera da li je ovo preautorizacija depozita i da li treba naplata ukupne cene
-  const isDepositPreAuth =
-    reservationData.needsTotalPayment &&
-    callbackParams.Amount &&
-    parseFloat(callbackParams.Amount.replace(",", ".")) ===
-      reservationData.depositAmount *
-        Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
+  // Prva uplata je preautorizacija depozita. Druga (isTotalPayment) je naplata najma,
+  // čak i kad je iznos isti kao depozit.
+  const isDepositPreAuth = isDepositPreAuthCallback(reservationData);
 
   if (isDepositPreAuth && successValue === "1") {
+    invalidateWSPaySession(sessionId);
+
     // Sačuvaj podatke o preautorizaciji depozita
     const depositPreAuthData = {
       wsPayOrderId: callbackParams.wsPayOrderId,
@@ -195,132 +345,75 @@ export async function action({ request, params }: Route.ActionArgs) {
       console.error("Failed to send deposit pending email:", error);
     }
 
-    // Kreiraj novi shopping cart ID za naplatu ukupne cene
-    const totalPaymentCartId = generateShoppingCartId();
-    const totalPaymentSessionId = createWSPaySession(totalPaymentCartId, {
-      ...reservationData,
-      depositPreAuth: depositPreAuthData,
-      isTotalPayment: true,
+    if (!shopId || !secretKey) {
+      return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
+    }
+
+    return startRentalCheckout({
+      request,
+      langCode: params.lang ?? "sr",
+      reservationData,
+      depositOrderId: depositPreAuthData.wsPayOrderId,
+      depositApproval: depositPreAuthData.approvalCode,
+      shopId,
+      secretKey,
     });
-
-    const baseUrl = getBaseUrl(request);
-    const langCode = params.lang ?? "sr";
-    const testModeEnv =
-      process.env.WSPAY_TEST_MODE ||
-      (typeof import.meta !== "undefined"
-        ? import.meta.env?.WSPAY_TEST_MODE
-        : undefined);
-    const isTestMode = testModeEnv !== "false";
-
-    const totalAmount =
-      reservationData.totalPrice *
-      Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
-
-    const returnUrlTotal = ensureHttpsUrl(
-      `${baseUrl}${publicPaths.wspay.success(langCode)}?sessionId=${totalPaymentSessionId}`,
-      isTestMode,
-    );
-    const returnErrorUrlTotal = ensureHttpsUrl(
-      `${baseUrl}${publicPaths.wspay.error(langCode)}?sessionId=${totalPaymentSessionId}`,
-      isTestMode,
-    );
-    const cancelUrlTotal = ensureHttpsUrl(
-      `${baseUrl}${publicPaths.wspay.cancel(langCode)}?sessionId=${totalPaymentSessionId}`,
-      isTestMode,
-    );
-
-    const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
-    const totalPaymentFormData = createWSPayFormData({
-      shopId: shopId!,
-      secretKey: secretKey!,
-      shoppingCartId: totalPaymentCartId,
-      totalAmount,
-      returnUrl: returnUrlTotal,
-      returnErrorUrl: returnErrorUrlTotal,
-      cancelUrl: cancelUrlTotal,
-      customerFirstName: reservationData.firstName,
-      customerLastName: reservationData.lastName,
-      customerEmail: reservationData.customerEmail,
-      customerPhone: reservationData.phone,
-      lang: langCode.toUpperCase(),
-      returnMethod: "GET",
-      authorizationType: "Sale", // Obična naplata za ukupnu cenu
-    });
-
-    const wspayFormDataEncoded = encodeURIComponent(
-      JSON.stringify({
-        url: wspayUrl,
-        formData: totalPaymentFormData,
-      }),
-    );
-
-    // Redirectuj na naplatu ukupne cene
-    return redirect(
-      `${publicPaths.wspay.redirect(langCode)}?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
-    );
   }
 
   // Ako je ovo naplata ukupne cene ili samo preautorizacija bez naplate
-  try {
-    const approvalCode = callbackParams.ApprovalCode;
-    const wsPayOrderId = callbackParams.wsPayOrderId;
-
-    // Ako postoji preautorizacija depozita, koristi te podatke za email
-    const depositPreAuth = reservationData.depositPreAuth;
-    const depositWsPayOrderId = depositPreAuth?.wsPayOrderId || wsPayOrderId;
-    const depositApprovalCode = depositPreAuth?.approvalCode || approvalCode;
-
-    await sendCompletedReservationEmails(reservationData, {
-      request,
-      langParam: params.lang,
-      wsPayOrderId: depositWsPayOrderId,
-      approvalCode: depositApprovalCode,
-    });
-  } catch (error) {
-    console.error(error);
-  }
-
   invalidateWSPaySession(sessionId);
 
-  const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await prefs.parse(cookieHeader)) || {};
-  cookie.paymentSuccessful = "true";
+  const rentalCart = callbackParams.ShoppingCartID || "";
+  if (rentalCart) cancelRentalReminder(rentalCart);
+  if (!rentalCart || claimRentalCart(rentalCart)) {
+    try {
+      const approvalCode = callbackParams.ApprovalCode;
+      const wsPayOrderId = callbackParams.wsPayOrderId;
 
-  return redirect(publicPaths.success(params.lang ?? "sr"), {
-    headers: {
-      "Set-Cookie": await prefs.serialize(cookie),
-    },
-  });
+      // Ako postoji preautorizacija depozita, koristi te podatke za email
+      const depositPreAuth = reservationData.depositPreAuth;
+      const depositWsPayOrderId = depositPreAuth?.wsPayOrderId || wsPayOrderId;
+      const depositApprovalCode = depositPreAuth?.approvalCode || approvalCode;
+
+      await sendCompletedReservationEmails(reservationData, {
+        request,
+        langParam: params.lang,
+        wsPayOrderId: depositWsPayOrderId,
+        approvalCode: depositApprovalCode,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return successPageRedirect(request, params.lang ?? "sr");
 }
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const sessionId = url.searchParams.get("sessionId");
 
-  const session = getWSPaySession(sessionId);
-  if (!session) {
-    return redirect(`/${params.lang ?? "sr"}`);
-  }
-
   const wspayParams: Record<string, string> = {};
   url.searchParams.forEach((value, key) => {
     wspayParams[key] = value;
   });
 
-  if (!wspayParams.ShoppingCartID && !wspayParams.Success) {
-    invalidateWSPaySession(sessionId);
+  const cartId = callbackCartId(wspayParams);
+  const resolved = resolveReservation(request, sessionId, cartId);
+  const reservationData = resolved.reservationData;
+
+  if (!cartId && !wspayParams.Success && !wspayParams.success) {
+    if (resolved.session) invalidateWSPaySession(sessionId);
     return redirect(publicPaths.reservation(params.lang ?? "sr"));
   }
 
-  if (wspayParams.ShoppingCartID !== session.shoppingCartId) {
-    invalidateWSPaySession(sessionId);
-    return redirect(publicPaths.reservation(params.lang ?? "sr"));
-  }
-
-  const reservationData = session.reservationData;
   if (!reservationData) {
-    invalidateWSPaySession(sessionId);
-    return redirect(publicPaths.reservation(params.lang ?? "sr"));
+    if (resolved.session) invalidateWSPaySession(sessionId);
+    return redirect(
+      resolved.session
+        ? publicPaths.reservation(params.lang ?? "sr")
+        : `/${params.lang ?? "sr"}`,
+    );
   }
 
   const successValue = wspayParams.Success || wspayParams.success;
@@ -367,15 +460,13 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     }
   }
 
-  // Provera da li je ovo preautorizacija depozita i da li treba naplata ukupne cene
-  const isDepositPreAuth =
-    reservationData.needsTotalPayment &&
-    callbackParams.Amount &&
-    parseFloat(callbackParams.Amount.replace(",", ".")) ===
-      reservationData.depositAmount *
-        Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
+  // Prva uplata je preautorizacija depozita. Druga (isTotalPayment) je naplata najma,
+  // čak i kad je iznos isti kao depozit.
+  const isDepositPreAuth = isDepositPreAuthCallback(reservationData);
 
   if (isDepositPreAuth && isSuccessful) {
+    invalidateWSPaySession(sessionId);
+
     // Sačuvaj podatke o preautorizaciji depozita
     const depositPreAuthData = {
       wsPayOrderId: callbackParams.wsPayOrderId,
@@ -395,98 +486,44 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       console.error("Failed to send deposit pending email:", error);
     }
 
-    // Kreiraj novi shopping cart ID za naplatu ukupne cene
-    const totalPaymentCartId = generateShoppingCartId();
-    const totalPaymentSessionId = createWSPaySession(totalPaymentCartId, {
-      ...reservationData,
-      depositPreAuth: depositPreAuthData,
-      isTotalPayment: true,
+    if (!shopId || !secretKey) {
+      return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
+    }
+
+    return startRentalCheckout({
+      request,
+      langCode: params.lang ?? "sr",
+      reservationData,
+      depositOrderId: depositPreAuthData.wsPayOrderId,
+      depositApproval: depositPreAuthData.approvalCode,
+      shopId,
+      secretKey,
     });
-
-    const baseUrl = getBaseUrl(request);
-    const langCode = params.lang ?? "sr";
-    const testModeEnv =
-      process.env.WSPAY_TEST_MODE ||
-      (typeof import.meta !== "undefined"
-        ? import.meta.env?.WSPAY_TEST_MODE
-        : undefined);
-    const isTestMode = testModeEnv !== "false";
-
-    const totalAmount =
-      reservationData.totalPrice *
-      Number(process.env.WSPAY_EURO_EXCHANGE_RATE || 1);
-
-    const returnUrlTotal = ensureHttpsUrl(
-      `${baseUrl}${publicPaths.wspay.success(langCode)}?sessionId=${totalPaymentSessionId}`,
-      isTestMode,
-    );
-    const returnErrorUrlTotal = ensureHttpsUrl(
-      `${baseUrl}${publicPaths.wspay.error(langCode)}?sessionId=${totalPaymentSessionId}`,
-      isTestMode,
-    );
-    const cancelUrlTotal = ensureHttpsUrl(
-      `${baseUrl}${publicPaths.wspay.cancel(langCode)}?sessionId=${totalPaymentSessionId}`,
-      isTestMode,
-    );
-
-    const wspayUrl = getWSPayAuthorizationUrl(isTestMode);
-    const totalPaymentFormData = createWSPayFormData({
-      shopId: shopId!,
-      secretKey: secretKey!,
-      shoppingCartId: totalPaymentCartId,
-      totalAmount,
-      returnUrl: returnUrlTotal,
-      returnErrorUrl: returnErrorUrlTotal,
-      cancelUrl: cancelUrlTotal,
-      customerFirstName: reservationData.firstName,
-      customerLastName: reservationData.lastName,
-      customerEmail: reservationData.customerEmail,
-      customerPhone: reservationData.phone,
-      lang: langCode.toUpperCase(),
-      returnMethod: "GET",
-      authorizationType: "Sale", // Obična naplata za ukupnu cenu
-    });
-
-    const wspayFormDataEncoded = encodeURIComponent(
-      JSON.stringify({
-        url: wspayUrl,
-        formData: totalPaymentFormData,
-      }),
-    );
-
-    // Redirectuj na naplatu ukupne cene
-    return redirect(
-      `${publicPaths.wspay.redirect(langCode)}?sessionId=${totalPaymentSessionId}&formData=${wspayFormDataEncoded}`,
-    );
   }
 
   if (isSuccessful) {
-    try {
-      const depositPreAuth = reservationData.depositPreAuth;
-      const depositWsPayOrderId =
-        depositPreAuth?.wsPayOrderId || callbackParams.wsPayOrderId;
-      const depositApprovalCode =
-        depositPreAuth?.approvalCode || callbackParams.ApprovalCode;
-
-      await sendCompletedReservationEmails(reservationData, {
-        request,
-        langParam: params.lang,
-        wsPayOrderId: depositWsPayOrderId,
-        approvalCode: depositApprovalCode,
-      });
-    } catch (error) {}
-
     invalidateWSPaySession(sessionId);
 
-    const cookieHeader = request.headers.get("Cookie");
-    const cookie = (await prefs.parse(cookieHeader)) || {};
-    cookie.paymentSuccessful = "true";
+    const rentalCart = callbackParams.ShoppingCartID || "";
+    if (rentalCart) cancelRentalReminder(rentalCart);
+    if (!rentalCart || claimRentalCart(rentalCart)) {
+      try {
+        const depositPreAuth = reservationData.depositPreAuth;
+        const depositWsPayOrderId =
+          depositPreAuth?.wsPayOrderId || callbackParams.wsPayOrderId;
+        const depositApprovalCode =
+          depositPreAuth?.approvalCode || callbackParams.ApprovalCode;
 
-    return redirect(publicPaths.success(params.lang ?? "sr"), {
-      headers: {
-        "Set-Cookie": await prefs.serialize(cookie),
-      },
-    });
+        await sendCompletedReservationEmails(reservationData, {
+          request,
+          langParam: params.lang,
+          wsPayOrderId: depositWsPayOrderId,
+          approvalCode: depositApprovalCode,
+        });
+      } catch (error) {}
+    }
+
+    return successPageRedirect(request, params.lang ?? "sr");
   } else {
     invalidateWSPaySession(sessionId);
     return redirect(publicPaths.wspay.error(params.lang ?? "sr"));
