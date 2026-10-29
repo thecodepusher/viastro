@@ -170,7 +170,7 @@ const carDataMap: Record<
   "16": {
     deposite: 500,
     fullProtectionPrice: 12.99,
-    depositeDiscount: 150,
+    depositeDiscount: 250,
     customName: "Skoda Superb",
     prices: [
       { from: 3, to: 7, price: 70 },
