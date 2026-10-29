@@ -284,6 +284,7 @@ export default function ReservationTime(props: {
                 <CustomCalendar
                   mode="single"
                   selected={dropDate}
+                  defaultMonth={pickDate}
                   fromDate={addDays(pickDate ?? new Date(), 2)}
                   onSelect={(newDate: Date | undefined) => {
                     setDropDate(newDate);

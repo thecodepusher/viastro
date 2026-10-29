@@ -21,6 +21,7 @@ import { buttonVariants } from "@/components/ui/button";
 interface CustomCalendarProps {
   mode?: "single" | "range";
   selected?: Date | undefined;
+  defaultMonth?: Date;
   fromDate?: Date;
   toDate?: Date;
   onSelect?: (date: Date | undefined) => void;
@@ -36,6 +37,7 @@ const CustomCalendar = forwardRef<HTMLDivElement, CustomCalendarProps>(
     {
       mode = "single",
       selected,
+      defaultMonth,
       fromDate,
       toDate,
       onSelect,
@@ -45,15 +47,15 @@ const CustomCalendar = forwardRef<HTMLDivElement, CustomCalendarProps>(
     },
     ref
   ) => {
-    const [currentMonth, setCurrentMonth] = useState<Date>(
-      selected ? startOfMonth(selected) : startOfMonth(new Date())
+    const visibleMonth = selected ?? defaultMonth;
+    const [currentMonth, setCurrentMonth] = useState<Date>(() =>
+      startOfMonth(selected ?? defaultMonth ?? new Date())
     );
 
     useEffect(() => {
-      if (selected) {
-        setCurrentMonth(startOfMonth(selected));
-      }
-    }, [selected]);
+      if (!visibleMonth) return;
+      setCurrentMonth(startOfMonth(visibleMonth));
+    }, [visibleMonth]);
 
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(currentMonth);

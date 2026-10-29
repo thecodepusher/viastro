@@ -3,7 +3,7 @@ import { CarType, GasType, TransmissionType } from "./data";
 
 /**
  * Vozila koja se prikazuju na sajtu.
- * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia, 15=Polo DSG
+ * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia, 15=Polo DSG, 16=Superb
  */
 export const ALLOWED_CAR_IDS: string[] = [
   "10",
@@ -13,6 +13,7 @@ export const ALLOWED_CAR_IDS: string[] = [
   "12",
   "13",
   "14",
+  "16",
 ];
 
 export const fullProtection = {
@@ -40,6 +41,7 @@ const carImageMap: Record<string, string> = {
   skoda_octavia: "/skoda-octavia-grey.webp",
   skoda_octavia_siva: "/skoda-octavia-grey.webp",
   skoda_kamiq: "/skoda-kamiq.webp",
+  skoda_superb: "/skoda-superb-black.png",
   citroen_c3_aircross: "/c3-aircross.webp",
   citroen_c3_aircross_blue: "/c3-aircross-blue.webp",
   citroen_c3: "/c3-aircross.webp",
@@ -162,6 +164,19 @@ const carDataMap: Record<
       { from: 8, to: 15, price: 55 },
       { from: 16, to: 29, price: 50 },
       { from: 30, to: null, price: 45 },
+    ],
+  },
+  // Skoda Superb (id: "16", manager: SUPERB, Limuzina / Premium, dizel, automatik)
+  "16": {
+    deposite: 500,
+    fullProtectionPrice: 12.99,
+    depositeDiscount: 150,
+    customName: "Skoda Superb",
+    prices: [
+      { from: 3, to: 7, price: 70 },
+      { from: 8, to: 15, price: 65 },
+      { from: 16, to: 29, price: 60 },
+      { from: 30, to: null, price: 55 },
     ],
   },
   default: {
