@@ -8,6 +8,7 @@ import {
 export const RENTAL_RESUME_DAYS = 7;
 const RENTAL_RESUME_MS = RENTAL_RESUME_DAYS * 24 * 60 * 60 * 1000;
 const COOKIE_NAME = "wspay_rental";
+const DEPOSIT_COOKIE = "wspay_deposit";
 
 const claimedRentalCarts = new Set<string>();
 
@@ -175,30 +176,60 @@ export function reservationFromResume(payload: RentalResumePayload) {
   };
 }
 
-export function resumeCookieHeader(token: string): string {
+function cookieHeader(name: string, value: string, maxAge: number): string {
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
+  return `${name}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`;
+}
+
+export function resumeCookieHeader(token: string): string {
   const maxAge = RENTAL_RESUME_DAYS * 24 * 60 * 60;
-  return `${COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`;
+  return cookieHeader(COOKIE_NAME, encodeURIComponent(token), maxAge);
 }
 
 export function clearResumeCookieHeader(): string {
-  const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
-  return `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure}`;
+  return cookieHeader(COOKIE_NAME, "", 0);
 }
 
-export function readResumeTokenFromRequest(request: Request): string | null {
+export function depositCookieHeader(token: string): string {
+  const maxAge = RENTAL_RESUME_DAYS * 24 * 60 * 60;
+  return cookieHeader(DEPOSIT_COOKIE, encodeURIComponent(token), maxAge);
+}
+
+export function clearDepositCookieHeader(): string {
+  return cookieHeader(DEPOSIT_COOKIE, "", 0);
+}
+
+function readNamedCookie(request: Request, name: string): string | null {
   const raw = request.headers.get("Cookie");
   if (!raw) return null;
   for (const part of raw.split(";")) {
     const trimmed = part.trim();
-    if (!trimmed.startsWith(`${COOKIE_NAME}=`)) continue;
+    if (!trimmed.startsWith(`${name}=`)) continue;
     try {
-      return decodeURIComponent(trimmed.slice(COOKIE_NAME.length + 1));
+      return decodeURIComponent(trimmed.slice(name.length + 1));
     } catch {
       return null;
     }
   }
   return null;
+}
+
+export function readResumeTokenFromRequest(request: Request): string | null {
+  return readNamedCookie(request, COOKIE_NAME);
+}
+
+export function matchDepositReservation(request: Request, cartId: string) {
+  const payload = verifyRentalResumeToken(
+    readNamedCookie(request, DEPOSIT_COOKIE),
+  );
+  if (!payload || payload.cartId !== cartId) return null;
+  return {
+    ...payload.reservation,
+    lang: payload.lang,
+    needsTotalPayment: true,
+    isTotalPayment: false,
+    depositAmount: payload.reservation.depositAfterDiscount,
+  };
 }
 
 export function matchResumeReservation(request: Request, cartId: string) {

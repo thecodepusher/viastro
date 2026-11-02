@@ -12,9 +12,7 @@ import {
 } from "@/lib/wspay-resume";
 
 const NOTIFIED_COOKIE = "wspay_rental_mail";
-const REMINDER_DELAY_MS = 3 * 60 * 1000;
 const remindedCarts = new Set<string>();
-const reminderTimers = new Map<string, ReturnType<typeof setTimeout>>();
 
 export function pickLang(
   ...candidates: (string | undefined | null)[]
@@ -61,7 +59,7 @@ function notifiedCart(request: Request): string | null {
   return null;
 }
 
-function notifiedCookie(cartId: string): string {
+export function rentalMailCookie(cartId: string): string {
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
   const maxAge = RENTAL_RESUME_DAYS * 24 * 60 * 60;
   return `${NOTIFIED_COOKIE}=${encodeURIComponent(cartId)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`;
@@ -118,7 +116,7 @@ function rentalDuePayload(
   };
 }
 
-async function deliverRentalReminder(options: {
+export async function sendRentalPaymentLink(options: {
   cartId: string;
   token: string;
   langCode: string;
@@ -127,9 +125,6 @@ async function deliverRentalReminder(options: {
 }) {
   if (remindedCarts.has(options.cartId)) return false;
   remindedCarts.add(options.cartId);
-  const timer = reminderTimers.get(options.cartId);
-  if (timer) clearTimeout(timer);
-  reminderTimers.delete(options.cartId);
 
   try {
     const langCode = pickLang(
@@ -150,29 +145,7 @@ async function deliverRentalReminder(options: {
   }
 }
 
-export function scheduleRentalReminder(options: {
-  cartId: string;
-  token: string;
-  langCode: string;
-  baseUrl: string;
-  reservation: Parameters<typeof rentalDuePayload>[0];
-  delayMs?: number;
-}) {
-  if (remindedCarts.has(options.cartId)) return;
-  const existing = reminderTimers.get(options.cartId);
-  if (existing) clearTimeout(existing);
-
-  const timer = setTimeout(() => {
-    reminderTimers.delete(options.cartId);
-    void deliverRentalReminder(options);
-  }, options.delayMs ?? REMINDER_DELAY_MS);
-  reminderTimers.set(options.cartId, timer);
-}
-
 export function cancelRentalReminder(cartId: string) {
-  const timer = reminderTimers.get(cartId);
-  if (timer) clearTimeout(timer);
-  reminderTimers.delete(cartId);
   if (cartId) remindedCarts.add(cartId);
 }
 
@@ -187,12 +160,12 @@ export async function maybeRemindRentalPayment(
   if (!payload || !token) return null;
   if (notifiedCart(request) === payload.cartId) return null;
 
-  const sent = await deliverRentalReminder({
+  const sent = await sendRentalPaymentLink({
     cartId: payload.cartId,
     token,
     langCode: pickLang(payload.lang, langFromPath(url.pathname)),
     baseUrl: getBaseUrl(request),
     reservation: payload.reservation,
   });
-  return sent ? notifiedCookie(payload.cartId) : null;
+  return sent ? rentalMailCookie(payload.cartId) : null;
 }

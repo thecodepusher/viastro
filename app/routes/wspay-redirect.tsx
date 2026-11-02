@@ -8,7 +8,11 @@ import {
   getWSPaySession,
   invalidateWSPaySession,
 } from "@/lib/wspay-session";
-import { verifyRentalResumeToken, readResumeTokenFromRequest } from "@/lib/wspay-resume";
+import {
+  matchDepositReservation,
+  verifyRentalResumeToken,
+  readResumeTokenFromRequest,
+} from "@/lib/wspay-resume";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
@@ -35,8 +39,13 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const resume = verifyRentalResumeToken(readResumeTokenFromRequest(request));
   const sessionMatches = Boolean(session && cartId && session.shoppingCartId === cartId);
   const resumeMatches = Boolean(resume && cartId && resume.cartId === cartId);
+  const depositMatches = Boolean(cartId && matchDepositReservation(request, cartId));
 
-  if (!wspayData.url || !wspayData.formData || (!sessionMatches && !resumeMatches)) {
+  if (
+    !wspayData.url ||
+    !wspayData.formData ||
+    (!sessionMatches && !resumeMatches && !depositMatches)
+  ) {
     if (session) invalidateWSPaySession(sessionId);
     return redirect(`/${params.lang ?? "sr"}`);
   }

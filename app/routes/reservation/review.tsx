@@ -20,6 +20,12 @@ import {
   ensureHttpsUrl,
 } from "@/lib/wspay";
 import { createWSPaySession } from "@/lib/wspay-session";
+import {
+  createRentalResumeToken,
+  depositCookieHeader,
+  rentalResumeExpiry,
+  snapshotReservation,
+} from "@/lib/wspay-resume";
 import { CostSummary } from "@/components/Reservation/Review/CostSummary";
 import { ReviewForm } from "@/components/Reservation/Review/ReviewForm";
 import { publicPaths } from "@/lib/paths";
@@ -306,8 +312,20 @@ export async function action({ request, params }: Route.ActionArgs) {
     }),
   );
 
+  const depositToken = createRentalResumeToken({
+    exp: rentalResumeExpiry(),
+    cartId: shoppingCartId,
+    lang: langCode,
+    reservation: snapshotReservation(reservationDataObj),
+  });
+  const headers = new Headers();
+  if (depositToken) {
+    headers.append("Set-Cookie", depositCookieHeader(depositToken));
+  }
+
   return redirect(
     `${publicPaths.wspay.redirect(langCode)}?sessionId=${sessionId}&formData=${wspayFormDataEncoded}`,
+    { headers },
   );
 }
 export function meta({ data }: Route.MetaArgs) {

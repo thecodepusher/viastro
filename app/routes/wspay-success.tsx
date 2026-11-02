@@ -18,8 +18,10 @@ import {
 import {
   buildRentalSaleForm,
   claimRentalCart,
+  clearDepositCookieHeader,
   clearResumeCookieHeader,
   createRentalResumeToken,
+  matchDepositReservation,
   matchResumeReservation,
   rentalResumeExpiry,
   resumeCookieHeader,
@@ -28,7 +30,8 @@ import {
 import {
   cancelRentalReminder,
   pickLang,
-  scheduleRentalReminder,
+  rentalMailCookie,
+  sendRentalPaymentLink,
 } from "@/lib/wspay-rental-reminder";
 
 function buildReservationEmailPayload(
@@ -100,6 +103,11 @@ function resolveReservation(
     return { reservationData: session.reservationData, session };
   }
 
+  const fromDeposit = cartId ? matchDepositReservation(request, cartId) : null;
+  if (fromDeposit) {
+    return { reservationData: fromDeposit, session };
+  }
+
   const fromResume = cartId ? matchResumeReservation(request, cartId) : null;
   if (fromResume) {
     return { reservationData: fromResume, session };
@@ -115,6 +123,7 @@ async function successPageRedirect(request: Request, langCode: string) {
   const headers = new Headers();
   headers.append("Set-Cookie", await prefs.serialize(cookie));
   headers.append("Set-Cookie", clearResumeCookieHeader());
+  headers.append("Set-Cookie", clearDepositCookieHeader());
   return redirect(publicPaths.success(langCode), { headers });
 }
 
@@ -177,16 +186,6 @@ async function startRentalCheckout(options: {
   });
   const baseUrl = getBaseUrl(options.request);
 
-  if (token) {
-    scheduleRentalReminder({
-      cartId,
-      token,
-      langCode,
-      baseUrl,
-      reservation: snapshotReservation(options.reservationData),
-    });
-  }
-
   const payment = buildRentalSaleForm({
     shopId: options.shopId,
     secretKey: options.secretKey,
@@ -201,8 +200,19 @@ async function startRentalCheckout(options: {
     phone: options.reservationData.phone,
   });
   const headers = new Headers();
+  headers.append("Set-Cookie", clearDepositCookieHeader());
   if (token) {
-    headers.set("Set-Cookie", resumeCookieHeader(token));
+    headers.append("Set-Cookie", resumeCookieHeader(token));
+    const sent = await sendRentalPaymentLink({
+      cartId,
+      token,
+      langCode,
+      baseUrl,
+      reservation: snapshotReservation(options.reservationData),
+    });
+    if (sent) {
+      headers.append("Set-Cookie", rentalMailCookie(cartId));
+    }
   }
 
   return redirect(
