@@ -308,7 +308,7 @@ export const sr: BaseLocale = {
     toastErrorSending: "Greška pri slanju upita. Molimo pokušajte ponovo.",
     noSearchResults: "Nema rezultata",
   },
-  seoHomeTitle: "Viastro rent a car | Novi Beograd",
+  seoHomeTitle: "Rent a Car Beograd | Viastro",
   seoHomeDescription:
     "Viastro nudi povoljno iznajmljivanje automobila u Srbiji: nova vozila, puno osiguranje, preuzimanje na adresi Nehruova 51a, Novi Beograd, dostava na aerodrom i mogućnost putovanja u inostranstvo. Rezervišite online i istražite Beograd, Novi Sad ili Balkan bez stresa.",
   seoHomeKeywords:

@@ -308,7 +308,7 @@ export const en: BaseLocale = {
     toastErrorSending: "Error sending inquiry. Please try again.",
     noSearchResults: "No results found",
   },
-  seoHomeTitle: "Viastro rent a car | New Belgrade",
+  seoHomeTitle: "Rent a Car Belgrade | Viastro",
   seoHomeDescription:
     "Rent a car New Belgrade - Viastro offers cheap car hire in Serbia with new vehicles, full insurance, pick-up at Nehruova 51a in Novi Beograd, airport delivery, and cross-border travel options. Book online today and explore Belgrade, Novi Sad, or the Balkans with comfort and safety.",
   seoHomeKeywords:
