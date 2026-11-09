@@ -38,11 +38,13 @@ export default function BlogSection(props: {
                     alt=""
                     src={post.imageUrl}
                     className={`h-full w-full transition-transform duration-500 ${
-                      post.imageUrl === "/mount.webp" ||
-                      post.imageUrl === "/sea-summer.webp" ||
-                      post.imageUrl === "/dugorocni-najam-viastro.webp"
-                        ? "object-cover object-bottom-left group-hover:scale-105"
-                        : "object-contain group-hover:scale-105"
+                      post.imageUrl === "/dugorocni-najam-skoda-superb.webp"
+                        ? "object-cover object-center group-hover:scale-105"
+                        : post.imageUrl === "/mount.webp" ||
+                            post.imageUrl === "/sea-summer.webp" ||
+                            post.imageUrl === "/dugorocni-najam-viastro.webp"
+                          ? "object-cover object-bottom-left group-hover:scale-105"
+                          : "object-contain group-hover:scale-105"
                     }`}
                     loading="lazy"
                     decoding="async"

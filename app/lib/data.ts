@@ -29,6 +29,59 @@ export type LocaleTypes = "en" | "ru" | "sr";
 
 export const postsSr = [
   {
+    id: 6,
+    title:
+      "Dugoročni najam Škoda Superb 2026 - poslovni najam i dugoročni zakup vozila",
+    href: "/vesti/dugorocni-najam-skoda-superb",
+    slug: "dugorocni-najam-skoda-superb",
+    description:
+      "Crna Škoda Superb 2026 za dugoročni najam, poslovni najam vozila i dugoročni zakup vozila u Beogradu. Limuzina za firme i preduzetnike, uz registraciju, kasko, održavanje i zamensko vozilo u mesečnoj rati.",
+    keywords:
+      "dugoročni najam, poslovni najam vozila, dugoročni zakup vozila, dugoročni najam Škoda Superb, Škoda Superb 2026, poslovni najam automobila Beograd, dugoročni rent a car Beograd, limuzina na dugoročni najam",
+    content: `
+      <h2>Dugoročni najam Škoda Superb: reprezentativna limuzina bez kupovine vozila</h2>
+      <p>Kada je automobil deo posla, izgled i pouzdanost se vide na svakom sastanku. Crna Škoda Superb 2026 spaja prostor limuzine, udoban automatski menjač i dizel motor spreman za gradske i međugradske relacije. Dugoročni najam ovog modela daje firmi vozilo koje ostavlja ozbiljan utisak, bez početnog ulaganja u kupovinu i bez brige o registraciji, osiguranju i servisima.</p>
+      <p>Viastro dugoročni najam namenjen je firmama, preduzetnicima i pojedincima kojima je Superb potreban mesecima, a ne samo za vikend. Vi vozite, a registracija, kasko, redovno održavanje, pomoć na putu 24/7 i zamensko vozilo ostaju na nama.</p>
+
+      <h3>Zašto je Superb dobar izbor za poslovni najam vozila</h3>
+      <p>Poslovni najam vozila ima smisla kada automobil mora da prati ritam sastanaka, putovanja i dolazaka kod klijenata. Škoda Superb 2026 u crnoj boji pokriva baš tu ulogu: dovoljno je prostrana za putnike i prtljag, dovoljno udobna za duže relacije i dovoljno ozbiljna za prvi utisak ispred kancelarije ili hotela.</p>
+      <ul>
+        <li><strong>Reprezentativan nastup:</strong> crna limuzina novijeg godišta deluje uredno na sastanku, aerodromu i kod klijenta.</li>
+        <li><strong>Komfor na dužim relacijama:</strong> automatski menjač i dizel motor olakšavaju svakodnevne i međugradske vožnje.</li>
+        <li><strong>Prostor za posao:</strong> mesta ima i za putnike i za opremu, uzorke ili kofere.</li>
+        <li><strong>Jedno vozilo, jasan trošak:</strong> umesto kupovine i neplaniranih računa, dogovarate mesečnu ratu prema trajanju i načinu korišćenja.</li>
+      </ul>
+
+      <h3>Šta ulazi u dugoročni zakup vozila</h3>
+      <p>Dugoročni zakup vozila kod Viastro nije samo ključ u ruke na mesec dana. To je paket u kome predvidivi mesečni trošak zamenjuje niz zasebnih obaveza. Za Škodu Superb to znači da firma koristi limuzinu, a o vozilu brine naš tim.</p>
+      <ul>
+        <li><strong>Registracija i osiguranje:</strong> uključeni su u dogovor, zajedno sa kasko zaštitom.</li>
+        <li><strong>Redovno održavanje:</strong> servisi ostaju na nama, pa vozilo ne staje zbog administracije.</li>
+        <li><strong>Pomoć na putu 24/7:</strong> asistencija je deo paketa, u gradu i na dužim relacijama.</li>
+        <li><strong>Zamensko vozilo:</strong> ako Superb privremeno nije dostupan zbog kvara, obezbeđujemo zamenu kako posao ne bi stao.</li>
+        <li><strong>Bez kupovine i amortizacije:</strong> kapital ostaje u firmi, a vozilo se koristi dok traje potreba.</li>
+      </ul>
+
+      <h3>Kome odgovara dugoročni najam Škode Superb</h3>
+      <p>Ovaj model najčešće biraju direktori i vlasnici firmi, komercijalisti koji provode dan na sastancima, kao i timovi kojima je potreban jedan reprezentativan automobil za klijente. Dugoročni najam je praktičan i za preduzetnike koji žele premium limuzinu bez kredita, lizinga i brige o servisu.</p>
+      <p>Ako vam treba više vozila, Superb može da bude deo šireg voznog parka. Kompaktniji modeli pokrivaju gradske obilaske, a limuzina ostaje za duže putove i poslovne posete.</p>
+
+      <h3>Kako da dobijete ponudu</h3>
+      <p>Napišite nam koliko dugo vam treba vozilo, ko će ga voziti i da li su u pitanju gradske vožnje, međugradski sastanci ili kombinacija. Na osnovu toga pripremamo ponudu za dugoročni najam Škode Superb.</p>
+      <p><strong>Spremni za sledeći korak?</strong> Pogledajte <a href="/sr/vozila">Viastro vozila</a> ili <a href="/sr/dugorocni-najam">pošaljite upit za dugoročni najam</a>. Poslovni najam vozila i dugoročni zakup vozila dogovaramo prema ritmu vašeg tima.</p>
+    `,
+    imageUrl: "/dugorocni-najam-skoda-superb.webp",
+    date: "9. novembar 2026.",
+    datetime: "2026-11-09",
+    tags: [
+      "Dugoročni najam vozila",
+      "Poslovni najam vozila",
+      "Dugoročni zakup vozila",
+      "Škoda Superb",
+      "Rent a car Beograd",
+    ],
+  },
+  {
     id: 0,
     title:
       "Dugoročni najam vozila za firme - kako da vozni park radi za vaš biznis",
@@ -328,6 +381,58 @@ export const postsSr = [
 
 export const postsEn = [
   {
+    id: 6,
+    title:
+      "Long-Term Rental of the Skoda Superb 2026 - Business Car Hire",
+    href: "/vesti/dugorocni-najam-skoda-superb",
+    slug: "dugorocni-najam-skoda-superb",
+    description:
+      "Black Skoda Superb 2026 for long-term rental and business vehicle hire in Belgrade. A sedan for companies and entrepreneurs, with registration, insurance, maintenance, and a replacement car in one monthly fee.",
+    keywords:
+      "long-term car rental, business vehicle rental, long-term vehicle lease, Skoda Superb long-term rental, Skoda Superb 2026, corporate car rental Belgrade, executive sedan rental",
+    content: `
+      <h2>Long-term rental of the Skoda Superb: an executive sedan without buying a car</h2>
+      <p>When a car is part of the job, comfort and first impressions show up at every meeting. The black Skoda Superb 2026 combines sedan space, an automatic gearbox, and a diesel engine suited to city days and longer trips. Long-term rental gives a company that car without an upfront purchase and without managing registration, insurance, and servicing on its own.</p>
+      <p>Viastro long-term rental is for companies, entrepreneurs, and individuals who need a Superb for months, not just a weekend. You drive. Registration, comprehensive insurance, routine maintenance, 24/7 roadside assistance, and a replacement vehicle stay with us.</p>
+
+      <h3>Why the Superb fits business vehicle rental</h3>
+      <p>Business vehicle rental makes sense when the car has to keep up with meetings, client visits, and travel between cities. The black Skoda Superb 2026 is built for that role: room for passengers and luggage, comfort on longer drives, and a composed look outside an office or hotel.</p>
+      <ul>
+        <li><strong>A professional presence:</strong> a current black sedan looks right for a meeting, an airport pickup, or a client visit.</li>
+        <li><strong>Comfort on longer routes:</strong> the automatic gearbox and diesel engine suit both daily driving and intercity trips.</li>
+        <li><strong>Room for work:</strong> space for passengers, samples, equipment, or luggage.</li>
+        <li><strong>One car, a clear cost:</strong> instead of buying and covering surprise bills, you agree a monthly fee around how long and how you use the car.</li>
+      </ul>
+
+      <h3>What a long-term vehicle lease includes</h3>
+      <p>A Viastro long-term vehicle lease is more than handing over the keys for a month. The monthly cost replaces a list of separate obligations. With the Skoda Superb, the company uses the sedan and our team looks after the car.</p>
+      <ul>
+        <li><strong>Registration and insurance:</strong> both are part of the agreement, including comprehensive cover.</li>
+        <li><strong>Routine maintenance:</strong> servicing stays with us, so the car is not waiting on paperwork.</li>
+        <li><strong>24/7 roadside assistance:</strong> support is included in the city and on longer routes.</li>
+        <li><strong>A replacement vehicle:</strong> if the Superb is briefly unavailable, we arrange a substitute so work can continue.</li>
+        <li><strong>No purchase and no depreciation:</strong> capital stays in the business, and the car is used for as long as it is needed.</li>
+      </ul>
+
+      <h3>Who the Superb long-term rental is for</h3>
+      <p>Directors and owners, sales teams that spend the day in meetings, and companies that need one representative car for clients use this model most often. It is equally practical for an entrepreneur who wants a premium sedan without a loan, a lease, or service admin.</p>
+      <p>If you need more than one vehicle, the Superb can sit alongside a wider fleet. Smaller cars cover city rounds, and the sedan stays for longer trips and client visits.</p>
+
+      <h3>How to request an offer</h3>
+      <p>Tell us how long you need the car, who will drive it, and whether the use is city driving, intercity meetings, or both. We prepare a Skoda Superb long-term rental offer from that.</p>
+      <p><strong>Ready for the next step?</strong> Browse <a href="/en/vozila">Viastro vehicles</a> or <a href="/en/dugorocni-najam">send a long-term rental inquiry</a>. We tailor business vehicle rental to the rhythm of your team.</p>
+    `,
+    imageUrl: "/dugorocni-najam-skoda-superb.webp",
+    date: "November 9, 2026",
+    datetime: "2026-11-09",
+    tags: [
+      "Long-term car rental",
+      "Business vehicle rental",
+      "Skoda Superb",
+      "Rent a car Belgrade",
+    ],
+  },
+  {
     id: 0,
     title:
       "Long-Term Car Rental for Businesses - Make Your Fleet Work for You",
@@ -611,6 +716,58 @@ export const postsEn = [
 ];
 
 export const postsRu = [
+  {
+    id: 6,
+    title:
+      "Долгосрочная аренда Skoda Superb 2026 - автомобиль для бизнеса",
+    href: "/vesti/dugorocni-najam-skoda-superb",
+    slug: "dugorocni-najam-skoda-superb",
+    description:
+      "Черная Skoda Superb 2026 для долгосрочной аренды и бизнес-аренды автомобиля в Белграде. Седан для компаний и предпринимателей: регистрация, страховка, обслуживание и подменный автомобиль в ежемесячной плате.",
+    keywords:
+      "долгосрочная аренда автомобиля, аренда автомобиля для бизнеса, долгосрочный прокат автомобиля, Skoda Superb долгосрочная аренда, Skoda Superb 2026, аренда авто Белград",
+    content: `
+      <h2>Долгосрочная аренда Skoda Superb: представительский седан без покупки автомобиля</h2>
+      <p>Когда автомобиль является частью работы, комфорт и первое впечатление видны на каждой встрече. Черная Skoda Superb 2026 сочетает пространство седана, автоматическую коробку передач и дизельный двигатель для города и междугородних поездок. Долгосрочная аренда дает компании такой автомобиль без первоначальной покупки и без самостоятельной регистрации, страховки и сервиса.</p>
+      <p>Долгосрочная аренда Viastro подходит компаниям, предпринимателям и частным лицам, которым Superb нужен на месяцы, а не на выходные. Вы ездите, а регистрация, полное страхование, регулярное обслуживание, помощь в пути 24/7 и подменный автомобиль остаются на нас.</p>
+
+      <h3>Почему Superb подходит для аренды автомобиля для бизнеса</h3>
+      <p>Аренда автомобиля для бизнеса имеет смысл, когда машина должна успевать за встречами, визитами к клиентам и поездками между городами. Черная Skoda Superb 2026 как раз для этой роли: место для пассажиров и багажа, комфорт в дальней дороге и собранный вид у офиса или отеля.</p>
+      <ul>
+        <li><strong>Деловой вид:</strong> черный седан актуального года уместен на встрече, в аэропорту и у клиента.</li>
+        <li><strong>Комфорт на длинных маршрутах:</strong> автомат и дизель удобны и в городе, и в междугородних поездках.</li>
+        <li><strong>Место для работы:</strong> пассажиры, образцы, оборудование или чемоданы.</li>
+        <li><strong>Один автомобиль и понятная стоимость:</strong> вместо покупки и неожиданных счетов вы согласовываете ежемесячную плату под срок и характер использования.</li>
+      </ul>
+
+      <h3>Что входит в долгосрочный прокат автомобиля</h3>
+      <p>Долгосрочный прокат Viastro - это не просто ключи на месяц. Ежемесячная плата заменяет набор отдельных обязательств. Компания пользуется седаном, а о Skoda Superb заботится наша команда.</p>
+      <ul>
+        <li><strong>Регистрация и страховка:</strong> входят в договоренность, включая полное покрытие.</li>
+        <li><strong>Регулярное обслуживание:</strong> сервис остается на нас.</li>
+        <li><strong>Помощь в пути 24/7:</strong> поддержка включена и в городе, и на дальних маршрутах.</li>
+        <li><strong>Подменный автомобиль:</strong> если Superb временно недоступен, мы организуем замену, чтобы работа не останавливалась.</li>
+        <li><strong>Без покупки и амортизации:</strong> капитал остается в компании, а автомобиль используется столько, сколько он нужен.</li>
+      </ul>
+
+      <h3>Кому подходит долгосрочная аренда Superb</h3>
+      <p>Эту модель чаще выбирают руководители и владельцы компаний, отделы продаж и команды, которым нужен один представительский автомобиль для клиентов. Она удобна и предпринимателю, который хочет премиальный седан без кредита и заботы о сервисе.</p>
+      <p>Если автомобилей нужно несколько, Superb может стать частью более широкого парка. Компактные модели закрывают городские выезды, а седан остается для дальних поездок и визитов к клиентам.</p>
+
+      <h3>Как получить предложение</h3>
+      <p>Напишите, на какой срок нужен автомобиль, кто будет за рулем и это городские поездки, междугородние встречи или и то и другое. По этим данным мы подготовим предложение на долгосрочную аренду Skoda Superb.</p>
+      <p><strong>Готовы к следующему шагу?</strong> Посмотрите <a href="/ru/vozila">автомобили Viastro</a> или <a href="/ru/dugorocni-najam">отправьте запрос на долгосрочную аренду</a>. Аренду для бизнеса мы подстраиваем под ритм вашей команды.</p>
+    `,
+    imageUrl: "/dugorocni-najam-skoda-superb.webp",
+    date: "9 ноября 2026",
+    datetime: "2026-11-09",
+    tags: [
+      "Долгосрочная аренда",
+      "Аренда для бизнеса",
+      "Skoda Superb",
+      "Rent a car Белград",
+    ],
+  },
   {
     id: 0,
     title:

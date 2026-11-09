@@ -79,6 +79,7 @@ export const links: Route.LinksFunction = () => [];
 
 const articleOgImageSizes: Record<string, { width: number; height: number }> = {
   "/dugorocni-najam-viastro.webp": { width: 1200, height: 630 },
+  "/dugorocni-najam-skoda-superb.webp": { width: 1280, height: 720 },
   "/sea-summer.webp": { width: 1200, height: 800 },
   "/mount.webp": { width: 1920, height: 1080 },
   "/kop.webp": { width: 900, height: 600 },
