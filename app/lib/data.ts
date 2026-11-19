@@ -1046,14 +1046,15 @@ export const postsRu = [
   },
 ];
 
-export const wokringHours = [
-  { from: "08:00", to: "16:00" },
-  { from: "08:00", to: "16:00" },
-  { from: "08:00", to: "16:00" },
-  { from: "08:00", to: "16:00" },
-  { from: "08:00", to: "16:00" },
-  { from: "08:00", to: "16:00" },
-  { from: "08:00", to: "16:00" },
+/** Indexed by Date.getDay(): 0 = Sunday (closed), 1-6 = Monday-Saturday. */
+export const wokringHours: Array<{ from: string; to: string } | null> = [
+  null,
+  { from: "08:00", to: "17:00" },
+  { from: "08:00", to: "17:00" },
+  { from: "08:00", to: "17:00" },
+  { from: "08:00", to: "17:00" },
+  { from: "08:00", to: "17:00" },
+  { from: "08:00", to: "17:00" },
 ];
 
 export function getAditionalEquipment(langCode: LocaleTypes) {

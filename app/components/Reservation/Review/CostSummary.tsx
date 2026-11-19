@@ -2,6 +2,7 @@ import { Info } from "lucide-react";
 import { format } from "date-fns";
 import type { BaseLocale } from "@/locales/base-locale";
 import type { ReactNode } from "react";
+import { PRICE_FOR_PICKUP_OFF_HOURS } from "@/lib/data";
 
 interface CostSummaryProps {
   pickup: { name: string } | undefined;
@@ -18,8 +19,8 @@ interface CostSummaryProps {
   promoDiscountPercent?: number;
   depositeDiscount: number;
   extras: Array<{ id: number; name: string; price: number }>;
-  notInWorkingHours: boolean;
-  priceForOffHours: number;
+  pickupOutsideHours: boolean;
+  dropoffOutsideHours: boolean;
   lang: BaseLocale;
 }
 
@@ -52,8 +53,8 @@ export function CostSummary({
   promoDiscountPercent = 0,
   depositeDiscount,
   extras,
-  notInWorkingHours,
-  priceForOffHours,
+  pickupOutsideHours,
+  dropoffOutsideHours,
   lang,
 }: CostSummaryProps) {
   const displayPrice = promoApplied && discountedPrice != null ? discountedPrice : price;
@@ -77,18 +78,28 @@ export function CostSummary({
         <span className="text-p">{carPrice.toFixed(2)}€</span>
       </SummaryRow>
 
-      {(extras.length > 0 || (notInWorkingHours && priceForOffHours > 0)) && (
+      {(extras.length > 0 || pickupOutsideHours || dropoffOutsideHours) && (
         <div className="flex flex-col gap-2">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-p">
             {lang.accessories}
           </span>
-          {notInWorkingHours && priceForOffHours > 0 && (
+          {pickupOutsideHours && (
             <div className="rounded-xl border border-white/10 bg-pl/50 px-4 py-3.5">
               <p className="text-sm font-semibold text-white/90">
-                {lang.afterHoursReservationFee}
+                {lang.afterHoursPickupFee}
               </p>
               <p className="mt-1 text-lg font-bold text-p">
-                {priceForOffHours.toFixed(2)}€
+                {PRICE_FOR_PICKUP_OFF_HOURS.toFixed(2)}€
+              </p>
+            </div>
+          )}
+          {dropoffOutsideHours && (
+            <div className="rounded-xl border border-white/10 bg-pl/50 px-4 py-3.5">
+              <p className="text-sm font-semibold text-white/90">
+                {lang.afterHoursDropoffFee}
+              </p>
+              <p className="mt-1 text-lg font-bold text-p">
+                {PRICE_FOR_PICKUP_OFF_HOURS.toFixed(2)}€
               </p>
             </div>
           )}

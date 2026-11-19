@@ -6,6 +6,7 @@ import { setHours } from "date-fns";
 import { locations } from "@/lib/data";
 import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import { type ApiAllModelsResponse } from "@/lib/api-cars";
+import { meetsMinimumRental, readApiDayPriceTiers } from "@/lib/helpers";
 import Cta from "@/components/Cta";
 import FandQ from "@/components/FandQ";
 import TrustedBy from "@/components/TrustedBy";
@@ -71,6 +72,16 @@ export async function action({ request, params }: Route.ActionArgs) {
   delete cookie.wspayReservation;
 
   if (pickUpLocation) {
+    if (
+      typeof pickUpDate !== "string" ||
+      typeof pickUpTime !== "string" ||
+      typeof dropOffDate !== "string" ||
+      typeof dropOffTime !== "string" ||
+      !meetsMinimumRental(pickUpDate, pickUpTime, dropOffDate, dropOffTime)
+    ) {
+      return new Response(null, { status: 400 });
+    }
+
     cookie.pickUpLocation = pickUpLocation;
     cookie.dropOffLocation = dropOffLocation;
     cookie.pickUpDate = pickUpDate;
@@ -124,6 +135,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
   });
 
   const apiResponse: ApiAllModelsResponse = await res.json();
+  const priceTiers = readApiDayPriceTiers();
   const baseUrl = getBaseUrl(request);
 
   const data = {
@@ -132,6 +144,7 @@ export async function loader({ request, context, params }: Route.LoaderArgs) {
     locations,
     message: context.VALUE_FROM_EXPRESS,
     cars: apiResponse,
+    priceTiers,
     baseUrl,
     initialValues: {
       pickUpDate: undefined,
@@ -269,6 +282,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         lang={loaderData.lang}
         langCode={loaderData.langCode}
         cars={loaderData.cars}
+        priceTiers={loaderData.priceTiers}
       />
       <TrustedBy lang={loaderData.lang} />
       <BlogSection langCode={loaderData.langCode} lang={loaderData.lang} />

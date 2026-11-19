@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { addDays, differenceInDays, format, isAfter } from "date-fns";
+import {
+  addDays,
+  differenceInDays,
+  format,
+  startOfDay,
+} from "date-fns";
+import { rentalMinutesBetween, MIN_RENTAL_MINUTES } from "@/lib/helpers";
 import {
   Select,
   SelectContent,
@@ -20,6 +26,36 @@ import { CalendarIcon, Loader2 } from "lucide-react";
 import type { BaseLocale } from "@/locales/base-locale";
 import { times } from "@/constants/calendar";
 import { toast } from "sonner";
+
+function dayGap(dropDate: Date, pickDate: Date): number {
+  return differenceInDays(startOfDay(dropDate), startOfDay(pickDate));
+}
+
+function rentalMinutes(
+  pickDate: Date,
+  dropDate: Date,
+  pickUpTime: string,
+  dropTime: string,
+): number {
+  return rentalMinutesBetween(
+    startOfDay(pickDate),
+    pickUpTime,
+    startOfDay(dropDate),
+    dropTime,
+  );
+}
+
+function isReturnBeforeMinimum(
+  pickDate: Date | undefined,
+  dropDate: Date | undefined,
+  pickUpTime: string,
+  dropTime: string,
+): boolean {
+  if (!pickDate || !dropDate) return false;
+  return (
+    rentalMinutes(pickDate, dropDate, pickUpTime, dropTime) < MIN_RENTAL_MINUTES
+  );
+}
 
 export default function ReservationTime(props: {
   locations: {
@@ -65,45 +101,16 @@ export default function ReservationTime(props: {
 
   const { locations, lang, onStart, isLoading = false } = props;
 
-  const getInitialDropOffTimes = (): {
-    times: string[];
-    validDropOffTime: string | null;
-  } => {
-    const initialPickDate = getInitialPickDate();
-    const initialDropDate = getInitialDropDate();
-    const initialPickUpTime = initialValues?.pickUpTime || "15:00";
-    const initialDropOffTime = initialValues?.dropOffTime || "15:00";
+  const initialPickUpTime = initialValues?.pickUpTime || "15:00";
+  const initialDropOffTime = initialValues?.dropOffTime || "15:00";
+  const initialPickDate = getInitialPickDate();
+  const initialDropDate = getInitialDropDate();
+  const [pickDate, setPickDate] = useState<Date | undefined>(initialPickDate);
+  const [dropDate, setDropDate] = useState<Date | undefined>(initialDropDate);
 
-    if (initialPickDate && initialDropDate) {
-      const daysDiff = differenceInDays(initialDropDate, initialPickDate);
-      const t = [...times];
-
-      if (daysDiff == 2) {
-        t.splice(0, times.indexOf(initialPickUpTime) + 1);
-
-        if (t.indexOf(initialDropOffTime) == -1) {
-          return { times: t, validDropOffTime: t.length > 0 ? t[0] : null };
-        }
-      }
-
-      return { times: t, validDropOffTime: initialDropOffTime };
-    }
-    return { times: [...times], validDropOffTime: initialDropOffTime };
-  };
-
-  const initialDropOffData = getInitialDropOffTimes();
-  const [pickDate, setPickDate] = useState<Date | undefined>(
-    getInitialPickDate(),
-  );
-  const [dropDate, setDropDate] = useState<Date | undefined>(
-    getInitialDropDate(),
-  );
-
-  const [pickUpTime, setPickUpTime] = useState(
-    initialValues?.pickUpTime || "15:00",
-  );
+  const [pickUpTime, setPickUpTime] = useState(initialPickUpTime);
   const [dropOfTime, setDropOfTime] = useState<string | null>(
-    initialDropOffData.validDropOffTime,
+    initialDropOffTime,
   );
 
   const [pickUpLocation, setPickUpLocation] = useState<string | undefined>(
@@ -113,18 +120,52 @@ export default function ReservationTime(props: {
     initialValues?.dropOffLocation,
   );
 
-  const [dropOffTimes, setDropOffTimes] = useState<string[]>(
-    initialDropOffData.times,
-  );
   const [pickDatePopoverOpen, setPickDatePopoverOpen] = useState(false);
   const [dropDatePopoverOpen, setDropDatePopoverOpen] = useState(false);
+
+  const moveReturnByHalfHour = (
+    nextPickDate: Date | undefined,
+    nextDropDate: Date | undefined,
+    nextPickTime: string,
+    nextDropTime: string | null,
+    notify: boolean,
+  ) => {
+    if (
+      !nextPickDate ||
+      !nextDropDate ||
+      !nextDropTime ||
+      !isReturnBeforeMinimum(
+        nextPickDate,
+        nextDropDate,
+        nextPickTime,
+        nextDropTime,
+      )
+    ) {
+      return;
+    }
+
+    const nextTime = times.find(
+      (time) =>
+        rentalMinutes(nextPickDate, nextDropDate, nextPickTime, time) >=
+        MIN_RENTAL_MINUTES,
+    );
+
+    if (nextTime) {
+      setDropOfTime(nextTime);
+      if (notify) toast.error(lang.minimumRentalHint);
+      return;
+    }
+
+    toast.error(lang.minimumRentalHint);
+  };
 
   return (
     <div className="w-full mx-auto">
       <h3 className="pb-3 font-display font-semibold text-lg sm:text-2xl text-white/95 sm:text-left text-center">
         {lang.createReservation}
       </h3>
-      <div className="w-full max-w-full rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xl p-3 sm:p-5 mb-4 sm:mb-6 flex flex-col items-stretch xl:flex-row gap-3 sm:gap-4 text-white">
+      <div className="w-full max-w-full rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xl p-3 sm:p-5 mb-4 sm:mb-6 flex flex-col gap-3 text-white">
+      <div className="flex flex-col items-stretch xl:flex-row gap-3 sm:gap-4">
         <div className="w-full min-w-0 xl:w-40 xl:grow-0 xl:shrink-0 flex flex-col gap-1">
           <Label className="text-white/80 text-xs sm:text-sm">
             {lang.pickUpLoacation}
@@ -199,22 +240,18 @@ export default function ReservationTime(props: {
 
                     if (!newDate || !dropDate) return;
 
-                    const daysDiff = differenceInDays(dropDate, newDate);
-                    const t = [...times];
-
-                    if (daysDiff == 2) {
-                      t.splice(0, times.indexOf(pickUpTime) + 1);
-
-                      if (dropOfTime && t.indexOf(dropOfTime) == -1) {
-                        setDropOfTime(t.length > 0 ? t[0] : null);
-                      }
-                    }
-
-                    setDropOffTimes(t);
-
-                    if (isAfter(addDays(newDate, 2), dropDate)) {
+                    if (dayGap(dropDate, newDate) < 0) {
                       setDropDate(undefined);
+                      return;
                     }
+
+                    moveReturnByHalfHour(
+                      newDate,
+                      dropDate,
+                      pickUpTime,
+                      dropOfTime,
+                      false,
+                    );
                   }}
                   initialFocus
                 />
@@ -225,22 +262,13 @@ export default function ReservationTime(props: {
               value={pickUpTime}
               onValueChange={(newTime) => {
                 setPickUpTime(newTime);
-
-                if (!pickDate || !dropDate) return;
-
-                const daysDiff = differenceInDays(dropDate, pickDate);
-
-                const t = [...times];
-
-                if (daysDiff == 2) {
-                  t.splice(0, times.indexOf(newTime) + 1);
-
-                  if (dropOfTime && t.indexOf(dropOfTime) == -1) {
-                    setDropOfTime(t.length > 0 ? t[0] : null);
-                  }
-                }
-
-                setDropOffTimes(t);
+                moveReturnByHalfHour(
+                  pickDate,
+                  dropDate,
+                  newTime,
+                  dropOfTime,
+                  true,
+                );
               }}>
               <SelectTrigger
                 className="w-20 shrink-0 px-2 gap-1 bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
@@ -285,31 +313,37 @@ export default function ReservationTime(props: {
                   mode="single"
                   selected={dropDate}
                   defaultMonth={pickDate}
-                  fromDate={addDays(pickDate ?? new Date(), 2)}
+                  fromDate={startOfDay(pickDate ?? new Date())}
                   onSelect={(newDate: Date | undefined) => {
                     setDropDate(newDate);
                     setDropDatePopoverOpen(false);
 
                     if (!newDate || !pickDate) return;
 
-                    const daysDiff = differenceInDays(newDate, pickDate);
-                    const t = [...times];
-
-                    if (daysDiff == 2) {
-                      t.splice(0, times.indexOf(pickUpTime) + 1);
-
-                      if (dropOfTime && t.indexOf(dropOfTime) == -1) {
-                        setDropOfTime(t.length > 0 ? t[0] : null);
-                      }
-                    }
-
-                    setDropOffTimes(t);
+                    moveReturnByHalfHour(
+                      pickDate,
+                      newDate,
+                      pickUpTime,
+                      dropOfTime,
+                      false,
+                    );
                   }}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
-            <Select value={dropOfTime ?? ""} onValueChange={setDropOfTime}>
+            <Select
+              value={dropOfTime ?? ""}
+              onValueChange={(newTime) => {
+                setDropOfTime(newTime);
+                moveReturnByHalfHour(
+                  pickDate,
+                  dropDate,
+                  pickUpTime,
+                  newTime,
+                  true,
+                );
+              }}>
               <SelectTrigger
                 className="w-20 shrink-0 px-2 gap-1 bg-white/10 border border-white/20 text-white data-placeholder:text-white/70 [&_svg:not([class*='text-'])]:text-white/70 focus:ring-2 focus:ring-p/40"
                 aria-label={`${lang.dropOffTime} - ${dropOfTime || lang.choose}`}>
@@ -317,7 +351,7 @@ export default function ReservationTime(props: {
               </SelectTrigger>
 
               <SelectContent className="bg-pd text-white border border-white/15 **:data-highlighted:bg-white/10 **:data-highlighted:text-white **:data-[state=checked]:bg-white/15">
-                {dropOffTimes.map((time) => (
+                {times.map((time) => (
                   <SelectItem key={`dropOff${time}`} value={time}>
                     {time}
                   </SelectItem>
@@ -347,6 +381,18 @@ export default function ReservationTime(props: {
               return;
             }
 
+            if (
+              rentalMinutesBetween(
+                startOfDay(pickDate),
+                pickUpTime,
+                startOfDay(dropDate),
+                dropOfTime,
+              ) < MIN_RENTAL_MINUTES
+            ) {
+              toast.error(props.lang.minimumRentalHint);
+              return;
+            }
+
             onStart({
               pickUpLocation,
               dropOffLocation,
@@ -369,6 +415,7 @@ export default function ReservationTime(props: {
           )}
         </Button>
       </div>
+    </div>
     </div>
   );
 }

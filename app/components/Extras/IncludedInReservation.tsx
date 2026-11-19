@@ -1,15 +1,57 @@
 import type { BaseLocale } from "@/locales/base-locale";
+import { PRICE_FOR_PICKUP_OFF_HOURS } from "@/lib/data";
 
 interface IncludedInReservationProps {
   lang: BaseLocale;
-  notInWorkingHours: boolean;
-  priceForOffHours: number;
+  pickupOutsideHours: boolean;
+  dropoffOutsideHours: boolean;
+}
+
+function OffHoursCard({
+  title,
+  details,
+  lang,
+}: {
+  title: string;
+  details: string;
+  lang: BaseLocale;
+}) {
+  return (
+    <div className="group relative overflow-hidden rounded-xl border-2 border-s bg-s text-white shadow-lg transition-all duration-300">
+      <div className="flex min-h-[140px] flex-col items-stretch md:flex-row">
+        <div className="flex flex-1 flex-col justify-between p-4 md:p-6">
+          <div className="flex-1">
+            <h3 className="mb-2 text-lg font-bold text-white md:text-xl">
+              {title}
+            </h3>
+            <p className="mb-3 text-xs leading-relaxed text-white/90 md:text-sm">
+              {details}
+            </p>
+          </div>
+        </div>
+
+        <div className="relative flex flex-row items-center justify-between gap-4 border-t p-4 md:min-w-[200px] md:flex-col md:items-end md:justify-between md:border-t-0 md:p-6">
+          <div className="absolute bottom-[15%] left-0 top-[15%] hidden w-px bg-white/20 md:block" />
+          <div className="flex-1 text-left md:flex-none md:text-right">
+            <div>
+              <div className="mb-1 flex items-baseline gap-1 md:justify-end">
+                <span className="text-2xl font-bold text-white md:text-3xl">
+                  {PRICE_FOR_PICKUP_OFF_HOURS.toFixed(2)}€
+                </span>
+              </div>
+              <p className="text-xs text-white">{lang.allPricesIncludeVAT}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function IncludedInReservation({
   lang,
-  notInWorkingHours,
-  priceForOffHours,
+  pickupOutsideHours,
+  dropoffOutsideHours,
 }: IncludedInReservationProps) {
   return (
     <>
@@ -45,37 +87,20 @@ export function IncludedInReservation({
           </div>
         </div>
 
-        {notInWorkingHours && priceForOffHours > 0 && (
-          <div className="group relative border-2 rounded-xl shadow-lg transition-all duration-300 overflow-hidden border-s bg-s text-white">
-            <div className="flex flex-col md:flex-row items-stretch min-h-[140px]">
-              <div className="flex-1 flex flex-col justify-between p-4 md:p-6">
-                <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-bold mb-2 text-white">
-                    {lang.afterHoursReservationFee}
-                  </h3>
-                  <p className="text-xs md:text-sm leading-relaxed mb-3 text-white/90">
-                    {lang.afterHoursFeeDetails}
-                  </p>
-                </div>
-              </div>
+        {pickupOutsideHours && (
+          <OffHoursCard
+            title={lang.afterHoursPickupFee}
+            details={lang.afterHoursPickupDetails}
+            lang={lang}
+          />
+        )}
 
-              <div className="relative flex flex-row md:flex-col items-center md:items-end justify-between md:justify-between p-4 md:p-6 gap-4 md:gap-0 border-t md:border-t-0 md:min-w-[200px]">
-                <div className="hidden md:block absolute left-0 top-[15%] bottom-[15%] w-px bg-white/20" />
-                <div className="text-left md:text-right flex-1 md:flex-none">
-                  <div>
-                    <div className="flex items-baseline md:justify-end gap-1 mb-1">
-                      <span className="text-2xl md:text-3xl font-bold text-white">
-                        {priceForOffHours.toFixed(2)}€
-                      </span>
-                    </div>
-                    <p className="text-xs text-white">
-                      {lang.allPricesIncludeVAT}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {dropoffOutsideHours && (
+          <OffHoursCard
+            title={lang.afterHoursDropoffFee}
+            details={lang.afterHoursDropoffDetails}
+            lang={lang}
+          />
         )}
       </div>
     </>

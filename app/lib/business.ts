@@ -14,7 +14,7 @@ export const BUSINESS = {
   mapsUrl: "https://maps.app.goo.gl/3gyS4z6Wy46Wufg9A",
   instagramUrl: "https://www.instagram.com/viastro.rs/",
   weekdayOpens: "08:00",
-  weekdayCloses: "16:00",
+  weekdayCloses: "17:00",
 } as const;
 
 export function formattedAddress(): string {

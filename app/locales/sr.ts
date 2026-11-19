@@ -22,6 +22,12 @@ export const sr: BaseLocale = {
   toastErrorSelectDates: "Odaberite datum preuzimanja i vraćanja vozila!",
   toastErrorSelectLocations: "Odaberite mesto preuzimanja i vraćanja vozila!",
   toastErrorSelectTimes: "Odaberite vreme preuzimanja i vraćanja vozila!",
+  toastErrorMinimumRental:
+    "Najkraći najam je pola sata. Isti sat i raniji termini vraćanja su isključeni.",
+  toastMinimumRentalAdjusted:
+    "Vreme vraćanja je pomereno jer najam mora trajati najmanje pola sata.",
+  minimumRentalHint:
+    "Najkraći najam je pola sata. Isti sat i raniji termini vraćanja su isključeni.",
   choose: "Odaberi",
   vehiclesOffer: "Ponuda automobila",
   diesel: "Dizel",
@@ -58,7 +64,9 @@ export const sr: BaseLocale = {
   gitTitle: "Kontaktirajte nas",
   gitSubTitle:
     "Mi smo tu za vas. Budite slobodni da nas pozovete i dobijete neophodne informacije.",
-  gitDays: "Ponedeljak - Petak",
+  gitDays: "Ponedeljak - Subota",
+  gitHours: "08:00 - 17:00",
+  gitSundayClosed: "Nedelja neradna",
   gitAwailable: "Dostupno 24/7",
   lhTitle: "Preuzmite vozilo odmah pri sletanju",
   lhSubTitle: "RENT A CAR BEOGRAD",
@@ -110,6 +118,12 @@ export const sr: BaseLocale = {
   afterHoursReservationFee: "Dodatak za rezervaciju van radnog vremena",
   afterHoursFeeDetails:
     "Za podizanje ili vraćanje vozila van radnog vremena naplaćuje se dodatno",
+  afterHoursPickupFee: "Naknada za preuzimanje vozila van radnog vremena",
+  afterHoursPickupDetails:
+    "Vozilo možete preuzeti u bilo koje vreme. Za preuzimanje van radnog vremena poslovnice (ponedeljak-subota 08:00-17:00, nedelja neradna) naplaćuje se dodatna naknada.",
+  afterHoursDropoffFee: "Naknada za vraćanje vozila van radnog vremena",
+  afterHoursDropoffDetails:
+    "Vozilo možete vratiti u bilo koje vreme. Za vraćanje van radnog vremena poslovnice (ponedeljak-subota 08:00-17:00, nedelja neradna) naplaćuje se dodatna naknada.",
   successTitle:
     "Vaša uplata je uspešno izvršena. Potvrda o uplati će vam uskoro stići na e-mail adresu. Takođe ćete biti kontaktirani od strane našeg tima u vezi potvrde rezervacije.",
   successAction: "Vratite se na početnu stranicu",

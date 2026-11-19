@@ -12,6 +12,7 @@ import {
   trackEventOnce,
   trackReservationDatesSelected,
 } from "@/lib/analytics";
+import { meetsMinimumRental } from "@/lib/helpers";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
@@ -53,6 +54,16 @@ export async function action({ request, params }: Route.ActionArgs) {
   delete cookie.wspayInProgress;
   delete cookie.wspayFormData;
   delete cookie.wspayReservation;
+
+  if (
+    typeof pickUpDate !== "string" ||
+    typeof pickUpTime !== "string" ||
+    typeof dropOffDate !== "string" ||
+    typeof dropOffTime !== "string" ||
+    !meetsMinimumRental(pickUpDate, pickUpTime, dropOffDate, dropOffTime)
+  ) {
+    return new Response(null, { status: 400 });
+  }
 
   cookie.pickUpLocation = pickUpLocation;
   cookie.dropOffLocation = dropOffLocation;

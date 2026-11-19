@@ -15,6 +15,7 @@ import type { Route } from "./+types/vehicle";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
 import { trackEvent } from "@/lib/analytics";
+import { readApiDayPriceTiers } from "@/lib/helpers";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -40,24 +41,26 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   const databaseUrl = getDatabaseUrl();
 
-  const allModelsRes = await fetch(databaseUrl, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "get_all_models",
+  const [allModelsRes, availableRes] = await Promise.all([
+    fetch(databaseUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "get_all_models",
+      }),
+      headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
     }),
-    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-  });
+    fetch(databaseUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "get_available_models",
+        date_from: `${format(pickupDate, "dd/MM/yyyy")} ${pickupTime}`,
+        date_to: `${format(dropoffDate, "dd/MM/yyyy")} ${dropoffTime}`,
+      }),
+      headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+    }),
+  ]);
+  const priceTiers = readApiDayPriceTiers();
   const allModels: ApiAllModelsResponse = await allModelsRes.json();
-
-  const availableRes = await fetch(databaseUrl, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "get_available_models",
-      date_from: `${format(pickupDate, "dd/MM/yyyy")} ${pickupTime}`,
-      date_to: `${format(dropoffDate, "dd/MM/yyyy")} ${dropoffTime}`,
-    }),
-    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-  });
   const availableResponse: ApiCarsResponse = await availableRes.json();
   const availableCarIds = availableResponse.available_models.map(
     (car) => car.id
@@ -66,7 +69,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     allModels,
     lang,
     availableResponse.days,
-    availableCarIds
+    availableCarIds,
+    priceTiers,
   );
 
   const selectedCarId = cookie.selectedCarId

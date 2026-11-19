@@ -21,6 +21,12 @@ export const en: BaseLocale = {
   toastErrorSelectDates: "Please select pick-up and drop-off dates!",
   toastErrorSelectLocations: "Please select pick-up and drop-off locations!",
   toastErrorSelectTimes: "Please select pick-up and drop-off times!",
+  toastErrorMinimumRental:
+    "The shortest rental is 30 minutes. The same time and earlier return times are unavailable.",
+  toastMinimumRentalAdjusted:
+    "The return time was moved because the rental must last at least 30 minutes.",
+  minimumRentalHint:
+    "The shortest rental is 30 minutes. The same time and earlier return times are unavailable.",
   choose: "Choose",
   continue: "Continue",
   vehiclesOffer: "Vehicles offer",
@@ -58,7 +64,9 @@ export const en: BaseLocale = {
   gitTitle: "Get in touch",
   gitSubTitle:
     "We are here for you. Feel free to call us and get the necessary information.",
-  gitDays: "Monday - Friday",
+  gitDays: "Monday - Saturday",
+  gitHours: "08:00 - 17:00",
+  gitSundayClosed: "Sunday closed",
   gitAwailable: "Available 24/7",
   lhTitle: "Take over the vehicle immediately upon landing",
   lhSubTitle: "RENT A CAR BELGRADE",
@@ -110,6 +118,12 @@ export const en: BaseLocale = {
   afterHoursReservationFee: "After-Hours Reservation Fee",
   afterHoursFeeDetails:
     "An additional charge applies for vehicle pick-up or return outside of regular working hours",
+  afterHoursPickupFee: "Fee for vehicle pick-up outside working hours",
+  afterHoursPickupDetails:
+    "You can pick up the vehicle at any time. An additional fee applies when pick-up is outside office hours (Monday-Saturday 08:00-17:00, Sunday closed).",
+  afterHoursDropoffFee: "Fee for vehicle return outside working hours",
+  afterHoursDropoffDetails:
+    "You can return the vehicle at any time. An additional fee applies when return is outside office hours (Monday-Saturday 08:00-17:00, Sunday closed).",
   successTitle:
     "Your payment has been successfully completed. A payment confirmation will arrive at your email address shortly. You will also be contacted by our team regarding the reservation confirmation.",
   successAction: "Return to the home page",

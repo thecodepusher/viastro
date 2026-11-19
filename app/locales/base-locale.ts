@@ -112,6 +112,9 @@ export interface BaseLocale {
   toastErrorSelectDates: string;
   toastErrorSelectLocations: string;
   toastErrorSelectTimes: string;
+  toastErrorMinimumRental: string;
+  toastMinimumRentalAdjusted: string;
+  minimumRentalHint: string;
   choose: string;
   vehiclesOffer: string;
   diesel: string;
@@ -145,6 +148,8 @@ export interface BaseLocale {
   gitTitle: string;
   gitSubTitle: string;
   gitDays: string;
+  gitHours: string;
+  gitSundayClosed: string;
   gitAwailable: string;
   lhTitle: string;
   lhSubTitle: string;
@@ -189,6 +194,10 @@ export interface BaseLocale {
   cascoInsuranceDisclaimer: string;
   afterHoursReservationFee: string;
   afterHoursFeeDetails: string;
+  afterHoursPickupFee: string;
+  afterHoursPickupDetails: string;
+  afterHoursDropoffFee: string;
+  afterHoursDropoffDetails: string;
   successTitle: string;
   successAction: string;
   paymentErrorTitle: string;

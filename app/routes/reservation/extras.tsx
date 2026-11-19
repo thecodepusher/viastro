@@ -1,11 +1,18 @@
 import { useState, useMemo, useEffect } from "react";
 import { redirect, useFetcher } from "react-router";
+import { differenceInMinutes, set } from "date-fns";
 import { prefs } from "@/lib/prefs-cookie";
 import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import { getAditionalEquipment, type LocaleTypes, locations } from "@/lib/data";
 import { transformApiCars, type ApiAllModelsResponse } from "@/lib/api-cars";
-import { calculateInWorkingHours } from "@/lib/helpers";
-import { differenceInMinutes, set } from "date-fns";
+import {
+  calculateCarPrice,
+  calculateInWorkingHours,
+  calculateRentalDays,
+  fetchQuotedRentalTotals,
+  readApiDayPriceTiers,
+  quotedCarPrice,
+} from "@/lib/helpers";
 import type { Route } from "./+types/extras";
 import { getBaseUrl, generateOpenGraphMeta } from "@/lib/seo";
 import { publicPaths } from "@/lib/paths";
@@ -24,26 +31,43 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const lang = await getLocale(params.lang, request);
 
   const databaseUrl = getDatabaseUrl();
-
-  const res = await fetch(databaseUrl, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "get_all_models",
-    }),
-    headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-  });
-  const apiResponse: ApiAllModelsResponse = await res.json();
-
-  const transformedCars = transformApiCars(apiResponse, lang);
-
-  const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
-
   const pickupDate = cookie.pickUpDate;
   const pickupTime = cookie.pickUpTime;
   const dropoffDate = cookie.dropOffDate;
   const dropoffTime = cookie.dropOffTime;
 
-  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
+  const [res, quote] = await Promise.all([
+    fetch(databaseUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "get_all_models",
+      }),
+      headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+    }),
+    pickupDate && pickupTime && dropoffDate && dropoffTime
+      ? fetchQuotedRentalTotals(
+          pickupDate,
+          pickupTime,
+          dropoffDate,
+          dropoffTime,
+        )
+      : Promise.resolve(null),
+  ]);
+  const apiResponse: ApiAllModelsResponse = await res.json();
+  const priceTiers = readApiDayPriceTiers();
+
+  const transformedCars = transformApiCars(
+    apiResponse,
+    lang,
+    undefined,
+    undefined,
+    priceTiers,
+  );
+
+  const car = transformedCars.find((x) => x.exnternalId === cookie.carId);
+
+  const { notInWorkingHours, priceForOffHours, pickupOutsideHours, dropoffOutsideHours } =
+    calculateInWorkingHours(
     dropoffDate,
     pickupDate,
     dropoffTime,
@@ -60,35 +84,18 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
   let baseCarPrice = 0;
   if (pickupDate && dropoffDate && pickupTime && dropoffTime) {
-    const pickupDateAndTime = set(new Date(pickupDate), {
-      hours: pickupTime.split(":")[0],
-      minutes: pickupTime.split(":")[1],
-      seconds: 0,
-      milliseconds: 0,
-    });
-
-    const dropOffDateAndTime = set(new Date(dropoffDate), {
-      hours: dropoffTime.split(":")[0],
-      minutes: dropoffTime.split(":")[1],
-      seconds: 0,
-      milliseconds: 0,
-    });
-
-    const days = Math.ceil(
-      differenceInMinutes(dropOffDateAndTime, pickupDateAndTime) / 1440
+    const days = calculateRentalDays(
+      pickupDate,
+      pickupTime,
+      dropoffDate,
+      dropoffTime,
     );
-
-    for (let price of car.prices) {
-      if (!price.to) {
-        baseCarPrice = days * price.price;
-        break;
-      }
-
-      if (days >= price.from && days <= price.to) {
-        baseCarPrice = price.price * days;
-        break;
-      }
-    }
+    baseCarPrice = quotedCarPrice(
+      quote,
+      car.exnternalId,
+      days,
+      calculateCarPrice(car, days),
+    );
   }
 
   const baseUrl = getBaseUrl(request);
@@ -101,6 +108,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     lang,
     notInWorkingHours,
     priceForOffHours,
+    pickupOutsideHours,
+    dropoffOutsideHours,
     aditionalEquipment: ad,
     langCode: params.lang ?? "sr",
     baseUrl,
@@ -254,8 +263,8 @@ export default function Extras({ loaderData }: Route.ComponentProps) {
     <div className="w-full bg-surface">
       <IncludedInReservation
         lang={loaderData.lang}
-        notInWorkingHours={loaderData.notInWorkingHours}
-        priceForOffHours={loaderData.priceForOffHours}
+        pickupOutsideHours={loaderData.pickupOutsideHours}
+        dropoffOutsideHours={loaderData.dropoffOutsideHours}
       />
 
       <EquipmentList

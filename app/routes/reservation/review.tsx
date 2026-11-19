@@ -1,14 +1,17 @@
 import { prefs } from "@/lib/prefs-cookie";
 import { redirect, useNavigation } from "react-router";
 import { useEffect, useRef, useState } from "react";
-import { type LocaleTypes } from "@/lib/data";
+import { PRICE_FOR_PICKUP_OFF_HOURS, type LocaleTypes } from "@/lib/data";
 import { format } from "date-fns";
 import {
+  calculateCarPrice,
   calculateInWorkingHours,
   calculateRentalDays,
   calculateReservationPrice,
   fetchAllCarModels,
+  fetchQuotedRentalTotals,
   getReservationDataFromCookies,
+  quotedCarPrice,
 } from "@/lib/helpers";
 import { getLocale } from "@/lib/utils";
 import type { Route } from "./+types/review";
@@ -44,8 +47,24 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const cookie = (await prefs.parse(cookieHeader)) || {};
 
   const lang = await getLocale(params.lang, request);
-  const transformedCars = await fetchAllCarModels(lang);
   const reservationData = getReservationDataFromCookies(cookie);
+  const hasSchedule = Boolean(
+    reservationData.pickupDate &&
+      reservationData.pickupTime &&
+      reservationData.dropoffDate &&
+      reservationData.dropoffTime,
+  );
+  const [transformedCars, quote] = await Promise.all([
+    fetchAllCarModels(lang),
+    hasSchedule
+      ? fetchQuotedRentalTotals(
+          reservationData.pickupDate,
+          reservationData.pickupTime,
+          reservationData.dropoffDate,
+          reservationData.dropoffTime,
+        )
+      : Promise.resolve(null),
+  ]);
 
   const car = transformedCars.find(
     (x) => x.exnternalId === reservationData.carId,
@@ -61,7 +80,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     return redirect(publicPaths.reservationVehicle(params.lang ?? "sr"));
   }
 
-  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
+  const {
+    notInWorkingHours,
+    priceForOffHours,
+    pickupOutsideHours,
+    dropoffOutsideHours,
+  } = calculateInWorkingHours(
     reservationData.dropoffDate,
     reservationData.pickupDate,
     reservationData.dropoffTime,
@@ -82,6 +106,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       idExtras: reservationData.extras,
       priceForOffHours,
       langCode: params.lang as LocaleTypes,
+      carPriceOverride: quotedCarPrice(
+        quote,
+        car.exnternalId,
+        days,
+        calculateCarPrice(car, days),
+      ),
     });
 
   const baseUrl = getBaseUrl(request);
@@ -97,6 +127,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     pickup: reservationData.pickup,
     notInWorkingHours,
     priceForOffHours,
+    pickupOutsideHours,
+    dropoffOutsideHours,
     dropOff: reservationData.dropOff,
     pickupDate: reservationData.pickupDate,
     pickupTime: reservationData.pickupTime,
@@ -131,9 +163,24 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   const lang = await getLocale(params.lang, request);
   const langCode = (params.lang as LocaleTypes) || "sr";
-
-  const transformedCars = await fetchAllCarModels(lang);
   const reservationData = getReservationDataFromCookies(cookie);
+  const hasSchedule = Boolean(
+    reservationData.pickupDate &&
+      reservationData.pickupTime &&
+      reservationData.dropoffDate &&
+      reservationData.dropoffTime,
+  );
+  const [transformedCars, quote] = await Promise.all([
+    fetchAllCarModels(lang),
+    hasSchedule
+      ? fetchQuotedRentalTotals(
+          reservationData.pickupDate,
+          reservationData.pickupTime,
+          reservationData.dropoffDate,
+          reservationData.dropoffTime,
+        )
+      : Promise.resolve(null),
+  ]);
 
   const car = transformedCars.find(
     (x) => x.exnternalId === reservationData.carId,
@@ -155,12 +202,13 @@ export async function action({ request, params }: Route.ActionArgs) {
     );
   }
 
-  const { notInWorkingHours, priceForOffHours } = calculateInWorkingHours(
-    reservationData.dropoffDate,
-    reservationData.pickupDate,
-    reservationData.dropoffTime,
-    reservationData.pickupTime,
-  );
+  const { notInWorkingHours, priceForOffHours, pickupOutsideHours, dropoffOutsideHours } =
+    calculateInWorkingHours(
+      reservationData.dropoffDate,
+      reservationData.pickupDate,
+      reservationData.dropoffTime,
+      reservationData.pickupTime,
+    );
 
   const days = calculateRentalDays(
     reservationData.pickupDate,
@@ -176,6 +224,12 @@ export async function action({ request, params }: Route.ActionArgs) {
       idExtras: reservationData.extras,
       priceForOffHours,
       langCode,
+      carPriceOverride: quotedCarPrice(
+        quote,
+        car.exnternalId,
+        days,
+        calculateCarPrice(car, days),
+      ),
     });
 
   const pickupDateFormatted = reservationData.pickupDate
@@ -189,9 +243,14 @@ export async function action({ request, params }: Route.ActionArgs) {
   const extrasDescriptions = extras.map(
     (extra) => `${extra.name} - ${extra.price.toFixed(2)}€`,
   );
-  if (notInWorkingHours && priceForOffHours > 0) {
+  if (pickupOutsideHours) {
     extrasDescriptions.push(
-      `${lang.afterHoursReservationFee} - ${priceForOffHours.toFixed(2)}€`,
+      `${lang.afterHoursPickupFee} - ${PRICE_FOR_PICKUP_OFF_HOURS.toFixed(2)}€`,
+    );
+  }
+  if (dropoffOutsideHours) {
+    extrasDescriptions.push(
+      `${lang.afterHoursDropoffFee} - ${PRICE_FOR_PICKUP_OFF_HOURS.toFixed(2)}€`,
     );
   }
 
@@ -493,8 +552,8 @@ export default function Review({ loaderData }: Route.ComponentProps) {
           promoDiscountPercent={promo.percent}
           depositeDiscount={loaderData.depositeDiscount}
           extras={loaderData.extras}
-          notInWorkingHours={loaderData.notInWorkingHours}
-          priceForOffHours={loaderData.priceForOffHours}
+          pickupOutsideHours={loaderData.pickupOutsideHours}
+          dropoffOutsideHours={loaderData.dropoffOutsideHours}
           lang={loaderData.lang}
         />
 

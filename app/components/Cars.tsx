@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import {
   transformApiCars,
   type ApiCarModel,
+  type DayPriceTier,
   type TransformedCar,
 } from "@/lib/api-cars";
 import { cn } from "@/lib/utils";
@@ -19,6 +20,7 @@ export default function Cars(props: {
   fromreservationPage?: boolean;
   isLoading?: boolean;
   loadingCarId?: number | null;
+  priceTiers?: Record<string, DayPriceTier[]>;
 }) {
   const [pendingCarId, setPendingCarId] = useState<number | null>(null);
   const activeLoadingCarId = props.loadingCarId ?? pendingCarId;
@@ -31,7 +33,13 @@ export default function Cars(props: {
     props.cars[0]?.features;
 
   const carsToDisplay: TransformedCar[] = isApiFormat
-    ? transformApiCars(props.cars as ApiCarModel[], props.lang)
+    ? transformApiCars(
+        props.cars as ApiCarModel[],
+        props.lang,
+        undefined,
+        undefined,
+        props.priceTiers,
+      )
     : (props.cars as TransformedCar[]) || [];
 
   return (
@@ -129,7 +137,9 @@ export default function Cars(props: {
                             {props.lang.pricesByDays}
                           </p>
                           <div className="space-y-1.5">
-                            {car.prices.map(
+                            {[...car.prices]
+                              .sort((a, b) => a.from - b.from)
+                              .map(
                               (
                                 x: {
                                   from: number;

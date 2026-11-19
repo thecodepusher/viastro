@@ -71,7 +71,7 @@ const carDataMap: Record<
     deposite: number;
     fullProtectionPrice: number;
     depositeDiscount: number;
-    prices: Array<{ from: number; to: number | null; price: number }>;
+    prices: DayPriceTier[];
     customName?: string;
   }
 > = {
@@ -82,6 +82,7 @@ const carDataMap: Record<
     depositeDiscount: 100,
     customName: "Citroen C3 Aircross",
     prices: [
+      { from: 1, to: 2, price: 55 },
       { from: 3, to: 7, price: 50 },
       { from: 8, to: 15, price: 45 },
       { from: 16, to: 29, price: 40 },
@@ -95,6 +96,7 @@ const carDataMap: Record<
     depositeDiscount: 100,
     customName: "SEAT Ibiza DSG",
     prices: [
+      { from: 1, to: 2, price: 45 },
       { from: 3, to: 7, price: 40 },
       { from: 8, to: 15, price: 35 },
       { from: 16, to: 29, price: 30 },
@@ -108,6 +110,7 @@ const carDataMap: Record<
     depositeDiscount: 100,
     customName: "Volkswagen Polo DSG",
     prices: [
+      { from: 1, to: 2, price: 45 },
       { from: 3, to: 7, price: 40 },
       { from: 8, to: 15, price: 35 },
       { from: 16, to: 29, price: 30 },
@@ -121,6 +124,7 @@ const carDataMap: Record<
     depositeDiscount: 150,
     customName: "Renault Clio",
     prices: [
+      { from: 1, to: 2, price: 46 },
       { from: 3, to: 7, price: 42 },
       { from: 8, to: 15, price: 38 },
       { from: 16, to: 29, price: 34 },
@@ -134,6 +138,7 @@ const carDataMap: Record<
     depositeDiscount: 100,
     customName: "Citroen C3 Aircross Blue",
     prices: [
+      { from: 1, to: 2, price: 55 },
       { from: 3, to: 7, price: 50 },
       { from: 8, to: 15, price: 45 },
       { from: 16, to: 29, price: 40 },
@@ -147,6 +152,7 @@ const carDataMap: Record<
     depositeDiscount: 150,
     customName: "Skoda Kamiq",
     prices: [
+      { from: 1, to: 2, price: 60 },
       { from: 3, to: 7, price: 55 },
       { from: 8, to: 15, price: 50 },
       { from: 16, to: 29, price: 45 },
@@ -160,6 +166,7 @@ const carDataMap: Record<
     depositeDiscount: 150,
     customName: "Skoda Octavia",
     prices: [
+      { from: 1, to: 2, price: 65 },
       { from: 3, to: 7, price: 60 },
       { from: 8, to: 15, price: 55 },
       { from: 16, to: 29, price: 50 },
@@ -173,6 +180,7 @@ const carDataMap: Record<
     depositeDiscount: 250,
     customName: "Skoda Superb",
     prices: [
+      { from: 1, to: 2, price: 75 },
       { from: 3, to: 7, price: 70 },
       { from: 8, to: 15, price: 65 },
       { from: 16, to: 29, price: 60 },
@@ -184,6 +192,7 @@ const carDataMap: Record<
     fullProtectionPrice: 9.99,
     depositeDiscount: 150,
     prices: [
+      { from: 1, to: 2, price: 46 },
       { from: 3, to: 7, price: 42 },
       { from: 8, to: 15, price: 38 },
       { from: 16, to: 29, price: 34 },
@@ -246,6 +255,8 @@ export type ApiCarsResponse = {
 
 export type ApiAllModelsResponse = ApiCarModel[];
 
+export type DayPriceTier = { from: number; to: number | null; price: number };
+
 export type TransformedCar = {
   id: number;
   exnternalId: string;
@@ -258,7 +269,7 @@ export type TransformedCar = {
   airConditioning: boolean;
   deposite: number;
   aditionalEquipment: any[];
-  prices: Array<{ from: number; to: number | null; price: number }>;
+  prices: DayPriceTier[];
   price: number;
   image: string;
   carTypeText: string;
@@ -333,6 +344,7 @@ export function transformApiCars(
   lang: BaseLocale,
   days?: number,
   availableCarIds?: string[],
+  apiPriceTiers?: Record<string, DayPriceTier[]>,
 ): TransformedCar[] {
   const visibleModels = apiModels
     .filter((car) => ALLOWED_CAR_IDS.includes(car.id))
@@ -365,10 +377,10 @@ export function transformApiCars(
     const gasText = getGasText(gas, lang);
     const transmissionText = getTransmissionText(transmissionType, lang);
     const slug = `${apiCar.brand_name.toLowerCase()}_${apiCar.model_name.toLowerCase().replace(/\s+/g, "_")}`;
-    const minPrice =
-      carData.prices.find((p) => p.from === 30)?.price ||
-      carData.prices[carData.prices.length - 1]?.price ||
-      0;
+    const prices = apiPriceTiers?.[apiCar.id]?.length
+      ? [...apiPriceTiers[apiCar.id]].sort((a, b) => a.from - b.from)
+      : carData.prices;
+    const minPrice = Math.min(...prices.map((tier) => tier.price));
     let available: boolean;
 
     if (apiCar.price !== undefined && apiCar.price !== null) {
@@ -393,7 +405,7 @@ export function transformApiCars(
       airConditioning,
       deposite: carData.deposite,
       aditionalEquipment,
-      prices: carData.prices,
+      prices,
       price: minPrice,
       image,
       carTypeText,

@@ -33,7 +33,10 @@ export default function GetInTouch(props: { lang: BaseLocale }) {
                 </a>
                 <div className="mt-4 space-y-1 text-sm">
                   <div className="font-semibold text-foreground">{props.lang.gitDays}</div>
-                  <div className="text-muted-foreground">8.00 - 16.00</div>
+                  <div className="text-muted-foreground">{props.lang.gitHours}</div>
+                  <div className="pt-2 font-semibold text-foreground">
+                    {props.lang.gitSundayClosed}
+                  </div>
                 </div>
               </div>
               <div className="rounded-xl border border-border/70 bg-card p-6 sm:p-8 transition-colors hover:border-p/40">

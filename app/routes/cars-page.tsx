@@ -1,6 +1,7 @@
 import { useNavigate, useFetcher } from "react-router";
 import { getLocale, getDatabaseUrl } from "@/lib/utils";
 import { type ApiAllModelsResponse } from "@/lib/api-cars";
+import { readApiDayPriceTiers } from "@/lib/helpers";
 import type { Route } from "./+types/cars-page";
 import Cars from "@/components/Cars";
 import Logos from "@/components/Logos";
@@ -39,6 +40,7 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
   });
 
   const apiResponse: ApiAllModelsResponse = await res.json();
+  const priceTiers = readApiDayPriceTiers();
   const baseUrl = getBaseUrl(request);
   const langCode = params.lang ?? "sr";
 
@@ -47,6 +49,7 @@ export async function loader({ context, params, request }: Route.LoaderArgs) {
     lang,
     message: context.VALUE_FROM_EXPRESS,
     cars: apiResponse,
+    priceTiers,
     baseUrl,
   };
 
@@ -123,6 +126,7 @@ export default function CarsPage({ loaderData }: Route.ComponentProps) {
           lang={loaderData.lang}
           langCode={loaderData.langCode}
           cars={loaderData.cars}
+          priceTiers={loaderData.priceTiers}
         />
       </div>
     </div>

@@ -10,10 +10,14 @@ import { type ApiAllModelsResponse, transformApiCars } from "@/lib/api-cars";
 import { locations, type LocaleTypes } from "@/lib/data";
 import { CheckIcon, ChevronRight } from "lucide-react";
 import {
+  calculateCarPrice,
   calculateInWorkingHours,
   calculateRentalDays,
   calculateReservationPrice,
+  fetchQuotedRentalTotals,
+  readApiDayPriceTiers,
   getReservationDataFromCookies,
+  quotedCarPrice,
 } from "@/lib/helpers";
 import { CarSummary } from "@/components/Reservation/CarSummary";
 
@@ -28,16 +32,39 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   if (cookie.carId) {
     try {
       const databaseUrl = getDatabaseUrl();
-      const res = await fetch(databaseUrl, {
-        method: "POST",
-        body: JSON.stringify({
-          action: "get_all_models",
-        }),
-        headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
-      });
-      const apiResponse: ApiAllModelsResponse = await res.json();
-      const transformedCars = transformApiCars(apiResponse, lang);
       const reservationData = getReservationDataFromCookies(cookie);
+      const hasSchedule = Boolean(
+        reservationData.pickupDate &&
+          reservationData.dropoffDate &&
+          reservationData.pickupTime &&
+          reservationData.dropoffTime,
+      );
+      const [res, quote] = await Promise.all([
+        fetch(databaseUrl, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "get_all_models",
+          }),
+          headers: { API_KEY: "f13e62b2-39e3-4d89-a1d1-bf9b27e0c121" },
+        }),
+        hasSchedule
+          ? fetchQuotedRentalTotals(
+              reservationData.pickupDate,
+              reservationData.pickupTime,
+              reservationData.dropoffDate,
+              reservationData.dropoffTime,
+            )
+          : Promise.resolve(null),
+      ]);
+      const apiResponse: ApiAllModelsResponse = await res.json();
+      const priceTiers = readApiDayPriceTiers();
+      const transformedCars = transformApiCars(
+        apiResponse,
+        lang,
+        undefined,
+        undefined,
+        priceTiers,
+      );
       const car = transformedCars.find(
         (x) => x.exnternalId === reservationData.carId
       );
@@ -69,6 +96,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
           idExtras: reservationData.extras || null,
           priceForOffHours,
           langCode: (params.lang as LocaleTypes) || "sr",
+          carPriceOverride: quotedCarPrice(
+            quote,
+            car.exnternalId,
+            days,
+            calculateCarPrice(car, days),
+          ),
         });
 
         const pickupLocation = locations.find(

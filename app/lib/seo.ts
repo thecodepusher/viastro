@@ -262,7 +262,14 @@ export function generateLocalBusinessSchema(
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
         opens: BUSINESS.weekdayOpens,
         closes: BUSINESS.weekdayCloses,
       },
