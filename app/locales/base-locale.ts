@@ -147,9 +147,11 @@ export interface BaseLocale {
   ctaAction: string;
   gitTitle: string;
   gitSubTitle: string;
-  gitDays: string;
+  gitHoursLabel: string;
   gitHours: string;
-  gitSundayClosed: string;
+  gitClosed: string;
+  /** Indexed by Date.getDay(): 0 = Sunday. */
+  gitWeekdays: [string, string, string, string, string, string, string];
   gitAwailable: string;
   lhTitle: string;
   lhSubTitle: string;

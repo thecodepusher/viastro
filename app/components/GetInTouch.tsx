@@ -31,11 +31,30 @@ export default function GetInTouch(props: { lang: BaseLocale }) {
                     <p>{formattedAddress()}</p>
                   </address>
                 </a>
-                <div className="mt-4 space-y-1 text-sm">
-                  <div className="font-semibold text-foreground">{props.lang.gitDays}</div>
-                  <div className="text-muted-foreground">{props.lang.gitHours}</div>
-                  <div className="pt-2 font-semibold text-foreground">
-                    {props.lang.gitSundayClosed}
+                <div className="mt-4 text-sm">
+                  <div className="font-semibold text-foreground">
+                    {props.lang.gitHoursLabel}
+                  </div>
+                  <div className="mt-2 space-y-1">
+                    {[1, 2, 3, 4, 5, 6, 0].map((day) => {
+                      const isToday = day === new Date().getDay();
+                      const closed = day === 0;
+
+                      return (
+                        <div
+                          key={day}
+                          className={
+                            isToday
+                              ? "flex items-baseline justify-between gap-4 font-semibold text-foreground"
+                              : "flex items-baseline justify-between gap-4 text-muted-foreground"
+                          }>
+                          <span>{props.lang.gitWeekdays[day]}</span>
+                          <span className="shrink-0 whitespace-nowrap">
+                            {closed ? props.lang.gitClosed : props.lang.gitHours}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
