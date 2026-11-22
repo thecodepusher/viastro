@@ -180,11 +180,11 @@ const carDataMap: Record<
     depositeDiscount: 250,
     customName: "Skoda Superb",
     prices: [
-      { from: 1, to: 2, price: 75 },
-      { from: 3, to: 7, price: 70 },
-      { from: 8, to: 15, price: 65 },
-      { from: 16, to: 29, price: 60 },
-      { from: 30, to: null, price: 55 },
+      { from: 1, to: 2, price: 90 },
+      { from: 3, to: 7, price: 80 },
+      { from: 8, to: 15, price: 75 },
+      { from: 16, to: 29, price: 70 },
+      { from: 30, to: null, price: 65 },
     ],
   },
   default: {
