@@ -3,13 +3,14 @@ import { CarType, GasType, TransmissionType } from "./data";
 
 /**
  * Vozila koja se prikazuju na sajtu.
- * 2=C3 Aircross, 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia, 15=Polo DSG, 16=Superb
+ * 8=Clio, 10=Ibiza DSG, 12=C3 Aircross Blue, 13=Kamiq, 14=Octavia, 15=Polo DSG, 16=Superb
+ * Citroen C3 Aircross (id "2") je van ponude (zakomentarisan ispod).
  */
 export const ALLOWED_CAR_IDS: string[] = [
   "10",
   "15",
   "8",
-  "2",
+  // "2", // Citroen C3 Aircross - van ponude
   "12",
   "13",
   "14",
@@ -75,20 +76,20 @@ const carDataMap: Record<
     customName?: string;
   }
 > = {
-  // Citroen C3 Aircross (id: "2")
-  "2": {
-    deposite: 200,
-    fullProtectionPrice: 9.99,
-    depositeDiscount: 100,
-    customName: "Citroen C3 Aircross",
-    prices: [
-      { from: 1, to: 2, price: 55 },
-      { from: 3, to: 7, price: 50 },
-      { from: 8, to: 15, price: 45 },
-      { from: 16, to: 29, price: 40 },
-      { from: 30, to: null, price: 35 },
-    ],
-  },
+  // Citroen C3 Aircross (id: "2") - van ponude
+  // "2": {
+  //   deposite: 200,
+  //   fullProtectionPrice: 9.99,
+  //   depositeDiscount: 100,
+  //   customName: "Citroen C3 Aircross",
+  //   prices: [
+  //     { from: 1, to: 2, price: 55 },
+  //     { from: 3, to: 7, price: 50 },
+  //     { from: 8, to: 15, price: 45 },
+  //     { from: 16, to: 29, price: 40 },
+  //     { from: 30, to: null, price: 35 },
+  //   ],
+  // },
   // Seat Ibiza DSG (id: "10")
   "10": {
     deposite: 200,
